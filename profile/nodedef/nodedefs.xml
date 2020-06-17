@@ -1,0 +1,47 @@
+<nodeDefs>
+    <nodeDef id="RPITEMP" nls="TEMP">
+        <editors />
+        <sts>
+            <st id="ST" editor="BOOL" />
+        </sts>
+        <cmds>
+            <sends />
+            <accepts>
+                <cmd id="DISCOVER" />
+            </accepts>
+        </cmds>
+    </nodeDef>
+
+    <nodeDef id="RELAY" nls="RELAY">
+        <editors />
+        <sts>
+            <st id="ST" editor="RELAY_EN" />
+        </sts>
+        <cmds>
+            </sends>
+            <cmd id="TOGGLE_RELAY">
+            <sends>
+            <accepts/>
+         </cmds>
+    </nodeDef>
+
+    <nodeDef id="TEMPSENSOR" nls="SENSOR">
+        <editors />
+        <sts>
+            <st id="GV0" editor="TEMPC" />
+            <st id="GV1" editor="TEMPC24H_MIN" />
+            <st id="GV2" editor="TEMPC24H_MAX" />            
+            <st id="GV6" editor="LAST_UPDATE_MO" />
+            <st id="GV7" editor="LAST_UPDATE_D" /> 
+            <st id="GV8" editor="LAST_UPDATE_Y" />                
+            <st id="GV9" editor="LAST_UPDATE_H" />
+            <st id="GV10" editor="LAST_UPDATE_M" />
+        </sts>
+        <cmds>
+            <sends>
+                <cmd id="UPDATE" />
+            </sends>
+            <accepts />
+        </cmds>
+    </nodeDef>
+</nodeDefs>

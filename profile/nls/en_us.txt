@@ -1,0 +1,29 @@
+# Temp Sensor controller
+ND-RPITEMP-NAME = RPi Temp Controller
+ND-RPITEMP-ICON = GenericCtl
+CMD-TEMP-DISCOVER-NAME = Update
+ST-TEMP-ST-NAME = NodeServer Online
+STATUS-0 = Off-line
+STATUS-1 = On-lIne
+
+# Relay
+ND-RELAY-NAME = Relay
+ND-RELAY-ICON = Output
+ST-RELAY-ST-NAME = Offset Res Enable 
+STATUS-0 = Normal
+STATUS-1 = Resistor EN
+
+# Temp Sensor
+ND-TEMPSENSOR-NAME = Temp Sensor
+ND-TEMPSENSOR-ICON = Input
+ST-SENSOR-GV0-NAME = Current Temp C
+ST-SENSOR-GV1-NAME = Temp Min 24H C
+ST-SENSOR-GV2-NAME = Temp Max 24H C
+ST-SENSOR-GV6-NAME = Month
+ST-SENSOR-GV7-NAME = Day
+ST-SENSOR-GV8-NAME = Year 
+ST-SENSOR-GV9-NAME = Hour
+ST-SENSOR-GV10-NAME = Min
+CMD-SENSOR-UPDATE-NAME = Update Temp
+
+

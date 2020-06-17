@@ -1,0 +1,32 @@
+<editors>
+    <editor id="BOOL">
+        <range uom="2" subset="0,1" />
+    </editor>
+    <editor id="RELAY_EN">
+        <range uom="2" subset="0,1" />
+    </editor>   
+    <editor id="TEMPC">
+        <range uom="4" min="-40" max="100" step="1" prec="1"/>
+    </editor>
+    <editor id="TEMPC24H_MIN">
+        <range uom="4" min="-40" max="100" step="1" prec="1"/>
+    </editor> 
+    <editor id="TEMPC24H_MAX">
+        <range uom="4" min="-40" max="100" step="1" prec="1"/>
+    </editor>
+        <editor id="LAST_UPDATE_MO">
+        <range uom="47" subset="1-12" />
+    </editor>  
+    <editor id="LAST_UPDATE_D">
+        <range uom="9" subset="1-31" />
+    </editor> 
+    <editor id="LAST_UPDATE_Y">
+        <range uom="77" subset="2020-2120" />
+    </editor>   
+    <editor id="LAST_UPDATE_H">
+        <range uom="20" subset="0-23" />
+    </editor> 
+    <editor id="LAST_UPDATE_M">
+        <range uom="44" subset="0-59" />
+    </editor> 
+</editors>
