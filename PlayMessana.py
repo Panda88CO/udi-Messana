@@ -10,7 +10,24 @@ from collections import defaultdict
 
 
 MessanaSystem = defaultdict(dict)
-MessanaSystem = {   'zones': {  
+MessanaSystem = {   'system' : {
+                        'mName' : '/api/system/name', 
+                       # 'mApiVer' : '/api/system/apiVersion',
+                        'mStatus':'/api/system/status',
+                        'mATUcount':'/api/system/atuCount',
+                        'mDHWcount':'/api/system/dhwCount',
+                        'mFanCoilCount':'/api/system/fancoilCount',
+                        'mEnergySourceCount':'/api/system/energySourceCount',
+                        'mZoneCount':'/api/system/zoneCount',
+                        'mMacrozoneCount':'/api/system/macrozoneCount',
+                        'mGroupCount':'/api/system/groupCount',
+                        'mBufTankCount':'/api/system/bufferTankCount',
+                        'mUnitTemp':'/api/system/tempUnit',
+                        'mEnergySaving':'/api/system/energySaving',
+                        'mSetback':'/api/system/setback',
+                        'mExternalAlarm':'/api/system/externalAlarm'
+                    },
+                    'zones': {  
                         'mName': '/api/zone/name', 
                         'mSetPoint' :'/api/zone/setpoint', 
                         'mStatus':'/api/zone/status',
@@ -34,30 +51,13 @@ MessanaSystem = {   'zones': {
                         'mCapability':'/api/zone/capability'
                     },
                     'macrozones' : {
-                        'mName': '/api/zone/name', 
-                        'mSetPoint' :'/api/zone/setpoint', 
-                        'mStatus':'/api/zone/status',
+                        'mName': '/api/macrozone/name', 
+                        'mSetPoint' :'/api/macrozone/setpoint', 
+                        'mStatus':'/api/macrozone/status',
                         'mScheduleOn' : '/api/zone/scheduleOn',
-                        'mHumidity':'/api/zone/humidity',
-                        'mDewPoint' : '/api/zone/dewpoint',
-                        'mTemp' :'/api/zone/temperature'
-                    },
-                    'system' : {
-                        'apiVer' : '/api/system/apiVersion',
-                        'mName': '/api/zone/name', 
-                        'mStatus':'/api/zone/status',
-                        'mATmUcount':'/api/system/atuCount',
-                        'mDHWcount':'/api/system/dhwCount',
-                        'mFanCoilCount':'/api/system/fancoilCount',
-                        'EnergySourceCount':'/api/system/energySourceCount',
-                        'mZoneCount':'/api/system/zoneCount',
-                        'mMacrozoneCount':'/api/system/macrozoneCount',
-                        'mGroupCount':'/api/system/groupCount',
-                        'mBufTankCount':'/api/system/bufferTankCount',
-                        'mUnitTemp':'/api/system/tempUnit',
-                        'mEnergySaving':'/api/system/energySaving',
-                        'mSetback':'/api/system/setback',
-                        'mExternalAlarm':'/api/system/externalAlarm'
+                        'mHumidity':'/api/macrozone/humidity',
+                        'mDewPoint' : '/api/macrozone/dewpoint',
+                        'mTemp' :'/api/macrozone/temperature'
                     },
                     'HCChangeOvers' :{
                         'mName':'/api/hc/name',
@@ -76,7 +76,7 @@ MessanaSystem = {   'zones': {
                     'ATU': {
                         'mName':'/api/atu/name',
                         'mFlowLevel':'/api/atu/flowLevel',
-                        'mStatus':'/api/atu/status'.
+                        'mStatus':'/api/atu/status',
                         'HRVOn':'/api/atu/hrvOn',
                         'mHUMOn':'/api/atu/humOn',
                         'mNTDOn':'/api/atu/ntdOn',
@@ -105,7 +105,7 @@ MessanaSystem = {   'zones': {
                         'mTemp':'/api/tnk/temperature',
                         'mAlarmOn':'/api/tnk/alarmOn'
                     },
-                    'DomrsticHotWater':{
+                    'DomseticHotWater':{
                         'mStatus':'/api/dhw/status',
                         'mName':'/api/dhw/name',
                         'mTemp':'/api/dhw/temperature',
@@ -126,28 +126,45 @@ zoneNameKey = 'zoneName'
 zoneSetPtKey = 'setPoint'
 RESPONSE_OK = '<Response [200]>'
 
-GetStr =MessanaIP+systemStr+'/zoneCount/?'+ messanaAPIKey
-zones =  requests.get(GetStr).json()
-MessanaSystem['zoneCount'] = zones['count']
+#GetStr =MessanaIP+'/api/system/zoneCount/?'+ messanaAPIKey
 
-namedZones= defaultdict(dict)
-namedZones['zoneCount'] = MessanaSystem['zoneCount']
+#zones =  requests.get(GetStr).json()
+#GetStr =MessanaIP+'/api/system/apiVersion/?'+ messanaAPIKey
+#zones1 =  requests.get(GetStr).json()
+#MessanaSystem['zoneCount'] = zones['count']
 
-def getMessanaSystemData( MessanaKey, newKey, systemDict):
-    temp={}
-    GetStr =MessanaIP+systemStr+MessanaKey+'/?'+ messanaAPIKey
+systemDict = {}
+namedZones = {}
+
+def getMessanaSystemData( MessanaSystem, mKey, systemDict):
+
+    temp = {}
+    GetStr =MessanaIP+MessanaSystem[mKey] + '/?' + messanaAPIKey
     systemTemp = requests.get(GetStr)
     if str(systemTemp) == RESPONSE_OK:
-        systemTemp = systemTemp.json()
-        jsonKey= list(systemTemp.keys())[0]
-        temp[newKey] = systemTemp[str(jsonKey)]
-        systemDict.update(temp)
+       systemTemp = systemTemp.json()
+       #jsonKey= list(systemTemp.keys())[0]
+       temp[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+       systemDict.update(temp)
     else:
         print('error')
+
 
 def getMessanaZoneData(MessanaZone, mKey, zoneDict):
     temp={}
     for i in range(0, zoneDict['zoneCount']):
+        GetStr =MessanaIP+MessanaZone[mKey] +'/'+str(i)+'?'+ messanaAPIKey
+        zoneTemp = requests.get(GetStr)
+        if str(zoneTemp) == RESPONSE_OK:
+            zoneTemp = zoneTemp.json()
+            temp[mKey] = zoneTemp[str(list(zoneTemp.keys())[0])]
+            zoneDict[i].update(temp)
+        else:
+            print('error')
+
+def getMessanasubSystemsData(MessanaSubSys, Count, mKey, zoneDict):
+    temp={}
+    for i in range(0, Count):
         GetStr =MessanaIP+MessanaZone[mKey]+'/'+str(i)+'?'+ messanaAPIKey
         zoneTemp = requests.get(GetStr)
         if str(zoneTemp) == RESPONSE_OK:
@@ -157,11 +174,13 @@ def getMessanaZoneData(MessanaZone, mKey, zoneDict):
         else:
             print('error')
 
-
 #getMessanaZoneData(MessanaSystem['zones'],  namedZones)
 #getMessanaZoneData(MessanaSystem['zones']['mSetPoint'], namedZones)
-for mZoneKeys in MessanaSystem['zones']:
-   getMessanaZoneData(MessanaSystem['zones'], mZoneKeys, namedZones)
+for nSystemKey in MessanaSystem['system']:
+    getMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
+
+for mZoneKey in MessanaSystem['zones']:
+   getMessanaZoneData(MessanaSystem['zones'],MessanaSystem[System]['mzoneCount'], mZoneKey, namedZones)
 print()
 
 
