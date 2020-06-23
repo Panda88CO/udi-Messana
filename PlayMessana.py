@@ -59,13 +59,13 @@ MessanaSystem = {   'system' : {
                         'mDewPoint' : '/api/macrozone/dewpoint',
                         'mTemp' :'/api/macrozone/temperature'
                     },
-                    'HCChangeOvers' :{
+                    'hc_changeover' :{
                         'mName':'/api/hc/name',
                         'mMode':'/api/hc/mode',
                         'mExcutiveSession':'/api/hc/executiveSeason',
                         'mAdaptiveComfort':'/api/hc/adaptiveComfort'
                     },
-                    'FanCoils' :{
+                    'fan_coils' :{
                         'mName':'/api/fan/name',
                         'mState':'/api/fan/state',
                         'mCoolingSpeed':'/api/fan/coolingSpeed',
@@ -73,7 +73,7 @@ MessanaSystem = {   'system' : {
                         'mType':'/api/fan/type',
                         'mAlarmOn':'/api/fan/alarmOn'
                     },
-                    'ATU': {
+                    'atus': {
                         'mName':'/api/atu/name',
                         'mFlowLevel':'/api/atu/flowLevel',
                         'mStatus':'/api/atu/status',
@@ -91,21 +91,21 @@ MessanaSystem = {   'system' : {
                         'mAlarmOn':'/api/atu/alarmOn',
                         'mAirTemp':'/api/atu/airTemperature'
                     },
-                    'EnergySources' :{
+                    'energy_sources' :{
                         'mName':'/api/enr/name',
                         'mStatus':'/api/enr/status',
                         'mDHWtatus':'/api/enr/dhwStatus',
                         'mType':'/api/enr/type',
                         'mAlarmOn':'/api/enr/alarmOn'
                     },
-                    'BufferTank' : {
+                    'buffer_tanks' : {
                         'mName':'/api/tnk/name',
-                        'mStatus':'/api/tnk/status',
+                        #'mStatus':'/api/tnk/status',
                         'mMode':'/api/tnk/mode',
                         'mTemp':'/api/tnk/temperature',
                         'mAlarmOn':'/api/tnk/alarmOn'
                     },
-                    'DomseticHotWater':{
+                    'domsetic_hot_waters':{
                         'mStatus':'/api/dhw/status',
                         'mName':'/api/dhw/name',
                         'mTemp':'/api/dhw/temperature',
@@ -115,16 +115,8 @@ MessanaSystem = {   'system' : {
 
 
 messanaAPIKey = 'apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-#MessanaIP = 'http://192.168.2.45'
-MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
-
-
-
-
-
-
-zoneNameKey = 'zoneName'
-zoneSetPtKey = 'setPoint'
+MessanaIP = 'http://192.168.2.45'
+#MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
 
 #GetStr =MessanaIP+'/api/system/zoneCount/?'+ messanaAPIKey
@@ -134,12 +126,18 @@ RESPONSE_OK = '<Response [200]>'
 #zones1 =  requests.get(GetStr).json()
 #MessanaSystem['zoneCount'] = zones['count']
 
-systemDict = {}
+systemDict = defaultdict(list)
 zoneDict = defaultdict(list)
 macrozoneDict = defaultdict(list)
+hc_changeoverDict = defaultdict(list)
+fan_coilsDict = defaultdict(list)
+atuDict =defaultdict(list)
+energy_sourcesDict = defaultdict(list)
+buffer_tankDict = defaultdict(list)
+domsetic_hot_waterDict =defaultdict(list)
+
 
 def getMessanaSystemData( MessanaSystem, mKey, systemDict):
-
     temp = {}
     GetStr =MessanaIP+MessanaSystem[mKey] + '/?' + messanaAPIKey
     systemTemp = requests.get(GetStr)
@@ -151,12 +149,13 @@ def getMessanaSystemData( MessanaSystem, mKey, systemDict):
        return True
     else:
         print(str(mKey) + ' error')
+        temp[mKey] = -1
+        systemDict.update(temp)
         return False 
 
 
 
 def getMessanaSubSystemData(MessanaSubSys, Count, mKey, subDict):
-   
     for i in range(0, Count):
         temp={}
         GetStr =MessanaIP+MessanaSubSys[mKey]+'/'+str(i)+'?'+ messanaAPIKey
@@ -168,20 +167,53 @@ def getMessanaSubSystemData(MessanaSubSys, Count, mKey, subDict):
         else:
             print(str(mKey) + ' error')
 
-
+#Retrive basic system info
+print('\nSYSTEM')
 for nSystemKey in MessanaSystem['system']:
     getMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
 
-if systemDict['mMacrozoneCount'] > 0:
-    for mMacrozoneKey in MessanaSystem['macrozones']:
-        getMessanaSubSystemData(MessanaSystem['macrozones'],systemDict['mMacrozoneCount'], mMacrozoneKey, macrozoneDict)
-
+print('\n ZONES')
 if systemDict['mZoneCount'] > 0:
-    for mZoneKey in MessanaSystem['zones']:
-        getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mZoneKey, zoneDict)
+    for mKey in MessanaSystem['zones']:
+        getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mKey, zoneDict)
+
+print('\nMACROZONES')
+if systemDict['mMacrozoneCount'] > 0:
+    for mKey in MessanaSystem['macrozones']:
+        getMessanaSubSystemData(MessanaSystem['macrozones'],systemDict['mMacrozoneCount'], mKey, macrozoneDict)
+
+print('\nhc_changeover')
+for mKey in MessanaSystem['hc_changeover']:
+    getMessanaSubSystemData(MessanaSystem['hc_changeover'],1, mKey, hc_changeoverDict)
+
+print('\nFAN COILS')
+if systemDict['mFanCoilCount'] > 0:
+    for mKey in MessanaSystem['fan_coils']:
+        getMessanaSubSystemData(MessanaSystem['fan_coils'],systemDict['mFanCoilCount'], mKey, fan_coilsDict )
+
+print('\nATU')
+if systemDict['mATUcount'] > 0:
+    for mKey in MessanaSystem['atus']:
+        getMessanaSubSystemData(MessanaSystem['atus'],systemDict['mATUcount'], mKey, atuDict)
+
+print('\nBUFFER TANK')
+if systemDict['mBufTankCount'] > 0:
+    for mKey in MessanaSystem['buffer_tanks']:
+        getMessanaSubSystemData(MessanaSystem['buffer_tanks'],systemDict['mBufTankCount'], mKey, buffer_tankDict)
+
+print('\nENERGY SOURCE')
+if systemDict['mEnergySourceCount'] > 0:
+    for mKey in MessanaSystem['energy_sources']:
+        getMessanaSubSystemData(MessanaSystem['energy_sources'],systemDict['mEnergySourceCount'], mKey, energy_sourcesDict)
+
+print('\nDHW')
+if systemDict['mDHWcount'] > 0:
+    for mZoneKey in MessanaSystem['domsetic_hot_waters']:
+        getMessanaSubSystemData(MessanaSystem['domsetic_hot_waters'],systemDict['mDHWcount'], mZoneKey, domsetic_hot_waterDict)
 
 
-print()
+
+
 
 
 
