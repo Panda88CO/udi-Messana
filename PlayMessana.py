@@ -12,7 +12,7 @@ from collections import defaultdict
 MessanaSystem = defaultdict(dict)
 MessanaSystem = {   'system' : {
                         'mName' : '/api/system/name', 
-                       # 'mApiVer' : '/api/system/apiVersion',
+                        #'mApiVer' : '/api/system/apiVersion',
                         'mStatus':'/api/system/status',
                         'mATUcount':'/api/system/atuCount',
                         'mDHWcount':'/api/system/dhwCount',
@@ -33,10 +33,10 @@ MessanaSystem = {   'system' : {
                         'mStatus':'/api/zone/status',
                         'mHumSetPointRH': '/api/zone/humidSetpointRH',
                         'mHumSetPointDP':'/api/zone/humidSetpointDP',
-                        'mHumSetPointRH':'/api/zone/dehumSetpointRH',
+                        'mDeumSetPointRH':'/api/zone/dehumSetpointRH',
                         'mDehumSetPointDP':'/api/zone/dehumSetpointDP',
-                        'mDehumSetPointRH':'/api/zone/currentSetpointRH',
-                        'mCurrentSetPoint':'/api/zone/currentSetpointDP',
+                        'mCurrentSetPointRH':'/api/zone/currentSetpointRH',
+                        'mCurrentSetPointDP':'/api/zone/currentSetpointDP',
                         'mHumidity':'/api/zone/humidity',
                         'mDewPoint' : '/api/zone/dewpoint',
                         'mTemp' :'/api/zone/temperature',
@@ -115,7 +115,8 @@ MessanaSystem = {   'system' : {
 
 
 messanaAPIKey = 'apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-MessanaIP = 'http://192.168.2.45'
+#MessanaIP = 'http://192.168.2.45'
+MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 
 
 
@@ -153,18 +154,6 @@ def getMessanaSystemData( MessanaSystem, mKey, systemDict):
         return False 
 
 
-def getMessanaZoneData(MessanaZone, mKey, zoneDict):
-    temp={}
-    for i in range(0, zoneDict['zoneCount']):
-
-        GetStr =MessanaIP+MessanaZone[mKey] +'/'+str(i)+'?'+ messanaAPIKey
-        zoneTemp = requests.get(GetStr)
-        if str(zoneTemp) == RESPONSE_OK:
-            zoneTemp = zoneTemp.json()
-            temp[mKey] = zoneTemp[str(list(zoneTemp.keys())[0])]
-            zoneDict[i].update(temp)
-        else:
-            print('error')
 
 def getMessanaSubSystemData(MessanaSubSys, Count, mKey, subDict):
    
@@ -180,18 +169,19 @@ def getMessanaSubSystemData(MessanaSubSys, Count, mKey, subDict):
             print(str(mKey) + ' error')
 
 
-#getMessanaZoneData(MessanaSystem['zones'],  namedZones)
-#getMessanaZoneData(MessanaSystem['zones']['mSetPoint'], namedZones)
 for nSystemKey in MessanaSystem['system']:
     getMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
 
-for mMacrozoneKey in MessanaSystem['macrozones']:
-   getMessanaSubSystemData(MessanaSystem['macrozones'],systemDict['mMacrozoneCount'], mMacrozoneKey, macrozoneDict)
+if systemDict['mMacrozoneCount'] > 0:
+    for mMacrozoneKey in MessanaSystem['macrozones']:
+        getMessanaSubSystemData(MessanaSystem['macrozones'],systemDict['mMacrozoneCount'], mMacrozoneKey, macrozoneDict)
 
-for mZoneKey in MessanaSystem['zones']:
-   getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mZoneKey, zoneDict)
+if systemDict['mZoneCount'] > 0:
+    for mZoneKey in MessanaSystem['zones']:
+        getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mZoneKey, zoneDict)
 
 
 print()
+
 
 
