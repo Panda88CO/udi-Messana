@@ -120,12 +120,6 @@ MessanaIP = 'http://192.168.2.45'
 #MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
 
-#GetStr =MessanaIP+'/api/system/zoneCount/?'+ messanaAPIKey
-
-#zones =  requests.get(GetStr).json()
-#GetStr =MessanaIP+'/api/macrozone/name/0?'+ messanaAPIKey
-#zones1 =  requests.get(GetStr).json()
-#MessanaSystem['zoneCount'] = zones['count']
 
 systemDict = defaultdict(list)
 zoneDict = defaultdict(list)
@@ -144,7 +138,6 @@ def getMessanaSystemData( MessanaSystem, mKey, systemDict):
     systemTemp = requests.get(GETStr)
     if str(systemTemp) == RESPONSE_OK:
        systemTemp = systemTemp.json()
-       #jsonKey= list(systemTemp.keys())[0]
        temp[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
        systemDict.update(temp)
        return True
@@ -166,7 +159,7 @@ def getMessanaSubSystemData(MessanaSystem, Count, mKey, subDict):
             temp[mKey] = subSysTemp[str(list(subSysTemp.keys())[0])]
             subDict[i].append(temp)
         else:
-            print(str(mKey) + ' error')
+            print(str(mKey) + ' error for id:', i)
 
 
 def putMessanaSystem(MessanaSystem, mKey, value):
@@ -244,7 +237,7 @@ if systemDict['mDHWcount'] > 0:
     for mZoneKey in MessanaSystem['domsetic_hot_waters']:
         getMessanaSubSystemData(MessanaSystem['domsetic_hot_waters'],systemDict['mDHWcount'], mZoneKey, domsetic_hot_waterDict)
 
-
+print('\n end')
 
 
 
