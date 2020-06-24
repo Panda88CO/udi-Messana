@@ -149,7 +149,7 @@ def getMessanaSystemData( MessanaSystem, mKey, systemDict):
 
 
 
-def getMessanaSubSystemData(MessanaSystem, Count, mKey, subDict):
+def getMessanaSubSystemData(MessanaSystem, Count, mKey, subSysDict):
     for i in range(0, Count):
         temp={}
         GETStr =MessanaIP+MessanaSystem[mKey]+str(i)+'?'+ messanaAPIKey
@@ -157,28 +157,28 @@ def getMessanaSubSystemData(MessanaSystem, Count, mKey, subDict):
         if str(subSysTemp) == RESPONSE_OK:
             subSysTemp = subSysTemp.json()
             temp[mKey] = subSysTemp[str(list(subSysTemp.keys())[0])]
-            subDict[i].append(temp)
+            subSysDict[i].append(temp)
         else:
             print(str(mKey) + ' error for id:', i)
 
 
-def putMessanaSystem(MessanaSystem, mKey, value):
+def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
-    data = {'value':value, 'apikey':'9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
-
+    data = {'value':value, messanaAPIKeyList}
     resp = requests.put(PUTStr, data)
     if str(resp) == RESPONSE_OK:
+        systemDict[mKey] = value
         return True
     else:
         return False
 
 
-def putMessanaSubSystem(MessanaSystem, mKey, id, value ):
+def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
-    data = {'id':id, 'value': value, 'apikey':'9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
-
+    data = {'id':id, 'value': value, messanaAPIKeyList}
     resp = requests.put(PUTStr, data)
     if str(resp) == RESPONSE_OK:
+        subSysDict[id][mKey] = value
         return True
     else:
         return False
