@@ -115,6 +115,7 @@ MessanaSystem = {   'system' : {
 
 
 messanaAPIKey = 'apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+messanaAPIKeyList = {'apikey' : '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
 MessanaIP = 'http://192.168.2.45'
 #MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
@@ -159,10 +160,10 @@ def getMessanaSubSystemData(MessanaSubSys, Count, mKey, subDict):
     for i in range(0, Count):
         temp={}
         GetStr =MessanaIP+MessanaSubSys[mKey]+'/'+str(i)+'?'+ messanaAPIKey
-        zoneTemp = requests.get(GetStr)
-        if str(zoneTemp) == RESPONSE_OK:
-            zoneTemp = zoneTemp.json()
-            temp[mKey] = zoneTemp[str(list(zoneTemp.keys())[0])]
+        subSysTemp = requests.get(GetStr)
+        if str(subSysTemp) == RESPONSE_OK:
+            subSysTemp = subSysTemp.json()
+            temp[mKey] = subSysTemp[str(list(subSysTemp.keys())[0])]
             subDict[i].append(temp)
         else:
             print(str(mKey) + ' error')
@@ -172,7 +173,30 @@ print('\nSYSTEM')
 for nSystemKey in MessanaSystem['system']:
     getMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
 
-print('\n ZONES')
+
+'''
+GetStr = MessanaIP+'/api/zone/name/0?'+ messanaAPIKey
+PutStr = MessanaIP+'/api/zone/name/'+ messanaAPIKey
+subSysTemp = requests.get(GetStr)
+subSysTemp = subSysTemp.json()
+subSysTemp1 = {}
+subSysTemp1['name'] = subSysTemp['name'].upper()
+subSysTemp1['id']= 0
+subSysTemp['id'] = 0
+data1 = {'id': 0, 'value': 'DS Small Bedroom', 'apikey':'9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
+PutStr = MessanaIP+'/api/zone/name/' 
+resp = requests.put(PutStr, data1)
+resp1 = resp.json()
+subSysTemp2 = requests.get(GetStr)
+subSysTemp2 = subSysTemp2.json()
+resp = requests.put(PutStr, data1)
+subSysTemp = requests.get(GetStr)
+subSysTemp = subSysTemp.json()
+print()
+'''
+
+
+print('\nZONES')
 if systemDict['mZoneCount'] > 0:
     for mKey in MessanaSystem['zones']:
         getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mKey, zoneDict)
