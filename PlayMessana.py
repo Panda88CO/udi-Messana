@@ -113,9 +113,10 @@ MessanaSystem = {   'system' : {
                     }
                 }
 
+messanaAPIKey = 'apikey'
+messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
 
-messanaAPIKey = 'apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-messanaAPIKeyList = {'apikey' : '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
 #MessanaIP = 'http://192.168.2.45'
 MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
@@ -133,8 +134,8 @@ domsetic_hot_waterDict =defaultdict(dict)
 
 
 
-def getMessanaSystemData( MessanaSystem, mKey, systemDict):
-    GETStr =MessanaIP+MessanaSystem[mKey] + '?' + messanaAPIKey
+def retrieveMessanaSystemData( MessanaSystem, mKey, systemDict):
+    GETStr =MessanaIP+MessanaSystem[mKey] + '?' + massanaAPIStr 
     systemTemp = requests.get(GETStr)
     if str(systemTemp) == RESPONSE_OK:
        systemTemp = systemTemp.json()
@@ -146,10 +147,10 @@ def getMessanaSystemData( MessanaSystem, mKey, systemDict):
         return False 
 
 
-
+'''
 def getMessanaSubSystemData(MessanaSystem, Count, mKey, subSysDict):
     for mId in range(0, Count):
-        GETStr =MessanaIP+MessanaSystem[mKey]+str(mId)+'?'+ messanaAPIKey
+        GETStr =MessanaIP+MessanaSystem[mKey]+str(mId)+'?'+ massanaAPIStr 
         subSysTemp = requests.get(GETStr)
         if str(subSysTemp) == RESPONSE_OK:
             subSysTemp = subSysTemp.json()
@@ -157,110 +158,100 @@ def getMessanaSubSystemData(MessanaSystem, Count, mKey, subSysDict):
         else:
             print(str(mKey) + ' error for id: ', mId)
 
+'''
+
 
 def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
-    data = defaultdict(list)
+    mData = defaultdict(list)
     PUTStr = MessanaIP+MessanaSystem[mKey] 
-    data = {'value':value}
-    data.append( messanaAPIKeyList)
-    resp = requests.put(PUTStr, data)
+    mData = {'value':value, messanaAPIKey : messanaAPIKeyVal}
+    resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
         systemDict[mKey] = value
         return True
     else:
+        print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', str(value) )
         return False
 
 
 def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
-    data = {'id':id, 'value': value}
-    data.append(messanaAPIKeyList)
-    resp = requests.put(PUTStr, data)
+    mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
+    resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
        subSysDict[id][mKey] = value
        return True
     else:
+        print (str(resp) + ': Not able to PUT key:'+ mKey + ' iD: '+ str(id) + ' value:', str(value) )
         return False
 
 def retrieveMessanaSubNodeData(MessanaSystem, instNbr, mKey, mData):
-    GETStr =MessanaIP+MessanaSystem[mKey]+str(instNbr)+'?'+ messanaAPIKey
+    GETStr =MessanaIP+MessanaSystem[mKey]+str(instNbr)+'?'+ massanaAPIStr 
     subSysTemp = requests.get(GETStr)
     if str(subSysTemp) == RESPONSE_OK:
        subSysTemp = subSysTemp.json()
-       mData = subSysTemp[str(list(subSysTemp.keys())[0])]
-       return True
+       mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+       mData['statusOK'] =True
     else:
-        mData = str(mKey) + ' error for id: ', zoneNbr
-        return False
+       mData['error'] = 'Error: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+       mData['statusOK'] =False
 
 def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
      for mKey in MessanaSubSystem:
-        mData = ''
-        if retrieveMessanaSubNodeData(MessanaSubSystem, instNbr, mKey, mData):
-           subSysDict[instNbr][mKey] = mData
+        mData = {}
+        retrieveMessanaSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
+        if mData['statusOK']:
+           subSysDict[instNbr][mKey] = mData['data']
         else:
-            print(mData)
+           print(mData['error'])
+
+
+
 
 #Retrive basic system info
 print('\nSYSTEM')
 for nSystemKey in MessanaSystem['system']:
-    getMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
-
-
-'''
-data1 = {'id': 0, 'value': 'DS Small Bedroom', 'apikey':'9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
-PutStr = MessanaIP+'/api/zone/name/' 
-resp = requests.put(PutStr, data1)
-resp1 = resp.json()
-'''
-
+    retrieveMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
 
 print('\nZONES')
-'''
-if systemDict['mZoneCount'] > 0:
-    for mKey in MessanaSystem['zones']:
-        getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mKey, zoneDict)
-'''
 for zoneNbr in range(0,systemDict['mZoneCount']):
     retrieveMessanaSubSystemData(MessanaSystem['zones'], zoneNbr, zoneDict)
 
 print('\nMACROZONES')
-if systemDict['mMacrozoneCount'] > 0:
-    for mKey in MessanaSystem['macrozones']:
-        getMessanaSubSystemData(MessanaSystem['macrozones'],systemDict['mMacrozoneCount'], mKey, macrozoneDict)
+for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
+    retrieveMessanaSubSystemData(MessanaSystem['macrozones'], mzoneNbr, macrozoneDict)
 
 print('\nhc_changeover')
-for mKey in MessanaSystem['hc_changeover']:
-    getMessanaSubSystemData(MessanaSystem['hc_changeover'],1, mKey, hc_changeoverDict)
+# only 1 (0 index) change over
+retrieveMessanaSubSystemData(MessanaSystem['hc_changeover'], 0, hc_changeoverDict)
 
 print('\nFAN COILS')
-if systemDict['mFanCoilCount'] > 0:
-    for mKey in MessanaSystem['fan_coils']:
-        getMessanaSubSystemData(MessanaSystem['fan_coils'],systemDict['mFanCoilCount'], mKey, fan_coilsDict )
+for fcNbr in range(0,systemDict['mFanCoilCount']):
+    retrieveMessanaSubSystemData(MessanaSystem['fan_coils'], fcNbr, fan_coilsDict)
 
 print('\nATU')
-if systemDict['mATUcount'] > 0:
-    for mKey in MessanaSystem['atus']:
-        getMessanaSubSystemData(MessanaSystem['atus'],systemDict['mATUcount'], mKey, atuDict)
+for zoneNbr in range(0,systemDict['mATUcount']):
+    retrieveMessanaSubSystemData(MessanaSystem['atus'], zoneNbr, atuDict)
 
 print('\nBUFFER TANK')
-if systemDict['mBufTankCount'] > 0:
-    for mKey in MessanaSystem['buffer_tanks']:
-        getMessanaSubSystemData(MessanaSystem['buffer_tanks'],systemDict['mBufTankCount'], mKey, buffer_tankDict)
+for zoneNbr in range(0,systemDict['mBufTankCount']):
+    retrieveMessanaSubSystemData(MessanaSystem['buffer_tanks'], zoneNbr, buffer_tankDict)
 
 print('\nENERGY SOURCE')
-if systemDict['mEnergySourceCount'] > 0:
-    for mKey in MessanaSystem['energy_sources']:
-        getMessanaSubSystemData(MessanaSystem['energy_sources'],systemDict['mEnergySourceCount'], mKey, energy_sourcesDict)
+for zoneNbr in range(0,systemDict['mEnergySourceCount']):
+    retrieveMessanaSubSystemData(MessanaSystem['energy_sources'], zoneNbr, energy_sourcesDict)
 
 print('\nDHW')
-if systemDict['mDHWcount'] > 0:
-    for mZoneKey in MessanaSystem['domsetic_hot_waters']:
-        getMessanaSubSystemData(MessanaSystem['domsetic_hot_waters'],systemDict['mDHWcount'], mZoneKey, domsetic_hot_waterDict)
+for zoneNbr in range(0,systemDict['mDHWcount']):
+    retrieveMessanaSubSystemData(MessanaSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
 
-print('\n end')
-
+print('\n end extracting data')
 
 
+for zoneNbr in zoneDict:
+    for mKey in zoneDict[zoneNbr]:
+        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr, zoneDict[zoneNbr][mKey], zoneDict)
 
+for zoneNbr in range(0,systemDict['mZoneCount']):
+    putMessanaSubSystem(MessanaSystem['zones'], 'mSetPoint', zoneNbr, 70, zoneDict)
 
