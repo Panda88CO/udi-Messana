@@ -177,23 +177,29 @@ def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
     data.append(messanaAPIKeyList)
     resp = requests.put(PUTStr, data)
     if str(resp) == RESPONSE_OK:
-        subSysDict[id][mKey] = value
-        return True
+       subSysDict[id][mKey] = value
+       return True
     else:
         return False
-def RetrieveMessanaNodeData():
-    
 
-def retrieveMessanaSubSystemData(MessanaSystem['zones'], zoneNbr, zoneDict):
-     for mKey in MessanaSystem['zones']:
+def retrieveMessanaSubNodeData(MessanaSystem, instNbr, mKey, mData):
+    GETStr =MessanaIP+MessanaSystem[mKey]+str(instNbr)+'?'+ messanaAPIKey
+    subSysTemp = requests.get(GETStr)
+    if str(subSysTemp) == RESPONSE_OK:
+       subSysTemp = subSysTemp.json()
+       mData = subSysTemp[str(list(subSysTemp.keys())[0])]
+       return True
+    else:
+        mData = str(mKey) + ' error for id: ', zoneNbr
+        return False
 
-        GETStr =MessanaIP+MessanaSystem[mKey]+str(zoneNbr)+'?'+ messanaAPIKey
-        subSysTemp = requests.get(GETStr)
-        if str(subSysTemp) == RESPONSE_OK:
-            subSysTemp = subSysTemp.json()
-            subSysDict[zoneNbr][mKey] =subSysTemp[str(list(subSysTemp.keys())[0])]
+def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
+     for mKey in MessanaSubSystem:
+        mData = ''
+        if retrieveMessanaSubNodeData(MessanaSubSystem, instNbr, mKey, mData):
+           subSysDict[instNbr][mKey] = mData
         else:
-            print(str(mKey) + ' error for id: ', zoneNbr)
+            print(mData)
 
 #Retrive basic system info
 print('\nSYSTEM')
@@ -210,10 +216,11 @@ resp1 = resp.json()
 
 
 print('\nZONES')
+'''
 if systemDict['mZoneCount'] > 0:
     for mKey in MessanaSystem['zones']:
         getMessanaSubSystemData(MessanaSystem['zones'],systemDict['mZoneCount'], mKey, zoneDict)
-
+'''
 for zoneNbr in range(0,systemDict['mZoneCount']):
     retrieveMessanaSubSystemData(MessanaSystem['zones'], zoneNbr, zoneDict)
 
