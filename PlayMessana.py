@@ -127,7 +127,7 @@ zoneDict = defaultdict(dict)
 macrozoneDict = defaultdict(dict)
 hc_changeoverDict = defaultdict(dict)
 fan_coilsDict = defaultdict(dict)
-atuDict =defaultdict(dict)
+atusDict =defaultdict(dict)
 energy_sourcesDict = defaultdict(dict)
 buffer_tankDict = defaultdict(dict)
 domsetic_hot_waterDict =defaultdict(dict)
@@ -174,8 +174,9 @@ def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
         return False
 
 
-def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
+def putMessanaSubSystem(MessanaSystem, mKey, id, subSysDict ):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
+    value = subSysDict[mKey][id]
     mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
     resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
@@ -231,7 +232,7 @@ for fcNbr in range(0,systemDict['mFanCoilCount']):
 
 print('\nATU')
 for zoneNbr in range(0,systemDict['mATUcount']):
-    retrieveMessanaSubSystemData(MessanaSystem['atus'], zoneNbr, atuDict)
+    retrieveMessanaSubSystemData(MessanaSystem['atus'], zoneNbr, atusDict)
 
 print('\nBUFFER TANK')
 for zoneNbr in range(0,systemDict['mBufTankCount']):
@@ -250,8 +251,19 @@ print('\n end extracting data')
 
 for zoneNbr in zoneDict:
     for mKey in zoneDict[zoneNbr]:
-        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr, zoneDict[zoneNbr][mKey], zoneDict)
+        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr, zoneDict)
 
-for zoneNbr in range(0,systemDict['mZoneCount']):
-    putMessanaSubSystem(MessanaSystem['zones'], 'mSetPoint', zoneNbr, 70, zoneDict)
+for macrozoneNbr in macrozoneDict:
+    for mKey in macrozoneDict[macrozoneNbr]:
+        putMessanaSubSystem(MessanaSystem['macorzones'], mKey, macrozoneNbr, macrozoneDict)
 
+for mKey in hc_changeoverDict[0]:
+    putMessanaSubSystem(MessanaSystem['hc_changeover'], mKey, 0, hc_changeoverDict)
+
+for fan_coilNbr in fan_coilsDict:
+    for mKey in fan_coilsDict[fan_coilNbr]:
+        putMessanaSubSystem(MessanaSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict)
+
+for atuNbr in atusDict:
+    for mKey in atusDict[fan_coilNbr]:
+        putMessanaSubSystem(MessanaSystem['atuss'], mKey, atuNbr, atusDict)
