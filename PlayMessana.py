@@ -129,7 +129,7 @@ hc_changeoverDict = defaultdict(dict)
 fan_coilsDict = defaultdict(dict)
 atusDict =defaultdict(dict)
 energy_sourcesDict = defaultdict(dict)
-buffer_tankDict = defaultdict(dict)
+buffer_tanksDict = defaultdict(dict)
 domsetic_hot_waterDict =defaultdict(dict)
 
 
@@ -236,7 +236,7 @@ for zoneNbr in range(0,systemDict['mATUcount']):
 
 print('\nBUFFER TANK')
 for zoneNbr in range(0,systemDict['mBufTankCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['buffer_tanks'], zoneNbr, buffer_tankDict)
+    retrieveMessanaSubSystemData(MessanaSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
 
 print('\nENERGY SOURCE')
 for zoneNbr in range(0,systemDict['mEnergySourceCount']):
