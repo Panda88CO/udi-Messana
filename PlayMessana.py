@@ -20,7 +20,7 @@ MessanaSystem = {   'system' : {
                         'mEnergySourceCount':'/api/system/energySourceCount/',
                         'mZoneCount':'/api/system/zoneCount/',
                         'mMacrozoneCount':'/api/system/macrozoneCount/',
-                        'mGroupCount':'/api/system/groupCount/',
+                        'mHCGroupCount':'/api/system/groupCount/',
                         'mBufTankCount':'/api/system/bufferTankCount/',
                         'mUnitTemp':'/api/system/tempUnit/',
                         'mEnergySaving':'/api/system/energySaving/',
@@ -94,7 +94,7 @@ MessanaSystem = {   'system' : {
                     'energy_sources' :{
                         'mName':'/api/enr/name/',
                         'mStatus':'/api/enr/status/',
-                        'mDHWtatus':'/api/enr/dhwStatus/',
+                        'mDHWstatus':'/api/enr/dhwStatus/',
                         'mType':'/api/enr/type/',
                         'mAlarmOn':'/api/enr/alarmOn/'
                     },
@@ -174,9 +174,9 @@ def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
         return False
 
 
-def putMessanaSubSystem(MessanaSystem, mKey, id, subSysDict ):
+def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
-    value = subSysDict[mKey][id]
+    value = subSysDict[id][mKey]
     mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
     resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
@@ -194,7 +194,7 @@ def retrieveMessanaSubNodeData(MessanaSystem, instNbr, mKey, mData):
        mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
        mData['statusOK'] =True
     else:
-       mData['error'] = 'Error: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+       mData['error'] = str(subSysTemp) + ': Error: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
        mData['statusOK'] =False
 
 def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
@@ -223,8 +223,8 @@ for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
     retrieveMessanaSubSystemData(MessanaSystem['macrozones'], mzoneNbr, macrozoneDict)
 
 print('\nhc_changeover')
-# only 1 (0 index) change over
-retrieveMessanaSubSystemData(MessanaSystem['hc_changeover'], 0, hc_changeoverDict)
+for hcchangeoverNbr in range (0,systemDict['mHCGroupCount']):
+    retrieveMessanaSubSystemData(MessanaSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
 
 print('\nFAN COILS')
 for fcNbr in range(0,systemDict['mFanCoilCount']):
@@ -248,22 +248,48 @@ for zoneNbr in range(0,systemDict['mDHWcount']):
 
 print('\n end extracting data')
 
+print('\nSYSTEM - PUT')
+for mKey in systemDict:
+    putMessanaSystem(MessanaSystem['system'], mKey, systemDict[mKey], systemDict)
 
+
+print('\nZONES - PUT')
 for zoneNbr in zoneDict:
     for mKey in zoneDict[zoneNbr]:
-        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr, zoneDict)
+        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
 
+print('\nMACROZONES - PUT')
 for macrozoneNbr in macrozoneDict:
     for mKey in macrozoneDict[macrozoneNbr]:
-        putMessanaSubSystem(MessanaSystem['macorzones'], mKey, macrozoneNbr, macrozoneDict)
+        putMessanaSubSystem(MessanaSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
 
-for mKey in hc_changeoverDict[0]:
-    putMessanaSubSystem(MessanaSystem['hc_changeover'], mKey, 0, hc_changeoverDict)
+print('\nhc_changeover - PUT')
+for hcgroupcountNbr in hc_changeoverDict:
+    for mKey in hc_changeoverDict[hcgroupcountNbr]:
+        putMessanaSubSystem(MessanaSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
 
+print('\nFAN COILS - PUT')
 for fan_coilNbr in fan_coilsDict:
     for mKey in fan_coilsDict[fan_coilNbr]:
-        putMessanaSubSystem(MessanaSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict)
+        putMessanaSubSystem(MessanaSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
 
+print('\nATU - PUT')
 for atuNbr in atusDict:
-    for mKey in atusDict[fan_coilNbr]:
-        putMessanaSubSystem(MessanaSystem['atuss'], mKey, atuNbr, atusDict)
+    for mKey in atusDict[atuNbr]:
+        putMessanaSubSystem(MessanaSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
+
+print('\nBUFFER TANK - PUT')
+for bufferTankNbr in buffer_tanksDict:
+    for mKey in buffer_tanksDict[bufferTankNbr]:
+        putMessanaSubSystem(MessanaSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
+
+print('\nENERGY SOURCE - PUT')
+for energySourceNbr in energy_sourcesDict:
+    for mKey in energy_sourcesDict[energySourceNbr]:
+        putMessanaSubSystem(MessanaSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
+
+print('\nDHW - PUT')
+for DHwaterNbr in domsetic_hot_waterDict:
+    for mKey in domsetic_hot_waterDict[DHwaterNbr]:
+        putMessanaSubSystem(MessanaSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
+print('\nEND put')
