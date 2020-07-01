@@ -62,7 +62,7 @@ MessanaSystem = {   'system' : {
                     'hc_changeover' :{
                         'mName':'/api/hc/name/',
                         'mMode':'/api/hc/mode/',
-                        'mExcutiveSession':'/api/hc/executiveSeason/',
+                        'mExcutiveSeason':'/api/hc/executiveSeason/',
                         'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
                     },
                     'fan_coils' :{
@@ -251,7 +251,6 @@ print('\n end extracting data')
 print('\nSYSTEM - PUT')
 for mKey in systemDict:
     putMessanaSystem(MessanaSystem['system'], mKey, systemDict[mKey], systemDict)
-
 
 print('\nZONES - PUT')
 for zoneNbr in zoneDict:
