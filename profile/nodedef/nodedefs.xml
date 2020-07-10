@@ -1,27 +1,61 @@
 <nodeDefs>
-    <nodeDef id="RPITEMP" nls="TEMP">
+    <nodeDef id="MESSANA" nls="MESSANA">
         <editors />
         <sts>
-            <st id="ST" editor="BOOL" />
+            <st id="ST"  editor="STATUS" />
+            <st id='GV0' editor='NAME'   />
+            <st id='GV1' editor='APIVER' />  #should be able set in messages - STATIC
+            <st id='GV2' editor='TEMPUNIT'/> #should be able set in messages - STATIC
+            <st id='GV3' editor='ENERGYSAVE'/>
+            <st id='GV4' editor='SETBACK'/>
+            <st id='ALARM' editor='EXTALARM'/>
         </sts>
         <cmds>
-            <sends />
+            <sends>
+                <cmd id="DON" />
+                <cmd id="DOF" />
+            </sends>
             <accepts>
-                <cmd id="DISCOVER" />
+                <cmd id="UPDATE" />
+                <cmd id="SETENERGYSAVE" />
+                <cmd id="SETSETBACK" />
+                    <p id="OFFSET" editor="OFFSET" init="0" />
             </accepts>
         </cmds>
     </nodeDef>
 
-    <nodeDef id="RELAY" nls="RELAY">
+    <nodeDef id="ZONE" nls="MZONE">
         <editors />
         <sts>
-            <st id="ST" editor="RELAY_EN" />
+            <st id="ST"  editor="STATUS" />
+            <st id='GV0' editor='NAME'   />
+            <st id='GV1' editor='SETPOINT' />
+            <st id='GV2' editor='MTEMP'/>
+            <st id='CLITEMP' editor='AIRTEMP'/>
+            <st id='GV3' editor='SCHEDULE'/>
+            <st id='GV4' editor='HUMIDIDTY'/>
+            <st id='GV5' editor='DEWPOINT'/>
+            <st id='GV6' editor='AIRQUALITY'/>
+            <st id='CLIHUM' editor='HUMIDIDTY'/>
+            <st id='CO2LVL' editor='CO2'/>
+            <st id='GV7' editor='MACROZONE'/>
+            <st id='GV8' editor='ENERGYSAVE'/>
+            <st id='ALARM' editor='EXTALARM'/>
+            <st id='GV9' editor='HSETPOINTRH'/>
+            <st id='GV10' editor='HSETPOINTDP'/>            
+            <st id='GV11' editor='DHSETPOINTRH'/>
+            <st id='GV12' editor='FHSETPOINTDP'/>
+            <st id='GV13' editor='CURSETPOINTRH'/>
+            <st id='GV14' editor='CURSETPOINTDP'/>
         </sts>
         <cmds>
-            </sends>
-            <cmd id="TOGGLE_RELAY">
-            <sends>
-            <accepts/>
+            <sends />
+            <accepts>
+                <cmd id="STATUS" />
+                <cmd id="SETSETPOINT" />
+                <cmd id="SETENERGYSAVE" />
+                <cmd id="SETSCHEDULE" />
+            </accepts>
          </cmds>
     </nodeDef>
 

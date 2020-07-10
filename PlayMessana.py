@@ -8,11 +8,11 @@ import json
 import requests
 from collections import defaultdict
 
-
+sys.stdout = open('MEssanaoutput.txt','wt')
 MessanaSystem = defaultdict(dict)
 MessanaSystem = {   'system' : {
                         'mName' : '/api/system/name/', 
-                        #'mApiVer' : '/api/system/apiVersion/',
+                        'mApiVer' : '/api/system/apiVersion/',
                         'mStatus':'/api/system/status/',
                         'mATUcount':'/api/system/atuCount/',
                         'mDHWcount':'/api/system/dhwCount/',
@@ -20,7 +20,7 @@ MessanaSystem = {   'system' : {
                         'mEnergySourceCount':'/api/system/energySourceCount/',
                         'mZoneCount':'/api/system/zoneCount/',
                         'mMacrozoneCount':'/api/system/macrozoneCount/',
-                        'mHCGroupCount':'/api/system/groupCount/',
+                        'mHCGroupCount':'/api/system/HCgroupCount/',
                         'mBufTankCount':'/api/system/bufferTankCount/',
                         'mUnitTemp':'/api/system/tempUnit/',
                         'mEnergySaving':'/api/system/energySaving/',
@@ -28,7 +28,7 @@ MessanaSystem = {   'system' : {
                         'mExternalAlarm':'/api/system/externalAlarm/'
                     },
                     'zones': {  
-                        'mName': '/api/zone/name/', 
+                        'mName': '/api/zone/name/',
                         'mSetPoint' :'/api/zone/setpoint/', 
                         'mStatus':'/api/zone/status/',
                         'mHumSetPointRH': '/api/zone/humidSetpointRH/',
@@ -51,13 +51,13 @@ MessanaSystem = {   'system' : {
                         'mCapability':'/api/zone/capability/'
                     },
                     'macrozones' : {
-                        'mName': '/api/macrozone/name/', 
-                        'mSetPoint' :'/api/macrozone/setpoint/', 
-                        'mStatus':'/api/macrozone/status/',
+                        'mName': '/api/macro/name/', 
+                        'mSetPoint' :'/api/macro/setpoint/', 
+                        'mStatus':'/api/macro/status/',
                         'mScheduleOn' : '/api/zone/scheduleOn/',
-                        'mHumidity':'/api/macrozone/humidity/',
-                        'mDewPoint' : '/api/macrozone/dewpoint/',
-                        'mTemp' :'/api/macrozone/temperature/'
+                        'mHumidity':'/api/macro/humidity/',
+                        'mDewPoint' : '/api/macro/dewpoint/',
+                        'mTemp' :'/api/macro/temperature/'
                     },
                     'hc_changeover' :{
                         'mName':'/api/hc/name/',
@@ -81,15 +81,19 @@ MessanaSystem = {   'system' : {
                         'mHUMOn':'/api/atu/humOn/',
                         'mNTDOn':'/api/atu/ntdOn/',
                         'mINTOn':'/api/atu/intOn/',
-                        'mHumidity':'/api/atu/humidity/',
-                        'mDewPoint':'/api/atu/dewpoint/',
                         'mTargetAirTemp':'/api/atu/targetAirTemperature/',
                         'mDehumudityStatus':'/api/atu/dehumidificationStatus/',
                         'mHumidityStatus':'/api/atu/humidificationStatus/',
-                        'mHRVstatus':'/api​/atu​/hrvStatus/',
+                        'mHRVstatus':'/api?/atu?/hrvStatus/',
                         'mIntegrationStatus':'/api/atu/integrationStatus/',
                         'mAlarmOn':'/api/atu/alarmOn/',
-                        'mAirTemp':'/api/atu/airTemperature/'
+                        'mAirTemp':'/api/atu/airTemperature/',
+                        'mHumSetpointRH':'/api/atu/humidSetpointRH',
+                        'mHumSetpointDP':'/api/atu/humidSetpointDP',
+                        'mDehumSetpointRH':'/api/atu/dehumSetpointRH',
+                        'mDehumSetpointDP':'/api/atu/dehumSetpointDP',
+                        'mCurrentSetpointRH':'/api/atu/currentSetpointRH',
+                        'mCurrentSetpointDP':'/api/atu/currentSetpointDP'
                     },
                     'energy_sources' :{
                         'mName':'/api/enr/name/',
@@ -100,7 +104,7 @@ MessanaSystem = {   'system' : {
                     },
                     'buffer_tanks' : {
                         'mName':'/api/tnk/name/',
-                        #'mStatus':'/api/tnk/status/',
+                       # 'mStatus':'/api/tnk/status/',
                         'mMode':'/api/tnk/mode/',
                         'mTemp':'/api/tnk/temperature/',
                         'mAlarmOn':'/api/tnk/alarmOn/'
@@ -113,6 +117,8 @@ MessanaSystem = {   'system' : {
                     }
                 }
 
+
+
 messanaAPIKey = 'apikey'
 messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
 massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
@@ -120,7 +126,8 @@ massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
 #MessanaIP = 'http://192.168.2.45'
 MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
-
+RESPONSE_NO_SUPPORT = '<Response [400]>'
+RESPONSE_NO_RESPONSE = '<Response [404]>'
 
 systemDict = defaultdict(list)
 zoneDict = defaultdict(dict)
@@ -136,6 +143,7 @@ domsetic_hot_waterDict =defaultdict(dict)
 
 def retrieveMessanaSystemData( MessanaSystem, mKey, systemDict):
     GETStr =MessanaIP+MessanaSystem[mKey] + '?' + massanaAPIStr 
+    print('\n' +  GETStr)
     systemTemp = requests.get(GETStr)
     if str(systemTemp) == RESPONSE_OK:
        systemTemp = systemTemp.json()
@@ -164,6 +172,7 @@ def getMessanaSubSystemData(MessanaSystem, Count, mKey, subSysDict):
 def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
     mData = defaultdict(list)
     PUTStr = MessanaIP+MessanaSystem[mKey] 
+    print('\n' + PUTStr)
     mData = {'value':value, messanaAPIKey : messanaAPIKeyVal}
     resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
@@ -174,28 +183,53 @@ def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
         return False
 
 
-def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict ):
+def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict):
     PUTStr = MessanaIP+MessanaSystem[mKey] 
     value = subSysDict[id][mKey]
+    print('\n' + PUTStr + ' ' + str(value))
+
     mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
     resp = requests.put(PUTStr, mData)
     if str(resp) == RESPONSE_OK:
        subSysDict[id][mKey] = value
        return True
+    elif str(resp) == RESPONSE_NO_SUPPORT:
+       temp1 =  resp.content
+       res_dict = json.loads(temp1.decode('utf-8')) 
+       mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
+       print(mData['error'])
+       mData['statusOK'] =False
+    elif str(resp) == RESPONSE_NO_RESPONSE:
+       mData['error'] = str(resp) + ': Error: No response from API:  Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+       print(mData['error'])
+       mData['statusOK'] =False
     else:
-        print (str(resp) + ': Not able to PUT key:'+ mKey + ' iD: '+ str(id) + ' value:', str(value) )
-        return False
+       mData['error'] = str(resp) + ': Error: Unklown: Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+       print(mData['error'])
+       mData['statusOK'] =False
+    
+    return False
 
 def retrieveMessanaSubNodeData(MessanaSystem, instNbr, mKey, mData):
     GETStr =MessanaIP+MessanaSystem[mKey]+str(instNbr)+'?'+ massanaAPIStr 
+    print('\n' +  GETStr)
     subSysTemp = requests.get(GETStr)
     if str(subSysTemp) == RESPONSE_OK:
        subSysTemp = subSysTemp.json()
        mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
        mData['statusOK'] =True
-    else:
-       mData['error'] = str(subSysTemp) + ': Error: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+    elif str(subSysTemp) == RESPONSE_NO_SUPPORT:
+       temp1 =  subSysTemp.content
+       res_dict = json.loads(temp1.decode('utf-8')) 
+       mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
        mData['statusOK'] =False
+    elif str(subSysTemp) == RESPONSE_NO_RESPONSE:
+       mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+       mData['statusOK'] =False
+    else:
+       mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+       mData['statusOK'] =False
+
 
 def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
      for mKey in MessanaSubSystem:
@@ -256,6 +290,7 @@ print('\nZONES - PUT')
 for zoneNbr in zoneDict:
     for mKey in zoneDict[zoneNbr]:
         putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
+        
 
 print('\nMACROZONES - PUT')
 for macrozoneNbr in macrozoneDict:
@@ -292,3 +327,4 @@ for DHwaterNbr in domsetic_hot_waterDict:
     for mKey in domsetic_hot_waterDict[DHwaterNbr]:
         putMessanaSubSystem(MessanaSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
+sys.stdout.close() 

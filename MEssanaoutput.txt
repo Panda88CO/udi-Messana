@@ -1,0 +1,1227 @@
+
+SYSTEM
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+ZONES
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 0 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 0 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 1 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 1 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 2 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 2 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 3 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/3?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 3 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 4 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/4?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 4 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No ARS Found.']) Subnode 5 for id: mCurrentSetPointRH
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No ARS Found.']) Subnode 5 for id: mCurrentSetPointDP
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 5 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/5?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 5 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No ARS Found.']) Subnode 6 for id: mCurrentSetPointRH
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No ARS Found.']) Subnode 6 for id: mCurrentSetPointDP
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 6 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/6?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 6 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 7 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/7?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 7 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 8 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/8?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 8 for id: mCapability
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airQuality/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Air Quality Sensor/Co2']) Subnode 9 for id: mAirQuality
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/capability/9?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [400]>: Error: dict_values(['No Capability Found.']) Subnode 9 for id: mCapability
+
+MACROZONES
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/1?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/2?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+hc_changeover
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/mode/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/executiveSeason/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/adaptiveComfort/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+FAN COILS
+
+ATU
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/flowLevel/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/status/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/hrvOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/humOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/ntdOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/intOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/targetAirTemperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mTargetAirTemp
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/dehumidificationStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mDehumudityStatus
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/humidificationStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mHumidityStatus
+
+http://olgaardtahoe1.mynetgear.com:3045/api?/atu?/hrvStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mHRVstatus
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/integrationStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mIntegrationStatus
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/alarmOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/airTemperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/humidSetpointRH0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mHumSetpointRH
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/humidSetpointDP0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mHumSetpointDP
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/dehumSetpointRH0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mDehumSetpointRH
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/dehumSetpointDP0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mDehumSetpointDP
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/currentSetpointRH0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mCurrentSetpointRH
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/currentSetpointDP0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [404]>: Error: No response from API:  Subnode 0 for id: mCurrentSetpointDP
+
+BUFFER TANK
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/mode/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/temperature/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/alarmOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+ENERGY SOURCE
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/name/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/status/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/dhwStatus/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/type/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/alarmOn/0?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+
+DHW
+
+ end extracting data
+
+SYSTEM - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/name/
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/apiVersion/
+<Response [404]>: Not able to PUT Key: : mApiVer value: 0.5.1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/status/
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/atuCount/
+<Response [404]>: Not able to PUT Key: : mATUcount value: 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/dhwCount/
+<Response [404]>: Not able to PUT Key: : mDHWcount value: 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/fancoilCount/
+<Response [404]>: Not able to PUT Key: : mFanCoilCount value: 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/energySourceCount/
+<Response [404]>: Not able to PUT Key: : mEnergySourceCount value: 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/zoneCount/
+<Response [404]>: Not able to PUT Key: : mZoneCount value: 10
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/macrozoneCount/
+<Response [404]>: Not able to PUT Key: : mMacrozoneCount value: 3
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/HCgroupCount/
+<Response [404]>: Not able to PUT Key: : mHCGroupCount value: 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/bufferTankCount/
+<Response [404]>: Not able to PUT Key: : mBufTankCount value: 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/tempUnit/
+<Response [404]>: Not able to PUT Key: : mUnitTemp value: Fahrenheit
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/energySaving/
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/setback/
+
+http://olgaardtahoe1.mynetgear.com:3045/api/system/externalAlarm/
+<Response [404]>: Not able to PUT Key: : mExternalAlarm value: 0
+
+ZONES - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS Small Bedroom
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 50.4
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mHumidity value:', '50.4')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.3
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mDewPoint value:', '43.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 62.1
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mTemp value:', '62.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 62.2
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mAirTemp value:', '62.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS large bedroom
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 52.1
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mHumidity value:', '52.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.8
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mDewPoint value:', '43.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 61.6
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mTemp value:', '61.6')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 61.7
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mAirTemp value:', '61.7')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS Bath
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 51.2
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mHumidity value:', '51.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.3
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mDewPoint value:', '43.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 61.6
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mTemp value:', '61.6')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 61.8
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mAirTemp value:', '61.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS TV Room
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 51.9
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mHumidity value:', '51.9')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.3
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mDewPoint value:', '43.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 61.4
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mTemp value:', '61.4')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 61.5
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mAirTemp value:', '61.5')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 3 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS Office
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 50.2
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mHumidity value:', '50.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.1
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mDewPoint value:', '43.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 61.8
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mTemp value:', '61.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 62.1
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mAirTemp value:', '62.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 4 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ DS entrance
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 90
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 50.4
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mHumidity value:', '50.4')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 43.1
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mDewPoint value:', '43.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 61.9
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mTemp value:', '61.9')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 62
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mAirTemp value:', '62')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 2
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mMacrozoneId value:', '2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 5 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ Powder Room
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70.5
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 82
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 82
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 43.7
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mHumidity value:', '43.7')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 42.8
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mDewPoint value:', '42.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 65.4
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mTemp value:', '65.4')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 65.5
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mAirTemp value:', '65.5')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 1
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mMacrozoneId value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 6 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ Living-Stairs-Kitchen
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70.5
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 83
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 83
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 83
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 43.9
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mHumidity value:', '43.9')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 42.4
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mDewPoint value:', '42.4')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 65.3
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mTemp value:', '65.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 65.2
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mAirTemp value:', '65.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 1
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mMacrozoneId value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 7 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ Master Bedroom
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70.5
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 80
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 80
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 80
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 42
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mHumidity value:', '42')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 42.2
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mDewPoint value:', '42.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 66.2
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mTemp value:', '66.2')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 66.1
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mAirTemp value:', '66.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 1
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mMacrozoneId value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 8 for key: mThermalStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/name/ Master Bath
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/setpoint/ 70.5
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointRH/ 79
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointRH/ 79
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dehumSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointRH/ 79
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/currentSetpointDP/ 60.0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/humidity/ 41.1
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mHumidity value:', '41.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/dewpoint/ 42
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mDewPoint value:', '42')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/temperature/ 66.6
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mTemp value:', '66.6')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/co2/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/airTemperature/ 66.6
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mAirTemp value:', '66.6')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/macrozoneId/ 1
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mMacrozoneId value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/energySaving/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/thermalStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 9 for key: mThermalStatus value:', '0')
+
+MACROZONES - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/ All
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode 0 for key: mName value:', 'All')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/ 69
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode 0 for key: mSetPoint value:', '69')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/ 1
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode 0 for key: mStatus value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/ 47.7
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mHumidity value:', '47.7')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/ 42.9
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mDewPoint value:', '42.9')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/ 63.3
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mTemp value:', '63.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/ Upstairs
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/ 70.5
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/ 42.6
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mHumidity value:', '42.6')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/ 42.3
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mDewPoint value:', '42.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/ 65.8
+('<Response [404]>: Error: No response from API:  Subnode 1 for key: mTemp value:', '65.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/name/ Downstairs
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/setpoint/ 70
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/zone/scheduleOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/humidity/ 51.1
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mHumidity value:', '51.1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/dewpoint/ 43.3
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mDewPoint value:', '43.3')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/macro/temperature/ 61.7
+('<Response [404]>: Error: No response from API:  Subnode 2 for key: mTemp value:', '61.7')
+
+hc_changeover - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/name/ Olgaard Residence
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/mode/ 1
+("<Response [400]>: Not able to PUT key: dict_values(['Unknow error']) Subnode 0 for key: mMode value:", '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/executiveSeason/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mExcutiveSeason value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/hc/adaptiveComfort/ 0
+("<Response [400]>: Not able to PUT key: dict_values(['Unknow error']) Subnode 0 for key: mAdaptiveComfort value:", '0')
+
+FAN COILS - PUT
+
+ATU - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/name/ Air Treatment Unit 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/flowLevel/ 1
+('<Response [500]>: Error: Unklown: Subnode 0 for key: mFlowLevel value:', '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/status/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/hrvOn/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/humOn/ 0
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/ntdOn/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/intOn/ 1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mAlarmOn value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/atu/airTemperature/ 73
+('<Response [500]>: Error: Unklown: Subnode 0 for key: mAirTemp value:', '73')
+
+BUFFER TANK - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/name/ BT-1
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/mode/ 1
+("<Response [400]>: Not able to PUT key: dict_values(['Invalid value']) Subnode 0 for key: mMode value:", '1')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/temperature/ 65.8
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mTemp value:', '65.8')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/tnk/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mAlarmOn value:', '0')
+
+ENERGY SOURCE - PUT
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/name/ Boiler
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/status/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mStatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/dhwStatus/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mDHWstatus value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/type/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mType value:', '0')
+
+http://olgaardtahoe1.mynetgear.com:3045/api/enr/alarmOn/ 0
+('<Response [404]>: Error: No response from API:  Subnode 0 for key: mAlarmOn value:', '0')
+
+DHW - PUT
+
+END put
