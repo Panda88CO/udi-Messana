@@ -18,7 +18,11 @@
             <accepts>
                 <cmd id="UPDATE" />
                 <cmd id="SETENERGYSAVE" />
-                <cmd id="SETSETBACK" />
+                <cmd id="SET
+                
+                
+                
+                SETBACK" />
                     <p id="OFFSET" editor="OFFSET" init="0" />
             </accepts>
         </cmds>
