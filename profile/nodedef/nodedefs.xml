@@ -3,11 +3,19 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   />
+            <st id='GV0' editor='NAME'   />  #shoud not be passed - NodeName?
             <st id='GV1' editor='APIVER' />  #should be able set in messages - STATIC
             <st id='GV2' editor='TEMPUNIT'/> #should be able set in messages - STATIC
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
+            <st id='GV5' editor='ATU_COUNT'/>
+            <st id='GV6' editor='DHW_COUNT'/>
+            <st id='GV7' editor='FANCOIL_COUNT'/>
+            <st id='GV8' editor='ENERGYS_COUNT'/>
+            <st id='GV9' editor='ZONE_COUNT'/>
+            <st id='GV10' editor='MACROZONE_COUNT'/>
+            <st id='GV11' editor='H_C_COUNT'/>
+            <st id='GV12' editor='BUFTANK_COUNT'/>
             <st id='ALARM' editor='EXTALARM'/>
         </sts>
         <cmds>
@@ -18,12 +26,7 @@
             <accepts>
                 <cmd id="UPDATE" />
                 <cmd id="SETENERGYSAVE" />
-                <cmd id="SET
-                
-                
-                
-                SETBACK" />
-                    <p id="OFFSET" editor="OFFSET" init="0" />
+                <cmd id="SETSETBACK" />
             </accepts>
         </cmds>
     </nodeDef>
@@ -32,7 +35,7 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   />
+            <st id='GV0' editor='NAME'   /> # node name
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='MTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
@@ -57,8 +60,8 @@
             <accepts>
                 <cmd id="STATUS" />
                 <cmd id="SETSETPOINT" />
-                <cmd id="SETENERGYSAVE" />
-                <cmd id="SETSCHEDULE" />
+                <cmd id="ENABLE_ENERGYSAVE" />
+                <cmd id="ENABLE_SCHEDULE" />
             </accepts>
          </cmds>
     </nodeDef>
