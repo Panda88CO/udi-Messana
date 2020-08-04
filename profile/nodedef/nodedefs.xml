@@ -63,6 +63,10 @@
          </cmds>
     </nodeDef>
 
+
+
+
+
     <nodeDef id="TEMPSENSOR" nls="SENSOR">
         <editors />
         <sts>
