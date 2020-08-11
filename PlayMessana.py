@@ -10,7 +10,7 @@ import requests
 from collections import defaultdict
 
 
-sys.stdout = open('MEssanaoutput.txt','wt')
+#sys.stdout = open('MEssanaoutput.txt','wt')
 MessanaSystem = defaultdict(dict)
 MessanaSystem = {   'system' : {
                         'mName' : '/api/system/name/', 
@@ -125,8 +125,8 @@ messanaAPIKey = 'apikey'
 messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
 massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
 
-#MessanaIP = 'http://192.168.2.45'
-MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
+MessanaIP = 'http://192.168.2.45'
+#MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
 RESPONSE_NO_SUPPORT = '<Response [400]>'
 RESPONSE_NO_RESPONSE = '<Response [404]>'
@@ -329,4 +329,4 @@ for DHwaterNbr in domsetic_hot_waterDict:
     for mKey in domsetic_hot_waterDict[DHwaterNbr]:
         putMessanaSubSystem(MessanaSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
-sys.stdout.close() 
+#sys.stdout.close() 
