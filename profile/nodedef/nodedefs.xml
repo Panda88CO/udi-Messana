@@ -3,19 +3,19 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   />  #shoud not be passed - NodeName?
-            <st id='GV1' editor='APIVER' />  #should be able set in messages - STATIC
-            <st id='GV2' editor='TEMPUNIT'/> #should be able set in messages - STATIC
+            <!st id='GV0' editor='NAME'   /> 
+            <!st id='GV1' editor='APIVER' /> 
+            <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
-            <st id='GV5' editor='ATU_COUNT'/>
-            <st id='GV6' editor='DHW_COUNT'/>
-            <st id='GV7' editor='FANCOIL_COUNT'/>
-            <st id='GV8' editor='ENERGYS_COUNT'/>
+            <!st id='GV5' editor='ATU_COUNT'/>
+            <!st id='GV6' editor='DHW_COUNT'/>
+            <!st id='GV7' editor='FANCOIL_COUNT'/>
+            <!st id='GV8' editor='ENERGYS_COUNT'/>
             <st id='GV9' editor='ZONE_COUNT'/>
             <st id='GV10' editor='MACROZONE_COUNT'/>
-            <st id='GV11' editor='H_C_COUNT'/>
-            <st id='GV12' editor='BUFTANK_COUNT'/>
+            <!st id='GV11' editor='H_C_COUNT'/>
+            <!st id='GV12' editor='BUFTANK_COUNT'/>
             <st id='ALARM' editor='EXTALARM'/>
         </sts>
         <cmds>
@@ -25,8 +25,9 @@
             </sends>
             <accepts>
                 <cmd id="UPDATE" />
-                <cmd id="SETENERGYSAVE" />
-                <cmd id="SETSETBACK" />
+                <cmd id="SET_STATUS" />
+                <cmd id="SET_ENERGYSAVE" />
+                <cmd id="SET_SETBACK" />
             </accepts>
         </cmds>
     </nodeDef>
@@ -35,31 +36,30 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   /> # node name
+            <!st id='GV0' editor='NAME'   /> 
             <st id='GV1' editor='SETPOINT' />
-            <st id='GV2' editor='MTEMP'/>
+            <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
             <st id='GV3' editor='SCHEDULE'/>
-            <st id='GV4' editor='HUMIDIDTY'/>
-            <st id='GV5' editor='DEWPOINT'/>
-            <st id='GV6' editor='AIRQUALITY'/>
-            <st id='CLIHUM' editor='HUMIDIDTY'/>
-            <st id='CO2LVL' editor='CO2'/>
-            <st id='GV7' editor='MACROZONE'/>
+            <!st id='GV5' editor='DEWPOINT'/>
+            <!st id='GV6' editor='AIRQUALITY'/>
+            <!st id='CLIHUM' editor='HUMIDIDTY'/>
+            <!st id='CO2LVL' editor='CO2'/>
+            <st id='GV7' editor='MACROZONE_MEMBER'/>
             <st id='GV8' editor='ENERGYSAVE'/>
             <st id='ALARM' editor='EXTALARM'/>
-            <st id='GV9' editor='HSETPOINTRH'/>
-            <st id='GV10' editor='HSETPOINTDP'/>            
-            <st id='GV11' editor='DHSETPOINTRH'/>
-            <st id='GV12' editor='FHSETPOINTDP'/>
-            <st id='GV13' editor='CURSETPOINTRH'/>
-            <st id='GV14' editor='CURSETPOINTDP'/>
+            <!st id='GV9' editor='HSETPOINTRH'/>
+            <!st id='GV10' editor='HSETPOINTDP'/>            
+            <!st id='GV11' editor='DHSETPOINTRH'/>
+            <!st id='GV12' editor='FHSETPOINTDP'/>
+            <!st id='GV13' editor='CURSETPOINTRH'/>
+            <!st id='GV14' editor='CURSETPOINTDP'/>
         </sts>
         <cmds>
             <sends />
             <accepts>
-                <cmd id="STATUS" />
-                <cmd id="SETSETPOINT" />
+                <cmd id="SET_STATUS" />
+                <cmd id="SET_SETPOINT" />
                 <cmd id="ENABLE_ENERGYSAVE" />
                 <cmd id="ENABLE_SCHEDULE" />
             </accepts>
