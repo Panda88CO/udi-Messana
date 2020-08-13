@@ -12,7 +12,7 @@ from collections import defaultdict
 
 #sys.stdout = open('MEssanaoutput.txt','wt')
 class MessanaInfo:
-    def __init__ (self)
+    def __init__ (self):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system' : {
                             'mName' : '/api/system/name/', 
@@ -120,27 +120,25 @@ class MessanaInfo:
                             'mTargetTemp':'/api/dhw/targetTemperature/'
                             }
                         }
+    
+        self.messanaAPIKey = 'apikey'
+        self.messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        self.massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
+        self.MessanaIP = '192.168.2.65'
 
+        self.RESPONSE_OK = '<Response [200]>'
+        self.RESPONSE_NO_SUPPORT = '<Response [400]>'
+        self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
-
-    self.messanaAPIKey = 'apikey'
-    self.messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-    self.massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
-
-    self.MessanaIP = 'http://192.168.2.65'
-    self.RESPONSE_OK = '<Response [200]>'
-    self.RESPONSE_NO_SUPPORT = '<Response [400]>'
-    self.RESPONSE_NO_RESPONSE = '<Response [404]>'
-
-    self.systemDict = defaultdict(list)
-    self.zoneDict = defaultdict(dict)
-    self.macrozoneDict = defaultdict(dict)
-    self.hc_changeoverDict = defaultdict(dict)
-    self.fan_coilsDict = defaultdict(dict)
-    self.atusDict =defaultdict(dict)
-    self.energy_sourcesDict = defaultdict(dict)
-    self.buffer_tanksDict = defaultdict(dict)
-    self.domsetic_hot_waterDict =defaultdict(dict)
+        self.systemDict = defaultdict(list)
+        self.zoneDict = defaultdict(dict)
+        self.macrozoneDict = defaultdict(dict)
+        self.hc_changeoverDict = defaultdict(dict)
+        self.fan_coilsDict = defaultdict(dict)
+        self.atusDict =defaultdict(dict)
+        self.energy_sourcesDict = defaultdict(dict)
+        self.buffer_tanksDict = defaultdict(dict)
+        self.domsetic_hot_waterDict =defaultdict(dict)
 
     def setIP (mIPAddress, mAPIKeyVal):
         self.messanaAPIKeyVal = mAPIKeyVal
@@ -148,17 +146,17 @@ class MessanaInfo:
         self.MessanaIP ='htp://'+ mIPAddress
 
 
-    def retrieveSystemData( mSystem, mKey, systemDict):
-        GETStr =MessanaIP+mSystem[mKey] + '?' + massanaAPIStr 
+    def retrieveSystemData():
+        GETStr =self.MessanaIP+self.mSystem[mKey] + '?' + self.massanaAPIStr 
         print('\n' +  GETStr)
         systemTemp = requests.get(GETStr)
         if str(systemTemp) == RESPONSE_OK:
-        systemTemp = systemTemp.json()
-        systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-        return True
+            systemTemp = systemTemp.json()
+            self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+            return True
         else:
             print(str(mKey) + ' error')
-            systemDict[mKey] = -1
+            self.systemDict[mKey] = -1
             return False 
 
 
@@ -198,44 +196,43 @@ class MessanaInfo:
         mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
         resp = requests.put(PUTStr, mData)
         if str(resp) == RESPONSE_OK:
-        subSysDict[id][mKey] = value
-        return True
+            subSysDict[id][mKey] = value
+            return True
         elif str(resp) == RESPONSE_NO_SUPPORT:
-        temp1 =  resp.content
-        res_dict = json.loads(temp1.decode('utf-8')) 
-        mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-        print(mData['error'])
-        mData['statusOK'] =False
+            temp1 =  resp.content
+            res_dict = json.loads(temp1.decode('utf-8')) 
+            mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
         elif str(resp) == RESPONSE_NO_RESPONSE:
-        mData['error'] = str(resp) + ': Error: No response from API:  Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
-        print(mData['error'])
-        mData['statusOK'] =False
+            mData['error'] = str(resp) + ': Error: No response from API:  Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
         else:
-        mData['error'] = str(resp) + ': Error: Unklown: Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
-        print(mData['error'])
-        mData['statusOK'] =False
-        
-        return False
+            mData['error'] = str(resp) + ': Error: Unklown: Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
+            return False
 
     def retrieveSubNodeData(mSystem, instNbr, mKey, mData):
         GETStr =MessanaIP+mSystem[mKey]+str(instNbr)+'?'+ massanaAPIStr 
         print('\n' +  GETStr)
         subSysTemp = requests.get(GETStr)
         if str(subSysTemp) == RESPONSE_OK:
-        subSysTemp = subSysTemp.json()
-        mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
-        mData['statusOK'] =True
+            subSysTemp = subSysTemp.json()
+            mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+            mData['statusOK'] =True
         elif str(subSysTemp) == RESPONSE_NO_SUPPORT:
-        temp1 =  subSysTemp.content
-        res_dict = json.loads(temp1.decode('utf-8')) 
-        mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-        mData['statusOK'] =False
+            temp1 =  subSysTemp.content
+            res_dict = json.loads(temp1.decode('utf-8')) 
+            mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
         elif str(subSysTemp) == RESPONSE_NO_RESPONSE:
-        mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-        mData['statusOK'] =False
+            mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
         else:
-        mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-        mData['statusOK'] =False
+            mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
 
 
     def retrieveSubSystemData(MessanaSubSystem, instNbr, subSysDict):
@@ -243,9 +240,9 @@ class MessanaInfo:
             mData = {}
             retrieveMessanaSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
             if mData['statusOK']:
-            subSysDict[instNbr][mKey] = mData['data']
+                subSysDict[instNbr][mKey] = mData['data']
             else:
-            print(mData['error'])
+                print(mData['error'])
 }
 
 messana = MessanaInfo():
@@ -303,32 +300,32 @@ for zoneNbr in zoneDict:
 print('\nMACROZONES - PUT')
 for macrozoneNbr in macrozoneDict:
     for mKey in macrozoneDict[macrozoneNbr]:
-        putMessanaSubSystem(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
+        putSubSystem(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
 
 print('\nhc_changeover - PUT')
 for hcgroupcountNbr in hc_changeoverDict:
     for mKey in hc_changeoverDict[hcgroupcountNbr]:
-        putMessanaSubSystem(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
+        putSubSystem(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
 
 print('\nFAN COILS - PUT')
 for fan_coilNbr in fan_coilsDict:
     for mKey in fan_coilsDict[fan_coilNbr]:
-        putMessanaSubSystem(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
+        putSubSystem(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
 
 print('\nATU - PUT')
 for atuNbr in atusDict:
     for mKey in atusDict[atuNbr]:
-        putMessanaSubSystem(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
+        putSubSystem(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
 
 print('\nBUFFER TANK - PUT')
 for bufferTankNbr in buffer_tanksDict:
     for mKey in buffer_tanksDict[bufferTankNbr]:
-        putMessanaSubSystem(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
+        putSubSystem(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
 
 print('\nENERGY SOURCE - PUT')
 for energySourceNbr in energy_sourcesDict:
     for mKey in energy_sourcesDict[energySourceNbr]:
-        putMessanaSubSystem(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
+        putSubSystem(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
 
 print('\nDHW - PUT')
 for DHwaterNbr in domsetic_hot_waterDict:
