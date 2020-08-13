@@ -243,7 +243,7 @@ class MessanaInfo:
                 subSysDict[instNbr][mKey] = mData['data']
             else:
                 print(mData['error'])
-}
+
 
 messana = MessanaInfo():
 
