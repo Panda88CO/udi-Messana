@@ -125,7 +125,7 @@ messanaAPIKey = 'apikey'
 messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
 massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
 
-MessanaIP = 'http://192.168.2.65'
+MessanaIP = 'http://192.168.2.45'
 #MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
 RESPONSE_OK = '<Response [200]>'
 RESPONSE_NO_SUPPORT = '<Response [400]>'
@@ -247,8 +247,8 @@ def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
 
 #Retrive basic system info
 print('\nSYSTEM')
-for mSystemKey in MessanaSystem['system']:
-    retrieveMessanaSystemData(MessanaSystem['system'], mSystemKey, systemDict)
+for nSystemKey in MessanaSystem['system']:
+    retrieveMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
 
 print('\nZONES')
 for zoneNbr in range(0,systemDict['mZoneCount']):
