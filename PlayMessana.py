@@ -12,7 +12,7 @@ from collections import defaultdict
 
 #sys.stdout = open('MEssanaoutput.txt','wt')
 class MessanaInfo:
-    def __init__ (self):
+    def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system' : {
                             'mName' : '/api/system/name/', 
@@ -120,11 +120,13 @@ class MessanaInfo:
                             'mTargetTemp':'/api/dhw/targetTemperature/'
                             }
                         }
-    
+        #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        #self.IP = '192.168.2.65'    
         self.APIKey = 'apikey'
-        self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-        self.APIStr =self.APIKey + '='+ self.APIKeyVal
-        self.IP = '192.168.2.65'
+        self.APIKeyVal = mAPIKeyVal
+        self.APIStr = self.APIKey + '=' + self.APIKeyVal
+
+        self.IP ='htp://'+ mIPaddress
 
         self.RESPONSE_OK = '<Response [200]>'
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
@@ -140,24 +142,22 @@ class MessanaInfo:
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
 
-    def setIP (self, mIPAddress, mAPIKeyVal):
-        self.APIKeyVal = mAPIKeyVal
-        self.APIStr = self.APIKey + '='+ mAPIKeyVal
-        self.IP ='htp://'+ mIPAddress
+        self.retrieveSystemData()
+        self.retrieveZoneData()
+        self.retrieveMacroZoneData()
+        self.retrieveHC_COData()
+        self.retrieveFCData()
+        self.retrieveATUdata()
+        self.retrieveEnergySourceData()
+        self.retrieveBufTData()
+        self.retrieveDHWData()
 
 
-    def retrieveSystemData(self):
-        GETStr =self.IP+self.mSystem[mKey] + '?' + self.APIStr 
-        print('\n' +  GETStr)
-        systemTemp = requests.get(GETStr)
-        if str(systemTemp) == self.RESPONSE_OK:
-            systemTemp = systemTemp.json()
-            self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-            return True
-        else:
-            print(str(mKey) + ' error')
-            self.systemDict[mKey] = -1
-            return False 
+
+   
+
+
+
 
 
     '''
@@ -244,8 +244,60 @@ class MessanaInfo:
             else:
                 print(mData['error'])
 
+    '''    def retrieveSystemData(self):
+        GETStr =self.IP+self.mSystem[mKey] + '?' + self.APIStr 
+        print('\n' +  GETStr)
+        systemTemp = requests.get(GETStr)
+        if str(systemTemp) == self.RESPONSE_OK:
+            systemTemp = systemTemp.json()
+            self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+            return True
+        else:
+            print(str(mKey) + ' error')
+            self.systemDict[mKey] = -1
+            return False '''
 
-messana = MessanaInfo()
+    def retrieveSystemData(self):
+        for mKey in self.mSystem['system']:
+            GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
+            print('\n' +  GETStr)
+            systemTemp = requests.get(GETStr)
+            if str(systemTemp) == self.RESPONSE_OK:
+                systemTemp = systemTemp.json()
+                self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+                return True
+            else:
+                print(str(mKey) + ' error')
+                self.systemDict[mKey] = -1
+                return False
+
+
+    def retrieveZoneData(self):
+        #
+
+    def retrieveMacroZoneData(self):
+        #
+
+    def retrieveHC_COData(self):
+        #
+
+    def retrieveFCData(self):
+        #
+        
+    def retrieveATUdata(self):
+
+    def retrieveEnergySourceData(self):
+
+    def retrieveBufTData(self):
+
+    def retrieveDHWData(self):
+
+
+
+#    def retrieveAllData (self):
+        
+
+messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
 #Retrive basic system info
