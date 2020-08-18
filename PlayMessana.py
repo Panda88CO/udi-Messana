@@ -126,13 +126,13 @@ class MessanaInfo:
         self.APIKeyVal = mAPIKeyVal
         self.APIStr = self.APIKey + '=' + self.APIKeyVal
 
-        self.IP ='htp://'+ mIPaddress
+        self.IP ='http://'+ mIPaddress
 
         self.RESPONSE_OK = '<Response [200]>'
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
-        self.systemDict = defaultdict(list)
+        self.systemDict = defaultdict(dict)
         self.zoneDict = defaultdict(dict)
         self.macrozoneDict = defaultdict(dict)
         self.hc_changeoverDict = defaultdict(dict)
@@ -143,25 +143,19 @@ class MessanaInfo:
         self.domsetic_hot_waterDict =defaultdict(dict)
 
         self.retrieveSystemData()
-        self.retrieveZoneData()
-        self.retrieveMacroZoneData()
-        self.retrieveHC_COData()
-        self.retrieveFCData()
-        self.retrieveATUdata()
-        self.retrieveEnergySourceData()
-        self.retrieveBufTData()
-        self.retrieveDHWData()
+        self.retrieveAllZoneData()
+        self.retrieveAllZoneData()
+        #self.retrieveAllMacroZoneData()
+        #self.retrieveAllHC_COData()
+        #self.retrieveAllFCData()
+        #self.retrieveAllATUdata()
+        #self.retrieveAllEnergySourceData()
+        #self.retrieveAllBufTData()
+        #self.retrieveAllDHWData()
 
 
 
-   
-
-
-
-
-
-    '''
-    def getSubSystemData(mSystem, Count, mKey, subSysDict):
+    ''' def getSubSystemData(mSystem, Count, mKey, subSysDict):
         for mId in range(0, Count):
             GETStr =MessanaIP+mSystem[mKey]+str(mId)+'?'+ massanaAPIStr 
             subSysTemp = requests.get(GETStr)
@@ -169,9 +163,7 @@ class MessanaInfo:
                 subSysTemp = subSysTemp.json()
                 subSysDict[mId][mKey] =subSysTemp[str(list(subSysTemp.keys())[0])]
             else:
-                print(str(mKey) + ' error for id: ', mId)
-
-    '''
+                print(str(mKey) + ' error for id: ', mId) '''
 
 
     def putSystem(self, mSystem, mKey, value, systemDict):
@@ -235,14 +227,16 @@ class MessanaInfo:
             mData['statusOK'] =False
 
 
-    def retrieveSubSystemData(self, MessanaSubSystem, instNbr, subSysDict):
+    def retrieveSubSystemData(self, MessanaSubSystem, instNbr):
+        subSystemDict = defaultdict(dict)
         for mKey in MessanaSubSystem:
             mData = {}
             self.retrieveSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
             if mData['statusOK']:
-                subSysDict[instNbr][mKey] = mData['data']
+                subSystemDict[instNbr][mKey] = mData['data']
             else:
                 print(mData['error'])
+        return subSystemDict
 
     '''    def retrieveSystemData(self):
         GETStr =self.IP+self.mSystem[mKey] + '?' + self.APIStr 
@@ -265,35 +259,77 @@ class MessanaInfo:
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-                return True
             else:
                 print(str(mKey) + ' error')
                 self.systemDict[mKey] = -1
                 return False
+        return True
+    
+    def retrieveZoneData(self, zoneNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['zones'], zoneNbr)
+        return (tempDict)
+    
+    def retrieveAllZoneData(self):
+        for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
+            tempDict = {}
+            tempDict= self.retrieveZoneData(zoneNbr)
+            for key in tempDict[zoneNbr]:
+                    self.zoneDict[zoneNbr][key]=tempDict[key]
+    
+    def retrieveMacroZoneData(self, mzoneNbr):
+        self.retrieveSubSystemData(self.mSystem['macrozones'], mzoneNbr, self.macrozoneDict)
+
+    def retrieveAllMacroZoneData(self):
+        for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
+            self.retrieveMacroZoneData(mzoneNbr)
+
+    def retrieveHC_COData(self, hcchangeoverNbr):
+        self.retrieveSubSystemData(self.mSystem['hc_changeover'],hcchangeoverNbr , self.hc_changeoverDict)
+
+    def retrieveAllHC_COData(self):
+        for hcchangeoverNbr in range (0,self.systemDict['mHCGroupCount']):
+            self.retrieveHC_COData(hcchangeoverNbr)
+
+    def retrieveFCData(self, fcNbr):
+        self.retrieveSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
+
+    def retrieveAllFCData(self):
+       for fcNbr in range(0,self.systemDict['mFanCoilCount']):
+           self.retrieveFCData(fcNbr)
+
+    def retrieveATUdata(self, atuNbr):
+        self.retrieveSubSystemData(self.mSystem['energy_sources'], atuNbr, self.energy_sourcesDict)
 
 
-    def retrieveZoneData(self):
-        #
-
-    def retrieveMacroZoneData(self):
-        #
-
-    def retrieveHC_COData(self):
-        #
-
-    def retrieveFCData(self):
-        #
-        
-    def retrieveATUdata(self):
-
-    def retrieveEnergySourceData(self):
-
-    def retrieveBufTData(self):
-
-    def retrieveDHWData(self):
+    def retrieveAllATUdata(self):
+        for atuNbr in range(0,self.systemDict['mATUcount']):
+            self.retrieveATUdata(atuNbr)
 
 
+    def retrieveEnergySourceData(self, esNbr):
+        self.retrieveSubSystemData(self.mSystem['energy_sources'], esNbr, self.energy_sourcesDict)
 
+    def retrieveAllEnergySourceData(self):
+        for esNbr in range(0,self.systemDict['mEnergySourceCount']):
+            self.retrieveEnergySourceData(esNbr)
+
+    def retrieveBufTData(self, btNbr):
+            self.retrieveSubSystemData(self.mSystem['buffer_tanks'], btNbr, self.buffer_tanksDict)
+
+    def retrieveAllBufTData(self):
+        for btNbr in range(0,self.systemDict['mBufTankCount']):
+            self.retrieveBufTData(btNbr)
+
+
+    def retrieveDHWData(self, dhwNbr):
+        self.retrieveSubSystemData(self.mSystem['domsetic_hot_waters'], dhwNbr, self.domsetic_hot_waterDict)
+
+    def retrieveAllDHWData(self):
+        for dhwNbr in range(0,self.systemDict['mDHWcount']):
+            self.retrieveDHWData(dhwNbr)
+
+    
 #    def retrieveAllData (self):
         
 
@@ -302,14 +338,15 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 #Retrive basic system info
 print('\nSYSTEM')
-for mSystemKey in messana.mSystem['system']:
-    messana.retrieveSystemData(messana.mSystem['system'], mSystemKey, systemDict)
+messana.retrieveSystemData()
 
 print('\nZONES')
-for zoneNbr in range(0,systemDict['mZoneCount']):
-    messana.retrieveSubSystemData(messana.mSystem['zones'], zoneNbr, zoneDict)
+for zoneNbr in range(0,messana.systemDict['mZoneCount']):
+    tempDict = {}   
+    tempDict = messana.retrieveZoneData(zoneNbr)
+    
 
-print('\nMACROZONES')
+'''print('\nMACROZONES')
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
     messana.retrieveSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
 
@@ -385,3 +422,4 @@ for DHwaterNbr in domsetic_hot_waterDict:
         putMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
 #sys.stdout.close() 
+'''
