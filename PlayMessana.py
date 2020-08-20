@@ -55,13 +55,13 @@ class MessanaInfo:
                             'mCapability':'/api/zone/capability/'
                             },
                         'macrozones' : {
-                            'mName': '/api/macro/name/', 
-                            'mSetPoint' :'/api/macro/setpoint/', 
-                            'mStatus':'/api/macro/status/',
-                            'mScheduleOn' : '/api/zone/scheduleOn/',
-                            'mHumidity':'/api/macro/humidity/',
-                            'mDewPoint' : '/api/macro/dewpoint/',
-                            'mTemp' :'/api/macro/temperature/'
+                            'mName': '/api/macrozone/name/', 
+                            'mSetPoint' :'/api/macrozone/setpoint/', 
+                            'mStatus':'/api/macrozone/status/',
+                            'mScheduleOn' : '/api/macrozone/scheduleOn/',
+                            'mHumidity':'/api/macrozone/humidity/',
+                            'mDewPoint' : '/api/macrozone/dewpoint/',
+                            'mTemp' :'/api/macrozone/temperature/'
                             },
                         'hc_changeover' :{
                             'mName':'/api/hc/name/',
@@ -142,28 +142,8 @@ class MessanaInfo:
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
 
-        self.retrieveSystemData()
-        self.retrieveAllZoneData()
-        self.retrieveAllZoneData()
-        #self.retrieveAllMacroZoneData()
-        #self.retrieveAllHC_COData()
-        #self.retrieveAllFCData()
-        #self.retrieveAllATUdata()
-        #self.retrieveAllEnergySourceData()
-        #self.retrieveAllBufTData()
-        #self.retrieveAllDHWData()
+        self.updateMessanaStatus()
 
-
-
-    ''' def getSubSystemData(mSystem, Count, mKey, subSysDict):
-        for mId in range(0, Count):
-            GETStr =MessanaIP+mSystem[mKey]+str(mId)+'?'+ massanaAPIStr 
-            subSysTemp = requests.get(GETStr)
-            if str(subSysTemp) == RESPONSE_OK:
-                subSysTemp = subSysTemp.json()
-                subSysDict[mId][mKey] =subSysTemp[str(list(subSysTemp.keys())[0])]
-            else:
-                print(str(mKey) + ' error for id: ', mId) '''
 
 
     def putSystem(self, mSystem, mKey, value, systemDict):
@@ -238,20 +218,18 @@ class MessanaInfo:
                 print(mData['error'])
         return subSystemDict
 
-    '''    def retrieveSystemData(self):
-        GETStr =self.IP+self.mSystem[mKey] + '?' + self.APIStr 
-        print('\n' +  GETStr)
-        systemTemp = requests.get(GETStr)
-        if str(systemTemp) == self.RESPONSE_OK:
-            systemTemp = systemTemp.json()
-            self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-            return True
-        else:
-            print(str(mKey) + ' error')
-            self.systemDict[mKey] = -1
-            return False '''
+    def updateMessanaStatus(self):
+        self.retrieveSystemDataMessana()
+        self.retrieveAllZoneDataMessana()
+        self.retrieveAllMacroZoneDataMessana()
+        #self.retrieveAllHC_COData()
+        #self.retrieveAllFCData()
+        #self.retrieveAllATUdata()
+        #self.retrieveAllEnergySourceData()
+        #self.retrieveAllBufTData()
+        #self.retrieveAllDHWData()
 
-    def retrieveSystemData(self):
+    def retrieveSystemDataMessana(self):
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
             print('\n' +  GETStr)
@@ -261,30 +239,43 @@ class MessanaInfo:
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
             else:
                 print(str(mKey) + ' error')
-                self.systemDict[mKey] = -1
-                return False
-        return True
+                #self.systemDict[mKey] = -1
+        
+    def retrieveSystemData(self):
+        return self.systemDict
     
-    def retrieveZoneData(self, zoneNbr):
+    def retrieveZoneDataMessana(self, zoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.retrieveSubSystemData(self.mSystem['zones'], zoneNbr)
-        return (tempDict)
+        for key in tempDict[zoneNbr]:
+                    self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
+
+
+    def retrieveZoneData(self, zoneNbr):
+        return(self.zoneDict[zoneNbr])
     
-    def retrieveAllZoneData(self):
+    def retrieveAllZoneDataMessana(self):      
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
-            tempDict = {}
-            tempDict= self.retrieveZoneData(zoneNbr)
-            for key in tempDict[zoneNbr]:
-                    self.zoneDict[zoneNbr][key]=tempDict[key]
+            self.retrieveZoneDataMessana(zoneNbr)
+
     
-    def retrieveMacroZoneData(self, mzoneNbr):
-        self.retrieveSubSystemData(self.mSystem['macrozones'], mzoneNbr, self.macrozoneDict)
+    def retrieveMacroZoneDataMessana(self, mzoneNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mzoneNbr)
+        for key in tempDict[mzoneNbr]:
+            self.macrozoneDict[mzoneNbr][key]=tempDict[mzoneNbr][key]
+  
+       
 
-    def retrieveAllMacroZoneData(self):
+    def retrieveAllMacroZoneDataMessana(self):
         for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
-            self.retrieveMacroZoneData(mzoneNbr)
+            self.retrieveMacroZoneDataMessana(mzoneNbr)
+            
 
-    def retrieveHC_COData(self, hcchangeoverNbr):
+    def retrieveMacroZoneData(self, mzoneNbr):
+        return self.macrozoneDict[mzoneNbr]
+
+    '''def retrieveHC_COData(self, hcchangeoverNbr):
         self.retrieveSubSystemData(self.mSystem['hc_changeover'],hcchangeoverNbr , self.hc_changeoverDict)
 
     def retrieveAllHC_COData(self):
@@ -329,7 +320,7 @@ class MessanaInfo:
         for dhwNbr in range(0,self.systemDict['mDHWcount']):
             self.retrieveDHWData(dhwNbr)
 
-    
+    '''
 #    def retrieveAllData (self):
         
 
@@ -338,15 +329,24 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 #Retrive basic system info
 print('\nSYSTEM')
-messana.retrieveSystemData()
+msysInfo = defaultdict(dict)
+#messana.updateMessanaStatus()
+msysInfo = messana.retrieveSystemData()
+
 
 print('\nZONES')
-for zoneNbr in range(0,messana.systemDict['mZoneCount']):
-    tempDict = {}   
-    tempDict = messana.retrieveZoneData(zoneNbr)
-    
+ZoneDict = defaultdict(dict) 
+for zoneNbr in range(0,msysInfo['mZoneCount']):
+    ZoneDict[zoneNbr] = messana.retrieveZoneData(zoneNbr)
 
-'''print('\nMACROZONES')
+
+print('\nMACROZONES')
+MacroZoneDict = defaultdict(dict)   
+for macrozoneNbr in range(0,   msysInfo['mMacrozoneCount'] ):
+    MacroZoneDict[macrozoneNbr] = messana.retrieveMacroZoneData(macrozoneNbr)  
+
+print('\n END')
+'''
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
     messana.retrieveSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
 
