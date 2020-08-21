@@ -14,7 +14,7 @@ from collections import defaultdict
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system' : {
+        self.mSystem = {'system': {
                             'mName' : '/api/system/name/', 
                             'mApiVer' : '/api/system/apiVersion/',
                             'mStatus':'/api/system/status/',
@@ -108,18 +108,34 @@ class MessanaInfo:
                             },
                         'buffer_tanks' : {
                             'mName':'/api/tnk/name/',
-                            # 'mStatus':'/api/tnk/status/',
+                            'mStatus':'/api/tnk/status/',
                             'mMode':'/api/tnk/mode/',
                             'mTemp':'/api/tnk/temperature/',
                             'mAlarmOn':'/api/tnk/alarmOn/'
                             },
-                        'domsetic_hot_waters':{
+                        'domsetic_hot_waters' : {
                             'mStatus':'/api/dhw/status/',
                             'mName':'/api/dhw/name/',
                             'mTemp':'/api/dhw/temperature/',
                             'mTargetTemp':'/api/dhw/targetTemperature/'
                             }
                         }
+        self.mSystemPut = {
+                        'system' : ['mName', 'mStatus', 'mEnergySavings', 'mSetback'],
+                        'zones' : [ 'mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH',
+                                    'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP',
+                                    'mCurrentSetPointRH','mCurrentSetPointDP', 'mScheduleOn',
+                                    'mEnergySave' ],
+                        'macrozones' : ['mName', 'mSetPoint', 'mStatus', 'mScheduleOn'],
+                        'hc_changeover' : ['mName', 'mMode', 'mAdaptiveComfort' ],
+                        'fan_coils' :['mName', 'mState', 'mCoolingSpeed','mHeatingSpeed' ],
+                        'atus': [ 'mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn',
+                                  'mINTOn', 'mHumSetpointRH', 'mHumSetpointDP', 'mDehumSetpointRH',
+                                  'mDehumSetpointDP', 'mCurrentSetpointRH', 'mCurrentSetpointDP' ],
+                        'energy_sources' : [ 'mName' ],
+                        'buffer_tanks' : [ 'mName','mStatus', 'mMode' ],
+                        'domsetic_hot_waters':[ 'mStatus', 'mName', 'mTargetTemp' ]
+                        }                    
         #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         #self.IP = '192.168.2.65'    
         self.APIKey = 'apikey'
@@ -146,18 +162,19 @@ class MessanaInfo:
 
 
 
-    def putSystem(self, mSystem, mKey, value, systemDict):
-        mData = defaultdict(list)
-        PUTStr = self.IP+mSystem[mKey] 
-        print('\n' + PUTStr)
-        mData = {'value':value, self.APIKey : self.APIKeyVal}
-        resp = requests.put(PUTStr, mData)
-        if str(resp) == self.RESPONSE_OK:
-            systemDict[mKey] = value
-            return True
-        else:
-            print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', str(value) )
-            return False
+    def putSystem(self, systemDict):
+        for key in systemDict:
+            mData = defaultdict(list)
+            PUTStr = self.IP+mSystem[mKey] 
+            print('\n' + PUTStr)
+            mData = {'value':value, self.APIKey : self.APIKeyVal}
+            resp = requests.put(PUTStr, mData)
+            if str(resp) == self.RESPONSE_OK:
+                systemDict[mKey] = value
+                #return True
+            else:
+                print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', str(value) )
+                #return False
 
 
     def putSubSystem(self, mSystem, mKey, id, value, subSysDict):
