@@ -15,96 +15,95 @@ class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {
-                            'mName' : '/api/system/name/', 
-                            'mApiVer' : '/api/system/apiVersion/',
-                            'mStatus':'/api/system/status/',
-                            'mATUcount':'/api/system/atuCount/',
-                            'mDHWcount':'/api/system/dhwCount/',
-                            'mFanCoilCount':'/api/system/fancoilCount/',
-                            'mEnergySourceCount':'/api/system/energySourceCount/',
-                            'mZoneCount':'/api/system/zoneCount/',
-                            'mMacrozoneCount':'/api/system/macrozoneCount/',
-                            'mHCGroupCount':'/api/system/HCgroupCount/',
-                            'mBufTankCount':'/api/system/bufferTankCount/',
-                            'mUnitTemp':'/api/system/tempUnit/',
-                            'mEnergySaving':'/api/system/energySaving/',
-                            'mSetback':'/api/system/setback/',
-                            'mExternalAlarm':'/api/system/externalAlarm/'
+                            'mName' : '/api/system/name/'
+                            ,'mApiVer' : '/api/system/apiVersion/'
+                            ,'mStatus':'/api/system/status/'
+                            ,'mATUcount':'/api/system/atuCount/'
+                            ,'mDHWcount':'/api/system/dhwCount/'
+                            ,'mFanCoilCount':'/api/system/fancoilCount/'
+                            ,'mEnergySourceCount':'/api/system/energySourceCount/'
+                            ,'mZoneCount':'/api/system/zoneCount/'
+                            ,'mMacrozoneCount':'/api/system/macrozoneCount/'
+                            ,'mHC_changeoverCount':'/api/system/HCgroupCount/'
+                            ,'mBufTankCount':'/api/system/bufferTankCount/'
+                            ,'mUnitTemp':'/api/system/tempUnit/'
+                            ,'mEnergySaving':'/api/system/energySaving/'
+                            ,'mSetback':'/api/system/setback/'
+                            ,'mExternalAlarm':'/api/system/externalAlarm/'
                             },
                         'zones': {  
-                            'mName': '/api/zone/name/',
-                            'mSetPoint' :'/api/zone/setpoint/', 
-                            'mStatus':'/api/zone/status/',
-                            'mHumSetPointRH': '/api/zone/humidSetpointRH/',
-                            'mHumSetPointDP':'/api/zone/humidSetpointDP/',
-                            'mDeumSetPointRH':'/api/zone/dehumSetpointRH/',
-                            'mDehumSetPointDP':'/api/zone/dehumSetpointDP/',
-                            'mCurrentSetPointRH':'/api/zone/currentSetpointRH/',
-                            'mCurrentSetPointDP':'/api/zone/currentSetpointDP/',
-                            'mHumidity':'/api/zone/humidity/',
-                            'mDewPoint' : '/api/zone/dewpoint/',
-                            'mTemp' :'/api/zone/temperature/',
-                            'mAirQuality' : '/api/zone/airQuality/',
-                            'mScheduleOn' : '/api/zone/scheduleOn/',
-                            'mCO2' : '/api/zone/co2/',
-                            'mAirTemp' : '/api/zone/airTemperature/',
-                            'mMacrozoneId' :'/api/zone/macrozoneId/',
-                            'mEnergySave' : '/api/zone/energySaving/',
-                            'mAlarmOn':'/api/zone/alarmOn/',
-                            'mThermalStatus':'/api/zone/thermalStatus/',
-                            'mCapability':'/api/zone/capability/'
+                            'mName': '/api/zone/name/'
+                            ,'mSetPoint' :'/api/zone/setpoint/'
+                            ,'mStatus':'/api/zone/status/'
+                            ,'mHumSetPointRH': '/api/zone/humidSetpointRH/'
+                            ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
+                            ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
+                            ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
+                            ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                            ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                            ,'mHumidity':'/api/zone/humidity/'
+                            ,'mDewPoint' : '/api/zone/dewpoint/'
+                            ,'mTemp' :'/api/zone/temperature/'
+                            ,'mAirQuality' : '/api/zone/airQuality/'
+                            ,'mScheduleOn' : '/api/zone/scheduleOn/'
+                            ,'mCO2' : '/api/zone/co2/'
+                            ,'mAirTemp' : '/api/zone/airTemperature/'
+                            ,'mMacrozoneId' :'/api/zone/macrozoneId/'
+                            ,'mEnergySave' : '/api/zone/energySaving/'
+                            ,'mAlarmOn':'/api/zone/alarmOn/'
+                            ,'mThermalStatus':'/api/zone/thermalStatus/'
+                            ,'mCapability':'/api/zone/capability/'
                             },
                         'macrozones' : {
-                            'mName': '/api/macrozone/name/', 
-                            'mSetPoint' :'/api/macrozone/setpoint/', 
-                            'mStatus':'/api/macrozone/status/',
-                            'mScheduleOn' : '/api/macrozone/scheduleOn/',
-                            'mHumidity':'/api/macrozone/humidity/',
-                            'mDewPoint' : '/api/macrozone/dewpoint/',
-                            'mTemp' :'/api/macrozone/temperature/'
+                            'mName': '/api/macrozone/name/'
+                            ,'mSetPoint' :'/api/macrozone/setpoint/'
+                            ,'mStatus':'/api/macrozone/status/'
+                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
+                            ,'mHumidity':'/api/macrozone/humidity/'
+                            ,'mDewPoint' : '/api/macrozone/dewpoint/'
+                            ,'mTemp' :'/api/macrozone/temperature/'
                             },
                         'hc_changeover' :{
-                            'mName':'/api/hc/name/',
-                            'mMode':'/api/hc/mode/',
-                            'mExcutiveSeason':'/api/hc/executiveSeason/',
-                            'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
+                            'mName':'/api/hc/name/'
+                            ,'mMode':'/api/hc/mode/'
+                            ,'mExcutiveSeason':'/api/hc/executiveSeason/'
+                            ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
                             },
                         'fan_coils' :{
-                            'mName':'/api/fan/name/',
-                            'mState':'/api/fan/state/',
-                            'mCoolingSpeed':'/api/fan/coolingSpeed/',
-                            'mHeatingSpeed':'/api/fan/heatingSpeed/',
-                            'mType':'/api/fan/type/',
-                            'mAlarmOn':'/api/fan/alarmOn/'
+                            'mName':'/api/fan/name/'
+                            ,'mState':'/api/fan/state/'
+                            ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
+                            ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
+                            ,'mType':'/api/fan/type/'
+                            ,'mAlarmOn':'/api/fan/alarmOn/'
                             },
                         'atus': {
-                            'mName':'/api/atu/name/',
-                            'mFlowLevel':'/api/atu/flowLevel/',
-                            'mStatus':'/api/atu/status/',
-                            'HRVOn':'/api/atu/hrvOn/',
-                            'mHUMOn':'/api/atu/humOn/',
-                            'mNTDOn':'/api/atu/ntdOn/',
-                            'mINTOn':'/api/atu/intOn/',
-                            'mTargetAirTemp':'/api/atu/targetAirTemperature/',
-                            'mDehumudityStatus':'/api/atu/dehumidificationStatus/',
-                            'mHumidityStatus':'/api/atu/humidificationStatus/',
-                            'mHRVstatus':'/api?/atu?/hrvStatus/',
-                            'mIntegrationStatus':'/api/atu/integrationStatus/',
-                            'mAlarmOn':'/api/atu/alarmOn/',
-                            'mAirTemp':'/api/atu/airTemperature/',
-                            'mHumSetpointRH':'/api/atu/humidSetpointRH',
-                            'mHumSetpointDP':'/api/atu/humidSetpointDP',
-                            'mDehumSetpointRH':'/api/atu/dehumSetpointRH',
-                            'mDehumSetpointDP':'/api/atu/dehumSetpointDP',
-                            'mCurrentSetpointRH':'/api/atu/currentSetpointRH',
-                            'mCurrentSetpointDP':'/api/atu/currentSetpointDP'
+                            'mName':'/api/atu/name/'
+                            ,'mFlowLevel':'/api/atu/flowLevel/'
+                            ,'mStatus':'/api/atu/status/'
+                            ,'HRVOn':'/api/atu/hrvOn/'
+                            ,'mHUMOn':'/api/atu/humOn/'
+                            ,'mNTDOn':'/api/atu/ntdOn/'
+                            ,'mINTOn':'/api/atu/intOn/'
+                            ,'mDehumudityStatus':'/api/atu/dehumidificationStatus/'
+                            ,'mHumidityStatus':'/api/atu/humidificationStatus/'
+                            ,'mHRVstatus':'/api/atu/status/'
+                            ,'mIntegrationStatus':'/api/atu/integrationStatus/'
+                            ,'mAlarmOn':'/api/atu/alarmOn/'
+                            ,'mAirTemp':'/api/atu/airTemperature/'
+                            ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
+                            ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
+                            ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
+                            ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
+                            #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                            #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
                             },
                         'energy_sources' :{
-                            'mName':'/api/enr/name/',
-                            'mStatus':'/api/enr/status/',
-                            'mDHWstatus':'/api/enr/dhwStatus/',
-                            'mType':'/api/enr/type/',
-                            'mAlarmOn':'/api/enr/alarmOn/'
+                            'mName':'/api/enr/name/'
+                            ,'mStatus':'/api/enr/status/'
+                            ,'mDHWstatus':'/api/enr/dhwStatus/'
+                            ,'mType':'/api/enr/type/'
+                            ,'mAlarmOn':'/api/enr/alarmOn/'
                             },
                         'buffer_tanks' : {
                             'mName':'/api/tnk/name/',
@@ -114,10 +113,10 @@ class MessanaInfo:
                             'mAlarmOn':'/api/tnk/alarmOn/'
                             },
                         'domsetic_hot_waters' : {
-                            'mStatus':'/api/dhw/status/',
-                            'mName':'/api/dhw/name/',
-                            'mTemp':'/api/dhw/temperature/',
-                            'mTargetTemp':'/api/dhw/targetTemperature/'
+                            'mStatus':'/api/dhw/status/'
+                            ,'mName':'/api/dhw/name/'
+                            ,'mTemp':'/api/dhw/temperature/'
+                            ,'mTargetTemp':'/api/dhw/targetTemperature/'
                             }
                         }
         self.mSystemPut = {
@@ -153,28 +152,31 @@ class MessanaInfo:
         self.macrozoneDict = defaultdict(dict)
         self.hc_changeoverDict = defaultdict(dict)
         self.fan_coilsDict = defaultdict(dict)
-        self.atusDict =defaultdict(dict)
+        self.atuDict =defaultdict(dict)
         self.energy_sourcesDict = defaultdict(dict)
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
 
-        self.updateMessanaStatus()
+        self.retrieveAllMessanaStatus()
 
 
 
-    def putSystem(self, systemDict):
-        for key in systemDict:
+    def putSystem(self, mKey, value):
+            print (mKey, value, self.mSystem['system'][mKey])
             mData = defaultdict(list)
-            PUTStr = self.IP+mSystem[mKey] 
+            PUTStr = self.IP+self.mSystem['system'][mKey] 
             print('\n' + PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, mData)
-            if str(resp) == self.RESPONSE_OK:
-                systemDict[mKey] = value
-                #return True
-            else:
-                print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', str(value) )
+            if str(resp) != self.RESPONSE_OK:
+                print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
                 #return False
+
+    def updateSystemData(self, systemDict):
+        for mKey in systemDict:
+            if mKey in self.mSystemPut['system']:
+                self.putSystem(mKey,systemDict[mKey])
+
 
 
     def putSubSystem(self, mSystem, mKey, id, value, subSysDict):
@@ -235,16 +237,18 @@ class MessanaInfo:
                 print(mData['error'])
         return subSystemDict
 
-    def updateMessanaStatus(self):
+    def retrieveAllMessanaStatus(self):
         self.retrieveSystemDataMessana()
         self.retrieveAllZoneDataMessana()
         self.retrieveAllMacroZoneDataMessana()
-        #self.retrieveAllHC_COData()
+        self.retrieveAllHC_CODataMessana()
         #self.retrieveAllFCData()
-        #self.retrieveAllATUdata()
+        self.retrieveAllATUDataMessana()
         #self.retrieveAllEnergySourceData()
         #self.retrieveAllBufTData()
         #self.retrieveAllDHWData()
+
+
 
     def retrieveSystemDataMessana(self):
         for mKey in self.mSystem['system']:
@@ -260,6 +264,14 @@ class MessanaInfo:
         
     def retrieveSystemData(self):
         return self.systemDict
+
+    def uploadSystemData(self, systemDict):
+        for mKey in systemDict:
+            if mKey in self.mSystemPut['system']:
+                self.putSystem(mKey,systemDict[mKey])
+
+ def putSubSystem(self, mSystem, mKey, id, value, subSysDict):
+
     
     def retrieveZoneDataMessana(self, zoneNbr):
         tempDict = defaultdict(dict)
@@ -275,30 +287,54 @@ class MessanaInfo:
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
             self.retrieveZoneDataMessana(zoneNbr)
 
-    
-    def retrieveMacroZoneDataMessana(self, mzoneNbr):
+
+    def uploadZoneData(self, zoneNbr, zoneDict):
+        for mKey in zoneDict[zoneNbr]:
+            if mKey in self.mSystemPut['zones']:
+                self.putSubSystem(mKey,zoneDict[mKey])
+
+
+    def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
-        tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mzoneNbr)
-        for key in tempDict[mzoneNbr]:
-            self.macrozoneDict[mzoneNbr][key]=tempDict[mzoneNbr][key]
-  
-       
+        tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
+        for key in tempDict[mmacrozoneNbr]:
+            self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
 
     def retrieveAllMacroZoneDataMessana(self):
         for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
             self.retrieveMacroZoneDataMessana(mzoneNbr)
             
-
     def retrieveMacroZoneData(self, mzoneNbr):
         return self.macrozoneDict[mzoneNbr]
 
-    '''def retrieveHC_COData(self, hcchangeoverNbr):
-        self.retrieveSubSystemData(self.mSystem['hc_changeover'],hcchangeoverNbr , self.hc_changeoverDict)
+    def retrieveHC_COData(self, hcchangeoverNbr):
+        return self.hc_changeoverDict[hcchangeoverNbr]
 
-    def retrieveAllHC_COData(self):
-        for hcchangeoverNbr in range (0,self.systemDict['mHCGroupCount']):
+    def retrieveAllHC_CODataMessana(self):
+        for hcchangeoverNbr in range (0,self.systemDict['mHC_changeoverCount']):
             self.retrieveHC_COData(hcchangeoverNbr)
 
+    def retrieveHC_CODataMessana(self, mHCCoNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
+        for key in tempDict[mHCCoNbr]:
+            self.hc_changeoverDict[mHCCoNbr][key]=tempDict[mHCCoNbr][key]
+
+    def retrieveAllATUDataMessana(self):
+        for atuNbr in range(0,self.systemDict['mATUcount']):
+            self.retrieveATUDataMessana(atuNbr)
+
+    def retrieveATUDataMessana(self, atuNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['atus'], atuNbr)
+        for key in tempDict[atuNbr]:
+            self.atuDict[atuNbr][key]=tempDict[atuNbr][key]  
+ 
+    def retrieveATUData(self, atuNbr):
+        return self.atuDict[atuNbr]
+
+
+'''
     def retrieveFCData(self, fcNbr):
         self.retrieveSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
 
@@ -306,13 +342,7 @@ class MessanaInfo:
        for fcNbr in range(0,self.systemDict['mFanCoilCount']):
            self.retrieveFCData(fcNbr)
 
-    def retrieveATUdata(self, atuNbr):
-        self.retrieveSubSystemData(self.mSystem['energy_sources'], atuNbr, self.energy_sourcesDict)
 
-
-    def retrieveAllATUdata(self):
-        for atuNbr in range(0,self.systemDict['mATUcount']):
-            self.retrieveATUdata(atuNbr)
 
 
     def retrieveEnergySourceData(self, esNbr):
@@ -340,16 +370,15 @@ class MessanaInfo:
     '''
 #    def retrieveAllData (self):
         
-
+#sys.stdout = open('Messanaoutput.txt','wt')
 messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
 #Retrive basic system info
 print('\nSYSTEM')
 msysInfo = defaultdict(dict)
-#messana.updateMessanaStatus()
 msysInfo = messana.retrieveSystemData()
-
+messana.uploadSystemData(msysInfo)
 
 print('\nZONES')
 ZoneDict = defaultdict(dict) 
@@ -359,8 +388,19 @@ for zoneNbr in range(0,msysInfo['mZoneCount']):
 
 print('\nMACROZONES')
 MacroZoneDict = defaultdict(dict)   
-for macrozoneNbr in range(0,   msysInfo['mMacrozoneCount'] ):
+for macrozoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
     MacroZoneDict[macrozoneNbr] = messana.retrieveMacroZoneData(macrozoneNbr)  
+
+
+print('\nHC changeover')
+HC_CoDict = defaultdict(dict)   
+for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
+    HC_CoDict[HC_CoNbr] = messana.retrieveHC_COData(HC_CoNbr)  
+
+print('\nATU')
+atuDict = defaultdict(dict)   
+for atuNbr in range(0,  msysInfo['mATUcount'] ):
+    atuDict[atuNbr] = messana.retrieveATUData(atuNbr)  
 
 print('\n END')
 '''
@@ -438,5 +478,5 @@ for DHwaterNbr in domsetic_hot_waterDict:
     for mKey in domsetic_hot_waterDict[DHwaterNbr]:
         putMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
-#sys.stdout.close() 
 '''
+sys.stdout.close() 
