@@ -371,10 +371,10 @@ class MessanaInfo:
             self.retrieveDHWData(dhwNbr)
 
     '''
-#    def retrieveAllData (self):
+
         
 #sys.stdout = open('Messanaoutput.txt','wt')
-messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+'''messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
 #Retrive basic system info
@@ -415,7 +415,7 @@ for atuNbr in range(0,  msysInfo['mATUcount'] ):
     messana.uploadATUData(atuNbr, atuDict)
 
 print('\n END')
-'''
+
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
     messana.retrieveSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
 
@@ -491,4 +491,4 @@ for DHwaterNbr in domsetic_hot_waterDict:
         putMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
 '''
-sys.stdout.close() 
+#sys.stdout.close() 
