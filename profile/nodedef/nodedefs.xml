@@ -8,14 +8,14 @@
             <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
-            <!st id='GV5' editor='ATU_COUNT'/>
-            <!st id='GV6' editor='DHW_COUNT'/>
-            <!st id='GV7' editor='FANCOIL_COUNT'/>
-            <!st id='GV8' editor='ENERGYS_COUNT'/>
+            <st id='GV5' editor='ATU_COUNT'/>
+            <st id='GV6' editor='DHW_COUNT'/>
+            <st id='GV7' editor='FANCOIL_COUNT'/>
+            <st id='GV8' editor='ENERGYS_COUNT'/>
             <st id='GV9' editor='ZONE_COUNT'/>
             <st id='GV10' editor='MACROZONE_COUNT'/>
-            <!st id='GV11' editor='H_C_COUNT'/>
-            <!st id='GV12' editor='BUFTANK_COUNT'/>
+            <st id='GV11' editor='H_C_COUNT'/>
+            <st id='GV12' editor='BUFTANK_COUNT'/>
             <st id='ALARM' editor='EXTALARM'/>
         </sts>
         <cmds>

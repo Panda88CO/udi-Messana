@@ -1,9 +1,9 @@
 <editors>
     <! Main node>
     <editor id="STATUS" >
-        <range uom="2" subset="0,1" />
+        <range uom="2" subset="0,1" nls="STATUS"/>
     <editor id="TEMPUNIT" >
-        <range uom="2" subset="0,1" />
+        <range uom="2" subset="0,1"  nls="TEMPUNIT"/>
     <editor id="ENERGYSAVE" >
         <range uom="2" subset="0,1" />
      <editor id='SETBACK' />

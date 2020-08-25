@@ -11,322 +11,484 @@ from collections import defaultdict
 
 
 #sys.stdout = open('MEssanaoutput.txt','wt')
-MessanaSystem = defaultdict(dict)
-MessanaSystem = {   'system' : {
-                        'mName' : '/api/system/name/', 
-                        'mApiVer' : '/api/system/apiVersion/',
-                        'mStatus':'/api/system/status/',
-                        'mATUcount':'/api/system/atuCount/',
-                        'mDHWcount':'/api/system/dhwCount/',
-                        'mFanCoilCount':'/api/system/fancoilCount/',
-                        'mEnergySourceCount':'/api/system/energySourceCount/',
-                        'mZoneCount':'/api/system/zoneCount/',
-                        'mMacrozoneCount':'/api/system/macrozoneCount/',
-                        'mHCGroupCount':'/api/system/HCgroupCount/',
-                        'mBufTankCount':'/api/system/bufferTankCount/',
-                        'mUnitTemp':'/api/system/tempUnit/',
-                        'mEnergySaving':'/api/system/energySaving/',
-                        'mSetback':'/api/system/setback/',
-                        'mExternalAlarm':'/api/system/externalAlarm/'
-                    },
-                    'zones': {  
-                        'mName': '/api/zone/name/',
-                        'mSetPoint' :'/api/zone/setpoint/', 
-                        'mStatus':'/api/zone/status/',
-                        'mHumSetPointRH': '/api/zone/humidSetpointRH/',
-                        'mHumSetPointDP':'/api/zone/humidSetpointDP/',
-                        'mDeumSetPointRH':'/api/zone/dehumSetpointRH/',
-                        'mDehumSetPointDP':'/api/zone/dehumSetpointDP/',
-                        'mCurrentSetPointRH':'/api/zone/currentSetpointRH/',
-                        'mCurrentSetPointDP':'/api/zone/currentSetpointDP/',
-                        'mHumidity':'/api/zone/humidity/',
-                        'mDewPoint' : '/api/zone/dewpoint/',
-                        'mTemp' :'/api/zone/temperature/',
-                        'mAirQuality' : '/api/zone/airQuality/',
-                        'mScheduleOn' : '/api/zone/scheduleOn/',
-                        'mCO2' : '/api/zone/co2/',
-                        'mAirTemp' : '/api/zone/airTemperature/',
-                        'mMacrozoneId' :'/api/zone/macrozoneId/',
-                        'mEnergySave' : '/api/zone/energySaving/',
-                        'mAlarmOn':'/api/zone/alarmOn/',
-                        'mThermalStatus':'/api/zone/thermalStatus/',
-                        'mCapability':'/api/zone/capability/'
-                    },
-                    'macrozones' : {
-                        'mName': '/api/macro/name/', 
-                        'mSetPoint' :'/api/macro/setpoint/', 
-                        'mStatus':'/api/macro/status/',
-                        'mScheduleOn' : '/api/zone/scheduleOn/',
-                        'mHumidity':'/api/macro/humidity/',
-                        'mDewPoint' : '/api/macro/dewpoint/',
-                        'mTemp' :'/api/macro/temperature/'
-                    },
-                    'hc_changeover' :{
-                        'mName':'/api/hc/name/',
-                        'mMode':'/api/hc/mode/',
-                        'mExcutiveSeason':'/api/hc/executiveSeason/',
-                        'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
-                    },
-                    'fan_coils' :{
-                        'mName':'/api/fan/name/',
-                        'mState':'/api/fan/state/',
-                        'mCoolingSpeed':'/api/fan/coolingSpeed/',
-                        'mHeatingSpeed':'/api/fan/heatingSpeed/',
-                        'mType':'/api/fan/type/',
-                        'mAlarmOn':'/api/fan/alarmOn/'
-                    },
-                    'atus': {
-                        'mName':'/api/atu/name/',
-                        'mFlowLevel':'/api/atu/flowLevel/',
-                        'mStatus':'/api/atu/status/',
-                        'HRVOn':'/api/atu/hrvOn/',
-                        'mHUMOn':'/api/atu/humOn/',
-                        'mNTDOn':'/api/atu/ntdOn/',
-                        'mINTOn':'/api/atu/intOn/',
-                        'mTargetAirTemp':'/api/atu/targetAirTemperature/',
-                        'mDehumudityStatus':'/api/atu/dehumidificationStatus/',
-                        'mHumidityStatus':'/api/atu/humidificationStatus/',
-                        'mHRVstatus':'/api?/atu?/hrvStatus/',
-                        'mIntegrationStatus':'/api/atu/integrationStatus/',
-                        'mAlarmOn':'/api/atu/alarmOn/',
-                        'mAirTemp':'/api/atu/airTemperature/',
-                        'mHumSetpointRH':'/api/atu/humidSetpointRH',
-                        'mHumSetpointDP':'/api/atu/humidSetpointDP',
-                        'mDehumSetpointRH':'/api/atu/dehumSetpointRH',
-                        'mDehumSetpointDP':'/api/atu/dehumSetpointDP',
-                        'mCurrentSetpointRH':'/api/atu/currentSetpointRH',
-                        'mCurrentSetpointDP':'/api/atu/currentSetpointDP'
-                    },
-                    'energy_sources' :{
-                        'mName':'/api/enr/name/',
-                        'mStatus':'/api/enr/status/',
-                        'mDHWstatus':'/api/enr/dhwStatus/',
-                        'mType':'/api/enr/type/',
-                        'mAlarmOn':'/api/enr/alarmOn/'
-                    },
-                    'buffer_tanks' : {
-                        'mName':'/api/tnk/name/',
-                       # 'mStatus':'/api/tnk/status/',
-                        'mMode':'/api/tnk/mode/',
-                        'mTemp':'/api/tnk/temperature/',
-                        'mAlarmOn':'/api/tnk/alarmOn/'
-                    },
-                    'domsetic_hot_waters':{
-                        'mStatus':'/api/dhw/status/',
-                        'mName':'/api/dhw/name/',
-                        'mTemp':'/api/dhw/temperature/',
-                        'mTargetTemp':'/api/dhw/targetTemperature/'
-                    }
-                }
+class MessanaInfo:
+    def __init__ (self, mIPaddress, mAPIKeyVal):
+        self.mSystem = defaultdict(dict)
+        self.mSystem = {'system': {
+                            'mName' : '/api/system/name/'
+                            ,'mApiVer' : '/api/system/apiVersion/'
+                            ,'mStatus':'/api/system/status/'
+                            ,'mATUcount':'/api/system/atuCount/'
+                            ,'mDHWcount':'/api/system/dhwCount/'
+                            ,'mFanCoilCount':'/api/system/fancoilCount/'
+                            ,'mEnergySourceCount':'/api/system/energySourceCount/'
+                            ,'mZoneCount':'/api/system/zoneCount/'
+                            ,'mMacrozoneCount':'/api/system/macrozoneCount/'
+                            ,'mHC_changeoverCount':'/api/system/HCgroupCount/'
+                            ,'mBufTankCount':'/api/system/bufferTankCount/'
+                            ,'mUnitTemp':'/api/system/tempUnit/'
+                            ,'mEnergySaving':'/api/system/energySaving/'
+                            ,'mSetback':'/api/system/setback/'
+                            ,'mExternalAlarm':'/api/system/externalAlarm/'
+                            },
+                        'zones': {  
+                            'mName': '/api/zone/name/'
+                            ,'mSetPoint' :'/api/zone/setpoint/'
+                            ,'mStatus':'/api/zone/status/'
+                            ,'mHumSetPointRH': '/api/zone/humidSetpointRH/'
+                            ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
+                            ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
+                            ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
+                            ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                            ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                            ,'mHumidity':'/api/zone/humidity/'
+                            ,'mDewPoint' : '/api/zone/dewpoint/'
+                            ,'mTemp' :'/api/zone/temperature/'
+                            ,'mAirQuality' : '/api/zone/airQuality/'
+                            ,'mScheduleOn' : '/api/zone/scheduleOn/'
+                            ,'mCO2' : '/api/zone/co2/'
+                            ,'mAirTemp' : '/api/zone/airTemperature/'
+                            ,'mMacrozoneId' :'/api/zone/macrozoneId/'
+                            ,'mEnergySave' : '/api/zone/energySaving/'
+                            ,'mAlarmOn':'/api/zone/alarmOn/'
+                            ,'mThermalStatus':'/api/zone/thermalStatus/'
+                            ,'mCapability':'/api/zone/capability/'
+                            },
+                        'macrozones' : {
+                            'mName': '/api/macrozone/name/'
+                            ,'mSetPoint' :'/api/macrozone/setpoint/'
+                            ,'mStatus':'/api/macrozone/status/'
+                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
+                            ,'mHumidity':'/api/macrozone/humidity/'
+                            ,'mDewPoint' : '/api/macrozone/dewpoint/'
+                            ,'mTemp' :'/api/macrozone/temperature/'
+                            },
+                        'hc_changeover' :{
+                            'mName':'/api/hc/name/'
+                            ,'mMode':'/api/hc/mode/'
+                            ,'mExcutiveSeason':'/api/hc/executiveSeason/'
+                            ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
+                            },
+                        'fan_coils' :{
+                            'mName':'/api/fan/name/'
+                            ,'mState':'/api/fan/state/'
+                            ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
+                            ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
+                            ,'mType':'/api/fan/type/'
+                            ,'mAlarmOn':'/api/fan/alarmOn/'
+                            },
+                        'atus': {
+                            'mName':'/api/atu/name/'
+                            ,'mFlowLevel':'/api/atu/flowLevel/'
+                            ,'mStatus':'/api/atu/status/'
+                            ,'HRVOn':'/api/atu/hrvOn/'
+                            ,'mHUMOn':'/api/atu/humOn/'
+                            ,'mNTDOn':'/api/atu/ntdOn/'
+                            ,'mINTOn':'/api/atu/intOn/'
+                            ,'mDehumudityStatus':'/api/atu/dehumidificationStatus/'
+                            ,'mHumidityStatus':'/api/atu/humidificationStatus/'
+                            ,'mHRVstatus':'/api/atu/status/'
+                            ,'mIntegrationStatus':'/api/atu/integrationStatus/'
+                            ,'mAlarmOn':'/api/atu/alarmOn/'
+                            ,'mAirTemp':'/api/atu/airTemperature/'
+                            ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
+                            ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
+                            ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
+                            ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
+                            #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                            #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                            },
+                        'energy_sources' :{
+                            'mName':'/api/enr/name/'
+                            ,'mStatus':'/api/enr/status/'
+                            ,'mDHWstatus':'/api/enr/dhwStatus/'
+                            ,'mType':'/api/enr/type/'
+                            ,'mAlarmOn':'/api/enr/alarmOn/'
+                            },
+                        'buffer_tanks' : {
+                            'mName':'/api/tnk/name/'
+                            ,'mStatus':'/api/tnk/status/'
+                            ,'mMode':'/api/tnk/mode/'
+                            ,'mTemp':'/api/tnk/temperature/'
+                            ,'mAlarmOn':'/api/tnk/alarmOn/'
+                            },
+                        'domsetic_hot_waters' : {
+                            'mStatus':'/api/dhw/status/'
+                            ,'mName':'/api/dhw/name/'
+                            ,'mTemp':'/api/dhw/temperature/'
+                            ,'mTargetTemp':'/api/dhw/targetTemperature/'
+                            }
+                        }
+        self.mSystemPut = {
+                        'system' : ['mName', 'mStatus', 'mEnergySavings', 'mSetback'],
+                        'zones' : [ 'mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH',
+                                    'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP',
+                                    'mCurrentSetPointRH','mCurrentSetPointDP', 'mScheduleOn',
+                                    'mEnergySave' ],
+                        'macrozones' : ['mName', 'mSetPoint', 'mStatus', 'mScheduleOn'],
+                        'hc_changeover' : ['mName', 'mMode', 'mAdaptiveComfort' ],
+                        'fan_coils' :['mName', 'mState', 'mCoolingSpeed','mHeatingSpeed' ],
+                        'atus': [ 'mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn',
+                                  'mINTOn', 'mHumSetpointRH', 'mHumSetpointDP', 'mDehumSetpointRH',
+                                  'mDehumSetpointDP', 'mCurrentSetpointRH', 'mCurrentSetpointDP' ],
+                        'energy_sources' : [ 'mName' ],
+                        'buffer_tanks' : [ 'mName','mStatus', 'mMode' ],
+                        'domsetic_hot_waters':[ 'mStatus', 'mName', 'mTargetTemp' ]
+                        }                    
+        #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        #self.IP = '192.168.2.65'    
+        self.APIKey = 'apikey'
+        self.APIKeyVal = mAPIKeyVal
+        self.APIStr = self.APIKey + '=' + self.APIKeyVal
+
+        self.IP ='http://'+ mIPaddress
+
+        self.RESPONSE_OK = '<Response [200]>'
+        self.RESPONSE_NO_SUPPORT = '<Response [400]>'
+        self.RESPONSE_NO_RESPONSE = '<Response [404]>'
+
+        self.systemDict = defaultdict(dict)
+        self.zoneDict = defaultdict(dict)
+        self.macrozoneDict = defaultdict(dict)
+        self.hc_changeoverDict = defaultdict(dict)
+        self.fan_coilsDict = defaultdict(dict)
+        self.atuDict =defaultdict(dict)
+        self.energy_sourcesDict = defaultdict(dict)
+        self.buffer_tanksDict = defaultdict(dict)
+        self.domsetic_hot_waterDict =defaultdict(dict)
+
+        self.retrieveAllMessanaStatus()
 
 
 
-messanaAPIKey = 'apikey'
-messanaAPIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-massanaAPIStr =messanaAPIKey + '='+ messanaAPIKeyVal
+    def putSystem(self, mKey, value):
+            print (mKey, value, self.mSystem['system'][mKey])
+            mData = defaultdict(list)
+            PUTStr = self.IP+self.mSystem['system'][mKey] 
+            print('\n' + PUTStr)
+            mData = {'value':value, self.APIKey : self.APIKeyVal}
+            resp = requests.put(PUTStr, mData)
+            if str(resp) != self.RESPONSE_OK:
+                print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
+                #return False
 
-MessanaIP = 'http://192.168.2.45'
-#MessanaIP ='http://olgaardtahoe1.mynetgear.com:3045'
-RESPONSE_OK = '<Response [200]>'
-RESPONSE_NO_SUPPORT = '<Response [400]>'
-RESPONSE_NO_RESPONSE = '<Response [404]>'
+    def updateSystemData(self, systemDict):
+        for mKey in systemDict:
+            if mKey in self.mSystemPut['system']:
+                self.putSystem(mKey,systemDict[mKey])
 
-systemDict = defaultdict(list)
-zoneDict = defaultdict(dict)
-macrozoneDict = defaultdict(dict)
-hc_changeoverDict = defaultdict(dict)
-fan_coilsDict = defaultdict(dict)
-atusDict =defaultdict(dict)
-energy_sourcesDict = defaultdict(dict)
-buffer_tanksDict = defaultdict(dict)
-domsetic_hot_waterDict =defaultdict(dict)
+    def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
+        PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
+        value = subSysDict[mKey]
+        print('\n' + PUTStr + ' ' + str(value))
 
+        mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
+        resp = requests.put(PUTStr, mData)
+        if str(resp) == self.RESPONSE_OK:
+            subSysDict[mKey] = value
+            return True
+        elif str(resp) == self.RESPONSE_NO_SUPPORT:
+            temp1 =  resp.content
+            res_dict = json.loads(temp1.decode('utf-8')) 
+            mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
+        elif str(resp) == self.RESPONSE_NO_RESPONSE:
+            mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
+        else:
+            mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
+            print(mData['error'])
+            mData['statusOK'] =False
+            return False
 
-
-def retrieveMessanaSystemData( MessanaSystem, mKey, systemDict):
-    GETStr =MessanaIP+MessanaSystem[mKey] + '?' + massanaAPIStr 
-    print('\n' +  GETStr)
-    systemTemp = requests.get(GETStr)
-    if str(systemTemp) == RESPONSE_OK:
-       systemTemp = systemTemp.json()
-       systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-       return True
-    else:
-        print(str(mKey) + ' error')
-        systemDict[mKey] = -1
-        return False 
-
-
-'''
-def getMessanaSubSystemData(MessanaSystem, Count, mKey, subSysDict):
-    for mId in range(0, Count):
-        GETStr =MessanaIP+MessanaSystem[mKey]+str(mId)+'?'+ massanaAPIStr 
+    def retrieveSubNodeData(self, mSystem, instNbr, mKey, mData):
+        GETStr =self.IP+mSystem[mKey]+str(instNbr)+'?'+ self.APIStr 
+        print('\n' +  GETStr)
         subSysTemp = requests.get(GETStr)
-        if str(subSysTemp) == RESPONSE_OK:
+        if str(subSysTemp) == self.RESPONSE_OK:
             subSysTemp = subSysTemp.json()
-            subSysDict[mId][mKey] =subSysTemp[str(list(subSysTemp.keys())[0])]
+            mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+            mData['statusOK'] =True
+        elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
+            temp1 =  subSysTemp.content
+            res_dict = json.loads(temp1.decode('utf-8')) 
+            mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
+        elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
+            mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
         else:
-            print(str(mKey) + ' error for id: ', mId)
+            mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            mData['statusOK'] =False
+
+    def retrieveSubSystemData(self, MessanaSubSystem, instNbr):
+        subSystemDict = defaultdict(dict)
+        for mKey in MessanaSubSystem:
+            mData = {}
+            self.retrieveSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
+            if mData['statusOK']:
+                subSystemDict[instNbr][mKey] = mData['data']
+            else:
+                print(mData['error'])
+        return subSystemDict
+
+    def retrieveAllMessanaStatus(self):
+        self.retrieveSystemDataMessana()
+        self.retrieveAllZoneDataMessana()
+        self.retrieveAllMacroZoneDataMessana()
+        self.retrieveAllHC_CODataMessana()
+        #self.retrieveAllFCData()
+        self.retrieveAllATUDataMessana()
+        #self.retrieveAllEnergySourceData()
+        #self.retrieveAllBufTData()
+        #self.retrieveAllDHWData()
+
+    def retrieveSystemDataMessana(self):
+        for mKey in self.mSystem['system']:
+            GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
+            print('\n' +  GETStr)
+            systemTemp = requests.get(GETStr)
+            if str(systemTemp) == self.RESPONSE_OK:
+                systemTemp = systemTemp.json()
+                self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+            else:
+                print(str(mKey) + ' error')
+                #self.systemDict[mKey] = -1
+        
+    def retrieveSystemData(self):
+        return self.systemDict
+
+    def uploadSystemData(self, systemDict):
+        for mKey in systemDict:
+            if mKey in self.mSystemPut['system']:
+                self.putSystem(mKey,systemDict[mKey])
+
+    def retrieveZoneDataMessana(self, zoneNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['zones'], zoneNbr)
+        for key in tempDict[zoneNbr]:
+                    self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
+
+    def retrieveZoneData(self, zoneNbr):
+        return(self.zoneDict[zoneNbr])
+    
+    def retrieveAllZoneDataMessana(self):      
+        for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
+            self.retrieveZoneDataMessana(zoneNbr)
+
+    def uploadZoneData(self, zoneNbr, zoneDict):
+        for mKey in zoneDict[zoneNbr]:
+            if mKey in self.mSystemPut['zones']:
+                self.putSubSystem('zones', zoneNbr, mKey, zoneDict[zoneNbr])
+
+    def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
+        for key in tempDict[mmacrozoneNbr]:
+            self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
+
+    def retrieveAllMacroZoneDataMessana(self):
+        for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
+            self.retrieveMacroZoneDataMessana(mzoneNbr)
+            
+    def retrieveMacroZoneData(self, mzoneNbr):
+        return self.macrozoneDict[mzoneNbr]
+
+    def uploadMacroZoneData(self, macrozoneNbr, macrozoneDict):
+        for mKey in macrozoneDict[macrozoneNbr]:
+            if mKey in self.mSystemPut['macrozones']:
+                self.putSubSystem('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
+
+    def retrieveHC_COData(self, hcchangeoverNbr):
+        return self.hc_changeoverDict[hcchangeoverNbr]
+
+    def retrieveAllHC_CODataMessana(self):
+        for hcchangeoverNbr in range (0,self.systemDict['mHC_changeoverCount']):
+            self.retrieveHC_COData(hcchangeoverNbr)
+
+    def retrieveHC_CODataMessana(self, mHCCoNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
+        for key in tempDict[mHCCoNbr]:
+            self.hc_changeoverDict[mHCCoNbr][key]=tempDict[mHCCoNbr][key]
+
+    def uploadHC_COData(self, hcchangeoverNbr, hc_changeoverDict):
+        for mKey in hc_changeoverDict[hcchangeoverNbr]:
+            if mKey in self.mSystemPut['hc_changeover']:
+                self.putSubSystem('hc_changeover', hcchangeoverNbr, mKey, hc_changeoverDict[hcchangeoverNbr])
+
+    def retrieveAllATUDataMessana(self):
+        for atuNbr in range(0,self.systemDict['mATUcount']):
+            self.retrieveATUDataMessana(atuNbr)
+
+    def retrieveATUDataMessana(self, atuNbr):
+        tempDict = defaultdict(dict)
+        tempDict = self.retrieveSubSystemData(self.mSystem['atus'], atuNbr)
+        for key in tempDict[atuNbr]:
+            self.atuDict[atuNbr][key]=tempDict[atuNbr][key]  
+ 
+    def retrieveATUData(self, atuNbr):
+        return self.atuDict[atuNbr]
+
+    def uploadATUData(self, atuNbr, atuDict):
+        for mKey in atuDict[atuNbr]:
+            if mKey in self.mSystemPut['atus']:
+                self.putSubSystem('atus', atuNbr, mKey, atuDict[atuNbr])
 
 '''
+    def retrieveFCData(self, fcNbr):
+        self.retrieveSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
+
+    def retrieveAllFCData(self):
+       for fcNbr in range(0,self.systemDict['mFanCoilCount']):
+           self.retrieveFCData(fcNbr)
 
 
-def putMessanaSystem(MessanaSystem, mKey, value, systemDict):
-    mData = defaultdict(list)
-    PUTStr = MessanaIP+MessanaSystem[mKey] 
-    print('\n' + PUTStr)
-    mData = {'value':value, messanaAPIKey : messanaAPIKeyVal}
-    resp = requests.put(PUTStr, mData)
-    if str(resp) == RESPONSE_OK:
-        systemDict[mKey] = value
-        return True
-    else:
-        print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', str(value) )
-        return False
 
 
-def putMessanaSubSystem(MessanaSystem, mKey, id, value, subSysDict):
-    PUTStr = MessanaIP+MessanaSystem[mKey] 
-    value = subSysDict[id][mKey]
-    print('\n' + PUTStr + ' ' + str(value))
+    def retrieveEnergySourceData(self, esNbr):
+        self.retrieveSubSystemData(self.mSystem['energy_sources'], esNbr, self.energy_sourcesDict)
 
-    mData = {'id':id, 'value': value, messanaAPIKey : messanaAPIKeyVal}
-    resp = requests.put(PUTStr, mData)
-    if str(resp) == RESPONSE_OK:
-       subSysDict[id][mKey] = value
-       return True
-    elif str(resp) == RESPONSE_NO_SUPPORT:
-       temp1 =  resp.content
-       res_dict = json.loads(temp1.decode('utf-8')) 
-       mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-       print(mData['error'])
-       mData['statusOK'] =False
-    elif str(resp) == RESPONSE_NO_RESPONSE:
-       mData['error'] = str(resp) + ': Error: No response from API:  Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
-       print(mData['error'])
-       mData['statusOK'] =False
-    else:
-       mData['error'] = str(resp) + ': Error: Unklown: Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
-       print(mData['error'])
-       mData['statusOK'] =False
-    
-    return False
+    def retrieveAllEnergySourceData(self):
+        for esNbr in range(0,self.systemDict['mEnergySourceCount']):
+            self.retrieveEnergySourceData(esNbr)
 
-def retrieveMessanaSubNodeData(MessanaSystem, instNbr, mKey, mData):
-    GETStr =MessanaIP+MessanaSystem[mKey]+str(instNbr)+'?'+ massanaAPIStr 
-    print('\n' +  GETStr)
-    subSysTemp = requests.get(GETStr)
-    if str(subSysTemp) == RESPONSE_OK:
-       subSysTemp = subSysTemp.json()
-       mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
-       mData['statusOK'] =True
-    elif str(subSysTemp) == RESPONSE_NO_SUPPORT:
-       temp1 =  subSysTemp.content
-       res_dict = json.loads(temp1.decode('utf-8')) 
-       mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-       mData['statusOK'] =False
-    elif str(subSysTemp) == RESPONSE_NO_RESPONSE:
-       mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-       mData['statusOK'] =False
-    else:
-       mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-       mData['statusOK'] =False
+    def retrieveBufTData(self, btNbr):
+            self.retrieveSubSystemData(self.mSystem['buffer_tanks'], btNbr, self.buffer_tanksDict)
+
+    def retrieveAllBufTData(self):
+        for btNbr in range(0,self.systemDict['mBufTankCount']):
+            self.retrieveBufTData(btNbr)
 
 
-def retrieveMessanaSubSystemData(MessanaSubSystem, instNbr, subSysDict):
-     for mKey in MessanaSubSystem:
-        mData = {}
-        retrieveMessanaSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
-        if mData['statusOK']:
-           subSysDict[instNbr][mKey] = mData['data']
-        else:
-           print(mData['error'])
+    def retrieveDHWData(self, dhwNbr):
+        self.retrieveSubSystemData(self.mSystem['domsetic_hot_waters'], dhwNbr, self.domsetic_hot_waterDict)
 
+    def retrieveAllDHWData(self):
+        for dhwNbr in range(0,self.systemDict['mDHWcount']):
+            self.retrieveDHWData(dhwNbr)
 
+    '''
+#    def retrieveAllData (self):
+        
+#sys.stdout = open('Messanaoutput.txt','wt')
+messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
 #Retrive basic system info
 print('\nSYSTEM')
-for nSystemKey in MessanaSystem['system']:
-    retrieveMessanaSystemData(MessanaSystem['system'], nSystemKey, systemDict)
+msysInfo = defaultdict(dict)
+msysInfo = messana.retrieveSystemData()
+messana.uploadSystemData(msysInfo)
 
 print('\nZONES')
-for zoneNbr in range(0,systemDict['mZoneCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['zones'], zoneNbr, zoneDict)
+ZoneDict = defaultdict(dict) 
+for zoneNbr in range(0,msysInfo['mZoneCount']):
+    ZoneDict[zoneNbr] = messana.retrieveZoneData(zoneNbr)
+
+for zoneNbr in range(0,msysInfo['mZoneCount']):
+    messana.uploadZoneData(zoneNbr, ZoneDict)
+
 
 print('\nMACROZONES')
+MacroZoneDict = defaultdict(dict)   
+for macroZoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
+    MacroZoneDict[macroZoneNbr] = messana.retrieveMacroZoneData(macroZoneNbr)  
+
+for macroZoneNbr in range(0, msysInfo['mMacrozoneCount']):
+    messana.uploadMacroZoneData(macroZoneNbr, MacroZoneDict)
+
+print('\nHC changeover')
+HC_CoDict = defaultdict(dict)   
+for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
+    HC_CoDict[HC_CoNbr] = messana.retrieveHC_COData(HC_CoNbr)  
+for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
+    messana.uploadHC_COData(HC_CoNbr, HC_CoDict)  
+
+print('\nATU')
+atuDict = defaultdict(dict)   
+for atuNbr in range(0,  msysInfo['mATUcount'] ):
+    atuDict[atuNbr] = messana.retrieveATUData(atuNbr)  
+for atuNbr in range(0,  msysInfo['mATUcount'] ):
+    messana.uploadATUData(atuNbr, atuDict)
+
+print('\n END')
+'''
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['macrozones'], mzoneNbr, macrozoneDict)
+    messana.retrieveSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
 
 print('\nhc_changeover')
 for hcchangeoverNbr in range (0,systemDict['mHCGroupCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
+    messana.retrieveSubSystemData(messana.mSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
 
 print('\nFAN COILS')
 for fcNbr in range(0,systemDict['mFanCoilCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['fan_coils'], fcNbr, fan_coilsDict)
+    messana.retrieveSubSystemData(messana.mSystem['fan_coils'], fcNbr, fan_coilsDict)
 
 print('\nATU')
 for zoneNbr in range(0,systemDict['mATUcount']):
-    retrieveMessanaSubSystemData(MessanaSystem['atus'], zoneNbr, atusDict)
+    messana.retrieveSubSystemData(messana.mSystem['atus'], zoneNbr, atusDict)
 
 print('\nBUFFER TANK')
 for zoneNbr in range(0,systemDict['mBufTankCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
+    retrieveSubSystemData(messana.mSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
 
 print('\nENERGY SOURCE')
 for zoneNbr in range(0,systemDict['mEnergySourceCount']):
-    retrieveMessanaSubSystemData(MessanaSystem['energy_sources'], zoneNbr, energy_sourcesDict)
+    messana.retrieveSubSystemData(messana.mSystem['energy_sources'], zoneNbr, energy_sourcesDict)
 
 print('\nDHW')
 for zoneNbr in range(0,systemDict['mDHWcount']):
-    retrieveMessanaSubSystemData(MessanaSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
+    messana.retrieveSubSystemData(messana.mSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
 
 print('\n end extracting data')
 
 print('\nSYSTEM - PUT')
 for mKey in systemDict:
-    putMessanaSystem(MessanaSystem['system'], mKey, systemDict[mKey], systemDict)
+    putmessana.mSystem(messana.mSystem['system'], mKey, systemDict[mKey], systemDict)
 
 print('\nZONES - PUT')
 for zoneNbr in zoneDict:
     for mKey in zoneDict[zoneNbr]:
-        putMessanaSubSystem(MessanaSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
+        putMessanaSubSystem(messana.mSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
         
 
 print('\nMACROZONES - PUT')
 for macrozoneNbr in macrozoneDict:
     for mKey in macrozoneDict[macrozoneNbr]:
-        putMessanaSubSystem(MessanaSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
+        putSubSystem(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
 
 print('\nhc_changeover - PUT')
 for hcgroupcountNbr in hc_changeoverDict:
     for mKey in hc_changeoverDict[hcgroupcountNbr]:
-        putMessanaSubSystem(MessanaSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
+        putSubSystem(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
 
 print('\nFAN COILS - PUT')
 for fan_coilNbr in fan_coilsDict:
     for mKey in fan_coilsDict[fan_coilNbr]:
-        putMessanaSubSystem(MessanaSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
+        putSubSystem(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
 
 print('\nATU - PUT')
 for atuNbr in atusDict:
     for mKey in atusDict[atuNbr]:
-        putMessanaSubSystem(MessanaSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
+        putSubSystem(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
 
 print('\nBUFFER TANK - PUT')
 for bufferTankNbr in buffer_tanksDict:
     for mKey in buffer_tanksDict[bufferTankNbr]:
-        putMessanaSubSystem(MessanaSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
+        putSubSystem(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
 
 print('\nENERGY SOURCE - PUT')
 for energySourceNbr in energy_sourcesDict:
     for mKey in energy_sourcesDict[energySourceNbr]:
-        putMessanaSubSystem(MessanaSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
+        putSubSystem(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
 
 print('\nDHW - PUT')
 for DHwaterNbr in domsetic_hot_waterDict:
     for mKey in domsetic_hot_waterDict[DHwaterNbr]:
-        putMessanaSubSystem(MessanaSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
+        putMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
-#sys.stdout.close() 
+'''
+sys.stdout.close() 
