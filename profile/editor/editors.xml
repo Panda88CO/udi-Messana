@@ -14,11 +14,14 @@
     </editor>         
     <editor id='MACROZONE_COUNT' />
         <range uom="107" min="0" max="40" step="1" prec="0"/>
-    </editor>       
+    </editor> 
+    <editor id='ATU_COUNT' />
+        <range uom="107" min="0" max="5" step="1" prec="0"/>
+    </editor>      
     <editor id="EXTALARM" >
         <range uom="2" subset="0,1" />
-
-            <!st id='GV5' editor='ATU_COUNT'/>
+    </editor>  
+ 
             <!st id='GV6' editor='DHW_COUNT'/>
             <!st id='GV7' editor='FANCOIL_COUNT'/>
             <!st id='GV8' editor='ENERGYS_COUNT'/>
@@ -41,23 +44,22 @@
     <editor id='MACROZONE_MEMBER' />
         <range uom="107" min="0" max="40" step="1" prec="0"/>
     </editor>   
-     
-   
-
             <!st id='GV4' editor='HUMIDIDTY'/>
             <!st id='GV5' editor='DEWPOINT'/>
             <!st id='GV6' editor='AIRQUALITY'/>
             <!st id='CLIHUM' editor='HUMIDIDTY'/>
             <!st id='CO2LVL' editor='CO2'/>
-            <st id='GV7' editor='MACROZONE_MEMBER'/>
-
-            <!st id='GV9' editor='HSETPOINTRH'/>
+             <!st id='GV9' editor='HSETPOINTRH'/>
             <!st id='GV10' editor='HSETPOINTDP'/>            
             <!st id='GV11' editor='DHSETPOINTRH'/>
             <!st id='GV12' editor='FHSETPOINTDP'/>
             <!st id='GV13' editor='CURSETPOINTRH'/>
             <!st id='GV14' editor='CURSETPOINTDP'/>
+
+
     <! Macro zones>
+
+    <!ATUs>
 
 
  

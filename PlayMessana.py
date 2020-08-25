@@ -106,11 +106,11 @@ class MessanaInfo:
                             ,'mAlarmOn':'/api/enr/alarmOn/'
                             },
                         'buffer_tanks' : {
-                            'mName':'/api/tnk/name/',
-                            'mStatus':'/api/tnk/status/',
-                            'mMode':'/api/tnk/mode/',
-                            'mTemp':'/api/tnk/temperature/',
-                            'mAlarmOn':'/api/tnk/alarmOn/'
+                            'mName':'/api/tnk/name/'
+                            ,'mStatus':'/api/tnk/status/'
+                            ,'mMode':'/api/tnk/mode/'
+                            ,'mTemp':'/api/tnk/temperature/'
+                            ,'mAlarmOn':'/api/tnk/alarmOn/'
                             },
                         'domsetic_hot_waters' : {
                             'mStatus':'/api/dhw/status/'

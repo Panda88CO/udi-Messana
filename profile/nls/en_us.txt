@@ -1,10 +1,23 @@
 # Temp Sensor controller
-ND-RPITEMP-NAME = RPi Temp Controller
-ND-RPITEMP-ICON = GenericCtl
-CMD-TEMP-DISCOVER-NAME = Update
+ND-MESSANA-NAME = Messana Main Controller
+ND-MESSANA-ICON = GenericCtl
+CMD-MESSANA-DISCOVER-NAME = Update
+CMD-MESSANA-SET_STATUS-NAME = Set Status
+CMD-MESSANA-SET_ENERGYSAVE-NAME = Enable Energy Save
+CMD-MESSANA-SET_SETBACK-NAME = Set Setback Offset
+
 ST-TEMP-ST-NAME = NodeServer Online
 STATUS-0 = Off-line
 STATUS-1 = On-lIne
+
+
+
+
+
+
+
+
+
 
 # Relay
 ND-RELAY-NAME = Relay

@@ -106,7 +106,7 @@ MessanaSystem = {   'system' : {
                     },
                     'buffer_tanks' : {
                         'mName':'/api/tnk/name/',
-                       # 'mStatus':'/api/tnk/status/',
+                        'mStatus':'/api/tnk/status/',
                         'mMode':'/api/tnk/mode/',
                         'mTemp':'/api/tnk/temperature/',
                         'mAlarmOn':'/api/tnk/alarmOn/'
