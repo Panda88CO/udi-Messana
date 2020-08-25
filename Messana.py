@@ -162,14 +162,14 @@ class MessanaInfo:
 
 
     def putSystem(self, mKey, value):
-            print (mKey, value, self.mSystem['system'][mKey])
+            #print (mKey, value, self.mSystem['system'][mKey])
             mData = defaultdict(list)
             PUTStr = self.IP+self.mSystem['system'][mKey] 
-            print('\n' + PUTStr)
+            #print('\n' + PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, mData)
             if str(resp) != self.RESPONSE_OK:
-                print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
+                #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
                 #return False
 
     def updateSystemData(self, systemDict):
@@ -180,7 +180,7 @@ class MessanaInfo:
     def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
-        print('\n' + PUTStr + ' ' + str(value))
+        #print('\n' + PUTStr + ' ' + str(value))
 
         mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
         resp = requests.put(PUTStr, mData)
@@ -191,21 +191,21 @@ class MessanaInfo:
             temp1 =  resp.content
             res_dict = json.loads(temp1.decode('utf-8')) 
             mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-            print(mData['error'])
+            #print(mData['error'])
             mData['statusOK'] =False
         elif str(resp) == self.RESPONSE_NO_RESPONSE:
             mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
-            print(mData['error'])
+            #print(mData['error'])
             mData['statusOK'] =False
         else:
             mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
-            print(mData['error'])
+            #print(mData['error'])
             mData['statusOK'] =False
             return False
 
     def retrieveSubNodeData(self, mSystem, instNbr, mKey, mData):
         GETStr =self.IP+mSystem[mKey]+str(instNbr)+'?'+ self.APIStr 
-        print('\n' +  GETStr)
+        #print('\n' +  GETStr)
         subSysTemp = requests.get(GETStr)
         if str(subSysTemp) == self.RESPONSE_OK:
             subSysTemp = subSysTemp.json()
@@ -231,7 +231,7 @@ class MessanaInfo:
             if mData['statusOK']:
                 subSystemDict[instNbr][mKey] = mData['data']
             else:
-                print(mData['error'])
+                #print(mData['error'])
         return subSystemDict
 
     def retrieveAllMessanaStatus(self):
@@ -248,7 +248,7 @@ class MessanaInfo:
     def retrieveSystemDataMessana(self):
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-            print('\n' +  GETStr)
+            #print('\n' +  GETStr)
             systemTemp = requests.get(GETStr)
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
