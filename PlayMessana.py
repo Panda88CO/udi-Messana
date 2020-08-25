@@ -177,8 +177,6 @@ class MessanaInfo:
             if mKey in self.mSystemPut['system']:
                 self.putSystem(mKey,systemDict[mKey])
 
-
-
     def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
@@ -285,7 +283,6 @@ class MessanaInfo:
             if mKey in self.mSystemPut['zones']:
                 self.putSubSystem('zones', zoneNbr, mKey, zoneDict[zoneNbr])
 
-
     def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
@@ -303,7 +300,6 @@ class MessanaInfo:
         for mKey in macrozoneDict[macrozoneNbr]:
             if mKey in self.mSystemPut['macrozones']:
                 self.putSubSystem('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
-
 
     def retrieveHC_COData(self, hcchangeoverNbr):
         return self.hc_changeoverDict[hcchangeoverNbr]
@@ -417,7 +413,7 @@ for atuNbr in range(0,  msysInfo['mATUcount'] ):
     atuDict[atuNbr] = messana.retrieveATUData(atuNbr)  
 for atuNbr in range(0,  msysInfo['mATUcount'] ):
     messana.uploadATUData(atuNbr, atuDict)
-    
+
 print('\n END')
 '''
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
