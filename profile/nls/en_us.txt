@@ -1,4 +1,4 @@
-# Temp Sensor controller
+# Messana controller
 ND-MESSANA-NAME = Messana Main Controller
 ND-MESSANA-ICON = GenericCtl
 CMD-MESSANA-DISCOVER-NAME = Update
