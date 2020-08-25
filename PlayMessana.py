@@ -179,15 +179,15 @@ class MessanaInfo:
 
 
 
-    def putSubSystem(self, mSystem, mKey, id, value, subSysDict):
-        PUTStr = self.IP+mSystem[mKey] 
-        value = subSysDict[id][mKey]
+    def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
+        PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
+        value = subSysDict[mKey]
         print('\n' + PUTStr + ' ' + str(value))
 
-        mData = {'id':id, 'value': value, self.APIKey : self.APIKeyVal}
+        mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
         resp = requests.put(PUTStr, mData)
         if str(resp) == self.RESPONSE_OK:
-            subSysDict[id][mKey] = value
+            subSysDict[mKey] = value
             return True
         elif str(resp) == self.RESPONSE_NO_SUPPORT:
             temp1 =  resp.content
@@ -196,11 +196,11 @@ class MessanaInfo:
             print(mData['error'])
             mData['statusOK'] =False
         elif str(resp) == self.RESPONSE_NO_RESPONSE:
-            mData['error'] = str(resp) + ': Error: No response from API:  Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+            mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
             print(mData['error'])
             mData['statusOK'] =False
         else:
-            mData['error'] = str(resp) + ': Error: Unklown: Subnode ' + str(id) + ' for key: ' + str(mKey)+ ' value:', str(value)
+            mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
             print(mData['error'])
             mData['statusOK'] =False
             return False
@@ -225,7 +225,6 @@ class MessanaInfo:
             mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
             mData['statusOK'] =False
 
-
     def retrieveSubSystemData(self, MessanaSubSystem, instNbr):
         subSystemDict = defaultdict(dict)
         for mKey in MessanaSubSystem:
@@ -248,8 +247,6 @@ class MessanaInfo:
         #self.retrieveAllBufTData()
         #self.retrieveAllDHWData()
 
-
-
     def retrieveSystemDataMessana(self):
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
@@ -270,15 +267,11 @@ class MessanaInfo:
             if mKey in self.mSystemPut['system']:
                 self.putSystem(mKey,systemDict[mKey])
 
- def putSubSystem(self, mSystem, mKey, id, value, subSysDict):
-
-    
     def retrieveZoneDataMessana(self, zoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.retrieveSubSystemData(self.mSystem['zones'], zoneNbr)
         for key in tempDict[zoneNbr]:
                     self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
-
 
     def retrieveZoneData(self, zoneNbr):
         return(self.zoneDict[zoneNbr])
@@ -287,11 +280,10 @@ class MessanaInfo:
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
             self.retrieveZoneDataMessana(zoneNbr)
 
-
     def uploadZoneData(self, zoneNbr, zoneDict):
         for mKey in zoneDict[zoneNbr]:
             if mKey in self.mSystemPut['zones']:
-                self.putSubSystem(mKey,zoneDict[mKey])
+                self.putSubSystem('zones', zoneNbr, mKey, zoneDict[zoneNbr])
 
 
     def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
@@ -307,6 +299,12 @@ class MessanaInfo:
     def retrieveMacroZoneData(self, mzoneNbr):
         return self.macrozoneDict[mzoneNbr]
 
+    def uploadMacroZoneData(self, macrozoneNbr, macrozoneDict):
+        for mKey in macrozoneDict[macrozoneNbr]:
+            if mKey in self.mSystemPut['macrozones']:
+                self.putSubSystem('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
+
+
     def retrieveHC_COData(self, hcchangeoverNbr):
         return self.hc_changeoverDict[hcchangeoverNbr]
 
@@ -319,6 +317,11 @@ class MessanaInfo:
         tempDict = self.retrieveSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
         for key in tempDict[mHCCoNbr]:
             self.hc_changeoverDict[mHCCoNbr][key]=tempDict[mHCCoNbr][key]
+
+    def uploadHC_COData(self, hcchangeoverNbr, hc_changeoverDict):
+        for mKey in hc_changeoverDict[hcchangeoverNbr]:
+            if mKey in self.mSystemPut['hc_changeover']:
+                self.putSubSystem('hc_changeover', hcchangeoverNbr, mKey, hc_changeoverDict[hcchangeoverNbr])
 
     def retrieveAllATUDataMessana(self):
         for atuNbr in range(0,self.systemDict['mATUcount']):
@@ -333,6 +336,10 @@ class MessanaInfo:
     def retrieveATUData(self, atuNbr):
         return self.atuDict[atuNbr]
 
+    def uploadATUData(self, atuNbr, atuDict):
+        for mKey in atuDict[atuNbr]:
+            if mKey in self.mSystemPut['atus']:
+                self.putSubSystem('atus', atuNbr, mKey, atuDict[atuNbr])
 
 '''
     def retrieveFCData(self, fcNbr):
@@ -385,23 +392,32 @@ ZoneDict = defaultdict(dict)
 for zoneNbr in range(0,msysInfo['mZoneCount']):
     ZoneDict[zoneNbr] = messana.retrieveZoneData(zoneNbr)
 
+for zoneNbr in range(0,msysInfo['mZoneCount']):
+    messana.uploadZoneData(zoneNbr, ZoneDict)
+
 
 print('\nMACROZONES')
 MacroZoneDict = defaultdict(dict)   
-for macrozoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
-    MacroZoneDict[macrozoneNbr] = messana.retrieveMacroZoneData(macrozoneNbr)  
+for macroZoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
+    MacroZoneDict[macroZoneNbr] = messana.retrieveMacroZoneData(macroZoneNbr)  
 
+for macroZoneNbr in range(0, msysInfo['mMacrozoneCount']):
+    messana.uploadMacroZoneData(macroZoneNbr, MacroZoneDict)
 
 print('\nHC changeover')
 HC_CoDict = defaultdict(dict)   
 for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
     HC_CoDict[HC_CoNbr] = messana.retrieveHC_COData(HC_CoNbr)  
+for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
+    messana.uploadHC_COData(HC_CoNbr, HC_CoDict)  
 
 print('\nATU')
 atuDict = defaultdict(dict)   
 for atuNbr in range(0,  msysInfo['mATUcount'] ):
     atuDict[atuNbr] = messana.retrieveATUData(atuNbr)  
-
+for atuNbr in range(0,  msysInfo['mATUcount'] ):
+    messana.uploadATUData(atuNbr, atuDict)
+    
 print('\n END')
 '''
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
