@@ -1,5 +1,5 @@
 {
-    "name": "SpaControl",
+    "name": "MessanaControl",
     "docs": "https://github.com/Panda88CO/udi-Messana",
     "type": "python3",
     "executable": "MessanaNS.py",
@@ -10,7 +10,7 @@
     "longPoll": "600",
     "credits": [
         {
-            "title": "A NodeServer to integrate MEssana Radiant eat/Cool system",
+            "title": "A NodeServer to integrate Messana Radiant eat/Cool system",
             "author": "Panda88CO",
             "version": "0.0.1",
             "date": "Auguast 25, 2020",

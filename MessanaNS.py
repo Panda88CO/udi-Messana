@@ -36,7 +36,7 @@ class Controller(polyinterface.Controller):
 
         try:
             self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-            self.msysInfo = messana.retrieveSystemData()
+            self.msysInfo = self.messana.retrieveSystemData()
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
         self.discover()         
@@ -427,8 +427,8 @@ class GPINcontrol(polyinterface.Node):
 if __name__ == "__main__":
 
     try:
-        LOGGER.info('Starting SPA Controller')
-        polyglot = polyinterface.Interface('SPA_Temp_Control')
+        LOGGER.info('Starting Messana Controller')
+        polyglot = polyinterface.Interface('Messana_Control')
         polyglot.start()
         control = Controller(polyglot)
         control.runForever()
