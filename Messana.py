@@ -170,7 +170,7 @@ class MessanaInfo:
             resp = requests.put(PUTStr, mData)
             if str(resp) != self.RESPONSE_OK:
                 #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
-                #return False
+                return False
 
     def updateSystemData(self, systemDict):
         for mKey in systemDict:
@@ -230,7 +230,7 @@ class MessanaInfo:
             self.retrieveSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
             if mData['statusOK']:
                 subSystemDict[instNbr][mKey] = mData['data']
-            else:
+            #else:
                 #print(mData['error'])
         return subSystemDict
 
