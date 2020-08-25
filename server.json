@@ -1,21 +1,21 @@
 {
     "name": "SpaControl",
-    "docs": "https://github.com/Panda88CO/spaControl",
+    "docs": "https://github.com/Panda88CO/udi-Messana",
     "type": "python3",
     "executable": "MessanaNS.py",
     "install": "install.sh",
-    "description": "Raspberry Pi with multiple DS18B20 Temperature Sensors and GPIO control",
-    "notice": "Only 1 4.7K Ohm pull up resistor needed for multiple sensors",
+    "description": "Nodeserver to allow integration Of messana Radiant heating/cooling",
+    "notice": "My current system only supports heat, so cooling is not tested yet",
     "shortPoll": "120",
     "longPoll": "600",
     "credits": [
         {
-            "title": "RPI Temp Sensors  and GPIO: a NodeServer to read Temp Sensors and control GPIOs",
+            "title": "A NodeServer to integrate MEssana Radiant eat/Cool system",
             "author": "Panda88CO",
             "version": "0.0.1",
-            "date": "June 5, 2020",
-            "source": "https://https://github.com/Panda88CO/spaControl",
-            "license": "https://raw.githubusercontent.com/Panda88CO/spaControl/master/LICENSE"
+            "date": "Auguast 25, 2020",
+            "source": "https://https://github.com/Panda88CO/udi-Messana",
+            "license": "https://raw.githubusercontent.com/Panda88CO/udi-Messana/master/LICENSE"
         }
     ]
 }
