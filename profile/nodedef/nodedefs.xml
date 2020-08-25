@@ -3,8 +3,6 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <!st id='GV0' editor='NAME'   /> 
-            <!st id='GV1' editor='APIVER' /> 
             <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
@@ -36,24 +34,23 @@
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <!st id='GV0' editor='NAME'   /> 
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
             <st id='GV3' editor='SCHEDULE'/>
-            <!st id='GV5' editor='DEWPOINT'/>
-            <!st id='GV6' editor='AIRQUALITY'/>
-            <!st id='CLIHUM' editor='HUMIDIDTY'/>
-            <!st id='CO2LVL' editor='CO2'/>
+            <st id='GV5' editor='DEWPOINT'/>
+            <st id='GV6' editor='AIRQUALITY'/>
+            <st id='CLIHUM' editor='HUMIDIDTY'/>
+            <st id='CO2LVL' editor='CO2'/>
             <st id='GV7' editor='MACROZONE_MEMBER'/>
             <st id='GV8' editor='ENERGYSAVE'/>
             <st id='ALARM' editor='EXTALARM'/>
-            <!st id='GV9' editor='HSETPOINTRH'/>
-            <!st id='GV10' editor='HSETPOINTDP'/>            
-            <!st id='GV11' editor='DHSETPOINTRH'/>
-            <!st id='GV12' editor='FHSETPOINTDP'/>
-            <!st id='GV13' editor='CURSETPOINTRH'/>
-            <!st id='GV14' editor='CURSETPOINTDP'/>
+            <st id='GV9' editor='HSETPOINTRH'/>
+            <st id='GV10' editor='HSETPOINTDP'/>            
+            <st id='GV11' editor='DHSETPOINTRH'/>
+            <st id='GV12' editor='FHSETPOINTDP'/>
+            <st id='GV13' editor='CURSETPOINTRH'/>
+            <st id='GV14' editor='CURSETPOINTDP'/>
         </sts>
         <cmds>
             <sends />
@@ -66,27 +63,4 @@
          </cmds>
     </nodeDef>
 
-
-
-
-
-    <nodeDef id="TEMPSENSOR" nls="SENSOR">
-        <editors />
-        <sts>
-            <st id="GV0" editor="TEMPC" />
-            <st id="GV1" editor="TEMPC24H_MIN" />
-            <st id="GV2" editor="TEMPC24H_MAX" />            
-            <st id="GV6" editor="LAST_UPDATE_MO" />
-            <st id="GV7" editor="LAST_UPDATE_D" /> 
-            <st id="GV8" editor="LAST_UPDATE_Y" />                
-            <st id="GV9" editor="LAST_UPDATE_H" />
-            <st id="GV10" editor="LAST_UPDATE_M" />
-        </sts>
-        <cmds>
-            <sends>
-                <cmd id="UPDATE" />
-            </sends>
-            <accepts />
-        </cmds>
-    </nodeDef>
 </nodeDefs>
