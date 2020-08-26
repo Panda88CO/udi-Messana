@@ -253,6 +253,12 @@ class MessanaInfo:
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+                if mKey == 'mUnitTemp': 
+                    "we cannot handle strings"
+                    if self.systemDict[mKey] == 'celcius':
+                        self.systemDict[mKey] = 0
+                    else:
+                        self.systemDict[mKey] = 1 
             else:
                 print(str(mKey) + ' error')
                 #self.systemDict[mKey] = -1

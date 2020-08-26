@@ -1,26 +1,26 @@
 # Messana controller
-ND-MESSANA-NAME = Messana Main Controller
-ND-MESSANA-ICON = GenericCtl
-CMD-MESSANA-DISCOVER-NAME = Update
-CMD-MESSANA-SET_STATUS-NAME = Set Status
-CMD-MESSANA-SET_ENERGYSAVE-NAME = Enable Energy Save
-CMD-MESSANA-SET_SETBACK-NAME = Set Setback Offset
-ST-MESSANA-GV2-NAME = Temp Unit (C/F)
+ND-MSYS-NAME = Messana Main Controller
+ND-MSYS-ICON = GenericCtl
+CMD-MSYS-DISCOVER-NAME = Update
+CMD-MSYS-SET_STATUS-NAME = Set Status
+CMD-MSYS-SET_ENERGYSAVE-NAME = Enable Energy Save
+CMD-MSYS-SET_SETBACK-NAME = Set Setback Offset
+ST-MSYS-GV2-NAME = Temp Unit (C/F)
 TEMPUNIT-0 = C
-TEMPUNIT=1 = F
-ST-MESSANA-GV3-NAME = EnergySave En
-ST-MESSANA-GV4-NAME = Setback
-ST-MESSANA-GV5-NAME = Nbr ATUs
-ST-MESSANA-GV6-NAME = Nbr Domestic Hot Water
-ST-MESSANA-GV7-NAME = Nbr Fancoils
-ST-MESSANA-GV8-NAME = Nbr Energy Units
-ST-MESSANA-GV9-NAME = Nbr Zones
-ST-MESSANA-GV10-NAME = Nbr Macro Zones (all=1)
-ST-MESSANA-GV11-NAME = Nbr Hot/Cold units
-ST-MESSANA-GV12-NAME = Nbr Buffer Tanks
-ST-MESSANA-ALARM-NAME = External Alarm
+TEMPUNIT-1 = F
+ST-MSYS-GV3-NAME = EnergySave En
+ST-MSYS-GV4-NAME = Setback
+ST-MSYS-GV5-NAME = Nbr ATUs
+ST-MSYSGV6-NAME = Nbr Domestic Hot Water
+ST-MSYS-GV7-NAME = Nbr Fancoils
+ST-MSYS-GV8-NAME = Nbr Energy Units
+ST-MSYS-GV9-NAME = Nbr Zones
+ST-MSYS-GV10-NAME = Nbr Macro Zones (all=1)
+ST-MSYS-GV11-NAME = Nbr Hot/Cold units
+ST-MSYS-GV12-NAME = Nbr Buffer Tanks
+ST-MSYS-ALARM-NAME = External Alarm
 
-ST-MESSANA-ST-NAME = NodeServer Online
+ST-MSYS-ST-NAME = NodeServer Online
 STATUS-0 = Off-line
 STATUS-1 = On-lIne
 
