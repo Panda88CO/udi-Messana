@@ -255,7 +255,8 @@ class MessanaInfo:
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
                 if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
-                    if self.systemDict[mKey].tolower() == 'celcius':
+                    print(self.systemDict[mKey])
+                    if self.systemDict[mKey] == 'Celcius':
                         self.systemDict[mKey] = 0
                     else:
                         self.systemDict[mKey] = 1 
@@ -387,7 +388,7 @@ class MessanaInfo:
 print('\nSYSTEM')
 msysInfo = defaultdict(dict)
 msysInfo = messana.retrieveSystemData()
-messana.uploadSystemData(msysInfo)
+#messana.uploadSystemData(msysInfo)
 
 print('\nZONES')
 ZoneDict = defaultdict(dict) 
