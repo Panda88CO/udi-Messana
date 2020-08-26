@@ -2,7 +2,7 @@
     <nodeDef id="MESSANA" nls="MESSANA">
         <editors />
         <sts>
-            <st id="ST"  editor="STATUS" />
+            <st id='ST'  editor="STATUS" />
             <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>

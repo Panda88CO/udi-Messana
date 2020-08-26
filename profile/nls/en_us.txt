@@ -16,7 +16,7 @@ ST-MESSANA-GV7-NAME = Nbr Fancoils
 ST-MESSANA-GV8-NAME = Nbr Energy Units
 ST-MESSANA-GV9-NAME = Nbr Zones
 ST-MESSANA-GV10-NAME = Nbr Macro Zones (all=1)
-ST-MESSANA-GV11-NAME = Nbr Hot/Cold units
+ST-MESSANA-GV11-NAME = Nbr HotCold units
 ST-MESSANA-GV12-NAME = Nbr Buffer Tanks
 ST-MESSANA-ALARM-NAME = External Alarm
 
@@ -24,6 +24,22 @@ ST-MESSANA-ST-NAME = NodeServer Online
 STATUS-0 = Off-line
 STATUS-1 = On-lIne
 
-
-
-
+ND-MZONE-NAME = Messane Zone
+ND-MZONE-ICON = Thermostat
+ST-MZONE-ST-NAME = Status
+ST-MZONE-GV1-NAME = Set Point
+ST-MZONE-GV2-NAME = Panel Temp
+ST-MZONE-CLITEMP-NAME = Room Temp
+ST-MZONE-GV3-NAME = Schedule Enable
+ST-MZONE-GV5-NAME = Dew point
+ST-MZONE-GV6-NAME = Air Quality
+ST-MZONE-CLIHUM-NAME = Humidity
+ST-MZONE-CO2LVL-NAME = CO2 level
+ST-MZONE-GV7-NAME = Macro Zone Nbr
+ST-MZONE-ALARM-NAME = External Alarm 
+ST-MZONE-GV9-NAME = Hum Setpoint RH
+ST-MZONE-GV10-NAME = Hum Setpoint DP
+ST-MZONE-GV11-NAME = DeHum Setpoint RH
+ST-MZONE-GV12-NAME = DeHum Setpoint DP
+ST-MZONE-GV13-NAME = Current Setpoint RH
+ST-MZONE-GV14-NAME = Current Setpoint DP
