@@ -39,7 +39,7 @@
         <range uom="107" min="0" max="5" step="1" prec="0"/>
     </editor>     
 
-    <editor id="H_C__COUNT" >
+    <editor id="H_C_COUNT" >
         <range uom="107" min="0" max="5" step="1" prec="0"/>
     </editor>     
 
@@ -71,4 +71,35 @@
     <editor id="MACROZONE_MEMBER" >
         <range uom="107" min="0" max="40" step="1" prec="0"/>
     </editor>   
+    <editor id="DEWPOINT" >
+        <range uom="51" min="0" max="100" step="1" prec="1"/>
+    </editor>   
+    <editor id="AIRQUALITY" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>   
+    <editor id="HUMIDIDTY" >
+        <range uom="51" min="0" max="100" step="1" prec="1"/>
+    </editor>   
+    <editor id="CO2" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>    
+    <editor id="HSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="HSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="DHSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="FHSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>      
+     <editor id="CURSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>     
+     <editor id="CURSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>     
+
 </editors> 
