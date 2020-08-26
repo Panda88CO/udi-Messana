@@ -255,7 +255,7 @@ class MessanaInfo:
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
                 if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
-                    print(self.systemDict[mKey])
+                    #print(self.systemDict[mKey])
                     if self.systemDict[mKey] == 'Celcius':
                         self.systemDict[mKey] = 0
                     else:
