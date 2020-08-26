@@ -31,9 +31,6 @@ class Controller(polyinterface.Controller):
     def start(self):
         LOGGER.info('Start  Messana Main')
         self.check_params()
-        self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-
-
         try:
             self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             self.msysInfo = self.messana.retrieveSystemData()
