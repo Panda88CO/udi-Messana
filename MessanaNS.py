@@ -156,7 +156,8 @@ class Controller(polyinterface.Controller):
         self.saveCustomData(self.polyConfig['customParams'])
     '''
     def updateInfo(self):
-        LOGGER.debug('Update Messana System ')
+        LOGGER.info('Update Messana System ')
+        LOGGER.debug('ST :'+  int(self.msysInfo['mStatus']) + ' GV2:' + self.msysInfo['mUnitTemp'] + ' GV9: ' + self.msysInfo['mZoneCount'])
         self.setDriver('ST', self.msysInfo['mStatus'])
         self.setDriver('GV2', self.msysInfo['mUnitTemp'])
         self.setDriver('GV3', self.msysInfo['mEnergySaving'])
