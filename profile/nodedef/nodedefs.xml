@@ -1,5 +1,5 @@
 <nodeDefs>
-    <nodeDef id="messanasys" nls="MSYS">
+    <nodeDef id="messanasys" nls="msys">
         <editors />
         <sts>
             <st id='ST'  editor="STATUS" />
@@ -30,7 +30,7 @@
         </cmds>
     </nodeDef>
 
-    <nodeDef id="ZONE" nls="MZONE">
+    <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
