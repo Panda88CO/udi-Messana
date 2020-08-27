@@ -17,9 +17,9 @@ from Messana  import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
 
-class Controller(polyinterface.Controller):
+class MessanaController(polyinterface.Controller):
     def __init__(self, polyglot):
-        super().__init__(polyglot)
+        super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_')
         self.name = 'Messana Main Control'
         self.address = 'messana'
@@ -182,7 +182,7 @@ class Controller(polyinterface.Controller):
         return True
 
 
-    id = 'MESSANASYS'
+    id = 'messanasys'
     commands = { 'UPDATE': discover
                 ,'SET_STATUS"': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
@@ -428,7 +428,7 @@ if __name__ == "__main__":
         LOGGER.info('Starting Messana Controller')
         polyglot = polyinterface.Interface('Messana_Control')
         polyglot.start()
-        control = Controller(polyglot)
+        control = MessanaController(polyglot)
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
         sys.exit(0)
