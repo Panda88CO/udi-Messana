@@ -1,5 +1,5 @@
 <nodeDefs>
-    <nodeDef id="MESSANA" nls="MSYS">
+    <nodeDef id="MESSANASYS" nls="MSYS">
         <editors />
         <sts>
             <st id='ST'  editor="STATUS" />
