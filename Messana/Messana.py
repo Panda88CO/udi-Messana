@@ -1,16 +1,3 @@
-#import polyinterface
-import os
-import sys
-import glob
-import time
-import datetime
-import os,subprocess
-import json
-import requests
-from collections import defaultdict
-
-
-#sys.stdout = open('MEssanaoutput.txt','wt')
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)

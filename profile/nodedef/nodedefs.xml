@@ -23,9 +23,15 @@
             </sends>
             <accepts>
                 <cmd id="UPDATE" />
-                <cmd id="SET_STATUS" />
-                <cmd id="SET_ENERGYSAVE" />
-                <cmd id="SET_SETBACK" />
+                <cmd id="SET_STATUS" >
+                    <p id="" editor="STATUS" init="ST" />
+                </cmd>
+                <cmd id="SET_ENERGYSAVE" >
+                    <p id="" editor="ENERGYSAVE" init="GV3" />
+                </cmd>               
+                <cmd id="SET_SETBACK" >
+                    <p id="" editor="SETBACK" init="GV4" />
+                </cmd>    
             </accepts>
         </cmds>
     </nodeDef>
