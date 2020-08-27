@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-class (polyinterface.Controller):
+class MessanaController(polyinterface.Controller):
     def __init__(self, polyglot):
         super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_')

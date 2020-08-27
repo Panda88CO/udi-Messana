@@ -1,7 +1,5 @@
-
-""" Node classes used by the Wireless Sensor Tags Node Server. """
-
-from Messana          import MessanaInfo
-from MessanaCtrl      import MessanaController
-from MessanaZone      import MessanaZone
+#__init__.py
+.MessanaSystem    import MessanaSystem
+.MessanaCtrl      import MessanaCtrl
+.MessanaZone      import MessanaZone
 
