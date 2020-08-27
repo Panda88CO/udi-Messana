@@ -1,9 +1,6 @@
 #!/usr/bin/env python3
 
 
-
-LOGGER = polyinterface.LOGGER
-
 class MessanaZone(polyinterface.node):
     def __init__(self, controller, primary, address, name, zonenbr):
         super(MessanaZone, self).__init__(controller, primary, address, name)
@@ -33,7 +30,7 @@ class MessanaZone(polyinterface.node):
 
     def updateInfo(self):
         return True
-        
+
     def setStatus(self, command):
         return True
 
