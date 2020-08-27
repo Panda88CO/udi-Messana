@@ -12,11 +12,10 @@ import os,subprocess
 import json
 import requests
 from collections import defaultdict
-import Messana
+
+from  Messana import MessanaCtrl
 
 LOGGER = polyinterface.LOGGER
-
-
 
 if __name__ == "__main__":
 
