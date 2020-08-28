@@ -5,7 +5,7 @@ import json
 from collections import defaultdict
 
 
-class MessanaZone(polyinterface.node):
+class MessanaZone(polyinterface.Node):
     def __init__(self, controller, primary, address, name, zonenbr):
         super(MessanaZone, self).__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
