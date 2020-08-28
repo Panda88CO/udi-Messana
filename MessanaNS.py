@@ -14,7 +14,6 @@ import requests
 from collections import defaultdict
 
 import Messana
-import Messana
 
 LOGGER = polyinterface.LOGGER
 

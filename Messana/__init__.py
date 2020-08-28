@@ -1,5 +1,5 @@
-#__init__.py
-.MessanaInfo       import MessanaInfo
-.MessanaController import MessanaController
-.MessanaZone       import MessanaZone
+#!/usr/bin/env python3
+from .MessanaInfo import MessanaInfo
+from .MessanaController import MessanaController
+from .MessanaZone import MessanaZone
 

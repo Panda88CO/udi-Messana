@@ -1,3 +1,8 @@
+#!/usr/bin/env python3
+
+from subprocess import call
+import json
+from collections import defaultdict
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
