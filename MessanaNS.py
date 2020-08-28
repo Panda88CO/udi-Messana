@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-
 import polyinterface
 import sys
 import os
@@ -13,6 +12,7 @@ import json
 import requests
 from collections import defaultdict
 from Messana import MessanaController
+
 #import Messana
 
 LOGGER = polyinterface.LOGGER
