@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-
+import polyinterface
+import requests
 from subprocess import call
 import json
 from collections import defaultdict
