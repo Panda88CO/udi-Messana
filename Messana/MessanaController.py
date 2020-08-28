@@ -4,6 +4,7 @@ from subprocess import call
 import json
 from collections import defaultdict
 from MessanaInfo import MessanaInfo
+from MessanaZone import MezzanaZone
 
 class MessanaController(polyinterface.Controller):
     def __init__(self, polyglot):
