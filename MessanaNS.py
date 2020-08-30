@@ -11,7 +11,7 @@ import os,subprocess
 import json
 import requests
 from collections import defaultdict
-from Messana import MessanaController
+import MessanaController
 
 #import Messana
 
