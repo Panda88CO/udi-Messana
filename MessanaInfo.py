@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-#import polyinterface
+import polyinterface
 import requests
 from subprocess import call
 import json
 from collections import defaultdict
 
+LOGGER = polyinterface.LOGGER
 
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
