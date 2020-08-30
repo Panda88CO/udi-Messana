@@ -8,7 +8,7 @@ from collections import defaultdict
 
 LOGGER = polyinterface.LOGGER
 
-class MessanaZone(polyinterface.Node):
+class MessanaZones(polyinterface.Node):
     def __init__(self, controller, primary, address, name, zoneNbr):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')

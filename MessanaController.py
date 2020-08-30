@@ -4,7 +4,7 @@ import polyinterface
 from subprocess import call
 import json
 from collections import defaultdict
-import MezzanaZone
+import MezzanaZones
 import MessanaInfo
 
 

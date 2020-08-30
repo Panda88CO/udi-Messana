@@ -12,8 +12,7 @@ import json
 import requests
 from collections import defaultdict
 import MessanaController
-
-#import Messana
+import MessanaZones
 
 LOGGER = polyinterface.LOGGER
 
