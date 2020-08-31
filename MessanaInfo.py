@@ -242,9 +242,10 @@ class MessanaInfo:
         #self.retrieveAllDHWData()
 
     def retrieveSystemDataMessana(self):
+        LOGGER.Info('retrieve Sytem Data')
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-            #print('\n' +  GETStr)
+            LOGGER.debug( GETStr)
             systemTemp = requests.get(GETStr)
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
@@ -257,7 +258,7 @@ class MessanaInfo:
                     else:
                         self.systemDict[mKey] = 1 
             else:
-                print(str(mKey) + ' error')
+                LOGGER.debug(str(mKey) + ' error')
                 #self.systemDict[mKey] = -1
         
     def retrieveSystemData(self):
