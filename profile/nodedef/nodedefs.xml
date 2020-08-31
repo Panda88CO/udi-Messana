@@ -39,7 +39,7 @@
     <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
-            <st id="ST"  editor="STATUS" />
+            <st id="ST"  editor='STATUS' />
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
@@ -61,10 +61,18 @@
         <cmds>
             <sends />
             <accepts>
-                <cmd id="SET_STATUS" />
-                <cmd id="SET_SETPOINT" />
-                <cmd id="ENABLE_ENERGYSAVE" />
-                <cmd id="ENABLE_SCHEDULE" />
+                <cmd id="SET_STATUS" >
+                    <p id="" editor="STATUS" init="ST" />
+                </cmd>
+                <cmd id="SET_ENERGYSAVE" >
+                    <p id="" editor="ENERGYSAVE" init="GV8" />
+                </cmd>               
+                <cmd id="SET_SCHEDULE" >
+                    <p id="" editor="SCHEDLULE" init="GV3" />
+                </cmd>    
+                <cmd id="SET_SETPOINT" >
+                    <p id="" editor="SETPOINT" init="GV1" /> 
+                </cmd>               
             </accepts>
          </cmds>
     </nodeDef>
