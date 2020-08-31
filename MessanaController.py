@@ -5,7 +5,7 @@ from subprocess import call
 import json
 from collections import defaultdict
 #import MezzanaZones
-import MessanaInfo
+from MessanaInfo import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
 class MessanaZones(polyinterface.Node):
@@ -96,6 +96,7 @@ class MessanaController(polyinterface.Controller):
 
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
+
         self.discover()         
         self.updateInfo()
         self.reportDrivers()
