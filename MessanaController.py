@@ -138,6 +138,7 @@ class MessanaController(polyinterface.Controller):
     def discover(self, command=None):
         LOGGER.debug('discover')
         LOGGER.info('Adding Zone')
+        LOGGER.debug(str(self.msysInfo['mZoneCount']))
         for zoneNbr in range(0,self.msysInfo['mZoneCount']):
             ZoneDict = self.messana.retrieveZoneData(zoneNbr)
             name = str(ZoneDict['mName'])
