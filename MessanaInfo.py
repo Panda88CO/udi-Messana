@@ -152,8 +152,9 @@ class MessanaInfo:
         self.energy_sourcesDict = defaultdict(dict)
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
-
+        LOGGER.debug ('Reading Messana System')
         self.retrieveAllMessanaStatus()
+        LOGGER.debug('Finish Reading Messana system')
 
 
 
