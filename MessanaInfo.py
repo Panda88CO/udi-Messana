@@ -233,11 +233,16 @@ class MessanaInfo:
 
     def retrieveAllMessanaStatus(self):
         self.retrieveSystemDataMessana()
+        LOGGER.debug('Reading Main System')
         self.retrieveAllZoneDataMessana()
+        LOGGER.debug('Reading Zone System')
         self.retrieveAllMacroZoneDataMessana()
+        LOGGER.debug('Reading MacroZone System')
         self.retrieveAllHC_CODataMessana()
+        LOGGER.debug('Reading Ht/Cold System')
         #self.retrieveAllFCData()
         self.retrieveAllATUDataMessana()
+        LOGGER.debug('Reading ATU System')
         #self.retrieveAllEnergySourceData()
         #self.retrieveAllBufTData()
         #self.retrieveAllDHWData()
