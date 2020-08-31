@@ -65,7 +65,7 @@ class MessanaZones(polyinterface.Node):
                 ,{'driver': 'GV6', 'value': 1, 'uom': 107}     
                 ,{'driver': 'GV7', 'value': 0, 'uom': 107}
                 ,{'driver': 'GV8', 'value': 1, 'uom': 107}
-                ,{'driver': 'ALARM', 'value': 1, 'uom': 2}          
+                ,{'driver': 'ALARM', 'value': 0, 'uom': 2}          
                 ,{'driver': 'GV9', 'value': 1, 'uom': 107}
                 ,{'driver': 'GV10', 'value': 1, 'uom': 107} 
                 ,{'driver': 'GV11', 'value': 0, 'uom': 107}
