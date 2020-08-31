@@ -232,17 +232,19 @@ class MessanaInfo:
         return subSystemDict
 
     def retrieveAllMessanaStatus(self):
-        self.retrieveSystemDataMessana()
         LOGGER.debug('Reading Main System')
-        self.retrieveAllZoneDataMessana()
+        self.retrieveSystemDataMessana()
         LOGGER.debug('Reading Zone System')
-        self.retrieveAllMacroZoneDataMessana()
+        self.retrieveAllZoneDataMessana()
         LOGGER.debug('Reading MacroZone System')
-        self.retrieveAllHC_CODataMessana()
+        self.retrieveAllMacroZoneDataMessana()
         LOGGER.debug('Reading Ht/Cold System')
-        #self.retrieveAllFCData()
-        self.retrieveAllATUDataMessana()
+        self.retrieveAllHC_CODataMessana()
         LOGGER.debug('Reading ATU System')
+
+        self.retrieveAllATUDataMessana()
+        #LOGGER.debug('')
+        #self.retrieveAllFCData()
         #self.retrieveAllEnergySourceData()
         #self.retrieveAllBufTData()
         #self.retrieveAllDHWData()
