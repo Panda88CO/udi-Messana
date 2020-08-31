@@ -1,29 +1,46 @@
-# Temp Sensor controller
-ND-RPITEMP-NAME = RPi Temp Controller
-ND-RPITEMP-ICON = GenericCtl
-CMD-TEMP-DISCOVER-NAME = Update
-ST-TEMP-ST-NAME = NodeServer Online
+# Messana controller
+ND-msys-NAME = Messana Main Controller
+ND-msys-ICON = GenericCtl
+CMD-msys-UPDATER-NAME = Update
+CMD-msys-SET_STATUS-NAME = Set Status
+CMD-msys-SET_ENERGYSAVE-NAME = Enable Energy Save
+CMD-msys-SET_SETBACK-NAME = Set Setback Offset
+ST-msys-GV2-NAME = Temp Unit (C/F)
+TEMPUNIT-0 = C
+TEMPUNIT-1 = F
+ST-msys-GV3-NAME = EnergySave En
+ST-msys-GV4-NAME = Setback
+ST-msys-GV5-NAME = Nbr ATUs
+ST-msysGV6-NAME = Nbr Domestic Hot Water
+ST-msys-GV7-NAME = Nbr Fancoils
+ST-msys-GV8-NAME = Nbr Energy Units
+ST-msys-GV9-NAME = Nbr Zones
+ST-msys-GV10-NAME = Nbr Macro Zones (all=1)
+ST-msys-GV11-NAME = Nbr Hot/Cold units
+ST-msys-GV12-NAME = Nbr Buffer Tanks
+ST-msys-ALARM-NAME = External Alarm
+
+ST-msys-ST-NAME = NodeServer Online
 STATUS-0 = Off-line
 STATUS-1 = On-lIne
 
-# Relay
-ND-RELAY-NAME = Relay
-ND-RELAY-ICON = Output
-ST-RELAY-ST-NAME = Offset Res Enable 
-STATUS-0 = Normal
-STATUS-1 = Resistor EN
+ND-mzone-NAME = Messane Zone
+ND-mzone-ICON = Thermostat
 
-# Temp Sensor
-ND-TEMPSENSOR-NAME = Temp Sensor
-ND-TEMPSENSOR-ICON = Input
-ST-SENSOR-GV0-NAME = Current Temp C
-ST-SENSOR-GV1-NAME = Temp Min 24H C
-ST-SENSOR-GV2-NAME = Temp Max 24H C
-ST-SENSOR-GV6-NAME = Month
-ST-SENSOR-GV7-NAME = Day
-ST-SENSOR-GV8-NAME = Year 
-ST-SENSOR-GV9-NAME = Hour
-ST-SENSOR-GV10-NAME = Min
-CMD-SENSOR-UPDATE-NAME = Update Temp
-
-
+ST-mzone-ST-NAME = Status
+ST-mzone-GV1-NAME = Set Point
+ST-mzone-GV2-NAME = Panel Temp
+ST-mzone-CLITEMP-NAME = Room Temp
+ST-mzone-GV3-NAME = Schedule Enable
+ST-mzone-GV5-NAME = Dew point
+ST-mzone-GV6-NAME = Air Quality
+ST-mzone-CLIHUM-NAME = Humidity
+ST-mzone-CO2LVL-NAME = CO2 level
+ST-mzone-GV7-NAME = Macro Zone Nbr
+ST-mzone-ALARM-NAME = External Alarm 
+ST-mzone-GV9-NAME = Hum Setpoint RH
+ST-mzone-GV10-NAME = Hum Setpoint DP
+ST-mzone-GV11-NAME = DeHum Setpoint RH
+ST-mzone-GV12-NAME = DeHum Setpoint DP
+ST-mzone-GV13-NAME = Current Setpoint RH
+ST-mzone-GV14-NAME = Current Setpoint DP

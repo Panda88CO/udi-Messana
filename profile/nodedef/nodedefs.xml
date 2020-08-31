@@ -1,11 +1,9 @@
 <nodeDefs>
-    <nodeDef id="MESSANA" nls="MESSANA">
+    <nodeDef id="messanasys" nls="msys">
         <editors />
         <sts>
-            <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   />  #shoud not be passed - NodeName?
-            <st id='GV1' editor='APIVER' />  #should be able set in messages - STATIC
-            <st id='GV2' editor='TEMPUNIT'/> #should be able set in messages - STATIC
+            <st id='ST'  editor="STATUS" />
+            <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
             <st id='GV5' editor='ATU_COUNT'/>
@@ -25,27 +23,32 @@
             </sends>
             <accepts>
                 <cmd id="UPDATE" />
-                <cmd id="SETENERGYSAVE" />
-                <cmd id="SETSETBACK" />
+                <cmd id="SET_STATUS" >
+                    <p id="" editor="STATUS" init="ST" />
+                </cmd>
+                <cmd id="SET_ENERGYSAVE" >
+                    <p id="" editor="ENERGYSAVE" init="GV3" />
+                </cmd>               
+                <cmd id="SET_SETBACK" >
+                    <p id="" editor="SETBACK" init="GV4" />
+                </cmd>    
             </accepts>
         </cmds>
     </nodeDef>
 
-    <nodeDef id="ZONE" nls="MZONE">
+    <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
             <st id="ST"  editor="STATUS" />
-            <st id='GV0' editor='NAME'   /> # node name
             <st id='GV1' editor='SETPOINT' />
-            <st id='GV2' editor='MTEMP'/>
+            <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
             <st id='GV3' editor='SCHEDULE'/>
-            <st id='GV4' editor='HUMIDIDTY'/>
             <st id='GV5' editor='DEWPOINT'/>
             <st id='GV6' editor='AIRQUALITY'/>
             <st id='CLIHUM' editor='HUMIDIDTY'/>
             <st id='CO2LVL' editor='CO2'/>
-            <st id='GV7' editor='MACROZONE'/>
+            <st id='GV7' editor='MACROZONE_MEMBER'/>
             <st id='GV8' editor='ENERGYSAVE'/>
             <st id='ALARM' editor='EXTALARM'/>
             <st id='GV9' editor='HSETPOINTRH'/>
@@ -58,35 +61,12 @@
         <cmds>
             <sends />
             <accepts>
-                <cmd id="STATUS" />
-                <cmd id="SETSETPOINT" />
+                <cmd id="SET_STATUS" />
+                <cmd id="SET_SETPOINT" />
                 <cmd id="ENABLE_ENERGYSAVE" />
                 <cmd id="ENABLE_SCHEDULE" />
             </accepts>
          </cmds>
     </nodeDef>
 
-
-
-
-
-    <nodeDef id="TEMPSENSOR" nls="SENSOR">
-        <editors />
-        <sts>
-            <st id="GV0" editor="TEMPC" />
-            <st id="GV1" editor="TEMPC24H_MIN" />
-            <st id="GV2" editor="TEMPC24H_MAX" />            
-            <st id="GV6" editor="LAST_UPDATE_MO" />
-            <st id="GV7" editor="LAST_UPDATE_D" /> 
-            <st id="GV8" editor="LAST_UPDATE_Y" />                
-            <st id="GV9" editor="LAST_UPDATE_H" />
-            <st id="GV10" editor="LAST_UPDATE_M" />
-        </sts>
-        <cmds>
-            <sends>
-                <cmd id="UPDATE" />
-            </sends>
-            <accepts />
-        </cmds>
-    </nodeDef>
 </nodeDefs>

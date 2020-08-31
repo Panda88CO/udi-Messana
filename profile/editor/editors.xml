@@ -1,58 +1,105 @@
 <editors>
-    <editor id="BOOL">
-        <range uom="2" subset="0,1" />
-    </editor>
-    <editor id="RELAY_EN">
-        <range uom="2" subset="0,1" />
-    </editor>   
-    <editor id="TEMPC">
-        <range uom="4" min="-40" max="100" editorep="1" prec="1"/>
-    </editor>
-    <editor id="LAST_UPDATE_MO">
-        <range uom="47" subset="1-12" />
-    </editor>  
-    <editor id="LAST_UPDATE_D">
-        <range uom="9" subset="1-31" />
-    </editor> 
-    <editor id="LAST_UPDATE_Y">
-        <range uom="77" subset="2020-2120" />
-    </editor>   
-    <editor id="LAST_UPDATE_H">
-        <range uom="20" subset="0-23" />
-    </editor> 
-    <editor id="LAST_UPDATE_M">
-        <range uom="44" subset="0-59" />
-    </editor> 
-</editors>
-
-
-<editors>
     <editor id="STATUS" >
+        <range uom="2" subset="0,1" nls="STATUS"/>
+    </editor> 
+
+    <editor id="TEMPUNIT" >
+        <range uom="2" subset="0,1"  nls="TEMPUNIT" />
+    </editor>     
+
+    <editor id="ENERGYSAVE" >
         <range uom="2" subset="0,1" />
+    </editor>       
+
+     <editor id="SETBACK" >
+        <range uom="4" min="0" max="40" step="1" prec="0" />
+    </editor>        
+
+    <editor id="ZONE_COUNT" >
+        <range uom="107" min="0" max="40" step="1" prec="0" />
+    </editor>         
+
+    <editor id="MACROZONE_COUNT" >
+        <range uom="107" min="0" max="40" step="1" prec="0" />
+    </editor> 
+
+    <editor id="ATU_COUNT" >
+        <range uom="107" min="0" max="5" step="1" prec="0" />
     </editor>
-    #<editor id='NAME'   />
-    <editor id='SETPOINT' />
+
+    <editor id="DHW_COUNT" > 
+        <range uom="107" min="0" max="5" step="1" prec="0" />
+    </editor>     
+    
+    <editor id="FANCOIL_COUNT" >
+        <range uom="107" min="0" max="5" step="1" prec="0"/>
+    </editor>     
+
+    <editor id="ENERGYS_COUNT" >
+        <range uom="107" min="0" max="5" step="1" prec="0"/>
+    </editor>     
+
+    <editor id="H_C_COUNT" >
+        <range uom="107" min="0" max="5" step="1" prec="0"/>
+    </editor>     
+
+    <editor id="BUFTANK_COUNT" >
+        <range uom="107" min="0" max="5" step="1" prec="0"/>
+    </editor>     
+
+    <editor id="EXTALARM" >
+        <range uom="2" subset="0,1" />
+    </editor> 
+
+
+
+
+    <editor id="SCHEDULE" >
+        <range uom="2" subset="0,1" />
+    </editor>     
+    <editor id="SETPOINT" >
         <range uom="4" min="5" max="100" step="1" prec="0"/>
     </editor> 
-    <editor id='MTEMP'/>
+
+    <editor id="PANELTEMP">
         <range uom="4" min="-40" max="100" step="0.1" prec="1"/>
     </editor>
-    <editor id='AIRTEMP'/>
+
+    <editor id="AIRTEMP">
         <range uom="4" min="-40" max="100" step="1" prec="1"/>
     </editor>
+    <editor id="MACROZONE_MEMBER" >
+        <range uom="107" min="0" max="40" step="1" prec="0"/>
+    </editor>   
+    <editor id="DEWPOINT" >
+        <range uom="51" min="0" max="100" step="1" prec="1"/>
+    </editor>   
+    <editor id="AIRQUALITY" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>   
+    <editor id="HUMIDIDTY" >
+        <range uom="51" min="0" max="100" step="1" prec="1"/>
+    </editor>   
+    <editor id="CO2" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>    
+    <editor id="HSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="HSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="DHSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>  
+    <editor id="FHSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>      
+     <editor id="CURSETPOINTRH" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>     
+     <editor id="CURSETPOINTDP" >
+        <range uom="107" min="0" max="1000" step="1" prec="0"/>
+    </editor>     
 
-            <editor id='SCHEDULE'/>
-            <editor id='HUMIDIDTY'/>
-            <editor id='DEWPOINT'/>
-            <editor id='AIRQUALITY'/>
-            <editor id='HUMIDIDTY'/>
-            <editor id='CO2'/>
-            <editor id='MACROZONE'/>
-            <editor id='ENERGYSAVE'/>
-            <editor id='EXTALARM'/>
-            <editor id='HSETPOINTRH'/>
-            <editor id='HSETPOINTDP'/>            
-            <editor id='DHSETPOINTRH'/>
-            <editor id='FHSETPOINTDP'/>
-            <editor id='CURSETPOINTRH'/>
-            <editor id='CURSETPOINTDP'/>
+</editors> 
