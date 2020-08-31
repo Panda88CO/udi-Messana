@@ -250,7 +250,7 @@ class MessanaInfo:
         #self.retrieveAllDHWData()
 
     def retrieveSystemDataMessana(self):
-        LOGGER.Info('retrieve Sytem Data')
+        LOGGER.info('retrieve Sytem Data')
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
             LOGGER.debug( GETStr)
