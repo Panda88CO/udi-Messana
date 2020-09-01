@@ -52,9 +52,9 @@ class MessanaController(polyinterface.Controller):
 
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
-        #for node in self.nodes:
-        #     if node != self.address:
-        #        self.nodes[node].updateInfo()
+        for node in self.nodes:
+             if node != self.address:
+                self.nodes[node].updateInfo()
                    
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
