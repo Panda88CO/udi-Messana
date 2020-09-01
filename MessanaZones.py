@@ -36,27 +36,31 @@ class MessanaZones(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
+    def checkSetDriver(self, ISYkey, mKey):
+        if mkey in self.zoneInfo:
+            self.setDriver(ISYkey, self.zoneInfo[mKey])   
+
     def updateInfo(self):
         LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
         self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
-        self.setDriver('ST', self.zoneInfo['mStatus'])
-        self.setDriver('GV1', self.zoneInfo['mSetPoint'])        
-        self.setDriver('GV2', self.zoneInfo['mTemp'])
-        self.setDriver('CLITEMP', self.zoneInfo['mAirTemp'])
-        self.setDriver('GV3', self.zoneInfo['mScheduleOn'])
-        self.setDriver('GV5', self.zoneInfo['mDewPoint'])
-        self.setDriver('GV6', self.zoneInfo['mAirQuality'])
-        self.setDriver('CLIHUM', self.zoneInfo['mHumidity'])
-        self.setDriver('CO2LVL', self.zoneInfo['mCO2'])
-        self.setDriver('GV7', self.zoneInfo['mMacrozoneId'])
-        self.setDriver('GV8', self.zoneInfo['mEnergySave'])
-        self.setDriver('GV9', self.zoneInfo['mHumSetPointRH'])
-        self.setDriver('GV10', self.zoneInfo['mHumSetPointDP'])
-        self.setDriver('GV11', self.zoneInfo['mDeumSetPointRH'])
-        self.setDriver('GV12', self.zoneInfo['mDehumSetPointDP'])
-        self.setDriver('ALARM', self.zoneInfo['mAlarmOn'])
-        self.setDriver('GV13', self.zoneInfo['mCurrentSetPointRH'])
-        self.setDriver('GV14', self.zoneInfo['mCurrentSetPointDP'])
+        self.checkSetDriver('ST', self.zoneInfo['mStatus'])
+        self.checkSetDriver('GV1', self.zoneInfo['mSetPoint'])        
+        self.checkSetDriver('GV2', self.zoneInfo['mTemp'])
+        self.checkSetDriver('CLITEMP', self.zoneInfo['mAirTemp'])
+        self.checkSetDriver('GV3', self.zoneInfo['mScheduleOn'])
+        self.checkSetDriver('GV5', self.zoneInfo['mDewPoint'])
+        self.checkSetDriver('GV6', self.zoneInfo['mAirQuality'])
+        self.checkSetDriver('CLIHUM', self.zoneInfo['mHumidity'])
+        self.checkSetDriver('CO2LVL', self.zoneInfo['mCO2'])
+        self.checkSetDriver('GV7', self.zoneInfo['mMacrozoneId'])
+        self.checkSetDriver('GV8', self.zoneInfo['mEnergySave'])
+        self.checkSetDriver('GV9', self.zoneInfo['mHumSetPointRH'])
+        self.checkSetDriver('GV10', self.zoneInfo['mHumSetPointDP'])
+        self.checkSetDriver('GV11', self.zoneInfo['mDeumSetPointRH'])
+        self.checkSetDriver('GV12', self.zoneInfo['mDehumSetPointDP'])
+        self.checkSetDriver('ALARM', self.zoneInfo['mAlarmOn'])
+        self.checkSetDriver('GV13', self.zoneInfo['mCurrentSetPointRH'])
+        self.checkSetDriver('GV14', self.zoneInfo['mCurrentSetPointDP'])
 
 
     def setStatus(self, command):
