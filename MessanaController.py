@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         self.primary = self.address
         self.hb = 0
         self.msysInfo = defaultdict(dict)
-      self.mzoneInfo = defaultdict(dict)  
+        #self.mzoneInfo = defaultdict(dict)  
 
 
                 
