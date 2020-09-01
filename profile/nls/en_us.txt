@@ -25,7 +25,7 @@ ST-msys-ALARM-NAME = External Alarm
 
 
 ND-mzone-NAME = Messana Zone
-ND-mzone-ICON = Thermostat
+ND-mzone-ICON = TempSensor
 ST-mzone-ST-NAME = Status
 ST-mzone-GV1-NAME = Set Point
 ST-mzone-GV2-NAME = Panel Temp
@@ -45,6 +45,6 @@ ST-mzone-GV12-NAME = DeHum Setpoint DP
 ST-mzone-GV13-NAME = Current Setpoint RH
 ST-mzone-GV14-NAME = Current Setpoint DP
 CMD-mzone-SET_SETPOINT-NAME = Setpoint
-CMD-mzone-SET_STATUS-NAME = Set Status
+CMD-mzone-SET_STATUS-NAME = Zone On/Off
 CMD-mzone-SET_ENERGYSAVE-NAME = Energy Save On/Off
 CMD-mzone-SET_SCHEDULE-NAME = Schedule On/Off
