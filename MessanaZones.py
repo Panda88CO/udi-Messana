@@ -37,7 +37,7 @@ class MessanaZones(polyinterface.Node):
         LOGGER.debug('TOP querry')
 
     def checkSetDriver(self, ISYkey, mKey):
-        if mkey in self.zoneInfo:
+        if mKey in self.zoneInfo:
             self.setDriver(ISYkey, self.zoneInfo[mKey])   
 
     def updateInfo(self):
