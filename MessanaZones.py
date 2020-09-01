@@ -15,6 +15,7 @@ class MessanaZones(polyinterface.Node):
         self.zoneNbr = zoneNbr
         self.zoneInfo = defaultdict(dict)
         self.zoneInfo = messana.retrieveZoneData(self.zoneNbr)
+        LOGGER.debug(self.zoneInfo)
 
       
     def start(self):
@@ -35,7 +36,7 @@ class MessanaZones(polyinterface.Node):
 
     def updateInfo(self):
         LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
-        self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
+        self.zoneInfo = messana.retrieveZoneData(self.zoneNbr)
         self.setDriver('ST', self.zoneInfo['mStatus'])
         self.setDriver('GV1', self.zoneInfo['mSetPoint'])        
         self.setDriver('GV2', self.zoneInfo['mTemp'])
