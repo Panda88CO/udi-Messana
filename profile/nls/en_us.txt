@@ -45,6 +45,6 @@ ST-mzone-GV12-NAME = DeHum Setpoint DP
 ST-mzone-GV13-NAME = Current Setpoint RH
 ST-mzone-GV14-NAME = Current Setpoint DP
 CMD-mzone-SET_SETPOINT-NAME = Setpoint
-CMD-mzonw-SET_STATUS-NAME = Set Status
+CMD-mzone-SET_STATUS-NAME = Set Status
 CMD-mzone-SET_ENERGYSAVE-NAME = Energy Save On/Off
 CMD-mzone-SET_SCHEDULE-NAME = Schedule On/Off

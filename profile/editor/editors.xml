@@ -55,10 +55,10 @@
 
 
     <editor id="SCHEDULE" >
-        <range uom="2" subset="0,1" />
+        <range uom="2" subset="0,1" nls="STATUS"/>
     </editor>
-    <editor id="ENERGY_SAVE" >
-        <range uom="2" subset="0,1" />
+    <editor id="ENERGYSAVE" >
+        <range uom="2" subset="0,1" nls="STATUS"/>
     </editor> 
     <editor id="SETPOINT" >
         <range uom="4" min="5" max="100" step="1" prec="0"/>
