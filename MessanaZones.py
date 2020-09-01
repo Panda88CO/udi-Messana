@@ -12,9 +12,10 @@ class MessanaZones(polyinterface.Node):
     def __init__(self, controller, primary, address, name, zoneNbr, messana):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
-        self.zoneInfo = defaultdict(dict)
-        self.zoneInfo = messana.retrieveZoneData(zoneNbr)
         self.zoneNbr = zoneNbr
+        self.zoneInfo = defaultdict(dict)
+        self.zoneInfo = messana.retrieveZoneData(self.zoneNbr)
+
       
     def start(self):
         return True
@@ -33,6 +34,7 @@ class MessanaZones(polyinterface.Node):
         LOGGER.debug('TOP querry')
 
     def updateInfo(self):
+        LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
         self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
         self.setDriver('ST', self.zoneInfo['mStatus'])
         self.setDriver('GV1', self.zoneInfo['mSetPoint'])        

@@ -270,6 +270,7 @@ class MessanaInfo:
                 #self.systemDict[mKey] = -1
         
     def retrieveSystemData(self):
+        LOGGER.debug('MessanaInfo Retrieve System Data')
         return self.systemDict
 
     def uploadSystemData(self, systemDict):
@@ -284,6 +285,7 @@ class MessanaInfo:
                     self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
 
     def retrieveZoneData(self, zoneNbr):
+        LOGGER.debug('MessanaInfo Retrieve ZONE Data')
         return(self.zoneDict[zoneNbr])
     
     def retrieveAllZoneDataMessana(self):      
