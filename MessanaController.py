@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         self.primary = self.address
         self.hb = 0
         self.msysInfo = defaultdict(dict)
-        self.mzoneInfo = defaultdict(dict)
+      self.mzoneInfo = defaultdict(dict)  
 
 
                 
@@ -82,7 +82,7 @@ class MessanaController(polyinterface.Controller):
             address = 'zone'+str(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr)+' : name, Address' + name +' ' + address) 
             if not address in self.nodes:
-               self.addNode(MessanaZones(self, self.address, address, name, zoneNbr))
+               self.addNode(MessanaZones(self, self.address, address, name, zoneNbr, self.messana))
 
 
         #count = 0

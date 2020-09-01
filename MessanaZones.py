@@ -9,11 +9,11 @@ from MessanaInfo import MessanaInfo
 LOGGER = polyinterface.LOGGER
 
 class MessanaZones(polyinterface.Node):
-    def __init__(self, controller, primary, address, name, zoneNbr):
+    def __init__(self, controller, primary, address, name, zoneNbr, messana):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
         self.zoneInfo = defaultdict(dict)
-        self.zoneInfo = self.messana.retrieveZoneData(zoneNbr)
+        self.zoneInfo = messana.retrieveZoneData(zoneNbr)
         self.zoneNbr = zoneNbr
       
     def start(self):
