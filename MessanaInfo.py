@@ -253,11 +253,12 @@ class MessanaInfo:
             LOGGER.debug('Reading Zone System')
             self.retrieveAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
+            LOGGER.debug('Reading MacroZone System :' + str(self.systemDict['mMacrozoneCount'] ))
             self.retrieveAllMacroZoneDataMessana()
         #if self.systemDict['mHC_changeoverCount'] > 0:   
         #    LOGGER.debug('Reading Ht/Cold System')
         #    self.retrieveAllHC_CODataMessana()
+        LOGGER.debug('Reading ATU System: ' + str(self.systemDict['mATUCount']))
         if self.systemDict['mATUCount'] > 0:
             LOGGER.debug('Reading ATU System')
             self.retrieveAllATUDataMessana()
