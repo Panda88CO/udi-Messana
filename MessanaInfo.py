@@ -248,19 +248,19 @@ class MessanaInfo:
         LOGGER.info('Retrieve Full Messana Status')
         LOGGER.debug('Reading Main System')
         self.retrieveSystemDataMessana()
-        LOGGER.debug(self.systemDict)
-        LOGGER.debug('Zone count: '+ str(self.systemDict['mZoneCount'] ))
+        #LOGGER.debug(self.systemDict)
+        #LOGGER.debug('Zone count: '+ str(self.systemDict['mZoneCount'] ))
         if self.systemDict['mZoneCount'] > 0:
             LOGGER.debug('Reading Zone System')
             self.retrieveAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System :' + str(self.systemDict['mMacrozoneCount'] ))
+            LOGGER.debug('Reading MacroZone System :')
             self.retrieveAllMacroZoneDataMessana()
-        #if self.systemDict['mHC_changeoverCount'] > 0:   
-        #    LOGGER.debug('Reading Ht/Cold System')
-        #    self.retrieveAllHC_CODataMessana()
+        if self.systemDict['mHC_changeoverCount'] > 0:   
+            LOGGER.debug('Reading Ht/Cold System')
+            self.retrieveAllHC_CODataMessana()
         LOGGER.debug('Reading ATU System: ' + str(self.systemDict['mATUCount']))
-        if self.systemDict['mATUCount'] > 0:
+        if self.systemDict['mATUcount'] > 0:
             LOGGER.debug('Reading ATU System')
             self.retrieveAllATUDataMessana()
         #LOGGER.debug('')
