@@ -2,7 +2,7 @@
     <editor id="STATUS" >
         <range uom="2" subset="0,1" nls="STATUS"/>
     </editor> 
-    <editor id="STATUS" >
+    <editor id="CMDSTATUS" >
         <range uom="2" subset="0,1" nls="STATUS"/>
     </editor> 
 

@@ -36,6 +36,8 @@ class MessanaController(polyinterface.Controller):
 
         self.discover()         
         self.updateInfo()
+        LOGGER.debug('install profile')
+        self.poly.installprofile()
         self.reportDrivers()
  
 
