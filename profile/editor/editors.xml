@@ -57,7 +57,7 @@
     </editor>     
 
     <editor id="EXTALARM" >
-        <range uom="25" subset="0,1" nls-"STATUS" />
+        <range uom="25" subset="0,1" nls="STATUS" />
     </editor> 
 
 
