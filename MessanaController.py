@@ -58,6 +58,7 @@ class MessanaController(polyinterface.Controller):
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
         self.heartbeat()
+        self.messana.retrieveAllMessanaStatus() #update Messana status to internal structure
         self.updateInfo()
         #for node in self.nodes:
         #    if node != self.address:
