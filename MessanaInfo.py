@@ -248,6 +248,7 @@ class MessanaInfo:
         LOGGER.info('Retrieve Full Messana Status')
         LOGGER.debug('Reading Main System')
         self.retrieveSystemDataMessana()
+        LOGGER.debug(self.systemDict)
         LOGGER.debug('Zone count: '+ str(self.systemDict['mZoneCount'] ))
         if self.systemDict['mZoneCount'] > 0:
             LOGGER.debug('Reading Zone System')
