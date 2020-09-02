@@ -259,7 +259,7 @@ class MessanaInfo:
         if self.systemDict['mHC_changeoverCount'] > 0:   
             LOGGER.debug('Reading Ht/Cold System')
             self.retrieveAllHC_CODataMessana()
-        LOGGER.debug('Reading ATU System: ' + str(self.systemDict['mATUCount']))
+        LOGGER.debug('Reading ATU System: ' )
         if self.systemDict['mATUcount'] > 0:
             LOGGER.debug('Reading ATU System')
             self.retrieveAllATUDataMessana()

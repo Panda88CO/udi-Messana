@@ -29,7 +29,7 @@ class MessanaController(polyinterface.Controller):
             self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             LOGGER.debug('MessanaInfo call done')
             self.msysInfo = self.messana.retrieveSystemData()
-            LOGGER.debug(self.msysInfo)
+            #LOGGER.debug(self.msysInfo)
 
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
@@ -64,6 +64,7 @@ class MessanaController(polyinterface.Controller):
         self.heartbeat()
         self.messana.retrieveAllMessanaStatus() #update Messana status to internal structure
         self.updateInfo()
+        self.reportDrivers()
         #for node in self.nodes:
         #    if node != self.address:
         #        self.nodes[node].updateInfo()
@@ -183,12 +184,15 @@ class MessanaController(polyinterface.Controller):
         self.setDriver('ALARM', self.msysInfo['mExternalAlarm'])
 
     def setStatus(self, command):
+        LOGGER.debug('setStatus Called')
         return True
 
     def setEnergySave(self, command):
+        LOGGER.debug('setEnergySave Called')
         return True
 
     def setSetback(self, command):
+        LOGGER.debug('setSetback Called')
         return True
 
 
