@@ -17,7 +17,7 @@ class MessanaZones(polyinterface.Node):
         self.zoneInfo = defaultdict(dict)
         
         self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
-        LOGGER.debug(self.zoneInfo)
+        #LOGGER.debug(self.zoneInfo)
 
       
     def start(self):

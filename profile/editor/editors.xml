@@ -2,6 +2,9 @@
     <editor id="STATUS" >
         <range uom="2" subset="0,1" nls="STATUS"/>
     </editor> 
+    <editor id="STATUS" >
+        <range uom="2" subset="0,1" nls="STATUS"/>
+    </editor> 
 
     <editor id="TEMPUNIT" >
         <range uom="25" subset="0,1"  nls="TEMPUNIT" />
@@ -10,8 +13,14 @@
     <editor id="ENERGYSAVE" >
         <range uom="2" subset="0,1" />
     </editor>       
+    <editor id="CMDENERGYSAVE" >
+        <range uom="2" subset="0,1" />
+    </editor>       
 
      <editor id="SETBACK" >
+        <range uom="4" min="0" max="40" step="1" prec="0" />
+    </editor>  
+    <editor id="CMDSETBACK" >
         <range uom="4" min="0" max="40" step="1" prec="0" />
     </editor>        
 

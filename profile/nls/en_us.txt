@@ -1,15 +1,12 @@
 # Messana controller
 ND-msys-NAME = Messana Main Controller
 ND-msys-ICON = GenericCtl
-CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_STATUS-NAME = System On/Off
-STATUS-0=Off
-STATUS-1=On
+CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_ENERGYSAVE-NAME = Energy Save On/Off
 CMD-msys-SET_SETBACK-NAME = Set Setback Offset
 ST-msys-GV2-NAME = Temp Unit (C/F)
-TEMPUNIT-0 = C
-TEMPUNIT-1 = F
+
 ST-msys-ST-NAME = NodeServer Online
 ST-msys-GV3-NAME = EnergySave En
 ST-msys-GV4-NAME = Setback
@@ -22,7 +19,10 @@ ST-msys-GV10-NAME = Nbr Macro Zones (all=1)
 ST-msys-GV11-NAME = Nbr Hot/Cold units
 ST-msys-GV12-NAME = Nbr Buffer Tanks
 ST-msys-ALARM-NAME = External Alarm
-
+STATUS-0=Off
+STATUS-1=On
+TEMPUNIT-0 = C
+TEMPUNIT-1 = F
 
 ND-mzone-NAME = Messana Zone
 ND-mzone-ICON = TempSensor

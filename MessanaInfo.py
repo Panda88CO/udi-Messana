@@ -273,7 +273,7 @@ class MessanaInfo:
         LOGGER.info('retrieve Sytem Data')
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-            LOGGER.debug( GETStr)
+            #LOGGER.debug( GETStr)
             systemTemp = requests.get(GETStr)
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
@@ -320,7 +320,7 @@ class MessanaInfo:
     def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
-        LOGGER.debug(tempDict)
+        #LOGGER.debug(tempDict)
         for key in tempDict[mmacrozoneNbr]:
             self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
 

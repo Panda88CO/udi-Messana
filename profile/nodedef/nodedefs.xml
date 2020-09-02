@@ -24,13 +24,13 @@
             <accepts>
                 <cmd id="UPDATE" />
                 <cmd id="SET_STATUS" >
-                    <p id="" editor="STATUS" init="ST" />
+                    <p id="" editor="CMDSTATUS" init="ST" />
                 </cmd>
                 <cmd id="SET_ENERGYSAVE" >
-                    <p id="" editor="ENERGYSAVE" init="GV3" />
+                    <p id="" editor="CMDENERGYSAVE" init="GV3" />
                 </cmd>               
                 <cmd id="SET_SETBACK" >
-                    <p id="" editor="SETBACK" init="GV4" />
+                    <p id="" editor="CMDSETBACK" init="GV4" />
                 </cmd>    
             </accepts>
         </cmds>
