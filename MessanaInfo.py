@@ -231,18 +231,35 @@ class MessanaInfo:
                 #print(mData['error'])
         return subSystemDict
 
+    def retrieveMessanaStatus(self):
+        if self.systemDict['mZoneCount'] > 0:
+            LOGGER.debug('Reading Zone System')
+            self.retrieveAllZoneDataMessana()
+        if self.systemDict['mMacrozoneCount'] > 0:    
+            LOGGER.debug('Reading MacroZone System')
+            self.retrieveAllMacroZoneDataMessana()
+        if self.systemDict['mHC_changeoverCount'] > 0:   
+            LOGGER.debug('Reading Ht/Cold System')
+            self.retrieveAllHC_CODataMessana()
+        if self.systemDict['mATUCount'] > 0:
+            LOGGER.debug('Reading ATU System')
+
     def retrieveAllMessanaStatus(self):
+        LOGGER.info('Retrieve Full Messana Status')
         LOGGER.debug('Reading Main System')
         self.retrieveSystemDataMessana()
-        LOGGER.debug('Reading Zone System')
-        self.retrieveAllZoneDataMessana()
-        LOGGER.debug('Reading MacroZone System')
-        self.retrieveAllMacroZoneDataMessana()
-        LOGGER.debug('Reading Ht/Cold System')
-        self.retrieveAllHC_CODataMessana()
-        LOGGER.debug('Reading ATU System')
-
-        self.retrieveAllATUDataMessana()
+        if self.systemDict['mZoneCount'] > 0:
+            LOGGER.debug('Reading Zone System')
+            self.retrieveAllZoneDataMessana()
+        if self.systemDict['mMacrozoneCount'] > 0:    
+            LOGGER.debug('Reading MacroZone System')
+            self.retrieveAllMacroZoneDataMessana()
+        if self.systemDict['mHC_changeoverCount'] > 0:   
+            LOGGER.debug('Reading Ht/Cold System')
+            self.retrieveAllHC_CODataMessana()
+        if self.systemDict['mATUCount'] > 0:
+            LOGGER.debug('Reading ATU System')
+            self.retrieveAllATUDataMessana()
         #LOGGER.debug('')
         #self.retrieveAllFCData()
         #self.retrieveAllEnergySourceData()
