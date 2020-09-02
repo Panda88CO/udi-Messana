@@ -318,6 +318,7 @@ class MessanaInfo:
     def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
+        LOGGER.debug(tempDict)
         for key in tempDict[mmacrozoneNbr]:
             self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
 
