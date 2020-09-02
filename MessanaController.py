@@ -28,6 +28,7 @@ class MessanaController(polyinterface.Controller):
         try:
             self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             self.msysInfo = self.messana.retrieveSystemData()
+            LOGGER.debug(self.msysInfo)
 
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
@@ -74,8 +75,7 @@ class MessanaController(polyinterface.Controller):
 
     def discover(self, command=None):
         LOGGER.debug('discover')
-        LOGGER.info('Adding Zone')
-        LOGGER.debug(str(self.msysInfo['mZoneCount']))
+        LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
         for zoneNbr in range(0,self.msysInfo['mZoneCount']):
             ZoneDict = self.messana.retrieveZoneData(zoneNbr)
             name = str(ZoneDict['mName'])
