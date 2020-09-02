@@ -4,7 +4,7 @@
     </editor> 
 
     <editor id="TEMPUNIT" >
-        <range uom="2" subset="0,1"  nls="TEMPUNIT" />
+        <range uom="25" subset="0,1"  nls="TEMPUNIT" />
     </editor>     
 
     <editor id="ENERGYSAVE" >
@@ -48,29 +48,29 @@
     </editor>     
 
     <editor id="EXTALARM" >
-        <range uom="2" subset="0,1" />
+        <range uom="25" subset="0,1" nls-"STATUS" />
     </editor> 
 
 
 
 
     <editor id="SCHEDULE" >
-        <range uom="2" subset="0,1" nls="STATUS"/>
+        <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>
     <editor id="ENERGYSAVE" >
-        <range uom="2" subset="0,1" nls="STATUS"/>
+        <range uom="25" subset="0,1" nls="STATUS"/>
     </editor> 
     <editor id="SETPOINT" >
-        <range uom="4" min="5" max="100" step="1" prec="0"/>
+        <range uom="17" min="5" max="100" step="1" prec="0"/>
     </editor> 
     <editor id="PANELTEMP">
-        <range uom="4" min="-40" max="100" step="0.1" prec="1"/>
+        <range uom="17" min="-40" max="100" step="0.1" prec="1"/>
     </editor>
     <editor id="AIRTEMP">
-        <range uom="4" min="-40" max="100" step="1" prec="1"/>
+        <range uom="17" min="-40" max="100" step="1" prec="1"/>
     </editor>
     <editor id="MACROZONE_MEMBER" >
-        <range uom="107" min="0" max="40" step="1" prec="0"/>
+        <range uom="25" min="0" max="40" step="1" prec="0"/>
     </editor>   
     <editor id="DEWPOINT" >
         <range uom="51" min="0" max="100" step="1" prec="1"/>

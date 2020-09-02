@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
     try:
         LOGGER.info('Starting Messana Controller')
-        polyglot = polyinterface.Interface('Messana_Control')
+        polyglot = polyinterface.Interface('Messana Control')
         polyglot.start()
         control = MessanaController(polyglot)
         control.runForever()
