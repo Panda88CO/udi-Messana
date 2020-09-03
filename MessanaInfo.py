@@ -254,7 +254,7 @@ class MessanaInfo:
             LOGGER.debug('Reading Zone System')
             self.retrieveAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System :')
+            LOGGER.debug('Reading MacroZone System')
             self.retrieveAllMacroZoneDataMessana()
         if self.systemDict['mHC_changeoverCount'] > 0:   
             LOGGER.debug('Reading Ht/Cold System')
