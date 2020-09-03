@@ -64,16 +64,24 @@ class MessanaZones(polyinterface.Node):
 
 
     def setStatus(self, command):
-        return True
+        LOGGER.debug('setStatus Called')
+        val = int(command.get('value'))
+        LOGGER.debug('setStatus Reeived:' + str(val))
 
     def setEnergySave(self, command):
-        return True
+        LOGGER.debug('setEnergySave Called')
+        val = int(command.get('value'))
+        LOGGER.debug('setEnergySave Reeived:' + str(val))
 
     def setSetpoint(self, command):
-        return True
+        LOGGER.debug('setSetpoint Called')
+        val = int(command.get('value'))
+        LOGGER.debug('setSetpoint Reeived:' + str(val))
 
     def EnSchedule(self, command):
-        return True        
+        LOGGER.debug('EnSchedule Called')
+        val = int(command.get('value'))
+        LOGGER.debug('EnSchedule Reeived:' + str(val))      
 
     id = 'zone'
     commands = { 'SET_SETPOINT': setSetpoint
@@ -83,8 +91,8 @@ class MessanaZones(polyinterface.Node):
                 }
 
     drivers = [  {'driver': 'ST',  'value': 1, 'uom': 2}
-                ,{'driver': 'GV1', 'value': 1, 'uom': 17}               
-                ,{'driver': 'GV2', 'value': 1, 'uom': 25}
+                ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
+                ,{'driver': 'GV2', 'value': 70, 'uom': 25}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
                 ,{'driver': 'CLITEMP', 'value': 1, 'uom': 17}
                 ,{'driver': 'GV5', 'value': 1, 'uom': 51}

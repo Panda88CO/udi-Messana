@@ -6,7 +6,6 @@ CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_ENERGYSAVE-NAME = Energy Save On/Off
 CMD-msys-SET_SETBACK-NAME = Set Setback Offset
 ST-msys-GV2-NAME = Temp Unit (C/F)
-
 ST-msys-ST-NAME = NodeServer Online
 ST-msys-GV3-NAME = EnergySave En
 ST-msys-GV4-NAME = Setback
