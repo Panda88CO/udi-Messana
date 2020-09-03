@@ -185,15 +185,18 @@ class MessanaController(polyinterface.Controller):
 
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
-        return True
+        val = int(command.get('value'))
+        LOGGER.debug('setSetback Reeived:' + str(val))
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
-        return True
+        val = int(command.get('value'))
+        LOGGER.debug('SetStatus Reeived:' + str(val))
 
     def setSetback(self, command):
         LOGGER.debug('setSetback Called')
-        return True
+        val = int(command.get('value'))
+        LOGGER.debug('setSetback Reeived:' + str(val))
 
 
     id = 'messanasys'
