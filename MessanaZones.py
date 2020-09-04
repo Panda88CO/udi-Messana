@@ -92,15 +92,15 @@ class MessanaZones(polyinterface.Node):
 
     drivers = [  {'driver': 'ST',  'value': 1, 'uom': 2}
                 ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
-                ,{'driver': 'GV2', 'value': 70, 'uom': 25}
+                ,{'driver': 'GV2', 'value': 70, 'uom': 17}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
-                ,{'driver': 'CLITEMP', 'value': 1, 'uom': 17}
+                ,{'driver': 'CLITEMP', 'value': 10, 'uom': 17}
                 ,{'driver': 'GV5', 'value': 1, 'uom': 51}
                 ,{'driver': 'CLIHUM', 'value': 1, 'uom': 51}
                 ,{'driver': 'C02LVL', 'value': 1, 'uom': 107}
                 ,{'driver': 'GV6', 'value': 1, 'uom': 107}     
                 ,{'driver': 'GV7', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV8', 'value': 1, 'uom': 107}
+                ,{'driver': 'GV8', 'value': 1, 'uom': 25}
                 ,{'driver': 'ALARM', 'value': 0, 'uom': 25}          
                 ,{'driver': 'GV9', 'value': 1, 'uom': 107}
                 ,{'driver': 'GV10', 'value': 1, 'uom': 107} 
