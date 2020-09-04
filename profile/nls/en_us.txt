@@ -1,6 +1,6 @@
 # Messana controller
 ND-msys-NAME = Messana Main Controller
-ND-msys-ICON = GenericCtl
+ND-msys-ICON = Thermostat
 CMD-msys-SET_STATUS-NAME = System On/Off
 CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_ENERGYSAVE-NAME = Energy Save On/Off

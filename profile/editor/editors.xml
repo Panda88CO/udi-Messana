@@ -121,7 +121,7 @@
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>     
     <editor id="CMDSETPOINT" >
-        <range uom="4" min="0" max="40" step="1" prec="0" />
+        <range uom="4" min="5" max="100" step="1" prec="0" />
     </editor>  
 
 </editors> 
