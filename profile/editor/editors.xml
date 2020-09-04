@@ -123,6 +123,9 @@
     <editor id="CMDSETPOINT" >
 <<<<<<< HEAD
         <range uom="17" min="40" max="100" step="1" prec="0" />
+=======
+        <range uom="4" min="5" max="100" step="1" prec="0" />
+>>>>>>> 818a80203a0e893f062baa47a19c8da4543115ba
     </editor>  
 
 </editors> 
