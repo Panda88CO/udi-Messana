@@ -61,17 +61,17 @@
         <cmds>
             <sends />
             <accepts>
-                <cmd id="SET_STATUS" >
-                    <p id="" editor="CMDSTATUS" init="ST" />
+                <cmd id="SET_ZSTATUS" >
+                    <p id="" editor="CMDZSTATUS" init="ST" />
                 </cmd>
-                <cmd id="SET_ENERGYSAVE" >
-                    <p id="" editor="CMDENERGYSAVE" init="GV8" />
+                <cmd id="SET_ZENERGYSAVE" >
+                    <p id="" editor="CMDZENERGYSAVE" init="GV8" />
                 </cmd>               
-                <cmd id="SET_SCHEDULE" >
-                    <p id="" editor="CMDSCHEDLULE" init="GV3" />
+                <cmd id="SET_ZSCHEDULE" >
+                    <p id="" editor="CMDZSCHEDLULE" init="GV3" />
                 </cmd>    
-                <cmd id="SET_SETPOINT" >
-                    <p id="" editor="CMDSETPOINT" init="GV1" /> 
+                <cmd id="SET_ZSETPOINT" >
+                    <p id="" editor="CMDZSETPOINT" init="GV1" /> 
                 </cmd>               
             </accepts>
          </cmds>

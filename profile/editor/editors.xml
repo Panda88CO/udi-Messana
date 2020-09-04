@@ -111,16 +111,16 @@
      <editor id="CURSETPOINTDP" >
         <range uom="107" min="0" max="1000" step="1" prec="0"/>
     </editor>     
-     <editor id="CMDSTATUS" >
+     <editor id="CMDZSTATUS" >
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>  
-     <editor id="CMDENERGYSAVE" >
+     <editor id="CMDZENERGYSAVE" >
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>  
-     <editor id="CMDSCHEDLULE" >
+     <editor id="CMDZSCHEDLULE" >
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>     
-    <editor id="CMDSETPOINT" >
+    <editor id="CMDZSETPOINT" >
         <range uom="17" min="40" max="90" step="1" prec="0" />
     </editor>  
 

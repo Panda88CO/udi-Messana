@@ -86,10 +86,10 @@ class MessanaZones(polyinterface.Node):
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(val))      
 
     id = 'zone'
-    commands = { 'SET_SETPOINT': setSetpoint
-                ,'SET_STATUS"': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SCHEDULE' : EnSchedule 
+    commands = { 'SET_ZSETPOINT': setSetpoint
+                ,'SET_ZSTATUS"': setStatus
+                ,'SET_ZENERGYSAVE': setEnergySave
+                ,'SET_ZSCHEDULE' : EnSchedule 
                 }
 
     drivers = [  {'driver': 'ST',  'value': 1, 'uom': 2}
