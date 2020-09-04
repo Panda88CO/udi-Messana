@@ -66,17 +66,17 @@ class MessanaZones(polyinterface.Node):
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(val))
 
     def setSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+ setSetpoint Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(val))
 
     def EnSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
