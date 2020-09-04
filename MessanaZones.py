@@ -66,17 +66,17 @@ class MessanaZones(polyinterface.Node):
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(val))
 
     def setSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
         val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+ setSetpoint Reeived:' + str(val))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(val))
 
     def EnSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
@@ -92,15 +92,15 @@ class MessanaZones(polyinterface.Node):
 
     drivers = [  {'driver': 'ST',  'value': 1, 'uom': 2}
                 ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
-                ,{'driver': 'GV2', 'value': 70, 'uom': 25}
+                ,{'driver': 'GV2', 'value': 70, 'uom': 17}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
-                ,{'driver': 'CLITEMP', 'value': 1, 'uom': 17}
+                ,{'driver': 'CLITEMP', 'value': 10, 'uom': 17}
                 ,{'driver': 'GV5', 'value': 1, 'uom': 51}
                 ,{'driver': 'CLIHUM', 'value': 1, 'uom': 51}
                 ,{'driver': 'C02LVL', 'value': 1, 'uom': 107}
                 ,{'driver': 'GV6', 'value': 1, 'uom': 107}     
                 ,{'driver': 'GV7', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV8', 'value': 1, 'uom': 107}
+                ,{'driver': 'GV8', 'value': 1, 'uom': 25}
                 ,{'driver': 'ALARM', 'value': 0, 'uom': 25}          
                 ,{'driver': 'GV9', 'value': 1, 'uom': 107}
                 ,{'driver': 'GV10', 'value': 1, 'uom': 107} 
