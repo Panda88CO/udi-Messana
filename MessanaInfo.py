@@ -177,7 +177,7 @@ class MessanaInfo:
     def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
-        #print('\n' + PUTStr + ' ' + str(value))
+        LOGGER.debug('PUT str: ' + PUTStr + str(value))
 
         mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
         resp = requests.put(PUTStr, mData)
@@ -188,15 +188,15 @@ class MessanaInfo:
             temp1 =  resp.content
             res_dict = json.loads(temp1.decode('utf-8')) 
             mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-            #print(mData['error'])
+            LOGGER.debug(mData['error'])
             mData['statusOK'] =False
         elif str(resp) == self.RESPONSE_NO_RESPONSE:
             mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
-            #print(mData['error'])
+            LOGGER.debug(mData['error'])
             mData['statusOK'] =False
         else:
             mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
-            #print(mData['error'])
+            LOGGER.debug(mData['error'])
             mData['statusOK'] =False
             return False
 
@@ -312,10 +312,14 @@ class MessanaInfo:
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
             self.retrieveZoneDataMessana(zoneNbr)
 
-    def uploadZoneData(self, zoneNbr, zoneDict):
-        for mKey in zoneDict[zoneNbr]:
+    def uploadZoneData(self, zoneNbr, extZoneDict):
+        for mKey in extZoneDict[zoneNbr]:
             if mKey in self.mSystemPut['zones']:
-                self.putSubSystem('zones', zoneNbr, mKey, zoneDict[zoneNbr])
+                # only update changed values
+                if extZoneDict[mKey] != self.zoneDict[zoneNbr][mKey]:
+                    zoneDict[zoneNbr][mKey] = extZoneDict[mKey]
+                    self.putSubSystem('zones', zoneNbr, mKey, self.zoneDict)
+
 
     def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)

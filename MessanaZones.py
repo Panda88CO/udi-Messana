@@ -66,6 +66,8 @@ class MessanaZones(polyinterface.Node):
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
+        self.zoneInfo['mStatus'] = val
+        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
 
     def setEnergySave(self, command):
