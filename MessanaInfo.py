@@ -317,7 +317,7 @@ class MessanaInfo:
             if mKey in self.mSystemPut['zones']:
                 # only update changed values
                 if extZoneDict[mKey] != self.zoneDict[zoneNbr][mKey]:
-                    zoneDict[zoneNbr][mKey] = extZoneDict[mKey]
+                    self.zoneDict[zoneNbr][mKey] = extZoneDict[mKey]
                     self.putSubSystem('zones', zoneNbr, mKey, self.zoneDict)
 
 
