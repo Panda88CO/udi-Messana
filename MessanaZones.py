@@ -43,7 +43,7 @@ class MessanaZones(polyinterface.Node):
     def updateInfo(self):
         LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
         self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
-        self.checkSetDriver('ST', 'mStatus')
+        self.checkSetDriver('GV4', 'mStatus')
         self.checkSetDriver('GV1', 'mSetPoint')        
         self.checkSetDriver('GV2', 'mTemp')
         self.checkSetDriver('CLITEMP', 'mAirTemp')
@@ -92,7 +92,7 @@ class MessanaZones(polyinterface.Node):
                 ,'SET_ZSCHEDULE' : EnSchedule 
                 }
 
-    drivers = [  {'driver': 'ST',  'value': 1, 'uom': 25}
+    drivers = [  {'driver': 'GV4',  'value': 1, 'uom': 25}
                 ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
                 ,{'driver': 'GV2', 'value': 70, 'uom': 17}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}

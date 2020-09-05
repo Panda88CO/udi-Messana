@@ -206,7 +206,7 @@ class MessanaController(polyinterface.Controller):
                 ,'SET_SETBACK' : setSetback 
                 }
 
-    drivers = [  {'driver': 'GV4',  'value': 1, 'uom': 25}
+    drivers = [  {'driver': 'GV4', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV2', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV4', 'value': 1, 'uom': 17}

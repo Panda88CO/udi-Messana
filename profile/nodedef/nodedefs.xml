@@ -24,7 +24,7 @@
             <accepts>
                 <cmd id="UPDATE" />
                 <cmd id="SET_STATUS" >
-                    <p id="" editor="CMDSTATUS" init="ST" />
+                    <p id="" editor="CMDSTATUS" init="GV1" />
                 </cmd>
                 <cmd id="SET_ENERGYSAVE" >
                     <p id="" editor="CMDENERGYSAVE" init="GV3" />
@@ -39,11 +39,12 @@
     <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
-            <st id="GV4"  editor='ZSTATUS' />
+
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
             <st id='GV3' editor='SCHEDULE'/>
+            <st id="GV4"  editor='ZSTATUS' />
             <st id='GV5' editor='DEWPOINT'/>
             <st id='GV6' editor='AIRQUALITY'/>
             <st id='CLIHUM' editor='HUMIDIDTY'/>
@@ -71,7 +72,7 @@
                     <p id="" editor="CMDZSETPOINT" init="GV1" /> 
                 </cmd>               
                 <cmd id="SET_ZSTATUS" >
-                    <p id="" editor="CMDZSTATUS" init="ST" />
+                    <p id="" editor="CMDZSTATUS" init="GV4" />
                 </cmd>
             </accepts>
          </cmds>
