@@ -92,7 +92,7 @@ class MessanaZones(polyinterface.Node):
                 ,'SET_ZSCHEDULE' : EnSchedule 
                 }
 
-    drivers = [  {'driver': 'ST',  'value': 1, 'uom': 2}
+    drivers = [  {'driver': 'ST',  'value': 1, 'uom': 25}
                 ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
                 ,{'driver': 'GV2', 'value': 70, 'uom': 17}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
