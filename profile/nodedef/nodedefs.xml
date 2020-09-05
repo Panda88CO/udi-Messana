@@ -39,7 +39,7 @@
     <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
-            <st id="ST"  editor='STATUS' />
+            <st id="ST"  editor='ZSTATUS' />
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>

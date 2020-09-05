@@ -110,8 +110,11 @@
     </editor>     
      <editor id="CURSETPOINTDP" >
         <range uom="107" min="0" max="1000" step="1" prec="0"/>
-    </editor>     
-     <editor id="CMDZSTATUS" >
+    </editor>  
+    <editor id="ZSTATUS" >
+        <range uom="25" subset="0,1" nls="STATUS"/>
+    </editor>      
+    <editor id="CMDZSTATUS" >
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>  
      <editor id="CMDZENERGYSAVE" >
