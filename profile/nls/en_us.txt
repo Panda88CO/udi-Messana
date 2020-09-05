@@ -6,7 +6,7 @@ CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_ENERGYSAVE-NAME = Energy Save On/Off
 CMD-msys-SET_SETBACK-NAME = Set Setback Offset
 ST-msys-GV2-NAME = Temp Unit (C/F)
-ST-msys-ST-NAME = NodeServer Online
+ST-msys-GV1-NAME = Messana System
 ST-msys-GV3-NAME = EnergySave En
 ST-msys-GV4-NAME = Setback
 ST-msys-GV5-NAME = Nbr ATUs
@@ -25,7 +25,7 @@ TEMPUNIT-1 = F
 
 ND-mzone-NAME = Messana Zone
 ND-mzone-ICON = TempSensor
-ST-mzone-ST-NAME = Status
+ST-mzone-GV4-NAME = Status
 ST-mzone-GV1-NAME = Set Point
 ST-mzone-GV2-NAME = Panel Temp
 ST-mzone-CLITEMP-NAME = Room Temp

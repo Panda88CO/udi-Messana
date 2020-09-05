@@ -2,7 +2,7 @@
     <nodeDef id="messanasys" nls="msys">
         <editors />
         <sts>
-            <st id='ST'  editor="STATUS" />
+            <st id='GV1'  editor="STATUS" />
             <st id='GV2' editor='TEMPUNIT'/> 
             <st id='GV3' editor='ENERGYSAVE'/>
             <st id='GV4' editor='SETBACK'/>
@@ -39,7 +39,7 @@
     <nodeDef id="zone" nls="mzone">
         <editors />
         <sts>
-            <st id="ST"  editor='ZSTATUS' />
+            <st id="GV4"  editor='ZSTATUS' />
             <st id='GV1' editor='SETPOINT' />
             <st id='GV2' editor='PANELTEMP'/>
             <st id='CLITEMP' editor='AIRTEMP'/>
@@ -61,9 +61,6 @@
         <cmds>
             <sends />
             <accepts>
-                <cmd id="SET_ZSTATUS" >
-                    <p id="" editor="CMDZSTATUS" init="ST" />
-                </cmd>
                 <cmd id="SET_ZENERGYSAVE" >
                     <p id="" editor="CMDZENERGYSAVE" init="GV8" />
                 </cmd>               
@@ -73,6 +70,9 @@
                 <cmd id="SET_ZSETPOINT" >
                     <p id="" editor="CMDZSETPOINT" init="GV1" /> 
                 </cmd>               
+                <cmd id="SET_ZSTATUS" >
+                    <p id="" editor="CMDZSTATUS" init="ST" />
+                </cmd>
             </accepts>
          </cmds>
     </nodeDef>

@@ -169,7 +169,7 @@ class MessanaController(polyinterface.Controller):
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
         LOGGER.debug('ST :'+  str(self.msysInfo['mStatus']) + ' GV2:' + str(self.msysInfo['mUnitTemp']) + ' GV9: ' + str(self.msysInfo['mZoneCount']))
-        self.setDriver('ST', self.msysInfo['mStatus'])
+        self.setDriver('GV1', self.msysInfo['mStatus'])
         self.setDriver('GV2', self.msysInfo['mUnitTemp'])
         self.setDriver('GV3', self.msysInfo['mEnergySaving'])
         self.setDriver('GV4', self.msysInfo['mSetback'])
@@ -206,7 +206,7 @@ class MessanaController(polyinterface.Controller):
                 ,'SET_SETBACK' : setSetback 
                 }
 
-    drivers = [  {'driver': 'ST',  'value': 1, 'uom': 25}
+    drivers = [  {'driver': 'GV4',  'value': 1, 'uom': 25}
                 ,{'driver': 'GV2', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV4', 'value': 1, 'uom': 17}
