@@ -63,7 +63,7 @@ class MessanaZones(polyinterface.Node):
         self.checkSetDriver('GV14', 'mCurrentSetPointDP')
 
 
-    def setZStatus(self, command):
+    def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
         self.zoneInfo['mStatus'] = val
@@ -87,12 +87,12 @@ class MessanaZones(polyinterface.Node):
 
     id = 'zone'
     commands = { 'SET_ZSETPOINT': setSetpoint
-                ,'SET_ZSTATUS"': setZStatus
+                ,'SET_ZSTATUS"': setStatus
                 ,'SET_ZENERGYSAVE': setEnergySave
                 ,'SET_ZSCHEDULE' : EnSchedule 
                 }
 
-    drivers = [  {'driver': 'GV4',  'value': 1, 'uom': 25}
+    drivers = [  {'driver': 'GV4', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
                 ,{'driver': 'GV2', 'value': 70, 'uom': 17}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
