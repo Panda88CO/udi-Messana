@@ -25,7 +25,7 @@ TEMPUNIT-1 = F
 
 ND-mzone-NAME = Messana Zone
 ND-mzone-ICON = TempSensor
-ST-mzone-GV4-NAME = Status
+ST-mzone-GV4-NAME = zone On/Off
 ST-mzone-GV1-NAME = Set Point
 ST-mzone-GV2-NAME = Panel Temp
 ST-mzone-CLITEMP-NAME = Room Temp
