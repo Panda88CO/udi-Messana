@@ -168,7 +168,6 @@ class MessanaController(polyinterface.Controller):
     '''
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
-        LOGGER.debug('ST :'+  str(self.msysInfo['mStatus']) + ' GV2:' + str(self.msysInfo['mUnitTemp']) + ' GV9: ' + str(self.msysInfo['mZoneCount']))
         self.setDriver('GV1', self.msysInfo['mStatus'])
         self.setDriver('GV2', self.msysInfo['mUnitTemp'])
         self.setDriver('GV3', self.msysInfo['mEnergySaving'])
