@@ -183,7 +183,7 @@ class MessanaController(polyinterface.Controller):
         self.setDriver('ALARM', self.msysInfo['mExternalAlarm'])
 
     def setStatus(self, command):
-        LOGGER.debug('setStatus Called')
+        LOGGER.debug('set Status Called')
         val = int(command.get('value'))
         LOGGER.debug('setSetback Reeived:' + str(val))
 
