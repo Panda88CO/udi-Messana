@@ -313,8 +313,8 @@ class MessanaInfo:
             self.retrieveZoneDataMessana(zoneNbr)
 
     def uploadZoneData(self, zoneNbr, extZoneDict):
-        LOGGER.debug(extZoneDict[zoneNbr])
-        for mKey in extZoneDict[zoneNbr]:
+        LOGGER.debug(extZoneDict)
+        for mKey in extZoneDict:
             if mKey in self.mSystemPut['zones']:
                 # only update changed values
                 if extZoneDict[mKey] != self.zoneDict[zoneNbr][mKey]:
