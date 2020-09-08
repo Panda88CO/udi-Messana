@@ -67,25 +67,35 @@ class MessanaZones(polyinterface.Node):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
         self.zoneInfo['mStatus'] = val
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
-        LOGGER.debug(self.zoneInfo)
+        #LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
+        #LOGGER.debug(self.zoneInfo)
         self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.checkSetDriver('GV4', 'mStatus')
 
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(val))
+        self.zoneInfo['mEnergySave'] = val
+        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.checkSetDriver('GV8', 'mEnergySave')
 
     def setSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(val))
+        self.zoneInfo['mSetPoint'] = val
+        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.checkSetDriver('GV1', 'mSetPoint')  
 
     def EnSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(val))      
+        self.zoneInfo['mScheduleOn'] = val
+        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.checkSetDriver('GV3', 'mScheduleOn')
 
     id = 'zone'
     commands = { 'SET_ZSETPOINT': setSetpoint

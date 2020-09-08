@@ -168,24 +168,33 @@ class MessanaController(polyinterface.Controller):
     '''
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
-        self.setDriver('GV1', self.msysInfo['mStatus'])
-        self.setDriver('GV2', self.msysInfo['mUnitTemp'])
-        self.setDriver('GV3', self.msysInfo['mEnergySaving'])
-        self.setDriver('GV4', self.msysInfo['mSetback'])
-        self.setDriver('GV5', self.msysInfo['mATUcount'])
-        self.setDriver('GV6', self.msysInfo['mDHWcount'])
-        self.setDriver('GV7', self.msysInfo['mFanCoilCount'])
-        self.setDriver('GV8', self.msysInfo['mEnergySourceCount'])
-        self.setDriver('GV9', self.msysInfo['mZoneCount'])
-        self.setDriver('GV10', self.msysInfo['mMacrozoneCount'])
-        self.setDriver('GV11', self.msysInfo['mHC_changeoverCount'])
-        self.setDriver('GV12', self.msysInfo['mBufTankCount'])
-        self.setDriver('ALARM', self.msysInfo['mExternalAlarm'])
+        self.CheckSetDriver('GV1', 'mStatus')
+        self.CheckSetDriver('GV2', 'mUnitTemp')
+        self.CheckSetDriver('GV3', 'mEnergySaving')
+        self.CheckSetDriver('GV4', 'mSetback')
+        self.CheckSetDriver('GV5', 'mATUcount')
+        self.CheckSetDriver('GV6', 'mDHWcount')
+        self.CheckSetDriver('GV7', 'mFanCoilCount')
+        self.CheckSetDriver('GV8', 'mEnergySourceCount')
+        self.CheckSetDriver('GV9', 'mZoneCount')
+        self.CheckSetDriver('GV10', 'mMacrozoneCount')
+        self.CheckSetDriver('GV11', 'mHC_changeoverCount')
+        self.CheckSetDriver('GV12', 'mBufTankCount')
+        self.CheckSetDriver('ALARM', 'mExternalAlarm')
+
+
+    def checkSetDriver(self, ISYkey, mKey):
+        if mKey in self.msysInfo:
+            self.setDriver(ISYkey, self.zoneInfo[mKey])   
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
         val = int(command.get('value'))
         LOGGER.debug('setSetback Reeived:' + str(val))
+        self.msysInfo['mStatus'] = val
+        self.messana.uploadSystemData(self.msysInfo)
+        self.CheckSetDriver('GV1', 'mStatus')
+
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
