@@ -281,7 +281,7 @@ class MessanaInfo:
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-                LOGGER,debug( mKey + ' '+ self.systemDict[mKey])
+                LOGGER.debug( mKey + ' '+ self.systemDict[mKey])
                 if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
                     #print(self.systemDict[mKey])
