@@ -159,12 +159,13 @@ class MessanaInfo:
 
 
     def putSystem(self, mKey, value):
-            #print (mKey, value, self.mSystem['system'][mKey])
+            LOGGER.debug('PUT System')
             mData = defaultdict(list)
             PUTStr = self.IP+self.mSystem['system'][mKey] 
-            #print('\n' + PUTStr)
+            LOGGER.debug(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, mData)
+            LOGGER.debug(resp)
             if str(resp) != self.RESPONSE_OK:
                 #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
                 return False
