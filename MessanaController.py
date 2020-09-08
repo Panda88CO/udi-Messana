@@ -185,7 +185,7 @@ class MessanaController(polyinterface.Controller):
 
     def checkSetDriver(self, ISYkey, mKey):
         if mKey in self.msysInfo:
-            self.setDriver(ISYkey, self.zoneInfo[mKey])   
+            self.setDriver(ISYkey, self.msysInfo[mKey])   
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
