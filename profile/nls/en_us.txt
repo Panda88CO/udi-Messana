@@ -1,5 +1,5 @@
-ND-msys-NAME = Messana Main Controller
-ND-msys-ICON = Thermostat
+ND-messanasys-NAME = Messana Main Controller
+ND-messanasys-ICON = Thermostat
 CMD-msys-SET_STATUS-NAME = System On/Off
 CMD-msys-UPDATE-NAME = Update
 CMD-msys-SET_ENERGYSAVE-NAME = Energy Save On/Off
@@ -24,8 +24,8 @@ STATUS1-1=On
 TEMPUNIT-0 = C
 TEMPUNIT-1 = F
 
-ND-mzone-NAME = Messana Zone
-ND-mzone-ICON = TempSensor
+ND-zone-NAME = Messana Zone
+ND-zone-ICON = TempSensor
 ST-mzone-GV4-NAME = zone On/Off
 ST-mzone-GV1-NAME = Set Point
 ST-mzone-GV2-NAME = Panel Temp
