@@ -62,7 +62,7 @@ class MessanaController(polyinterface.Controller):
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
         self.heartbeat()
-        self.messana.retrieveAllMessanaStatus() #update Messana status to internal structure
+        self.messana.retrieveAllMessanaStatus() #update from Messanato internal structure
         self.updateInfo()
         self.reportDrivers()
         #for node in self.nodes:
@@ -195,8 +195,10 @@ class MessanaController(polyinterface.Controller):
         self.messana.uploadSystemData(self.msysInfo)
         LOGGER.debug(self.msysInfo)
         self.CheckSetDriver('GV1', 'mStatus')
-
-
+        self.messana.retrieveSystemDataMessana()
+        self.msysInfo = self.messana.retrieveSystemData()
+        LOGGER.debug(self.msysInfo)
+        
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
