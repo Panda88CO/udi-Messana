@@ -190,16 +190,17 @@ class MessanaController(polyinterface.Controller):
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
         val = int(command.get('value'))
-        LOGGER.debug('setSetback Reeived:' + str(val))
+        LOGGER.debug('set Status Recived:' + str(val))
         self.msysInfo['mStatus'] = val
         self.messana.uploadSystemData(self.msysInfo)
+        LOGGER.debug(self.msysInfo)
         self.CheckSetDriver('GV1', 'mStatus')
 
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
-        LOGGER.debug('SetEnergySave Reeived:' + str(val))
+        LOGGER.debug('SetEnergySave Recived:' + str(val))
 
     def setSetback(self, command):
         LOGGER.debug('setSetback Called')

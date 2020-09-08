@@ -7,10 +7,10 @@
     </editor> 
     <editor id="TEMPUNIT" >
         <range uom="25" subset="0,1"  nls="TEMPUNIT" />
-    </editor>     
+    </editor>          
     <editor id="ENERGYSAVE" >
-        <range uom="25" subset="0,1" />
-    </editor>       
+        <range uom="25" subset="0,1" nls="STATUS"/>
+    </editor> 
     <editor id="CMDENERGYSAVE" >
         <range uom="25" subset="0,1" />
     </editor>       
@@ -50,9 +50,7 @@
     <editor id="SCHEDULE" >
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor>
-    <editor id="ENERGYSAVE" >
-        <range uom="25" subset="0,1" nls="STATUS"/>
-    </editor> 
+
     <editor id="SETPOINT" >
         <range uom="17" min="40" max="100" step="1" prec="0"/>
     </editor> 
