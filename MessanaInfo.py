@@ -164,6 +164,7 @@ class MessanaInfo:
             PUTStr = self.IP+self.mSystem['system'][mKey] 
             LOGGER.debug(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
+            LOGGER.debug(mData)
             resp = requests.put(PUTStr, mData)
             LOGGER.debug(resp)
             if str(resp) != self.RESPONSE_OK:
