@@ -67,6 +67,7 @@ class MessanaZones(polyinterface.Node):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
         self.zoneInfo['mStatus'] = val
+        LOGGER.debug(self.zoneInfo + '   ' + str(self.zoneNbr))
         self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
 
