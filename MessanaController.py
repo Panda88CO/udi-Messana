@@ -200,7 +200,7 @@ class MessanaController(polyinterface.Controller):
 
     id = 'messanasys'
     commands = { 'UPDATE': discover
-                ,'SET_STATUS"': setStatus
+                ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
                 ,'SET_SETBACK' : setSetback 
                 }

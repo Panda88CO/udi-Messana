@@ -87,7 +87,7 @@ class MessanaZones(polyinterface.Node):
 
     id = 'zone'
     commands = { 'SET_ZSETPOINT': setSetpoint
-                ,'SET_ZSTATUS"': setStatus
+                ,'SET_ZSTATUS': setStatus
                 ,'SET_ZENERGYSAVE': setEnergySave
                 ,'SET_ZSCHEDULE' : EnSchedule 
                 }
