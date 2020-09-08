@@ -171,11 +171,11 @@ class MessanaInfo:
                 #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
                 return False
 
-    def updateSystemData(self, systemDict):
+    ''' def updateSystemData(self, systemDict):
         for mKey in systemDict:
             if mKey in self.mSystemPut['system']:
                 self.putSystem(mKey,systemDict[mKey])
-
+    '''
     def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
@@ -273,13 +273,15 @@ class MessanaInfo:
 
     def retrieveSystemDataMessana(self):
         LOGGER.info('retrieve Sytem Data')
+        LOGGER.info(self.mSystem['system'])
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-            #LOGGER.debug( GETStr)
+            LOGGER.debug( GETStr)
             systemTemp = requests.get(GETStr)
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+                LOGGER,debug( mKey + ' '+ self.systemDict[mKey])
                 if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
                     #print(self.systemDict[mKey])
