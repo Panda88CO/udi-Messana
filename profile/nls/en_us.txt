@@ -1,4 +1,3 @@
-# Messana controller
 ND-msys-NAME = Messana Main Controller
 ND-msys-ICON = Thermostat
 CMD-msys-SET_STATUS-NAME = System On/Off
@@ -20,6 +19,8 @@ ST-msys-GV12-NAME = Nbr Buffer Tanks
 ST-msys-ALARM-NAME = External Alarm
 STATUS-0=Off
 STATUS-1=On
+STATUS1-0=Off
+STATUS1-1=On
 TEMPUNIT-0 = C
 TEMPUNIT-1 = F
 
