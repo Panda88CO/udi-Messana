@@ -278,6 +278,7 @@ class MessanaInfo:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
             LOGGER.debug( GETStr)
             systemTemp = requests.get(GETStr)
+            LOGGER.debug(str(systemTemp))
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
