@@ -168,19 +168,19 @@ class MessanaController(polyinterface.Controller):
     '''
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
-        self.CheckSetDriver('GV1', 'mStatus')
-        self.CheckSetDriver('GV2', 'mUnitTemp')
-        self.CheckSetDriver('GV3', 'mEnergySaving')
-        self.CheckSetDriver('GV4', 'mSetback')
-        self.CheckSetDriver('GV5', 'mATUcount')
-        self.CheckSetDriver('GV6', 'mDHWcount')
-        self.CheckSetDriver('GV7', 'mFanCoilCount')
-        self.CheckSetDriver('GV8', 'mEnergySourceCount')
-        self.CheckSetDriver('GV9', 'mZoneCount')
-        self.CheckSetDriver('GV10', 'mMacrozoneCount')
-        self.CheckSetDriver('GV11', 'mHC_changeoverCount')
-        self.CheckSetDriver('GV12', 'mBufTankCount')
-        self.CheckSetDriver('ALARM', 'mExternalAlarm')
+        self.checkSetDriver('GV1', 'mStatus')
+        self.checkSetDriver('GV2', 'mUnitTemp')
+        self.checkSetDriver('GV3', 'mEnergySaving')
+        self.checkSetDriver('GV4', 'mSetback')
+        self.checkSetDriver('GV5', 'mATUcount')
+        self.checkSetDriver('GV6', 'mDHWcount')
+        self.checkSetDriver('GV7', 'mFanCoilCount')
+        self.checkSetDriver('GV8', 'mEnergySourceCount')
+        self.checkSetDriver('GV9', 'mZoneCount')
+        self.checkSetDriver('GV10', 'mMacrozoneCount')
+        self.checkSetDriver('GV11', 'mHC_changeoverCount')
+        self.checkSetDriver('GV12', 'mBufTankCount')
+        self.checkSetDriver('ALARM', 'mExternalAlarm')
 
 
     def checkSetDriver(self, ISYkey, mKey):
@@ -194,11 +194,11 @@ class MessanaController(polyinterface.Controller):
         self.msysInfo['mStatus'] = val
         self.messana.uploadSystemData(self.msysInfo)
         LOGGER.debug(self.msysInfo)
-        self.CheckSetDriver('GV1', 'mStatus')
+        self.checkSetDriver('GV1', 'mStatus')
         self.messana.retrieveSystemDataMessana()
         self.msysInfo = self.messana.retrieveSystemData()
         LOGGER.debug(self.msysInfo)
-        
+
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
