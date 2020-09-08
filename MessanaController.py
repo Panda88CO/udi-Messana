@@ -14,7 +14,7 @@ class MessanaController(polyinterface.Controller):
         super().__init__(polyglot)
         LOGGER.info('_init_')
         self.name = 'Messana Main Control'
-        self.address = 'messana'
+        self.address = 'messanasys'
         self.primary = self.address
         self.hb = 0
         self.msysInfo = defaultdict(dict)
