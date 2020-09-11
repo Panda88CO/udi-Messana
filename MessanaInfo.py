@@ -164,8 +164,9 @@ class MessanaInfo:
             PUTStr = self.IP+self.mSystem['system'][mKey] 
             LOGGER.debug(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
+            #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
             LOGGER.debug(mData)
-            resp = requests.put(PUTStr, mData)
+            resp = requests.put(PUTStr, json=mData)
             LOGGER.debug(resp)
             if str(resp) != self.RESPONSE_OK:
                 #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
@@ -182,7 +183,8 @@ class MessanaInfo:
         LOGGER.debug('PUT str: ' + PUTStr + str(value))
 
         mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
-        resp = requests.put(PUTStr, mData)
+        resp = requests.put(PUTStr, json=mData)
+    
         if str(resp) == self.RESPONSE_OK:
             subSysDict[mKey] = value
             return True
@@ -273,7 +275,7 @@ class MessanaInfo:
 
     def retrieveSystemDataMessana(self):
         LOGGER.info('retrieve Sytem Data')
-        LOGGER.info(self.mSystem['system'])
+        #LOGGER.info(self.mSystem['system'])
         for mKey in self.mSystem['system']:
             GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
             LOGGER.debug( GETStr)
