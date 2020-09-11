@@ -115,7 +115,7 @@ class MessanaInfo:
                             ,'mTargetTemp':'/api/dhw/targetTemperature/'
                             }
                         }
-        self.mSystemPut = {
+        self.mSystemPUT = {
                         'system' : ['mName', 'mStatus', 'mEnergySavings', 'mSetback'],
                         'zones' : [ 'mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH',
                                     'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP',
@@ -153,13 +153,42 @@ class MessanaInfo:
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
         LOGGER.debug ('Reading Messana System')
-        self.retrieveAllMessanaStatus()
+        self.pullAllMessanaStatus()
         LOGGER.debug('Finish Reading Messana system')
 
 
 
-    def putSystem(self, mKey, value):
-            LOGGER.debug('PUT System')
+    def GETSystem(self, mKey):
+        LOGGER.debug('GETSystem: ' + )
+        GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
+           LOGGER.debug( GETStr)
+           systemTemp = requests.get(GETStr)
+           LOGGER.debug(str(systemTemp))
+           if str(systemTemp) == self.RESPONSE_OK:
+               systemTemp = systemTemp.json()
+               LOGGER.debug(systemTemp)
+               self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+           else:
+               LOGGER.debug(str(mKey) + ' error')
+               #self.systemDict[mKey] = -1
+
+    def pullSystemDataAll(self):
+        LOGGER.info('pull Sytem Data')
+        #LOGGER.info(self.mSystem['system'])
+        for mKey in self.mSystem['system']:
+            self.pullSystemData[mKey]
+        
+    def pullSystemData(self, mKey):
+        LOGGER.debug('MessanaInfo pull System Data')
+        if mKey in self.mSystem['mSystem']:
+           self.GETSystem(mKey) 
+        else:         
+           LOGGER.debug('Unknown keyword :' + mKey)
+
+
+
+    def PUTSystem(self, mKey, value):
+            LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             PUTStr = self.IP+self.mSystem['system'][mKey] 
             LOGGER.debug(PUTStr)
@@ -169,15 +198,19 @@ class MessanaInfo:
             resp = requests.put(PUTStr, json=mData)
             LOGGER.debug(resp)
             if str(resp) != self.RESPONSE_OK:
-                #print (str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
-                return False
+               LOGGER.debug(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
+               return False
 
-    ''' def updateSystemData(self, systemDict):
-        for mKey in systemDict:
-            if mKey in self.mSystemPut['system']:
-                self.putSystem(mKey,systemDict[mKey])
-    '''
-    def putSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
+    def pushSystemDataAll(self):
+        for mKey in self.systemDict:
+            if mKey in self.mSystemPUT['system']:
+                self.PUTSystem(mKey,self.systemDict[mKey])
+
+    def pushSystemData(self, mKey, value):
+        self.PUTSystem(mKey, value)
+
+        
+    def PUTSubSystem(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
         LOGGER.debug('PUT str: ' + PUTStr + str(value))
@@ -204,7 +237,7 @@ class MessanaInfo:
             mData['statusOK'] =False
             return False
 
-    def retrieveSubNodeData(self, mSystem, instNbr, mKey, mData):
+    def pullSubNodeData(self, mSystem, instNbr, mKey, mData):
         GETStr =self.IP+mSystem[mKey]+str(instNbr)+'?'+ self.APIStr 
         #print('\n' +  GETStr)
         subSysTemp = requests.get(GETStr)
@@ -224,197 +257,166 @@ class MessanaInfo:
             mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
             mData['statusOK'] =False
 
-    def retrieveSubSystemData(self, MessanaSubSystem, instNbr):
+    def pullSubSystemData(self, MessanaSubSystem, instNbr):
         subSystemDict = defaultdict(dict)
         for mKey in MessanaSubSystem:
             mData = {}
-            self.retrieveSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
+            self.pullSubNodeData(MessanaSubSystem, instNbr, mKey, mData)
             if mData['statusOK']:
                 subSystemDict[instNbr][mKey] = mData['data']
             #else:
                 #print(mData['error'])
         return subSystemDict
 
-    def retrieveMessanaStatus(self):
-        if self.systemDict['mZoneCount'] > 0:
-            LOGGER.debug('Reading Zone System')
-            self.retrieveAllZoneDataMessana()
-        if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
-            self.retrieveAllMacroZoneDataMessana()
-        if self.systemDict['mHC_changeoverCount'] > 0:   
-            LOGGER.debug('Reading Ht/Cold System')
-            self.retrieveAllHC_CODataMessana()
-        if self.systemDict['mATUCount'] > 0:
-            LOGGER.debug('Reading ATU System')
-
-    def retrieveAllMessanaStatus(self):
-        LOGGER.info('Retrieve Full Messana Status')
+    def pullAllMessanaStatus(self):
+        LOGGER.info('pull Full Messana Status')
         LOGGER.debug('Reading Main System')
-        self.retrieveSystemDataMessana()
+        self.pullSystemDataMessana()
         #LOGGER.debug(self.systemDict)
         #LOGGER.debug('Zone count: '+ str(self.systemDict['mZoneCount'] ))
         if self.systemDict['mZoneCount'] > 0:
             LOGGER.debug('Reading Zone System')
-            self.retrieveAllZoneDataMessana()
+            self.pullAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
             LOGGER.debug('Reading MacroZone System')
-            self.retrieveAllMacroZoneDataMessana()
+            self.pullAllMacroZoneDataMessana()
         if self.systemDict['mHC_changeoverCount'] > 0:   
             LOGGER.debug('Reading Ht/Cold System')
-            self.retrieveAllHC_CODataMessana()
+            self.pullAllHC_CODataMessana()
         LOGGER.debug('Reading ATU System: ' )
         if self.systemDict['mATUcount'] > 0:
             LOGGER.debug('Reading ATU System')
-            self.retrieveAllATUDataMessana()
+            self.pullAllATUDataMessana()
         #LOGGER.debug('')
-        #self.retrieveAllFCData()
-        #self.retrieveAllEnergySourceData()
-        #self.retrieveAllBufTData()
-        #self.retrieveAllDHWData()
+        #self.pullAllFCData()
+        #self.pullAllEnergySourceData()
+        #self.pullAllBufTData()
+        #self.pullAllDHWData()
 
-    def retrieveSystemDataMessana(self):
-        LOGGER.info('retrieve Sytem Data')
-        #LOGGER.info(self.mSystem['system'])
-        for mKey in self.mSystem['system']:
-            GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-            LOGGER.debug( GETStr)
-            systemTemp = requests.get(GETStr)
-            LOGGER.debug(str(systemTemp))
-            if str(systemTemp) == self.RESPONSE_OK:
-                systemTemp = systemTemp.json()
-                LOGGER.debug(systemTemp)
-                self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if self.systemDict[mKey] == 'Celcius':
-                        self.systemDict[mKey] = 0
-                    else:
-                        self.systemDict[mKey] = 1 
-            else:
-                LOGGER.debug(str(mKey) + ' error')
-                #self.systemDict[mKey] = -1
-        
-    def retrieveSystemData(self):
-        LOGGER.debug('MessanaInfo Retrieve System Data')
-        return self.systemDict
+    def pullMessanaStatus(self):
+        if self.systemDict['mZoneCount'] > 0:
+            LOGGER.debug('Reading Zone System')
+            self.pullAllZoneDataMessana()
+        if self.systemDict['mMacrozoneCount'] > 0:    
+            LOGGER.debug('Reading MacroZone System')
+            self.pullAllMacroZoneDataMessana()
+        if self.systemDict['mHC_changeoverCount'] > 0:   
+            LOGGER.debug('Reading Ht/Cold System')
+            self.pullAllHC_CODataMessana()
+        if self.systemDict['mATUCount'] > 0:
+            LOGGER.debug('Reading ATU System')
 
-    def uploadSystemData(self, systemDict):
-        for mKey in systemDict:
-            if mKey in self.mSystemPut['system']:
-                self.putSystem(mKey,systemDict[mKey])
-
-    def retrieveZoneDataMessana(self, zoneNbr):
+    def pullZoneDataMessana(self, zoneNbr):
         tempDict = defaultdict(dict)
-        tempDict = self.retrieveSubSystemData(self.mSystem['zones'], zoneNbr)
+        tempDict = self.pullSubSystemData(self.mSystem['zones'], zoneNbr)
         for key in tempDict[zoneNbr]:
                     self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
 
-    def retrieveZoneData(self, zoneNbr):
-        LOGGER.debug('MessanaInfo Retrieve ZONE Data')
+    def pullZoneData(self, zoneNbr):
+        LOGGER.debug('MessanaInfo pull ZONE Data')
         return(self.zoneDict[zoneNbr])
     
-    def retrieveAllZoneDataMessana(self):      
+    def pullAllZoneDataMessana(self):      
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
-            self.retrieveZoneDataMessana(zoneNbr)
+            self.pullZoneDataMessana(zoneNbr)
 
-    def uploadZoneData(self, zoneNbr, extZoneDict):
+    def pushZoneData(self, zoneNbr, extZoneDict):
         LOGGER.debug(extZoneDict)
         for mKey in extZoneDict:
-            if mKey in self.mSystemPut['zones']:
+            if mKey in self.mSystemPUT['zones']:
                 # only update changed values
                 if extZoneDict[mKey] != self.zoneDict[zoneNbr][mKey]:
                     self.zoneDict[zoneNbr][mKey] = extZoneDict[mKey]
-                    self.putSubSystem('zones', zoneNbr, mKey, self.zoneDict)
+                    self.PUTSubSystem('zones', zoneNbr, mKey, self.zoneDict)
 
 
-    def retrieveMacroZoneDataMessana(self, mmacrozoneNbr):
+    def pullMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
-        tempDict = self.retrieveSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
+        tempDict = self.pullSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
         #LOGGER.debug(tempDict)
         for key in tempDict[mmacrozoneNbr]:
             self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
 
-    def retrieveAllMacroZoneDataMessana(self):
+    def pullAllMacroZoneDataMessana(self):
         for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
-            self.retrieveMacroZoneDataMessana(mzoneNbr)
+            self.pullMacroZoneDataMessana(mzoneNbr)
             
-    def retrieveMacroZoneData(self, mzoneNbr):
+    def pullMacroZoneData(self, mzoneNbr):
         return self.macrozoneDict[mzoneNbr]
 
-    def uploadMacroZoneData(self, macrozoneNbr, macrozoneDict):
+    def pushMacroZoneData(self, macrozoneNbr, macrozoneDict):
         for mKey in macrozoneDict[macrozoneNbr]:
-            if mKey in self.mSystemPut['macrozones']:
-                self.putSubSystem('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
+            if mKey in self.mSystemPUT['macrozones']:
+                self.PUTSubSystem('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
 
-    def retrieveHC_COData(self, hcchangeoverNbr):
+    def pullHC_COData(self, hcchangeoverNbr):
         return self.hc_changeoverDict[hcchangeoverNbr]
 
-    def retrieveAllHC_CODataMessana(self):
+    def pullAllHC_CODataMessana(self):
         for hcchangeoverNbr in range (0,self.systemDict['mHC_changeoverCount']):
-            self.retrieveHC_COData(hcchangeoverNbr)
+            self.pullHC_COData(hcchangeoverNbr)
 
-    def retrieveHC_CODataMessana(self, mHCCoNbr):
+    def pullHC_CODataMessana(self, mHCCoNbr):
         tempDict = defaultdict(dict)
-        tempDict = self.retrieveSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
+        tempDict = self.pullSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
         for key in tempDict[mHCCoNbr]:
             self.hc_changeoverDict[mHCCoNbr][key]=tempDict[mHCCoNbr][key]
 
-    def uploadHC_COData(self, hcchangeoverNbr, hc_changeoverDict):
+    def pushHC_COData(self, hcchangeoverNbr, hc_changeoverDict):
         for mKey in hc_changeoverDict[hcchangeoverNbr]:
-            if mKey in self.mSystemPut['hc_changeover']:
-                self.putSubSystem('hc_changeover', hcchangeoverNbr, mKey, hc_changeoverDict[hcchangeoverNbr])
+            if mKey in self.mSystemPUT['hc_changeover']:
+                self.PUTSubSystem('hc_changeover', hcchangeoverNbr, mKey, hc_changeoverDict[hcchangeoverNbr])
 
-    def retrieveAllATUDataMessana(self):
+    def pullAllATUDataMessana(self):
         for atuNbr in range(0,self.systemDict['mATUcount']):
-            self.retrieveATUDataMessana(atuNbr)
+            self.pullATUDataMessana(atuNbr)
 
-    def retrieveATUDataMessana(self, atuNbr):
+    def pullATUDataMessana(self, atuNbr):
         tempDict = defaultdict(dict)
-        tempDict = self.retrieveSubSystemData(self.mSystem['atus'], atuNbr)
+        tempDict = self.pullSubSystemData(self.mSystem['atus'], atuNbr)
         for key in tempDict[atuNbr]:
             self.atuDict[atuNbr][key]=tempDict[atuNbr][key]  
  
-    def retrieveATUData(self, atuNbr):
+    def pullATUData(self, atuNbr):
         return self.atuDict[atuNbr]
 
-    def uploadATUData(self, atuNbr, atuDict):
+    def pushATUData(self, atuNbr, atuDict):
         for mKey in atuDict[atuNbr]:
-            if mKey in self.mSystemPut['atus']:
-                self.putSubSystem('atus', atuNbr, mKey, atuDict[atuNbr])
+            if mKey in self.mSystemPUT['atus']:
+                self.PUTSubSystem('atus', atuNbr, mKey, atuDict[atuNbr])
 
     '''
-    def retrieveFCData(self, fcNbr):
-        self.retrieveSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
+    def pullFCData(self, fcNbr):
+        self.pullSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
 
-    def retrieveAllFCData(self):
+    def pullAllFCData(self):
        for fcNbr in range(0,self.systemDict['mFanCoilCount']):
-           self.retrieveFCData(fcNbr)
+           self.pullFCData(fcNbr)
 
 
 
 
-    def retrieveEnergySourceData(self, esNbr):
-        self.retrieveSubSystemData(self.mSystem['energy_sources'], esNbr, self.energy_sourcesDict)
+    def pullEnergySourceData(self, esNbr):
+        self.pullSubSystemData(self.mSystem['energy_sources'], esNbr, self.energy_sourcesDict)
 
-    def retrieveAllEnergySourceData(self):
+    def pullAllEnergySourceData(self):
         for esNbr in range(0,self.systemDict['mEnergySourceCount']):
-            self.retrieveEnergySourceData(esNbr)
+            self.pullEnergySourceData(esNbr)
 
-    def retrieveBufTData(self, btNbr):
-            self.retrieveSubSystemData(self.mSystem['buffer_tanks'], btNbr, self.buffer_tanksDict)
+    def pullBufTData(self, btNbr):
+            self.pullSubSystemData(self.mSystem['buffer_tanks'], btNbr, self.buffer_tanksDict)
 
-    def retrieveAllBufTData(self):
+    def pullAllBufTData(self):
         for btNbr in range(0,self.systemDict['mBufTankCount']):
-            self.retrieveBufTData(btNbr)
+            self.pullBufTData(btNbr)
 
 
-    def retrieveDHWData(self, dhwNbr):
-        self.retrieveSubSystemData(self.mSystem['domsetic_hot_waters'], dhwNbr, self.domsetic_hot_waterDict)
+    def pullDHWData(self, dhwNbr):
+        self.pullSubSystemData(self.mSystem['domsetic_hot_waters'], dhwNbr, self.domsetic_hot_waterDict)
 
-    def retrieveAllDHWData(self):
+    def pullAllDHWData(self):
         for dhwNbr in range(0,self.systemDict['mDHWcount']):
-            self.retrieveDHWData(dhwNbr)
+            self.pullDHWData(dhwNbr)
 
     '''
 
@@ -426,115 +428,115 @@ class MessanaInfo:
 #Retrive basic system info
 print('\nSYSTEM')
 msysInfo = defaultdict(dict)
-msysInfo = messana.retrieveSystemData()
-#messana.uploadSystemData(msysInfo)
+msysInfo = messana.pullSystemData()
+#messana.PUTSystemData(msysInfo)
 
 print('\nZONES')
 ZoneDict = defaultdict(dict) 
 for zoneNbr in range(0,msysInfo['mZoneCount']):
-    ZoneDict[zoneNbr] = messana.retrieveZoneData(zoneNbr)
+    ZoneDict[zoneNbr] = messana.pullZoneData(zoneNbr)
 
 for zoneNbr in range(0,msysInfo['mZoneCount']):
-    messana.uploadZoneData(zoneNbr, ZoneDict)
+    messana.pushZoneData(zoneNbr, ZoneDict)
 
 
 print('\nMACROZONES')
 MacroZoneDict = defaultdict(dict)   
 for macroZoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
-    MacroZoneDict[macroZoneNbr] = messana.retrieveMacroZoneData(macroZoneNbr)  
+    MacroZoneDict[macroZoneNbr] = messana.pullMacroZoneData(macroZoneNbr)  
 
 for macroZoneNbr in range(0, msysInfo['mMacrozoneCount']):
-    messana.uploadMacroZoneData(macroZoneNbr, MacroZoneDict)
+    messana.pushMacroZoneData(macroZoneNbr, MacroZoneDict)
 
 print('\nHC changeover')
 HC_CoDict = defaultdict(dict)   
 for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    HC_CoDict[HC_CoNbr] = messana.retrieveHC_COData(HC_CoNbr)  
+    HC_CoDict[HC_CoNbr] = messana.pullHC_COData(HC_CoNbr)  
 for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    messana.uploadHC_COData(HC_CoNbr, HC_CoDict)  
+    messana.pushHC_COData(HC_CoNbr, HC_CoDict)  
 
 print('\nATU')
 atuDict = defaultdict(dict)   
 for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    atuDict[atuNbr] = messana.retrieveATUData(atuNbr)  
+    atuDict[atuNbr] = messana.pullATUData(atuNbr)  
 for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    messana.uploadATUData(atuNbr, atuDict)
+    messana.pushATUData(atuNbr, atuDict)
 
 print('\n END')
 
 for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
-    messana.retrieveSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
+    messana.pullSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
 
 print('\nhc_changeover')
 for hcchangeoverNbr in range (0,systemDict['mHCGroupCount']):
-    messana.retrieveSubSystemData(messana.mSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
+    messana.pullSubSystemData(messana.mSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
 
 print('\nFAN COILS')
 for fcNbr in range(0,systemDict['mFanCoilCount']):
-    messana.retrieveSubSystemData(messana.mSystem['fan_coils'], fcNbr, fan_coilsDict)
+    messana.pullSubSystemData(messana.mSystem['fan_coils'], fcNbr, fan_coilsDict)
 
 print('\nATU')
 for zoneNbr in range(0,systemDict['mATUcount']):
-    messana.retrieveSubSystemData(messana.mSystem['atus'], zoneNbr, atusDict)
+    messana.pullSubSystemData(messana.mSystem['atus'], zoneNbr, atusDict)
 
 print('\nBUFFER TANK')
 for zoneNbr in range(0,systemDict['mBufTankCount']):
-    retrieveSubSystemData(messana.mSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
+    pullSubSystemData(messana.mSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
 
 print('\nENERGY SOURCE')
 for zoneNbr in range(0,systemDict['mEnergySourceCount']):
-    messana.retrieveSubSystemData(messana.mSystem['energy_sources'], zoneNbr, energy_sourcesDict)
+    messana.pullSubSystemData(messana.mSystem['energy_sources'], zoneNbr, energy_sourcesDict)
 
 print('\nDHW')
 for zoneNbr in range(0,systemDict['mDHWcount']):
-    messana.retrieveSubSystemData(messana.mSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
+    messana.pullSubSystemData(messana.mSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
 
 print('\n end extracting data')
 
 print('\nSYSTEM - PUT')
 for mKey in systemDict:
-    putmessana.mSystem(messana.mSystem['system'], mKey, systemDict[mKey], systemDict)
+    pushmessana.mSystem(messana.mSystem['system'], mKey, systemDict[mKey], systemDict)
 
 print('\nZONES - PUT')
 for zoneNbr in zoneDict:
     for mKey in zoneDict[zoneNbr]:
-        putMessanaSubSystem(messana.mSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
+        pushMessanaSubSystem(messana.mSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
         
 
 print('\nMACROZONES - PUT')
 for macrozoneNbr in macrozoneDict:
     for mKey in macrozoneDict[macrozoneNbr]:
-        putSubSystem(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
+        PUTSubSystem(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
 
 print('\nhc_changeover - PUT')
 for hcgroupcountNbr in hc_changeoverDict:
     for mKey in hc_changeoverDict[hcgroupcountNbr]:
-        putSubSystem(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
+        PUTSubSystem(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
 
 print('\nFAN COILS - PUT')
 for fan_coilNbr in fan_coilsDict:
     for mKey in fan_coilsDict[fan_coilNbr]:
-        putSubSystem(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
+        PUTSubSystem(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
 
 print('\nATU - PUT')
 for atuNbr in atusDict:
     for mKey in atusDict[atuNbr]:
-        putSubSystem(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
+        PUTSubSystem(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
 
 print('\nBUFFER TANK - PUT')
 for bufferTankNbr in buffer_tanksDict:
     for mKey in buffer_tanksDict[bufferTankNbr]:
-        putSubSystem(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
+        PUTSubSystem(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
 
 print('\nENERGY SOURCE - PUT')
 for energySourceNbr in energy_sourcesDict:
     for mKey in energy_sourcesDict[energySourceNbr]:
-        putSubSystem(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
+        PUTSubSystem(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
 
 print('\nDHW - PUT')
 for DHwaterNbr in domsetic_hot_waterDict:
     for mKey in domsetic_hot_waterDict[DHwaterNbr]:
-        putMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
+        pushMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
 print('\nEND put')
 '''
 #sys.stdout.close() 

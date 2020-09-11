@@ -28,7 +28,7 @@ class MessanaController(polyinterface.Controller):
         try:
             self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             LOGGER.debug('MessanaInfo call done')
-            self.msysInfo = self.messana.retrieveSystemData()
+            self.msysInfo = self.messana.pullSystemData()
             #LOGGER.debug(self.msysInfo)
 
         except:
@@ -62,7 +62,7 @@ class MessanaController(polyinterface.Controller):
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
         self.heartbeat()
-        self.messana.retrieveAllMessanaStatus() #update from Messanato internal structure
+        self.messana.pullAllMessanaStatus() #update from Messanato internal structure
         self.updateInfo()
         self.reportDrivers()
         #for node in self.nodes:
@@ -81,7 +81,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover')
         LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
         for zoneNbr in range(0,self.msysInfo['mZoneCount']):
-            ZoneDict = self.messana.retrieveZoneData(zoneNbr)
+            ZoneDict = self.messana.pullZoneData(zoneNbr)
             name = str(ZoneDict['mName'])
             address = 'zone'+str(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr)+' : name, Address' + name +' ' + address) 
@@ -185,6 +185,13 @@ class MessanaController(polyinterface.Controller):
 
     def checkSetDriver(self, ISYkey, mKey):
         if mKey in self.msysInfo:
+            if mKey == 'mUnitTemp': 
+                    #"we cannot handle strings"
+                    if self.systemDict[mKey] in  ['Celcius', 'Fahrenheit']:
+                       if self.systemDict[mKey] == 'Celcius':
+                          self.systemDict[mKey] = 0
+                       else:
+                          self.systemDict[mKey] = 1 
             self.setDriver(ISYkey, self.msysInfo[mKey])   
 
     def setStatus(self, command):
@@ -192,11 +199,11 @@ class MessanaController(polyinterface.Controller):
         val = int(command.get('value'))
         LOGGER.debug('set Status Recived:' + str(val))
         self.msysInfo['mStatus'] = val
-        self.messana.uploadSystemData(self.msysInfo)
         LOGGER.debug(self.msysInfo)
+        self.messana.pushSystemData('mStatus', val)
         self.checkSetDriver('GV1', 'mStatus')
-        self.messana.retrieveSystemDataMessana()
-        self.msysInfo = self.messana.retrieveSystemData()
+        self.messana.pullSystemDataMessana()
+        self.msysInfo = self.messana.pullSystemData()
         LOGGER.debug(self.msysInfo)
 
     def setEnergySave(self, command):

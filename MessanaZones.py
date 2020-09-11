@@ -16,7 +16,7 @@ class MessanaZones(polyinterface.Node):
         self.messana = messana
         self.zoneInfo = defaultdict(dict)
         
-        self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
+        self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
         #LOGGER.debug(self.zoneInfo)
 
       
@@ -42,7 +42,7 @@ class MessanaZones(polyinterface.Node):
 
     def updateInfo(self):
         LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
-        self.zoneInfo = self.messana.retrieveZoneData(self.zoneNbr)
+        self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
         self.checkSetDriver('GV4', 'mStatus')
         self.checkSetDriver('GV1', 'mSetPoint')        
         self.checkSetDriver('GV2', 'mTemp')
@@ -69,7 +69,7 @@ class MessanaZones(polyinterface.Node):
         self.zoneInfo['mStatus'] = val
         #LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
         #LOGGER.debug(self.zoneInfo)
-        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV4', 'mStatus')
 
 
@@ -78,7 +78,7 @@ class MessanaZones(polyinterface.Node):
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(val))
         self.zoneInfo['mEnergySave'] = val
-        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV8', 'mEnergySave')
 
     def setSetpoint(self, command):
@@ -86,7 +86,7 @@ class MessanaZones(polyinterface.Node):
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(val))
         self.zoneInfo['mSetPoint'] = val
-        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV1', 'mSetPoint')  
 
     def EnSchedule(self, command):
@@ -94,7 +94,7 @@ class MessanaZones(polyinterface.Node):
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(val))      
         self.zoneInfo['mScheduleOn'] = val
-        self.messana.uploadZoneData(self.zoneNbr, self.zoneInfo)
+        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV3', 'mScheduleOn')
 
     id = 'zone'
