@@ -1,72 +1,105 @@
 #!/usr/bin/env python3
-import polyinterface
+#import polyinterface
 import requests
 from subprocess import call
 import json
 from collections import defaultdict
 
-LOGGER = polyinterface.LOGGER
+#LOGGER = polyinterface.LOGGER
 
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': { 'GETstr' : {
-                                    'mName':'/api/system/name/'
-                                    ,'mApiVer':'/api/system/apiVersion/'
-                                    ,'mStatus':'/api/system/status/'
-                                    ,'mATUcount':'/api/system/atuCount/'
-                                    ,'mDHWcount':'/api/system/dhwCount/'
-                                    ,'mFanCoilCount':'/api/system/fancoilCount/'
-                                    ,'mEnergySourceCount':'/api/system/energySourceCount/'
-                                    ,'mZoneCount':'/api/system/zoneCount/'
-                                    ,'mMacrozoneCount':'/api/system/macrozoneCount/'
-                                    ,'mHC_changeoverCount':'/api/system/HCgroupCount/'
-                                    ,'mBufTankCount':'/api/system/bufferTankCount/'
-                                    ,'mUnitTemp':'/api/system/tempUnit/'
-                                    ,'mEnergySaving':'/api/system/energySaving/'
-                                    ,'mSetback':'/api/system/setback/'
-                                    ,'mExternalAlarm':'/api/system/externalAlarm/'}
+                                        'mName':'/api/system/name/'
+                                        ,'mApiVer':'/api/system/apiVersion/'
+                                        ,'mStatus':'/api/system/status/'
+                                        ,'mATUcount':'/api/system/atuCount/'
+                                        ,'mDHWcount':'/api/system/dhwCount/'
+                                        ,'mFanCoilCount':'/api/system/fancoilCount/'
+                                        ,'mEnergySourceCount':'/api/system/energySourceCount/'
+                                        ,'mZoneCount':'/api/system/zoneCount/'
+                                        ,'mMacrozoneCount':'/api/system/macrozoneCount/'
+                                        ,'mHC_changeoverCount':'/api/system/HCgroupCount/'
+                                        ,'mBufTankCount':'/api/system/bufferTankCount/'
+                                        ,'mUnitTemp':'/api/system/tempUnit/'
+                                        ,'mEnergySaving':'/api/system/energySaving/'
+                                        ,'mSetback':'/api/system/setback/'
+                                        ,'mExternalAlarm':'/api/system/externalAlarm/'}
                                     ,
-                                     'PUTstr' : {
-                                    'mName':'/api/system/name/'
-                                    ,'mStatus':'/api/system/status/'
-                                    ,'mEnergySavings':'/api/system/energySaving/'
-                                    ,'mSetback':'/api/system/setback/' }
+                                    'PUTstr' : {
+                                        'mName':'/api/system/name/'
+                                        ,'mStatus':'/api/system/status/'
+                                        ,'mEnergySavings':'/api/system/energySaving/'
+                                        ,'mSetback':'/api/system/setback/' }
+                                    ,
+                                   'active':
+                                        ['mStatus', 'mExternalAlarm']
+                                   , 
+                                    'data':{}
                                    },
-                        'zones': {  'RESTstr' : {
-                                    'mName': '/api/zone/name/'
-                                    ,'mSetPoint' :'/api/zone/setpoint/'
-                                    ,'mStatus':'/api/zone/status/'
-                                    ,'mHumSetPointRH': '/api/zone/humidSetpointRH/'
-                                    ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
-                                    ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
-                                    ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
-                                   #,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
-                                   #,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
-                                    ,'mHumidity':'/api/zone/humidity/'
-                                    ,'mDewPoint' : '/api/zone/dewpoint/'
-                                    ,'mTemp' :'/api/zone/temperature/'
-                                    #,'mAirQuality' : '/api/zone/airQuality/'
-                                    ,'mScheduleOn' : '/api/zone/scheduleOn/'
-                                    ,'mCO2' : '/api/zone/co2/'
-                                    ,'mAirTemp' : '/api/zone/airTemperature/'
-                                    ,'mMacrozoneId' :'/api/zone/macrozoneId/'
-                                    ,'mEnergySave' : '/api/zone/energySaving/'
-                                    ,'mAlarmOn':'/api/zone/alarmOn/'
-                                    ,'mThermalStatus':'/api/zone/thermalStatus/'
-                                    ,'mCapability':'/api/zone/capability/'
-                                    },
+                        'zones': {  'GETstr' : {
+                                        'mName': '/api/zone/name/'
+                                        ,'mSetPoint' :'/api/zone/setpoint/'
+                                        ,'mStatus':'/api/zone/status/'
+                                        ,'mHumSetPointRH': '/api/zone/humidSetpointRH/'
+                                        ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
+                                        ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
+                                        ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
+                                        ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                                        ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                                        ,'mHumidity':'/api/zone/humidity/'
+                                        ,'mDewPoint' : '/api/zone/dewpoint/'
+                                        ,'mTemp' :'/api/zone/temperature/'
+                                        #,'mAirQuality' : '/api/zone/airQuality/'
+                                        ,'mScheduleOn' : '/api/zone/scheduleOn/'
+                                        ,'mCO2' : '/api/zone/co2/'
+                                        ,'mAirTemp' : '/api/zone/airTemperature/'
+                                        ,'mMacrozoneId' :'/api/zone/macrozoneId/'
+                                        ,'mEnergySave' : '/api/zone/energySaving/'
+                                        ,'mAlarmOn':'/api/zone/alarmOn/'
+                                        ,'mThermalStatus':'/api/zone/thermalStatus/'
+                                        ,'mCapability':'/api/zone/capability/'                                    }
+                                    ,
+                                    'PUTstr':{
+                                        'mName': '/api/zone/name/'
+                                        ,'mSetPoint' :'/api/zone/setpoint/'
+                                        ,'mStatus':'/api/zone/status/'
+                                        ,'mHumSetPointRH': '/api/zone/humidSetpointRH/'
+                                        ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
+                                        ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
+                                        ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
+                                        ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                                        ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                                        ,'mScheduleOn' : '/api/zone/scheduleOn/'
+                                        ,'mEnergySave' : '/api/zone/energySaving/'}
+                                    ,
+                                    'active':['mStatus','mCurrentSetPointRH', 'mCurrentSetPointDP'
+                                        ,'mHumidity', 'mDewPoint', 'mTemp', 'mAirTemp', 'mAlarmOn' ]
+                                    ,
+                                    'data' :{}
+                            },
+                        'macrozones' : { 'GETstr' : {
+                                            'mName': '/api/macrozone/name/'
+                                            ,'mSetPoint' :'/api/macrozone/setpoint/'
+                                            ,'mStatus':'/api/macrozone/status/'
+                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
+                                            ,'mHumidity':'/api/macrozone/humidity/'
+                                            ,'mDewPoint' : '/api/macrozone/dewpoint/'
+                                            ,'mTemp' :'/api/macrozone/temperature/'}
+                                        ,
+                                        'PUTstr':{
+                                            'mName': '/api/macrozone/name/'
+                                            ,'mSetPoint' :'/api/macrozone/setpoint/'
+                                            ,'mStatus':'/api/macrozone/status/'
+                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
+                                        }
+                                        ,
+                                        'active':['mTemp', 'mHumidity','mDewPoint' ]
+                                        ,
+                                        'data' : {}
+                        },
 
-                            },
-                        'macrozones' : {
-                            'mName': '/api/macrozone/name/'
-                            ,'mSetPoint' :'/api/macrozone/setpoint/'
-                            ,'mStatus':'/api/macrozone/status/'
-                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
-                            ,'mHumidity':'/api/macrozone/humidity/'
-                            ,'mDewPoint' : '/api/macrozone/dewpoint/'
-                            ,'mTemp' :'/api/macrozone/temperature/'
-                            },
                         'hc_changeover' :{
                             'mName':'/api/hc/name/'
                             ,'mMode':'/api/hc/mode/'
@@ -124,12 +157,8 @@ class MessanaInfo:
                             }
                         }
         self.mSystemPUT = {
-                        'system' : ['mName', 'mStatus', 'mEnergySavings', 'mSetback'],
-                        'zones' : [ 'mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH',
-                                    'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP',
-                                    'mCurrentSetPointRH','mCurrentSetPointDP', 'mScheduleOn',
-                                    'mEnergySave' ],
                         'macrozones' : ['mName', 'mSetPoint', 'mStatus', 'mScheduleOn'],
+
                         'hc_changeover' : ['mName', 'mMode', 'mAdaptiveComfort' ],
                         'fan_coils' :['mName', 'mState', 'mCoolingSpeed','mHeatingSpeed' ],
                         'atus': [ 'mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn',
@@ -151,6 +180,7 @@ class MessanaInfo:
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
+        '''
         self.systemDict = defaultdict(dict)
         self.zoneDict = defaultdict(dict)
         self.macrozoneDict = defaultdict(dict)
@@ -160,55 +190,126 @@ class MessanaInfo:
         self.energy_sourcesDict = defaultdict(dict)
         self.buffer_tanksDict = defaultdict(dict)
         self.domsetic_hot_waterDict =defaultdict(dict)
-        LOGGER.debug ('Reading Messana System')
-        self.pullAllMessanaStatus()
-        LOGGER.debug('Finish Reading Messana system')
-
+        print ('Reading Messana System')
+        #self.pullAllMessanaStatus()
+        print('Finish Reading Messana system')
+        '''
 
 
     def GETSystem(self, mKey):
-        LOGGER.debug('GETSystem: ' + )
-        GETStr =self.IP+self.mSystem['system'][mKey] + '?' + self.APIStr 
-           LOGGER.debug( GETStr)
-           systemTemp = requests.get(GETStr)
-           LOGGER.debug(str(systemTemp))
-           if str(systemTemp) == self.RESPONSE_OK:
-               systemTemp = systemTemp.json()
-               LOGGER.debug(systemTemp)
-               self.systemDict[mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-           else:
-               LOGGER.debug(str(mKey) + ' error')
-               #self.systemDict[mKey] = -1
+        print('GETSystem: ' + mKey )
+        GETStr = self.IP+self.mSystem['system']['GETstr'][mKey] + '?' + self.APIStr 
+        print( GETStr)
+        systemTemp = requests.get(GETStr)
+        print(str(systemTemp))
+        if str(systemTemp) == self.RESPONSE_OK:
+           systemTemp = systemTemp.json()
+           print(systemTemp)
+           self.mSystem['system']['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+        else:
+           print(str(mKey) + ' error')
+           #self.systemDict[mKey] = -1
+
+    def GETNodeData(self, mNodeKey, instNbr, mKey):
+        print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
+        GETStr =self.IP+self.mSystem[mNodeKey]['GETstr'][mKey]+str(instNbr)+'?'+ self.APIStr 
+        nodeData = {}
+        subSysTemp = requests.get(GETStr)
+        if str(subSysTemp) == self.RESPONSE_OK:
+            subSysTemp = subSysTemp.json()
+            nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+            nodeData['statusOK'] =True
+            if instNbr in self.mSystem[mNodeKey]['data']:
+                if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
+                    self.mSystem[mNodeKey]['data'][instNbr][mKey] = nodeData['data']
+                else:
+                    self.mSystem[mNodeKey]['data'][instNbr].update({mKey : nodeData['data']})
+            else:
+                temp = {}
+                temp[instNbr] = {mKey : nodeData['data']}
+                self.mSystem[mNodeKey]['data'].update(temp)
+
+        elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
+            temp1 =  subSysTemp.content
+            res_dict = json.loads(temp1.decode('utf-8')) 
+            nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            nodeData['statusOK'] =False
+        elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
+            nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            nodeData['statusOK'] =False
+        else:
+            nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+            nodeData['statusOK'] =False
+        return(nodeData)
+
 
     def pullSystemDataAll(self):
-        LOGGER.info('pull Sytem Data')
-        #LOGGER.info(self.mSystem['system'])
-        for mKey in self.mSystem['system']:
+        #LOGGER.info('pull Sytem Data')
+        ##LOGGER.info(self.mSystem['system'])
+        for mKey in self.mSystem['system']['GETstr']:
+            print(mKey)
+            self.GETSystem(mKey) 
+    
+    def pullSystemDataActive(self):
+        print ('pullSystemDataNonStatic')
+        for mKey in self.mSystem['system']['active']:
+            print (mKey)
             self.GETSystem(mKey) 
         
-    def pullSystemData(self, mKey):
-        LOGGER.debug('MessanaInfo pull System Data')
-        if mKey in self.mSystem['mSystem']:
+    def pullSystemDataIndividual(self, mKey):
+        print('MessanaInfo pull System Data: ' + mKey)
+        if mKey in self.mSystem['system']['GETstr']:
            self.GETSystem(mKey) 
         else:         
-           LOGGER.debug('Unknown keyword :' + mKey)
-
-
-
+           print('Unknown keyword :' + mKey)
+    
+    def pullSystemKeys(self):
+        print('pullSystemKeys')
+        keys=[]
+        if self.mSystem['system']['data']:
+            for mKey in self.mSystem['system']['data']:
+                keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch system data ')
+            self.pullSystemDataAll()
+            for mKey in self.mSystem['system']['data']:
+                keys.append(mKey)
+        return(keys)
+    
     def PUTSystem(self, mKey, value):
-            LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
+            print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             PUTStr = self.IP+self.mSystem['system'][mKey] 
-            LOGGER.debug(PUTStr)
+            print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
-            LOGGER.debug(mData)
+            print(mData)
             resp = requests.put(PUTStr, json=mData)
-            LOGGER.debug(resp)
+            print(resp)
             if str(resp) != self.RESPONSE_OK:
-               LOGGER.debug(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
+               print(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
                return False
 
+    
+    def pullZoneDataAll(self, zoneNbr):
+        print('pullZoneDataMessanaAll: ' + str(zoneNbr))
+        for mKey in self.mSystem['zones']['GETstr']:
+            self.pullZoneDataIndividual(zoneNbr, mKey)
+
+
+    def pullZoneDataActive(self, zoneNbr):
+        print('pullZoneDataActive: ' + str(zoneNbr))
+        for mKey in self.mSystem['zones']['active']:
+            self.pullZoneDataIndividual(zoneNbr, mKey)
+        
+    def pullZoneDataIndividual(self, zoneNbr, mKey):  
+        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
+        self.GETNodeData('zones', zoneNbr, mKey)
+
+
+
+
+    '''
     def pushSystemDataAll(self):
         for mKey in self.systemDict:
             if mKey in self.mSystemPUT['system']:
@@ -218,13 +319,13 @@ class MessanaInfo:
         self.PUTSystem(mKey, value)
 
 
-    def GETSubNode(self, mKey, subNodeDict)
+    #def GETSubNode(self, mKey, subNodeDict)
 
         
     def PUTSubNode(self, mSystemKey, subSysNbr, mKey, subSysDict):
         PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
         value = subSysDict[mKey]
-        LOGGER.debug('PUT str: ' + PUTStr + str(value))
+        print('PUT str: ' + PUTStr + str(value))
 
         mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
         resp = requests.put(PUTStr, json=mData)
@@ -236,20 +337,20 @@ class MessanaInfo:
             temp1 =  resp.content
             res_dict = json.loads(temp1.decode('utf-8')) 
             mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-            LOGGER.debug(mData['error'])
+            print(mData['error'])
             mData['statusOK'] =False
         elif str(resp) == self.RESPONSE_NO_RESPONSE:
             mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
-            LOGGER.debug(mData['error'])
+            print(mData['error'])
             mData['statusOK'] =False
         else:
             mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
-            LOGGER.debug(mData['error'])
+            print(mData['error'])
             mData['statusOK'] =False
             return False
 
     def GETSubNodeData(self, mSubSysKey, instNbr, mKey):
-        LOGGER.debug('GETSubNodeData: ' + mSubSysKey + ' ' + str(instNbr)+ ' ' + mKey)
+        print('GETSubNodeData: ' + mSubSysKey + ' ' + str(instNbr)+ ' ' + mKey)
         GETStr =self.IP+self.mSystem[mSubSysKey][mKey]+str(instNbr)+'?'+ self.APIStr 
         mData = {}
         subSysTemp = requests.get(GETStr)
@@ -270,12 +371,12 @@ class MessanaInfo:
             mData['statusOK'] =False
         return mData
 
-    def pullSubNodeDataAll( mSubSysKey, instNbr):
-        LOGGER.debug('pullSubnNodeDataAll: ' + mSubSysKey + ' ' + str(instNbr) )
+     def pullSubNodeDataAll( mSubSysKey, instNbr):
+        print('pullSubnNodeDataAll: ' + mSubSysKey + ' ' + str(instNbr) )
         for mKey in 
+    '''
 
-
-
+    '''
     def pullSubSystemData(self, mSubSysKey, instNbr):
         subSystemDict = defaultdict(dict)
         for mKey in MessanaSubSystem:
@@ -287,25 +388,25 @@ class MessanaInfo:
         return subSystemDict
 
     def pullAllMessanaStatus(self):
-        LOGGER.info('pull Full Messana Status')
-        LOGGER.debug('Reading Main System')
+        #LOGGER.info('pull Full Messana Status')
+        print('Reading Main System')
         self.pullSystemDataMessana()
-        #LOGGER.debug(self.systemDict)
-        #LOGGER.debug('Zone count: '+ str(self.systemDict['mZoneCount'] ))
+        #print(self.systemDict)
+        #print('Zone count: '+ str(self.systemDict['mZoneCount'] ))
         if self.systemDict['mZoneCount'] > 0:
-            LOGGER.debug('Reading Zone System')
+            print('Reading Zone System')
             self.pullAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
+            print('Reading MacroZone System')
             self.pullAllMacroZoneDataMessana()
         if self.systemDict['mHC_changeoverCount'] > 0:   
-            LOGGER.debug('Reading Ht/Cold System')
+            print('Reading Ht/Cold System')
             self.pullAllHC_CODataMessana()
-        LOGGER.debug('Reading ATU System: ' )
+        print('Reading ATU System: ' )
         if self.systemDict['mATUcount'] > 0:
-            LOGGER.debug('Reading ATU System')
+            print('Reading ATU System')
             self.pullAllATUDataMessana()
-        #LOGGER.debug('')
+        #print('')
         #self.pullAllFCData()
         #self.pullAllEnergySourceData()
         #self.pullAllBufTData()
@@ -313,16 +414,16 @@ class MessanaInfo:
 
     def pullMessanaStatus(self):
         if self.systemDict['mZoneCount'] > 0:
-            LOGGER.debug('Reading Zone System')
+            print('Reading Zone System')
             self.pullAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
+            print('Reading MacroZone System')
             self.pullAllMacroZoneDataMessana()
         if self.systemDict['mHC_changeoverCount'] > 0:   
-            LOGGER.debug('Reading Ht/Cold System')
+            print('Reading Ht/Cold System')
             self.pullAllHC_CODataMessana()
         if self.systemDict['mATUCount'] > 0:
-            LOGGER.debug('Reading ATU System')
+            print('Reading ATU System')
 
     def pullZoneDataMessana(self, zoneNbr):
         tempDict = defaultdict(dict)
@@ -331,15 +432,15 @@ class MessanaInfo:
                     self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
 
     def pullZoneData(self, zoneNbr):
-        LOGGER.debug('MessanaInfo pull ZONE Data')
+        print('MessanaInfo pull ZONE Data')
         return(self.zoneDict[zoneNbr])
     
     def pullAllZoneDataMessana(self):      
         for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
             self.pullZoneDataMessana(zoneNbr)
-
+    
     def pushZoneData(self, zoneNbr, extZoneDict):
-        LOGGER.debug(extZoneDict)
+        print(extZoneDict)
         for mKey in extZoneDict:
             if mKey in self.mSystemPUT['zones']:
                 # only update changed values
@@ -351,7 +452,7 @@ class MessanaInfo:
     def pullMacroZoneDataMessana(self, mmacrozoneNbr):
         tempDict = defaultdict(dict)
         tempDict = self.pullSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
-        #LOGGER.debug(tempDict)
+        #print(tempDict)
         for key in tempDict[mmacrozoneNbr]:
             self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
 
@@ -403,7 +504,7 @@ class MessanaInfo:
             if mKey in self.mSystemPUT['atus']:
                 self.PUTSubNode('atus', atuNbr, mKey, atuDict[atuNbr])
 
-    '''
+    
     def pullFCData(self, fcNbr):
         self.pullSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
 
@@ -440,15 +541,32 @@ class MessanaInfo:
 
         
 #sys.stdout = open('Messanaoutput.txt','wt')
-'''messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
 #Retrive basic system info
 print('\nSYSTEM')
-msysInfo = defaultdict(dict)
-msysInfo = messana.pullSystemData()
-#messana.PUTSystemData(msysInfo)
+systemKeys = messana.pullSystemKeys()
+print(systemKeys)
+messana.pullSystemDataAll()
+systemKeys = messana.pullSystemKeys()
+print(systemKeys)
+messana.pullSystemDataActive()
+for mKey in messana.mSystem['system']['GETstr']:
+    messana.pullSystemDataIndividual(mKey)
 
+print ('\n Zones')
+
+for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+    messana.pullZoneDataAll(zoneNbr)
+    messana.pullZoneDataActive(zoneNbr)
+    for mKey in messana.mSystem['zones']['GETstr']:
+        messana.pullZoneDataIndividual(zoneNbr, mKey)
+      
+
+print ('\n Macro Zones')    
+#messana.PUTSystemData(msysInfo)
+'''
 print('\nZONES')
 ZoneDict = defaultdict(dict) 
 for zoneNbr in range(0,msysInfo['mZoneCount']):
