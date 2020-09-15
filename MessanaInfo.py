@@ -183,7 +183,7 @@ class MessanaInfo:
                                          'active':['mAlarmOn']
                                          ,
                                          'data' : {}
-                        },                               ,
+                        }, 
                         'buffer_tanks': {'GETstr' : {
                                             'mName':'/api/tnk/name/'
                                             ,'mStatus':'/api/tnk/status/'
@@ -217,12 +217,7 @@ class MessanaInfo:
                         }
                     }
 
-        self.mSystemPUT = {
- ],
-                        'energy_sources' : [ 'mName' ],
-                        'buffer_tanks' : [ 'mName','mStatus', 'mMode' ],
-                        'domsetic_hot_waters':[ 'mStatus', 'mName', 'mTargetTemp' ]
-                        }                    
+                 
         #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         #self.IP = '192.168.2.65'    
         self.APIKey = 'apikey'
@@ -236,15 +231,6 @@ class MessanaInfo:
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
         '''
-        self.systemDict = defaultdict(dict)
-        self.zoneDict = defaultdict(dict)
-        self.macrozoneDict = defaultdict(dict)
-        self.hc_changeoverDict = defaultdict(dict)
-        self.fan_coilsDict = defaultdict(dict)
-        self.atuDict =defaultdict(dict)
-        self.energy_sourcesDict = defaultdict(dict)
-        self.buffer_tanksDict = defaultdict(dict)
-        self.domsetic_hot_waterDict =defaultdict(dict)
         print ('Reading Messana System')
         #self.pullAllMessanaStatus()
         print('Finish Reading Messana system')
@@ -362,6 +348,35 @@ class MessanaInfo:
         self.GETNodeData('zones', zoneNbr, mKey)
 
 
+   def pullZoneKeys(self):
+        print('pullZoneKeys')
+        keys=[]
+        for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+            if self.mSystem['zones']['data'][zoneNbr]:
+                for mKey in self.mSystem['system']['data']:
+                    if not(mKey in keys):
+                       keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch system data ')
+            self.pullSystemDataAll()
+            for mKey in self.mSystem['system']['data']:
+                keys.append(mKey)
+        return(keys)
+
+    def pullMacroZoneDataAll(self, zoneNbr):
+        print('pullZoneDataMessanaAll: ' + str(zoneNbr))
+        for mKey in self.mSystem['zones']['GETstr']:
+            self.pullZoneDataIndividual(zoneNbr, mKey)
+
+
+    def pullMacroZoneDataActive(self, zoneNbr):
+        print('pullZoneDataActive: ' + str(zoneNbr))
+        for mKey in self.mSystem['zones']['active']:
+            self.pullZoneDataIndividual(zoneNbr, mKey)
+        
+    def pullMacroZoneDataIndividual(self, zoneNbr, mKey):  
+        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
+        self.GETNodeData('zones', zoneNbr, mKey)
 
 
     '''
