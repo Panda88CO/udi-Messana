@@ -34,7 +34,7 @@ class MessanaInfo:
                                         ,'mSetback':'/api/system/setback/' }
                                     ,
                                    'active':
-                                        ['mStatus', 'mExternalAlarm']
+                                        ['mExternalAlarm']
                                    , 
                                     'data':{}
                                    },
@@ -74,7 +74,7 @@ class MessanaInfo:
                                         ,'mScheduleOn' : '/api/zone/scheduleOn/'
                                         ,'mEnergySave' : '/api/zone/energySaving/'}
                                     ,
-                                    'active':['mStatus','mCurrentSetPointRH', 'mCurrentSetPointDP'
+                                    'active':['mCurrentSetPointRH', 'mCurrentSetPointDP'
                                         ,'mHumidity', 'mDewPoint', 'mTemp', 'mAirTemp', 'mAlarmOn' ]
                                     ,
                                     'data' :{}
@@ -92,78 +92,133 @@ class MessanaInfo:
                                             'mName': '/api/macrozone/name/'
                                             ,'mSetPoint' :'/api/macrozone/setpoint/'
                                             ,'mStatus':'/api/macrozone/status/'
-                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
-                                        }
+                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'}
                                         ,
                                         'active':['mTemp', 'mHumidity','mDewPoint' ]
                                         ,
                                         'data' : {}
                         },
-
-                        'hc_changeover' :{
-                            'mName':'/api/hc/name/'
-                            ,'mMode':'/api/hc/mode/'
-                            ,'mExcutiveSeason':'/api/hc/executiveSeason/'
-                            ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
-                            },
-                        'fan_coils' :{
-                            'mName':'/api/fan/name/'
-                            ,'mState':'/api/fan/state/'
-                            ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
-                            ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
-                            ,'mType':'/api/fan/type/'
-                            ,'mAlarmOn':'/api/fan/alarmOn/'
-                            },
-                        'atus': {
-                            'mName':'/api/atu/name/'
-                            ,'mFlowLevel':'/api/atu/flowLevel/'
-                            ,'mStatus':'/api/atu/status/'
-                            ,'HRVOn':'/api/atu/hrvOn/'
-                            ,'mHUMOn':'/api/atu/humOn/'
-                            ,'mNTDOn':'/api/atu/ntdOn/'
-                            ,'mINTOn':'/api/atu/intOn/'
-                            ,'mDehumudityStatus':'/api/atu/dehumidificationStatus/'
-                            ,'mHumidityStatus':'/api/atu/humidificationStatus/'
-                            ,'mHRVstatus':'/api/atu/status/'
-                            ,'mIntegrationStatus':'/api/atu/integrationStatus/'
-                            ,'mAlarmOn':'/api/atu/alarmOn/'
-                            ,'mAirTemp':'/api/atu/airTemperature/'
-                            ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
-                            ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
-                            ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
-                            ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                            #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                            #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
-                            },
-                        'energy_sources' :{
-                            'mName':'/api/enr/name/'
-                            ,'mStatus':'/api/enr/status/'
-                            ,'mDHWstatus':'/api/enr/dhwStatus/'
-                            ,'mType':'/api/enr/type/'
-                            ,'mAlarmOn':'/api/enr/alarmOn/'
-                            },
-                        'buffer_tanks' : {
-                            'mName':'/api/tnk/name/'
-                            ,'mStatus':'/api/tnk/status/'
-                            ,'mMode':'/api/tnk/mode/'
-                            ,'mTemp':'/api/tnk/temperature/'
-                            ,'mAlarmOn':'/api/tnk/alarmOn/'
-                            },
-                        'domsetic_hot_waters' : {
-                            'mStatus':'/api/dhw/status/'
-                            ,'mName':'/api/dhw/name/'
-                            ,'mTemp':'/api/dhw/temperature/'
-                            ,'mTargetTemp':'/api/dhw/targetTemperature/'
-                            }
+                        'hc_changeover' :{ 'GETstr' : {
+                                                'mName':'/api/hc/name/'
+                                                ,'mMode':'/api/hc/mode/'
+                                                ,'mExcutiveSeason':'/api/hc/executiveSeason/'
+                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'}
+                                            ,
+                                            'PUTstr':{
+                                                'mName':'/api/hc/name/'
+                                                ,'mMode':'/api/hc/mode/'
+                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/' }
+                                            ,
+                                            'active':[]
+                                            ,
+                                            'data' : {}
+                        },
+                        'fan_coils' :{'GETstr' : {
+                                        'mName':'/api/fan/name/'
+                                        ,'mState':'/api/fan/state/'
+                                        ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
+                                        ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
+                                        ,'mType':'/api/fan/type/'
+                                        ,'mAlarmOn':'/api/fan/alarmOn/'}
+                                     ,
+                                     'PUTstr':{                                        
+                                        'mName':'/api/fan/name/'
+                                        ,'mState':'/api/fan/state/'
+                                        ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
+                                        ,'mHeatingSpeed':'/api/fan/heatingSpeed/'}
+                                     ,
+                                     'active':['mAlarmOn','mCoolingSpeed','mHeatingSpeed' ]
+                                     ,
+                                     'data' : {}
+                        },
+                        'atus': {'GETstr' : {
+                                    'mName':'/api/atu/name/'
+                                    ,'mFlowLevel':'/api/atu/flowLevel/'
+                                    ,'mStatus':'/api/atu/status/'
+                                    ,'HRVOn':'/api/atu/hrvOn/'
+                                    ,'mHUMOn':'/api/atu/humOn/'
+                                    ,'mNTDOn':'/api/atu/ntdOn/'
+                                    ,'mINTOn':'/api/atu/intOn/'
+                                    ,'mDehumudityStatus':'/api/atu/dehumidificationStatus/'
+                                    ,'mHumidityStatus':'/api/atu/humidificationStatus/'
+                                    ,'mHRVstatus':'/api/atu/status/'
+                                    ,'mIntegrationStatus':'/api/atu/integrationStatus/'
+                                    ,'mAlarmOn':'/api/atu/alarmOn/'
+                                    ,'mAirTemp':'/api/atu/airTemperature/'
+                                    ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
+                                    ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
+                                    ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
+                                    ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
+                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'}
+                                 ,
+                                 'PUTstr':{                                    
+                                    'mName':'/api/atu/name/'
+                                    ,'mFlowLevel':'/api/atu/flowLevel/'
+                                    ,'mStatus':'/api/atu/status/'
+                                    ,'HRVOn':'/api/atu/hrvOn/'
+                                    ,'mHUMOn':'/api/atu/humOn/'
+                                    ,'mNTDOn':'/api/atu/ntdOn/'
+                                    ,'mINTOn':'/api/atu/intOn/'
+                                    ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
+                                    ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
+                                    ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
+                                    ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
+                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'}
+                                 ,
+                                 'active':['mFlowLevel', 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
+                                 ,
+                                 'data' : {}
+                        },
+                        'energy_sources':{'GETstr' : {
+                                            'mName':'/api/enr/name/'
+                                            ,'mStatus':'/api/enr/status/'
+                                            ,'mDHWstatus':'/api/enr/dhwStatus/'
+                                            ,'mType':'/api/enr/type/'
+                                            ,'mAlarmOn':'/api/enr/alarmOn/' }
+                                         ,
+                                         'PUTstr':{'mName':'/api/enr/name/'}
+                                         ,
+                                         'active':['mAlarmOn']
+                                         ,
+                                         'data' : {}
+                        },                               ,
+                        'buffer_tanks': {'GETstr' : {
+                                            'mName':'/api/tnk/name/'
+                                            ,'mStatus':'/api/tnk/status/'
+                                            ,'mMode':'/api/tnk/mode/'
+                                            ,'mTemp':'/api/tnk/temperature/'
+                                            ,'mAlarmOn':'/api/tnk/alarmOn/'}
+                                         ,
+                                         'PUTstr':{
+                                            'mName':'/api/tnk/name/'
+                                            ,'mStatus':'/api/tnk/status/'
+                                            ,'mMode':'/api/tnk/mode/' }
+                                         ,
+                                         'active':['mTemp', 'mAlarmOn']
+                                         ,
+                                         'data' : {}
+                        },
+                        'domsetic_hot_waters': {'GETstr' : {
+                                                    'mStatus':'/api/dhw/status/'
+                                                    ,'mName':'/api/dhw/name/'
+                                                    ,'mTemp':'/api/dhw/temperature/'
+                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/' }
+                                                ,
+                                                'PUTstr':{ 
+                                                    'mStatus':'/api/dhw/status/'
+                                                    ,'mName':'/api/dhw/name/'
+                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/'}
+                                                ,
+                                                'active':['mTemp']
+                                                ,
+                                                'data' : {}
                         }
-        self.mSystemPUT = {
-                        'macrozones' : ['mName', 'mSetPoint', 'mStatus', 'mScheduleOn'],
+                    }
 
-                        'hc_changeover' : ['mName', 'mMode', 'mAdaptiveComfort' ],
-                        'fan_coils' :['mName', 'mState', 'mCoolingSpeed','mHeatingSpeed' ],
-                        'atus': [ 'mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn',
-                                  'mINTOn', 'mHumSetpointRH', 'mHumSetpointDP', 'mDehumSetpointRH',
-                                  'mDehumSetpointDP', 'mCurrentSetpointRH', 'mCurrentSetpointDP' ],
+        self.mSystemPUT = {
+ ],
                         'energy_sources' : [ 'mName' ],
                         'buffer_tanks' : [ 'mName','mStatus', 'mMode' ],
                         'domsetic_hot_waters':[ 'mStatus', 'mName', 'mTargetTemp' ]
