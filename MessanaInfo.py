@@ -53,7 +53,7 @@ class MessanaInfo:
                                         ,'mHumidity':'/api/zone/humidity/'
                                         ,'mDewPoint' : '/api/zone/dewpoint/'
                                         ,'mTemp' :'/api/zone/temperature/'
-                                        ,'mAirQuality' : '/api/zone/airQuality/'
+                                        #,'mAirQuality' : '/api/zone/airQuality/'
                                         ,'mScheduleOn' : '/api/zone/scheduleOn/'
                                         ,'mCO2' : '/api/zone/co2/'
                                         ,'mAirTemp' : '/api/zone/airTemperature/'
@@ -158,8 +158,8 @@ class MessanaInfo:
                                     ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
                                     ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
                                     ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                                    #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                                    #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
                                     }
                                  ,
                                  'PUTstr':{                                    
@@ -292,41 +292,40 @@ class MessanaInfo:
 
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
-        try:
-            if mKey in self.mSystem[mNodeKey]['GETstr']:
-               GETStr =self.IP+self.mSystem[mNodeKey]['GETstr'][mKey]+str(instNbr)+'?'+ self.APIStr 
-        except: 
-                print('Put does not accept keywork: ' + mKey)
-                return()
-
-        nodeData = {}
-        subSysTemp = requests.get(GETStr)
-        if str(subSysTemp) == self.RESPONSE_OK:
-            subSysTemp = subSysTemp.json()
-            nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
-            nodeData['statusOK'] =True
-            if instNbr in self.mSystem[mNodeKey]['data']:
-                if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
-                    self.mSystem[mNodeKey]['data'][instNbr][mKey] = nodeData['data']
+        if mKey in self.mSystem[mNodeKey]['GETstr']:
+            GETStr =self.IP+self.mSystem[mNodeKey]['GETstr'][mKey]+str(instNbr)+'?'+ self.APIStr 
+            nodeData = {}
+            subSysTemp = requests.get(GETStr)
+            if str(subSysTemp) == self.RESPONSE_OK:
+                subSysTemp = subSysTemp.json()
+                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+                nodeData['statusOK'] =True
+                if instNbr in self.mSystem[mNodeKey]['data']:
+                    if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
+                        self.mSystem[mNodeKey]['data'][instNbr][mKey] = nodeData['data']
+                    else:
+                        self.mSystem[mNodeKey]['data'][instNbr].update({mKey : nodeData['data']})
                 else:
-                    self.mSystem[mNodeKey]['data'][instNbr].update({mKey : nodeData['data']})
-            else:
-                temp = {}
-                temp[instNbr] = {mKey : nodeData['data']}
-                self.mSystem[mNodeKey]['data'].update(temp)
+                    temp = {}
+                    temp[instNbr] = {mKey : nodeData['data']}
+                    self.mSystem[mNodeKey]['data'].update(temp)
 
-        elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
-            temp1 =  subSysTemp.content
-            res_dict = json.loads(temp1.decode('utf-8')) 
-            nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            nodeData['statusOK'] =False
-        elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
-            nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            nodeData['statusOK'] =False
-        else:
-            nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            nodeData['statusOK'] =False
-        return(nodeData)
+            elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
+                temp1 =  subSysTemp.content
+                res_dict = json.loads(temp1.decode('utf-8')) 
+                nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['statusOK'] =False
+            elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
+                nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['statusOK'] =False
+            else:
+                nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['statusOK'] =False
+        else: 
+                nodeData['error'] = 'Put does not accept keywork: ' + mKey
+                nodeData['statusOK'] =False
+        return(nodeData)   
+   
 
     def PUTNodeData(self, mNodeKey, nodeNbr, mKey, value):
         nodeData = {}
