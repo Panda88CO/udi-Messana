@@ -25,19 +25,21 @@ class MessanaInfo:
                                         ,'mUnitTemp':'/api/system/tempUnit/'
                                         ,'mEnergySaving':'/api/system/energySaving/'
                                         ,'mSetback':'/api/system/setback/'
-                                        ,'mExternalAlarm':'/api/system/externalAlarm/'}
+                                        ,'mExternalAlarm':'/api/system/externalAlarm/'
+                                        }
                                     ,
                                     'PUTstr' : {
                                         'mName':'/api/system/name/'
                                         ,'mStatus':'/api/system/status/'
                                         ,'mEnergySavings':'/api/system/energySaving/'
-                                        ,'mSetback':'/api/system/setback/' }
+                                        ,'mSetback':'/api/system/setback/' 
+                                        }
                                     ,
                                    'active':
                                         ['mExternalAlarm']
                                    , 
                                     'data':{}
-                                   },
+                        },
                         'zones': {  'GETstr' : {
                                         'mName': '/api/zone/name/'
                                         ,'mSetPoint' :'/api/zone/setpoint/'
@@ -51,7 +53,7 @@ class MessanaInfo:
                                         ,'mHumidity':'/api/zone/humidity/'
                                         ,'mDewPoint' : '/api/zone/dewpoint/'
                                         ,'mTemp' :'/api/zone/temperature/'
-                                        #,'mAirQuality' : '/api/zone/airQuality/'
+                                        ,'mAirQuality' : '/api/zone/airQuality/'
                                         ,'mScheduleOn' : '/api/zone/scheduleOn/'
                                         ,'mCO2' : '/api/zone/co2/'
                                         ,'mAirTemp' : '/api/zone/airTemperature/'
@@ -59,7 +61,8 @@ class MessanaInfo:
                                         ,'mEnergySave' : '/api/zone/energySaving/'
                                         ,'mAlarmOn':'/api/zone/alarmOn/'
                                         ,'mThermalStatus':'/api/zone/thermalStatus/'
-                                        ,'mCapability':'/api/zone/capability/'}
+                                        ,'mCapability':'/api/zone/capability/'
+                                        }
                                     ,
                                     'PUTstr':{
                                         'mName': '/api/zone/name/'
@@ -72,13 +75,14 @@ class MessanaInfo:
                                         ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
                                         ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
                                         ,'mScheduleOn' : '/api/zone/scheduleOn/'
-                                        ,'mEnergySave' : '/api/zone/energySaving/'}
+                                        ,'mEnergySave' : '/api/zone/energySaving/'
+                                        }
                                     ,
                                     'active':['mCurrentSetPointRH', 'mCurrentSetPointDP'
-                                        ,'mHumidity', 'mDewPoint', 'mTemp', 'mAirTemp', 'mAlarmOn' ]
+                                        ,'mHumidity', 'mDewPoint', 'mTemp', 'mAirTemp', 'mAlarmOn'                                         ]
                                     ,
                                     'data' :{}
-                            },
+                        },
                         'macrozones' : { 'GETstr' : {
                                             'mName': '/api/macrozone/name/'
                                             ,'mSetPoint' :'/api/macrozone/setpoint/'
@@ -86,13 +90,15 @@ class MessanaInfo:
                                             ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
                                             ,'mHumidity':'/api/macrozone/humidity/'
                                             ,'mDewPoint' : '/api/macrozone/dewpoint/'
-                                            ,'mTemp' :'/api/macrozone/temperature/'}
+                                            ,'mTemp' :'/api/macrozone/temperature/'
+                                            }
                                         ,
                                         'PUTstr':{
                                             'mName': '/api/macrozone/name/'
                                             ,'mSetPoint' :'/api/macrozone/setpoint/'
                                             ,'mStatus':'/api/macrozone/status/'
-                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'}
+                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
+                                            }
                                         ,
                                         'active':['mTemp', 'mHumidity','mDewPoint' ]
                                         ,
@@ -102,12 +108,14 @@ class MessanaInfo:
                                                 'mName':'/api/hc/name/'
                                                 ,'mMode':'/api/hc/mode/'
                                                 ,'mExcutiveSeason':'/api/hc/executiveSeason/'
-                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'}
+                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
+                                                }
                                             ,
                                             'PUTstr':{
                                                 'mName':'/api/hc/name/'
                                                 ,'mMode':'/api/hc/mode/'
-                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/' }
+                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/' 
+                                                }
                                             ,
                                             'active':[]
                                             ,
@@ -119,7 +127,8 @@ class MessanaInfo:
                                         ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
                                         ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
                                         ,'mType':'/api/fan/type/'
-                                        ,'mAlarmOn':'/api/fan/alarmOn/'}
+                                        ,'mAlarmOn':'/api/fan/alarmOn/'
+                                        }
                                      ,
                                      'PUTstr':{                                        
                                         'mName':'/api/fan/name/'
@@ -150,7 +159,8 @@ class MessanaInfo:
                                     ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
                                     ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
                                     ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'}
+                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                                    }
                                  ,
                                  'PUTstr':{                                    
                                     'mName':'/api/atu/name/'
@@ -164,8 +174,9 @@ class MessanaInfo:
                                     ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
                                     ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
                                     ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'}
+                                    #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                                    #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                                    }
                                  ,
                                  'active':['mFlowLevel', 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
                                  ,
@@ -176,7 +187,8 @@ class MessanaInfo:
                                             ,'mStatus':'/api/enr/status/'
                                             ,'mDHWstatus':'/api/enr/dhwStatus/'
                                             ,'mType':'/api/enr/type/'
-                                            ,'mAlarmOn':'/api/enr/alarmOn/' }
+                                            ,'mAlarmOn':'/api/enr/alarmOn/' 
+                                            }
                                          ,
                                          'PUTstr':{'mName':'/api/enr/name/'}
                                          ,
@@ -189,12 +201,14 @@ class MessanaInfo:
                                             ,'mStatus':'/api/tnk/status/'
                                             ,'mMode':'/api/tnk/mode/'
                                             ,'mTemp':'/api/tnk/temperature/'
-                                            ,'mAlarmOn':'/api/tnk/alarmOn/'}
+                                            ,'mAlarmOn':'/api/tnk/alarmOn/'
+                                            }
                                          ,
                                          'PUTstr':{
                                             'mName':'/api/tnk/name/'
                                             ,'mStatus':'/api/tnk/status/'
-                                            ,'mMode':'/api/tnk/mode/' }
+                                            ,'mMode':'/api/tnk/mode/' 
+                                            }
                                          ,
                                          'active':['mTemp', 'mAlarmOn']
                                          ,
@@ -204,22 +218,25 @@ class MessanaInfo:
                                                     'mStatus':'/api/dhw/status/'
                                                     ,'mName':'/api/dhw/name/'
                                                     ,'mTemp':'/api/dhw/temperature/'
-                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/' }
+                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/' 
+                                                    }
                                                 ,
                                                 'PUTstr':{ 
                                                     'mStatus':'/api/dhw/status/'
                                                     ,'mName':'/api/dhw/name/'
-                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/'}
+                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/'
+                                                    }
                                                 ,
                                                 'active':['mTemp']
                                                 ,
                                                 'data' : {}
                         }
                     }
-
-                 
+    
+      
         #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         #self.IP = '192.168.2.65'    
+
         self.APIKey = 'apikey'
         self.APIKeyVal = mAPIKeyVal
         self.APIStr = self.APIKey + '=' + self.APIKeyVal
@@ -238,6 +255,7 @@ class MessanaInfo:
 
 
     def GETSystem(self, mKey):
+        sysData= {}
         print('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem['system']['GETstr'][mKey] + '?' + self.APIStr 
         print( GETStr)
@@ -247,11 +265,15 @@ class MessanaInfo:
            systemTemp = systemTemp.json()
            print(systemTemp)
            self.mSystem['system']['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+           sysData['statusOK'] = True   
         else:
            print(str(mKey) + ' error')
+           sysData['statusOK'] = False
            #self.systemDict[mKey] = -1
-    
+        return(sysData) 
+
     def PUTSystem(self, mKey, value):
+            sysData= {}
             print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             PUTStr = self.IP+self.mSystem['system']['PUTstr'][mKey] 
@@ -263,9 +285,10 @@ class MessanaInfo:
             print(resp)
             if str(resp) != self.RESPONSE_OK:
                print(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
-               return False
+               sysData['statusOK'] =True
             else:
-               return(True)          
+               sysData['statusOK'] = False
+            return(sysData)          
 
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
@@ -306,15 +329,38 @@ class MessanaInfo:
         return(nodeData)
 
     def PUTNodeData(self, mNodeKey, nodeNbr, mKey, value):
-        try:
-            if mKey in self.mSystem[mNodeKey]['PUTstr']:
-                PUTStr = self.IP + self.mSystem[mNodeKey]['PUTstr'][mKey]
-                print('PUT str: ' + PUTStr + str(value))
-                mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
-                resp = requests.put(PUTStr, json=mData)
-        except:
-            print('Node ' + mNodeKey + ' does not accept keyword: ' + mKey)
-            return (False)
+        nodeData = {}
+        if mKey in self.mSystem[mNodeKey]['PUTstr']:
+            PUTStr = self.IP + self.mSystem[mNodeKey]['PUTstr'][mKey]
+            print('PUT str: ' + PUTStr + str(value))
+            mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
+            resp = requests.put(PUTStr, json=mData)
+            if str(resp) == self.RESPONSE_OK:
+                self.mSystem[mNodeKey]['data'][nodeNbr][mKey] = value
+                nodeData['statusOK'] = True
+                return(nodeData)
+            elif str(resp) == self.RESPONSE_NO_SUPPORT:
+                temp1 =  resp.content
+                res_dict = json.loads(temp1.decode('utf-8')) 
+                nodeData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
+                print(nodeData['error'])
+                nodeData['statusOK'] =False
+                return(nodeData)
+            elif str(resp) == self.RESPONSE_NO_RESPONSE:
+                nodeData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
+                print(nodeData['error'])
+                nodeData['statusOK'] =False
+                return(nodeData)
+            else:
+                nodeData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
+                print(nodeData['error'])
+                nodeData['statusOK'] =False
+                return(nodeData)
+        else:
+            nodeData['error'] = 'Node ' + mNodeKey + ' does not accept keyword: ' + mKey
+            print(nodeData['error'])
+            nodeData['nodeDataOK'] =False
+            return(nodeData)
 
         if str(resp) == self.RESPONSE_OK:
             self.mSystem[mNodeKey]['data'][nodeNbr][mKey] = value
@@ -401,7 +447,8 @@ class MessanaInfo:
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        self.PUTNodeData('zones', zoneNbr, mKey, value)
+        status = self.PUTNodeData('zones', zoneNbr, mKey, value)
+        return(status)
 
     def pullZoneKeys(self, zoneNbr):
         print('pullZoneKeys')
@@ -702,8 +749,9 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     print (keys)  
     for mKey in messana.mSystem['zones']['GETstr']:
         messana.pullZoneDataIndividual(zoneNbr, mKey)
-        messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
+        nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
         print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
+        print('nodeData : ' + str(status))
 
 print ('\n Macro Zones')    
 #messana.PUTSystemData(msysInfo)
