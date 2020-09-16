@@ -59,7 +59,7 @@ class MessanaInfo:
                                         ,'mEnergySave' : '/api/zone/energySaving/'
                                         ,'mAlarmOn':'/api/zone/alarmOn/'
                                         ,'mThermalStatus':'/api/zone/thermalStatus/'
-                                        ,'mCapability':'/api/zone/capability/'                                    }
+                                        ,'mCapability':'/api/zone/capability/'}
                                     ,
                                     'PUTstr':{
                                         'mName': '/api/zone/name/'
@@ -263,7 +263,9 @@ class MessanaInfo:
             print(resp)
             if str(resp) != self.RESPONSE_OK:
                print(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
-               return False           
+               return False
+            else:
+               return(True)          
 
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
@@ -305,15 +307,15 @@ class MessanaInfo:
 
     def PUTNodeData(self, mNodeKey, nodeNbr, mKey, value):
         try:
-            if mKey in self.mSystem[mNodeKey][PUTstr]:
-                PUTStr = self.IP + self.mSystem[mNodeKey][PUTstr][mKey]
+            if mKey in self.mSystem[mNodeKey]['PUTstr']:
+                PUTStr = self.IP + self.mSystem[mNodeKey]['PUTstr'][mKey]
                 print('PUT str: ' + PUTStr + str(value))
+                mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
+                resp = requests.put(PUTStr, json=mData)
         except:
             print('Node ' + mNodeKey + ' does not accept keyword: ' + mKey)
-            
-        mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
-        resp = requests.put(PUTStr, json=mData)
-    
+            return (False)
+
         if str(resp) == self.RESPONSE_OK:
             self.mSystem[mNodeKey]['data'][nodeNbr][mKey] = value
             return True
@@ -353,6 +355,19 @@ class MessanaInfo:
         else:         
            print('Unknown keyword :' + mKey)
     
+    def pushSystemDataIndividual(self, mKey, value):
+        print('MessanaInfo push System Data: ' + mKey)
+        if mKey in self.mSystem['system']['PUTstr']:
+           if (self.PUTSystem(mKey, value)):
+                return(True) 
+           else:
+                print('Put failed: ' + mKey + ' ' + str(value))
+                return(False)
+        else:         
+           print('PUT not supporting keyword :' + mKey)
+           return(False)
+    
+
     def pullSystemKeys(self):
         print('pullSystemKeys')
         keys=[]
@@ -384,22 +399,30 @@ class MessanaInfo:
         print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         self.GETNodeData('zones', zoneNbr, mKey)
 
+    def pushZoneDataIndividual(self, zoneNbr, mKey, value):
+        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        self.PUTNodeData('zones', zoneNbr, mKey, value)
 
     def pullZoneKeys(self, zoneNbr):
         print('pullZoneKeys')
         keys=[]
-        if self.mSystem['zones']['data'][zoneNbr]:
-           for mKey in self.mSystem['zones']['data'][zoneNbr]:
-               if not(mKey in keys):
-                  keys.append(mKey)
+        if self.mSystem['zones']['data']:
+            if zoneNbr in self.mSystem['zones']['data']: 
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullZoneDataAll(zoneNbr)
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
         else:
             print('No Keys found - trying to fetch Messana data')
             self.pullSystemDataAll()
             self.pullZoneDataAll(zoneNbr)
-            if self.mSystem['zones']['data'][zoneNbr]:
-               for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                   if not(mKey in keys):
-                      keys.append(mKey)
+            for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                if not(mKey in keys):
+                    keys.append(mKey)
         return(keys)
 
     def pullMacroZoneDataAll(self, zoneNbr):
@@ -655,24 +678,32 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 #Retrive basic system info
 print('\nSYSTEM')
-systemKeys = messana.pullSystemKeys()
-print(systemKeys)
+#systemKeys = messana.pullSystemKeys()
+#print(systemKeys)
 messana.pullSystemDataAll()
 systemKeys = messana.pullSystemKeys()
 print(systemKeys)
 messana.pullSystemDataActive()
 for mKey in messana.mSystem['system']['GETstr']:
     messana.pullSystemDataIndividual(mKey)
+    if messana.pushSystemDataIndividual(mKey,messana.mSystem['system']['data'][mKey] ):
+        print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
+    else:
+        print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
 
 print ('\n Zones')
 
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
-    messana.pullZoneKeys(zoneNbr)
+    keys = messana.pullZoneKeys(zoneNbr)
+    print (keys)
     messana.pullZoneDataAll(zoneNbr)
     messana.pullZoneDataActive(zoneNbr)
+    keys = messana.pullZoneKeys(zoneNbr)
+    print (keys)  
     for mKey in messana.mSystem['zones']['GETstr']:
         messana.pullZoneDataIndividual(zoneNbr, mKey)
-      
+        messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
+        print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
 
 print ('\n Macro Zones')    
 #messana.PUTSystemData(msysInfo)
