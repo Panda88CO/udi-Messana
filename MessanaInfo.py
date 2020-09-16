@@ -751,7 +751,7 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
         messana.pullZoneDataIndividual(zoneNbr, mKey)
         nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
         print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
-        print('nodeData : ' + str(status))
+        print('nodeData : ' + str(nodeData))
 
 print ('\n Macro Zones')    
 #messana.PUTSystemData(msysInfo)
