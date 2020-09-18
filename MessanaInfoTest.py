@@ -27,7 +27,7 @@ for mKey in messana.mSystem['system']['GETstr']:
         print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
     else:
         print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
-'''
+
 print ('\n Zones')
 
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
@@ -43,7 +43,7 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
             nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
             print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
             print('nodeData : ' + str(nodeData))
-'''
+
 print ('\n Macro Zones')  
 for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']):
     keys = messana.pullMacroZoneKeys(macrozoneNbr)
