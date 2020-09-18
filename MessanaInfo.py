@@ -47,8 +47,8 @@ class MessanaInfo:
                                         ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
                                         ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
                                         ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
-                                        ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
-                                        ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                                        #,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                                        #,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
                                         ,'mHumidity':'/api/zone/humidity/'
                                         ,'mDewPoint' : '/api/zone/dewpoint/'
                                         ,'mTemp' :'/api/zone/temperature/'
@@ -71,8 +71,8 @@ class MessanaInfo:
                                         ,'mHumSetPointDP':'/api/zone/humidSetpointDP/'
                                         ,'mDeumSetPointRH':'/api/zone/dehumSetpointRH/'
                                         ,'mDehumSetPointDP':'/api/zone/dehumSetpointDP/'
-                                        ,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
-                                        ,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
+                                        #,'mCurrentSetPointRH':'/api/zone/currentSetpointRH/'
+                                        #,'mCurrentSetPointDP':'/api/zone/currentSetpointDP/'
                                         ,'mScheduleOn' : '/api/zone/scheduleOn/'
                                         ,'mEnergySave' : '/api/zone/energySaving/'
                                         }
@@ -291,9 +291,9 @@ class MessanaInfo:
 
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
+        nodeData = {}
         if mKey in self.mSystem[mNodeKey]['GETstr']:
             GETStr =self.IP+self.mSystem[mNodeKey]['GETstr'][mKey]+str(instNbr)+'?'+ self.APIStr 
-            nodeData = {}
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 subSysTemp = subSysTemp.json()
@@ -470,20 +470,20 @@ class MessanaInfo:
                     keys.append(mKey)
         return(keys)
 
-    def pullMacroZoneDataAll(self, zoneNbr):
-        print('pullZoneDataMessanaAll: ' + str(zoneNbr))
-        for mKey in self.mSystem['zones']['GETstr']:
-            self.pullZoneDataIndividual(zoneNbr, mKey)
+    def pullMacroZoneDataAll(self, macrozoneNbr):
+        print('pullMacroZoneDataMessanaAll: ' + str(macrozoneNbr))
+        for mKey in self.mSystem['macrozones']['GETstr']:
+            self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
 
 
-    def pullMacroZoneDataActive(self, zoneNbr):
-        print('pullZoneDataActive: ' + str(zoneNbr))
-        for mKey in self.mSystem['zones']['active']:
-            self.pullZoneDataIndividual(zoneNbr, mKey)
+    def pullMacroZoneDataActive(self, macrozoneNbr):
+        print('pullMacroZoneDataActive: ' + str(macrozoneNbr))
+        for mKey in self.mSystem['macrozones']['active']:
+            self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
         
-    def pullMacroZoneDataIndividual(self, zoneNbr, mKey):  
-        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
-        self.GETNodeData('zones', zoneNbr, mKey)
+    def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey):  
+        print('pullMacroZoneDataMessanaIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
+        self.GETNodeData('macrozones', macrozoneNbr, mKey)
 
     def pullMacroZoneKeys(self, macrozoneNbr):
         print('pullMacroZoneKeys')
