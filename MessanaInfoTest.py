@@ -42,26 +42,22 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
         print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
         print('nodeData : ' + str(nodeData))
 
-print ('\n Macro Zones')    
+print ('\n Macro Zones')  
+for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']):
+    keys = messana.pullMacroZoneKeys(MacrozoneNbr)
+    print (keys)
+    messana.pullMacroZoneDataAll(macrozoneNbr)
+    messana.pullMacroZoneDataActive(macrozoneNbr)
+    keys = messana.pullMacroZoneKeys(macrozoneNbr)
+    print (keys)  
+    for mKey in messana.mSystem['macrozones']['GETstr']:
+        messana.pullMacroZoneDataIndividual(zoneNbr, mKey)
+        nodeData = messana.pushMacroZoneDataIndividual(macrozoneNbr, mKey, messana.mSystem['macrozones']['data'][macrozoneNbr][mKey])
+        print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['macrozones']['data'][macrozoneNbr][mKey]))
+        print('nodeData : ' + str(nodeData))
+
 #messana.PUTSystemData(msysInfo)
 '''
-print('\nZONES')
-ZoneDict = defaultdict(dict) 
-for zoneNbr in range(0,msysInfo['mZoneCount']):
-    ZoneDict[zoneNbr] = messana.pullZoneData(zoneNbr)
-
-for zoneNbr in range(0,msysInfo['mZoneCount']):
-    messana.pushZoneData(zoneNbr, ZoneDict)
-
-
-print('\nMACROZONES')
-MacroZoneDict = defaultdict(dict)   
-for macroZoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
-    MacroZoneDict[macroZoneNbr] = messana.pullMacroZoneData(macroZoneNbr)  
-
-for macroZoneNbr in range(0, msysInfo['mMacrozoneCount']):
-    messana.pushMacroZoneData(macroZoneNbr, MacroZoneDict)
-
 print('\nHC changeover')
 HC_CoDict = defaultdict(dict)   
 for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
