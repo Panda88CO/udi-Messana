@@ -1,0 +1,420 @@
+
+SYSTEM
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullSystemKeys
+['mName', 'mApiVer', 'mStatus', 'mATUcount', 'mDHWcount', 'mFanCoilCount', 'mEnergySourceCount', 'mZoneCount', 'mMacrozoneCount', 'mHC_changeoverCount', 'mBufTankCount', 'mUnitTemp', 'mEnergySaving', 'mSetback', 'mExternalAlarm']
+pullSystemDataNonStatic
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+MessanaInfo pull System Data: mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+MessanaInfo push System Data: mName
+PUT System: {mName:Olgaard Tahoe Residence}
+http://192.168.2.65/api/system/name/
+{'value': 'Olgaard Tahoe Residence', 'apikey': '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
+<Response [200]>
+Put :mName Olgaard Tahoe Residence
+MessanaInfo pull System Data: mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+MessanaInfo push System Data: mApiVer
+PUT not supporting keyword :mApiVer
+Put failed: mApiVer 0.5.2
+MessanaInfo pull System Data: mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+MessanaInfo push System Data: mStatus
+PUT System: {mStatus:1}
+http://192.168.2.65/api/system/status/
+{'value': 1, 'apikey': '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
+<Response [200]>
+Put :mStatus 1
+MessanaInfo pull System Data: mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+MessanaInfo push System Data: mATUcount
+PUT not supporting keyword :mATUcount
+Put failed: mATUcount 1
+MessanaInfo pull System Data: mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+MessanaInfo push System Data: mDHWcount
+PUT not supporting keyword :mDHWcount
+Put failed: mDHWcount 0
+MessanaInfo pull System Data: mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+MessanaInfo push System Data: mFanCoilCount
+PUT not supporting keyword :mFanCoilCount
+Put failed: mFanCoilCount 0
+MessanaInfo pull System Data: mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+MessanaInfo push System Data: mEnergySourceCount
+PUT not supporting keyword :mEnergySourceCount
+Put failed: mEnergySourceCount 1
+MessanaInfo pull System Data: mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+MessanaInfo push System Data: mZoneCount
+PUT not supporting keyword :mZoneCount
+Put failed: mZoneCount 10
+MessanaInfo pull System Data: mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+MessanaInfo push System Data: mMacrozoneCount
+PUT not supporting keyword :mMacrozoneCount
+Put failed: mMacrozoneCount 3
+MessanaInfo pull System Data: mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+MessanaInfo push System Data: mHC_changeoverCount
+PUT not supporting keyword :mHC_changeoverCount
+Put failed: mHC_changeoverCount 1
+MessanaInfo pull System Data: mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+MessanaInfo push System Data: mBufTankCount
+PUT not supporting keyword :mBufTankCount
+Put failed: mBufTankCount 1
+MessanaInfo pull System Data: mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+MessanaInfo push System Data: mUnitTemp
+PUT not supporting keyword :mUnitTemp
+Put failed: mUnitTemp Fahrenheit
+MessanaInfo pull System Data: mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+MessanaInfo push System Data: mEnergySaving
+PUT not supporting keyword :mEnergySaving
+Put failed: mEnergySaving 1
+MessanaInfo pull System Data: mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+MessanaInfo push System Data: mSetback
+PUT System: {mSetback:1}
+http://192.168.2.65/api/system/setback/
+{'value': 1, 'apikey': '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'}
+<Response [200]>
+Put :mSetback 1
+MessanaInfo pull System Data: mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+MessanaInfo push System Data: mExternalAlarm
+PUT not supporting keyword :mExternalAlarm
+Put failed: mExternalAlarm 0
+
+ Macro Zones
+pullMacroZoneKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullMacroZoneDataAll: 0
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataAll: 0
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneDataActive: 0
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pushMacroZoneDataIndividual: 0 mName All
+PUT str: http://192.168.2.65/api/macrozone/name/All
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mName value:', 'All')
+PUT macrozones : mName All
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mName value:', 'All'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pushMacroZoneDataIndividual: 0 mSetPoint 69
+PUT str: http://192.168.2.65/api/macrozone/setpoint/69
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mSetPoint value:', '69')
+PUT macrozones : mSetPoint 69
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mSetPoint value:', '69'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pushMacroZoneDataIndividual: 0 mStatus 1
+PUT str: http://192.168.2.65/api/macrozone/status/1
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mStatus value:', '1')
+PUT macrozones : mStatus 1
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mStatus value:', '1'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pushMacroZoneDataIndividual: 0 mScheduleOn 1
+PUT str: http://192.168.2.65/api/macrozone/scheduleOn/1
+PUT macrozones : mScheduleOn 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneKeys
+pullMacroZoneDataAll: 1
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pullMacroZoneDataIndividual: 1 mStatus
+GETSubNodeData: macrozones 1 mStatus
+pullMacroZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: macrozones 1 mScheduleOn
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataAll: 1
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pullMacroZoneDataIndividual: 1 mStatus
+GETSubNodeData: macrozones 1 mStatus
+pullMacroZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: macrozones 1 mScheduleOn
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+pullMacroZoneDataActive: 1
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pushMacroZoneDataIndividual: 1 mName Upstairs
+PUT str: http://192.168.2.65/api/macrozone/name/Upstairs
+PUT macrozones : mName Upstairs
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pushMacroZoneDataIndividual: 1 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/macrozone/setpoint/70.5
+PUT macrozones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mStatus

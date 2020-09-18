@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 #import polyinterface
+import sys
 import requests
 from subprocess import call
 import json
@@ -8,7 +9,7 @@ from MessanaInfo import MessanaInfo
 
 #LOGGER = polyinterface.LOGGER
         
-#sys.stdout = open('Messanaoutput.txt','wt')
+sys.stdout = open('Messanaoutput.txt','wt')
 messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
@@ -55,100 +56,109 @@ for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']
         messana.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
         if mKey in  messana.mSystem['macrozones']['PUTstr']:
             nodeData = messana.pushMacroZoneDataIndividual(macrozoneNbr, mKey, messana.mSystem['macrozones']['data'][macrozoneNbr][mKey])
-            print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['macrozones']['data'][macrozoneNbr][mKey]))
+            print('PUT macrozones : ' + mKey + ' ' + str( messana.mSystem['macrozones']['data'][macrozoneNbr][mKey]))
             print('nodeData : ' + str(nodeData))
 
+
+
+print ('\n Hot Cold Change Over')  
+for HCCO_Nbr in range(0,messana.mSystem['system']['data']['mHC_changeoverCount']):
+    keys = messana.pullHCCOKeys(HCCO_Nbr)
+    print (keys)
+    messana.pullHCCODataAll(HCCO_Nbr)
+    messana.pullHCCODataActive(HCCO_Nbr)
+    keys = messana.pullHCCOKeys(HCCO_Nbr)
+    print (keys)  
+    for mKey in messana.mSystem['hc_changeover']['GETstr']:
+        messana.pullHCCODataIndividual(HCCO_Nbr, mKey)
+        if mKey in  messana.mSystem['hc_changeover']['PUTstr']:
+            nodeData = messana.pushHCCODataIndividual(HCCO_Nbr, mKey, messana.mSystem['hc_changeover']['data'][HCCO_Nbr][mKey])
+            print('PUT HC changeover : ' + mKey + ' ' + str( messana.mSystem['hc_changeover']['data'][HCCO_Nbr][mKey]))
+            print('nodeData : ' + str(nodeData))
+
+
+print ('\n ATU')  
+for ATU_Nbr in range(0,messana.mSystem['system']['data']['mATUcount']):
+    keys = messana.pullATUKeys(ATU_Nbr)
+    print (keys)
+    messana.pullATUDataAll(ATU_Nbr)
+    messana.pullATUDataActive(ATU_Nbr)
+    keys = messana.pullATUKeys(ATU_Nbr)
+    print (keys)  
+    for mKey in messana.mSystem['atus']['GETstr']:
+        messana.pullATUDataIndividual(ATU_Nbr, mKey)
+        if mKey in  messana.mSystem['atus']['PUTstr']:
+            nodeData = messana.pushATUDataIndividual(ATU_Nbr, mKey, messana.mSystem['atus']['data'][ATU_Nbr][mKey])
+            print('PUT atu : ' + mKey + ' ' + str( messana.mSystem['atus']['data'][ATU_Nbr][mKey]))
+            print('nodeData : ' + str(nodeData))
+
+print ('\n Fan Coil')  
+for FC_Nbr in range(0,messana.mSystem['system']['data']['mFanCoilCount']):
+    keys = messana.pullFanCoilKeys(FC_Nbr)
+    print (keys)
+    messana.pullFanCoilDataAll(FC_Nbr)
+    messana.pullFanCoilDataActive(FC_Nbr)
+    keys = messana.pullFanCoilKeys(FC_Nbr)
+    print (keys)  
+    for mKey in messana.mSystem['fan_coils']['GETstr']:
+        messana.pullFanCoilDataIndividual(FC_Nbr, mKey)
+        if mKey in  messana.mSystem['fan_coils']['PUTstr']:
+            nodeData = messana.pushFanCoilDataIndividual(FC_Nbr, mKey, messana.mSystem['fan_coils']['data'][FC_Nbr][mKey])
+            print('PUT fan coil : ' + mKey + ' ' + str( messana.mSystem['fan_coils']['data'][FC_Nbr][mKey]))
+            print('nodeData : ' + str(nodeData))
+
+
+print ('\n energy_sources')  
+for EnergySourceNbr in range(0,messana.mSystem['system']['data']['mEnergySourceCount']):
+    keys = messana.pullEnergySourceKeys(EnergySourceNbr)
+    print (keys)
+    messana.pullEnergySourceDataAll(EnergySourceNbr)
+    messana.pullEnergySourceDataActive(EnergySourceNbr)
+    keys = messana.pullEnergySourceKeys(EnergySourceNbr)
+    print (keys)  
+    for mKey in messana.mSystem['energy_sources']['GETstr']:
+        messana.pullEnergySourceDataIndividual(EnergySourceNbr, mKey)
+        if messana.mSystem['energy_sources']['data']:
+            if mKey in  messana.mSystem['energy_sources']['PUTstr']:
+                nodeData = messana.pushEnergySourceDataIndividual(EnergySourceNbr, mKey, messana.mSystem['energy_sources']['data'][EnergySourceNbr][mKey])
+                print('PUT Buffer Tank : ' + mKey + ' ' + str( messana.mSystem['energy_sources']['data'][EnergySourceNbr][mKey]))
+                print('nodeData : ' + str(nodeData))
+
+
+print ('\n Buffer Tank')  
+for BufferTankNbr in range(0,messana.mSystem['system']['data']['mBufTankCount']):
+    keys = messana.pullBufferTankKeys(BufferTankNbr)
+    print (keys)
+    messana.pullBufferTankDataAll(BufferTankNbr)
+    messana.pullBufferTankDataActive(BufferTankNbr)
+    keys = messana.pullBufferTankKeys(BufferTankNbr)
+    print (keys)  
+    for mKey in messana.mSystem['buffer_tanks']['GETstr']:
+        messana.pullBufferTankDataIndividual(BufferTankNbr, mKey)
+        if mKey in  messana.mSystem['buffer_tanks']['PUTstr']:
+            nodeData = messana.pushBufferTankDataIndividual(BufferTankNbr, mKey, messana.mSystem['buffer_tanks']['data'][BufferTankNbr][mKey])
+            print('PUT Energy Source : ' + mKey + ' ' + str( messana.mSystem['buffer_tanks']['data'][BufferTankNbr][mKey]))
+            print('nodeData : ' + str(nodeData))
+
+
+
+print ('\n Domestic How Water')  
+for DHW_Nbr in range(0,messana.mSystem['system']['data']['mDHWcount']):
+    keys = messana.pullDHWKeys(DHW_Nbr)
+    print (keys)
+    messana.pullDHWDataAll(DHW_Nbr)
+    messana.pullDHWDataActive(DHW_Nbr)
+    keys = messana.pullDHWKeys(DHW_Nbr)
+    print (keys)  
+    for mKey in messana.mSystem['domsetic_hot_waters']['GETstr']:
+        messana.pullDHWDataIndividual(DHW_Nbr, mKey)
+        if mKey in  messana.mSystem['domsetic_hot_waters']['PUTstr']:
+            nodeData = messana.pushDHWDataIndividual(DHW_Nbr, mKey, messana.mSystem['domsetic_hot_waters']['data'][DHW_Nbr][mKey])
+            print('PUT Domestic Hot Water : ' + mKey + ' ' + str( messana.mSystem['domsetic_hot_waters']['data'][DHW_Nbr][mKey]))
+            print('nodeData : ' + str(nodeData))
+
+
+
 #messana.PUTSystemData(msysInfo)
-'''
-print('\nHC changeover')
-HC_CoDict = defaultdict(dict)   
-for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    HC_CoDict[HC_CoNbr] = messana.pullHC_COData(HC_CoNbr)  
-for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    messana.pushHC_COData(HC_CoNbr, HC_CoDict)  
 
-print('\nATU')
-atuDict = defaultdict(dict)   
-for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    atuDict[atuNbr] = messana.pullATUData(atuNbr)  
-for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    messana.pushATUData(atuNbr, atuDict)
-
-print('\n END')
-
-for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
-    messana.pullSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
-
-print('\nhc_changeover')
-for hcchangeoverNbr in range (0,systemDict['mHCGroupCount']):
-    messana.pullSubSystemData(messana.mSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
-
-print('\nFAN COILS')
-for fcNbr in range(0,systemDict['mFanCoilCount']):
-    messana.pullSubSystemData(messana.mSystem['fan_coils'], fcNbr, fan_coilsDict)
-
-print('\nATU')
-for zoneNbr in range(0,systemDict['mATUcount']):
-    messana.pullSubSystemData(messana.mSystem['atus'], zoneNbr, atusDict)
-
-print('\nBUFFER TANK')
-for zoneNbr in range(0,systemDict['mBufTankCount']):
-    pullSubSystemData(messana.mSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
-
-print('\nENERGY SOURCE')
-for zoneNbr in range(0,systemDict['mEnergySourceCount']):
-    messana.pullSubSystemData(messana.mSystem['energy_sources'], zoneNbr, energy_sourcesDict)
-
-print('\nDHW')
-for zoneNbr in range(0,systemDict['mDHWcount']):
-    messana.pullSubSystemData(messana.mSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
-
-print('\n end extracting data')
-
-print('\nSYSTEM - PUT')
-for mKey in systemDict:
-    pushmessana.mSystem(messana.mSystem['system'], mKey, systemDict[mKey], systemDict)
-
-print('\nZONES - PUT')
-for zoneNbr in zoneDict:
-    for mKey in zoneDict[zoneNbr]:
-        pushMessanaSubSystem(messana.mSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
-        
-
-print('\nMACROZONES - PUT')
-for macrozoneNbr in macrozoneDict:
-    for mKey in macrozoneDict[macrozoneNbr]:
-        PUTSubNode(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
-
-print('\nhc_changeover - PUT')
-for hcgroupcountNbr in hc_changeoverDict:
-    for mKey in hc_changeoverDict[hcgroupcountNbr]:
-        PUTSubNode(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
-
-print('\nFAN COILS - PUT')
-for fan_coilNbr in fan_coilsDict:
-    for mKey in fan_coilsDict[fan_coilNbr]:
-        PUTSubNode(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
-
-print('\nATU - PUT')
-for atuNbr in atusDict:
-    for mKey in atusDict[atuNbr]:
-        PUTSubNode(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
-
-print('\nBUFFER TANK - PUT')
-for bufferTankNbr in buffer_tanksDict:
-    for mKey in buffer_tanksDict[bufferTankNbr]:
-        PUTSubNode(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
-
-print('\nENERGY SOURCE - PUT')
-for energySourceNbr in energy_sourcesDict:
-    for mKey in energy_sourcesDict[energySourceNbr]:
-        PUTSubNode(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
-
-print('\nDHW - PUT')
-for DHwaterNbr in domsetic_hot_waterDict:
-    for mKey in domsetic_hot_waterDict[DHwaterNbr]:
-        pushMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
-print('\nEND put')
-'''
-#sys.stdout.close() 
+sys.stdout.close() 

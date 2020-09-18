@@ -121,19 +121,19 @@ class MessanaInfo:
                                             'data' : {}
                         },
                         'fan_coils' :{'GETstr' : {
-                                        'mName':'/api/fan/name/'
-                                        ,'mState':'/api/fan/state/'
-                                        ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
-                                        ,'mHeatingSpeed':'/api/fan/heatingSpeed/'
-                                        ,'mType':'/api/fan/type/'
-                                        ,'mAlarmOn':'/api/fan/alarmOn/'
+                                        'mName':'/api/fcu/name/'
+                                        ,'mState':'/api/fcu/state/'
+                                        ,'mCoolingSpeed':'/api/fcu/coolingSpeed/'
+                                        ,'mHeatingSpeed':'/api/fcu/heatingSpeed/'
+                                        ,'mType':'/api/fcu/type/'
+                                        ,'mAlarmOn':'/api/fcu/alarmOn/'
                                         }
                                      ,
                                      'PUTstr':{                                        
-                                        'mName':'/api/fan/name/'
-                                        ,'mState':'/api/fan/state/'
-                                        ,'mCoolingSpeed':'/api/fan/coolingSpeed/'
-                                        ,'mHeatingSpeed':'/api/fan/heatingSpeed/'}
+                                        'mName':'/api/fcu/name/'
+                                        ,'mState':'/api/fcu/state/'
+                                        ,'mCoolingSpeed':'/api/fcu/coolingSpeed/'
+                                        ,'mHeatingSpeed':'/api/fcu/heatingSpeed/'}
                                      ,
                                      'active':['mAlarmOn','mCoolingSpeed','mHeatingSpeed' ]
                                      ,
@@ -182,31 +182,31 @@ class MessanaInfo:
                                  'data' : {}
                         },
                         'energy_sources':{'GETstr' : {
-                                            'mName':'/api/enr/name/'
-                                            ,'mStatus':'/api/enr/status/'
-                                            ,'mDHWstatus':'/api/enr/dhwStatus/'
-                                            ,'mType':'/api/enr/type/'
-                                            ,'mAlarmOn':'/api/enr/alarmOn/' 
+                                            'mName':'/api/energySource/name/'
+                                            ,'mStatus':'/api/energySource/status/'
+                                            ,'mDHWstatus':'/api/energySource/dhwStatus/'
+                                            ,'mType':'/api/energySource/type/'
+                                            ,'mAlarmOn':'/api/energySource/alarmOn/' 
                                             }
                                          ,
-                                         'PUTstr':{'mName':'/api/enr/name/'}
+                                         'PUTstr':{'mName':'/api/energySource/name/'}
                                          ,
                                          'active':['mAlarmOn']
                                          ,
                                          'data' : {}
                         }, 
                         'buffer_tanks': {'GETstr' : {
-                                            'mName':'/api/tnk/name/'
-                                            ,'mStatus':'/api/tnk/status/'
-                                            ,'mMode':'/api/tnk/mode/'
-                                            ,'mTemp':'/api/tnk/temperature/'
-                                            ,'mAlarmOn':'/api/tnk/alarmOn/'
+                                            'mName':'/api/bufferTank/name/'
+                                            ,'mStatus':'/api/bufferTank/status/'
+                                            ,'mMode':'/api/bufferTank/mode/'
+                                            ,'mTemp':'/api/bufferTank/temperature/'
+                                            ,'mAlarmOn':'/api/bufferTank/alarmOn/'
                                             }
                                          ,
                                          'PUTstr':{
-                                            'mName':'/api/tnk/name/'
-                                            ,'mStatus':'/api/tnk/status/'
-                                            ,'mMode':'/api/tnk/mode/' 
+                                            'mName':'/api/bufferTank/name/'
+                                            ,'mStatus':'/api/bufferTank/status/'
+                                            ,'mMode':'/api/bufferTank/mode/' 
                                             }
                                          ,
                                          'active':['mTemp', 'mAlarmOn']
@@ -379,6 +379,8 @@ class MessanaInfo:
             mData['statusOK'] =False
             return False
 
+    #System
+
     def pullSystemDataAll(self):
         #LOGGER.info('pull Sytem Data')
         ##LOGGER.info(self.mSystem['system'])
@@ -426,10 +428,10 @@ class MessanaInfo:
         return(keys)
     
 
-
+    # Zones
     
     def pullZoneDataAll(self, zoneNbr):
-        print('pullZoneDataMessanaAll: ' + str(zoneNbr))
+        print('pullZoneDataAll: ' + str(zoneNbr))
         for mKey in self.mSystem['zones']['GETstr']:
             self.pullZoneDataIndividual(zoneNbr, mKey)
 
@@ -440,11 +442,11 @@ class MessanaInfo:
             self.pullZoneDataIndividual(zoneNbr, mKey)
         
     def pullZoneDataIndividual(self, zoneNbr, mKey):  
-        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
+        print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         self.GETNodeData('zones', zoneNbr, mKey)
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
-        print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
         status = self.PUTNodeData('zones', zoneNbr, mKey, value)
         return(status)
 
@@ -465,13 +467,18 @@ class MessanaInfo:
             print('No Keys found - trying to fetch Messana data')
             self.pullSystemDataAll()
             self.pullZoneDataAll(zoneNbr)
-            for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                if not(mKey in keys):
-                    keys.append(mKey)
+            if self.mSystem['zones']['data']:
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No zones present')
         return(keys)
 
+    #MacroZone
+
     def pullMacroZoneDataAll(self, macrozoneNbr):
-        print('pullMacroZoneDataMessanaAll: ' + str(macrozoneNbr))
+        print('pullMacroZoneDataAll: ' + str(macrozoneNbr))
         for mKey in self.mSystem['macrozones']['GETstr']:
             self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
 
@@ -482,7 +489,7 @@ class MessanaInfo:
             self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
         
     def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey):  
-        print('pullMacroZoneDataMessanaIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
+        print('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
         self.GETNodeData('macrozones', macrozoneNbr, mKey)
 
     def pullMacroZoneKeys(self, macrozoneNbr):
@@ -502,18 +509,309 @@ class MessanaInfo:
             print('No Keys found - trying to fetch Messana data')
             self.pullSystemDataAll()
             self.pullMacroZoneDataAll(macrozoneNbr)
-            for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
-                if not(mKey in keys):
-                    keys.append(mKey)
+            if self.mSystem['macrozones']['data']: 
+                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No macro zons present')
         return(keys)
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
-        print('pullMacroZoneDataMessanaIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
         status = self.PUTNodeData('macrozones', macrozoneNbr, mKey, value)
         return(status)
 
 
-   
+    # Hot Cold Change Over
+
+    def pullHCCODataAll(self, HCCO_Nbr):
+        print('pullHCCODataAll: ' + str(HCCO_Nbr))
+        for mKey in self.mSystem['hc_changeover']['GETstr']:
+            self.pullHCCODataIndividual(HCCO_Nbr, mKey)
+
+
+    def pullHCCODataActive(self, HCCO_Nbr):
+        print('pullHCCODataActive: ' + str(HCCO_Nbr))
+        for mKey in self.mSystem['hc_changeover']['active']:
+            self.pullHCCODataIndividual(HCCO_Nbr, mKey)
+        
+    def pullHCCODataIndividual(self, HCCO_Nbr, mKey):  
+        print('pullHCCODataMessanaIndividual: ' +str(HCCO_Nbr)  + ' ' + mKey)    
+        self.GETNodeData('hc_changeover', HCCO_Nbr, mKey)
+
+    def pullHCCOKeys(self, HCCO_Nbr):
+        print('pullHCCOKeys')
+        keys=[]
+        if self.mSystem['hc_changeover']['data']:
+            if HCCO_Nbr in self.mSystem['hc_changeover']['data']: 
+                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullHCCODataAll(HCCO_Nbr)
+                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullHCCODataAll(HCCO_Nbr)
+            if self.mSystem['hc_changeover']['data']:
+                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('NO Hot Cold Change Over present')
+        return(keys)
+
+    def pushHCCODataIndividual(self, HCCO_Nbr, mKey, value):
+        print('pushHCCODataMessanaIndividual: ' +str(HCCO_Nbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('hc_changeover', HCCO_Nbr, mKey, value)
+        return(status)
+
+    #ATU
+
+    def pullATUDataAll(self, ATUNbr):
+        print('pullATUDataAll: ' + str(ATUNbr))
+        for mKey in self.mSystem['atus']['GETstr']:
+            self.pullATUDataIndividual(ATUNbr, mKey)
+
+
+    def pullATUDataActive(self, ATUNbr):
+        print('pullATUDataActive: ' + str(ATUNbr))
+        for mKey in self.mSystem['atus']['active']:
+            self.pullATUDataIndividual(ATUNbr, mKey)
+        
+    def pullATUDataIndividual(self, ATUNbr, mKey):  
+        print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
+        self.GETNodeData('atus', ATUNbr, mKey)
+
+    def pullATUKeys(self, ATUNbr):
+        print('pullATUKeys')
+        keys=[]
+        if self.mSystem['atus']['data']:
+            if ATUNbr in self.mSystem['atus']['data']: 
+                for mKey in self.mSystem['atus']['data'][ATUNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullATUDataAll(ATUNbr)
+                for mKey in self.mSystem['atus']['data'][ATUNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullATUDataAll(ATUNbr)
+            if self.mSystem['atus']['data']:
+                for mKey in self.mSystem['atus']['data'][ATUNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No ATU present')
+        return(keys)
+
+    def pushATUDataIndividual(self, ATUNbr, mKey, value):
+        print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('atus', ATUNbr, mKey, value)
+        return(status)
+
+    #Fan Coils
+
+    def pullFanCoilDataAll(self, FC_Nbr):
+        print('pullFanCoilDataAll: ' + str(FC_Nbr))
+        for mKey in self.mSystem['fan_coils']['GETstr']:
+            self.pullFanCoilDataIndividual(FC_Nbr, mKey)
+
+
+    def pullFanCoilDataActive(self, FC_Nbr):
+        print('pullFanCoilDataActive: ' + str(FC_Nbr))
+        for mKey in self.mSystem['fan_coils']['active']:
+            self.pullFanCoilDataIndividual(FC_Nbr, mKey)
+        
+    def pullFanCoilDataIndividual(self, FC_Nbr, mKey):  
+        print('pullFanCoilDataIndividual: ' +str(FC_Nbr)  + ' ' + mKey)    
+        self.GETNodeData('fan_coils', FC_Nbr, mKey)
+
+    def pullFanCoilKeys(self, FC_Nbr):
+        print('pullFanCoilKeys')
+        keys=[]
+        if self.mSystem['fan_coils']['data']:
+            if FC_Nbr in self.mSystem['fan_coils']['data']: 
+                for mKey in self.mSystem['fan_coils']['data'][FC_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullFanCoilDataAll(FC_Nbr)
+                for mKey in self.mSystem['fan_coils']['data'][FC_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullFanCoilDataAll(FC_Nbr)
+            if self.mSystem['fan_coils']['data']:
+                for mKey in self.mSystem['fan_coils']['data'][FC_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No Fan Coil present')
+        return(keys)
+
+    def pushFanCoilDataIndividual(self, FC_Nbr, mKey, value):
+        print('pushFanCoilDataIndividual: ' +str(FC_Nbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('fan_coils', FC_Nbr, mKey, value)
+        return(status)
+
+
+
+    #energy_sources
+
+    def pullEnergySourceDataAll(self, EnergySourceNbr):
+        print('pullEnergySourceDataAll: ' + str(EnergySourceNbr))
+        for mKey in self.mSystem['energy_sources']['GETstr']:
+            self.pullEnergySourceDataIndividual(EnergySourceNbr, mKey)
+
+
+    def pullEnergySourceDataActive(self, EnergySourceNbr):
+        print('pullEnergySourceDataActive: ' + str(EnergySourceNbr))
+        for mKey in self.mSystem['energy_sources']['active']:
+            self.pullEnergySourceDataIndividual(EnergySourceNbr, mKey)
+        
+    def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey):  
+        print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
+        self.GETNodeData('energy_sources', EnergySourceNbr, mKey)
+
+    def pullEnergySourceKeys(self, EnergySourceNbr):
+        print('pullEnergySourceKeys')
+        keys=[]
+        if  self.mSystem['energy_sources']['data']:
+            if EnergySourceNbr in self.mSystem['energy_sources']['data']: 
+                for mKey in self.mSystem['energy_sources']['data'][EnergySourceNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+                    else:
+                        self.pullEnergySourceDataAll(EnergySourceNbr)
+                        for mKey in self.mSystem['energy_sources']['data'][EnergySourceNbr]:
+                            if not(mKey in keys):
+                                keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullEnergySourceDataAll(EnergySourceNbr)
+            if  self.mSystem['energy_sources']['data']:
+                if EnergySourceNbr in self.mSystem['energy_sources']['data']: 
+                    for mKey in self.mSystem['energy_sources']['data'][EnergySourceNbr]:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                print('No Energy Source Present')
+        return(keys)
+
+    def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
+        print('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('energy_sources', EnergySourceNbr, mKey, value)
+        return(status)
+
+
+     #Buffer Tank
+
+    def pullBufferTankDataAll(self, BT_Nbr):
+        print('pullBufferTankDataAll: ' + str(BT_Nbr))
+        for mKey in self.mSystem['buffer_tanks']['GETstr']:
+            self.pullBufferTankDataIndividual(BT_Nbr, mKey)
+
+
+    def pullBufferTankDataActive(self, BT_Nbr):
+        print('pullBufferTankDataActive: ' + str(BT_Nbr))
+        for mKey in self.mSystem['buffer_tanks']['active']:
+            self.pullBufferTankDataIndividual(BT_Nbr, mKey)
+        
+    def pullBufferTankDataIndividual(self, BT_Nbr, mKey):  
+        print('pullBufferTankDataIndividual: ' +str(BT_Nbr)  + ' ' + mKey)    
+        self.GETNodeData('buffer_tanks', BT_Nbr, mKey)
+
+    def pullBufferTankKeys(self, BT_Nbr):
+        print('pullBufferTankKeys')
+        keys=[]
+        if self.mSystem['buffer_tanks']['data']:
+            if BT_Nbr in self.mSystem['buffer_tanks']['data']: 
+                for mKey in self.mSystem['buffer_tanks']['data'][BT_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullBufferTankDataAll(BT_Nbr)
+                for mKey in self.mSystem['buffer_tanks']['data'][BT_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullBufferTankDataAll(BT_Nbr)
+            if self.mSystem['buffer_tanks']['data']:
+                for mKey in self.mSystem['buffer_tanks']['data'][BT_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No Buffer Tank present')
+        return(keys)
+
+
+    def pushBufferTankDataIndividual(self, BT_Nbr, mKey, value):
+        print('pushBufferTankDataIndividual: ' +str(BT_Nbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('buffer_tanks', BT_Nbr, mKey, value)
+        return(status)
+
+
+        #Domestic Hot Water
+
+    def pullDHWDataAll(self, DHW_Nbr):
+        print('pullDHWDataAll: ' + str(DHW_Nbr))
+        for mKey in self.mSystem['domsetic_hot_waters']['GETstr']:
+            self.pullDHWDataIndividual(DHW_Nbr, mKey)
+
+
+    def pullDHWDataActive(self, DHW_Nbr):
+        print('pullDHWDataActive: ' + str(DHW_Nbr))
+        for mKey in self.mSystem['domsetic_hot_waters']['active']:
+            self.pullDHWDataIndividual(DHW_Nbr, mKey)
+        
+    def pullDHWDataIndividual(self, DHW_Nbr, mKey):  
+        print('pullDHWDataIndividual: ' +str(DHW_Nbr)  + ' ' + mKey)    
+        self.GETNodeData('domsetic_hot_waters', DHW_Nbr, mKey)
+
+    def pullDHWKeys(self, DHW_Nbr):
+        print('pullDHWKeys')
+        keys=[]
+        if self.mSystem['domsetic_hot_waters']['data']:
+            if DHW_Nbr in self.mSystem['domsetic_hot_waters']['data']: 
+                for mKey in self.mSystem['domsetic_hot_waters']['data'][DHW_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullDHWDataAll(DHW_Nbr)
+                for mKey in self.mSystem['domsetic_hot_waters']['data'][DHW_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullDHWDataAll(DHW_Nbr)
+            if self.mSystem['domsetic_hot_waters']['data']:
+                for mKey in self.mSystem['domsetic_hot_waters']['data'][DHW_Nbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                print('No Domestic Hot Water present')
+        return(keys)
+
+    def pushDHWDataIndividual(self, DHW_Nbr, mKey, value):
+        print('pushDHWDataIndividual: ' +str(DHW_Nbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('domsetic_hot_waters', DHW_Nbr, mKey, value)
+        return(status)
+
+
     '''
     def pullSubSystemData(self, mSubSysKey, instNbr):
         subSystemDict = defaultdict(dict)
@@ -564,41 +862,7 @@ class MessanaInfo:
             print('Reading ATU System')
 
     
-    def pullHC_COData(self, hcchangeoverNbr):
-        return self.hc_changeoverDict[hcchangeoverNbr]
-
-    def pullAllHC_CODataMessana(self):
-        for hcchangeoverNbr in range (0,self.systemDict['mHC_changeoverCount']):
-            self.pullHC_COData(hcchangeoverNbr)
-
-    def pullHC_CODataMessana(self, mHCCoNbr):
-        tempDict = defaultdict(dict)
-        tempDict = self.pullSubSystemData(self.mSystem['hc_changeover'], mHCCoNbr)
-        for key in tempDict[mHCCoNbr]:
-            self.hc_changeoverDict[mHCCoNbr][key]=tempDict[mHCCoNbr][key]
-
-    def pushHC_COData(self, hcchangeoverNbr, hc_changeoverDict):
-        for mKey in hc_changeoverDict[hcchangeoverNbr]:
-            if mKey in self.mSystemPUT['hc_changeover']:
-                self.PUTSubNode('hc_changeover', hcchangeoverNbr, mKey, hc_changeoverDict[hcchangeoverNbr])
-
-    def pullAllATUDataMessana(self):
-        for atuNbr in range(0,self.systemDict['mATUcount']):
-            self.pullATUDataMessana(atuNbr)
-
-    def pullATUDataMessana(self, atuNbr):
-        tempDict = defaultdict(dict)
-        tempDict = self.pullSubSystemData(self.mSystem['atus'], atuNbr)
-        for key in tempDict[atuNbr]:
-            self.atuDict[atuNbr][key]=tempDict[atuNbr][key]  
- 
-    def pullATUData(self, atuNbr):
-        return self.atuDict[atuNbr]
-
-    def pushATUData(self, atuNbr, atuDict):
-        for mKey in atuDict[atuNbr]:
-            if mKey in self.mSystemPUT['atus']:
-                self.PUTSubNode('atus', atuNbr, mKey, atuDict[atuNbr])
+   
 
     
     def pullFCData(self, fcNbr):
