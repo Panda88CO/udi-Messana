@@ -1,5 +1,4 @@
 #!/usr/bin/env python3
-#import polyinterface
 import requests
 from subprocess import call
 import json
@@ -486,74 +485,35 @@ class MessanaInfo:
         print('pullZoneDataMessanaIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         self.GETNodeData('zones', zoneNbr, mKey)
 
-
-    '''
-    def pushSystemDataAll(self):
-        for mKey in self.systemDict:
-            if mKey in self.mSystemPUT['system']:
-                self.PUTSystem(mKey, self.systemDict[mKey])
-
-    def pushSystemData(self, mKey, value):
-        self.PUTSystem(mKey, value)
-
-
-    #def GETSubNode(self, mKey, subNodeDict)
-
-        
-    def PUTSubNode(self, mSystemKey, subSysNbr, mKey, subSysDict):
-        PUTStr = self.IP + self.mSystem[mSystemKey][mKey]
-        value = subSysDict[mKey]
-        print('PUT str: ' + PUTStr + str(value))
-
-        mData = {'id':subSysNbr, 'value': value, self.APIKey : self.APIKeyVal}
-        resp = requests.put(PUTStr, json=mData)
-    
-        if str(resp) == self.RESPONSE_OK:
-            subSysDict[mKey] = value
-            return True
-        elif str(resp) == self.RESPONSE_NO_SUPPORT:
-            temp1 =  resp.content
-            res_dict = json.loads(temp1.decode('utf-8')) 
-            mData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-            print(mData['error'])
-            mData['statusOK'] =False
-        elif str(resp) == self.RESPONSE_NO_RESPONSE:
-            mData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
-            print(mData['error'])
-            mData['statusOK'] =False
+    def pullMacroZoneKeys(self, macrozoneNbr):
+        print('pullMacroZoneKeys')
+        keys=[]
+        if self.mSystem['macrozones']['data']:
+            if macrozoneNbr in self.mSystem['macrozones']['data']: 
+                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
+            else:
+                self.pullMacroZoneDataAll(macrozoneNbr)
+                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
+                    if not(mKey in keys):
+                        keys.append(mKey)
         else:
-            mData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
-            print(mData['error'])
-            mData['statusOK'] =False
-            return False
+            print('No Keys found - trying to fetch Messana data')
+            self.pullSystemDataAll()
+            self.pullMacroZoneDataAll(macrozoneNbr)
+            for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
+                if not(mKey in keys):
+                    keys.append(mKey)
+        return(keys)
 
-    def GETSubNodeData(self, mSubSysKey, instNbr, mKey):
-        print('GETSubNodeData: ' + mSubSysKey + ' ' + str(instNbr)+ ' ' + mKey)
-        GETStr =self.IP+self.mSystem[mSubSysKey][mKey]+str(instNbr)+'?'+ self.APIStr 
-        mData = {}
-        subSysTemp = requests.get(GETStr)
-        if str(subSysTemp) == self.RESPONSE_OK:
-            subSysTemp = subSysTemp.json()
-            mData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
-            mData['statusOK'] =True
-        elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
-            temp1 =  subSysTemp.content
-            res_dict = json.loads(temp1.decode('utf-8')) 
-            mData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            mData['statusOK'] =False
-        elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
-            mData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            mData['statusOK'] =False
-        else:
-            mData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
-            mData['statusOK'] =False
-        return mData
+    def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
+        print('pullMacroZoneDataMessanaIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        status = self.PUTNodeData('macrozones', macrozoneNbr, mKey, value)
+        return(status)
 
-     def pullSubNodeDataAll( mSubSysKey, instNbr):
-        print('pullSubnNodeDataAll: ' + mSubSysKey + ' ' + str(instNbr) )
-        for mKey in 
-    '''
 
+   
     '''
     def pullSubSystemData(self, mSubSysKey, instNbr):
         subSystemDict = defaultdict(dict)
@@ -603,49 +563,7 @@ class MessanaInfo:
         if self.systemDict['mATUCount'] > 0:
             print('Reading ATU System')
 
-    def pullZoneDataMessana(self, zoneNbr):
-        tempDict = defaultdict(dict)
-        tempDict = self.pullSubSystemData(self.mSystem['zones'], zoneNbr)
-        for key in tempDict[zoneNbr]:
-                    self.zoneDict[zoneNbr][key]=tempDict[zoneNbr][key]
-
-    def pullZoneData(self, zoneNbr):
-        print('MessanaInfo pull ZONE Data')
-        return(self.zoneDict[zoneNbr])
     
-    def pullAllZoneDataMessana(self):      
-        for zoneNbr in range(0,int(self.systemDict['mZoneCount']) ):
-            self.pullZoneDataMessana(zoneNbr)
-    
-    def pushZoneData(self, zoneNbr, extZoneDict):
-        print(extZoneDict)
-        for mKey in extZoneDict:
-            if mKey in self.mSystemPUT['zones']:
-                # only update changed values
-                if extZoneDict[mKey] != self.zoneDict[zoneNbr][mKey]:
-                    self.zoneDict[zoneNbr][mKey] = extZoneDict[mKey]
-                    self.PUTSubNode('zones', zoneNbr, mKey, self.zoneDict)
-
-
-    def pullMacroZoneDataMessana(self, mmacrozoneNbr):
-        tempDict = defaultdict(dict)
-        tempDict = self.pullSubSystemData(self.mSystem['macrozones'], mmacrozoneNbr)
-        #print(tempDict)
-        for key in tempDict[mmacrozoneNbr]:
-            self.macrozoneDict[mmacrozoneNbr][key]=tempDict[mmacrozoneNbr][key]   
-
-    def pullAllMacroZoneDataMessana(self):
-        for mzoneNbr in range(0,self.systemDict['mMacrozoneCount']):
-            self.pullMacroZoneDataMessana(mzoneNbr)
-            
-    def pullMacroZoneData(self, mzoneNbr):
-        return self.macrozoneDict[mzoneNbr]
-
-    def pushMacroZoneData(self, macrozoneNbr, macrozoneDict):
-        for mKey in macrozoneDict[macrozoneNbr]:
-            if mKey in self.mSystemPUT['macrozones']:
-                self.PUTSubNode('macrozones', macrozoneNbr, mKey, macrozoneDict[macrozoneNbr])
-
     def pullHC_COData(self, hcchangeoverNbr):
         return self.hc_changeoverDict[hcchangeoverNbr]
 
@@ -716,151 +634,3 @@ class MessanaInfo:
             self.pullDHWData(dhwNbr)
 
     '''
-
-        
-#sys.stdout = open('Messanaoutput.txt','wt')
-messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-
-
-#Retrive basic system info
-print('\nSYSTEM')
-#systemKeys = messana.pullSystemKeys()
-#print(systemKeys)
-messana.pullSystemDataAll()
-systemKeys = messana.pullSystemKeys()
-print(systemKeys)
-messana.pullSystemDataActive()
-for mKey in messana.mSystem['system']['GETstr']:
-    messana.pullSystemDataIndividual(mKey)
-    if messana.pushSystemDataIndividual(mKey,messana.mSystem['system']['data'][mKey] ):
-        print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
-    else:
-        print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
-
-print ('\n Zones')
-
-for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
-    keys = messana.pullZoneKeys(zoneNbr)
-    print (keys)
-    messana.pullZoneDataAll(zoneNbr)
-    messana.pullZoneDataActive(zoneNbr)
-    keys = messana.pullZoneKeys(zoneNbr)
-    print (keys)  
-    for mKey in messana.mSystem['zones']['GETstr']:
-        messana.pullZoneDataIndividual(zoneNbr, mKey)
-        nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
-        print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
-        print('nodeData : ' + str(nodeData))
-
-print ('\n Macro Zones')    
-#messana.PUTSystemData(msysInfo)
-'''
-print('\nZONES')
-ZoneDict = defaultdict(dict) 
-for zoneNbr in range(0,msysInfo['mZoneCount']):
-    ZoneDict[zoneNbr] = messana.pullZoneData(zoneNbr)
-
-for zoneNbr in range(0,msysInfo['mZoneCount']):
-    messana.pushZoneData(zoneNbr, ZoneDict)
-
-
-print('\nMACROZONES')
-MacroZoneDict = defaultdict(dict)   
-for macroZoneNbr in range(0,  msysInfo['mMacrozoneCount'] ):
-    MacroZoneDict[macroZoneNbr] = messana.pullMacroZoneData(macroZoneNbr)  
-
-for macroZoneNbr in range(0, msysInfo['mMacrozoneCount']):
-    messana.pushMacroZoneData(macroZoneNbr, MacroZoneDict)
-
-print('\nHC changeover')
-HC_CoDict = defaultdict(dict)   
-for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    HC_CoDict[HC_CoNbr] = messana.pullHC_COData(HC_CoNbr)  
-for HC_CoNbr in range(0,  msysInfo['mHC_changeoverCount'] ):
-    messana.pushHC_COData(HC_CoNbr, HC_CoDict)  
-
-print('\nATU')
-atuDict = defaultdict(dict)   
-for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    atuDict[atuNbr] = messana.pullATUData(atuNbr)  
-for atuNbr in range(0,  msysInfo['mATUcount'] ):
-    messana.pushATUData(atuNbr, atuDict)
-
-print('\n END')
-
-for mzoneNbr in range(0,systemDict['mMacrozoneCount']):
-    messana.pullSubSystemData(messana.mSystem['macrozones'], mzoneNbr, macrozoneDict)
-
-print('\nhc_changeover')
-for hcchangeoverNbr in range (0,systemDict['mHCGroupCount']):
-    messana.pullSubSystemData(messana.mSystem['hc_changeover'],hcchangeoverNbr , hc_changeoverDict)
-
-print('\nFAN COILS')
-for fcNbr in range(0,systemDict['mFanCoilCount']):
-    messana.pullSubSystemData(messana.mSystem['fan_coils'], fcNbr, fan_coilsDict)
-
-print('\nATU')
-for zoneNbr in range(0,systemDict['mATUcount']):
-    messana.pullSubSystemData(messana.mSystem['atus'], zoneNbr, atusDict)
-
-print('\nBUFFER TANK')
-for zoneNbr in range(0,systemDict['mBufTankCount']):
-    pullSubSystemData(messana.mSystem['buffer_tanks'], zoneNbr, buffer_tanksDict)
-
-print('\nENERGY SOURCE')
-for zoneNbr in range(0,systemDict['mEnergySourceCount']):
-    messana.pullSubSystemData(messana.mSystem['energy_sources'], zoneNbr, energy_sourcesDict)
-
-print('\nDHW')
-for zoneNbr in range(0,systemDict['mDHWcount']):
-    messana.pullSubSystemData(messana.mSystem['domsetic_hot_waters'], zoneNbr, domsetic_hot_waterDict)
-
-print('\n end extracting data')
-
-print('\nSYSTEM - PUT')
-for mKey in systemDict:
-    pushmessana.mSystem(messana.mSystem['system'], mKey, systemDict[mKey], systemDict)
-
-print('\nZONES - PUT')
-for zoneNbr in zoneDict:
-    for mKey in zoneDict[zoneNbr]:
-        pushMessanaSubSystem(messana.mSystem['zones'], mKey, zoneNbr,zoneDict[zoneNbr][mKey], zoneDict)
-        
-
-print('\nMACROZONES - PUT')
-for macrozoneNbr in macrozoneDict:
-    for mKey in macrozoneDict[macrozoneNbr]:
-        PUTSubNode(messana.mSystem['macrozones'], mKey, macrozoneNbr, macrozoneDict[macrozoneNbr][mKey], macrozoneDict)
-
-print('\nhc_changeover - PUT')
-for hcgroupcountNbr in hc_changeoverDict:
-    for mKey in hc_changeoverDict[hcgroupcountNbr]:
-        PUTSubNode(messana.mSystem['hc_changeover'], mKey, hcgroupcountNbr, hc_changeoverDict[hcgroupcountNbr][mKey], hc_changeoverDict)
-
-print('\nFAN COILS - PUT')
-for fan_coilNbr in fan_coilsDict:
-    for mKey in fan_coilsDict[fan_coilNbr]:
-        PUTSubNode(messana.mSystem['fan_coils'], mKey, fan_coilNbr, fan_coilsDict[fan_coilNbr][mKey], fan_coilsDict)
-
-print('\nATU - PUT')
-for atuNbr in atusDict:
-    for mKey in atusDict[atuNbr]:
-        PUTSubNode(messana.mSystem['atus'], mKey, atuNbr, atusDict[atuNbr][mKey],  atusDict)
-
-print('\nBUFFER TANK - PUT')
-for bufferTankNbr in buffer_tanksDict:
-    for mKey in buffer_tanksDict[bufferTankNbr]:
-        PUTSubNode(messana.mSystem['buffer_tanks'], mKey, bufferTankNbr, buffer_tanksDict[bufferTankNbr][mKey], buffer_tanksDict)
-
-print('\nENERGY SOURCE - PUT')
-for energySourceNbr in energy_sourcesDict:
-    for mKey in energy_sourcesDict[energySourceNbr]:
-        PUTSubNode(messana.mSystem['energy_sources'], mKey, energySourceNbr, energy_sourcesDict[energySourceNbr][mKey], energy_sourcesDict)
-
-print('\nDHW - PUT')
-for DHwaterNbr in domsetic_hot_waterDict:
-    for mKey in domsetic_hot_waterDict[DHwaterNbr]:
-        pushMessanaSubSystem(messana.mSystem['domsetic_hot_waters'], mKey, DHwaterNbr, domsetic_hot_waterDict[DHwaterNbr][mKey], domsetic_hot_waterDict)
-print('\nEND put')
-'''
-#sys.stdout.close() 
