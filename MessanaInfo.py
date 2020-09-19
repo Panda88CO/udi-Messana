@@ -864,37 +864,5 @@ class MessanaInfo:
     
    
 
-    
-    def pullFCData(self, fcNbr):
-        self.pullSubSystemData(self.mSystem['fan_coils'], fcNbr, self.fan_coilsDict)
-
-    def pullAllFCData(self):
-       for fcNbr in range(0,self.systemDict['mFanCoilCount']):
-           self.pullFCData(fcNbr)
-
-
-
-
-    def pullEnergySourceData(self, esNbr):
-        self.pullSubSystemData(self.mSystem['energy_sources'], esNbr, self.energy_sourcesDict)
-
-    def pullAllEnergySourceData(self):
-        for esNbr in range(0,self.systemDict['mEnergySourceCount']):
-            self.pullEnergySourceData(esNbr)
-
-    def pullBufTData(self, btNbr):
-            self.pullSubSystemData(self.mSystem['buffer_tanks'], btNbr, self.buffer_tanksDict)
-
-    def pullAllBufTData(self):
-        for btNbr in range(0,self.systemDict['mBufTankCount']):
-            self.pullBufTData(btNbr)
-
-
-    def pullDHWData(self, dhwNbr):
-        self.pullSubSystemData(self.mSystem['domsetic_hot_waters'], dhwNbr, self.domsetic_hot_waterDict)
-
-    def pullAllDHWData(self):
-        for dhwNbr in range(0,self.systemDict['mDHWcount']):
-            self.pullDHWData(dhwNbr)
 
     '''
