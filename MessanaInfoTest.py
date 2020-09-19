@@ -9,7 +9,7 @@ from MessanaInfo import MessanaInfo
 
 #LOGGER = polyinterface.LOGGER
         
-sys.stdout = open('Messanaoutput.txt','wt')
+#sys.stdout = open('Messanaoutput.txt','wt')
 messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 
@@ -23,10 +23,11 @@ print(systemKeys)
 messana.pullSystemDataActive()
 for mKey in messana.mSystem['system']['GETstr']:
     messana.pullSystemDataIndividual(mKey)
-    if messana.pushSystemDataIndividual(mKey,messana.mSystem['system']['data'][mKey] ):
-        print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
-    else:
-        print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
+    if mKey in messana.mSystem['system']['PUTstr']:
+        if messana.pushSystemDataIndividual(mKey,messana.mSystem['system']['data'][mKey] ):
+            print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
+        else:
+            print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
 
 print ('\n Zones')
 
