@@ -226,3 +226,2632 @@ GETSystem: mApiVer
 http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
 <Response [200]>
 {'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullZoneDataAll: 0
+pullZoneDataIndividual: 0 mName
+GETSubNodeData: zones 0 mName
+pullZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: zones 0 mSetPoint
+pullZoneDataIndividual: 0 mStatus
+GETSubNodeData: zones 0 mStatus
+pullZoneDataIndividual: 0 mHumSetPointRH
+GETSubNodeData: zones 0 mHumSetPointRH
+pullZoneDataIndividual: 0 mHumSetPointDP
+GETSubNodeData: zones 0 mHumSetPointDP
+pullZoneDataIndividual: 0 mDeumSetPointRH
+GETSubNodeData: zones 0 mDeumSetPointRH
+pullZoneDataIndividual: 0 mDehumSetPointDP
+GETSubNodeData: zones 0 mDehumSetPointDP
+pullZoneDataIndividual: 0 mHumidity
+GETSubNodeData: zones 0 mHumidity
+pullZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: zones 0 mDewPoint
+pullZoneDataIndividual: 0 mTemp
+GETSubNodeData: zones 0 mTemp
+pullZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: zones 0 mScheduleOn
+pullZoneDataIndividual: 0 mCO2
+GETSubNodeData: zones 0 mCO2
+pullZoneDataIndividual: 0 mAirTemp
+GETSubNodeData: zones 0 mAirTemp
+pullZoneDataIndividual: 0 mMacrozoneId
+GETSubNodeData: zones 0 mMacrozoneId
+pullZoneDataIndividual: 0 mEnergySave
+GETSubNodeData: zones 0 mEnergySave
+pullZoneDataIndividual: 0 mAlarmOn
+GETSubNodeData: zones 0 mAlarmOn
+pullZoneDataIndividual: 0 mThermalStatus
+GETSubNodeData: zones 0 mThermalStatus
+pullZoneDataIndividual: 0 mCapability
+GETSubNodeData: zones 0 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 0
+pullZoneDataIndividual: 0 mName
+GETSubNodeData: zones 0 mName
+pullZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: zones 0 mSetPoint
+pullZoneDataIndividual: 0 mStatus
+GETSubNodeData: zones 0 mStatus
+pullZoneDataIndividual: 0 mHumSetPointRH
+GETSubNodeData: zones 0 mHumSetPointRH
+pullZoneDataIndividual: 0 mHumSetPointDP
+GETSubNodeData: zones 0 mHumSetPointDP
+pullZoneDataIndividual: 0 mDeumSetPointRH
+GETSubNodeData: zones 0 mDeumSetPointRH
+pullZoneDataIndividual: 0 mDehumSetPointDP
+GETSubNodeData: zones 0 mDehumSetPointDP
+pullZoneDataIndividual: 0 mHumidity
+GETSubNodeData: zones 0 mHumidity
+pullZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: zones 0 mDewPoint
+pullZoneDataIndividual: 0 mTemp
+GETSubNodeData: zones 0 mTemp
+pullZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: zones 0 mScheduleOn
+pullZoneDataIndividual: 0 mCO2
+GETSubNodeData: zones 0 mCO2
+pullZoneDataIndividual: 0 mAirTemp
+GETSubNodeData: zones 0 mAirTemp
+pullZoneDataIndividual: 0 mMacrozoneId
+GETSubNodeData: zones 0 mMacrozoneId
+pullZoneDataIndividual: 0 mEnergySave
+GETSubNodeData: zones 0 mEnergySave
+pullZoneDataIndividual: 0 mAlarmOn
+GETSubNodeData: zones 0 mAlarmOn
+pullZoneDataIndividual: 0 mThermalStatus
+GETSubNodeData: zones 0 mThermalStatus
+pullZoneDataIndividual: 0 mCapability
+GETSubNodeData: zones 0 mCapability
+pullZoneDataActive: 0
+pullZoneDataIndividual: 0 mCurrentSetPointRH
+GETSubNodeData: zones 0 mCurrentSetPointRH
+pullZoneDataIndividual: 0 mCurrentSetPointDP
+GETSubNodeData: zones 0 mCurrentSetPointDP
+pullZoneDataIndividual: 0 mHumidity
+GETSubNodeData: zones 0 mHumidity
+pullZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: zones 0 mDewPoint
+pullZoneDataIndividual: 0 mTemp
+GETSubNodeData: zones 0 mTemp
+pullZoneDataIndividual: 0 mAirTemp
+GETSubNodeData: zones 0 mAirTemp
+pullZoneDataIndividual: 0 mAlarmOn
+GETSubNodeData: zones 0 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 0 mName
+GETSubNodeData: zones 0 mName
+pushZoneDataIndividual: 0 mName DS Small Bedroom
+PUT str: http://192.168.2.65/api/zone/name/DS Small Bedroom
+PUT zones : mName DS Small Bedroom
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: zones 0 mSetPoint
+pushZoneDataIndividual: 0 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mStatus
+GETSubNodeData: zones 0 mStatus
+pushZoneDataIndividual: 0 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mHumSetPointRH
+GETSubNodeData: zones 0 mHumSetPointRH
+pushZoneDataIndividual: 0 mHumSetPointRH 70
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/70
+PUT zones : mHumSetPointRH 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mHumSetPointDP
+GETSubNodeData: zones 0 mHumSetPointDP
+pushZoneDataIndividual: 0 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mDeumSetPointRH
+GETSubNodeData: zones 0 mDeumSetPointRH
+pushZoneDataIndividual: 0 mDeumSetPointRH 70
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/70
+PUT zones : mDeumSetPointRH 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mDehumSetPointDP
+GETSubNodeData: zones 0 mDehumSetPointDP
+pushZoneDataIndividual: 0 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mHumidity
+GETSubNodeData: zones 0 mHumidity
+pullZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: zones 0 mDewPoint
+pullZoneDataIndividual: 0 mTemp
+GETSubNodeData: zones 0 mTemp
+pullZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: zones 0 mScheduleOn
+pushZoneDataIndividual: 0 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mCO2
+GETSubNodeData: zones 0 mCO2
+pullZoneDataIndividual: 0 mAirTemp
+GETSubNodeData: zones 0 mAirTemp
+pullZoneDataIndividual: 0 mMacrozoneId
+GETSubNodeData: zones 0 mMacrozoneId
+pullZoneDataIndividual: 0 mEnergySave
+GETSubNodeData: zones 0 mEnergySave
+pushZoneDataIndividual: 0 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 0 mAlarmOn
+GETSubNodeData: zones 0 mAlarmOn
+pullZoneDataIndividual: 0 mThermalStatus
+GETSubNodeData: zones 0 mThermalStatus
+pullZoneDataIndividual: 0 mCapability
+GETSubNodeData: zones 0 mCapability
+pullZoneKeys
+pullZoneDataAll: 1
+pullZoneDataIndividual: 1 mName
+GETSubNodeData: zones 1 mName
+pullZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: zones 1 mSetPoint
+pullZoneDataIndividual: 1 mStatus
+GETSubNodeData: zones 1 mStatus
+pullZoneDataIndividual: 1 mHumSetPointRH
+GETSubNodeData: zones 1 mHumSetPointRH
+pullZoneDataIndividual: 1 mHumSetPointDP
+GETSubNodeData: zones 1 mHumSetPointDP
+pullZoneDataIndividual: 1 mDeumSetPointRH
+GETSubNodeData: zones 1 mDeumSetPointRH
+pullZoneDataIndividual: 1 mDehumSetPointDP
+GETSubNodeData: zones 1 mDehumSetPointDP
+pullZoneDataIndividual: 1 mHumidity
+GETSubNodeData: zones 1 mHumidity
+pullZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: zones 1 mDewPoint
+pullZoneDataIndividual: 1 mTemp
+GETSubNodeData: zones 1 mTemp
+pullZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: zones 1 mScheduleOn
+pullZoneDataIndividual: 1 mCO2
+GETSubNodeData: zones 1 mCO2
+pullZoneDataIndividual: 1 mAirTemp
+GETSubNodeData: zones 1 mAirTemp
+pullZoneDataIndividual: 1 mMacrozoneId
+GETSubNodeData: zones 1 mMacrozoneId
+pullZoneDataIndividual: 1 mEnergySave
+GETSubNodeData: zones 1 mEnergySave
+pullZoneDataIndividual: 1 mAlarmOn
+GETSubNodeData: zones 1 mAlarmOn
+pullZoneDataIndividual: 1 mThermalStatus
+GETSubNodeData: zones 1 mThermalStatus
+pullZoneDataIndividual: 1 mCapability
+GETSubNodeData: zones 1 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 1
+pullZoneDataIndividual: 1 mName
+GETSubNodeData: zones 1 mName
+pullZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: zones 1 mSetPoint
+pullZoneDataIndividual: 1 mStatus
+GETSubNodeData: zones 1 mStatus
+pullZoneDataIndividual: 1 mHumSetPointRH
+GETSubNodeData: zones 1 mHumSetPointRH
+pullZoneDataIndividual: 1 mHumSetPointDP
+GETSubNodeData: zones 1 mHumSetPointDP
+pullZoneDataIndividual: 1 mDeumSetPointRH
+GETSubNodeData: zones 1 mDeumSetPointRH
+pullZoneDataIndividual: 1 mDehumSetPointDP
+GETSubNodeData: zones 1 mDehumSetPointDP
+pullZoneDataIndividual: 1 mHumidity
+GETSubNodeData: zones 1 mHumidity
+pullZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: zones 1 mDewPoint
+pullZoneDataIndividual: 1 mTemp
+GETSubNodeData: zones 1 mTemp
+pullZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: zones 1 mScheduleOn
+pullZoneDataIndividual: 1 mCO2
+GETSubNodeData: zones 1 mCO2
+pullZoneDataIndividual: 1 mAirTemp
+GETSubNodeData: zones 1 mAirTemp
+pullZoneDataIndividual: 1 mMacrozoneId
+GETSubNodeData: zones 1 mMacrozoneId
+pullZoneDataIndividual: 1 mEnergySave
+GETSubNodeData: zones 1 mEnergySave
+pullZoneDataIndividual: 1 mAlarmOn
+GETSubNodeData: zones 1 mAlarmOn
+pullZoneDataIndividual: 1 mThermalStatus
+GETSubNodeData: zones 1 mThermalStatus
+pullZoneDataIndividual: 1 mCapability
+GETSubNodeData: zones 1 mCapability
+pullZoneDataActive: 1
+pullZoneDataIndividual: 1 mCurrentSetPointRH
+GETSubNodeData: zones 1 mCurrentSetPointRH
+pullZoneDataIndividual: 1 mCurrentSetPointDP
+GETSubNodeData: zones 1 mCurrentSetPointDP
+pullZoneDataIndividual: 1 mHumidity
+GETSubNodeData: zones 1 mHumidity
+pullZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: zones 1 mDewPoint
+pullZoneDataIndividual: 1 mTemp
+GETSubNodeData: zones 1 mTemp
+pullZoneDataIndividual: 1 mAirTemp
+GETSubNodeData: zones 1 mAirTemp
+pullZoneDataIndividual: 1 mAlarmOn
+GETSubNodeData: zones 1 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 1 mName
+GETSubNodeData: zones 1 mName
+pushZoneDataIndividual: 1 mName DS large bedroom
+PUT str: http://192.168.2.65/api/zone/name/DS large bedroom
+PUT zones : mName DS large bedroom
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: zones 1 mSetPoint
+pushZoneDataIndividual: 1 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mStatus
+GETSubNodeData: zones 1 mStatus
+pushZoneDataIndividual: 1 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mHumSetPointRH
+GETSubNodeData: zones 1 mHumSetPointRH
+pushZoneDataIndividual: 1 mHumSetPointRH 75
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/75
+PUT zones : mHumSetPointRH 75
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mHumSetPointDP
+GETSubNodeData: zones 1 mHumSetPointDP
+pushZoneDataIndividual: 1 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mDeumSetPointRH
+GETSubNodeData: zones 1 mDeumSetPointRH
+pushZoneDataIndividual: 1 mDeumSetPointRH 75
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/75
+PUT zones : mDeumSetPointRH 75
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mDehumSetPointDP
+GETSubNodeData: zones 1 mDehumSetPointDP
+pushZoneDataIndividual: 1 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mHumidity
+GETSubNodeData: zones 1 mHumidity
+pullZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: zones 1 mDewPoint
+pullZoneDataIndividual: 1 mTemp
+GETSubNodeData: zones 1 mTemp
+pullZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: zones 1 mScheduleOn
+pushZoneDataIndividual: 1 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mCO2
+GETSubNodeData: zones 1 mCO2
+pullZoneDataIndividual: 1 mAirTemp
+GETSubNodeData: zones 1 mAirTemp
+pullZoneDataIndividual: 1 mMacrozoneId
+GETSubNodeData: zones 1 mMacrozoneId
+pullZoneDataIndividual: 1 mEnergySave
+GETSubNodeData: zones 1 mEnergySave
+pushZoneDataIndividual: 1 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 1 mAlarmOn
+GETSubNodeData: zones 1 mAlarmOn
+pullZoneDataIndividual: 1 mThermalStatus
+GETSubNodeData: zones 1 mThermalStatus
+pullZoneDataIndividual: 1 mCapability
+GETSubNodeData: zones 1 mCapability
+pullZoneKeys
+pullZoneDataAll: 2
+pullZoneDataIndividual: 2 mName
+GETSubNodeData: zones 2 mName
+pullZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: zones 2 mSetPoint
+pullZoneDataIndividual: 2 mStatus
+GETSubNodeData: zones 2 mStatus
+pullZoneDataIndividual: 2 mHumSetPointRH
+GETSubNodeData: zones 2 mHumSetPointRH
+pullZoneDataIndividual: 2 mHumSetPointDP
+GETSubNodeData: zones 2 mHumSetPointDP
+pullZoneDataIndividual: 2 mDeumSetPointRH
+GETSubNodeData: zones 2 mDeumSetPointRH
+pullZoneDataIndividual: 2 mDehumSetPointDP
+GETSubNodeData: zones 2 mDehumSetPointDP
+pullZoneDataIndividual: 2 mHumidity
+GETSubNodeData: zones 2 mHumidity
+pullZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: zones 2 mDewPoint
+pullZoneDataIndividual: 2 mTemp
+GETSubNodeData: zones 2 mTemp
+pullZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: zones 2 mScheduleOn
+pullZoneDataIndividual: 2 mCO2
+GETSubNodeData: zones 2 mCO2
+pullZoneDataIndividual: 2 mAirTemp
+GETSubNodeData: zones 2 mAirTemp
+pullZoneDataIndividual: 2 mMacrozoneId
+GETSubNodeData: zones 2 mMacrozoneId
+pullZoneDataIndividual: 2 mEnergySave
+GETSubNodeData: zones 2 mEnergySave
+pullZoneDataIndividual: 2 mAlarmOn
+GETSubNodeData: zones 2 mAlarmOn
+pullZoneDataIndividual: 2 mThermalStatus
+GETSubNodeData: zones 2 mThermalStatus
+pullZoneDataIndividual: 2 mCapability
+GETSubNodeData: zones 2 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 2
+pullZoneDataIndividual: 2 mName
+GETSubNodeData: zones 2 mName
+pullZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: zones 2 mSetPoint
+pullZoneDataIndividual: 2 mStatus
+GETSubNodeData: zones 2 mStatus
+pullZoneDataIndividual: 2 mHumSetPointRH
+GETSubNodeData: zones 2 mHumSetPointRH
+pullZoneDataIndividual: 2 mHumSetPointDP
+GETSubNodeData: zones 2 mHumSetPointDP
+pullZoneDataIndividual: 2 mDeumSetPointRH
+GETSubNodeData: zones 2 mDeumSetPointRH
+pullZoneDataIndividual: 2 mDehumSetPointDP
+GETSubNodeData: zones 2 mDehumSetPointDP
+pullZoneDataIndividual: 2 mHumidity
+GETSubNodeData: zones 2 mHumidity
+pullZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: zones 2 mDewPoint
+pullZoneDataIndividual: 2 mTemp
+GETSubNodeData: zones 2 mTemp
+pullZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: zones 2 mScheduleOn
+pullZoneDataIndividual: 2 mCO2
+GETSubNodeData: zones 2 mCO2
+pullZoneDataIndividual: 2 mAirTemp
+GETSubNodeData: zones 2 mAirTemp
+pullZoneDataIndividual: 2 mMacrozoneId
+GETSubNodeData: zones 2 mMacrozoneId
+pullZoneDataIndividual: 2 mEnergySave
+GETSubNodeData: zones 2 mEnergySave
+pullZoneDataIndividual: 2 mAlarmOn
+GETSubNodeData: zones 2 mAlarmOn
+pullZoneDataIndividual: 2 mThermalStatus
+GETSubNodeData: zones 2 mThermalStatus
+pullZoneDataIndividual: 2 mCapability
+GETSubNodeData: zones 2 mCapability
+pullZoneDataActive: 2
+pullZoneDataIndividual: 2 mCurrentSetPointRH
+GETSubNodeData: zones 2 mCurrentSetPointRH
+pullZoneDataIndividual: 2 mCurrentSetPointDP
+GETSubNodeData: zones 2 mCurrentSetPointDP
+pullZoneDataIndividual: 2 mHumidity
+GETSubNodeData: zones 2 mHumidity
+pullZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: zones 2 mDewPoint
+pullZoneDataIndividual: 2 mTemp
+GETSubNodeData: zones 2 mTemp
+pullZoneDataIndividual: 2 mAirTemp
+GETSubNodeData: zones 2 mAirTemp
+pullZoneDataIndividual: 2 mAlarmOn
+GETSubNodeData: zones 2 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 2 mName
+GETSubNodeData: zones 2 mName
+pushZoneDataIndividual: 2 mName DS Bath
+PUT str: http://192.168.2.65/api/zone/name/DS Bath
+PUT zones : mName DS Bath
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: zones 2 mSetPoint
+pushZoneDataIndividual: 2 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mStatus
+GETSubNodeData: zones 2 mStatus
+pushZoneDataIndividual: 2 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mHumSetPointRH
+GETSubNodeData: zones 2 mHumSetPointRH
+pushZoneDataIndividual: 2 mHumSetPointRH 77
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/77
+PUT zones : mHumSetPointRH 77
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mHumSetPointDP
+GETSubNodeData: zones 2 mHumSetPointDP
+pushZoneDataIndividual: 2 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mDeumSetPointRH
+GETSubNodeData: zones 2 mDeumSetPointRH
+pushZoneDataIndividual: 2 mDeumSetPointRH 77
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/77
+PUT zones : mDeumSetPointRH 77
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mDehumSetPointDP
+GETSubNodeData: zones 2 mDehumSetPointDP
+pushZoneDataIndividual: 2 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mHumidity
+GETSubNodeData: zones 2 mHumidity
+pullZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: zones 2 mDewPoint
+pullZoneDataIndividual: 2 mTemp
+GETSubNodeData: zones 2 mTemp
+pullZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: zones 2 mScheduleOn
+pushZoneDataIndividual: 2 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mCO2
+GETSubNodeData: zones 2 mCO2
+pullZoneDataIndividual: 2 mAirTemp
+GETSubNodeData: zones 2 mAirTemp
+pullZoneDataIndividual: 2 mMacrozoneId
+GETSubNodeData: zones 2 mMacrozoneId
+pullZoneDataIndividual: 2 mEnergySave
+GETSubNodeData: zones 2 mEnergySave
+pushZoneDataIndividual: 2 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 2 mAlarmOn
+GETSubNodeData: zones 2 mAlarmOn
+pullZoneDataIndividual: 2 mThermalStatus
+GETSubNodeData: zones 2 mThermalStatus
+pullZoneDataIndividual: 2 mCapability
+GETSubNodeData: zones 2 mCapability
+pullZoneKeys
+pullZoneDataAll: 3
+pullZoneDataIndividual: 3 mName
+GETSubNodeData: zones 3 mName
+pullZoneDataIndividual: 3 mSetPoint
+GETSubNodeData: zones 3 mSetPoint
+pullZoneDataIndividual: 3 mStatus
+GETSubNodeData: zones 3 mStatus
+pullZoneDataIndividual: 3 mHumSetPointRH
+GETSubNodeData: zones 3 mHumSetPointRH
+pullZoneDataIndividual: 3 mHumSetPointDP
+GETSubNodeData: zones 3 mHumSetPointDP
+pullZoneDataIndividual: 3 mDeumSetPointRH
+GETSubNodeData: zones 3 mDeumSetPointRH
+pullZoneDataIndividual: 3 mDehumSetPointDP
+GETSubNodeData: zones 3 mDehumSetPointDP
+pullZoneDataIndividual: 3 mHumidity
+GETSubNodeData: zones 3 mHumidity
+pullZoneDataIndividual: 3 mDewPoint
+GETSubNodeData: zones 3 mDewPoint
+pullZoneDataIndividual: 3 mTemp
+GETSubNodeData: zones 3 mTemp
+pullZoneDataIndividual: 3 mScheduleOn
+GETSubNodeData: zones 3 mScheduleOn
+pullZoneDataIndividual: 3 mCO2
+GETSubNodeData: zones 3 mCO2
+pullZoneDataIndividual: 3 mAirTemp
+GETSubNodeData: zones 3 mAirTemp
+pullZoneDataIndividual: 3 mMacrozoneId
+GETSubNodeData: zones 3 mMacrozoneId
+pullZoneDataIndividual: 3 mEnergySave
+GETSubNodeData: zones 3 mEnergySave
+pullZoneDataIndividual: 3 mAlarmOn
+GETSubNodeData: zones 3 mAlarmOn
+pullZoneDataIndividual: 3 mThermalStatus
+GETSubNodeData: zones 3 mThermalStatus
+pullZoneDataIndividual: 3 mCapability
+GETSubNodeData: zones 3 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 3
+pullZoneDataIndividual: 3 mName
+GETSubNodeData: zones 3 mName
+pullZoneDataIndividual: 3 mSetPoint
+GETSubNodeData: zones 3 mSetPoint
+pullZoneDataIndividual: 3 mStatus
+GETSubNodeData: zones 3 mStatus
+pullZoneDataIndividual: 3 mHumSetPointRH
+GETSubNodeData: zones 3 mHumSetPointRH
+pullZoneDataIndividual: 3 mHumSetPointDP
+GETSubNodeData: zones 3 mHumSetPointDP
+pullZoneDataIndividual: 3 mDeumSetPointRH
+GETSubNodeData: zones 3 mDeumSetPointRH
+pullZoneDataIndividual: 3 mDehumSetPointDP
+GETSubNodeData: zones 3 mDehumSetPointDP
+pullZoneDataIndividual: 3 mHumidity
+GETSubNodeData: zones 3 mHumidity
+pullZoneDataIndividual: 3 mDewPoint
+GETSubNodeData: zones 3 mDewPoint
+pullZoneDataIndividual: 3 mTemp
+GETSubNodeData: zones 3 mTemp
+pullZoneDataIndividual: 3 mScheduleOn
+GETSubNodeData: zones 3 mScheduleOn
+pullZoneDataIndividual: 3 mCO2
+GETSubNodeData: zones 3 mCO2
+pullZoneDataIndividual: 3 mAirTemp
+GETSubNodeData: zones 3 mAirTemp
+pullZoneDataIndividual: 3 mMacrozoneId
+GETSubNodeData: zones 3 mMacrozoneId
+pullZoneDataIndividual: 3 mEnergySave
+GETSubNodeData: zones 3 mEnergySave
+pullZoneDataIndividual: 3 mAlarmOn
+GETSubNodeData: zones 3 mAlarmOn
+pullZoneDataIndividual: 3 mThermalStatus
+GETSubNodeData: zones 3 mThermalStatus
+pullZoneDataIndividual: 3 mCapability
+GETSubNodeData: zones 3 mCapability
+pullZoneDataActive: 3
+pullZoneDataIndividual: 3 mCurrentSetPointRH
+GETSubNodeData: zones 3 mCurrentSetPointRH
+pullZoneDataIndividual: 3 mCurrentSetPointDP
+GETSubNodeData: zones 3 mCurrentSetPointDP
+pullZoneDataIndividual: 3 mHumidity
+GETSubNodeData: zones 3 mHumidity
+pullZoneDataIndividual: 3 mDewPoint
+GETSubNodeData: zones 3 mDewPoint
+pullZoneDataIndividual: 3 mTemp
+GETSubNodeData: zones 3 mTemp
+pullZoneDataIndividual: 3 mAirTemp
+GETSubNodeData: zones 3 mAirTemp
+pullZoneDataIndividual: 3 mAlarmOn
+GETSubNodeData: zones 3 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 3 mName
+GETSubNodeData: zones 3 mName
+pushZoneDataIndividual: 3 mName DS TV Room
+PUT str: http://192.168.2.65/api/zone/name/DS TV Room
+PUT zones : mName DS TV Room
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mSetPoint
+GETSubNodeData: zones 3 mSetPoint
+pushZoneDataIndividual: 3 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mStatus
+GETSubNodeData: zones 3 mStatus
+pushZoneDataIndividual: 3 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mHumSetPointRH
+GETSubNodeData: zones 3 mHumSetPointRH
+pushZoneDataIndividual: 3 mHumSetPointRH 77
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/77
+PUT zones : mHumSetPointRH 77
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mHumSetPointDP
+GETSubNodeData: zones 3 mHumSetPointDP
+pushZoneDataIndividual: 3 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mDeumSetPointRH
+GETSubNodeData: zones 3 mDeumSetPointRH
+pushZoneDataIndividual: 3 mDeumSetPointRH 77
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/77
+PUT zones : mDeumSetPointRH 77
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mDehumSetPointDP
+GETSubNodeData: zones 3 mDehumSetPointDP
+pushZoneDataIndividual: 3 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mHumidity
+GETSubNodeData: zones 3 mHumidity
+pullZoneDataIndividual: 3 mDewPoint
+GETSubNodeData: zones 3 mDewPoint
+pullZoneDataIndividual: 3 mTemp
+GETSubNodeData: zones 3 mTemp
+pullZoneDataIndividual: 3 mScheduleOn
+GETSubNodeData: zones 3 mScheduleOn
+pushZoneDataIndividual: 3 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mCO2
+GETSubNodeData: zones 3 mCO2
+pullZoneDataIndividual: 3 mAirTemp
+GETSubNodeData: zones 3 mAirTemp
+pullZoneDataIndividual: 3 mMacrozoneId
+GETSubNodeData: zones 3 mMacrozoneId
+pullZoneDataIndividual: 3 mEnergySave
+GETSubNodeData: zones 3 mEnergySave
+pushZoneDataIndividual: 3 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 3 mAlarmOn
+GETSubNodeData: zones 3 mAlarmOn
+pullZoneDataIndividual: 3 mThermalStatus
+GETSubNodeData: zones 3 mThermalStatus
+pullZoneDataIndividual: 3 mCapability
+GETSubNodeData: zones 3 mCapability
+pullZoneKeys
+pullZoneDataAll: 4
+pullZoneDataIndividual: 4 mName
+GETSubNodeData: zones 4 mName
+pullZoneDataIndividual: 4 mSetPoint
+GETSubNodeData: zones 4 mSetPoint
+pullZoneDataIndividual: 4 mStatus
+GETSubNodeData: zones 4 mStatus
+pullZoneDataIndividual: 4 mHumSetPointRH
+GETSubNodeData: zones 4 mHumSetPointRH
+pullZoneDataIndividual: 4 mHumSetPointDP
+GETSubNodeData: zones 4 mHumSetPointDP
+pullZoneDataIndividual: 4 mDeumSetPointRH
+GETSubNodeData: zones 4 mDeumSetPointRH
+pullZoneDataIndividual: 4 mDehumSetPointDP
+GETSubNodeData: zones 4 mDehumSetPointDP
+pullZoneDataIndividual: 4 mHumidity
+GETSubNodeData: zones 4 mHumidity
+pullZoneDataIndividual: 4 mDewPoint
+GETSubNodeData: zones 4 mDewPoint
+pullZoneDataIndividual: 4 mTemp
+GETSubNodeData: zones 4 mTemp
+pullZoneDataIndividual: 4 mScheduleOn
+GETSubNodeData: zones 4 mScheduleOn
+pullZoneDataIndividual: 4 mCO2
+GETSubNodeData: zones 4 mCO2
+pullZoneDataIndividual: 4 mAirTemp
+GETSubNodeData: zones 4 mAirTemp
+pullZoneDataIndividual: 4 mMacrozoneId
+GETSubNodeData: zones 4 mMacrozoneId
+pullZoneDataIndividual: 4 mEnergySave
+GETSubNodeData: zones 4 mEnergySave
+pullZoneDataIndividual: 4 mAlarmOn
+GETSubNodeData: zones 4 mAlarmOn
+pullZoneDataIndividual: 4 mThermalStatus
+GETSubNodeData: zones 4 mThermalStatus
+pullZoneDataIndividual: 4 mCapability
+GETSubNodeData: zones 4 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 4
+pullZoneDataIndividual: 4 mName
+GETSubNodeData: zones 4 mName
+pullZoneDataIndividual: 4 mSetPoint
+GETSubNodeData: zones 4 mSetPoint
+pullZoneDataIndividual: 4 mStatus
+GETSubNodeData: zones 4 mStatus
+pullZoneDataIndividual: 4 mHumSetPointRH
+GETSubNodeData: zones 4 mHumSetPointRH
+pullZoneDataIndividual: 4 mHumSetPointDP
+GETSubNodeData: zones 4 mHumSetPointDP
+pullZoneDataIndividual: 4 mDeumSetPointRH
+GETSubNodeData: zones 4 mDeumSetPointRH
+pullZoneDataIndividual: 4 mDehumSetPointDP
+GETSubNodeData: zones 4 mDehumSetPointDP
+pullZoneDataIndividual: 4 mHumidity
+GETSubNodeData: zones 4 mHumidity
+pullZoneDataIndividual: 4 mDewPoint
+GETSubNodeData: zones 4 mDewPoint
+pullZoneDataIndividual: 4 mTemp
+GETSubNodeData: zones 4 mTemp
+pullZoneDataIndividual: 4 mScheduleOn
+GETSubNodeData: zones 4 mScheduleOn
+pullZoneDataIndividual: 4 mCO2
+GETSubNodeData: zones 4 mCO2
+pullZoneDataIndividual: 4 mAirTemp
+GETSubNodeData: zones 4 mAirTemp
+pullZoneDataIndividual: 4 mMacrozoneId
+GETSubNodeData: zones 4 mMacrozoneId
+pullZoneDataIndividual: 4 mEnergySave
+GETSubNodeData: zones 4 mEnergySave
+pullZoneDataIndividual: 4 mAlarmOn
+GETSubNodeData: zones 4 mAlarmOn
+pullZoneDataIndividual: 4 mThermalStatus
+GETSubNodeData: zones 4 mThermalStatus
+pullZoneDataIndividual: 4 mCapability
+GETSubNodeData: zones 4 mCapability
+pullZoneDataActive: 4
+pullZoneDataIndividual: 4 mCurrentSetPointRH
+GETSubNodeData: zones 4 mCurrentSetPointRH
+pullZoneDataIndividual: 4 mCurrentSetPointDP
+GETSubNodeData: zones 4 mCurrentSetPointDP
+pullZoneDataIndividual: 4 mHumidity
+GETSubNodeData: zones 4 mHumidity
+pullZoneDataIndividual: 4 mDewPoint
+GETSubNodeData: zones 4 mDewPoint
+pullZoneDataIndividual: 4 mTemp
+GETSubNodeData: zones 4 mTemp
+pullZoneDataIndividual: 4 mAirTemp
+GETSubNodeData: zones 4 mAirTemp
+pullZoneDataIndividual: 4 mAlarmOn
+GETSubNodeData: zones 4 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 4 mName
+GETSubNodeData: zones 4 mName
+pushZoneDataIndividual: 4 mName DS Office
+PUT str: http://192.168.2.65/api/zone/name/DS Office
+PUT zones : mName DS Office
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mSetPoint
+GETSubNodeData: zones 4 mSetPoint
+pushZoneDataIndividual: 4 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mStatus
+GETSubNodeData: zones 4 mStatus
+pushZoneDataIndividual: 4 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mHumSetPointRH
+GETSubNodeData: zones 4 mHumSetPointRH
+pushZoneDataIndividual: 4 mHumSetPointRH 76
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/76
+PUT zones : mHumSetPointRH 76
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mHumSetPointDP
+GETSubNodeData: zones 4 mHumSetPointDP
+pushZoneDataIndividual: 4 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mDeumSetPointRH
+GETSubNodeData: zones 4 mDeumSetPointRH
+pushZoneDataIndividual: 4 mDeumSetPointRH 76
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/76
+PUT zones : mDeumSetPointRH 76
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mDehumSetPointDP
+GETSubNodeData: zones 4 mDehumSetPointDP
+pushZoneDataIndividual: 4 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mHumidity
+GETSubNodeData: zones 4 mHumidity
+pullZoneDataIndividual: 4 mDewPoint
+GETSubNodeData: zones 4 mDewPoint
+pullZoneDataIndividual: 4 mTemp
+GETSubNodeData: zones 4 mTemp
+pullZoneDataIndividual: 4 mScheduleOn
+GETSubNodeData: zones 4 mScheduleOn
+pushZoneDataIndividual: 4 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mCO2
+GETSubNodeData: zones 4 mCO2
+pullZoneDataIndividual: 4 mAirTemp
+GETSubNodeData: zones 4 mAirTemp
+pullZoneDataIndividual: 4 mMacrozoneId
+GETSubNodeData: zones 4 mMacrozoneId
+pullZoneDataIndividual: 4 mEnergySave
+GETSubNodeData: zones 4 mEnergySave
+pushZoneDataIndividual: 4 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 4 mAlarmOn
+GETSubNodeData: zones 4 mAlarmOn
+pullZoneDataIndividual: 4 mThermalStatus
+GETSubNodeData: zones 4 mThermalStatus
+pullZoneDataIndividual: 4 mCapability
+GETSubNodeData: zones 4 mCapability
+pullZoneKeys
+pullZoneDataAll: 5
+pullZoneDataIndividual: 5 mName
+GETSubNodeData: zones 5 mName
+pullZoneDataIndividual: 5 mSetPoint
+GETSubNodeData: zones 5 mSetPoint
+pullZoneDataIndividual: 5 mStatus
+GETSubNodeData: zones 5 mStatus
+pullZoneDataIndividual: 5 mHumSetPointRH
+GETSubNodeData: zones 5 mHumSetPointRH
+pullZoneDataIndividual: 5 mHumSetPointDP
+GETSubNodeData: zones 5 mHumSetPointDP
+pullZoneDataIndividual: 5 mDeumSetPointRH
+GETSubNodeData: zones 5 mDeumSetPointRH
+pullZoneDataIndividual: 5 mDehumSetPointDP
+GETSubNodeData: zones 5 mDehumSetPointDP
+pullZoneDataIndividual: 5 mHumidity
+GETSubNodeData: zones 5 mHumidity
+pullZoneDataIndividual: 5 mDewPoint
+GETSubNodeData: zones 5 mDewPoint
+pullZoneDataIndividual: 5 mTemp
+GETSubNodeData: zones 5 mTemp
+pullZoneDataIndividual: 5 mScheduleOn
+GETSubNodeData: zones 5 mScheduleOn
+pullZoneDataIndividual: 5 mCO2
+GETSubNodeData: zones 5 mCO2
+pullZoneDataIndividual: 5 mAirTemp
+GETSubNodeData: zones 5 mAirTemp
+pullZoneDataIndividual: 5 mMacrozoneId
+GETSubNodeData: zones 5 mMacrozoneId
+pullZoneDataIndividual: 5 mEnergySave
+GETSubNodeData: zones 5 mEnergySave
+pullZoneDataIndividual: 5 mAlarmOn
+GETSubNodeData: zones 5 mAlarmOn
+pullZoneDataIndividual: 5 mThermalStatus
+GETSubNodeData: zones 5 mThermalStatus
+pullZoneDataIndividual: 5 mCapability
+GETSubNodeData: zones 5 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 5
+pullZoneDataIndividual: 5 mName
+GETSubNodeData: zones 5 mName
+pullZoneDataIndividual: 5 mSetPoint
+GETSubNodeData: zones 5 mSetPoint
+pullZoneDataIndividual: 5 mStatus
+GETSubNodeData: zones 5 mStatus
+pullZoneDataIndividual: 5 mHumSetPointRH
+GETSubNodeData: zones 5 mHumSetPointRH
+pullZoneDataIndividual: 5 mHumSetPointDP
+GETSubNodeData: zones 5 mHumSetPointDP
+pullZoneDataIndividual: 5 mDeumSetPointRH
+GETSubNodeData: zones 5 mDeumSetPointRH
+pullZoneDataIndividual: 5 mDehumSetPointDP
+GETSubNodeData: zones 5 mDehumSetPointDP
+pullZoneDataIndividual: 5 mHumidity
+GETSubNodeData: zones 5 mHumidity
+pullZoneDataIndividual: 5 mDewPoint
+GETSubNodeData: zones 5 mDewPoint
+pullZoneDataIndividual: 5 mTemp
+GETSubNodeData: zones 5 mTemp
+pullZoneDataIndividual: 5 mScheduleOn
+GETSubNodeData: zones 5 mScheduleOn
+pullZoneDataIndividual: 5 mCO2
+GETSubNodeData: zones 5 mCO2
+pullZoneDataIndividual: 5 mAirTemp
+GETSubNodeData: zones 5 mAirTemp
+pullZoneDataIndividual: 5 mMacrozoneId
+GETSubNodeData: zones 5 mMacrozoneId
+pullZoneDataIndividual: 5 mEnergySave
+GETSubNodeData: zones 5 mEnergySave
+pullZoneDataIndividual: 5 mAlarmOn
+GETSubNodeData: zones 5 mAlarmOn
+pullZoneDataIndividual: 5 mThermalStatus
+GETSubNodeData: zones 5 mThermalStatus
+pullZoneDataIndividual: 5 mCapability
+GETSubNodeData: zones 5 mCapability
+pullZoneDataActive: 5
+pullZoneDataIndividual: 5 mCurrentSetPointRH
+GETSubNodeData: zones 5 mCurrentSetPointRH
+pullZoneDataIndividual: 5 mCurrentSetPointDP
+GETSubNodeData: zones 5 mCurrentSetPointDP
+pullZoneDataIndividual: 5 mHumidity
+GETSubNodeData: zones 5 mHumidity
+pullZoneDataIndividual: 5 mDewPoint
+GETSubNodeData: zones 5 mDewPoint
+pullZoneDataIndividual: 5 mTemp
+GETSubNodeData: zones 5 mTemp
+pullZoneDataIndividual: 5 mAirTemp
+GETSubNodeData: zones 5 mAirTemp
+pullZoneDataIndividual: 5 mAlarmOn
+GETSubNodeData: zones 5 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 5 mName
+GETSubNodeData: zones 5 mName
+pushZoneDataIndividual: 5 mName DS entrance
+PUT str: http://192.168.2.65/api/zone/name/DS entrance
+PUT zones : mName DS entrance
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mSetPoint
+GETSubNodeData: zones 5 mSetPoint
+pushZoneDataIndividual: 5 mSetPoint 70
+PUT str: http://192.168.2.65/api/zone/setpoint/70
+PUT zones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mStatus
+GETSubNodeData: zones 5 mStatus
+pushZoneDataIndividual: 5 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mHumSetPointRH
+GETSubNodeData: zones 5 mHumSetPointRH
+pushZoneDataIndividual: 5 mHumSetPointRH 76
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/76
+PUT zones : mHumSetPointRH 76
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mHumSetPointDP
+GETSubNodeData: zones 5 mHumSetPointDP
+pushZoneDataIndividual: 5 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mDeumSetPointRH
+GETSubNodeData: zones 5 mDeumSetPointRH
+pushZoneDataIndividual: 5 mDeumSetPointRH 76
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/76
+PUT zones : mDeumSetPointRH 76
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mDehumSetPointDP
+GETSubNodeData: zones 5 mDehumSetPointDP
+pushZoneDataIndividual: 5 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mHumidity
+GETSubNodeData: zones 5 mHumidity
+pullZoneDataIndividual: 5 mDewPoint
+GETSubNodeData: zones 5 mDewPoint
+pullZoneDataIndividual: 5 mTemp
+GETSubNodeData: zones 5 mTemp
+pullZoneDataIndividual: 5 mScheduleOn
+GETSubNodeData: zones 5 mScheduleOn
+pushZoneDataIndividual: 5 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mCO2
+GETSubNodeData: zones 5 mCO2
+pullZoneDataIndividual: 5 mAirTemp
+GETSubNodeData: zones 5 mAirTemp
+pullZoneDataIndividual: 5 mMacrozoneId
+GETSubNodeData: zones 5 mMacrozoneId
+pullZoneDataIndividual: 5 mEnergySave
+GETSubNodeData: zones 5 mEnergySave
+pushZoneDataIndividual: 5 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 5 mAlarmOn
+GETSubNodeData: zones 5 mAlarmOn
+pullZoneDataIndividual: 5 mThermalStatus
+GETSubNodeData: zones 5 mThermalStatus
+pullZoneDataIndividual: 5 mCapability
+GETSubNodeData: zones 5 mCapability
+pullZoneKeys
+pullZoneDataAll: 6
+pullZoneDataIndividual: 6 mName
+GETSubNodeData: zones 6 mName
+pullZoneDataIndividual: 6 mSetPoint
+GETSubNodeData: zones 6 mSetPoint
+pullZoneDataIndividual: 6 mStatus
+GETSubNodeData: zones 6 mStatus
+pullZoneDataIndividual: 6 mHumSetPointRH
+GETSubNodeData: zones 6 mHumSetPointRH
+pullZoneDataIndividual: 6 mHumSetPointDP
+GETSubNodeData: zones 6 mHumSetPointDP
+pullZoneDataIndividual: 6 mDeumSetPointRH
+GETSubNodeData: zones 6 mDeumSetPointRH
+pullZoneDataIndividual: 6 mDehumSetPointDP
+GETSubNodeData: zones 6 mDehumSetPointDP
+pullZoneDataIndividual: 6 mHumidity
+GETSubNodeData: zones 6 mHumidity
+pullZoneDataIndividual: 6 mDewPoint
+GETSubNodeData: zones 6 mDewPoint
+pullZoneDataIndividual: 6 mTemp
+GETSubNodeData: zones 6 mTemp
+pullZoneDataIndividual: 6 mScheduleOn
+GETSubNodeData: zones 6 mScheduleOn
+pullZoneDataIndividual: 6 mCO2
+GETSubNodeData: zones 6 mCO2
+pullZoneDataIndividual: 6 mAirTemp
+GETSubNodeData: zones 6 mAirTemp
+pullZoneDataIndividual: 6 mMacrozoneId
+GETSubNodeData: zones 6 mMacrozoneId
+pullZoneDataIndividual: 6 mEnergySave
+GETSubNodeData: zones 6 mEnergySave
+pullZoneDataIndividual: 6 mAlarmOn
+GETSubNodeData: zones 6 mAlarmOn
+pullZoneDataIndividual: 6 mThermalStatus
+GETSubNodeData: zones 6 mThermalStatus
+pullZoneDataIndividual: 6 mCapability
+GETSubNodeData: zones 6 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 6
+pullZoneDataIndividual: 6 mName
+GETSubNodeData: zones 6 mName
+pullZoneDataIndividual: 6 mSetPoint
+GETSubNodeData: zones 6 mSetPoint
+pullZoneDataIndividual: 6 mStatus
+GETSubNodeData: zones 6 mStatus
+pullZoneDataIndividual: 6 mHumSetPointRH
+GETSubNodeData: zones 6 mHumSetPointRH
+pullZoneDataIndividual: 6 mHumSetPointDP
+GETSubNodeData: zones 6 mHumSetPointDP
+pullZoneDataIndividual: 6 mDeumSetPointRH
+GETSubNodeData: zones 6 mDeumSetPointRH
+pullZoneDataIndividual: 6 mDehumSetPointDP
+GETSubNodeData: zones 6 mDehumSetPointDP
+pullZoneDataIndividual: 6 mHumidity
+GETSubNodeData: zones 6 mHumidity
+pullZoneDataIndividual: 6 mDewPoint
+GETSubNodeData: zones 6 mDewPoint
+pullZoneDataIndividual: 6 mTemp
+GETSubNodeData: zones 6 mTemp
+pullZoneDataIndividual: 6 mScheduleOn
+GETSubNodeData: zones 6 mScheduleOn
+pullZoneDataIndividual: 6 mCO2
+GETSubNodeData: zones 6 mCO2
+pullZoneDataIndividual: 6 mAirTemp
+GETSubNodeData: zones 6 mAirTemp
+pullZoneDataIndividual: 6 mMacrozoneId
+GETSubNodeData: zones 6 mMacrozoneId
+pullZoneDataIndividual: 6 mEnergySave
+GETSubNodeData: zones 6 mEnergySave
+pullZoneDataIndividual: 6 mAlarmOn
+GETSubNodeData: zones 6 mAlarmOn
+pullZoneDataIndividual: 6 mThermalStatus
+GETSubNodeData: zones 6 mThermalStatus
+pullZoneDataIndividual: 6 mCapability
+GETSubNodeData: zones 6 mCapability
+pullZoneDataActive: 6
+pullZoneDataIndividual: 6 mCurrentSetPointRH
+GETSubNodeData: zones 6 mCurrentSetPointRH
+pullZoneDataIndividual: 6 mCurrentSetPointDP
+GETSubNodeData: zones 6 mCurrentSetPointDP
+pullZoneDataIndividual: 6 mHumidity
+GETSubNodeData: zones 6 mHumidity
+pullZoneDataIndividual: 6 mDewPoint
+GETSubNodeData: zones 6 mDewPoint
+pullZoneDataIndividual: 6 mTemp
+GETSubNodeData: zones 6 mTemp
+pullZoneDataIndividual: 6 mAirTemp
+GETSubNodeData: zones 6 mAirTemp
+pullZoneDataIndividual: 6 mAlarmOn
+GETSubNodeData: zones 6 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 6 mName
+GETSubNodeData: zones 6 mName
+pushZoneDataIndividual: 6 mName Powder Room
+PUT str: http://192.168.2.65/api/zone/name/Powder Room
+PUT zones : mName Powder Room
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mSetPoint
+GETSubNodeData: zones 6 mSetPoint
+pushZoneDataIndividual: 6 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/zone/setpoint/70.5
+PUT zones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mStatus
+GETSubNodeData: zones 6 mStatus
+pushZoneDataIndividual: 6 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mHumSetPointRH
+GETSubNodeData: zones 6 mHumSetPointRH
+pushZoneDataIndividual: 6 mHumSetPointRH 73
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/73
+PUT zones : mHumSetPointRH 73
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mHumSetPointDP
+GETSubNodeData: zones 6 mHumSetPointDP
+pushZoneDataIndividual: 6 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mDeumSetPointRH
+GETSubNodeData: zones 6 mDeumSetPointRH
+pushZoneDataIndividual: 6 mDeumSetPointRH 73
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/73
+PUT zones : mDeumSetPointRH 73
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mDehumSetPointDP
+GETSubNodeData: zones 6 mDehumSetPointDP
+pushZoneDataIndividual: 6 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mHumidity
+GETSubNodeData: zones 6 mHumidity
+pullZoneDataIndividual: 6 mDewPoint
+GETSubNodeData: zones 6 mDewPoint
+pullZoneDataIndividual: 6 mTemp
+GETSubNodeData: zones 6 mTemp
+pullZoneDataIndividual: 6 mScheduleOn
+GETSubNodeData: zones 6 mScheduleOn
+pushZoneDataIndividual: 6 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mCO2
+GETSubNodeData: zones 6 mCO2
+pullZoneDataIndividual: 6 mAirTemp
+GETSubNodeData: zones 6 mAirTemp
+pullZoneDataIndividual: 6 mMacrozoneId
+GETSubNodeData: zones 6 mMacrozoneId
+pullZoneDataIndividual: 6 mEnergySave
+GETSubNodeData: zones 6 mEnergySave
+pushZoneDataIndividual: 6 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 6 mAlarmOn
+GETSubNodeData: zones 6 mAlarmOn
+pullZoneDataIndividual: 6 mThermalStatus
+GETSubNodeData: zones 6 mThermalStatus
+pullZoneDataIndividual: 6 mCapability
+GETSubNodeData: zones 6 mCapability
+pullZoneKeys
+pullZoneDataAll: 7
+pullZoneDataIndividual: 7 mName
+GETSubNodeData: zones 7 mName
+pullZoneDataIndividual: 7 mSetPoint
+GETSubNodeData: zones 7 mSetPoint
+pullZoneDataIndividual: 7 mStatus
+GETSubNodeData: zones 7 mStatus
+pullZoneDataIndividual: 7 mHumSetPointRH
+GETSubNodeData: zones 7 mHumSetPointRH
+pullZoneDataIndividual: 7 mHumSetPointDP
+GETSubNodeData: zones 7 mHumSetPointDP
+pullZoneDataIndividual: 7 mDeumSetPointRH
+GETSubNodeData: zones 7 mDeumSetPointRH
+pullZoneDataIndividual: 7 mDehumSetPointDP
+GETSubNodeData: zones 7 mDehumSetPointDP
+pullZoneDataIndividual: 7 mHumidity
+GETSubNodeData: zones 7 mHumidity
+pullZoneDataIndividual: 7 mDewPoint
+GETSubNodeData: zones 7 mDewPoint
+pullZoneDataIndividual: 7 mTemp
+GETSubNodeData: zones 7 mTemp
+pullZoneDataIndividual: 7 mScheduleOn
+GETSubNodeData: zones 7 mScheduleOn
+pullZoneDataIndividual: 7 mCO2
+GETSubNodeData: zones 7 mCO2
+pullZoneDataIndividual: 7 mAirTemp
+GETSubNodeData: zones 7 mAirTemp
+pullZoneDataIndividual: 7 mMacrozoneId
+GETSubNodeData: zones 7 mMacrozoneId
+pullZoneDataIndividual: 7 mEnergySave
+GETSubNodeData: zones 7 mEnergySave
+pullZoneDataIndividual: 7 mAlarmOn
+GETSubNodeData: zones 7 mAlarmOn
+pullZoneDataIndividual: 7 mThermalStatus
+GETSubNodeData: zones 7 mThermalStatus
+pullZoneDataIndividual: 7 mCapability
+GETSubNodeData: zones 7 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 7
+pullZoneDataIndividual: 7 mName
+GETSubNodeData: zones 7 mName
+pullZoneDataIndividual: 7 mSetPoint
+GETSubNodeData: zones 7 mSetPoint
+pullZoneDataIndividual: 7 mStatus
+GETSubNodeData: zones 7 mStatus
+pullZoneDataIndividual: 7 mHumSetPointRH
+GETSubNodeData: zones 7 mHumSetPointRH
+pullZoneDataIndividual: 7 mHumSetPointDP
+GETSubNodeData: zones 7 mHumSetPointDP
+pullZoneDataIndividual: 7 mDeumSetPointRH
+GETSubNodeData: zones 7 mDeumSetPointRH
+pullZoneDataIndividual: 7 mDehumSetPointDP
+GETSubNodeData: zones 7 mDehumSetPointDP
+pullZoneDataIndividual: 7 mHumidity
+GETSubNodeData: zones 7 mHumidity
+pullZoneDataIndividual: 7 mDewPoint
+GETSubNodeData: zones 7 mDewPoint
+pullZoneDataIndividual: 7 mTemp
+GETSubNodeData: zones 7 mTemp
+pullZoneDataIndividual: 7 mScheduleOn
+GETSubNodeData: zones 7 mScheduleOn
+pullZoneDataIndividual: 7 mCO2
+GETSubNodeData: zones 7 mCO2
+pullZoneDataIndividual: 7 mAirTemp
+GETSubNodeData: zones 7 mAirTemp
+pullZoneDataIndividual: 7 mMacrozoneId
+GETSubNodeData: zones 7 mMacrozoneId
+pullZoneDataIndividual: 7 mEnergySave
+GETSubNodeData: zones 7 mEnergySave
+pullZoneDataIndividual: 7 mAlarmOn
+GETSubNodeData: zones 7 mAlarmOn
+pullZoneDataIndividual: 7 mThermalStatus
+GETSubNodeData: zones 7 mThermalStatus
+pullZoneDataIndividual: 7 mCapability
+GETSubNodeData: zones 7 mCapability
+pullZoneDataActive: 7
+pullZoneDataIndividual: 7 mCurrentSetPointRH
+GETSubNodeData: zones 7 mCurrentSetPointRH
+pullZoneDataIndividual: 7 mCurrentSetPointDP
+GETSubNodeData: zones 7 mCurrentSetPointDP
+pullZoneDataIndividual: 7 mHumidity
+GETSubNodeData: zones 7 mHumidity
+pullZoneDataIndividual: 7 mDewPoint
+GETSubNodeData: zones 7 mDewPoint
+pullZoneDataIndividual: 7 mTemp
+GETSubNodeData: zones 7 mTemp
+pullZoneDataIndividual: 7 mAirTemp
+GETSubNodeData: zones 7 mAirTemp
+pullZoneDataIndividual: 7 mAlarmOn
+GETSubNodeData: zones 7 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 7 mName
+GETSubNodeData: zones 7 mName
+pushZoneDataIndividual: 7 mName Living-Stairs-Kitchen
+PUT str: http://192.168.2.65/api/zone/name/Living-Stairs-Kitchen
+PUT zones : mName Living-Stairs-Kitchen
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mSetPoint
+GETSubNodeData: zones 7 mSetPoint
+pushZoneDataIndividual: 7 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/zone/setpoint/70.5
+PUT zones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mStatus
+GETSubNodeData: zones 7 mStatus
+pushZoneDataIndividual: 7 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mHumSetPointRH
+GETSubNodeData: zones 7 mHumSetPointRH
+pushZoneDataIndividual: 7 mHumSetPointRH 73
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/73
+PUT zones : mHumSetPointRH 73
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mHumSetPointDP
+GETSubNodeData: zones 7 mHumSetPointDP
+pushZoneDataIndividual: 7 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mDeumSetPointRH
+GETSubNodeData: zones 7 mDeumSetPointRH
+pushZoneDataIndividual: 7 mDeumSetPointRH 73
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/73
+PUT zones : mDeumSetPointRH 73
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mDehumSetPointDP
+GETSubNodeData: zones 7 mDehumSetPointDP
+pushZoneDataIndividual: 7 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mHumidity
+GETSubNodeData: zones 7 mHumidity
+pullZoneDataIndividual: 7 mDewPoint
+GETSubNodeData: zones 7 mDewPoint
+pullZoneDataIndividual: 7 mTemp
+GETSubNodeData: zones 7 mTemp
+pullZoneDataIndividual: 7 mScheduleOn
+GETSubNodeData: zones 7 mScheduleOn
+pushZoneDataIndividual: 7 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mCO2
+GETSubNodeData: zones 7 mCO2
+pullZoneDataIndividual: 7 mAirTemp
+GETSubNodeData: zones 7 mAirTemp
+pullZoneDataIndividual: 7 mMacrozoneId
+GETSubNodeData: zones 7 mMacrozoneId
+pullZoneDataIndividual: 7 mEnergySave
+GETSubNodeData: zones 7 mEnergySave
+pushZoneDataIndividual: 7 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 7 mAlarmOn
+GETSubNodeData: zones 7 mAlarmOn
+pullZoneDataIndividual: 7 mThermalStatus
+GETSubNodeData: zones 7 mThermalStatus
+pullZoneDataIndividual: 7 mCapability
+GETSubNodeData: zones 7 mCapability
+pullZoneKeys
+pullZoneDataAll: 8
+pullZoneDataIndividual: 8 mName
+GETSubNodeData: zones 8 mName
+pullZoneDataIndividual: 8 mSetPoint
+GETSubNodeData: zones 8 mSetPoint
+pullZoneDataIndividual: 8 mStatus
+GETSubNodeData: zones 8 mStatus
+pullZoneDataIndividual: 8 mHumSetPointRH
+GETSubNodeData: zones 8 mHumSetPointRH
+pullZoneDataIndividual: 8 mHumSetPointDP
+GETSubNodeData: zones 8 mHumSetPointDP
+pullZoneDataIndividual: 8 mDeumSetPointRH
+GETSubNodeData: zones 8 mDeumSetPointRH
+pullZoneDataIndividual: 8 mDehumSetPointDP
+GETSubNodeData: zones 8 mDehumSetPointDP
+pullZoneDataIndividual: 8 mHumidity
+GETSubNodeData: zones 8 mHumidity
+pullZoneDataIndividual: 8 mDewPoint
+GETSubNodeData: zones 8 mDewPoint
+pullZoneDataIndividual: 8 mTemp
+GETSubNodeData: zones 8 mTemp
+pullZoneDataIndividual: 8 mScheduleOn
+GETSubNodeData: zones 8 mScheduleOn
+pullZoneDataIndividual: 8 mCO2
+GETSubNodeData: zones 8 mCO2
+pullZoneDataIndividual: 8 mAirTemp
+GETSubNodeData: zones 8 mAirTemp
+pullZoneDataIndividual: 8 mMacrozoneId
+GETSubNodeData: zones 8 mMacrozoneId
+pullZoneDataIndividual: 8 mEnergySave
+GETSubNodeData: zones 8 mEnergySave
+pullZoneDataIndividual: 8 mAlarmOn
+GETSubNodeData: zones 8 mAlarmOn
+pullZoneDataIndividual: 8 mThermalStatus
+GETSubNodeData: zones 8 mThermalStatus
+pullZoneDataIndividual: 8 mCapability
+GETSubNodeData: zones 8 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 8
+pullZoneDataIndividual: 8 mName
+GETSubNodeData: zones 8 mName
+pullZoneDataIndividual: 8 mSetPoint
+GETSubNodeData: zones 8 mSetPoint
+pullZoneDataIndividual: 8 mStatus
+GETSubNodeData: zones 8 mStatus
+pullZoneDataIndividual: 8 mHumSetPointRH
+GETSubNodeData: zones 8 mHumSetPointRH
+pullZoneDataIndividual: 8 mHumSetPointDP
+GETSubNodeData: zones 8 mHumSetPointDP
+pullZoneDataIndividual: 8 mDeumSetPointRH
+GETSubNodeData: zones 8 mDeumSetPointRH
+pullZoneDataIndividual: 8 mDehumSetPointDP
+GETSubNodeData: zones 8 mDehumSetPointDP
+pullZoneDataIndividual: 8 mHumidity
+GETSubNodeData: zones 8 mHumidity
+pullZoneDataIndividual: 8 mDewPoint
+GETSubNodeData: zones 8 mDewPoint
+pullZoneDataIndividual: 8 mTemp
+GETSubNodeData: zones 8 mTemp
+pullZoneDataIndividual: 8 mScheduleOn
+GETSubNodeData: zones 8 mScheduleOn
+pullZoneDataIndividual: 8 mCO2
+GETSubNodeData: zones 8 mCO2
+pullZoneDataIndividual: 8 mAirTemp
+GETSubNodeData: zones 8 mAirTemp
+pullZoneDataIndividual: 8 mMacrozoneId
+GETSubNodeData: zones 8 mMacrozoneId
+pullZoneDataIndividual: 8 mEnergySave
+GETSubNodeData: zones 8 mEnergySave
+pullZoneDataIndividual: 8 mAlarmOn
+GETSubNodeData: zones 8 mAlarmOn
+pullZoneDataIndividual: 8 mThermalStatus
+GETSubNodeData: zones 8 mThermalStatus
+pullZoneDataIndividual: 8 mCapability
+GETSubNodeData: zones 8 mCapability
+pullZoneDataActive: 8
+pullZoneDataIndividual: 8 mCurrentSetPointRH
+GETSubNodeData: zones 8 mCurrentSetPointRH
+pullZoneDataIndividual: 8 mCurrentSetPointDP
+GETSubNodeData: zones 8 mCurrentSetPointDP
+pullZoneDataIndividual: 8 mHumidity
+GETSubNodeData: zones 8 mHumidity
+pullZoneDataIndividual: 8 mDewPoint
+GETSubNodeData: zones 8 mDewPoint
+pullZoneDataIndividual: 8 mTemp
+GETSubNodeData: zones 8 mTemp
+pullZoneDataIndividual: 8 mAirTemp
+GETSubNodeData: zones 8 mAirTemp
+pullZoneDataIndividual: 8 mAlarmOn
+GETSubNodeData: zones 8 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 8 mName
+GETSubNodeData: zones 8 mName
+pushZoneDataIndividual: 8 mName Master Bedroom
+PUT str: http://192.168.2.65/api/zone/name/Master Bedroom
+PUT zones : mName Master Bedroom
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mSetPoint
+GETSubNodeData: zones 8 mSetPoint
+pushZoneDataIndividual: 8 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/zone/setpoint/70.5
+PUT zones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mStatus
+GETSubNodeData: zones 8 mStatus
+pushZoneDataIndividual: 8 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mHumSetPointRH
+GETSubNodeData: zones 8 mHumSetPointRH
+pushZoneDataIndividual: 8 mHumSetPointRH 67
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/67
+PUT zones : mHumSetPointRH 67
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mHumSetPointDP
+GETSubNodeData: zones 8 mHumSetPointDP
+pushZoneDataIndividual: 8 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mDeumSetPointRH
+GETSubNodeData: zones 8 mDeumSetPointRH
+pushZoneDataIndividual: 8 mDeumSetPointRH 67
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/67
+PUT zones : mDeumSetPointRH 67
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mDehumSetPointDP
+GETSubNodeData: zones 8 mDehumSetPointDP
+pushZoneDataIndividual: 8 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mHumidity
+GETSubNodeData: zones 8 mHumidity
+pullZoneDataIndividual: 8 mDewPoint
+GETSubNodeData: zones 8 mDewPoint
+pullZoneDataIndividual: 8 mTemp
+GETSubNodeData: zones 8 mTemp
+pullZoneDataIndividual: 8 mScheduleOn
+GETSubNodeData: zones 8 mScheduleOn
+pushZoneDataIndividual: 8 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mCO2
+GETSubNodeData: zones 8 mCO2
+pullZoneDataIndividual: 8 mAirTemp
+GETSubNodeData: zones 8 mAirTemp
+pullZoneDataIndividual: 8 mMacrozoneId
+GETSubNodeData: zones 8 mMacrozoneId
+pullZoneDataIndividual: 8 mEnergySave
+GETSubNodeData: zones 8 mEnergySave
+pushZoneDataIndividual: 8 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 8 mAlarmOn
+GETSubNodeData: zones 8 mAlarmOn
+pullZoneDataIndividual: 8 mThermalStatus
+GETSubNodeData: zones 8 mThermalStatus
+pullZoneDataIndividual: 8 mCapability
+GETSubNodeData: zones 8 mCapability
+pullZoneKeys
+pullZoneDataAll: 9
+pullZoneDataIndividual: 9 mName
+GETSubNodeData: zones 9 mName
+pullZoneDataIndividual: 9 mSetPoint
+GETSubNodeData: zones 9 mSetPoint
+pullZoneDataIndividual: 9 mStatus
+GETSubNodeData: zones 9 mStatus
+pullZoneDataIndividual: 9 mHumSetPointRH
+GETSubNodeData: zones 9 mHumSetPointRH
+pullZoneDataIndividual: 9 mHumSetPointDP
+GETSubNodeData: zones 9 mHumSetPointDP
+pullZoneDataIndividual: 9 mDeumSetPointRH
+GETSubNodeData: zones 9 mDeumSetPointRH
+pullZoneDataIndividual: 9 mDehumSetPointDP
+GETSubNodeData: zones 9 mDehumSetPointDP
+pullZoneDataIndividual: 9 mHumidity
+GETSubNodeData: zones 9 mHumidity
+pullZoneDataIndividual: 9 mDewPoint
+GETSubNodeData: zones 9 mDewPoint
+pullZoneDataIndividual: 9 mTemp
+GETSubNodeData: zones 9 mTemp
+pullZoneDataIndividual: 9 mScheduleOn
+GETSubNodeData: zones 9 mScheduleOn
+pullZoneDataIndividual: 9 mCO2
+GETSubNodeData: zones 9 mCO2
+pullZoneDataIndividual: 9 mAirTemp
+GETSubNodeData: zones 9 mAirTemp
+pullZoneDataIndividual: 9 mMacrozoneId
+GETSubNodeData: zones 9 mMacrozoneId
+pullZoneDataIndividual: 9 mEnergySave
+GETSubNodeData: zones 9 mEnergySave
+pullZoneDataIndividual: 9 mAlarmOn
+GETSubNodeData: zones 9 mAlarmOn
+pullZoneDataIndividual: 9 mThermalStatus
+GETSubNodeData: zones 9 mThermalStatus
+pullZoneDataIndividual: 9 mCapability
+GETSubNodeData: zones 9 mCapability
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataAll: 9
+pullZoneDataIndividual: 9 mName
+GETSubNodeData: zones 9 mName
+pullZoneDataIndividual: 9 mSetPoint
+GETSubNodeData: zones 9 mSetPoint
+pullZoneDataIndividual: 9 mStatus
+GETSubNodeData: zones 9 mStatus
+pullZoneDataIndividual: 9 mHumSetPointRH
+GETSubNodeData: zones 9 mHumSetPointRH
+pullZoneDataIndividual: 9 mHumSetPointDP
+GETSubNodeData: zones 9 mHumSetPointDP
+pullZoneDataIndividual: 9 mDeumSetPointRH
+GETSubNodeData: zones 9 mDeumSetPointRH
+pullZoneDataIndividual: 9 mDehumSetPointDP
+GETSubNodeData: zones 9 mDehumSetPointDP
+pullZoneDataIndividual: 9 mHumidity
+GETSubNodeData: zones 9 mHumidity
+pullZoneDataIndividual: 9 mDewPoint
+GETSubNodeData: zones 9 mDewPoint
+pullZoneDataIndividual: 9 mTemp
+GETSubNodeData: zones 9 mTemp
+pullZoneDataIndividual: 9 mScheduleOn
+GETSubNodeData: zones 9 mScheduleOn
+pullZoneDataIndividual: 9 mCO2
+GETSubNodeData: zones 9 mCO2
+pullZoneDataIndividual: 9 mAirTemp
+GETSubNodeData: zones 9 mAirTemp
+pullZoneDataIndividual: 9 mMacrozoneId
+GETSubNodeData: zones 9 mMacrozoneId
+pullZoneDataIndividual: 9 mEnergySave
+GETSubNodeData: zones 9 mEnergySave
+pullZoneDataIndividual: 9 mAlarmOn
+GETSubNodeData: zones 9 mAlarmOn
+pullZoneDataIndividual: 9 mThermalStatus
+GETSubNodeData: zones 9 mThermalStatus
+pullZoneDataIndividual: 9 mCapability
+GETSubNodeData: zones 9 mCapability
+pullZoneDataActive: 9
+pullZoneDataIndividual: 9 mCurrentSetPointRH
+GETSubNodeData: zones 9 mCurrentSetPointRH
+pullZoneDataIndividual: 9 mCurrentSetPointDP
+GETSubNodeData: zones 9 mCurrentSetPointDP
+pullZoneDataIndividual: 9 mHumidity
+GETSubNodeData: zones 9 mHumidity
+pullZoneDataIndividual: 9 mDewPoint
+GETSubNodeData: zones 9 mDewPoint
+pullZoneDataIndividual: 9 mTemp
+GETSubNodeData: zones 9 mTemp
+pullZoneDataIndividual: 9 mAirTemp
+GETSubNodeData: zones 9 mAirTemp
+pullZoneDataIndividual: 9 mAlarmOn
+GETSubNodeData: zones 9 mAlarmOn
+pullZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mHumSetPointRH', 'mHumSetPointDP', 'mDeumSetPointRH', 'mDehumSetPointDP', 'mHumidity', 'mDewPoint', 'mTemp', 'mScheduleOn', 'mCO2', 'mAirTemp', 'mMacrozoneId', 'mEnergySave', 'mAlarmOn', 'mThermalStatus', 'mCapability']
+pullZoneDataIndividual: 9 mName
+GETSubNodeData: zones 9 mName
+pushZoneDataIndividual: 9 mName Master Bath
+PUT str: http://192.168.2.65/api/zone/name/Master Bath
+PUT zones : mName Master Bath
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mSetPoint
+GETSubNodeData: zones 9 mSetPoint
+pushZoneDataIndividual: 9 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/zone/setpoint/70.5
+PUT zones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mStatus
+GETSubNodeData: zones 9 mStatus
+pushZoneDataIndividual: 9 mStatus 1
+PUT str: http://192.168.2.65/api/zone/status/1
+PUT zones : mStatus 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mHumSetPointRH
+GETSubNodeData: zones 9 mHumSetPointRH
+pushZoneDataIndividual: 9 mHumSetPointRH 67
+PUT str: http://192.168.2.65/api/zone/humidSetpointRH/67
+PUT zones : mHumSetPointRH 67
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mHumSetPointDP
+GETSubNodeData: zones 9 mHumSetPointDP
+pushZoneDataIndividual: 9 mHumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/humidSetpointDP/60.0
+PUT zones : mHumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mDeumSetPointRH
+GETSubNodeData: zones 9 mDeumSetPointRH
+pushZoneDataIndividual: 9 mDeumSetPointRH 67
+PUT str: http://192.168.2.65/api/zone/dehumSetpointRH/67
+PUT zones : mDeumSetPointRH 67
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mDehumSetPointDP
+GETSubNodeData: zones 9 mDehumSetPointDP
+pushZoneDataIndividual: 9 mDehumSetPointDP 60.0
+PUT str: http://192.168.2.65/api/zone/dehumSetpointDP/60.0
+PUT zones : mDehumSetPointDP 60.0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mHumidity
+GETSubNodeData: zones 9 mHumidity
+pullZoneDataIndividual: 9 mDewPoint
+GETSubNodeData: zones 9 mDewPoint
+pullZoneDataIndividual: 9 mTemp
+GETSubNodeData: zones 9 mTemp
+pullZoneDataIndividual: 9 mScheduleOn
+GETSubNodeData: zones 9 mScheduleOn
+pushZoneDataIndividual: 9 mScheduleOn 0
+PUT str: http://192.168.2.65/api/zone/scheduleOn/0
+PUT zones : mScheduleOn 0
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mCO2
+GETSubNodeData: zones 9 mCO2
+pullZoneDataIndividual: 9 mAirTemp
+GETSubNodeData: zones 9 mAirTemp
+pullZoneDataIndividual: 9 mMacrozoneId
+GETSubNodeData: zones 9 mMacrozoneId
+pullZoneDataIndividual: 9 mEnergySave
+GETSubNodeData: zones 9 mEnergySave
+pushZoneDataIndividual: 9 mEnergySave 1
+PUT str: http://192.168.2.65/api/zone/energySaving/1
+PUT zones : mEnergySave 1
+nodeData : {'statusOK': True}
+pullZoneDataIndividual: 9 mAlarmOn
+GETSubNodeData: zones 9 mAlarmOn
+pullZoneDataIndividual: 9 mThermalStatus
+GETSubNodeData: zones 9 mThermalStatus
+pullZoneDataIndividual: 9 mCapability
+GETSubNodeData: zones 9 mCapability
+
+ Macro Zones
+pullMacroZoneKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullMacroZoneDataAll: 0
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataAll: 0
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneDataActive: 0
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataIndividual: 0 mName
+GETSubNodeData: macrozones 0 mName
+pushMacroZoneDataIndividual: 0 mName All
+PUT str: http://192.168.2.65/api/macrozone/name/All
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mName value:', 'All')
+PUT macrozones : mName All
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mName value:', 'All'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mSetPoint
+GETSubNodeData: macrozones 0 mSetPoint
+pushMacroZoneDataIndividual: 0 mSetPoint 69
+PUT str: http://192.168.2.65/api/macrozone/setpoint/69
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mSetPoint value:', '69')
+PUT macrozones : mSetPoint 69
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mSetPoint value:', '69'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mStatus
+GETSubNodeData: macrozones 0 mStatus
+pushMacroZoneDataIndividual: 0 mStatus 1
+PUT str: http://192.168.2.65/api/macrozone/status/1
+('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mStatus value:', '1')
+PUT macrozones : mStatus 1
+nodeData : {'error': ('<Response [400]>: Not able to PUT key: dict_values(["There are other macrozone. Unable to change macrozone \'All\'"]) Subnode <built-in function id> for key: mStatus value:', '1'), 'statusOK': False}
+pullMacroZoneDataIndividual: 0 mScheduleOn
+GETSubNodeData: macrozones 0 mScheduleOn
+pushMacroZoneDataIndividual: 0 mScheduleOn 1
+PUT str: http://192.168.2.65/api/macrozone/scheduleOn/1
+PUT macrozones : mScheduleOn 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 0 mHumidity
+GETSubNodeData: macrozones 0 mHumidity
+pullMacroZoneDataIndividual: 0 mDewPoint
+GETSubNodeData: macrozones 0 mDewPoint
+pullMacroZoneDataIndividual: 0 mTemp
+GETSubNodeData: macrozones 0 mTemp
+pullMacroZoneKeys
+pullMacroZoneDataAll: 1
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pullMacroZoneDataIndividual: 1 mStatus
+GETSubNodeData: macrozones 1 mStatus
+pullMacroZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: macrozones 1 mScheduleOn
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataAll: 1
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pullMacroZoneDataIndividual: 1 mStatus
+GETSubNodeData: macrozones 1 mStatus
+pullMacroZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: macrozones 1 mScheduleOn
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+pullMacroZoneDataActive: 1
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataIndividual: 1 mName
+GETSubNodeData: macrozones 1 mName
+pushMacroZoneDataIndividual: 1 mName Upstairs
+PUT str: http://192.168.2.65/api/macrozone/name/Upstairs
+PUT macrozones : mName Upstairs
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mSetPoint
+GETSubNodeData: macrozones 1 mSetPoint
+pushMacroZoneDataIndividual: 1 mSetPoint 70.5
+PUT str: http://192.168.2.65/api/macrozone/setpoint/70.5
+PUT macrozones : mSetPoint 70.5
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mStatus
+GETSubNodeData: macrozones 1 mStatus
+pushMacroZoneDataIndividual: 1 mStatus 1
+PUT str: http://192.168.2.65/api/macrozone/status/1
+PUT macrozones : mStatus 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mScheduleOn
+GETSubNodeData: macrozones 1 mScheduleOn
+pushMacroZoneDataIndividual: 1 mScheduleOn 1
+PUT str: http://192.168.2.65/api/macrozone/scheduleOn/1
+PUT macrozones : mScheduleOn 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 1 mHumidity
+GETSubNodeData: macrozones 1 mHumidity
+pullMacroZoneDataIndividual: 1 mDewPoint
+GETSubNodeData: macrozones 1 mDewPoint
+pullMacroZoneDataIndividual: 1 mTemp
+GETSubNodeData: macrozones 1 mTemp
+pullMacroZoneKeys
+pullMacroZoneDataAll: 2
+pullMacroZoneDataIndividual: 2 mName
+GETSubNodeData: macrozones 2 mName
+pullMacroZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: macrozones 2 mSetPoint
+pullMacroZoneDataIndividual: 2 mStatus
+GETSubNodeData: macrozones 2 mStatus
+pullMacroZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: macrozones 2 mScheduleOn
+pullMacroZoneDataIndividual: 2 mHumidity
+GETSubNodeData: macrozones 2 mHumidity
+pullMacroZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: macrozones 2 mDewPoint
+pullMacroZoneDataIndividual: 2 mTemp
+GETSubNodeData: macrozones 2 mTemp
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataAll: 2
+pullMacroZoneDataIndividual: 2 mName
+GETSubNodeData: macrozones 2 mName
+pullMacroZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: macrozones 2 mSetPoint
+pullMacroZoneDataIndividual: 2 mStatus
+GETSubNodeData: macrozones 2 mStatus
+pullMacroZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: macrozones 2 mScheduleOn
+pullMacroZoneDataIndividual: 2 mHumidity
+GETSubNodeData: macrozones 2 mHumidity
+pullMacroZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: macrozones 2 mDewPoint
+pullMacroZoneDataIndividual: 2 mTemp
+GETSubNodeData: macrozones 2 mTemp
+pullMacroZoneDataActive: 2
+pullMacroZoneDataIndividual: 2 mTemp
+GETSubNodeData: macrozones 2 mTemp
+pullMacroZoneDataIndividual: 2 mHumidity
+GETSubNodeData: macrozones 2 mHumidity
+pullMacroZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: macrozones 2 mDewPoint
+pullMacroZoneKeys
+['mName', 'mSetPoint', 'mStatus', 'mScheduleOn', 'mHumidity', 'mDewPoint', 'mTemp']
+pullMacroZoneDataIndividual: 2 mName
+GETSubNodeData: macrozones 2 mName
+pushMacroZoneDataIndividual: 2 mName Downstairs
+PUT str: http://192.168.2.65/api/macrozone/name/Downstairs
+PUT macrozones : mName Downstairs
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 2 mSetPoint
+GETSubNodeData: macrozones 2 mSetPoint
+pushMacroZoneDataIndividual: 2 mSetPoint 70
+PUT str: http://192.168.2.65/api/macrozone/setpoint/70
+PUT macrozones : mSetPoint 70
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 2 mStatus
+GETSubNodeData: macrozones 2 mStatus
+pushMacroZoneDataIndividual: 2 mStatus 1
+PUT str: http://192.168.2.65/api/macrozone/status/1
+PUT macrozones : mStatus 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 2 mScheduleOn
+GETSubNodeData: macrozones 2 mScheduleOn
+pushMacroZoneDataIndividual: 2 mScheduleOn 1
+PUT str: http://192.168.2.65/api/macrozone/scheduleOn/1
+PUT macrozones : mScheduleOn 1
+nodeData : {'statusOK': True}
+pullMacroZoneDataIndividual: 2 mHumidity
+GETSubNodeData: macrozones 2 mHumidity
+pullMacroZoneDataIndividual: 2 mDewPoint
+GETSubNodeData: macrozones 2 mDewPoint
+pullMacroZoneDataIndividual: 2 mTemp
+GETSubNodeData: macrozones 2 mTemp
+
+ Hot Cold Change Over
+pullHCCOKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullHCCODataAll: 0
+pullHCCODataMessanaIndividual: 0 mName
+GETSubNodeData: hc_changeover 0 mName
+pullHCCODataMessanaIndividual: 0 mMode
+GETSubNodeData: hc_changeover 0 mMode
+pullHCCODataMessanaIndividual: 0 mExcutiveSeason
+GETSubNodeData: hc_changeover 0 mExcutiveSeason
+pullHCCODataMessanaIndividual: 0 mAdaptiveComfort
+GETSubNodeData: hc_changeover 0 mAdaptiveComfort
+['mName', 'mMode', 'mExcutiveSeason', 'mAdaptiveComfort']
+pullHCCODataAll: 0
+pullHCCODataMessanaIndividual: 0 mName
+GETSubNodeData: hc_changeover 0 mName
+pullHCCODataMessanaIndividual: 0 mMode
+GETSubNodeData: hc_changeover 0 mMode
+pullHCCODataMessanaIndividual: 0 mExcutiveSeason
+GETSubNodeData: hc_changeover 0 mExcutiveSeason
+pullHCCODataMessanaIndividual: 0 mAdaptiveComfort
+GETSubNodeData: hc_changeover 0 mAdaptiveComfort
+pullHCCODataActive: 0
+pullHCCOKeys
+['mName', 'mMode', 'mExcutiveSeason', 'mAdaptiveComfort']
+pullHCCODataMessanaIndividual: 0 mName
+GETSubNodeData: hc_changeover 0 mName
+pushHCCODataMessanaIndividual: 0 mName Olgaard Residence
+PUT str: http://192.168.2.65/api/hc/name/Olgaard Residence
+PUT HC changeover : mName Olgaard Residence
+nodeData : {'statusOK': True}
+pullHCCODataMessanaIndividual: 0 mMode
+GETSubNodeData: hc_changeover 0 mMode
+pushHCCODataMessanaIndividual: 0 mMode 0
+PUT str: http://192.168.2.65/api/hc/mode/0
+("<Response [400]>: Not able to PUT key: dict_values(['only Heating or only Cooling']) Subnode <built-in function id> for key: mMode value:", '0')
+PUT HC changeover : mMode 0
+nodeData : {'error': ("<Response [400]>: Not able to PUT key: dict_values(['only Heating or only Cooling']) Subnode <built-in function id> for key: mMode value:", '0'), 'statusOK': False}
+pullHCCODataMessanaIndividual: 0 mExcutiveSeason
+GETSubNodeData: hc_changeover 0 mExcutiveSeason
+pullHCCODataMessanaIndividual: 0 mAdaptiveComfort
+GETSubNodeData: hc_changeover 0 mAdaptiveComfort
+pushHCCODataMessanaIndividual: 0 mAdaptiveComfort 0
+PUT str: http://192.168.2.65/api/hc/adaptiveComfort/0
+PUT HC changeover : mAdaptiveComfort 0
+nodeData : {'statusOK': True}
+
+ ATU
+pullATUKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullATUDataAll: 0
+pullATUDataIndividual: 0 mName
+GETSubNodeData: atus 0 mName
+pullATUDataIndividual: 0 mFlowLevel
+GETSubNodeData: atus 0 mFlowLevel
+pullATUDataIndividual: 0 mStatus
+GETSubNodeData: atus 0 mStatus
+pullATUDataIndividual: 0 HRVOn
+GETSubNodeData: atus 0 HRVOn
+pullATUDataIndividual: 0 mHUMOn
+GETSubNodeData: atus 0 mHUMOn
+pullATUDataIndividual: 0 mNTDOn
+GETSubNodeData: atus 0 mNTDOn
+pullATUDataIndividual: 0 mINTOn
+GETSubNodeData: atus 0 mINTOn
+pullATUDataIndividual: 0 mDehumudityStatus
+GETSubNodeData: atus 0 mDehumudityStatus
+pullATUDataIndividual: 0 mHumidityStatus
+GETSubNodeData: atus 0 mHumidityStatus
+pullATUDataIndividual: 0 mHRVstatus
+GETSubNodeData: atus 0 mHRVstatus
+pullATUDataIndividual: 0 mIntegrationStatus
+GETSubNodeData: atus 0 mIntegrationStatus
+pullATUDataIndividual: 0 mAlarmOn
+GETSubNodeData: atus 0 mAlarmOn
+pullATUDataIndividual: 0 mAirTemp
+GETSubNodeData: atus 0 mAirTemp
+pullATUDataIndividual: 0 mHumSetpointRH
+GETSubNodeData: atus 0 mHumSetpointRH
+pullATUDataIndividual: 0 mHumSetpointDP
+GETSubNodeData: atus 0 mHumSetpointDP
+pullATUDataIndividual: 0 mDehumSetpointRH
+GETSubNodeData: atus 0 mDehumSetpointRH
+pullATUDataIndividual: 0 mDehumSetpointDP
+GETSubNodeData: atus 0 mDehumSetpointDP
+['mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn', 'mINTOn', 'mDehumudityStatus', 'mHumidityStatus', 'mHRVstatus', 'mIntegrationStatus', 'mAlarmOn', 'mAirTemp', 'mHumSetpointRH', 'mHumSetpointDP', 'mDehumSetpointRH', 'mDehumSetpointDP']
+pullATUDataAll: 0
+pullATUDataIndividual: 0 mName
+GETSubNodeData: atus 0 mName
+pullATUDataIndividual: 0 mFlowLevel
+GETSubNodeData: atus 0 mFlowLevel
+pullATUDataIndividual: 0 mStatus
+GETSubNodeData: atus 0 mStatus
+pullATUDataIndividual: 0 HRVOn
+GETSubNodeData: atus 0 HRVOn
+pullATUDataIndividual: 0 mHUMOn
+GETSubNodeData: atus 0 mHUMOn
+pullATUDataIndividual: 0 mNTDOn
+GETSubNodeData: atus 0 mNTDOn
+pullATUDataIndividual: 0 mINTOn
+GETSubNodeData: atus 0 mINTOn
+pullATUDataIndividual: 0 mDehumudityStatus
+GETSubNodeData: atus 0 mDehumudityStatus
+pullATUDataIndividual: 0 mHumidityStatus
+GETSubNodeData: atus 0 mHumidityStatus
+pullATUDataIndividual: 0 mHRVstatus
+GETSubNodeData: atus 0 mHRVstatus
+pullATUDataIndividual: 0 mIntegrationStatus
+GETSubNodeData: atus 0 mIntegrationStatus
+pullATUDataIndividual: 0 mAlarmOn
+GETSubNodeData: atus 0 mAlarmOn
+pullATUDataIndividual: 0 mAirTemp
+GETSubNodeData: atus 0 mAirTemp
+pullATUDataIndividual: 0 mHumSetpointRH
+GETSubNodeData: atus 0 mHumSetpointRH
+pullATUDataIndividual: 0 mHumSetpointDP
+GETSubNodeData: atus 0 mHumSetpointDP
+pullATUDataIndividual: 0 mDehumSetpointRH
+GETSubNodeData: atus 0 mDehumSetpointRH
+pullATUDataIndividual: 0 mDehumSetpointDP
+GETSubNodeData: atus 0 mDehumSetpointDP
+pullATUDataActive: 0
+pullATUDataIndividual: 0 mFlowLevel
+GETSubNodeData: atus 0 mFlowLevel
+pullATUDataIndividual: 0 mAlarmOn
+GETSubNodeData: atus 0 mAlarmOn
+pullATUDataIndividual: 0 mAirTemp
+GETSubNodeData: atus 0 mAirTemp
+pullATUDataIndividual: 0 mCurrentSetpointRH
+GETSubNodeData: atus 0 mCurrentSetpointRH
+pullATUDataIndividual: 0 mCurrentSetpointDP
+GETSubNodeData: atus 0 mCurrentSetpointDP
+pullATUKeys
+['mName', 'mFlowLevel', 'mStatus', 'HRVOn', 'mHUMOn', 'mNTDOn', 'mINTOn', 'mDehumudityStatus', 'mHumidityStatus', 'mHRVstatus', 'mIntegrationStatus', 'mAlarmOn', 'mAirTemp', 'mHumSetpointRH', 'mHumSetpointDP', 'mDehumSetpointRH', 'mDehumSetpointDP']
+pullATUDataIndividual: 0 mName
+GETSubNodeData: atus 0 mName
+pushATUDataIndividual: 0 mName Air Treatment Unit 1
+PUT str: http://192.168.2.65/api/atu/name/Air Treatment Unit 1
+PUT atu : mName Air Treatment Unit 1
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mFlowLevel
+GETSubNodeData: atus 0 mFlowLevel
+pushATUDataIndividual: 0 mFlowLevel 1
+PUT str: http://192.168.2.65/api/atu/flowLevel/1
+('<Response [500]>: Error: Unknown:for key: mFlowLevel value:', '1')
+PUT atu : mFlowLevel 1
+nodeData : {'error': ('<Response [500]>: Error: Unknown:for key: mFlowLevel value:', '1'), 'statusOK': False}
+pullATUDataIndividual: 0 mStatus
+GETSubNodeData: atus 0 mStatus
+pushATUDataIndividual: 0 mStatus 0
+PUT str: http://192.168.2.65/api/atu/status/0
+PUT atu : mStatus 0
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 HRVOn
+GETSubNodeData: atus 0 HRVOn
+pushATUDataIndividual: 0 HRVOn 1
+PUT str: http://192.168.2.65/api/atu/hrvOn/1
+PUT atu : HRVOn 1
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mHUMOn
+GETSubNodeData: atus 0 mHUMOn
+pushATUDataIndividual: 0 mHUMOn 0
+PUT str: http://192.168.2.65/api/atu/humOn/0
+PUT atu : mHUMOn 0
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mNTDOn
+GETSubNodeData: atus 0 mNTDOn
+pushATUDataIndividual: 0 mNTDOn 0
+PUT str: http://192.168.2.65/api/atu/ntdOn/0
+PUT atu : mNTDOn 0
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mINTOn
+GETSubNodeData: atus 0 mINTOn
+pushATUDataIndividual: 0 mINTOn 0
+PUT str: http://192.168.2.65/api/atu/intOn/0
+PUT atu : mINTOn 0
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mDehumudityStatus
+GETSubNodeData: atus 0 mDehumudityStatus
+pullATUDataIndividual: 0 mHumidityStatus
+GETSubNodeData: atus 0 mHumidityStatus
+pullATUDataIndividual: 0 mHRVstatus
+GETSubNodeData: atus 0 mHRVstatus
+pullATUDataIndividual: 0 mIntegrationStatus
+GETSubNodeData: atus 0 mIntegrationStatus
+pullATUDataIndividual: 0 mAlarmOn
+GETSubNodeData: atus 0 mAlarmOn
+pullATUDataIndividual: 0 mAirTemp
+GETSubNodeData: atus 0 mAirTemp
+pullATUDataIndividual: 0 mHumSetpointRH
+GETSubNodeData: atus 0 mHumSetpointRH
+pushATUDataIndividual: 0 mHumSetpointRH 70
+PUT str: http://192.168.2.65/api/atu/humidSetpointRH/70
+PUT atu : mHumSetpointRH 70
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mHumSetpointDP
+GETSubNodeData: atus 0 mHumSetpointDP
+pushATUDataIndividual: 0 mHumSetpointDP 60
+PUT str: http://192.168.2.65/api/atu/humidSetpointDP/60
+PUT atu : mHumSetpointDP 60
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mDehumSetpointRH
+GETSubNodeData: atus 0 mDehumSetpointRH
+pushATUDataIndividual: 0 mDehumSetpointRH 70
+PUT str: http://192.168.2.65/api/atu/dehumSetpointRH/70
+PUT atu : mDehumSetpointRH 70
+nodeData : {'statusOK': True}
+pullATUDataIndividual: 0 mDehumSetpointDP
+GETSubNodeData: atus 0 mDehumSetpointDP
+pushATUDataIndividual: 0 mDehumSetpointDP 60
+PUT str: http://192.168.2.65/api/atu/dehumSetpointDP/60
+PUT atu : mDehumSetpointDP 60
+nodeData : {'statusOK': True}
+
+ Fan Coil
+
+ energy_sources
+pullEnergySourceKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullEnergySourceDataAll: 0
+pullEnergySourceDataIndividual: 0 mName
+GETSubNodeData: energy_sources 0 mName
+pullEnergySourceDataIndividual: 0 mStatus
+GETSubNodeData: energy_sources 0 mStatus
+pullEnergySourceDataIndividual: 0 mDHWstatus
+GETSubNodeData: energy_sources 0 mDHWstatus
+pullEnergySourceDataIndividual: 0 mType
+GETSubNodeData: energy_sources 0 mType
+pullEnergySourceDataIndividual: 0 mAlarmOn
+GETSubNodeData: energy_sources 0 mAlarmOn
+['mName', 'mStatus', 'mDHWstatus', 'mType', 'mAlarmOn']
+pullEnergySourceDataAll: 0
+pullEnergySourceDataIndividual: 0 mName
+GETSubNodeData: energy_sources 0 mName
+pullEnergySourceDataIndividual: 0 mStatus
+GETSubNodeData: energy_sources 0 mStatus
+pullEnergySourceDataIndividual: 0 mDHWstatus
+GETSubNodeData: energy_sources 0 mDHWstatus
+pullEnergySourceDataIndividual: 0 mType
+GETSubNodeData: energy_sources 0 mType
+pullEnergySourceDataIndividual: 0 mAlarmOn
+GETSubNodeData: energy_sources 0 mAlarmOn
+pullEnergySourceDataActive: 0
+pullEnergySourceDataIndividual: 0 mAlarmOn
+GETSubNodeData: energy_sources 0 mAlarmOn
+pullEnergySourceKeys
+['mName', 'mStatus', 'mDHWstatus', 'mType', 'mAlarmOn']
+pullEnergySourceDataIndividual: 0 mName
+GETSubNodeData: energy_sources 0 mName
+pushEnergySourceDataIndividual: 0 mName Boiler
+PUT str: http://192.168.2.65/api/energySource/name/Boiler
+PUT Buffer Tank : mName Boiler
+nodeData : {'statusOK': True}
+pullEnergySourceDataIndividual: 0 mStatus
+GETSubNodeData: energy_sources 0 mStatus
+pullEnergySourceDataIndividual: 0 mDHWstatus
+GETSubNodeData: energy_sources 0 mDHWstatus
+pullEnergySourceDataIndividual: 0 mType
+GETSubNodeData: energy_sources 0 mType
+pullEnergySourceDataIndividual: 0 mAlarmOn
+GETSubNodeData: energy_sources 0 mAlarmOn
+
+ Buffer Tank
+pullBufferTankKeys
+No Keys found - trying to fetch Messana data
+mName
+GETSystem: mName
+http://192.168.2.65/api/system/name/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'name': 'Olgaard Tahoe Residence'}
+mApiVer
+GETSystem: mApiVer
+http://192.168.2.65/api/system/apiVersion/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'apiVersion': '0.5.2'}
+mStatus
+GETSystem: mStatus
+http://192.168.2.65/api/system/status/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mATUcount
+GETSystem: mATUcount
+http://192.168.2.65/api/system/atuCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mDHWcount
+GETSystem: mDHWcount
+http://192.168.2.65/api/system/dhwCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mFanCoilCount
+GETSystem: mFanCoilCount
+http://192.168.2.65/api/system/fancoilCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 0}
+mEnergySourceCount
+GETSystem: mEnergySourceCount
+http://192.168.2.65/api/system/energySourceCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mZoneCount
+GETSystem: mZoneCount
+http://192.168.2.65/api/system/zoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 10}
+mMacrozoneCount
+GETSystem: mMacrozoneCount
+http://192.168.2.65/api/system/macrozoneCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 3}
+mHC_changeoverCount
+GETSystem: mHC_changeoverCount
+http://192.168.2.65/api/system/HCgroupCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mBufTankCount
+GETSystem: mBufTankCount
+http://192.168.2.65/api/system/bufferTankCount/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'count': 1}
+mUnitTemp
+GETSystem: mUnitTemp
+http://192.168.2.65/api/system/tempUnit/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'value': 'Fahrenheit'}
+mEnergySaving
+GETSystem: mEnergySaving
+http://192.168.2.65/api/system/energySaving/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mSetback
+GETSystem: mSetback
+http://192.168.2.65/api/system/setback/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 1}
+mExternalAlarm
+GETSystem: mExternalAlarm
+http://192.168.2.65/api/system/externalAlarm/?apikey=9bf711fc-54e2-4387-9c7f-991bbb02ab3a
+<Response [200]>
+{'status': 0}
+pullBufferTankDataAll: 0
+pullBufferTankDataIndividual: 0 mName
+GETSubNodeData: buffer_tanks 0 mName
+pullBufferTankDataIndividual: 0 mStatus
+GETSubNodeData: buffer_tanks 0 mStatus
+pullBufferTankDataIndividual: 0 mMode
+GETSubNodeData: buffer_tanks 0 mMode
+pullBufferTankDataIndividual: 0 mTemp
+GETSubNodeData: buffer_tanks 0 mTemp
+pullBufferTankDataIndividual: 0 mAlarmOn
+GETSubNodeData: buffer_tanks 0 mAlarmOn
+['mName', 'mStatus', 'mMode', 'mTemp', 'mAlarmOn']
+pullBufferTankDataAll: 0
+pullBufferTankDataIndividual: 0 mName
+GETSubNodeData: buffer_tanks 0 mName
+pullBufferTankDataIndividual: 0 mStatus
+GETSubNodeData: buffer_tanks 0 mStatus
+pullBufferTankDataIndividual: 0 mMode
+GETSubNodeData: buffer_tanks 0 mMode
+pullBufferTankDataIndividual: 0 mTemp
+GETSubNodeData: buffer_tanks 0 mTemp
+pullBufferTankDataIndividual: 0 mAlarmOn
+GETSubNodeData: buffer_tanks 0 mAlarmOn
+pullBufferTankDataActive: 0
+pullBufferTankDataIndividual: 0 mTemp
+GETSubNodeData: buffer_tanks 0 mTemp
+pullBufferTankDataIndividual: 0 mAlarmOn
+GETSubNodeData: buffer_tanks 0 mAlarmOn
+pullBufferTankKeys
+['mName', 'mStatus', 'mMode', 'mTemp', 'mAlarmOn']
+pullBufferTankDataIndividual: 0 mName
+GETSubNodeData: buffer_tanks 0 mName
+pushBufferTankDataIndividual: 0 mName BT-1
+PUT str: http://192.168.2.65/api/bufferTank/name/BT-1
+PUT Energy Source : mName BT-1
+nodeData : {'statusOK': True}
+pullBufferTankDataIndividual: 0 mStatus
+GETSubNodeData: buffer_tanks 0 mStatus
+pushBufferTankDataIndividual: 0 mStatus 1
+PUT str: http://192.168.2.65/api/bufferTank/status/1
+("<Response [400]>: Not able to PUT key: dict_values(['Invalid Mode state']) Subnode <built-in function id> for key: mStatus value:", '1')
+PUT Energy Source : mStatus 1
+nodeData : {'error': ("<Response [400]>: Not able to PUT key: dict_values(['Invalid Mode state']) Subnode <built-in function id> for key: mStatus value:", '1'), 'statusOK': False}
+pullBufferTankDataIndividual: 0 mMode
+GETSubNodeData: buffer_tanks 0 mMode
+pushBufferTankDataIndividual: 0 mMode 1
+PUT str: http://192.168.2.65/api/bufferTank/mode/1
+PUT Energy Source : mMode 1
+nodeData : {'statusOK': True}
+pullBufferTankDataIndividual: 0 mTemp
+GETSubNodeData: buffer_tanks 0 mTemp
+pullBufferTankDataIndividual: 0 mAlarmOn
+GETSubNodeData: buffer_tanks 0 mAlarmOn
+
+ Domestic How Water
