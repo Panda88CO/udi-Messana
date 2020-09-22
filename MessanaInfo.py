@@ -340,7 +340,6 @@ class MessanaInfo:
                 nodeData['error'] = 'Put does not accept keywork: ' + mKey
                 nodeData['statusOK'] =False
         return(nodeData)   
-   
 
     def PUTNodeData(self, mNodeKey, nodeNbr, mKey, value):
         nodeData = {}
@@ -372,9 +371,67 @@ class MessanaInfo:
             nodeData['nodeDataOK'] =False
         return(nodeData)
 
+    def getSubSystemKeys (self, subsystemNbr, subsystemKey, cmdKey):
+        keys=[]
+        if self.mSystem[subsystemKey]['data']:
+            if subsystemNbr in self.mSystem[subsystemKey]['data']: 
+                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
+                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                        if not(mKey in keys):
+                            print('already loaded')
+                            keys.append(mKey)
+            else:
+                self.updateSubSystemData(subsystemNbr, subsystemKey)
+                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
+                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.updateSystemData()
+            self.updateSubSystemData(subsystemNbr, subsystemKey)
+            if self.mSystem[subsystemKey]['data']:
+                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
+                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                print('No '+ subsystemKey + ' present')
+        return(keys)
 
+    def updateSubSystemData(self, subsystemNbr, subsystemKey):
+        print('updatSubSystemData: ' + str(subsystemNbr) + ' ' + subsystemKey)
+        Data = {}
+        dataOK = True
+        for mKey in self.mSystem[subsystemKey]['GETstr']:
+            print ('GET ' + mKey + ' in zone ' + str(subsystemNbr))
+            Data = self.pullSubSystemDataIndividual(subsystemNbr, subsystemKey,  mKey)
+            if not(Data['statusOK']):
+                dataOK = False
+                print ('Error GET' + Data['error'])
+        return(dataOK)
+    
+    def pullSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey): 
+        Data = {} 
+        print('pullZoneDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey)    
+        if mKey in mKey in self.mSystem[subsystemKey]['GETstr']:
+            Data = self.GETNodeData(subsystemKey, subsystemNbr, mKey)
+        else:
+            Data['statusOK'] = False
+            Data['error'] = mKey +' is not a supported GETstr command'
+        return(Data)    
+
+    def pushSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey, value):
+        print('pushZoneDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey + ' ' + str(value))  
+        zoneData = {}
+        zoneData= self.PUTNodeData(subsystemKey, subsystemNbr, mKey, value)
+        if zoneData['statusOK']:
+            return(True)
+        else:
+            print(zoneData['error'])
+            return(False)
+    
     #System
-
     def updateSystemData(self):
         print('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
@@ -408,8 +465,7 @@ class MessanaInfo:
         else:
             print(sysData['error'])
             return(False)  
-  
-        
+     
     def systemPullKeys(self):
         print('systemPullKeys')
         keys=[]
@@ -454,264 +510,133 @@ class MessanaInfo:
         return(keys)  
             
     # Zones
-    
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
-        zoneData = {}
-        dataOK = True
-        for mKey in self.mSystem['zones']['GETstr']:
-            print ('GET ' + mKey + ' in zone ' + str(zoneNbr))
-            zoneData = self.pullZoneDataIndividual(zoneNbr, mKey)
-            if not(zoneData['statusOK']):
-                dataOK = False
-                print ('Error Zone GET' + zoneData['error'])
-        return(dataOK)
+        return(self.updateSubSystemData(zoneNbr, 'zones'))
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
-        zoneData = {} 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
-        if mKey in mKey in self.mSystem['zones']['GETstr']:
-            zoneData = self.GETNodeData('zones', zoneNbr, mKey)
-        else:
-            zoneData['statusOK'] = False
-            zoneData['error'] = mKey +' is not a supported GETstr command'
-        return(zoneData)
+        return(self.pullSubSystemDataIndividual(zoneNbr, 'zones', mKey))
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        zoneData = {}
-        zoneData= self.PUTNodeData('zones', zoneNbr, mKey, value)
-        if zoneData['statusOK']:
-            return(True)
-        else:
-            print(zoneData['error'])
-            return(False)
+        return(self.pushSubSystemDataIndividual(zoneNbr, 'zones', mKey, value))
 
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
-        keys=[]
-        if self.mSystem['zones']['data']:
-            if zoneNbr in self.mSystem['zones']['data']: 
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                self.updateZoneData(zoneNbr)
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.updateZoneData(zoneNbr)
-            if self.mSystem['zones']['data']:
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                print('No zones present')
-        return(keys)
+        return( self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr'))
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
-        keys=[]
-        if self.mSystem['zones']['data']:
-            if zoneNbr in self.mSystem['zones']['data']: 
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['PUTstr']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                self.updateZoneData(zoneNbr)
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['PUTstr']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.updateZoneData(zoneNbr)
-            if self.mSystem['zones']['data']:
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['PUTstr']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                print('No zones present')
-        return(keys)
-
-
+        return( self.getSubSystemKeys (zoneNbr, 'zones', 'PUTstr'))
+  
     def zoneActiveKeys(self, zoneNbr):
-        print('zonePushKeys')
-        keys=[]
-        if self.mSystem['zones']['data']:
-            if zoneNbr in self.mSystem['zones']['data']: 
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['active']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                self.updateZoneData(zoneNbr)
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['active']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.updateZoneData(zoneNbr)
-            if self.mSystem['zones']['data']:
-                for mKey in self.mSystem['zones']['data'][zoneNbr]:
-                    if mKey in self.mSystem['zones']['active']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                print('No zones present')
-        return(keys)
+        print('zoneActiveKeys')
+        return( self.getSubSystemKeys (zoneNbr, 'zones', 'active'))
+
+
     #MacroZone
+    def updateMacroZoneData(self, macrozoneNbr):
+        print('updatMacroZoneData: ' + str(macrozoneNbr))
+        return(self.updateSubSystemData(macrozoneNbr, 'macrozones'))
 
-    def pullMacroZoneDataAll(self, macrozoneNbr):
-        print('pullMacroZoneDataAll: ' + str(macrozoneNbr))
-        for mKey in self.mSystem['macrozones']['GETstr']:
-            self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
-
-
-    def pullMacroZoneDataActive(self, macrozoneNbr):
-        print('pullMacroZoneDataActive: ' + str(macrozoneNbr))
-        for mKey in self.mSystem['macrozones']['active']:
-            self.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
-        
-    def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey):  
+    def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
         print('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
-        self.GETNodeData('macrozones', macrozoneNbr, mKey)
-
-    def pullMacroZoneKeys(self, macrozoneNbr):
-        print('pullMacroZoneKeys')
-        keys=[]
-        if self.mSystem['macrozones']['data']:
-            if macrozoneNbr in self.mSystem['macrozones']['data']: 
-                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                self.pullMacroZoneDataAll(macrozoneNbr)
-                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.pullMacroZoneDataAll(macrozoneNbr)
-            if self.mSystem['macrozones']['data']: 
-                for mKey in self.mSystem['macrozones']['data'][macrozoneNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                print('No macro zons present')
-        return(keys)
+        return(self.pullSubSystemDataIndividual(macrozoneNbr, 'macrozones', mKey))
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
         print('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        status = self.PUTNodeData('macrozones', macrozoneNbr, mKey, value)
-        return(status)
+        return(self.pushSubSystemDataIndividual(macrozoneNbr, 'macrozones', mKey, value))
+
+    def macrozonePullKeys(self, macrozoneNbr):
+        print('macrozonePullKeys')
+        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'GETstr'))
+
+    def macrozonePushKeys(self, macrozoneNbr):
+        print('macrozonePushKeys')
+        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'PUTstr'))
+  
+    def macrozoneActiveKeys(self, macrozoneNbr):
+        print('macrozoneActiveKeys')
+        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'active'))    
 
 
     # Hot Cold Change Over
+    def updateHC_COData(self, HC_CONbr):
+        print('updatHC_COData: ' + str(HC_CONbr))
+        return(self.updateSubSystemData(HC_CONbr, 'hc_changeover'))
 
-    def pullHCCODataAll(self, HCCO_Nbr):
-        print('pullHCCODataAll: ' + str(HCCO_Nbr))
-        for mKey in self.mSystem['hc_changeover']['GETstr']:
-            self.pullHCCODataIndividual(HCCO_Nbr, mKey)
+    def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
+        print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
+        return(self.pullSubSystemDataIndividual(HC_CONbr, 'hc_changeover', mKey))
 
+    def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
+        print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
+        return(self.pushSubSystemDataIndividual(HC_CONbr, 'hc_changeover', mKey, value))
 
-    def pullHCCODataActive(self, HCCO_Nbr):
-        print('pullHCCODataActive: ' + str(HCCO_Nbr))
-        for mKey in self.mSystem['hc_changeover']['active']:
-            self.pullHCCODataIndividual(HCCO_Nbr, mKey)
-        
-    def pullHCCODataIndividual(self, HCCO_Nbr, mKey):  
-        print('pullHCCODataMessanaIndividual: ' +str(HCCO_Nbr)  + ' ' + mKey)    
-        self.GETNodeData('hc_changeover', HCCO_Nbr, mKey)
+    def hc_changeoverPullKeys(self, HC_CONbr):
+        print('hc_changeoverPullKeys')
+        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'GETstr'))
 
-    def pullHCCOKeys(self, HCCO_Nbr):
-        print('pullHCCOKeys')
-        keys=[]
-        if self.mSystem['hc_changeover']['data']:
-            if HCCO_Nbr in self.mSystem['hc_changeover']['data']: 
-                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                self.pullHCCODataAll(HCCO_Nbr)
-                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.pullHCCODataAll(HCCO_Nbr)
-            if self.mSystem['hc_changeover']['data']:
-                for mKey in self.mSystem['hc_changeover']['data'][HCCO_Nbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                print('NO Hot Cold Change Over present')
-        return(keys)
-
-    def pushHCCODataIndividual(self, HCCO_Nbr, mKey, value):
-        print('pushHCCODataMessanaIndividual: ' +str(HCCO_Nbr)  + ' ' + mKey + ' ' + str(value))  
-        status = self.PUTNodeData('hc_changeover', HCCO_Nbr, mKey, value)
-        return(status)
+    def hc_changeoverPushKeys(self, HC_CONbr):
+        print('hc_changeoverPushKeys')
+        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'PUTstr'))
+  
+    def hc_changeoverActiveKeys(self, HC_CONbr):
+        print('hc_changeoverActiveKeys')
+        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'active'))    
+   
 
     #ATU
+    def updateATUData(self, ATUNbr):
+        print('updatATUData: ' + str(ATUNbr))
+        return(self.updateSubSystemData(ATUNbr, 'atus'))
 
-    def pullATUDataAll(self, ATUNbr):
-        print('pullATUDataAll: ' + str(ATUNbr))
-        for mKey in self.mSystem['atus']['GETstr']:
-            self.pullATUDataIndividual(ATUNbr, mKey)
-
-
-    def pullATUDataActive(self, ATUNbr):
-        print('pullATUDataActive: ' + str(ATUNbr))
-        for mKey in self.mSystem['atus']['active']:
-            self.pullATUDataIndividual(ATUNbr, mKey)
-        
-    def pullATUDataIndividual(self, ATUNbr, mKey):  
+    def pullATUDataIndividual(self, ATUNbr, mKey): 
         print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
-        self.GETNodeData('atus', ATUNbr, mKey)
-
-    def pullATUKeys(self, ATUNbr):
-        print('pullATUKeys')
-        keys=[]
-        if self.mSystem['atus']['data']:
-            if ATUNbr in self.mSystem['atus']['data']: 
-                for mKey in self.mSystem['atus']['data'][ATUNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                self.pullATUDataAll(ATUNbr)
-                for mKey in self.mSystem['atus']['data'][ATUNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
-            self.pullATUDataAll(ATUNbr)
-            if self.mSystem['atus']['data']:
-                for mKey in self.mSystem['atus']['data'][ATUNbr]:
-                    if not(mKey in keys):
-                        keys.append(mKey)
-            else:
-                print('No ATU present')
-        return(keys)
+        return(self.pullSubSystemDataIndividual(ATUNbr, 'atus', mKey))
 
     def pushATUDataIndividual(self, ATUNbr, mKey, value):
         print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
-        status = self.PUTNodeData('atus', ATUNbr, mKey, value)
-        return(status)
+        return(self.pushSubSystemDataIndividual(ATUNbr, 'atus', mKey, value))
 
+    def atusPullKeys(self, ATUNbr):
+        print('atusPullKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'GETstr'))
+
+    def atusPushKeys(self, ATUNbr):
+        print('atusPushKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'PUTstr'))
+  
+    def atusActiveKeys(self, ATUNbr):
+        print('atusActiveKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'active'))    
+  
     #Fan Coils
+    def updateATUData(self, ATUNbr):
+        print('updatATUData: ' + str(ATUNbr))
+        return(self.updateSubSystemData(ATUNbr, 'atus'))
 
+    def pullATUDataIndividual(self, ATUNbr, mKey): 
+        print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
+        return(self.pullSubSystemDataIndividual(ATUNbr, 'atus', mKey))
+
+    def pushATUDataIndividual(self, ATUNbr, mKey, value):
+        print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
+        return(self.pushSubSystemDataIndividual(ATUNbr, 'atus', mKey, value))
+
+    def atusPullKeys(self, ATUNbr):
+        print('atusPullKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'GETstr'))
+
+    def atusPushKeys(self, ATUNbr):
+        print('atusPushKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'PUTstr'))
+  
+    def atusActiveKeys(self, ATUNbr):
+        print('atusActiveKeys')
+        return( self.getSubSystemKeys (ATUNbr, 'atus', 'active'))    
+  
     def pullFanCoilDataAll(self, FC_Nbr):
         print('pullFanCoilDataAll: ' + str(FC_Nbr))
         for mKey in self.mSystem['fan_coils']['GETstr']:

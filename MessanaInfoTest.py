@@ -40,13 +40,13 @@ for mKey in systemPUTKeys:
 print ('\n Zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
-    zoneGETkeys = messana.zonePullKeys(zoneNbr)
-    print (zoneGETkeys)
-    zonePUTkeys = messana.zonePushKeys(zoneNbr)
-    print(zonePUTkeys)
-    zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
-    print (zoneActiveKeys)
     messana.updateZoneData(zoneNbr)
+    zoneGETkeys = messana.zonePullKeys(zoneNbr)
+    #print (zoneGETkeys)
+    zonePUTkeys = messana.zonePushKeys(zoneNbr)
+    #print(zonePUTkeys)
+    zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
+    #print (zoneActiveKeys)
     
     for mKey in zoneGETkeys:
         zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
