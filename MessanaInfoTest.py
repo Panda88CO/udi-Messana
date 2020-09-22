@@ -38,22 +38,30 @@ for mKey in systemPUTKeys:
             print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
 
 print ('\n Zones')
-'''
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
-    keys = messana.pullZoneKeys(zoneNbr)
-    print (keys)
-    messana.pullZoneDataAll(zoneNbr)
-    messana.pullZoneDataActive(zoneNbr)
-    keys = messana.pullZoneKeys(zoneNbr)
-    print (keys)  
-    for mKey in messana.mSystem['zones']['GETstr']:
-        messana.pullZoneDataIndividual(zoneNbr, mKey)
-        if mKey in messana.mSystem['zones']['PUTstr']:
+    zoneData = {}
+    zoneGETkeys = messana.zonePullKeys(zoneNbr)
+    print (zoneGETkeys)
+    zonePUTkeys = messana.zonePushKeys(zoneNbr)
+    print(zonePUTkeys)
+    zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
+    print (zoneActiveKeys)
+    messana.updateZoneData(zoneNbr)
+    
+    for mKey in zoneGETkeys:
+        zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
+        if zoneData['statusOK']:
+            print('GET: ' + mKey + str(zoneData['data']))
+        if mKey in zoneActiveKeys:
+            zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
+            if zoneData['statusOK']:
+                print('GET: ' + mKey + str(zoneData['data']))
+        if mKey in zonePUTkeys:
             if mKey in messana.mSystem['zones']['data'][zoneNbr]:
                 nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
                 print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
                 print('nodeData : ' + str(nodeData))
-
+'''
 print ('\n Macro Zones')  
 for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']):
     keys = messana.pullMacroZoneKeys(macrozoneNbr)

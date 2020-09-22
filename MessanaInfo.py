@@ -378,23 +378,15 @@ class MessanaInfo:
     def updateSystemData(self):
         print('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
+        sysData = {}
         DataOK = True
         for mKey in self.mSystem['system']['GETstr']:
-            print(mKey)
-            if not(self.pullSystemDataIndividual(mKey)):
+            print('GET ' + mKey)
+            sysData= self.pullSystemDataIndividual(mKey)
+            if not(sysData['statusOK']):
                 print ('Error System GET: ' + mKey)
                 DataOK = False       
         return(DataOK)
-
-    '''
-    def pullSystemDataActive(self):
-        print ('pullSystemDataNonStatic')
-        sysData = {}
-        for mKey in self.mSystem['system']['active']:
-            print (mKey)
-            sysData[mKey] = self.pullSystemDataIndividual(mKey) 
-        return(sysData)
-    '''
 
     def pullSystemDataIndividual(self, mKey):
         print('MessanaInfo pull System Data: ' + mKey)
@@ -404,26 +396,20 @@ class MessanaInfo:
 
         else:
             sysData['statusOK'] = False
-            sysData['error'] = (mKey + ' not part of supported commands in GETstr')
+            sysData['error'] = (mKey + ' is not a supported GETstr command')
         return(sysData)   
-
-
 
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
         print('MessanaInfo push System Data: ' + mKey)
-        if mKey in self.mSystem['system']['PUTstr']:
-            sysData = self.PUTSystem(mKey, value)
-            if sysData['statusOK']:
-                return(True)
-            else:
-                print(sysData['error'])
-                return(False)  
-        else:         
+        sysData = self.PUTSystem(mKey, value)
+        if sysData['statusOK']:
+           return(True)
+        else:
             print(sysData['error'])
-            return(False)   
+            return(False)  
+  
         
-
     def systemPullKeys(self):
         print('systemPullKeys')
         keys=[]
@@ -472,30 +458,37 @@ class MessanaInfo:
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
         zoneData = {}
+        dataOK = True
         for mKey in self.mSystem['zones']['GETstr']:
-            zoneData[mKey] = self.pullZoneDataIndividual(zoneNbr, mKey)
-        return(zoneData)
+            print ('GET ' + mKey + ' in zone ' + str(zoneNbr))
+            zoneData = self.pullZoneDataIndividual(zoneNbr, mKey)
+            if not(zoneData['statusOK']):
+                dataOK = False
+                print ('Error Zone GET' + zoneData['error'])
+        return(dataOK)
 
-
-    def pullZoneDataActive(self, zoneNbr):
-        print('pullZoneDataActive: ' + str(zoneNbr))
-        zoneData = {}
-        for mKey in self.mSystem['zones']['active']:
-            zoneData[mKey] = self.pullZoneDataIndividual(zoneNbr, mKey)
-        return(zoneData)
-
-    def pullZoneDataIndividual(self, zoneNbr, mKey):  
+    def pullZoneDataIndividual(self, zoneNbr, mKey): 
+        zoneData = {} 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
-        return(self.GETNodeData('zones', zoneNbr, mKey))
-
+        if mKey in mKey in self.mSystem['zones']['GETstr']:
+            zoneData = self.GETNodeData('zones', zoneNbr, mKey)
+        else:
+            zoneData['statusOK'] = False
+            zoneData['error'] = mKey +' is not a supported GETstr command'
+        return(zoneData)
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        status = self.PUTNodeData('zones', zoneNbr, mKey, value)
-        return(status)
+        zoneData = {}
+        zoneData= self.PUTNodeData('zones', zoneNbr, mKey, value)
+        if zoneData['statusOK']:
+            return(True)
+        else:
+            print(zoneData['error'])
+            return(False)
 
     def zonePullKeys(self, zoneNbr):
-        print('pullZoneKeys')
+        print('zonePullKeys')
         keys=[]
         if self.mSystem['zones']['data']:
             if zoneNbr in self.mSystem['zones']['data']: 
@@ -520,10 +513,61 @@ class MessanaInfo:
         return(keys)
 
     def zonePushKeys(self, zoneNbr):
-        return(True)
+        print('zonePushKeys')
+        keys=[]
+        if self.mSystem['zones']['data']:
+            if zoneNbr in self.mSystem['zones']['data']: 
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['PUTstr']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                self.updateZoneData(zoneNbr)
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['PUTstr']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.updateSystemData()
+            self.updateZoneData(zoneNbr)
+            if self.mSystem['zones']['data']:
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['PUTstr']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                print('No zones present')
+        return(keys)
+
 
     def zoneActiveKeys(self, zoneNbr):
-        return(True)
+        print('zonePushKeys')
+        keys=[]
+        if self.mSystem['zones']['data']:
+            if zoneNbr in self.mSystem['zones']['data']: 
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['active']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                self.updateZoneData(zoneNbr)
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['active']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+        else:
+            print('No Keys found - trying to fetch Messana data')
+            self.updateSystemData()
+            self.updateZoneData(zoneNbr)
+            if self.mSystem['zones']['data']:
+                for mKey in self.mSystem['zones']['data'][zoneNbr]:
+                    if mKey in self.mSystem['zones']['active']:
+                        if not(mKey in keys):
+                            keys.append(mKey)
+            else:
+                print('No zones present')
+        return(keys)
     #MacroZone
 
     def pullMacroZoneDataAll(self, macrozoneNbr):
