@@ -10,27 +10,35 @@ from MessanaInfo import MessanaInfo
 #LOGGER = polyinterface.LOGGER
         
 #sys.stdout = open('Messanaoutput.txt','wt')
-messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
+messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+messana.init()
 
 #Retrive basic system info
 print('\nSYSTEM')
 #systemKeys = messana.pullSystemKeys()
 #print(systemKeys)
-messana.pullSystemDataAll()
-systemKeys = messana.pullSystemKeys()
-print(systemKeys)
-messana.pullSystemDataActive()
-for mKey in messana.mSystem['system']['GETstr']:
-    messana.pullSystemDataIndividual(mKey)
-    if mKey in messana.mSystem['system']['PUTstr']:
+messana.updateSystemData()
+systemGETKeys = messana.systemPullKeys()
+systemPUTKeys = messana.systemPushKeys()
+systemActiveKeys = messana.systemActiveKeys()
+
+#print(systemKeys)
+sysData={}
+for mKey in systemPUTKeys:
+    sysData = messana.pullSystemDataIndividual(mKey)
+    if sysData['statusOK']:
+        print ('GET:' + mKey + ' ' + str(sysData['data']))
+    else:
+        print(sysData['error'])
+    if mKey in systemPUTKeys:
         if messana.pushSystemDataIndividual(mKey,messana.mSystem['system']['data'][mKey] ):
-            print('Put :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
+            print('PUT :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
         else:
             print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
 
 print ('\n Zones')
-
+'''
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     keys = messana.pullZoneKeys(zoneNbr)
     print (keys)
@@ -41,9 +49,10 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     for mKey in messana.mSystem['zones']['GETstr']:
         messana.pullZoneDataIndividual(zoneNbr, mKey)
         if mKey in messana.mSystem['zones']['PUTstr']:
-            nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
-            print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
-            print('nodeData : ' + str(nodeData))
+            if mKey in messana.mSystem['zones']['data'][zoneNbr]:
+                nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
+                print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
+                print('nodeData : ' + str(nodeData))
 
 print ('\n Macro Zones')  
 for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']):
@@ -105,7 +114,7 @@ for FC_Nbr in range(0,messana.mSystem['system']['data']['mFanCoilCount']):
         messana.pullFanCoilDataIndividual(FC_Nbr, mKey)
         if mKey in  messana.mSystem['fan_coils']['PUTstr']:
             nodeData = messana.pushFanCoilDataIndividual(FC_Nbr, mKey, messana.mSystem['fan_coils']['data'][FC_Nbr][mKey])
-            print('PUT fan coil : ' + mKey + ' ' + str( messana.mSystem['fan_coils']['data'][FC_Nbr][mKey]))
+            print('PUT Fan Coil : ' + mKey + ' ' + str( messana.mSystem['fan_coils']['data'][FC_Nbr][mKey]))
             print('nodeData : ' + str(nodeData))
 
 
@@ -122,7 +131,7 @@ for EnergySourceNbr in range(0,messana.mSystem['system']['data']['mEnergySourceC
         if messana.mSystem['energy_sources']['data']:
             if mKey in  messana.mSystem['energy_sources']['PUTstr']:
                 nodeData = messana.pushEnergySourceDataIndividual(EnergySourceNbr, mKey, messana.mSystem['energy_sources']['data'][EnergySourceNbr][mKey])
-                print('PUT Buffer Tank : ' + mKey + ' ' + str( messana.mSystem['energy_sources']['data'][EnergySourceNbr][mKey]))
+                print('PUT Energy Source : ' + mKey + ' ' + str( messana.mSystem['energy_sources']['data'][EnergySourceNbr][mKey]))
                 print('nodeData : ' + str(nodeData))
 
 
@@ -138,7 +147,7 @@ for BufferTankNbr in range(0,messana.mSystem['system']['data']['mBufTankCount'])
         messana.pullBufferTankDataIndividual(BufferTankNbr, mKey)
         if mKey in  messana.mSystem['buffer_tanks']['PUTstr']:
             nodeData = messana.pushBufferTankDataIndividual(BufferTankNbr, mKey, messana.mSystem['buffer_tanks']['data'][BufferTankNbr][mKey])
-            print('PUT Energy Source : ' + mKey + ' ' + str( messana.mSystem['buffer_tanks']['data'][BufferTankNbr][mKey]))
+            print('PUT Buffer Tank : ' + mKey + ' ' + str( messana.mSystem['buffer_tanks']['data'][BufferTankNbr][mKey]))
             print('nodeData : ' + str(nodeData))
 
 
@@ -163,3 +172,4 @@ for DHW_Nbr in range(0,messana.mSystem['system']['data']['mDHWcount']):
 #messana.PUTSystemData(msysInfo)
 
 sys.stdout.close() 
+'''
