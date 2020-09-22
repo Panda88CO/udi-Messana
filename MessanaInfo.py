@@ -293,16 +293,17 @@ class MessanaInfo:
                 resp = requests.put(PUTStr, json=mData)
                 print(resp)
                 if str(resp) != self.RESPONSE_OK:
-                    print(str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:', value )
-                    sysData['statusOK'] =True
-                else:
                     sysData['statusOK'] = False
                     sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                else:
+                    sysData['statusOK'] = True
+                    sysData['data'] = value
                 print(sysData)    
-                return(True)          
+                return(sysData)          
             except:
-                print ('System PUT operation failed for :' + mKey + ' '+ str(value))
-                return(False)
+                sysData['statusOK'] = False
+                sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
+                return(sysData)
   
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
@@ -409,15 +410,17 @@ class MessanaInfo:
 
 
     def pushSystemDataIndividual(self, mKey, value):
+        sysData={}
         print('MessanaInfo push System Data: ' + mKey)
         if mKey in self.mSystem['system']['PUTstr']:
-            if self.PUTSystem(mKey, value):
+            sysData = self.PUTSystem(mKey, value)
+            if sysData['statusOK']:
                 return(True)
             else:
-                print('PUT operation fail - maybe no connection to system')
+                print(sysData['error'])
                 return(False)  
         else:         
-            print(mKey + ' not part of supported commands in PUTstr')
+            print(sysData['error'])
             return(False)   
         
 
