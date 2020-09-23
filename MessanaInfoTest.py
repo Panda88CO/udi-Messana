@@ -42,11 +42,11 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
     messana.updateZoneData(zoneNbr)
     zoneGETkeys = messana.zonePullKeys(zoneNbr)
-    #print (zoneGETkeys)
+    print (zoneGETkeys)
     zonePUTkeys = messana.zonePushKeys(zoneNbr)
-    #print(zonePUTkeys)
+    print(zonePUTkeys)
     zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
-    #print (zoneActiveKeys)
+    print (zoneActiveKeys)
     
     for mKey in zoneGETkeys:
         zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
@@ -61,41 +61,88 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
                 nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
                 print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
                 print('nodeData : ' + str(nodeData))
-'''
+
 print ('\n Macro Zones')  
 for macrozoneNbr in range(0,messana.mSystem['system']['data']['mMacrozoneCount']):
-    keys = messana.pullMacroZoneKeys(macrozoneNbr)
-    print (keys)
-    messana.pullMacroZoneDataAll(macrozoneNbr)
-    messana.pullMacroZoneDataActive(macrozoneNbr)
-    keys = messana.pullMacroZoneKeys(macrozoneNbr)
-    print (keys)  
-    for mKey in messana.mSystem['macrozones']['GETstr']:
-        messana.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
-        if mKey in  messana.mSystem['macrozones']['PUTstr']:
-            nodeData = messana.pushMacroZoneDataIndividual(macrozoneNbr, mKey, messana.mSystem['macrozones']['data'][macrozoneNbr][mKey])
-            print('PUT macrozones : ' + mKey + ' ' + str( messana.mSystem['macrozones']['data'][macrozoneNbr][mKey]))
-            print('nodeData : ' + str(nodeData))
-
+    nodeData = {}
+    messana.updateMacroZoneData(macrozoneNbr)
+    macrozoneGETkeys = messana.macrozonePullKeys(macrozoneNbr)
+    print (zoneGETkeys)
+    macrozonePUTkeys = messana.macrozonePushKeys(macrozoneNbr)
+    print(zonePUTkeys)
+    macrozoneActiveKeys = messana.macrozoneActiveKeys(macrozoneNbr)
+    print (zoneActiveKeys)
+    
+    for mKey in macrozoneGETkeys:
+        nodeData = messana.pullMacroZoneDataIndividual(macrozoneNbr, mKey)
+        if nodeData['statusOK']:
+            print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in macrozoneActiveKeys:
+            nodeData = messana.pullZoneDataIndividual(macrozoneNbr, mKey)
+            if nodeData['statusOK']:
+                print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in macrozonePUTkeys:
+            if mKey in messana.mSystem['macrozones']['data'][macrozoneNbr]:
+                nodeData = messana.pushMacroZoneDataIndividual(macrozoneNbr, mKey, messana.mSystem['macrozones']['data'][macrozoneNbr][mKey])
+                print('PUT macrozones : ' + mKey + ' ' + str( messana.mSystem['macrozones']['data'][macrozoneNbr][mKey]))
+                print('nodeData : ' + str(nodeData))
 
 
 print ('\n Hot Cold Change Over')  
-for HCCO_Nbr in range(0,messana.mSystem['system']['data']['mHC_changeoverCount']):
-    keys = messana.pullHCCOKeys(HCCO_Nbr)
-    print (keys)
-    messana.pullHCCODataAll(HCCO_Nbr)
-    messana.pullHCCODataActive(HCCO_Nbr)
-    keys = messana.pullHCCOKeys(HCCO_Nbr)
-    print (keys)  
-    for mKey in messana.mSystem['hc_changeover']['GETstr']:
-        messana.pullHCCODataIndividual(HCCO_Nbr, mKey)
-        if mKey in  messana.mSystem['hc_changeover']['PUTstr']:
-            nodeData = messana.pushHCCODataIndividual(HCCO_Nbr, mKey, messana.mSystem['hc_changeover']['data'][HCCO_Nbr][mKey])
-            print('PUT HC changeover : ' + mKey + ' ' + str( messana.mSystem['hc_changeover']['data'][HCCO_Nbr][mKey]))
-            print('nodeData : ' + str(nodeData))
+for HC_CONbr in range(0,messana.mSystem['system']['data']['mHC_changeoverCount']):
+    nodeData = {}
+    messana.updateHC_COData(HC_CONbr)
+    hc_changeoverGETkeys = messana.hc_changeoverPullKeys(HC_CONbr)
+    print (hc_changeoverGETkeys)
+    hc_changeoverPUTkeys = messana.hc_changeoverPushKeys(HC_CONbr)
+    print(hc_changeoverPUTkeys)
+    hc_changeoverActiveKeys = messana.hc_changeoverActiveKeys(HC_CONbr)
+    print (hc_changeoverActiveKeys)
+    
+    for mKey in hc_changeoverGETkeys:
+        nodeData = messana.pullHC_CODataIndividual(HC_CONbr, mKey)
+        if nodeData['statusOK']:
+            print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in hc_changeoverActiveKeys:
+            nodeData = messana.pullHC_CODataIndividual(HC_CONbr, mKey)
+            if nodeData['statusOK']:
+                print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in hc_changeoverPUTkeys:
+            if mKey in messana.mSystem['hc_changeover']['data'][HC_CONbr]:
+                nodeData = messana.pushHC_CODataIndividual(HC_CONbr, mKey, messana.mSystem['hc_changeover']['data'][HC_CONbr][mKey])
+                print('PUT HC_CO : ' + mKey + ' ' + str( messana.mSystem['hc_changeover']['data'][HC_CONbr][mKey]))
+                print('nodeData : ' + str(nodeData))
 
 
 print ('\n ATU')  
+for ATUNbr in range(0,messana.mSystem['system']['data']['mATUCount']):
+    nodeData = {}
+    messana.updateATUData(ATUNbr)
+    atuGETkeys = messana.atuPullKeys(ATUNbr)
+    print (atuGETkeys)
+    atuPUTkeys = messana.atuPushKeys(ATUNbr)
+    print(atuPUTkeys)
+    atuActiveKeys = messana.atuActiveKeys(ATUNbr)
+    print (atuActiveKeys)
+    
+    for mKey in atuGETkeys:
+        nodeData = messana.pullATUDataIndividual(ATUNbr, mKey)
+        if nodeData['statusOK']:
+            print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in atuActiveKeys:
+            nodeData = messana.pullATUDataIndividual(ATUNbr, mKey)
+            if nodeData['statusOK']:
+                print('GET: ' + mKey + str(nodeData['data']))
+        if mKey in atuPUTkeys:
+            if mKey in messana.mSystem['hc_changeover']['data'][ATUNbr]:
+                nodeData = messana.pushATUDataIndividual(ATUNbr, mKey, messana.mSystem['atus']['data'][ATUNbr][mKey])
+                print('PUT ATU: ' + mKey + ' ' + str( messana.mSystem['atus']['data'][ATUNbr][mKey]))
+                print('nodeData : ' + str(nodeData))
+
+
+
+'''
+
 for ATU_Nbr in range(0,messana.mSystem['system']['data']['mATUcount']):
     keys = messana.pullATUKeys(ATU_Nbr)
     print (keys)
