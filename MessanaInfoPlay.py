@@ -9,69 +9,280 @@ from collections import defaultdict
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system': { 'GETstr' : {
-                                        'mName':{
-                                            'GETstr' :'/api/system/name/'
+        self.mSystem = {'system': { 'KeyInfo' : {
+                                         'mName':{
+                                            'GETstr': '/api/system/name/'
+                                            ,'PUTstr': '/api/system/name/'
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id':None
+                                                    ,'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':"0,1"
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': { 
+                                                    'nlsKey': None }
+                                            }      
+                                        ,'mApiVer':{
+                                            'GETstr' :'/api/system/apiVersion/'
                                             ,'PUTstr': None 
-                                            ,'Active':None 
-                                            ,'ISYkey':None 
-                                            ,'ISYeditor':{   'editor':None
-                                                            ,'ISYuom':None
-                                                            ,'ISYmin':None
-                                                            ,'ISYmax':None
-                                                            ,'ISYsubset':None
-                                                            ,'ISYstep':None
-                                                            ,'ISYprec':None }
-                                            , 'ISYnls': {    'nlsName' : None 
-                                                            ,'nlsValues' : {}
-                                                            }
-                                                        
-
-
-                                        ,'mApiVer':'/api/system/apiVersion/'
-                                        ,'mStatus': {'GETstr' : '/api/system/status/'
-                                                    ,'PUTstr' : '/api/system/status/None'
-                                                    ,'Active' : None
-                                                    ,'ISYkey' :
-
-                                            ,'Active':None 
-                                            ,'ISYkey':None 
-                                            ,'ISYeditor':{   'editor':None
-                                                            ,'ISYuom':None
-                                                            ,'ISYmin':None
-                                                            ,'ISYmax':None
-                                                            ,'ISYsubset':None
-                                                            ,'ISYstep':None
-                                                            ,'ISYprec':None }
-                                            , 'ISYnls': {    'nlsName' : None 
-                                                            ,'nlsValues' : {}
-                                                            }
-
-                                        ,'mATUcount':'/api/system/atuCount/'
-                                        ,'mDHWcount':'/api/system/dhwCount/'
-                                        ,'mFanCoilCount':'/api/system/fancoilCount/'
-                                        ,'mEnergySourceCount':'/api/system/energySourceCount/'
-                                        ,'mZoneCount':'/api/system/zoneCount/'
-                                        ,'mMacrozoneCount':'/api/system/macrozoneCount/'
-                                        ,'mHC_changeoverCount':'/api/system/HCgroupCount/'
-                                        ,'mBufTankCount':'/api/system/bufferTankCount/'
-                                        ,'mUnitTemp':'/api/system/tempUnit/'
-                                        ,'mEnergySaving':'/api/system/energySaving/'
-                                        ,'mSetback':'/api/system/setback/'
-                                        ,'mExternalAlarm':'/api/system/externalAlarm/'
-                                        }
-                                    ,
-                                    'PUTstr' : {
-                                        'mName':'/api/system/name/'
-                                        ,'mStatus':'/api/system/status/'
-                                        ,'mEnergySavings':'/api/system/energySaving/'
-                                        ,'mSetback':'/api/system/setback/' 
-                                        }
-                                    ,
-                                   'active':
-                                        ['mExternalAlarm']
-                                   , 
-                                    'data':{}
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id':None
+                                                    ,'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':"0,1"
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': { 
+                                                    'nlsKey': None }
+                                            }                                           
+                                        ,'mStatus': {
+                                            'GETstr' : '/api/system/status/'
+                                            ,'PUTstr' : '/api/system/status/'
+                                            ,'Active' : None
+                                            ,'ISYkey' : None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id': 'STATUS'
+                                                    ,'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                    'nlsKey': 'STATUS' 
+                                                    ,'nlsNAME' : 'Messana System' 
+                                                    ,'nlsValues' : { '0=Off'
+                                                                    ,'1=On'} }
+                                                }
+                                        ,'mZoneCount':{
+                                            'GETstr':'/api/system/zoneCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'ZONE_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 32
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Zones' 
+                                                    ,'nlsValues' : { } }
+                                                }                                         
+                                        ,'mATUcount':{
+                                            'GETstr':'/api/system/atuCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'ATU_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 8
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of ATU' 
+                                                    ,'nlsValues' : { } }
+                                                }
+                                        ,'mDHWcount': {
+                                            'GETstr':'/api/system/dhwCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'DHW_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 8
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Hot Water' 
+                                                    ,'nlsValues' : { } }
+                                                }
+                                        ,'mMacrozoneCount': {
+                                            'GETstr':'/api/system/macrozoneCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'MACROZONE_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 16
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of MacroZones (all=1)' 
+                                                    ,'nlsValues' : { } }
+                                                }                                        
+                                        ,'mFanCoilCount': {
+                                            'GETstr':'/api/system/fancoilCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'FC_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 16
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Fan Coils' 
+                                                    ,'nlsValues' : { } }
+                                                }                                          
+                                        ,'mEnergySourceCount':{
+                                            'GETstr':'/api/system/energySourceCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'ENERGYSOURCE_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 16
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Energy Sources' 
+                                                    ,'nlsValues' : { } }
+                                                }                                          
+                                        ,'mHC_changeoverCount':{
+                                            'GETstr':'/api/system/HCgroupCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'HCC_CO_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 16
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Hot Cold ' 
+                                                    ,'nlsValues' : { } }
+                                                }                                          
+                                        ,'mBufTankCount':{
+                                            'GETstr':'/api/system/bufferTankCount/'
+                                            ,'PUTstr': None 
+                                            ,'Active': None 
+                                            ,'ISYkey': None  #assigned by program                                         
+                                            ,'ISYeditor':{   
+                                                    'Id': 'BT_COUNT'
+                                                    ,'ISYuom': 107
+                                                    ,'ISYmin': 0 
+                                                    ,'ISYmax': 16
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep': 1
+                                                    ,'ISYprec': 0}
+                                            , 'ISYnls': {    
+                                                    'nlsKey': None
+                                                    ,'nlsNAME' : '# of Buffer Tanks' 
+                                                    ,'nlsValues' : { } }
+                                                }                                                                                                                           
+                                        ,'mUnitTemp':{
+                                            'GETstr' : '/api/system/tempUnit/'
+                                            ,'PUTstr' : None
+                                            ,'Active' : None
+                                            ,'ISYkey' : None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id': 'TEMP_UNIT'
+                                                    ,'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                    'nlsKey': 'STATUS' 
+                                                    ,'nlsNAME' : 'Temp Unit' 
+                                                    ,'nlsValues' : { '0=F'
+                                                                    ,'1=C'} }
+                                                }                                        
+                                        ,'mEnergySaving':{
+                                            'GETstr' : '/api/system/energySaving/'
+                                            ,'PUTstr' : '/api/system/energySaving/'
+                                            ,'Active' : None
+                                            ,'ISYkey' : None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id': 'ENERGYSAVE'
+                                                    ,'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                    'nlsKey': 'STATUS' 
+                                                    ,'nlsNAME' : 'Energy Savings' 
+                                                    ,'nlsValues' : { '0=Off'
+                                                                    ,'1=On'} }
+                                                }                                        
+                                        ,'mSetback':{
+                                            'GETstr' : '/api/system/setback/'
+                                            ,'PUTstr' : '/api/system/setback/'
+                                            ,'Active' : None
+                                            ,'ISYkey' : None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id': 'SETBACK_EN'
+                                                    ,'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                    'nlsKey': 'STATUS' 
+                                                    ,'nlsNAME' : 'Setback Status' 
+                                                    ,'nlsValues' : { '0=Off'
+                                                                    ,'1=On'} }
+                                                }                                          
+                                        ,'mExternalAlarm':{
+                                            'GETstr' : '/api/system/externalAlarm/'
+                                            ,'PUTstr' : None
+                                            ,'Active' : None
+                                            ,'ISYkey' : None  #assigned by program 
+                                            ,'ISYeditor':{   
+                                                    'Id': 'EXTALARM'
+                                                    ,'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                    'nlsKey': 'STATUS' 
+                                                    ,'nlsNAME' : 'External Alarm' 
+                                                    ,'nlsValues' : { '0=Off'
+                                                                    ,'1=On'} }
+                                                }   
+                                         }                                         
+                                    ,'data':{}
                         },
                         'zones': {  'GETstr' : {
                                         'mName': '/api/zone/name/'
@@ -291,7 +502,7 @@ class MessanaInfo:
     def GETSystem(self, mKey):
         sysData= {}
         print('GETSystem: ' + mKey )
-        GETStr = self.IP+self.mSystem['system']['GETstr'][mKey] + '?' + self.APIStr 
+        GETStr = self.IP+self.mSystem['system'][mKey]['GETstr'] + '?' + self.APIStr 
         print( GETStr)
         try:
             systemTemp = requests.get(GETStr)
@@ -318,7 +529,12 @@ class MessanaInfo:
             sysData= {}
             print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
-            PUTStr = self.IP+self.mSystem['system']['PUTstr'][mKey] 
+            PUTStr = self.IP+self.mSystem['system'][mKey]['PUTstr']
+            if PUTStr == None:
+                sysData['statusOK'] = False
+                sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                print(sysData)    
+                return(sysData)   
             print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
@@ -470,18 +686,22 @@ class MessanaInfo:
         #LOGGER.info(self.mSystem['system'])
         sysData = {}
         DataOK = True
-        for mKey in self.mSystem['system']['GETstr']:
-            print('GET ' + mKey)
-            sysData= self.pullSystemDataIndividual(mKey)
-            if not(sysData['statusOK']):
-                print ('Error System GET: ' + mKey)
-                DataOK = False       
+        for mKey in self.mSystem['system']['KeyInfo']:
+            if self.mSystem['system']['KeyInfo'][mKey]['GETStr']:
+                print('GET ' + mKey)
+                sysData= self.pullSystemDataIndividual(mKey)
+                if not(sysData['statusOK']):
+                    print ('Error System GET: ' + mKey)
+                    DataOK = False       
+            else:
+                print ('GET string does not exist for : ' + mKey)
+                DataOK = False               
         return(DataOK)
 
     def pullSystemDataIndividual(self, mKey):
         print('MessanaInfo pull System Data: ' + mKey)
         sysData = {}
-        if mKey in self.mSystem['system']['GETstr']:
+        if mKey in self.mSystem['system']['KeyInfo']['GETstr']:
             sysData = self.GETSystem(mKey)
 
         else:
@@ -517,29 +737,33 @@ class MessanaInfo:
         keys=[]
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['PUTstr']:
-                    keys.append(mKey)
+                if mKey in self.mSystem['system']['KeyInfo']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
+                        keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
             self.updateSystemData()
             for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['PUTstr']:
-                    keys.append(mKey)
+                if mKey in self.mSystem['system']['KeyInfo']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
+                        keys.append(mKey)
         return(keys)  
             
     def systemActiveKeys(self):
         print('systemActiveKeys')
-        keys = []
+        keys=[]
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['PUTstr']:
-                    keys.append(mKey)
+                if mKey in self.mSystem['system']['KeyInfo']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['active']:
+                        keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
             self.updateSystemData()
             for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['active']:
-                    keys.append(mKey)
+                if mKey in self.mSystem['system']['KeyInfo']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['active']:
+                        keys.append(mKey)
         return(keys)  
             
     # Zones

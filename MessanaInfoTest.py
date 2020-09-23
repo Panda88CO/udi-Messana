@@ -5,11 +5,11 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-from MessanaInfo import MessanaInfo
+from MessanaInfoPlay import MessanaInfo
 
 #LOGGER = polyinterface.LOGGER
         
-sys.stdout = open('Messanaoutput.txt','wt')
+#sys.stdout = open('Messanaoutput.txt','wt')
 
 messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 messana.init()
@@ -34,7 +34,7 @@ for mKey in systemPUTKeys:
             print('PUT :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
         else:
             print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
-
+'''
 print ('\n Zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
@@ -246,3 +246,4 @@ for DHWNbr in range(0,messana.mSystem['system']['data']['mDHWcount']):
 
 #messana.PUTSystemData(msysInfo)
 sys.stdout.close() 
+'''
