@@ -163,7 +163,7 @@ class MessanaInfo:
                                  ,
                                  'PUTstr':{                                    
                                     'mName':'/api/atu/name/'
-                                    #,'mFlowLevel':'/api/atu/flowLevel/'
+                                    ,'mFlowLevel':'/api/atu/flowLevel/'
                                     ,'mStatus':'/api/atu/status/'
                                     ,'HRVOn':'/api/atu/hrvOn/'
                                     ,'mHUMOn':'/api/atu/humOn/'
@@ -173,8 +173,8 @@ class MessanaInfo:
                                     ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
                                     ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
                                     ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                                    #,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    #,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
+                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
                                     }
                                  ,
                                  'active':['mFlowLevel', 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
@@ -378,7 +378,6 @@ class MessanaInfo:
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
                     if mKey in self.mSystem[subsystemKey][cmdKey]:
                         if not(mKey in keys):
-                            print('already loaded')
                             keys.append(mKey)
             else:
                 self.updateSubSystemData(subsystemNbr, subsystemKey)
@@ -413,7 +412,7 @@ class MessanaInfo:
     
     def pullSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey): 
         Data = {} 
-        print('pullZoneDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey)    
+        print('pullSubSystemDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey)    
         if mKey in mKey in self.mSystem[subsystemKey]['GETstr']:
             Data = self.GETNodeData(subsystemKey, subsystemNbr, mKey)
         else:
@@ -675,13 +674,17 @@ class MessanaInfo:
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
         print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
-        BTdata = {}
-        BTdata = self.pullSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey)
-        if BTdata['data']!=0:
-            return(self.pushSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+
+        if mKey == 'mStatus':
+            BTdata = {}
+            BTdata = self.pullSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', 'mMode')
+            if BTdata['data'] != 0:
+                return(self.pushSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+            else:
+                print ('Mode = 0, Cannot set status if mode = 0')
+                return(False)
         else:
-            print ('Mode = 0, Cannot set status if mode = 0')
-            return(False)
+             return(self.pushSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
         print('buffer_tankPullKeys')
@@ -698,31 +701,44 @@ class MessanaInfo:
 
         #Domestic Hot Water
  
+
+    # Domestic Hot Water
+    def updateDHWData(self, DHWNbr):
+        print('updatDHWData: ' + str(DHWNbr))
+        return(self.updateSubSystemData(DHWNbr, 'domsetic_hot_waters'))
+
+    def pullDHWDataIndividual(self, DHWNbr, mKey): 
+        print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
+        return(self.pullSubSystemDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey))
+
+    def pushDHWDataIndividual(self, DHWNbr, mKey, value):
+        print('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
+        return(self.pushSubSystemDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey, value))
+
+
+    def DHWPullKeys(self, DHWNbr):
+        print('DHWPullKeys')
+        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'GETstr'))
+
+    def DHWPushKeys(self, DHWNbr):
+        print('DHWPushKeys')
+        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'PUTstr'))
+  
+    def DHWActiveKeys(self, DHWNbr):
+        print('DHWActiveKeys')
+        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'active'))    
+
+
+        #Domestic Hot Water
+ 
+
+
+
+
+
+
+
     '''
-     def pullAllMessanaStatus(self):
-        #LOGGER.info('pull Full Messana Status')
-        print('Reading Main System')
-        self.pullSystemDataMessana()
-        #print(self.systemDict)
-        #print('Zone count: '+ str(self.systemDict['mZoneCount'] ))
-        if self.systemDict['mZoneCount'] > 0:
-            print('Reading Zone System')
-            self.pullAllZoneDataMessana()
-        if self.systemDict['mMacrozoneCount'] > 0:    
-            print('Reading MacroZone System')
-            self.pullAllMacroZoneDataMessana()
-        if self.systemDict['mHC_changeoverCount'] > 0:   
-            print('Reading Ht/Cold System')
-            self.pullAllHC_CODataMessana()
-        print('Reading ATU System: ' )
-        if self.systemDict['mATUcount'] > 0:
-            print('Reading ATU System')
-            self.pullAllATUDataMessana()
-        #print('')
-        #self.pullAllFCData()
-        #self.pullAllEnergySourceData()
-        #self.pullAllBufTData()
-        #self.pullAllDHWData()
 
     def pullMessanaStatus(self):
         if self.systemDict['mZoneCount'] > 0:
