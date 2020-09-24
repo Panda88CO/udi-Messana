@@ -502,7 +502,7 @@ class MessanaInfo:
     def GETSystem(self, mKey):
         sysData= {}
         print('GETSystem: ' + mKey )
-        GETStr = self.IP+self.mSystem['system'][mKey]['GETstr'] + '?' + self.APIStr 
+        GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
         print( GETStr)
         try:
             systemTemp = requests.get(GETStr)
@@ -529,13 +529,15 @@ class MessanaInfo:
             sysData= {}
             print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
-            PUTStr = self.IP+self.mSystem['system'][mKey]['PUTstr']
-            if PUTStr == None:
-                sysData['statusOK'] = False
-                sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                print(sysData)    
-                return(sysData)   
-            print(PUTStr)
+            if mKey in self.mSystem['system']['KeyInfo']:
+                if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
+                    PUTStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['PUTstr']
+                    if PUTStr == None:
+                        sysData['statusOK'] = False
+                        sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                        print(sysData)    
+                        return(sysData)   
+                    print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
             print(mData)
@@ -687,7 +689,7 @@ class MessanaInfo:
         sysData = {}
         DataOK = True
         for mKey in self.mSystem['system']['KeyInfo']:
-            if self.mSystem['system']['KeyInfo'][mKey]['GETStr']:
+            if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
                 print('GET ' + mKey)
                 sysData= self.pullSystemDataIndividual(mKey)
                 if not(sysData['statusOK']):
@@ -701,8 +703,9 @@ class MessanaInfo:
     def pullSystemDataIndividual(self, mKey):
         print('MessanaInfo pull System Data: ' + mKey)
         sysData = {}
-        if mKey in self.mSystem['system']['KeyInfo']['GETstr']:
-            sysData = self.GETSystem(mKey)
+        if mKey in self.mSystem['system']['KeyInfo']:
+            if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
+                sysData = self.GETSystem(mKey)
 
         else:
             sysData['statusOK'] = False
@@ -755,14 +758,14 @@ class MessanaInfo:
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['active']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['Active']:
                         keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
             self.updateSystemData()
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['active']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['Active']:
                         keys.append(mKey)
         return(keys)  
             
