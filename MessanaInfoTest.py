@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 #import polyinterface
 import sys
+import time
 import requests
 from subprocess import call
 import json
@@ -13,16 +14,21 @@ import ISYsetupFiles
 #sys.stdout = open('Messanaoutput.txt','wt')
 
 messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-messana.init()
+#messana.init()
 
 #Retrive basic system info
 print('\nSYSTEM')
-messana.updateSystemData()
+#messana.updateSystemData()
+#messana.saveData()
+#time.sleep(2)
+messana.loadData()
+time.sleep(3)
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-
+messana.addSystemDefStruct('system')
 #print(systemKeys)
+'''
 sysData={}
 for mKey in systemPUTKeys:
     sysData = messana.pullSystemDataIndividual(mKey)
@@ -35,6 +41,9 @@ for mKey in systemPUTKeys:
             print('PUT :' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]) )
         else:
             print('Put failed: ' + mKey +' '+ str(messana.mSystem['system']['data'][mKey]))
+#messana.saveData()
+'''
+
 '''
 print ('\n Zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):

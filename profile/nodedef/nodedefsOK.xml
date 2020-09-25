@@ -1,7 +1,7 @@
 <nodeDefs>
     <nodeDef id="messanasys" nls="msys">
-         <sts>
-            <st id="GV1" editor="STATUS" />
+        <sts>
+            <st id="GV1"  editor="STATUS" />
             <st id="GV2" editor="TEMPUNIT"/> 
             <st id="GV3" editor="ENERGYSAVE"/>
             <st id="GV4" editor="SETBACK"/>

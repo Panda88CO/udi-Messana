@@ -6,7 +6,7 @@
         <range uom="25" subset="0,1" nls="STATUS"/>
     </editor> 
     <editor id="TEMPUNIT" >
-        <range uom="25" subset="0,1"  nls="TEMPUNIT" />
+        <range uom="25" subset="0,1"  nls="STATUS" />
     </editor>          
     <editor id="ENERGYSAVE" >
         <range uom="25" subset="0,1" nls="STATUS"/>
