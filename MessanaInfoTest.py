@@ -17,17 +17,18 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 #messana.init()
 
 #Retrive basic system info
-print('\nSYSTEM')
+print('\nSYSTEM 123')
 #messana.updateSystemData()
 #messana.saveData()
 #time.sleep(2)
 messana.loadData()
-time.sleep(3)
+#print('loaded :' + messana.mSystem)
+time.sleep(10)
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
 messana.addSystemDefStruct('system')
-#print(systemKeys)
+print('systemKeys')
 '''
 sysData={}
 for mKey in systemPUTKeys:
