@@ -1,4 +1,4 @@
-ND-messanasys-NAME = Messana Main Controller
+ND-messanasys-NAME = Messana System
 ND-messanasys-ICON = Thermostat
 CMD-msys-SET_STATUS-NAME = System On/Off
 CMD-msys-UPDATE-NAME = Update

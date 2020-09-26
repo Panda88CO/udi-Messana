@@ -7,7 +7,7 @@ from subprocess import call
 import json
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
-import ISYsetupFiles
+#import ISYsetupFiles
 
 #LOGGER = polyinterface.LOGGER
         
@@ -17,17 +17,18 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 #messana.init()
 
 #Retrive basic system info
-print('\nSYSTEM 123')
+print('\nSYSTEM')
 #messana.updateSystemData()
 #messana.saveData()
 #time.sleep(2)
-messana.loadData()
+#messana.loadData()
 #print('loaded :' + messana.mSystem)
-time.sleep(10)
-systemGETKeys = messana.systemPullKeys()
-systemPUTKeys = messana.systemPushKeys()
-systemActiveKeys = messana.systemActiveKeys()
+#time.sleep(2)
+#systemGETKeys = messana.systemPullKeys()
+#systemPUTKeys = messana.systemPushKeys()
+#systemActiveKeys = messana.systemActiveKeys()
 messana.addSystemDefStruct('system')
+
 print('systemKeys')
 '''
 sysData={}
