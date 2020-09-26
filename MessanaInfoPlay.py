@@ -904,8 +904,8 @@ class MessanaInfo:
     def GETNodeData(self, mNodeKey, instNbr, mKey):
         print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
         nodeData = {}
-        if mKey in self.mSystem[mNodeKey]['GETstr']:
-            GETStr =self.IP+self.mSystem[mNodeKey]['GETstr'][mKey]+str(instNbr)+'?'+ self.APIStr 
+        if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
+            GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(instNbr)+'?'+ self.APIStr 
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 subSysTemp = subSysTemp.json()
@@ -939,8 +939,8 @@ class MessanaInfo:
 
     def PUTNodeData(self, mNodeKey, nodeNbr, mKey, value):
         nodeData = {}
-        if mKey in self.mSystem[mNodeKey]['PUTstr']:
-            PUTStr = self.IP + self.mSystem[mNodeKey]['PUTstr'][mKey]
+        if 'PUTstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
+            PUTStr = self.IP + self.mSystem[mNodeKey]['KeyInfo'][mKey]['PUTstr']
             print('PUT str: ' + PUTStr + str(value))
             mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, json=mData)
@@ -998,7 +998,7 @@ class MessanaInfo:
         print('updatSubSystemData: ' + str(subsystemNbr) + ' ' + subsystemKey)
         Data = {}
         dataOK = True
-        for mKey in self.mSystem[subsystemKey]['GETstr']:
+        for mKey in self.mSystem[subsystemKey]['KeyInfo']:
             print ('GET ' + mKey + ' in zone ' + str(subsystemNbr))
             Data = self.pullSubSystemDataIndividual(subsystemNbr, subsystemKey,  mKey)
             if not(Data['statusOK']):
@@ -1009,7 +1009,7 @@ class MessanaInfo:
     def pullSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey): 
         Data = {} 
         print('pullSubSystemDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey)    
-        if mKey in mKey in self.mSystem[subsystemKey]['GETstr']:
+        if mKey in mKey in self.mSystem[subsystemKey]['KeyInfo']:
             Data = self.GETNodeData(subsystemKey, subsystemNbr, mKey)
         else:
             Data['statusOK'] = False
@@ -1334,12 +1334,12 @@ class MessanaInfo:
         return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'active'))    
 
     def saveData (self):
-        file1 = open(r'MessanaData.dat','wb')
+        file1 = open(r'MessanaData.pkl','wb')
         pickle.dump(self.mSystem, file1)
         file1.close()
 
     def loadData (self):
-        file1 = open(r'MessanaData.dat','rb')
+        file1 = open(r'MessanaData.pkl','rb')
         self.mSystem = pickle.load(file1)
         print (self.mSystem['system']['ISYnode']['nlsId'])        
         file1.close() 
