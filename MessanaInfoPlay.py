@@ -817,14 +817,15 @@ class MessanaInfo:
         self.setupFile['nodeDef'][nodeName]['cmds']['accepts'] = {}
   
         #pullKeys = self.systemPullKeys()
-        for mKey in self.mSystem['system']['KeyInfo']:
+        # Only install if node exists
+        for mKey in self.mSystem['system']['data']: 
             #if mKey in pullKeys:
             if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 keyCount = keyCount + 1
                 editorName = nodeName.upper()+'_'+str(keyCount)
                 nlsName = editorName.lower()
                 ISYvar = 'GV'+str(keyCount)
-                self.setupFile['nodeDef'][nodeName]['sts'][ISYvar]=editorName
+                self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
                 self.setupFile['editors'][editorName]={}
                 #self.setupFile['nls'][editorName][ISYparam]
                 for ISYparam in self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']:

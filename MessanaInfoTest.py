@@ -19,7 +19,7 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 #Retrive basic system info
 print('\nSYSTEM')
 messana.updateSystemData()
-messana.saveData()
+#messana.loadData()
 time.sleep(2)
 
 print('loaded :')
