@@ -4,7 +4,7 @@ import polyinterface
 from subprocess import call
 import json
 from collections import defaultdict
-from MessanaInfoPLay import MessanaInfo
+from MessanaInfoPlay import MessanaInfo
 from MessanaZones import MessanaZones
 
 LOGGER = polyinterface.LOGGER

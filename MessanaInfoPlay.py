@@ -10,8 +10,8 @@ import pickle
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system': {  'ISYnode':{ 'nodedefID':'messanasys'
-                                                ,'nlsId':'msys'}
+        self.mSystem = {'system': {  'ISYnode':{ 'nlsNAME':'Messana System'
+                                                ,'nlsICON':'Thermostat'}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/system/name/'
@@ -113,7 +113,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of MacroZones (all=1)' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' : {} }
                                                 }                                        
                                         ,'mFanCoilCount': {
                                             'GETstr':'/api/system/fancoilCount/'
@@ -797,20 +797,23 @@ class MessanaInfo:
     def init(self):
         return(True)
 
-    def addSubNodeDefStruct(self, nodeDefNbr, nodeIdName):
+    def addSubNodeDefStruct(self, subnodeNbr, subnodeName):
+        self.keyCount = 0
+        subnodeName.lower()
+        self.editorName = subnodeName+str(subnodeNbr)+'_'+str(self.keyCount)
         return()
 
-    def addSystemDefStruct(self, nodeName):
-        keyCount = 0
+    def addSystemDefStruct(self, nodeName, nodeId):
+        self.keyCount = 0
         nodeName.lower()
-        editorName = nodeName+'_'+str(keyCount)
+        self.nlsName = 'nls' + nodeName
+        self.nlsName.lower()
+        #editorName = nodeName+'_'+str(keyCount)
         self.setupFile['nodeDef'][nodeName]={}
-        nodeName = 'system'
-        nodeName.lower()
-        self.setupFile['nodeDef'][nodeName]['id'] = nodeName
-        nlsName = 'nlssystem'
-        nlsName.lower()
-        self.setupFile['nodeDef'][nodeName]['nlsid']=nlsName
+        self.setupFile['nodeDef'][nodeName]['CodeId'] = nodeId
+        self.setupFile['nodeDef'][nodeName]['nlsId'] = self.nlsName
+        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['KeyInfo']['nlsNAME']
+        self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['KeyInfo']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
         self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = {}
@@ -818,29 +821,32 @@ class MessanaInfo:
   
         #pullKeys = self.systemPullKeys()
         # Only install if node exists
-        for mKey in self.mSystem['system']['data']: 
-            #if mKey in pullKeys:
-            if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
-                keyCount = keyCount + 1
-                editorName = nodeName.upper()+'_'+str(keyCount)
-                nlsName = editorName.lower()
-                ISYvar = 'GV'+str(keyCount)
-                self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
-                self.setupFile['editors'][editorName]={}
-                #self.setupFile['nls'][editorName][ISYparam]
-                for ISYparam in self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
-                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+        for mKey in self.mSystem[nodeName]['data']: 
+            #make check if system has unit installed
+            if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+                if ((self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
+                   and self.mSystem[nodeName]['data'][mKey] != 0)
+                   or self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
+                    keyCount = keyCount + 1
+                    editorName = nodeName.upper()+'_'+str(keyCount)
+                    nlsName = editorName.lower()
+                    ISYvar = 'GV'+str(keyCount)
+                    self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
+                    self.setupFile['editors'][editorName]={}
+                    #self.setupFile['nls'][editorName][ISYparam]
+                    for ISYparam in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']:
+                        if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                            self.setupFile['editors'][editorName][ISYparam]=self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
-                if self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
-                    self.setupFile['nls'][nlsName]={}
-                for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
-                    print ( mKey + ' ' + ISYnls)
-                    if  self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
-                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
-                        if ISYnls == 'nlsValues':
-                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName
-                   
+                    if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
+                        self.setupFile['nls'][nlsName]={}
+                    for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
+                        print ( mKey + ' ' + ISYnls)
+                        if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                            self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                            if ISYnls == 'nlsValues':
+                                self.setupFile['editors'][editorName]['nlsKey'] = nlsName
+                    
                 
 
 
