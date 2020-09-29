@@ -797,10 +797,13 @@ class MessanaInfo:
     def init(self):
         return(True)
 
-    def addSubNodeDefStruct(self, subnodeNbr, subnodeName):
+    def addSubNodeDefStruct(self, subnodeNbr, subnodeName, nodeId):
         self.keyCount = 0
         subnodeName.lower()
         self.editorName = subnodeName+str(subnodeNbr)+'_'+str(self.keyCount)
+        return()
+
+    def addSystemComand(self, nodeName, nodeId, CommandType, commandName):
         return()
 
     def addSystemDefStruct(self, nodeName, nodeId):
@@ -812,8 +815,8 @@ class MessanaInfo:
         self.setupFile['nodeDef'][nodeName]={}
         self.setupFile['nodeDef'][nodeName]['CodeId'] = nodeId
         self.setupFile['nodeDef'][nodeName]['nlsId'] = self.nlsName
-        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['KeyInfo']['nlsNAME']
-        self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['KeyInfo']['nlsICON']
+        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['ISYnode']['nlsNAME']
+        self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
         self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = {}
@@ -827,10 +830,10 @@ class MessanaInfo:
                 if ((self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
                    and self.mSystem[nodeName]['data'][mKey] != 0)
                    or self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
-                    keyCount = keyCount + 1
-                    editorName = nodeName.upper()+'_'+str(keyCount)
+                    self.keyCount = self.keyCount + 1
+                    editorName = nodeName.upper()+'_'+str(self.keyCount)
                     nlsName = editorName.lower()
-                    ISYvar = 'GV'+str(keyCount)
+                    ISYvar = 'GV'+str(self.keyCount)
                     self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
                     self.setupFile['editors'][editorName]={}
                     #self.setupFile['nls'][editorName][ISYparam]

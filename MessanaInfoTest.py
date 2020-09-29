@@ -18,20 +18,21 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 #Retrive basic system info
 print('\nSYSTEM')
-#messana.updateSystemData()
-messana.loadData()
-time.sleep(2)
-
-print('loaded :')
+messana.updateSystemData()
+#messana.loadData()
+#time.sleep(2)
+#print('loaded :')
 #time.sleep(2)
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-messana.addSystemDefStruct('system')
+messana.addSystemDefStruct('system', 'MessanaSys')
+messana.addSystemComand('system','MessanaSys','sends',  )
 print('zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
     messana.updateZoneData(zoneNbr)
+    messana.addSubNodeDefStruct()
 messana.saveData()
 print('systemKeys')
 '''
