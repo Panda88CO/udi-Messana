@@ -803,8 +803,16 @@ class MessanaInfo:
         self.editorName = subnodeName+str(subnodeNbr)+'_'+str(self.keyCount)
         return()
 
-    def addSystemComand(self, nodeName, nodeId, CommandType, commandName):
+    def addSystemSendComand(self, nodeName, idName):
+        if  self.setupFile['nodeDef'][nodeName]['cmds']['sends'] == None:
+            self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
+        self.setupFile['nodeDef'][nodeName]['cmds']['sends'].append(idName)
         return()
+   
+    def addSystemAcceptComand(self, nodeName, idName, driverName):   
+        self.setupFile['nodeDef'][nodeName]['cmds']['accepts'][driverName] = idName
+        return()
+
 
     def addSystemDefStruct(self, nodeName, nodeId):
         self.keyCount = 0
@@ -819,7 +827,7 @@ class MessanaInfo:
         self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = {}
+        self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = []
         self.setupFile['nodeDef'][nodeName]['cmds']['accepts'] = {}
   
         #pullKeys = self.systemPullKeys()
@@ -1351,7 +1359,7 @@ class MessanaInfo:
     def loadData (self):
         file1 = open(r'MessanaData.pkl','rb')
         self.mSystem = pickle.load(file1)
-        print (self.mSystem['system']['ISYnode']['nlsId'])        
+        print (self.mSystem['system']['ISYnode']['nlsNAME'])        
         file1.close() 
 
 

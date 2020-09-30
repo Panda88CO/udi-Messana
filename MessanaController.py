@@ -47,10 +47,10 @@ class MessanaController(polyinterface.Controller):
     def heartbeat(self):
         LOGGER.debug('heartbeat: hb={}'.format(self.hb))
         if self.hb == 0:
-            self.reportCmd("DON",2)
+            self.reportCmd('DON',2)
             self.hb = 1
         else:
-            self.reportCmd("DOF",2)
+            self.reportCmd('DOF',2)
             self.hb = 0
 
     def shortPoll(self):
