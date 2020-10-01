@@ -10,8 +10,7 @@ import pickle
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system': {  'ISYnode':{ 'nlsNAME':'Messana System'
-                                                ,'nlsICON':'Thermostat'}
+        self.mSystem = {'system': {  'ISYnode':{ 'nlsICON':'Thermostat'}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/system/name/'
@@ -243,8 +242,7 @@ class MessanaInfo:
                                      ,'data':{}
                                          
                         },
-                        'zones': {   'ISYnode':{ 'nodedefID':'zone'
-                                                ,'nlsId':'mzone'}
+                        'zones': {   'ISYnode':{'nlsICON':'TempSensor'}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/zone/name/'
@@ -258,9 +256,8 @@ class MessanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Zone Name' 
+                                                    ,'nlsValues' : {} 
                                                         }  
                                             }  
                                         ,'mSetPoint' :{
@@ -268,16 +265,15 @@ class MessanaInfo:
                                             ,'PUTstr': '/api/zone/setpoint/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':17
+                                                    ,'ISYmin':40
+                                                    ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Set Temp' 
+                                                    ,'nlsValues' : { } 
                                                         }
                                                     }
 
@@ -286,33 +282,32 @@ class MessanaInfo:
                                             ,'PUTstr': '/api/zone/status/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
+                                                     'ISYuom': 25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset': '0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
-                                            , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Zone state'
                                                     ,'nlsValues' : { '0=Off'
                                                                     ,'1=On'} 
                                                         }
-                                                    }
+                                                }
                                         ,'mHumSetPointRH': { 
                                              'GETstr': '/api/zone/humidSetpointRH/'
                                             ,'PUTstr': '/api/zone/humidSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Hum Set Point RH'  
+                                                    ,'nlsValues' : {} 
                                                         }
                                                     }
                                         ,'mHumSetPointDP': { 
@@ -320,16 +315,15 @@ class MessanaInfo:
                                             ,'PUTstr': '/api/zone/humidSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Hum Set Point DP'  
+                                                    ,'nlsValues' : {} 
                                                         }
                                                     }
                                         ,'mDeumSetPointRH':{ 
@@ -337,33 +331,31 @@ class MessanaInfo:
                                             ,'PUTstr': '/api/zone/dehumSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        } 
+                                                     'nlsTEXT' : 'DeHum Set Point RH'  
+                                                    ,'nlsValues' : {} 
+                                                        }
                                                     }
                                         ,'mDehumSetPointDP': { 
                                              'GETstr': '/api/zone/dehumSetpointDP/'
                                             ,'PUTstr': '/api/zone/dehumSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'DeHum Set Point DP'  
+                                                    ,'nlsValues' : {} 
                                                         }
                                                     }
                                         ,'mCurrentSetPointRH': { 
@@ -371,33 +363,32 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointRH/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Current Set Point RH'  
+                                                    ,'nlsValues' : {} 
                                                         }
                                                     }
                                         ,'mCurrentSetPointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointDP/' 
+                                            ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Current Set Point DP'  
+                                                    ,'nlsValues' : {} 
                                                         }
                                                     }
                                         ,'mHumidity': { 
@@ -405,16 +396,15 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/humidity/' 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Humidity' 
+                                                    ,'nlsValues' : { } 
                                                         }
                                                     }
                                         ,'mDewPoint' : { 
@@ -422,16 +412,15 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/dewpoint/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Dew Point' 
+                                                    ,'nlsValues' : { } 
                                                         } 
                                                     }
                                         ,'mTemp' : { 
@@ -439,16 +428,15 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/temperature/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':17
+                                                    ,'ISYmin':-40
+                                                    ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'Panel Temp' 
+                                                    ,'nlsValues' : { } 
                                                         } 
                                                     }
                                         ,'mAirQuality' : { 
@@ -456,31 +444,30 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airQuality/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        } 
-                                                    }                                      
+                                                     'nlsTEXT' : 'Air Quality'  
+                                                    ,'nlsValues' : {} 
+                                                        }
+                                                    }                                     
                                         ,'mScheduleOn' : {
                                             'GETstr': '/api/zone/scheduleOn/'
                                             ,'PUTstr': '/api/zone/scheduleOn/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
+                                                     'nlsTEXT' : 'Schedule Status' 
                                                     ,'nlsValues' : { '0=Off'
                                                                     ,'1=On'} 
                                                         }  
@@ -490,104 +477,103 @@ class MessanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/co2/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                     'nlsTEXT' : 'CO2'  
+                                                    ,'nlsValues' : {} 
                                                         }
-                                                    }                                       
+                                                    }                                     
                                          ,'mAirTemp' : { 
                                              'GETstr': '/api/zone/airTemperature/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airTemperature/' 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':17
+                                                    ,'ISYmin':-40
+                                                    ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        }
-                                                    } 
+                                                     'nlsTEXT' : 'Air/Room Temp' 
+                                                    ,'nlsValues' : { } 
+                                                        } 
+                                                    }
                                         ,'mMacrozoneId' : { 
                                              'GETstr': '/api/zone/macrozoneId/'
                                             ,'PUTstr': None
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':40
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        } 
-                                                    }
+                                                     'nlsTEXT' : 'CO2'  
+                                                    ,'nlsValues' : {} 
+                                                        }
+                                                    }  
                                         ,'mEnergySave' : { 
                                              'GETstr': '/api/zone/energySaving/'
                                             ,'PUTstr': '/api/zone/energySaving/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
+                                                     'nlsTEXT' : 'Energy Save Status' 
                                                     ,'nlsValues' : { '0=Off'
                                                                     ,'1=On'} 
-                                                        } 
-                                                    }
+                                                        }  
+                                                    } 
                                         ,'mAlarmOn':{ 
                                              'GETstr': '/api/zone/alarmOn/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/alarmOn/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
+                                                     'nlsTEXT' : 'Alarm Status' 
                                                     ,'nlsValues' : { '0=Off'
                                                                     ,'1=On'} 
-                                                        }
-                                                    }
+                                                        }  
+                                                    } 
                                         ,'mThermalStatus': { 
                                              'GETstr': '/api/zone/thermalStatus/'
                                             ,'PUTstr': None
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-4'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        } 
-                                                    }
-                                        ,'mCapability': { 
+                                                     'nlsTEXT' : 'Thermal Status'  
+                                                    ,'nlsValues' : { '0=No Thermal'
+                                                                    ,'1=Heating Request'
+                                                                    ,'2=Cooling Request'
+                                                                    ,'3=H & C request'  } 
+                                                        }
+                                                    }    
+                                        ,'mCapability': { # needs to be considered - not single value
                                              'GETstr': '/api/zone/capability/'
                                             ,'PUTstr': None
                                             ,'Active': None 
@@ -799,8 +785,49 @@ class MessanaInfo:
 
     def addSubNodeDefStruct(self, subnodeNbr, subnodeName, nodeId):
         self.keyCount = 0
-        subnodeName.lower()
-        self.editorName = subnodeName+str(subnodeNbr)+'_'+str(self.keyCount)
+        nodeId.lower()
+
+        self.name = nodeId+str(subnodeNbr)
+
+
+        self.nlsKey = 'nls' + self.name
+        self.nlsKey.lower()
+        #editorName = nodeName+'_'+str(keyCount)
+        self.setupFile['nodeDef'][self.name]={}
+        self.setupFile['nodeDef'][self.name]['CodeId'] = nodeId
+        self.setupFile['nodeDef'][self.name]['nlsId'] = self.nlsKey
+        self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[subnodeName]['data'][subnodeNbr]['mName']
+        self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[subnodeName]['ISYnode']['nlsICON']
+        self.setupFile['nodeDef'][self.name]['sts']={}
+        self.setupFile['nodeDef'][self.name]['cmds']={}
+        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = []
+        self.setupFile['nodeDef'][self.name]['cmds']['accepts'] = {}
+        
+
+        for mKey in self.mSystem[subnodeName]['data'][subnodeNbr]: 
+            #make check if system has unit installed
+            if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+                self.keyCount = self.keyCount + 1
+                editorName = subnodeName.upper()+'_'+str(self.keyCount)
+                nlsName = editorName.lower()
+                ISYvar = 'GV'+str(self.keyCount)
+                self.setupFile['nodeDef'][subnodeName]['sts'][mKey]={ISYvar:editorName}
+                self.setupFile['editors'][editorName]={}
+                #self.setupFile['nls'][editorName][ISYparam]
+                for ISYparam in self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+
+                if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls']:
+                    self.setupFile['nls'][nlsName]={}
+                for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
+                    print ( mKey + ' ' + ISYnls)
+                    if  self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                        if ISYnls == 'nlsValues':
+                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName
+            
+        #self.editorName = self.name + '_'  + str(self.keyCount)  
         return()
 
     def addSystemSendComand(self, nodeName, idName):
@@ -816,14 +843,13 @@ class MessanaInfo:
 
     def addSystemDefStruct(self, nodeName, nodeId):
         self.keyCount = 0
-        nodeName.lower()
-        self.nlsName = 'nls' + nodeName
-        self.nlsName.lower()
-        #editorName = nodeName+'_'+str(keyCount)
+        nodeId.lower()
+        self.nlsKey= 'nls' + nodeId
+        self.nlsKey.lower()
         self.setupFile['nodeDef'][nodeName]={}
         self.setupFile['nodeDef'][nodeName]['CodeId'] = nodeId
-        self.setupFile['nodeDef'][nodeName]['nlsId'] = self.nlsName
-        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['ISYnode']['nlsNAME']
+        self.setupFile['nodeDef'][nodeName]['nlsId'] = self.nlsKey
+        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['data']['mName']
         self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
