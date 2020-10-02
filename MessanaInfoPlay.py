@@ -51,9 +51,10 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'System state'
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} }
-                                                }
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On'] 
+                                                   }
+                                                 }
                                         ,'mZoneCount':{
                                              'GETstr':'/api/system/zoneCount/'
                                             ,'PUTstr': None 
@@ -67,7 +68,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Zones' 
-                                                    ,'nlsValues' : {}}
+                                                    ,'nlsValues' : []
+                                                    }
                                                 }                                         
                                         ,'mATUcount':{
                                              'GETstr':'/api/system/atuCount/'
@@ -82,7 +84,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of ATU' 
-                                                    ,'nlsValues' : {}}
+                                                    ,'nlsValues' : []
+                                                    }
                                                 }
                                         ,'mDHWcount': {
                                              'GETstr':'/api/system/dhwCount/'
@@ -97,7 +100,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Hot Water' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' :[]
+                                                    }
                                                 }
                                         ,'mMacrozoneCount': {
                                              'GETstr':'/api/system/macrozoneCount/'
@@ -112,7 +116,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of MacroZones (all=1)' 
-                                                    ,'nlsValues' : {} }
+                                                    ,'nlsValues' : [] 
+                                                    }
                                                 }                                        
                                         ,'mFanCoilCount': {
                                             'GETstr':'/api/system/fancoilCount/'
@@ -127,7 +132,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Fan Coils' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' : []
+                                                    }
                                                 }                                          
                                         ,'mEnergySourceCount':{
                                              'GETstr':'/api/system/energySourceCount/'
@@ -142,7 +148,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Energy Sources' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' :  [] 
+                                                    }
                                                 }                                          
                                         ,'mHC_changeoverCount':{
                                              'GETstr':'/api/system/HCgroupCount/'
@@ -157,7 +164,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Hot Cold ' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' :  [] 
+                                                     }
                                                 }                                          
                                         ,'mBufTankCount':{
                                              'GETstr':'/api/system/bufferTankCount/'
@@ -172,7 +180,8 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Buffer Tanks' 
-                                                    ,'nlsValues' : { } }
+                                                    ,'nlsValues' : []
+                                                        }
                                                 }                                                                                                                           
                                         ,'mUnitTemp':{
                                              'GETstr' : '/api/system/tempUnit/'
@@ -187,8 +196,9 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                     'nlsTEXT' : 'Temp Unit' 
-                                                    ,'nlsValues' : { '0=F'
-                                                                    ,'1=C'} }
+                                                    ,'nlsValues' : ['0=F'
+                                                                    ,'1=C']
+                                                        }
                                                 }                                        
                                         ,'mEnergySaving':{
                                              'GETstr' : '/api/system/energySaving/'
@@ -203,8 +213,9 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Savings' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} }
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
+                                                        }
                                                 }                                        
                                         ,'mSetback':{
                                              'GETstr' : '/api/system/setback/'
@@ -219,8 +230,9 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Setback Status' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} }
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
+                                                        }
                                                 }                                          
                                         ,'mExternalAlarm':{
                                              'GETstr' : '/api/system/externalAlarm/'
@@ -235,8 +247,9 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} }
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
+                                                        }
                                                 }   
                                          }                                         
                                      ,'data':{}
@@ -257,9 +270,9 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Zone Name' 
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }  
-                                            }  
+                                                }  
                                         ,'mSetPoint' :{
                                              'GETstr': '/api/zone/setpoint/'
                                             ,'PUTstr': '/api/zone/setpoint/'
@@ -273,10 +286,9 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Set Temp' 
-                                                    ,'nlsValues' : { } 
+                                                    ,'nlsValues' : []
                                                         }
                                                     }
-
                                         ,'mStatus':{ 
                                              'GETstr': '/api/zone/status/'
                                             ,'PUTstr': '/api/zone/status/'
@@ -290,10 +302,10 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Zone state'
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                    ,'nlsValues' : ['0=Off'
+                                                                    ,'1=On']
                                                         }
-                                                }
+                                                    }
                                         ,'mHumSetPointRH': { 
                                              'GETstr': '/api/zone/humidSetpointRH/'
                                             ,'PUTstr': '/api/zone/humidSetpointRH/'
@@ -307,7 +319,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Hum Set Point RH'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mHumSetPointDP': { 
@@ -323,7 +335,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Hum Set Point DP'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mDeumSetPointRH':{ 
@@ -339,7 +351,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'DeHum Set Point RH'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mDehumSetPointDP': { 
@@ -355,7 +367,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'DeHum Set Point DP'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mCurrentSetPointRH': { 
@@ -371,14 +383,13 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Set Point RH'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mCurrentSetPointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointDP/' 
-                                            ,'Active': None 
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
@@ -388,7 +399,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Set Point DP'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }
                                         ,'mHumidity': { 
@@ -404,7 +415,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Humidity' 
-                                                    ,'nlsValues' : { } 
+                                                    ,'nlsValues' : []
                                                         }
                                                     }
                                         ,'mDewPoint' : { 
@@ -420,7 +431,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Dew Point' 
-                                                    ,'nlsValues' : { } 
+                                                    ,'nlsValues' : []
                                                         } 
                                                     }
                                         ,'mTemp' : { 
@@ -436,7 +447,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Panel Temp' 
-                                                    ,'nlsValues' : { } 
+                                                    ,'nlsValues' : []
                                                         } 
                                                     }
                                         ,'mAirQuality' : { 
@@ -452,7 +463,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Air Quality'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }                                     
                                         ,'mScheduleOn' : {
@@ -468,8 +479,8 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Schedule Status' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
                                                         }  
                                                     } 
                                         ,'mCO2' : { 
@@ -485,7 +496,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'CO2'  
-                                                    ,'nlsValues' : {} 
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }                                     
                                          ,'mAirTemp' : { 
@@ -501,7 +512,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Air/Room Temp' 
-                                                    ,'nlsValues' : { } 
+                                                    ,'nlsValues' : []
                                                         } 
                                                     }
                                         ,'mMacrozoneId' : { 
@@ -516,8 +527,8 @@ class MessanaInfo:
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'CO2'  
-                                                    ,'nlsValues' : {} 
+                                                     'nlsTEXT' : 'MAcro Zone member'  
+                                                    ,'nlsValues' : [] 
                                                         }
                                                     }  
                                         ,'mEnergySave' : { 
@@ -533,8 +544,8 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Save Status' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
                                                         }  
                                                     } 
                                         ,'mAlarmOn':{ 
@@ -550,8 +561,8 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Alarm Status' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
+                                                    ,'nlsValues' : [ '0=Off'
+                                                                    ,'1=On']
                                                         }  
                                                     } 
                                         ,'mThermalStatus': { 
@@ -567,13 +578,13 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Thermal Status'  
-                                                    ,'nlsValues' : { '0=No Thermal'
+                                                    ,'nlsValues' : [ '0=No Thermal'
                                                                     ,'1=Heating Request'
                                                                     ,'2=Cooling Request'
-                                                                    ,'3=H & C request'  } 
+                                                                    ,'3=H & C request'  ] 
                                                         }
                                                     }    
-                                        ,'mCapability': { # needs to be considered - not single value
+                                        ,'mCapability': {
                                              'GETstr': '/api/zone/capability/'
                                             ,'PUTstr': None
                                             ,'Active': None 
@@ -585,12 +596,10 @@ class MessanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : { '0=Off'
-                                                                    ,'1=On'} 
-                                                        } 
+                                                     'nlsTEXT' : None
                                                     }
                                         }
+                                    }
                                     ,'data' :{}
                         },
                         'macrozones' : { 'GETstr' : {
@@ -742,6 +751,7 @@ class MessanaInfo:
                                                 'data' : {}
                         }
                     }
+        
         '''
         self.setupStruct = {'nodeDef': nodeNbr: { 'nodeDef':{}
                                             ,'sts':{}
@@ -884,7 +894,12 @@ class MessanaInfo:
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
-                
+    def updateZoneCapability (self, zoneNbr):
+        self.capability = self.GETNodeData( 'zones', zoneNbr, 'mCapability')
+        return(self.capability)
+    
+    def addZoneDefStruct(self, zoneNbr, nodeId):
+        self.addSubNodeDefStruct(zoneNbr, 'zones', nodeId)
 
 
     def GETSystem(self, mKey):
@@ -953,7 +968,7 @@ class MessanaInfo:
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 subSysTemp = subSysTemp.json()
-                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])]
+                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])] # Need to address more than 1 value 
                 nodeData['statusOK'] =True
                 if instNbr in self.mSystem[mNodeKey]['data']:
                     if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
