@@ -914,7 +914,11 @@ class MessanaInfo:
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
     def updateZoneCapability (self, zoneNbr):
+
         self.zoneCapability[zoneNbr] = self.pullZoneDataIndividual(  zoneNbr, 'mCapability')
+       
+       
+       
         self.keyList = {}
         tempKeys = self.zoneCapability[zoneNbr]['dataAll']
         for key in tempKeys:
