@@ -32,7 +32,7 @@ messana.addSystemAcceptComand('system', 'SET_STATUS' , 'GV1' )
 print('zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
-    capability = messana.updateZoneCapability(zoneNbr)
+    #capability = messana.updateZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
     messana.addSubNodeDefStruct(zoneNbr, 'zones', 'zone' )
 messana.saveData()

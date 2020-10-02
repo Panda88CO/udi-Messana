@@ -801,8 +801,8 @@ class MessanaInfo:
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
-        self.zoneCapability = None
-        self.atuCapability = None
+        self.zoneCapability = {}
+        self.atuCapability = {}
 
         '''
         print ('Reading Messana System')
@@ -914,9 +914,9 @@ class MessanaInfo:
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
     def updateZoneCapability (self, zoneNbr):
-        self.capability = self.GETNodeData( 'zones', zoneNbr, 'mCapability')
+        self.zoneCapability[zoneNbr] = self.pullZoneDataIndividual(  zoneNbr, 'mCapability')
         self.keyList = {}
-        tempKeys = self.capability['dataAll']
+        tempKeys = self.zoneCapability[zoneNbr]['dataAll']
         for key in tempKeys:
             if key == 'operative_temperature':
                 self.keyList['mTemp'] = tempKeys["operative_temperature"]
@@ -1074,13 +1074,13 @@ class MessanaInfo:
         if self.mSystem[subsystemKey]['data']:
             if subsystemNbr in self.mSystem[subsystemKey]['data']: 
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
                 self.updateSubSystemData(subsystemNbr, subsystemKey)
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
         else:
@@ -1089,7 +1089,7 @@ class MessanaInfo:
             self.updateSubSystemData(subsystemNbr, subsystemKey)
             if self.mSystem[subsystemKey]['data']:
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey][cmdKey]:
+                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
@@ -1221,9 +1221,9 @@ class MessanaInfo:
         self.zoneKeys = self.zonePullKeys(zoneNbr)
         self.dataOK = True
         for mKey in self.zoneKeys:
-            self.data = self.pullSubSystemDataIndividual(zoneNbr, mKey)
-            self.dataOK = slef.datOK and self.data['dataOK']
-        return(self.fan_coilPushKeysdataOk)
+            self.data = self.pullZoneDataIndividual(zoneNbr, mKey)
+            self.dataOK = self.dataOK and self.data['dataOK']
+        return(self.dataOK)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
@@ -1236,13 +1236,13 @@ class MessanaInfo:
 
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
-        if self.zoneCapability == None:
+        if self.zoneCapability == {}:
             self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
         if self.zoneCapability[zoneNbr] == None:
             self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
         self.tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
         for mKey in self.tempZoneKeys:
-            if mKey in self.zoneCapabilities[zoneNbr]:
+            if mKey in self.zoneCapability[zoneNbr]:
                 if self.tempZoneKeys[mKey] == 0:
                     self.tempZoneKeys.remove(mKey)
         return( self.tempZoneKeys)
