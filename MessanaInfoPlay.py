@@ -338,7 +338,7 @@ class MessanaInfo:
                                                     ,'nlsValues' : [] 
                                                         }
                                                     }
-                                        ,'mDeumSetPointRH':{ 
+                                        ,'mDehumSetPointRH':{ 
                                              'GETstr': '/api/zone/dehumSetpointRH/'
                                             ,'PUTstr': '/api/zone/dehumSetpointRH/'
                                             ,'Active': None 
@@ -499,7 +499,7 @@ class MessanaInfo:
                                                     ,'nlsValues' : [] 
                                                         }
                                                     }                                     
-                                        ,'mVoe' : { 
+                                        ,'mVoc' : { 
                                              'GETstr': '/api/zone/voc/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/voc/'
@@ -514,7 +514,8 @@ class MessanaInfo:
                                                      'nlsTEXT' : 'Volatile Organic Compound'  
                                                     ,'nlsValues' : [] 
                                                         }
-                                                    }                                                  ,'mAirTemp' : { 
+                                                    }                                                  
+                                        ,'mAirTemp' : { 
                                              'GETstr': '/api/zone/airTemperature/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airTemperature/' 
@@ -914,7 +915,30 @@ class MessanaInfo:
                     
     def updateZoneCapability (self, zoneNbr):
         self.capability = self.GETNodeData( 'zones', zoneNbr, 'mCapability')
-        return(self.capability)
+        self.keyList = {}
+        tempKeys = self.capability['dataAll']
+        for key in tempKeys:
+            if key == 'operative_temperature':
+                self.keyList['mTemp'] = tempKeys["operative_temperature"]
+                self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+            elif key == 'air_temperature':
+                self.keyList['mAirTemp'] = tempKeys["air_temperature"]
+            elif key == 'relative_humidity':
+                self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
+                self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
+                self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
+                self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
+                self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
+                self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
+                self.keyList['mHumidity'] = tempKeys["relative_humidity"]
+                self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
+            elif key == 'co2':
+                self.keyList['mCO2'] = tempKeys['co2']                
+            elif key == 'voc':
+                self.keyList['mVoc'] = tempKeys['voc']   
+            else:
+                print(key + 'unknown keyword')
+        return(self.keyList)
     
     def addZoneDefStruct(self, zoneNbr, nodeId):
         self.addSubNodeDefStruct(zoneNbr, 'zones', nodeId)
@@ -1194,12 +1218,12 @@ class MessanaInfo:
     # Zones
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
-        zoneKeys = self.zonePullKeys(zoneNbr)
-        DataOK = True
-        for mKey in zoneKeys:
-            data = self.pullSubSystemDataIndividual(zoneNbr, mKey)
-            dataOK = datOK and data['dataOK']
-        return(dataOk)
+        self.zoneKeys = self.zonePullKeys(zoneNbr)
+        self.dataOK = True
+        for mKey in self.zoneKeys:
+            self.data = self.pullSubSystemDataIndividual(zoneNbr, mKey)
+            self.dataOK = slef.datOK and self.data['dataOK']
+        return(self.fan_coilPushKeysdataOk)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
@@ -1213,12 +1237,15 @@ class MessanaInfo:
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
         if self.zoneCapability == None:
-            self.updateZoneCapability(zoneNbr)
+            self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
         if self.zoneCapability[zoneNbr] == None:
-            self.updateZoneCapability(zoneNbr)
-        tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
-        
-        return( self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr'))
+            self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
+        self.tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
+        for mKey in self.tempZoneKeys:
+            if mKey in self.zoneCapabilities[zoneNbr]:
+                if self.tempZoneKeys[mKey] == 0:
+                    self.tempZoneKeys.remove(mKey)
+        return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
