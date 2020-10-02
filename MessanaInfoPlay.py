@@ -617,6 +617,7 @@ class MessanaInfo:
                                         }
                                     }
                                     ,'data' :{}
+                                    ,'capability' : {}
                         },
                         'macrozones' : { 'GETstr' : {
                                             'mName': '/api/macrozone/name/'
@@ -913,36 +914,37 @@ class MessanaInfo:
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
-    def updateZoneCapability (self, zoneNbr):
-
-        self.zoneCapability[zoneNbr] = self.pullZoneDataIndividual(  zoneNbr, 'mCapability')
-       
-       
-       
+    def updateZoneCapability (self, zoneNbr):     
         self.keyList = {}
-        tempKeys = self.zoneCapability[zoneNbr]['dataAll']
-        for key in tempKeys:
-            if key == 'operative_temperature':
-                self.keyList['mTemp'] = tempKeys["operative_temperature"]
-                self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
-            elif key == 'air_temperature':
-                self.keyList['mAirTemp'] = tempKeys["air_temperature"]
-            elif key == 'relative_humidity':
-                self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
-                self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
-                self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
-                self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
-                self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
-                self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
-                self.keyList['mHumidity'] = tempKeys["relative_humidity"]
-                self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
-            elif key == 'co2':
-                self.keyList['mCO2'] = tempKeys['co2']                
-            elif key == 'voc':
-                self.keyList['mVoc'] = tempKeys['voc']   
-            else:
-                print(key + 'unknown keyword')
+        if 'GETstr' in self.mSystem['zones']['KeyInfo']['mCapability']:
+            GETStr =self.IP+self.mSystem['zones']['KeyInfo']['mCapability']['GETstr']+str(zoneNbr)+'?'+ self.APIStr 
+            subSysTemp = requests.get(GETStr)
+            if str(subSysTemp) == self.RESPONSE_OK:
+                tempKeys= subSysTemp.json()
+                for key in tempKeys:
+                    if key == 'operative_temperature':
+                        self.keyList['mTemp'] = tempKeys["operative_temperature"]
+                        self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+                    elif key == 'air_temperature':
+                        self.keyList['mAirTemp'] = tempKeys["air_temperature"]
+                    elif key == 'relative_humidity':
+                        self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
+                        self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
+                        self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
+                        self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
+                        self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
+                        self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
+                        self.keyList['mHumidity'] = tempKeys["relative_humidity"]
+                        self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
+                    elif key == 'co2':
+                        self.keyList['mCO2'] = tempKeys['co2'] 
+                        self.keyList['mAirQuality'] = tempKeys['co2']            
+                    elif key == 'voc':
+                        self.keyList['mVoc'] = tempKeys['voc']   
+                    else:
+                        print(key + 'unknown keyword')
         return(self.keyList)
+       
     
     def addZoneDefStruct(self, zoneNbr, nodeId):
         self.addSubNodeDefStruct(zoneNbr, 'zones', nodeId)
@@ -1093,7 +1095,7 @@ class MessanaInfo:
             self.updateSubSystemData(subsystemNbr, subsystemKey)
             if self.mSystem[subsystemKey]['data']:
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
+                    if mKey in self.mSystem[subsystemKey]['KeyInfo']:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
@@ -1245,10 +1247,14 @@ class MessanaInfo:
         if self.zoneCapability[zoneNbr] == None:
             self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
         self.tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
+        removeKeys = []
         for mKey in self.tempZoneKeys:
+            print (mKey)
             if mKey in self.zoneCapability[zoneNbr]:
-                if self.tempZoneKeys[mKey] == 0:
-                    self.tempZoneKeys.remove(mKey)
+                if  self.zoneCapability[zoneNbr][mKey] == 0:
+                    removeKeys.append(mKey)                    
+        for mKey in removeKeys:
+            self.tempZoneKeys.remove(mKey)
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
