@@ -499,7 +499,22 @@ class MessanaInfo:
                                                     ,'nlsValues' : [] 
                                                         }
                                                     }                                     
-                                         ,'mAirTemp' : { 
+                                        ,'mVoe' : { 
+                                             'GETstr': '/api/zone/voc/'
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/zone/voc/'
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':107
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':1000
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Volatile Organic Compound'  
+                                                    ,'nlsValues' : [] 
+                                                        }
+                                                    }                                                  ,'mAirTemp' : { 
                                              'GETstr': '/api/zone/airTemperature/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airTemperature/' 
@@ -785,6 +800,9 @@ class MessanaInfo:
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
+        self.zoneCapability = None
+        self.atuCapability = None
+
         '''
         print ('Reading Messana System')
         #self.pullAllMessanaStatus()
@@ -968,7 +986,8 @@ class MessanaInfo:
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 subSysTemp = subSysTemp.json()
-                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])] # Need to address more than 1 value 
+                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])] 
+                nodeData['dataAll'] = subSysTemp
                 nodeData['statusOK'] =True
                 if instNbr in self.mSystem[mNodeKey]['data']:
                     if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
@@ -1175,11 +1194,17 @@ class MessanaInfo:
     # Zones
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
-        return(self.updateSubSystemData(zoneNbr, 'zones'))
+        zoneKeys = self.zonePullKeys(zoneNbr)
+        DataOK = True
+        for mKey in zoneKeys:
+            data = self.pullSubSystemDataIndividual(zoneNbr, mKey)
+            dataOK = datOK and data['dataOK']
+        return(dataOk)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         return(self.pullSubSystemDataIndividual(zoneNbr, 'zones', mKey))
+
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
@@ -1187,10 +1212,17 @@ class MessanaInfo:
 
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
+        if self.zoneCapability == None:
+            self.updateZoneCapability(zoneNbr)
+        if self.zoneCapability[zoneNbr] == None:
+            self.updateZoneCapability(zoneNbr)
+        tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
+        
         return( self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr'))
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
+
         return( self.getSubSystemKeys (zoneNbr, 'zones', 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
