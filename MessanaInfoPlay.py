@@ -446,7 +446,7 @@ class MessanaInfo:
                                                     ,'ISYstep':1
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'Panel Temp' 
+                                                     'nlsTEXT' : 'Perceived Temp' 
                                                     ,'nlsValues' : []
                                                         } 
                                                     }
@@ -527,7 +527,7 @@ class MessanaInfo:
                                                     ,'ISYstep':1
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'Air/Room Temp' 
+                                                     'nlsTEXT' : 'Roon air Temp' 
                                                     ,'nlsValues' : []
                                                         } 
                                                     }
@@ -617,7 +617,7 @@ class MessanaInfo:
                                         }
                                     }
                                     ,'data' :{}
-                                    ,'capability' : {}
+                                    ,'NOcapability' : {}
                         },
                         'macrozones' : { 'GETstr' : {
                                             'mName': '/api/macrozone/name/'
@@ -838,26 +838,26 @@ class MessanaInfo:
             #make check if system has unit installed
             if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 self.keyCount = self.keyCount + 1
-                editorName = subnodeName.upper()+'_'+str(self.keyCount)
+                editorName = subnodeName.upper()+str(subnodeNbr)+'_'+str(self.keyCount)
                 nlsName = editorName.lower()
                 ISYvar = 'GV'+str(self.keyCount)
-                self.setupFile['nodeDef'][subnodeName]['sts'][mKey]={ISYvar:editorName}
+                self.setupFile['nodeDef'][self.name]['sts'][mKey]={ISYvar:editorName}
                 self.setupFile['editors'][editorName]={}
                 #self.setupFile['nls'][editorName][ISYparam]
                 for ISYparam in self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                    if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
                         self.setupFile['editors'][editorName][ISYparam]=self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
                 if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
-                for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
+                for ISYnls in self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls']:
                     print ( mKey + ' ' + ISYnls)
                     if  self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
-                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
                             self.setupFile['editors'][editorName]['nlsKey'] = nlsName
             
-        #self.editorName = self.name + '_'  + str(self.keyCount)  
+        
         return()
 
     def addSystemSendComand(self, nodeName, idName):
@@ -914,15 +914,16 @@ class MessanaInfo:
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
-    def updateZoneCapability (self, zoneNbr):     
+    def getSubNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
-        if 'GETstr' in self.mSystem['zones']['KeyInfo']['mCapability']:
-            GETStr =self.IP+self.mSystem['zones']['KeyInfo']['mCapability']['GETstr']+str(zoneNbr)+'?'+ self.APIStr 
+
+        if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
+            GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 tempKeys= subSysTemp.json()
                 for key in tempKeys:
-                    if key == 'operative_temperature':
+                    if key == 'operative_temperature' and tempKeys[key] == 0:
                         self.keyList['mTemp'] = tempKeys["operative_temperature"]
                         self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
                     elif key == 'air_temperature':
@@ -943,7 +944,7 @@ class MessanaInfo:
                         self.keyList['mVoc'] = tempKeys['voc']   
                     else:
                         print(key + 'unknown keyword')
-        return(self.keyList)
+                self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
     def addZoneDefStruct(self, zoneNbr, nodeId):
@@ -1008,40 +1009,46 @@ class MessanaInfo:
                 sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
                 return(sysData)
   
-    def GETNodeData(self, mNodeKey, instNbr, mKey):
-        print('GETSubNodeData: ' + mNodeKey + ' ' + str(instNbr)+ ' ' + mKey)
+    def GETNodeData(self, mNodeKey, nodeNbr, mKey):
+        print('GETSubNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
+        if 'NOcapability' in self.mSystem[mNodeKey]:
+            if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
+                if  mKey in self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
+                    nodeData['error'] = 'Does not support keyword: ' + mKey
+                    nodeData['statusOK'] =False
+                    return (nodeData)
         if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
-            GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(instNbr)+'?'+ self.APIStr 
+            GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
             subSysTemp = requests.get(GETStr)
             if str(subSysTemp) == self.RESPONSE_OK:
                 subSysTemp = subSysTemp.json()
                 nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])] 
                 nodeData['dataAll'] = subSysTemp
                 nodeData['statusOK'] =True
-                if instNbr in self.mSystem[mNodeKey]['data']:
-                    if mKey in self.mSystem[mNodeKey]['data'][instNbr]:
-                        self.mSystem[mNodeKey]['data'][instNbr][mKey] = nodeData['data']
+                if nodeNbr in self.mSystem[mNodeKey]['data']:
+                    if mKey in self.mSystem[mNodeKey]['data'][nodeNbr]:
+                        self.mSystem[mNodeKey]['data'][nodeNbr][mKey] = nodeData['data']
                     else:
-                        self.mSystem[mNodeKey]['data'][instNbr].update({mKey : nodeData['data']})
+                        self.mSystem[mNodeKey]['data'][nodeNbr].update({mKey : nodeData['data']})
                 else:
                     temp = {}
-                    temp[instNbr] = {mKey : nodeData['data']}
+                    temp[nodeNbr] = {mKey : nodeData['data']}
                     self.mSystem[mNodeKey]['data'].update(temp)
 
             elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
                 temp1 =  subSysTemp.content
                 res_dict = json.loads(temp1.decode('utf-8')) 
-                nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
             elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
-                nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
             else:
-                nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(instNbr) + ' for id: ' + str(mKey)
+                nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
         else: 
-                nodeData['error'] = 'Put does not accept keywork: ' + mKey
+                nodeData['error'] = 'Does not support keyword: ' + mKey
                 nodeData['statusOK'] =False
         return(nodeData)   
 
@@ -1076,7 +1083,7 @@ class MessanaInfo:
         return(nodeData)
 
     def getSubSystemKeys (self, subsystemNbr, subsystemKey, cmdKey):
-        keys=[]
+        keys = []
         if self.mSystem[subsystemKey]['data']:
             if subsystemNbr in self.mSystem[subsystemKey]['data']: 
                 for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
@@ -1100,6 +1107,12 @@ class MessanaInfo:
                             keys.append(mKey)
             else:
                 print('No '+ subsystemKey + ' present')
+        if 'NOcapabiility' in self.mSystem[subsystemKey]:
+            if self.mSystem[subsystemKey]['NOcapability']:
+                if subsystemNbr in self.mSystem[subsystemKey]['NOcapability']:
+                    for mKey in keys:
+                        if mKey in self.mSystem[subsystemKey]['NOcapability'][subsystemNbr]:
+                            keys.remove(mKey)                            
         return(keys)
 
     def updateSubSystemData(self, subsystemNbr, subsystemKey):
@@ -1222,13 +1235,18 @@ class MessanaInfo:
         return(keys)  
             
     # Zones
+    def getZoneCapability(self, zoneNbr): 
+        self.getSubNodeCapability('zones', zoneNbr)
+
+
+
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
         self.zoneKeys = self.zonePullKeys(zoneNbr)
         self.dataOK = True
         for mKey in self.zoneKeys:
             self.data = self.pullZoneDataIndividual(zoneNbr, mKey)
-            self.dataOK = self.dataOK and self.data['dataOK']
+            self.dataOK = self.dataOK and self.data['dataAll']
         return(self.dataOK)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
@@ -1242,19 +1260,7 @@ class MessanaInfo:
 
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
-        if self.zoneCapability == {}:
-            self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
-        if self.zoneCapability[zoneNbr] == None:
-            self.zoneCapability[zoneNbr] = self.updateZoneCapability(zoneNbr)
         self.tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
-        removeKeys = []
-        for mKey in self.tempZoneKeys:
-            print (mKey)
-            if mKey in self.zoneCapability[zoneNbr]:
-                if  self.zoneCapability[zoneNbr][mKey] == 0:
-                    removeKeys.append(mKey)                    
-        for mKey in removeKeys:
-            self.tempZoneKeys.remove(mKey)
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
