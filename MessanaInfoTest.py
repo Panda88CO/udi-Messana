@@ -35,8 +35,8 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
     messana.getZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
-    messana.addSubNodeDefStruct(zoneNbr, 'zones', 'zone' )
-messana.saveData()
+    messana.addNodeDefStruct(zoneNbr, 'zones', 'zone' )
+messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
 print('systemKeys')
 '''
 sysData={}

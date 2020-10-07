@@ -51,8 +51,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'System state'
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On'] 
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                    }
                                                  }
                                         ,'mZoneCount':{
@@ -68,7 +67,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Zones' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                     }
                                                 }                                         
                                         ,'mATUcount':{
@@ -84,7 +83,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of ATU' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                     }
                                                 }
                                         ,'mDHWcount': {
@@ -100,7 +99,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Hot Water' 
-                                                    ,'nlsValues' :[]
+                                                    ,'nlsValues' :None
                                                     }
                                                 }
                                         ,'mMacrozoneCount': {
@@ -116,7 +115,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of MacroZones (all=1)' 
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                     }
                                                 }                                        
                                         ,'mFanCoilCount': {
@@ -132,7 +131,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Fan Coils' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                     }
                                                 }                                          
                                         ,'mEnergySourceCount':{
@@ -148,7 +147,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Energy Sources' 
-                                                    ,'nlsValues' :  [] 
+                                                    ,'nlsValues' :  None 
                                                     }
                                                 }                                          
                                         ,'mHC_changeoverCount':{
@@ -164,7 +163,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Hot Cold ' 
-                                                    ,'nlsValues' :  [] 
+                                                    ,'nlsValues' :  None 
                                                      }
                                                 }                                          
                                         ,'mBufTankCount':{
@@ -180,7 +179,7 @@ class MessanaInfo:
                                                     ,'ISYprec': 0}
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : '# of Buffer Tanks' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         }
                                                 }                                                                                                                           
                                         ,'mUnitTemp':{
@@ -196,8 +195,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                     'nlsTEXT' : 'Temp Unit' 
-                                                    ,'nlsValues' : ['0=F'
-                                                                    ,'1=C']
+                                                    ,'nlsValues' : {0:'F', 1:'C'}
                                                         }
                                                 }                                        
                                         ,'mEnergySaving':{
@@ -213,8 +211,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Savings' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                         }
                                                 }                                        
                                         ,'mSetback':{
@@ -230,8 +227,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Setback Status' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off',  1:'On' }
                                                         }
                                                 }                                          
                                         ,'mExternalAlarm':{
@@ -247,8 +243,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'External Alarm' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                         }
                                                 }   
                                          }                                         
@@ -270,7 +265,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Zone Name' 
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }  
                                                 }  
                                         ,'mSetPoint' :{
@@ -286,7 +281,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Set Temp' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         }
                                                     }
                                         ,'mStatus':{ 
@@ -302,8 +297,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Zone state'
-                                                    ,'nlsValues' : ['0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                     }
                                         ,'mHumSetPointRH': { 
@@ -319,7 +313,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Hum Set Point RH'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mHumSetPointDP': { 
@@ -335,7 +329,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Hum Set Point DP'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mDehumSetPointRH':{ 
@@ -351,7 +345,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'DeHum Set Point RH'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mDehumSetPointDP': { 
@@ -367,7 +361,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'DeHum Set Point DP'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mCurrentSetPointRH': { 
@@ -383,7 +377,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Set Point RH'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mCurrentSetPointDP': { 
@@ -399,7 +393,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Set Point DP'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                         ,'mHumidity': { 
@@ -415,7 +409,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Humidity' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         }
                                                     }
                                         ,'mDewPoint' : { 
@@ -431,7 +425,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Dew Point' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         } 
                                                     }
                                         ,'mTemp' : { 
@@ -447,7 +441,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Perceived Temp' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         } 
                                                     }
                                         ,'mAirQuality' : { 
@@ -463,7 +457,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Air Quality'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }                                     
                                         ,'mScheduleOn' : {
@@ -479,8 +473,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Schedule Status' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                         }  
                                                     } 
                                         ,'mCO2' : { 
@@ -496,7 +489,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'CO2'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }                                     
                                         ,'mVoc' : { 
@@ -512,7 +505,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Volatile Organic Compound'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }                                                  
                                         ,'mAirTemp' : { 
@@ -528,7 +521,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Roon air Temp' 
-                                                    ,'nlsValues' : []
+                                                    ,'nlsValues' : None
                                                         } 
                                                     }
                                         ,'mMacrozoneId' : { 
@@ -544,7 +537,7 @@ class MessanaInfo:
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'MAcro Zone member'  
-                                                    ,'nlsValues' : [] 
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }  
                                         ,'mEnergySave' : { 
@@ -560,8 +553,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Save Status' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                         }  
                                                     } 
                                         ,'mAlarmOn':{ 
@@ -577,8 +569,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Alarm Status' 
-                                                    ,'nlsValues' : [ '0=Off'
-                                                                    ,'1=On']
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
                                                         }  
                                                     } 
                                         ,'mThermalStatus': { 
@@ -594,10 +585,10 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Thermal Status'  
-                                                    ,'nlsValues' : [ '0=No Thermal'
-                                                                    ,'1=Heating Request'
-                                                                    ,'2=Cooling Request'
-                                                                    ,'3=H & C request'  ] 
+                                                    ,'nlsValues' : { 0:'No Thermal'
+                                                                    ,1:'=Heating Request'
+                                                                    ,2:'Cooling Request'
+                                                                    ,3:'=H & C request' }
                                                         }
                                                     }    
                                         ,'mCapability': {
@@ -653,7 +644,7 @@ class MessanaInfo:
                                                 ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/' 
                                                 }
                                             ,
-                                            'active':[]
+                                            'active':None
                                             ,
                                             'data' : {}
                         },
@@ -813,11 +804,11 @@ class MessanaInfo:
     def init(self):
         return(True)
 
-    def addSubNodeDefStruct(self, subnodeNbr, subnodeName, nodeId):
+    def addNodeDefStruct(self, NodeNbr, NodeName, nodeId):
         self.keyCount = 0
         nodeId.lower()
 
-        self.name = nodeId+str(subnodeNbr)
+        self.name = nodeId+str(NodeNbr)
 
 
         self.nlsKey = 'nls' + self.name
@@ -826,34 +817,34 @@ class MessanaInfo:
         self.setupFile['nodeDef'][self.name]={}
         self.setupFile['nodeDef'][self.name]['CodeId'] = nodeId
         self.setupFile['nodeDef'][self.name]['nlsId'] = self.nlsKey
-        self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[subnodeName]['data'][subnodeNbr]['mName']
-        self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[subnodeName]['ISYnode']['nlsICON']
+        self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[NodeName]['data'][NodeNbr]['mName']
+        self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[NodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
         self.setupFile['nodeDef'][self.name]['cmds']={}
-        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = []
+        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = None
         self.setupFile['nodeDef'][self.name]['cmds']['accepts'] = {}
         
 
-        for mKey in self.mSystem[subnodeName]['data'][subnodeNbr]: 
+        for mKey in self.mSystem[NodeName]['data'][NodeNbr]: 
             #make check if system has unit installed
-            if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+            if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 self.keyCount = self.keyCount + 1
-                editorName = subnodeName.upper()+str(subnodeNbr)+'_'+str(self.keyCount)
-                nlsName = editorName.lower()
+                editorName = NodeName.upper()+str(NodeNbr)+'_'+str(self.keyCount)
+                nlsName = editorName
                 ISYvar = 'GV'+str(self.keyCount)
                 self.setupFile['nodeDef'][self.name]['sts'][mKey]={ISYvar:editorName}
                 self.setupFile['editors'][editorName]={}
                 #self.setupFile['nls'][editorName][ISYparam]
-                for ISYparam in self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor']:
-                    if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
-                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+                for ISYparam in self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']:
+                    if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
-                if self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls']:
+                if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
-                for ISYnls in self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls']:
+                for ISYnls in self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls']:
                     print ( mKey + ' ' + ISYnls)
-                    if  self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
-                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[subnodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                    if  self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
                             self.setupFile['editors'][editorName]['nlsKey'] = nlsName
             
@@ -883,7 +874,7 @@ class MessanaInfo:
         self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = []
+        self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = None
         self.setupFile['nodeDef'][nodeName]['cmds']['accepts'] = {}
   
         #pullKeys = self.systemPullKeys()
@@ -896,7 +887,7 @@ class MessanaInfo:
                    or self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
                     self.keyCount = self.keyCount + 1
                     editorName = nodeName.upper()+'_'+str(self.keyCount)
-                    nlsName = editorName.lower()
+                    nlsName = editorName
                     ISYvar = 'GV'+str(self.keyCount)
                     self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
                     self.setupFile['editors'][editorName]={}
@@ -914,14 +905,13 @@ class MessanaInfo:
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
                     
-    def getSubNodeCapability (self, nodeKey, nodeNbr):     
+    def getNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
-
         if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
             GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
-            subSysTemp = requests.get(GETStr)
-            if str(subSysTemp) == self.RESPONSE_OK:
-                tempKeys= subSysTemp.json()
+            Nodep = requests.get(GETStr)
+            if str(Nodep) == self.RESPONSE_OK:
+                tempKeys= Nodep.json()
                 for key in tempKeys:
                     if key == 'operative_temperature' and tempKeys[key] == 0:
                         self.keyList['mTemp'] = tempKeys["operative_temperature"]
@@ -947,8 +937,7 @@ class MessanaInfo:
                 self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
-    def addZoneDefStruct(self, zoneNbr, nodeId):
-        self.addSubNodeDefStruct(zoneNbr, 'zones', nodeId)
+
 
 
     def GETSystem(self, mKey):
@@ -1010,7 +999,7 @@ class MessanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        print('GETSubNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
@@ -1020,11 +1009,11 @@ class MessanaInfo:
                     return (nodeData)
         if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
-            subSysTemp = requests.get(GETStr)
-            if str(subSysTemp) == self.RESPONSE_OK:
-                subSysTemp = subSysTemp.json()
-                nodeData['data']  = subSysTemp[str(list(subSysTemp.keys())[0])] 
-                nodeData['dataAll'] = subSysTemp
+            Nodep = requests.get(GETStr)
+            if str(Nodep) == self.RESPONSE_OK:
+                Nodep = Nodep.json()
+                nodeData['data']  = Nodep[str(list(Nodep.keys())[0])] 
+                nodeData['dataAll'] = Nodep
                 nodeData['statusOK'] =True
                 if nodeNbr in self.mSystem[mNodeKey]['data']:
                     if mKey in self.mSystem[mNodeKey]['data'][nodeNbr]:
@@ -1036,16 +1025,16 @@ class MessanaInfo:
                     temp[nodeNbr] = {mKey : nodeData['data']}
                     self.mSystem[mNodeKey]['data'].update(temp)
 
-            elif str(subSysTemp) == self.RESPONSE_NO_SUPPORT:
-                temp1 =  subSysTemp.content
+            elif str(Nodep) == self.RESPONSE_NO_SUPPORT:
+                temp1 =  Nodep.content
                 res_dict = json.loads(temp1.decode('utf-8')) 
-                nodeData['error'] = str(subSysTemp) + ': Error: '+ str(res_dict.values()) + ' Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
+                nodeData['error'] = str(Nodep) + ': Error: '+ str(res_dict.values()) + ' Node ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
-            elif str(subSysTemp) == self.RESPONSE_NO_RESPONSE:
-                nodeData['error'] = str(subSysTemp) + ': Error: No response from API:  Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
+            elif str(Nodep) == self.RESPONSE_NO_RESPONSE:
+                nodeData['error'] = str(Nodep) + ': Error: No response from API:  Node ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
             else:
-                nodeData['error'] = str(subSysTemp) + ': Error: Unknown: Subnode ' + str(nodeNbr) + ' for id: ' + str(mKey)
+                nodeData['error'] = str(Nodep) + ': Error: Unknown: Node ' + str(nodeNbr) + ' for id: ' + str(mKey)
                 nodeData['statusOK'] =False
         else: 
                 nodeData['error'] = 'Does not support keyword: ' + mKey
@@ -1065,7 +1054,7 @@ class MessanaInfo:
             elif str(resp) == self.RESPONSE_NO_SUPPORT:
                 temp1 =  resp.content
                 res_dict = json.loads(temp1.decode('utf-8')) 
-                nodeData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Subnode ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
+                nodeData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Node ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
                 print(nodeData['error'])
                 nodeData['statusOK'] =False
             elif str(resp) == self.RESPONSE_NO_RESPONSE:
@@ -1082,70 +1071,181 @@ class MessanaInfo:
             nodeData['nodeDataOK'] =False
         return(nodeData)
 
-    def getSubSystemKeys (self, subsystemNbr, subsystemKey, cmdKey):
+    def getNodeKeys (self, NodeNbr, NodeKey, cmdKey):
         keys = []
-        if self.mSystem[subsystemKey]['data']:
-            if subsystemNbr in self.mSystem[subsystemKey]['data']: 
-                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
+        if self.mSystem[NodeKey]['data']:
+            if NodeNbr in self.mSystem[NodeKey]['data']: 
+                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
+                    if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
-                self.updateSubSystemData(subsystemNbr, subsystemKey)
-                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey]['KeyInfo'][mKey][cmdKey]:
+                self.updateNodeData(NodeNbr, NodeKey)
+                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
+                    if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
         else:
             print('No Keys found - trying to fetch Messana data')
             self.updateSystemData()
-            self.updateSubSystemData(subsystemNbr, subsystemKey)
-            if self.mSystem[subsystemKey]['data']:
-                for mKey in self.mSystem[subsystemKey]['data'][subsystemNbr]:
-                    if mKey in self.mSystem[subsystemKey]['KeyInfo']:
+            self.updateNodeData(NodeNbr, NodeKey)
+            if self.mSystem[NodeKey]['data']:
+                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
+                    if mKey in self.mSystem[NodeKey]['KeyInfo']:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
-                print('No '+ subsystemKey + ' present')
-        if 'NOcapabiility' in self.mSystem[subsystemKey]:
-            if self.mSystem[subsystemKey]['NOcapability']:
-                if subsystemNbr in self.mSystem[subsystemKey]['NOcapability']:
+                print('No '+ NodeKey + ' present')
+        if 'NOcapabiility' in self.mSystem[NodeKey]:
+            if self.mSystem[NodeKey]['NOcapability']:
+                if NodeNbr in self.mSystem[NodeKey]['NOcapability']:
                     for mKey in keys:
-                        if mKey in self.mSystem[subsystemKey]['NOcapability'][subsystemNbr]:
+                        if mKey in self.mSystem[NodeKey]['NOcapability'][NodeNbr]:
                             keys.remove(mKey)                            
         return(keys)
 
-    def updateSubSystemData(self, subsystemNbr, subsystemKey):
-        print('updatSubSystemData: ' + str(subsystemNbr) + ' ' + subsystemKey)
+    def updateNodeData(self, NodeNbr, NodeKey):
+        print('updatNodeData: ' + str(NodeNbr) + ' ' + NodeKey)
         Data = {}
         dataOK = True
-        for mKey in self.mSystem[subsystemKey]['KeyInfo']:
-            print ('GET ' + mKey + ' in zone ' + str(subsystemNbr))
-            Data = self.pullSubSystemDataIndividual(subsystemNbr, subsystemKey,  mKey)
+        for mKey in self.mSystem[NodeKey]['KeyInfo']:
+            print ('GET ' + mKey + ' in zone ' + str(NodeNbr))
+            Data = self.pullNodeDataIndividual(NodeNbr, NodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
                 print ('Error GET' + Data['error'])
         return(dataOK)
     
-    def pullSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey): 
+    def pullNodeDataIndividual(self, NodeNbr, NodeKey, mKey): 
         Data = {} 
-        print('pullSubSystemDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey)    
-        if mKey in mKey in self.mSystem[subsystemKey]['KeyInfo']:
-            Data = self.GETNodeData(subsystemKey, subsystemNbr, mKey)
+        print('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
+        if mKey in mKey in self.mSystem[NodeKey]['KeyInfo']:
+            Data = self.GETNodeData(NodeKey, NodeNbr, mKey)
         else:
             Data['statusOK'] = False
             Data['error'] = mKey +' is not a supported GETstr command'
         return(Data)    
 
-    def pushSubSystemDataIndividual(self, subsystemNbr, subsystemKey, mKey, value):
-        print('pushZoneDataIndividual: ' +str(subsystemNbr)  + ' ' + mKey + ' ' + str(value))  
+    def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
+        print('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
         zoneData = {}
-        zoneData= self.PUTNodeData(subsystemKey, subsystemNbr, mKey, value)
+        zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
         if zoneData['statusOK']:
             return(True)
         else:
             print(zoneData['error'])
             return(False)
+
+    #Setup file generation 
+    def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
+
+        status = True
+        try:
+            nodeFile = open(nodeDefFileName, 'w+')
+            editorFile = open(editorFileName, 'w+')
+            nlsFile = open(nlsFileName, 'w+')
+            editorFile.write('<editors> \n')
+            nodeFile.write('<nodeDefs> \n')
+            for node in self.setupFile['nodeDef']:
+                nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
+                print(nodeDefStr)
+                nodeFile.write(nodeDefStr)
+                nodeFile.write('      <sts>\n')
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+                nlsFile.write(nlsStr)
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+                nlsFile.write(nlsStr)
+                for status in self.setupFile['nodeDef'][node]['sts']:
+                    for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
+                        nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
+                        nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
+                        print(nodeDefStr)
+                        nodeFile.write(nodeDefStr)
+                        editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
+                        editorStr = '     <range '
+                        for key in self.setupFile['editors'][nodeName]:
+                            if key == 'ISYsubset':
+                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYuom':
+                                editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYmax':
+                                editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYmin': 
+                                editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYstep':
+                                editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
+                            elif key == 'ISYprec': 
+                                editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYsubset': 
+                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'nlsKey': 
+                                nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
+                                editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
+                            else:
+                                print('unknown editor keyword: ' + str(key))
+                        editorStr = editorStr + ' >\n'
+                        print (editorStr)
+                        editorFile.write(editorStr)
+                        editorFile.write('</editor>\n')
+
+                        for nlsInfo in self.setupFile['nls'][nodeName]:
+                            if nlsInfo == 'nlsTEXT':
+                                nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+nodeName+'-NAME = '
+                                nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
+                                nlsFile.write(nlsStr)
+                            elif nlsInfo == 'nlsValues':
+                                nlsValues = 0
+                                for key in self.setupFile['nls'][nodeName][nlsInfo]:
+                                    nlsStr = nlsEditorKey+'-'+str(nlsValues)+'='+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                                    nlsFile.write(nlsStr)
+                                    nlsValues = nlsValues + 1
+                            print(nlsStr)
+                nodeFile.write('      </sts>\n')
+                nodeFile.write('      <cmds>\n')                
+
+                nodeFile.write('         <sends>\n')                                
+                nodeFile.write('         </sends>\n')               
+
+                nodeFile.write('         <accepts>\n')                                
+                nodeFile.write('         </accepts>\n')                   
+
+                nodeFile.write('      </cmds>\n')                
+                                 
+                nodeFile.write('</nodeDef> \n')
+
+            nodeFile.write('</nodeDefs> \n' )
+            nodeFile.close()
+            editorFile.write('</editors> \n')
+            editorFile.close()
+            nlsFile.close()
+        except:
+            print('something went wrong in creating setup files')
+            status = False
+        return(status)
+
+    def createNodedeFile(self, fileName):
+        file = open(fileName, 'w+')
+
+        file.close()
+        return()
+
+    def createNLSFile(self, fileName):
+        file = open(fileName, 'w+')
+
+        file.close()
+        return()
+
+    def saveData (self):
+        file1 = open(r'MessanaData.pkl','wb')
+        pickle.dump(self.mSystem, file1)
+        file1.close()
+
+    def loadData (self):
+        file1 = open(r'MessanaData.pkl','rb')
+        self.mSystem = pickle.load(file1)
+        print (self.mSystem['system']['ISYnode']['nlsNAME'])        
+        file1.close() 
+
     
     #System
     def updateSystemData(self):
@@ -1236,9 +1336,10 @@ class MessanaInfo:
             
     # Zones
     def getZoneCapability(self, zoneNbr): 
-        self.getSubNodeCapability('zones', zoneNbr)
+        self.getNodeCapability('zones', zoneNbr)
 
-
+    def addZoneDefStruct(self, zoneNbr, nodeId):
+        self.addNodeDefStruct(zoneNbr, 'zones', nodeId)
 
     def updateZoneData(self, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
@@ -1251,191 +1352,191 @@ class MessanaInfo:
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
         print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(zoneNbr, 'zones', mKey))
+        return(self.pullNodeDataIndividual(zoneNbr, 'zones', mKey))
 
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(zoneNbr, 'zones', mKey, value))
+        return(self.pushNodeDataIndividual(zoneNbr, 'zones', mKey, value))
 
     def zonePullKeys(self, zoneNbr):
         print('zonePullKeys')
-        self.tempZoneKeys =  self.getSubSystemKeys (zoneNbr, 'zones', 'GETstr')
+        self.tempZoneKeys =  self.getNodeKeys (zoneNbr, 'zones', 'GETstr')
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
 
-        return( self.getSubSystemKeys (zoneNbr, 'zones', 'PUTstr'))
+        return( self.getNodeKeys (zoneNbr, 'zones', 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
         print('zoneActiveKeys')
-        return( self.getSubSystemKeys (zoneNbr, 'zones', 'active'))
+        return( self.getNodeKeys (zoneNbr, 'zones', 'active'))
 
 
     #MacroZone
     def updateMacroZoneData(self, macrozoneNbr):
         print('updatMacroZoneData: ' + str(macrozoneNbr))
-        return(self.updateSubSystemData(macrozoneNbr, 'macrozones'))
+        return(self.updateNodeData(macrozoneNbr, 'macrozones'))
 
     def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
         print('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(macrozoneNbr, 'macrozones', mKey))
+        return(self.pullNodeDataIndividual(macrozoneNbr, 'macrozones', mKey))
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
         print('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(macrozoneNbr, 'macrozones', mKey, value))
+        return(self.pushNodeDataIndividual(macrozoneNbr, 'macrozones', mKey, value))
 
     def macrozonePullKeys(self, macrozoneNbr):
         print('macrozonePullKeys')
-        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'GETstr'))
+        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'GETstr'))
 
     def macrozonePushKeys(self, macrozoneNbr):
         print('macrozonePushKeys')
-        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'PUTstr'))
+        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'PUTstr'))
   
     def macrozoneActiveKeys(self, macrozoneNbr):
         print('macrozoneActiveKeys')
-        return( self.getSubSystemKeys (macrozoneNbr, 'macrozones', 'active'))    
+        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'active'))    
 
 
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
         print('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateSubSystemData(HC_CONbr, 'hc_changeover'))
+        return(self.updateNodeData(HC_CONbr, 'hc_changeover'))
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
         print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(HC_CONbr, 'hc_changeover', mKey))
+        return(self.pullNodeDataIndividual(HC_CONbr, 'hc_changeover', mKey))
 
     def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
         print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(HC_CONbr, 'hc_changeover', mKey, value))
+        return(self.pushNodeDataIndividual(HC_CONbr, 'hc_changeover', mKey, value))
 
     def hc_changeoverPullKeys(self, HC_CONbr):
         print('hc_changeoverPullKeys')
-        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'GETstr'))
+        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'GETstr'))
 
     def hc_changeoverPushKeys(self, HC_CONbr):
         print('hc_changeoverPushKeys')
-        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'PUTstr'))
+        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'PUTstr'))
   
     def hc_changeoverActiveKeys(self, HC_CONbr):
         print('hc_changeoverActiveKeys')
-        return( self.getSubSystemKeys (HC_CONbr, 'hc_changeover', 'active'))    
+        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'active'))    
    
 
     #ATU
     def updateATUData(self, ATUNbr):
         print('updatATUData: ' + str(ATUNbr))
-        return(self.updateSubSystemData(ATUNbr, 'atus'))
+        return(self.updateNodeData(ATUNbr, 'atus'))
 
     def pullATUDataIndividual(self, ATUNbr, mKey): 
         print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(ATUNbr, 'atus', mKey))
+        return(self.pullNodeDataIndividual(ATUNbr, 'atus', mKey))
 
     def pushATUDataIndividual(self, ATUNbr, mKey, value):
         print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(ATUNbr, 'atus', mKey, value))
+        return(self.pushNodeDataIndividual(ATUNbr, 'atus', mKey, value))
 
     def atuPullKeys(self, ATUNbr): 
         print('atusPullKeys')
-        return( self.getSubSystemKeys (ATUNbr, 'atus', 'GETstr'))
+        return( self.getNodeKeys (ATUNbr, 'atus', 'GETstr'))
 
     def atuPushKeys(self, ATUNbr):
         print('atusPushKeys')
-        return( self.getSubSystemKeys (ATUNbr, 'atus', 'PUTstr'))
+        return( self.getNodeKeys (ATUNbr, 'atus', 'PUTstr'))
   
     def atuActiveKeys(self, ATUNbr):
         print('atusActiveKeys')
-        return( self.getSubSystemKeys (ATUNbr, 'atus', 'active'))    
+        return( self.getNodeKeys (ATUNbr, 'atus', 'active'))    
   
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
 
         print('updatFanCoilData: ' + str(FanCoilNbr))
-        return(self.updateSubSystemData(FanCoilNbr, 'fan_coils'))
+        return(self.updateNodeData(FanCoilNbr, 'fan_coils'))
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
         print('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(FanCoilNbr, 'fan_coils', mKey))
+        return(self.pullNodeDataIndividual(FanCoilNbr, 'fan_coils', mKey))
 
     def pushFanCoilDataIndividual(self, FanCoilNbr, mKey, value):
         print('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(FanCoilNbr, 'fan_coils', mKey, value))
+        return(self.pushNodeDataIndividual(FanCoilNbr, 'fan_coils', mKey, value))
 
     def fan_coilPullKeys(self, FanCoilNbr):
         print('fan_coilPullKeys')
-        return( self.getSubSystemKeys (FanCoilNbr, 'fan_coils', 'GETstr'))
+        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'GETstr'))
 
     def fan_coilPushKeys(self, FanCoilNbr):
         print('fan_coilPushKeys')
-        return( self.getSubSystemKeys (FanCoilNbr, 'fan_coils', 'PUTstr'))
+        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'PUTstr'))
   
     def fan_coilActiveKeys(self, FanCoilNbr):
         print('fan_coilActiveKeys')
-        return( self.getSubSystemKeys (FanCoilNbr, 'fan_coils', 'active'))    
+        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'active'))    
   
     #energy_sources
     def updateEnergySourceData(self, EnergySourceNbr):
         print('updatEnergySourceData: ' + str(EnergySourceNbr))
-        return(self.updateSubSystemData(EnergySourceNbr, 'energy_sources'))
+        return(self.updateNodeData(EnergySourceNbr, 'energy_sources'))
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(EnergySourceNbr, 'energy_sources', mKey))
+        return(self.pullNodeDataIndividual(EnergySourceNbr, 'energy_sources', mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
         print('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(EnergySourceNbr, 'energy_sources', mKey, value))
+        return(self.pushNodeDataIndividual(EnergySourceNbr, 'energy_sources', mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
         print('energy_sourcePullKeys')
-        return( self.getSubSystemKeys (EnergySourceNbr, 'energy_sources', 'GETstr'))
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
         print('energy_sourcePushKeys')
-        return( self.getSubSystemKeys (EnergySourceNbr, 'energy_sources', 'PUTstr'))
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         print('energy_sourceActiveKeys')
-        return( self.getSubSystemKeys (EnergySourceNbr, 'energy_sources', 'active'))    
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'active'))    
 
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         print('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateSubSystemData(BufferTankNbr, 'buffer_tanks'))
+        return(self.updateNodeData(BufferTankNbr, 'buffer_tanks'))
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
         print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey))
+        return(self.pullNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey))
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
         print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', 'mMode')
+            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'buffer_tanks', 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+                return(self.pushNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
             else:
                 print ('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushSubSystemDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+             return(self.pushNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
         print('buffer_tankPullKeys')
-        return( self.getSubSystemKeys (BufferTankNbr, 'buffer_tanks', 'GETstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'GETstr'))
 
     def buffer_tankPushKeys(self, BufferTankNbr):
         print('buffer_tankPushKeys')
-        return( self.getSubSystemKeys (BufferTankNbr, 'buffer_tanks', 'PUTstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'PUTstr'))
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
         print('buffer_tankActiveKeys')
-        return( self.getSubSystemKeys (BufferTankNbr, 'buffer_tanks', 'active'))    
+        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'active'))    
 
 
         #Domestic Hot Water
@@ -1444,41 +1545,28 @@ class MessanaInfo:
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
         print('updatDHWData: ' + str(DHWNbr))
-        return(self.updateSubSystemData(DHWNbr, 'domsetic_hot_waters'))
+        return(self.updateNodeData(DHWNbr, 'domsetic_hot_waters'))
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
         print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
-        return(self.pullSubSystemDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey))
+        return(self.pullNodeDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
         print('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushSubSystemDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey, value))
+        return(self.pushNodeDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
         print('DHWPullKeys')
-        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'GETstr'))
+        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
         print('DHWPushKeys')
-        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'PUTstr'))
+        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
         print('DHWActiveKeys')
-        return( self.getSubSystemKeys (DHWNbr, 'domsetic_hot_waters', 'active'))    
-
-    def saveData (self):
-        file1 = open(r'MessanaData.pkl','wb')
-        pickle.dump(self.mSystem, file1)
-        file1.close()
-
-    def loadData (self):
-        file1 = open(r'MessanaData.pkl','rb')
-        self.mSystem = pickle.load(file1)
-        print (self.mSystem['system']['ISYnode']['nlsNAME'])        
-        file1.close() 
-
-
+        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'active'))    
 
 
     '''
