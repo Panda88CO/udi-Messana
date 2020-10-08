@@ -809,8 +809,6 @@ class MessanaInfo:
         nodeId.lower()
 
         self.name = nodeId+str(NodeNbr)
-
-
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
         #editorName = nodeName+'_'+str(keyCount)
@@ -845,73 +843,66 @@ class MessanaInfo:
                     if  self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
-                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName      
+                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName 
         return()
 
-    def addSystemSendComand(self, nodeName, idName):
-        '''if  self.setupFile['nodeDef'][nodeName]['cmds'] == None:
-            temp = []
-            self.setupFile['nodeDef'][nodeName]['cmds']['sends']=temp
-        else:
-            if 'sends' in self.setupFile['nodeDef'][nodeName]['cmds']:
-                if len(self.setupFile['nodeDef'][nodeName]['cmds']['sends'])==0:
-                    self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
-            else:
-                self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
-        '''
-        self.setupFile['nodeDef'][nodeName]['cmds']['sends'].append(idName)
+    def addNodeSendComand(self, nodeName, nodeNbr, nodeId):
+        self.name = nodeId+str(nodeNbr)
+        self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(nodeId)
         return()
    
-    def addSystemAcceptComand(self, nodeName, idName, driverName):  
-        '''if self.setupFile['nodeDef'][nodeName]['cmds'] == None:
-            self.setupFile['nodeDef'][nodeName]['cmds']['accepts']=None
-        else:
-            if  'accepts' in self.setupFile['nodeDef'][nodeName]['cmds']:
-                self.setupFile['nodeDef'][nodeName]['cmds']['accepts'][driverName] = idName
-            else:
-                self.setupFile['nodeDef'][nodeName]['cmds']['accepts']={}
-        '''
-        self.setupFile['nodeDef'][nodeName]['cmds']['accepts'][driverName] = idName
+    def addNodeAcceptComand(self,  nodeName, nodeNbr, nodeId, driverName):  
+        self.name = nodeId+str(nodeNbr)
+        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = nodeId
+        return() 
+
+
+    def addSystemSendComand(self, idName):
+        self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
+        return()
+   
+    def addSystemAcceptComand(self, idName, driverName):  
+        self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
         return() 
 
 
 
-    def addSystemDefStruct(self, nodeName, nodeId):
+    def addSystemDefStruct(self, nodeId):
         self.keyCount = 0
         nodeId.lower()
         self.nlsKey= 'nls' + nodeId
         self.nlsKey.lower()
-        self.setupFile['nodeDef'][nodeName]={}
-        self.setupFile['nodeDef'][nodeName]['CodeId'] = nodeId
-        self.setupFile['nodeDef'][nodeName]['nlsId'] = self.nlsKey
-        self.setupFile['nodeDef'][nodeName]['nlsNAME']=self.mSystem[nodeName]['data']['mName']
-        self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
-        self.setupFile['nodeDef'][nodeName]['sts']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']['accepts']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
-        for mKey in self.mSystem[nodeName]['data']: 
+        self.setupFile['nodeDef']['system']={}
+        self.setupFile['nodeDef']['system']['CodeId'] = nodeId
+        self.setupFile['nodeDef']['system']['nlsId'] = self.nlsKey
+        self.setupFile['nodeDef']['system']['nlsNAME']=self.mSystem['system']['data']['mName']
+        self.setupFile['nodeDef']['system']['nlsICON']=self.mSystem['system']['ISYnode']['nlsICON']
+        self.setupFile['nodeDef']['system']['sts']={}
+        self.setupFile['nodeDef']['system']['cmds']={}
+        self.setupFile['nodeDef']['system']['cmds']['accepts']={}
+        self.setupFile['nodeDef']['system']['cmds']['sends']=[]
+        for mKey in self.mSystem['system']['data']: 
             #make check if system has unit installed
-            if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
-                if ((self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
-                   and self.mSystem[nodeName]['data'][mKey] != 0)
-                   or self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
+            if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+                if ((self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
+                   and self.mSystem['system']['data'][mKey] != 0)
+                   or self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
                     self.keyCount = self.keyCount + 1
-                    editorName = nodeName.upper()+'_'+str(self.keyCount)
+                    editorName = 'SYSTEM_'+str(self.keyCount)
                     nlsName = editorName
                     ISYvar = 'GV'+str(self.keyCount)
-                    self.setupFile['nodeDef'][nodeName]['sts'][mKey]={ISYvar:editorName}
+                    self.setupFile['nodeDef']['system']['sts'][mKey]={ISYvar:editorName}
                     self.setupFile['editors'][editorName]={}
                     #self.setupFile['nls'][editorName][ISYparam]
-                    for ISYparam in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']:
+                    for ISYparam in self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']:
                         if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
-                            self.setupFile['editors'][editorName][ISYparam]=self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+                            self.setupFile['editors'][editorName][ISYparam]=self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
-                    if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
+                    if self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
                         self.setupFile['nls'][nlsName]={}
                     for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
                         print ( mKey + ' ' + ISYnls)
-                        if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                        if  self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                             self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName

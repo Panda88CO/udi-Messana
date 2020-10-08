@@ -28,14 +28,16 @@ systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
 messana.updateSystemData()
 messana.addSystemDefStruct('system', 'MessanaSys')
-messana.addSystemSendComand('system', 'DON' )
-messana.addSystemAcceptComand('system', 'SET_STATUS' , 'GV1' )
+messana.addSystemSendComand('DON' )
+messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
 print('zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
     messana.getZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
     messana.addNodeDefStruct(zoneNbr, 'zones', 'zone' )
+    #messana.addNodeSendComand('zones', zoneNbr, 'DON' )
+    #messana.addNodeAcceptComand('zones',zoneNbr,  'SET_TEMP' , 'GV2' )
 messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
 print('systemKeys')
 '''
