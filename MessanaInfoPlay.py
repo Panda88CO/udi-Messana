@@ -586,9 +586,9 @@ class MessanaInfo:
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Thermal Status'  
                                                     ,'nlsValues' : { 0:'No Thermal'
-                                                                    ,1:'=Heating Request'
+                                                                    ,1:'Heating Request'
                                                                     ,2:'Cooling Request'
-                                                                    ,3:'=H & C request' }
+                                                                    ,3:'H & C request' }
                                                         }
                                                     }    
                                         ,'mCapability': {
@@ -913,9 +913,10 @@ class MessanaInfo:
             if str(Nodep) == self.RESPONSE_OK:
                 tempKeys= Nodep.json()
                 for key in tempKeys:
-                    if key == 'operative_temperature' and tempKeys[key] == 0:
-                        self.keyList['mTemp'] = tempKeys["operative_temperature"]
-                        self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+                    if key == 'operative_temperature':
+                        if tempKeys[key] == 0:
+                            self.keyList['mTemp'] = tempKeys["operative_temperature"]
+                            self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
                     elif key == 'air_temperature':
                         self.keyList['mAirTemp'] = tempKeys["air_temperature"]
                     elif key == 'relative_humidity':
@@ -926,6 +927,7 @@ class MessanaInfo:
                         self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
                         self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
                         self.keyList['mHumidity'] = tempKeys["relative_humidity"]
+                    elif key == 'dewpoint':
                         self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
                     elif key == 'co2':
                         self.keyList['mCO2'] = tempKeys['co2'] 
@@ -933,7 +935,7 @@ class MessanaInfo:
                     elif key == 'voc':
                         self.keyList['mVoc'] = tempKeys['voc']   
                     else:
-                        print(key + 'unknown keyword')
+                        print(key + ' unknown keyword')
                 self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
@@ -1202,11 +1204,28 @@ class MessanaInfo:
                             print(nlsStr)
                 nodeFile.write('      </sts>\n')
                 nodeFile.write('      <cmds>\n')                
-
-                nodeFile.write('         <sends>\n')                                
+                nodeFile.write('         <sends>\n')            
+                if self.setupFile['nodeDef'][node]['cmds']:
+                    if 'sends' in self.setupFile['nodeDef'][node]['cmds']:
+                        for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
+                            cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
+                            print(cmdStr)
+                            nodeFile.write(cmdStr)
                 nodeFile.write('         </sends>\n')               
-
-                nodeFile.write('         <accepts>\n')                                
+                nodeFile.write('         <accepts>\n')      
+                if self.setupFile['nodeDef'][node]['cmds']:
+                    if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
+                        for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                            cmdStr = '            <cmd id="' +self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]+'" /> \n'        
+                            print(cmdStr)
+                            nodeFile.write(cmdStr)
+                            cmdStr = '               <p id="" editor="'
+                            for key in self.setupFile['nodeDef'][node]['sts']:
+                                for Id in self.setupFile['nodeDef'][node]['sts'][key]:
+                                    if Id == acceptCmd:
+                                        cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][Id]+'" init="'+acceptCmd+'"/> \n' 
+                            print(cmdStr)
+                            nodeFile.write(cmdStr)
                 nodeFile.write('         </accepts>\n')                   
 
                 nodeFile.write('      </cmds>\n')                
