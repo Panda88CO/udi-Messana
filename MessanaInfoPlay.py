@@ -820,11 +820,10 @@ class MessanaInfo:
         self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[NodeName]['data'][NodeNbr]['mName']
         self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[NodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
-        self.setupFile['nodeDef'][self.name]['cmds']={}
-        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = None
-        self.setupFile['nodeDef'][self.name]['cmds']['accepts'] = {}
-        
-
+        self.setupFile['nodeDef'][self.name]['cmds']= {}
+        self.setupFile['nodeDef'][self.name]['cmds']['accepts']= {}
+        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = []
+     
         for mKey in self.mSystem[NodeName]['data'][NodeNbr]: 
             #make check if system has unit installed
             if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
@@ -846,20 +845,35 @@ class MessanaInfo:
                     if  self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
-                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName
-            
-        
+                            self.setupFile['editors'][editorName]['nlsKey'] = nlsName      
         return()
 
     def addSystemSendComand(self, nodeName, idName):
-        if  self.setupFile['nodeDef'][nodeName]['cmds']['sends'] == None:
-            self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
+        '''if  self.setupFile['nodeDef'][nodeName]['cmds'] == None:
+            temp = []
+            self.setupFile['nodeDef'][nodeName]['cmds']['sends']=temp
+        else:
+            if 'sends' in self.setupFile['nodeDef'][nodeName]['cmds']:
+                if len(self.setupFile['nodeDef'][nodeName]['cmds']['sends'])==0:
+                    self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
+            else:
+                self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
+        '''
         self.setupFile['nodeDef'][nodeName]['cmds']['sends'].append(idName)
         return()
    
-    def addSystemAcceptComand(self, nodeName, idName, driverName):   
+    def addSystemAcceptComand(self, nodeName, idName, driverName):  
+        '''if self.setupFile['nodeDef'][nodeName]['cmds'] == None:
+            self.setupFile['nodeDef'][nodeName]['cmds']['accepts']=None
+        else:
+            if  'accepts' in self.setupFile['nodeDef'][nodeName]['cmds']:
+                self.setupFile['nodeDef'][nodeName]['cmds']['accepts'][driverName] = idName
+            else:
+                self.setupFile['nodeDef'][nodeName]['cmds']['accepts']={}
+        '''
         self.setupFile['nodeDef'][nodeName]['cmds']['accepts'][driverName] = idName
-        return()
+        return() 
+
 
 
     def addSystemDefStruct(self, nodeName, nodeId):
@@ -874,11 +888,8 @@ class MessanaInfo:
         self.setupFile['nodeDef'][nodeName]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][nodeName]['sts']={}
         self.setupFile['nodeDef'][nodeName]['cmds']={}
-        self.setupFile['nodeDef'][nodeName]['cmds']['sends'] = None
-        self.setupFile['nodeDef'][nodeName]['cmds']['accepts'] = {}
-  
-        #pullKeys = self.systemPullKeys()
-        # Only install if node exists
+        self.setupFile['nodeDef'][nodeName]['cmds']['accepts']={}
+        self.setupFile['nodeDef'][nodeName]['cmds']['sends']=[]
         for mKey in self.mSystem[nodeName]['data']: 
             #make check if system has unit installed
             if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
@@ -939,9 +950,6 @@ class MessanaInfo:
                 self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
-
-
-
     def GETSystem(self, mKey):
         sysData= {}
         print('GETSystem: ' + mKey )
@@ -1140,7 +1148,6 @@ class MessanaInfo:
 
     #Setup file generation 
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
-
         status = True
         try:
             nodeFile = open(nodeDefFileName, 'w+')
@@ -1206,7 +1213,7 @@ class MessanaInfo:
                 nodeFile.write('      <cmds>\n')                
                 nodeFile.write('         <sends>\n')            
                 if self.setupFile['nodeDef'][node]['cmds']:
-                    if 'sends' in self.setupFile['nodeDef'][node]['cmds']:
+                    if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
                         for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
                             cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
                             print(cmdStr)
@@ -1244,13 +1251,11 @@ class MessanaInfo:
 
     def createNodedeFile(self, fileName):
         file = open(fileName, 'w+')
-
         file.close()
         return()
 
     def createNLSFile(self, fileName):
         file = open(fileName, 'w+')
-
         file.close()
         return()
 
