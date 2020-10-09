@@ -846,14 +846,15 @@ class MessanaInfo:
                             self.setupFile['editors'][editorName]['nlsKey'] = nlsName 
         return()
 
-    def addNodeSendComand(self, nodeName, nodeNbr, nodeId):
+    def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
         self.name = nodeId+str(nodeNbr)
-        self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(nodeId)
+        if self.name in self.setupFile['nodeDef']:
+            self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
         return()
    
-    def addNodeAcceptComand(self,  nodeName, nodeNbr, nodeId, driverName):  
+    def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, driverName):  
         self.name = nodeId+str(nodeNbr)
-        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = nodeId
+        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
         return() 
 
 

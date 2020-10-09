@@ -23,7 +23,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone0">
+   <nodeDef id="zone0" nls="nlszone00">
       <sts>
          <st id="GV1" editor="ZONES0_1" />
          <st id="GV2" editor="ZONES0_2" />
@@ -42,12 +42,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone1">
+   <nodeDef id="zone1" nls="nlszone11">
       <sts>
          <st id="GV1" editor="ZONES1_1" />
          <st id="GV2" editor="ZONES1_2" />
@@ -66,12 +69,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone2">
+   <nodeDef id="zone2" nls="nlszone22">
       <sts>
          <st id="GV1" editor="ZONES2_1" />
          <st id="GV2" editor="ZONES2_2" />
@@ -90,12 +96,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone3">
+   <nodeDef id="zone3" nls="nlszone33">
       <sts>
          <st id="GV1" editor="ZONES3_1" />
          <st id="GV2" editor="ZONES3_2" />
@@ -114,12 +123,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone4">
+   <nodeDef id="zone4" nls="nlszone44">
       <sts>
          <st id="GV1" editor="ZONES4_1" />
          <st id="GV2" editor="ZONES4_2" />
@@ -138,12 +150,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone5">
+   <nodeDef id="zone5" nls="nlszone55">
       <sts>
          <st id="GV1" editor="ZONES5_1" />
          <st id="GV2" editor="ZONES5_2" />
@@ -160,12 +175,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone6">
+   <nodeDef id="zone6" nls="nlszone66">
       <sts>
          <st id="GV1" editor="ZONES6_1" />
          <st id="GV2" editor="ZONES6_2" />
@@ -182,12 +200,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone7">
+   <nodeDef id="zone7" nls="nlszone77">
       <sts>
          <st id="GV1" editor="ZONES7_1" />
          <st id="GV2" editor="ZONES7_2" />
@@ -206,12 +227,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone8">
+   <nodeDef id="zone8" nls="nlszone88">
       <sts>
          <st id="GV1" editor="ZONES8_1" />
          <st id="GV2" editor="ZONES8_2" />
@@ -230,12 +254,15 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone" nls="nlszone9">
+   <nodeDef id="zone9" nls="nlszone99">
       <sts>
          <st id="GV1" editor="ZONES9_1" />
          <st id="GV2" editor="ZONES9_2" />
@@ -254,8 +281,11 @@
       </sts>
       <cmds>
          <sends>
+            <cmd id="DON" /> 
          </sends>
          <accepts>
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
