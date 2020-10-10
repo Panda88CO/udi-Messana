@@ -610,19 +610,53 @@ class MessanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         },
-                        'macrozones' : { 'GETstr' : {
-                                            'mName': '/api/macrozone/name/'
-                                            ,'mSetPoint' :'/api/macrozone/setpoint/'
-                                            ,'mStatus':'/api/macrozone/status/'
-                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
-                                            ,'mHumidity':'/api/macrozone/humidity/'
-                                            ,'mDewPoint' : '/api/macrozone/dewpoint/'
-                                            ,'mTemp' :'/api/macrozone/temperature/'
+                        'macrozones' : {   'ISYnode':{'nlsICON':'TempSensor'}
+                                    ,'KeyInfo' : {
+                                         'mName':{
+                                             'GETstr': '/api/zone/name/'
+                                            ,'PUTstr': '/api/zone/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Zone Name' 
+                                                    ,'nlsValues' : None 
+                                                        }  
+                                        ,'mSetPoint' :{
+                                             'GETstr':'/api/macrozone/setpoint/'
+                                             'PUTstr':''/api/macrozone/setpoint/'
+                                             }
+                                        ,'mStatus':{
+                                            'GETstr':'/api/macrozone/status/'
+                                            'PUTstr':'/api/macrozone/status/'
                                             }
-                                        ,
-                                        'PUTstr':{
-                                            'mName': '/api/macrozone/name/'
-                                            ,'mSetPoint' :'/api/macrozone/setpoint/'
+                                        ,'mScheduleOn' :{
+                                            'GETstr':'/api/macrozone/scheduleOn/'
+                                            'PUTstr':'/api/macrozone/scheduleOn/'
+                                            }
+                                        ,'mHumidity':{
+                                            'GETstr':'/api/macrozone/humidity/'
+                                            }
+                                        ,'mDewPoint' : {
+                                            'GETstr':'/api/macrozone/dewpoint/'
+                                            }
+                                        ,'mTemp' : {
+                                            'GETstr':'/api/macrozone/temperature/'
+                                            'active': '/api/macrozone/temperature/'
+                                            }
+                                        }
+                                                }  
+                                    ,'data' :{}
+                                    ,'NOcapability' : {}
+                        },                        
+                        
+                                             'PUTstr':{
+
                                             ,'mStatus':'/api/macrozone/status/'
                                             ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
                                             }
@@ -849,21 +883,42 @@ class MessanaInfo:
     def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
         self.name = nodeId+str(nodeNbr)
         if self.name in self.setupFile['nodeDef']:
-            self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
+            if 'sends' in self.setupFile['nodeDef'][self.name]['cmds']:
+                self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
+            else:
+                self.setupFile['nodeDef'][self.name]['cmds']['sends']=[]
+                self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
+        else:
+            print ('Unknown name: ' + nodeId)
         return()
    
     def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, driverName):  
         self.name = nodeId+str(nodeNbr)
-        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
+        if self.name in self.setupFile['nodeDef']:
+            if 'accepts' in self.setupFile['nodeDef'][self.name]['cmds']:
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
+            else:
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
+        else:
+            print ('Unknown name: ' + nodeId)
         return() 
 
 
     def addSystemSendComand(self, idName):
-        self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
+        if 'sends' in self.setupFile['nodeDef']['system']['cmds']:
+            self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
+        else:
+            self.setupFile['nodeDef']['system']['cmds']['sends']=[]
+            self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
         return()
    
-    def addSystemAcceptComand(self, idName, driverName):  
-        self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
+    def addSystemAcceptComand(self, idName, driverName):
+        if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
+            self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
+        else:
+            self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
+            self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
         return() 
 
 

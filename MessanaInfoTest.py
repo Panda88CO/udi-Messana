@@ -36,9 +36,10 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     messana.getZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
     zoneName = 'zone'+str(zoneNbr)
-    messana.addNodeDefStruct(zoneNbr, 'zones', zoneName )
+    
     messana.addNodeSendComand(zoneNbr, zoneName,'DON' )
     messana.addNodeAcceptComand(zoneNbr, zoneName, 'SET_TEMP' , 'GV2' )
+    messana.addNodeDefStruct(zoneNbr, 'zones', zoneName )
 messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
 print('systemKeys')
 '''

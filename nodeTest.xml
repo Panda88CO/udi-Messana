@@ -42,11 +42,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -69,11 +66,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -96,11 +90,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -123,11 +114,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -150,11 +138,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -175,11 +160,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -200,11 +182,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -227,11 +206,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -254,11 +230,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
@@ -281,11 +254,8 @@
       </sts>
       <cmds>
          <sends>
-            <cmd id="DON" /> 
          </sends>
          <accepts>
-            <cmd id="SET_TEMP" /> 
-               <p id="" editor="SET_TEMP" init="GV2"/> 
          </accepts>
       </cmds>
 </nodeDef> 
