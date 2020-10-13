@@ -612,11 +612,11 @@ class MessanaInfo:
                         },
                         'macrozones' : {   'ISYnode':{'nlsICON':'TempSensor'}
                                     ,'KeyInfo' : {
-                                         'mName':{
-                                             'GETstr': '/api/zone/name/'
-                                            ,'PUTstr': '/api/zone/name/'
+                                        'mName':{
+                                             'GETstr': '/api/macrozone/name/'
+                                            ,'PUTstr': '/api/macrozone/name/'
                                             ,'Active': None 
-                                            ,'ISYeditor':{   
+                                            ,'ISYeditor':{
                                                      'ISYuom':None
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
@@ -626,45 +626,107 @@ class MessanaInfo:
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Zone Name' 
                                                     ,'nlsValues' : None 
-                                                        }  
-                                        ,'mSetPoint' :{
-                                             'GETstr':'/api/macrozone/setpoint/'
-                                             'PUTstr':''/api/macrozone/setpoint/'
-                                             }
+                                                        }
+                                            } 
+                                        ,'mSetPoint': {
+                                              'GETstr':'/api/macrozone/setpoint/'
+                                             ,'PUTstr':'/api/macrozone/setpoint/'
+                                             ,'Active': None 
+                                             ,'ISYeditor':{   
+                                                     'ISYuom':17
+                                                    ,'ISYmin':40
+                                                    ,'ISYmax':120
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0 }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Set Macro Zone Temp' 
+                                                    ,'nlsValues' : None 
+                                                    }  
+                                                 }
                                         ,'mStatus':{
-                                            'GETstr':'/api/macrozone/status/'
-                                            'PUTstr':'/api/macrozone/status/'
-                                            }
+                                             'GETstr':'/api/macrozone/status/'
+                                            ,'PUTstr':'/api/macrozone/status/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Macro Zone state'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                        }
+                                                    }
                                         ,'mScheduleOn' :{
                                             'GETstr':'/api/macrozone/scheduleOn/'
-                                            'PUTstr':'/api/macrozone/scheduleOn/'
-                                            }
+                                            ,'PUTstr':'/api/macrozone/scheduleOn/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Schedule Status' 
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
+                                                        }  
+                                                    } 
                                         ,'mHumidity':{
                                             'GETstr':'/api/macrozone/humidity/'
-                                            }
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/macrozone/humidity/' 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Humidity' 
+                                                    ,'nlsValues' : None
+                                                        }
+                                                    }                                            }
                                         ,'mDewPoint' : {
                                             'GETstr':'/api/macrozone/dewpoint/'
-                                            }
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/macrozone/dewpoint/'
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Dew Point' 
+                                                    ,'nlsValues' : None
+                                                        } 
+                                                    }                                            
                                         ,'mTemp' : {
                                             'GETstr':'/api/macrozone/temperature/'
-                                            'active': '/api/macrozone/temperature/'
-                                            }
-                                        }
-                                                }  
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/macrozone/temperature/'
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':17
+                                                    ,'ISYmin':-40
+                                                    ,'ISYmax':120
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Perceived Temp' 
+                                                    ,'nlsValues' : None
+                                                        } 
+                                                    }                                     
                                     ,'data' :{}
                                     ,'NOcapability' : {}
-                        },                        
-                        
-                                             'PUTstr':{
-
-                                            ,'mStatus':'/api/macrozone/status/'
-                                            ,'mScheduleOn' : '/api/macrozone/scheduleOn/'
-                                            }
-                                        ,
-                                        'active':['mTemp', 'mHumidity','mDewPoint' ]
-                                        ,
-                                        'data' : {}
-                        },
+                        }, 
                         'hc_changeover' :{ 'GETstr' : {
                                                 'mName':'/api/hc/name/'
                                                 ,'mMode':'/api/hc/mode/'

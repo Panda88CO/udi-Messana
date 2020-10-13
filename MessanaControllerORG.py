@@ -17,44 +17,29 @@ class MessanaController(polyinterface.Controller):
         self.address = 'messanasys'
         self.primary = self.address
         self.hb = 0
-        self.reportDrivers()
-        self.ISYdrivers=[]
-        self.ISYcommands = {}
-        try:
-            messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-            LOGGER.debug('MessanaInfo call done')
-            self.system_GETKeys = messana.systemPullKeys()
-            self.system_PUTKeys = messana.systemPushKeys()
-            self.system_ActiveKeys = messana.systemActiveKeys()
-            
-            messana.updateSystemData()
-            messana.addSystemDefStruct(self.address)
-            messana.addSystemSendComand('DON' )
-            messana.addSystemSendComand('DOF' )
-            messana.addSystemAcceptComand( 'UPDATE' , 'GV1' )
-            self.ISYcommands['UPDATE' ] = discover
-            messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
-            self.ISYcommands['SET_STATUS' ] = setStatus
-            messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'GV1' )
-            self.ISYcommands['SET_ENERGYSAVE' ] = setEnergySave
-            messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
-            self.ISYcommands['SET_SETBACK' ] = setSetback
-        
-                
-            self.poly.installprofile()
 
-        except:
-            LOGGER.debug('Reading data from Messana System NOT successful')
+
+
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
 
         self.check_params()
+        try:
+            self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+            LOGGER.debug('MessanaInfo call done')
+            self.messana.updateSystemData()
+            #LOGGER.debug(self.msysInfo)
+
+        except:
+            LOGGER.debug('Reading data from Messana System NOT successful')
+
         self.discover()         
         self.updateInfo()
-  
+        LOGGER.debug('install profile')
+        self.poly.installprofile()
+        self.reportDrivers()
  
-
 
     def stop(self):
         LOGGER.debug('stop - Cleaning up Temp Sensors & GPIO')
@@ -237,17 +222,13 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('setSetback Reeived:' + str(val))
 
 
-    id = self.address  
-    commands = {}
-    '''
+    id = 'messanasys'
     commands = { 'UPDATE': discover
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
                 ,'SET_SETBACK' : setSetback 
                 }
-    '''
-    drivers= []
-    '''
+
     drivers = [  {'driver': 'GV1', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV2', 'value': 1, 'uom': 25}
                 ,{'driver': 'GV3', 'value': 1, 'uom': 25}
@@ -262,4 +243,4 @@ class MessanaController(polyinterface.Controller):
                 ,{'driver': 'GV12', 'value': 1, 'uom': 107}
                 ,{'driver': 'ALARM', 'value': 0, 'uom': 25}  
                 ]
-    '''
+
