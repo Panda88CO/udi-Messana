@@ -14,7 +14,7 @@ class MessanaController(polyinterface.Controller):
         super().__init__(polyglot)
         LOGGER.info('_init_')
         self.name = 'Messana Main Control'
-        self.address = 'messanasys'
+        self.address ='messanasys'
         self.primary = self.address
         self.hb = 0
         self.reportDrivers()
@@ -31,15 +31,12 @@ class MessanaController(polyinterface.Controller):
             messana.addSystemDefStruct(self.address)
             messana.addSystemSendComand('DON' )
             messana.addSystemSendComand('DOF' )
-            messana.addSystemAcceptComand( 'UPDATE' , 'GV1' )
-            self.ISYcommands['UPDATE' ] = discover
-            messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
-            self.ISYcommands['SET_STATUS' ] = setStatus
-            messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'GV1' )
-            self.ISYcommands['SET_ENERGYSAVE' ] = setEnergySave
-            messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
-            self.ISYcommands['SET_SETBACK' ] = setSetback
-        
+
+            messana.addSystemAcceptComand( 'UPDATE' , '' )
+            messana.addSystemAcceptComand( 'SET_STATUS' , 'mStatus' )
+            messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'mEnergySaving' )
+            messana.addSystemAcceptComand( 'SET_SETBACK' , 'mSetback' )
+                   
                 
             self.poly.installprofile()
 
@@ -237,15 +234,14 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('setSetback Reeived:' + str(val))
 
 
-    id = self.address  
-    commands = {}
-    '''
+    id = 'messanasys'
+    
     commands = { 'UPDATE': discover
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
                 ,'SET_SETBACK' : setSetback 
                 }
-    '''
+
     drivers= []
     '''
     drivers = [  {'driver': 'GV1', 'value': 1, 'uom': 25}

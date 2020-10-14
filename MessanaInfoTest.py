@@ -29,7 +29,8 @@ systemActiveKeys = messana.systemActiveKeys()
 messana.updateSystemData()
 messana.addSystemDefStruct('MessanaSys')
 messana.addSystemSendComand('DON' )
-messana.addSystemAcceptComand( 'SET_STATUS' , 'GV1' )
+messana.addSystemAcceptComand( 'SET_STATUS' , {'mStatus':'GV1'} )
+messana.addSystemAcceptComand( 'UPDATE' , {} )
 print('zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}

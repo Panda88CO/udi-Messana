@@ -975,16 +975,34 @@ class MessanaInfo:
             self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
         return()
    
-    def addSystemAcceptComand(self, idName, driverName):
-        if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
-            self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
+    def addSystemAcceptComand(self, idName, messanaKey):
+        if len(messanaKey) == 0:
+            if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
+            else:
+                self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
         else:
-            self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-            self.setupFile['nodeDef']['system']['cmds']['accepts'][driverName] = idName
+            if messanaKey in 
+            if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
+            else:
+                self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
         return() 
 
-
-
+    '''
+    def getSystemDriver(self, driverKey):
+        tempDict= {}
+        if driverKey in  self.setupFile['nodeDef']['system']['sts']:
+            tempDict = self.setupFile['nodeDef']['system']['sts'][driverKey]
+            if len(tempDict) == 1:
+            else:
+                print('Error more than one element associated with :' + driverKey)
+        else:
+            print(driverKet + ' not found')
+        return(tempDict)
+    '''
     def addSystemDefStruct(self, nodeId):
         self.keyCount = 0
         nodeId.lower()
