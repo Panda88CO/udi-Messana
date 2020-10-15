@@ -983,12 +983,12 @@ class MessanaInfo:
                 self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
                 self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
         else:
-            if messanaKey in 
-            if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
-            else:
+            if not('accepts' in self.setupFile['nodeDef']['system']['cmds']):
                 self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
+            if messanaKey in self.setupFile['nodeDef']['system']['sts']:
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = self.setupFile['nodeDef']['system']['sts'][messanaKey]
+            else:
+                print (messanaKey + 'not defined')
         return() 
 
     '''
