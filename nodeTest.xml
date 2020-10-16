@@ -19,11 +19,13 @@
          </sends>
          <accepts>
             <cmd id="SET_STATUS" /> 
-               <p id="" editor="SET_STATUS" init="GV1"/> 
+               <p id="" editor="SYSTEM_1" init="GV1"/> 
+            </cmd> 
+            <cmd id="UPDATE" /> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone0" nls="nlszone00">
+   <nodeDef id="zone0" nls="nlszone0_0">
       <sts>
          <st id="GV1" editor="ZONES0_1" />
          <st id="GV2" editor="ZONES0_2" />
@@ -44,10 +46,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES0_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone1" nls="nlszone11">
+   <nodeDef id="zone1" nls="nlszone1_1">
       <sts>
          <st id="GV1" editor="ZONES1_1" />
          <st id="GV2" editor="ZONES1_2" />
@@ -68,10 +74,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES1_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone2" nls="nlszone22">
+   <nodeDef id="zone2" nls="nlszone2_2">
       <sts>
          <st id="GV1" editor="ZONES2_1" />
          <st id="GV2" editor="ZONES2_2" />
@@ -92,10 +102,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES2_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone3" nls="nlszone33">
+   <nodeDef id="zone3" nls="nlszone3_3">
       <sts>
          <st id="GV1" editor="ZONES3_1" />
          <st id="GV2" editor="ZONES3_2" />
@@ -116,10 +130,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES3_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone4" nls="nlszone44">
+   <nodeDef id="zone4" nls="nlszone4_4">
       <sts>
          <st id="GV1" editor="ZONES4_1" />
          <st id="GV2" editor="ZONES4_2" />
@@ -140,10 +158,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES4_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone5" nls="nlszone55">
+   <nodeDef id="zone5" nls="nlszone5_5">
       <sts>
          <st id="GV1" editor="ZONES5_1" />
          <st id="GV2" editor="ZONES5_2" />
@@ -162,10 +184,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES5_7" init="GV7"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone6" nls="nlszone66">
+   <nodeDef id="zone6" nls="nlszone6_6">
       <sts>
          <st id="GV1" editor="ZONES6_1" />
          <st id="GV2" editor="ZONES6_2" />
@@ -184,10 +210,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES6_7" init="GV7"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone7" nls="nlszone77">
+   <nodeDef id="zone7" nls="nlszone7_7">
       <sts>
          <st id="GV1" editor="ZONES7_1" />
          <st id="GV2" editor="ZONES7_2" />
@@ -208,10 +238,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES7_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone8" nls="nlszone88">
+   <nodeDef id="zone8" nls="nlszone8_8">
       <sts>
          <st id="GV1" editor="ZONES8_1" />
          <st id="GV2" editor="ZONES8_2" />
@@ -232,10 +266,14 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES8_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone9" nls="nlszone99">
+   <nodeDef id="zone9" nls="nlszone9_9">
       <sts>
          <st id="GV1" editor="ZONES9_1" />
          <st id="GV2" editor="ZONES9_2" />
@@ -256,6 +294,10 @@
          <sends>
          </sends>
          <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_TEMP" /> 
+               <p id="" editor="ZONES9_9" init="GV9"/> 
+            </cmd> 
          </accepts>
       </cmds>
 </nodeDef> 

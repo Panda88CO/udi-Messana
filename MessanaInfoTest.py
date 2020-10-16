@@ -29,7 +29,7 @@ systemActiveKeys = messana.systemActiveKeys()
 messana.updateSystemData()
 messana.addSystemDefStruct('MessanaSys')
 messana.addSystemSendComand('DON' )
-messana.addSystemAcceptComand( 'SET_STATUS' , {'mStatus':'GV1'} )
+messana.addSystemAcceptComand( 'SET_STATUS' , 'mStatus' )
 messana.addSystemAcceptComand( 'UPDATE' , {} )
 print('zones')
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
@@ -37,9 +37,11 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     messana.getZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
     zoneName = 'zone'+str(zoneNbr)
-    messana.addNodeSendComand(zoneNbr, zoneName,'DON' )
-    messana.addNodeAcceptComand(zoneNbr, zoneName, 'SET_TEMP' , 'GV2' )
     messana.addNodeDefStruct(zoneNbr, 'zones', zoneName )
+    messana.addNodeSendComand(zoneNbr, zoneName,'DON' )
+    messana.addNodeAcceptComand(zoneNbr, zoneName, 'UPDATE' , '' )
+    messana.addNodeAcceptComand(zoneNbr, zoneName, 'SET_TEMP' , 'mTemp' )
+
 messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
 print('systemKeys')
 '''

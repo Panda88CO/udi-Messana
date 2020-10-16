@@ -904,7 +904,7 @@ class MessanaInfo:
         self.keyCount = 0
         nodeId.lower()
 
-        self.name = nodeId+str(NodeNbr)
+        self.name = nodeId+'_'+str(NodeNbr)
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
         #editorName = nodeName+'_'+str(keyCount)
@@ -954,16 +954,21 @@ class MessanaInfo:
             print ('Unknown name: ' + nodeId)
         return()
    
-    def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, driverName):  
-        self.name = nodeId+str(nodeNbr)
-        if self.name in self.setupFile['nodeDef']:
-            if 'accepts' in self.setupFile['nodeDef'][self.name]['cmds']:
-                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
+    def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, messanaKey):  
+        name = nodeId + '_' + str(nodeNbr)
+        if len(messanaKey) == 0:
+            if 'accepts' in self.setupFile['nodeDef'][name]['cmds']:
+                self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = {}
             else:
-                self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
-                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][driverName] = functionName
+                self.setupFile['nodeDef'][name]['cmds']['accepts'] = {}
+                self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = {}
         else:
-            print ('Unknown name: ' + nodeId)
+            if not('accepts' in self.setupFile['nodeDef'][name]['cmds']):
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts'] = {}
+            if messanaKey in self.setupFile['nodeDef'][name]['sts']: 
+               self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = self.setupFile['nodeDef'][name]['sts'][messanaKey]
+            else:
+                print (messanaKey + 'not defined')
         return() 
 
 
@@ -975,18 +980,18 @@ class MessanaInfo:
             self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
         return()
    
-    def addSystemAcceptComand(self, idName, messanaKey):
+    def addSystemAcceptComand(self, functionName, messanaKey):
         if len(messanaKey) == 0:
             if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = {}
             else:
                 self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = {}
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = {}
         else:
             if not('accepts' in self.setupFile['nodeDef']['system']['cmds']):
                 self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
             if messanaKey in self.setupFile['nodeDef']['system']['sts']:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][idName] = self.setupFile['nodeDef']['system']['sts'][messanaKey]
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = self.setupFile['nodeDef']['system']['sts'][messanaKey]
             else:
                 print (messanaKey + 'not defined')
         return() 
@@ -1350,16 +1355,16 @@ class MessanaInfo:
                 if self.setupFile['nodeDef'][node]['cmds']:
                     if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
                         for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                            cmdStr = '            <cmd id="' +self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]+'" /> \n'        
+                            cmdStr = '            <cmd id="' +acceptCmd+'" /> \n'        
                             print(cmdStr)
                             nodeFile.write(cmdStr)
-                            cmdStr = '               <p id="" editor="'
-                            for key in self.setupFile['nodeDef'][node]['sts']:
-                                for Id in self.setupFile['nodeDef'][node]['sts'][key]:
-                                    if Id == acceptCmd:
-                                        cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][Id]+'" init="'+acceptCmd+'"/> \n' 
-                            print(cmdStr)
-                            nodeFile.write(cmdStr)
+                            if self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd] != {}:
+                                cmdStr = '               <p id="" editor="'
+                                for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
+                                    cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'"/> \n' 
+                                print(cmdStr)                              
+                                nodeFile.write(cmdStr)
+                                nodeFile.write('            </cmd> \n')
                 nodeFile.write('         </accepts>\n')                   
 
                 nodeFile.write('      </cmds>\n')                
