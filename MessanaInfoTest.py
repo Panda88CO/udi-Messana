@@ -7,6 +7,7 @@ from subprocess import call
 import json
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
+import shutil
 #import ISYsetupFiles
 
 #LOGGER = polyinterface.LOGGER
@@ -43,6 +44,9 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     messana.addNodeAcceptComand(zoneNbr, zoneName, 'SET_TEMP' , 'mTemp' )
 
 messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
+shutil.copy('./nodeTest.xml', './profile/nodedef/nodedefs.xml')
+shutil.copy('./editorTest.xml', './profile/editor/editors.xml')
+shutil.copy('./nlsTest.txt', './profile/nls/en_us.txt')
 print('systemKeys')
 '''
 sysData={}
