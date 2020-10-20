@@ -10,7 +10,12 @@ import pickle
 class MessanaInfo:
     def __init__ (self, mIPaddress, mAPIKeyVal):
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system': {  'ISYnode':{ 'nlsICON':'Thermostat'}
+        self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
+                                                ,'sends'   : ['DON', 'DOF']
+                                                ,'accepts' : {'UPDATE'        : ''
+                                                            ,'SET_STATUS'     : 'mStatus'
+                                                            ,'SET_ENERGYSAVE' : 'mEnergySaving'
+                                                            ,'SET_SETBACK'    : 'mSetback'}}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/system/name/'
@@ -250,7 +255,12 @@ class MessanaInfo:
                                      ,'data':{}
                                          
                         },
-                        'zones': {   'ISYnode':{'nlsICON':'TempSensor'}
+                        'zones': {   'ISYnode':{'nlsICON':'TempSensor'
+                                                ,'sends'   : []
+                                                ,'accepts' : {'UPDATE'        : ''
+                                                             ,'SET_STATUS'     : 'mStatus'
+                                                             ,'SET_ENERGYSAVE' : 'mEnergySaving'
+                                                             ,'SET_SETBACK'    : 'mSetback'}}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/zone/name/'
@@ -610,7 +620,12 @@ class MessanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         },
-                        'macrozones' : {   'ISYnode':{'nlsICON':'TempSensor'}
+                        'macrozones' : {   'ISYnode':{   'nlsICON' :'TempSensor'
+                                                        ,'sends'   : ['DON', 'DOF']
+                                                        ,'accepts' : {'UPDATE'        : ''
+                                                                    ,'SET_STATUS'     : 'mStatus'
+                                                                    ,'SET_ENERGYSAVE' : 'mEnergySaving'
+                                                                    ,'SET_SETBACK'    : 'mSetback'}}
                                     ,'KeyInfo' : {
                                         'mName':{
                                              'GETstr': '/api/macrozone/name/'
@@ -891,6 +906,9 @@ class MessanaInfo:
 
         self.zoneCapability = {}
         self.atuCapability = {}
+        
+        self.updateSystemData()
+        self.addSystemDefStruct('system')
 
         '''
         print ('Reading Messana System')
@@ -898,6 +916,7 @@ class MessanaInfo:
         print('Finish Reading Messana system')
         '''
     def init(self):
+
         return(True)
 
     def addNodeDefStruct(self, NodeNbr, NodeName, nodeId):
@@ -915,8 +934,8 @@ class MessanaInfo:
         self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[NodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
         self.setupFile['nodeDef'][self.name]['cmds']= {}
-        self.setupFile['nodeDef'][self.name]['cmds']['accepts']= {}
-        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = []
+        self.setupFile['nodeDef'][self.name]['cmds']['accepts']= self.mSystem[NodeName]['ISYnode']['accepts']
+        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[NodeName]['ISYnode']['sends']
      
         for mKey in self.mSystem[NodeName]['data'][NodeNbr]: 
             #make check if system has unit installed

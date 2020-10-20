@@ -29,12 +29,14 @@ class MessanaController(polyinterface.Controller):
             
             messana.updateSystemData()
             messana.addSystemDefStruct(self.address)
+            '''
             messana.addSystemSendComand('DON' )
             messana.addSystemSendComand('DOF' )
             messana.addSystemAcceptComand( 'UPDATE' , '' )
             messana.addSystemAcceptComand( 'SET_STATUS' , 'mStatus' )
             messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'mEnergySaving' )
             messana.addSystemAcceptComand( 'SET_SETBACK' , 'mSetback' )
+            '''
             messana.createSetupFiles('sys_nodedefs.xml','sys_editor.xml', 'sys_nls.txt')
             self.poly.installprofile()
 
