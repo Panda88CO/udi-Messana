@@ -388,4 +388,64 @@
          </accepts>
       </cmds>
 </nodeDef> 
+   <nodeDef id="macrozone0" nls="nlsmacrozone0_0">
+      <sts>
+         <st id="GV1" editor="MACROZONES0_1" />
+         <st id="GV2" editor="MACROZONES0_2" />
+         <st id="GV3" editor="MACROZONES0_3" />
+         <st id="GV4" editor="MACROZONES0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="MACROZONES0_2" init="GV2"/> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" /> 
+            <cmd id="SET_SETBACK" /> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="macrozone1" nls="nlsmacrozone1_1">
+      <sts>
+         <st id="GV1" editor="MACROZONES1_1" />
+         <st id="GV2" editor="MACROZONES1_2" />
+         <st id="GV3" editor="MACROZONES1_3" />
+         <st id="GV4" editor="MACROZONES1_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="MACROZONES1_2" init="GV2"/> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" /> 
+            <cmd id="SET_SETBACK" /> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="macrozone2" nls="nlsmacrozone2_2">
+      <sts>
+         <st id="GV1" editor="MACROZONES2_1" />
+         <st id="GV2" editor="MACROZONES2_2" />
+         <st id="GV3" editor="MACROZONES2_3" />
+         <st id="GV4" editor="MACROZONES2_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="MACROZONES2_2" init="GV2"/> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" /> 
+            <cmd id="SET_SETBACK" /> 
+         </accepts>
+      </cmds>
+</nodeDef> 
 </nodeDefs> 

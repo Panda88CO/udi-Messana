@@ -257,10 +257,10 @@ class MessanaInfo:
                         },
                         'zones': {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'UPDATE'        : ''
+                                                ,'accepts' : {'SET_SETPOINT'   : 'mSetPoint'
                                                              ,'SET_STATUS'     : 'mStatus'
                                                              ,'SET_ENERGYSAVE' : 'mEnergySaving'
-                                                             ,'SET_SETBACK'    : 'mSetback'}}
+                                                             ,'SET_SCHEDULEON' : 'mScheduleOn'}}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/zone/name/'
@@ -550,7 +550,7 @@ class MessanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }  
-                                        ,'mEnergySave' : { 
+                                        ,'mEnergySaving' : { 
                                              'GETstr': '/api/zone/energySaving/'
                                             ,'PUTstr': '/api/zone/energySaving/'
                                             ,'Active': None 
@@ -621,7 +621,7 @@ class MessanaInfo:
                                     ,'NOcapability' : {}
                         },
                         'macrozones' : {   'ISYnode':{   'nlsICON' :'TempSensor'
-                                                        ,'sends'   : ['DON', 'DOF']
+                                                        ,'sends'   : []
                                                         ,'accepts' : {'UPDATE'        : ''
                                                                     ,'SET_STATUS'     : 'mStatus'
                                                                     ,'SET_ENERGYSAVE' : 'mEnergySaving'
@@ -909,6 +909,19 @@ class MessanaInfo:
         
         self.updateSystemData()
         self.addSystemDefStruct('system')
+        for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
+            self.getZoneCapability(zoneNbr)
+            self.updateZoneData(zoneNbr)
+            zoneName = 'zone'+str(zoneNbr)
+            self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
+       
+        for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
+            self.getMacrozoneCapability(macrozoneNbr)
+            self.updateMacroZoneData(macrozoneNbr)
+            macrozoneName = 'macrozone'+str(macrozoneNbr)
+            self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
+
+        self.createSetupFiles('./profile/nodedef/nodeTest.xml','./profile/editor/editorTest.xml', './profile/nls/en_us.txt')
 
         '''
         print ('Reading Messana System')
@@ -933,10 +946,7 @@ class MessanaInfo:
         self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[NodeName]['data'][NodeNbr]['mName']
         self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[NodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
-        self.setupFile['nodeDef'][self.name]['cmds']= {}
-        self.setupFile['nodeDef'][self.name]['cmds']['accepts']= self.mSystem[NodeName]['ISYnode']['accepts']
-        self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[NodeName]['ISYnode']['sends']
-     
+
         for mKey in self.mSystem[NodeName]['data'][NodeNbr]: 
             #make check if system has unit installed
             if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
@@ -959,6 +969,17 @@ class MessanaInfo:
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
                             self.setupFile['editors'][editorName]['nlsKey'] = nlsName 
+
+        self.setupFile['nodeDef'][self.name]['cmds']= {}
+        if 'accepts' in self.mSystem[NodeName]['ISYnode']:
+            self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
+            for key in  self.mSystem[NodeName]['ISYnode']['accepts']:
+                if self.mSystem[NodeName]['ISYnode']['accepts'][key] in self.setupFile['nodeDef'][self.name]['sts']:
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[NodeName]['ISYnode']['accepts'][key]]
+                else:
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= {}
+        if 'sends' in self.mSystem[NodeName]['ISYnode']:         
+            self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[NodeName]['ISYnode']['sends']                                 
         return()
 
     def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
@@ -1038,9 +1059,7 @@ class MessanaInfo:
         self.setupFile['nodeDef']['system']['nlsNAME']=self.mSystem['system']['data']['mName']
         self.setupFile['nodeDef']['system']['nlsICON']=self.mSystem['system']['ISYnode']['nlsICON']
         self.setupFile['nodeDef']['system']['sts']={}
-        self.setupFile['nodeDef']['system']['cmds']={}
-        self.setupFile['nodeDef']['system']['cmds']['accepts']={}
-        self.setupFile['nodeDef']['system']['cmds']['sends']=[]
+
         for mKey in self.mSystem['system']['data']: 
             #make check if system has unit installed
             if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
@@ -1066,39 +1085,56 @@ class MessanaInfo:
                             self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
-                    
+        
+        self.setupFile['nodeDef']['system']['cmds']={}
+        if 'accepts' in self.mSystem['system']['ISYnode']:
+            self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
+            for key in  self.mSystem['system']['ISYnode']['accepts']:
+                if self.mSystem['system']['ISYnode']['accepts'][key] in self.setupFile['nodeDef']['system']['sts']:
+                    mVal = self.mSystem['system']['ISYnode']['accepts'][key]
+                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= self.setupFile['nodeDef']['system']['sts'][mVal]
+                else:
+                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= {}   
+        if 'sends' in self.mSystem['system']['ISYnode']:
+            self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
+        return()
+
+
+
+
     def getNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
-        if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
-            GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
-            Nodep = requests.get(GETStr)
-            if str(Nodep) == self.RESPONSE_OK:
-                tempKeys= Nodep.json()
-                for key in tempKeys:
-                    if key == 'operative_temperature':
-                        if tempKeys[key] == 0:
-                            self.keyList['mTemp'] = tempKeys["operative_temperature"]
-                            self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
-                    elif key == 'air_temperature':
-                        self.keyList['mAirTemp'] = tempKeys["air_temperature"]
-                    elif key == 'relative_humidity':
-                        self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
-                        self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
-                        self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
-                        self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
-                        self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
-                        self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
-                        self.keyList['mHumidity'] = tempKeys["relative_humidity"]
-                    elif key == 'dewpoint':
-                        self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
-                    elif key == 'co2':
-                        self.keyList['mCO2'] = tempKeys['co2'] 
-                        self.keyList['mAirQuality'] = tempKeys['co2']            
-                    elif key == 'voc':
-                        self.keyList['mVoc'] = tempKeys['voc']   
-                    else:
-                        print(key + ' unknown keyword')
-                self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
+        if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
+            if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
+                GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
+                Nodep = requests.get(GETStr)
+                if str(Nodep) == self.RESPONSE_OK:
+                    tempKeys= Nodep.json()
+                    for key in tempKeys:
+                        if key == 'operative_temperature':
+                            if tempKeys[key] == 0:
+                                self.keyList['mTemp'] = tempKeys["operative_temperature"]
+                                self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+                        elif key == 'air_temperature':
+                            self.keyList['mAirTemp'] = tempKeys["air_temperature"]
+                        elif key == 'relative_humidity':
+                            self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
+                            self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
+                            self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
+                            self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
+                            self.keyList['mCurrentSetpointDP'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumidity'] = tempKeys["relative_humidity"]
+                        elif key == 'dewpoint':
+                            self.keyList['mDewPoint'] = tempKeys["relative_humidity"]
+                        elif key == 'co2':
+                            self.keyList['mCO2'] = tempKeys['co2'] 
+                            self.keyList['mAirQuality'] = tempKeys['co2']            
+                        elif key == 'voc':
+                            self.keyList['mVoc'] = tempKeys['voc']   
+                        else:
+                            print(key + ' unknown keyword')
+        self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
     def GETSystem(self, mKey):
@@ -1550,6 +1586,9 @@ class MessanaInfo:
 
 
     #MacroZone
+    def getMacrozoneCapability(self, macrozoneNbr): 
+        self.getNodeCapability('macrozones', macrozoneNbr)
+
     def updateMacroZoneData(self, macrozoneNbr):
         print('updatMacroZoneData: ' + str(macrozoneNbr))
         return(self.updateNodeData(macrozoneNbr, 'macrozones'))
