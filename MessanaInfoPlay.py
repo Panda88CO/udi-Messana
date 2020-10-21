@@ -1141,13 +1141,13 @@ class MessanaInfo:
         sysData= {}
         print('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
-        print( GETStr)
+        #print( GETStr)
         try:
             systemTemp = requests.get(GETStr)
             print(str(systemTemp))
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
-                print(systemTemp)
+                #print(systemTemp)
                 self.mSystem['system']['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
                 sysData['statusOK'] = True 
                 sysData['data'] = self.mSystem['system']['data'][mKey] 
@@ -1175,10 +1175,10 @@ class MessanaInfo:
                         sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
                         print(sysData)    
                         return(sysData)   
-                    print(PUTStr)
+                    #print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
-            print(mData)
+            #print(mData)
             try:
                 resp = requests.put(PUTStr, json=mData)
                 print(resp)
@@ -1188,7 +1188,7 @@ class MessanaInfo:
                 else:
                     sysData['statusOK'] = True
                     sysData['data'] = value
-                print(sysData)    
+                #print(sysData)    
                 return(sysData)          
             except:
                 sysData['statusOK'] = False
@@ -1242,7 +1242,7 @@ class MessanaInfo:
         nodeData = {}
         if 'PUTstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             PUTStr = self.IP + self.mSystem[mNodeKey]['KeyInfo'][mKey]['PUTstr']
-            print('PUT str: ' + PUTStr + str(value))
+            #print('PUT str: ' + PUTStr + str(value))
             mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, json=mData)
             if str(resp) == self.RESPONSE_OK:
@@ -1306,11 +1306,11 @@ class MessanaInfo:
         Data = {}
         dataOK = True
         for mKey in self.mSystem[NodeKey]['KeyInfo']:
-            print ('GET ' + mKey + ' in zone ' + str(NodeNbr))
+            #print ('GET ' + mKey + ' in zone ' + str(NodeNbr))
             Data = self.pullNodeDataIndividual(NodeNbr, NodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
-                print ('Error GET' + Data['error'])
+                #print ('Error GET' + Data['error'])
         return(dataOK)
     
     def pullNodeDataIndividual(self, NodeNbr, NodeKey, mKey): 
@@ -1344,7 +1344,7 @@ class MessanaInfo:
             nodeFile.write('<nodeDefs> \n')
             for node in self.setupFile['nodeDef']:
                 nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
-                print(nodeDefStr)
+                #print(nodeDefStr)
                 nodeFile.write(nodeDefStr)
                 nodeFile.write('      <sts>\n')
                 nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
@@ -1355,7 +1355,7 @@ class MessanaInfo:
                     for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
                         nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
                         nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
-                        print(nodeDefStr)
+                        #print(nodeDefStr)
                         nodeFile.write(nodeDefStr)
                         editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
                         editorStr = '     <range '
@@ -1380,7 +1380,7 @@ class MessanaInfo:
                             else:
                                 print('unknown editor keyword: ' + str(key))
                         editorStr = editorStr + ' >\n'
-                        print (editorStr)
+                        #print (editorStr)
                         editorFile.write(editorStr)
                         editorFile.write('</editor>\n')
 
@@ -1395,7 +1395,7 @@ class MessanaInfo:
                                     nlsStr = nlsEditorKey+'-'+str(nlsValues)+'='+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
                                     nlsFile.write(nlsStr)
                                     nlsValues = nlsValues + 1
-                            print(nlsStr)
+                            #print(nlsStr)
                 nodeFile.write('      </sts>\n')
                 nodeFile.write('      <cmds>\n')                
                 nodeFile.write('         <sends>\n')            
@@ -1403,7 +1403,7 @@ class MessanaInfo:
                     if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
                         for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
                             cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
-                            print(cmdStr)
+                            #print(cmdStr)
                             nodeFile.write(cmdStr)
                 nodeFile.write('         </sends>\n')               
                 nodeFile.write('         <accepts>\n')      
@@ -1411,13 +1411,13 @@ class MessanaInfo:
                     if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
                         for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
                             cmdStr = '            <cmd id="' +acceptCmd+'" /> \n'        
-                            print(cmdStr)
+                            #print(cmdStr)
                             nodeFile.write(cmdStr)
                             if self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd] != {}:
                                 cmdStr = '               <p id="" editor="'
                                 for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
                                     cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'"/> \n' 
-                                print(cmdStr)                              
+                                #print(cmdStr)                              
                                 nodeFile.write(cmdStr)
                                 nodeFile.write('            </cmd> \n')
                 nodeFile.write('         </accepts>\n')                   
@@ -1466,7 +1466,7 @@ class MessanaInfo:
         DataOK = True
         for mKey in self.mSystem['system']['KeyInfo']:
             if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
-                print('GET ' + mKey)
+                #print('GET ' + mKey)
                 sysData= self.pullSystemDataIndividual(mKey)
                 if not(sysData['statusOK']):
                     print ('Error System GET: ' + mKey)
