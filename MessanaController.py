@@ -23,6 +23,8 @@ class MessanaController(polyinterface.Controller):
         try:
             messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             LOGGER.debug('MessanaInfo call done')
+
+
             self.system_GETKeys = messana.systemPullKeys()
             self.system_PUTKeys = messana.systemPushKeys()
             self.system_ActiveKeys = messana.systemActiveKeys()
@@ -36,8 +38,8 @@ class MessanaController(polyinterface.Controller):
             messana.addSystemAcceptComand( 'SET_STATUS' , 'mStatus' )
             messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'mEnergySaving' )
             messana.addSystemAcceptComand( 'SET_SETBACK' , 'mSetback' )
-            '''
             messana.createSetupFiles('sys_nodedefs.xml','sys_editor.xml', 'sys_nls.txt')
+            '''
             self.poly.installprofile()
 
         except:

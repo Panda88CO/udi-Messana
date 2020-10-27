@@ -921,6 +921,8 @@ class MessanaInfo:
             macrozoneName = 'macrozone'+str(macrozoneNbr)
             self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
 
+        #more modules mnissing 
+
         self.createSetupFiles('./profile/nodedef/nodeTest.xml','./profile/editor/editorTest.xml', './profile/nls/en_us.txt')
 
         '''
