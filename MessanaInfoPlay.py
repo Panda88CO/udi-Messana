@@ -912,7 +912,7 @@ class MessanaInfo:
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
             self.updateZoneData(zoneNbr)
-            zoneName = 'zone'+str(zoneNbr)
+            zoneName = 'zone'+str(zoneNbr) # why do we need an extra  level of nbr?
             self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
        
         for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
@@ -933,6 +933,17 @@ class MessanaInfo:
     def init(self):
 
         return(True)
+
+    def getSystemISYdriverInfo(self, mKey):
+        info = {}
+        keys = list(self.setupFile['system']['nodeDef']['sts'][mKey].keys())
+        info['driver'] = keys[0]
+        tempData =  self.GETSystem(mKey)
+        if tempData['statusOK']:
+            info['value'] = tempData['data']
+        info['uom'] = self.setupFile['system']['editors']['ISYoum']
+        return(info)
+
 
     def addNodeDefStruct(self, NodeNbr, NodeName, nodeId):
         self.keyCount = 0
