@@ -936,12 +936,17 @@ class MessanaInfo:
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
-        keys = list(self.setupFile['system']['nodeDef']['sts'][mKey].keys())
-        info['driver'] = keys[0]
-        tempData =  self.GETSystem(mKey)
-        if tempData['statusOK']:
-            info['value'] = tempData['data']
-        info['uom'] = self.setupFile['system']['editors']['ISYoum']
+        if mKey in self.setupFile['nodeDef']['system']['sts']:
+            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETSystem(mKey)
+            if tempData['statusOK']:
+                info['value'] = tempData['data']
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
 
