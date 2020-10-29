@@ -32,7 +32,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone0" nls="nlszone0_0">
+   <nodeDef id="zone" nls="nlszone_0">
       <sts>
          <st id="GV1" editor="ZONES0_1" />
          <st id="GV2" editor="ZONES0_2" />
@@ -68,7 +68,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone1" nls="nlszone1_1">
+   <nodeDef id="zone" nls="nlszone_1">
       <sts>
          <st id="GV1" editor="ZONES1_1" />
          <st id="GV2" editor="ZONES1_2" />
@@ -104,7 +104,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone2" nls="nlszone2_2">
+   <nodeDef id="zone" nls="nlszone_2">
       <sts>
          <st id="GV1" editor="ZONES2_1" />
          <st id="GV2" editor="ZONES2_2" />
@@ -140,7 +140,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone3" nls="nlszone3_3">
+   <nodeDef id="zone" nls="nlszone_3">
       <sts>
          <st id="GV1" editor="ZONES3_1" />
          <st id="GV2" editor="ZONES3_2" />
@@ -176,7 +176,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone4" nls="nlszone4_4">
+   <nodeDef id="zone" nls="nlszone_4">
       <sts>
          <st id="GV1" editor="ZONES4_1" />
          <st id="GV2" editor="ZONES4_2" />
@@ -212,7 +212,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone5" nls="nlszone5_5">
+   <nodeDef id="zone" nls="nlszone_5">
       <sts>
          <st id="GV1" editor="ZONES5_1" />
          <st id="GV2" editor="ZONES5_2" />
@@ -246,7 +246,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone6" nls="nlszone6_6">
+   <nodeDef id="zone" nls="nlszone_6">
       <sts>
          <st id="GV1" editor="ZONES6_1" />
          <st id="GV2" editor="ZONES6_2" />
@@ -280,7 +280,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone7" nls="nlszone7_7">
+   <nodeDef id="zone" nls="nlszone_7">
       <sts>
          <st id="GV1" editor="ZONES7_1" />
          <st id="GV2" editor="ZONES7_2" />
@@ -316,7 +316,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone8" nls="nlszone8_8">
+   <nodeDef id="zone" nls="nlszone_8">
       <sts>
          <st id="GV1" editor="ZONES8_1" />
          <st id="GV2" editor="ZONES8_2" />
@@ -352,7 +352,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="zone9" nls="nlszone9_9">
+   <nodeDef id="zone" nls="nlszone_9">
       <sts>
          <st id="GV1" editor="ZONES9_1" />
          <st id="GV2" editor="ZONES9_2" />
@@ -388,7 +388,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="macrozone0" nls="nlsmacrozone0_0">
+   <nodeDef id="macrozone" nls="nlsmacrozone_0">
       <sts>
          <st id="GV1" editor="MACROZONES0_1" />
          <st id="GV2" editor="MACROZONES0_2" />
@@ -408,7 +408,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="macrozone1" nls="nlsmacrozone1_1">
+   <nodeDef id="macrozone" nls="nlsmacrozone_1">
       <sts>
          <st id="GV1" editor="MACROZONES1_1" />
          <st id="GV2" editor="MACROZONES1_2" />
@@ -428,7 +428,7 @@
          </accepts>
       </cmds>
 </nodeDef> 
-   <nodeDef id="macrozone2" nls="nlsmacrozone2_2">
+   <nodeDef id="macrozone" nls="nlsmacrozone_2">
       <sts>
          <st id="GV1" editor="MACROZONES2_1" />
          <st id="GV2" editor="MACROZONES2_2" />

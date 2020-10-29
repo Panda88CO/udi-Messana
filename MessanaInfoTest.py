@@ -37,12 +37,18 @@ for key in systemGETKeys:
 print(DRIVERS)
 
 print('zones')
+ZONEDRIVER  = {}
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
     messana.getZoneCapability(zoneNbr)
     messana.updateZoneData(zoneNbr)
-    zoneName = 'zone'+str(zoneNbr)
+    zoneName = 'zone'
     messana.addNodeDefStruct(zoneNbr, 'zones', zoneName )
+    ZONEDRIVER[zoneNbr] = []
+    for key in systemGETKeys:
+        temp = messana.getnodeISYdriverInfo('zones', zoneNbr, key)
+        if  temp != {}:
+           ZONEDRIVER[zoneNbr].append(temp)
 
 messana.createSetupFiles('nodeTest.xml','editorTest.xml', 'nlsTest.txt')
 shutil.copy('./nodeTest.xml', './profile/nodedef/nodedefs.xml')
