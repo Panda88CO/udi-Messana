@@ -626,7 +626,7 @@ class MessanaInfo:
                                                                     ,'SET_STATUS'     : 'mStatus'
                                                                     ,'SET_ENERGYSAVE' : 'mEnergySaving'
                                                                     ,'SET_SETBACK'    : 'mSetback'}}
-                                    ,'KeyInfo' : {
+                                        ,'KeyInfo' : {
                                         'mName':{
                                              'GETstr': '/api/macrozone/name/'
                                             ,'PUTstr': '/api/macrozone/name/'
@@ -642,7 +642,7 @@ class MessanaInfo:
                                                      'nlsTEXT' : 'Zone Name' 
                                                     ,'nlsValues' : None 
                                                         }
-                                            } 
+                                                } 
                                         ,'mSetPoint': {
                                               'GETstr':'/api/macrozone/setpoint/'
                                              ,'PUTstr':'/api/macrozone/setpoint/'
@@ -671,7 +671,7 @@ class MessanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
-                                                     'nlsTEXT' : 'Macro Zone state'
+                                                     'nlsTEXT' : 'Macro Zone status'
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                     }
@@ -742,41 +742,183 @@ class MessanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         }, 
-                        'hc_changeover' :{ 'GETstr' : {
-                                                'mName':'/api/hc/name/'
-                                                ,'mMode':'/api/hc/mode/'
-                                                ,'mExcutiveSeason':'/api/hc/executiveSeason/'
-                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/'
+                        'hc_changeover' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_MODE': 'mMode'
+                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                    ,'KeyInfo' : {
+                                         'mName':{
+                                             'GETstr': '/api/hc/name/'
+                                            ,'PUTstr': '/api/hc/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Hot Cold CO Name' 
+                                                    ,'nlsValues' : None }
                                                 }
-                                            ,
-                                            'PUTstr':{
-                                                'mName':'/api/hc/name/'
-                                                ,'mMode':'/api/hc/mode/'
-                                                ,'mAdaptiveComfort':'/api/hc/adaptiveComfort/' 
+                                        ,'mMode':{
+                                             'GETstr': '/api/hc/mode/'
+                                            ,'PUTstr': '/api/hc/mode/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-2'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Hot Cold Mode' 
+                                                    ,'nlsValues' : {0:'Heat', 1:'Cool' , 2:'Auto' }
+                                                    }
                                                 }
-                                            ,
-                                            'active':None
-                                            ,
-                                            'data' : {}
-                        },
-                        'fan_coils' :{'GETstr' : {
-                                        'mName':'/api/fcu/name/'
-                                        ,'mState':'/api/fcu/state/'
-                                        ,'mCoolingSpeed':'/api/fcu/coolingSpeed/'
-                                        ,'mHeatingSpeed':'/api/fcu/heatingSpeed/'
-                                        ,'mType':'/api/fcu/type/'
-                                        ,'mAlarmOn':'/api/fcu/alarmOn/'
-                                        }
-                                     ,
-                                     'PUTstr':{                                        
-                                        'mName':'/api/fcu/name/'
-                                        ,'mState':'/api/fcu/state/'
-                                        ,'mCoolingSpeed':'/api/fcu/coolingSpeed/'
-                                        ,'mHeatingSpeed':'/api/fcu/heatingSpeed/'}
-                                     ,
-                                     'active':['mAlarmOn','mCoolingSpeed','mHeatingSpeed' ]
-                                     ,
-                                     'data' : {}
+                                        ,'mExcutiveSeason':{
+                                             'GETstr': '/api/hc/executiveSeason/'
+                                            ,'PUTstr': None
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-2'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Executive Season' 
+                                                    ,'nlsValues' : {0:'Heating', 1:'Cooling' }
+                                                    }          
+                                                }
+                                        ,'mAdaptiveComfort' :{
+                                             'GETstr': '/api/hc/adaptiveComfort/'
+                                            ,'PUTstr': '/api/hc/adaptiveComfort/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Adaptive Comfort' 
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                    }
+                                                }
+                                        ,'data' : {}
+                                        ,'NOcapability' : {}
+                                    }
+                                },
+
+                        'fan_coils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_MODE': 'mMode'
+                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                    ,'KeyInfo' : {
+                                         'mName':{
+                                             'GETstr': '/api/fcu/name/'
+                                            ,'PUTstr': '/api/fcu/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Fan Coil Name' 
+                                                    ,'nlsValues' : None }
+                                                }
+                                        ,'mStatus':{
+                                             'GETstr':'/api/fcu/status/'
+                                            ,'PUTstr':'/api/fcu/status/'                    
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Fan Coil Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                        }
+                                                    }                            
+                                        ,'mCoolingSpeed' :{
+                                             'GETstr':'/api/fcu/coolingSpeed/'
+                                            ,'PUTstr':'/api/fcu/coolingSpeed/'                   
+                                            ,'Active':'/api/fcu/coolingSpeed/'  
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
+                                                    ,'ISYsubset': None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0}
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Fan Coil Cooling Speed'
+                                                    ,'nlsValues' : None
+                                                        }
+                                                    }  
+                                        ,'mHeatingSpeed' :{
+                                             'GETstr':'/api/fcu/heatingSpeed/'
+                                            ,'PUTstr':'/api/fcu/heatingSpeed/'                   
+                                            ,'Active':'/api/fcu/heatingSpeed/'
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
+                                                    ,'ISYsubset': None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0}
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Fan Coil Heating Speed'
+                                                    ,'nlsValues' : None
+                                                        }
+                                                    }      
+                                        ,'mType':{
+                                             'GETstr':'/api/fcu/type/'
+                                            ,'PUTstr': None            
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-3'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Fan Coil Type'
+                                                    ,'nlsValues' : {0:'Radiator', 1:'Digital On/Off', 
+                                                                    2:'Digital variable', 3:'Analog'}       
+                                                    }
+                                                }                                                                                             
+                                        ,'mAlarmOn':{ 
+                                             'GETstr': '/api/fcu/alarmOn/'
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/fcu/alarmOn/'
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':'0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Alarm Status' 
+                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
+                                                        }  
+                                                    }
+                                            }                                       
+                                        ,'data' : {}
+                                        ,'NOcapability' : {}
                         },
                         'atus': {'GETstr' : {
                                     'mName':'/api/atu/name/'
@@ -817,8 +959,8 @@ class MessanaInfo:
                                     }
                                  ,
                                  'active':['mFlowLevel', 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
-                                 ,
-                                 'data' : {}
+                                 ,'data' : {}
+                                 ,'NOcapability' : {}
                         },
                         'energy_sources':{'GETstr' : {
                                             'mName':'/api/energySource/name/'
@@ -831,8 +973,8 @@ class MessanaInfo:
                                          'PUTstr':{'mName':'/api/energySource/name/'}
                                          ,
                                          'active':['mAlarmOn']
-                                         ,
-                                         'data' : {}
+                                         ,'data' : {}
+                                         ,'NOcapability' : {}
                         }, 
                         'buffer_tanks': {'GETstr' : {
                                             'mName':'/api/bufferTank/name/'
@@ -849,8 +991,8 @@ class MessanaInfo:
                                             }
                                          ,
                                          'active':['mTemp', 'mAlarmOn']
-                                         ,
-                                         'data' : {}
+                                         ,'data' : {}
+                                         ,'NOcapability' : {}
                         },
                         'domsetic_hot_waters': {'GETstr' : {
                                                     'mStatus':'/api/dhw/status/'
@@ -866,8 +1008,8 @@ class MessanaInfo:
                                                     }
                                                 ,
                                                 'active':['mTemp']
-                                                ,
-                                                'data' : {}
+                                                ,'data' : {}
+                                                ,'NOcapability' : {}
                         }
                     }
         

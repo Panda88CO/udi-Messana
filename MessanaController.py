@@ -31,15 +31,11 @@ class MessanaController(polyinterface.Controller):
             
             messana.updateSystemData()
             messana.addSystemDefStruct(self.address)
-            '''
-            messana.addSystemSendComand('DON' )
-            messana.addSystemSendComand('DOF' )
-            messana.addSystemAcceptComand( 'UPDATE' , '' )
-            messana.addSystemAcceptComand( 'SET_STATUS' , 'mStatus' )
-            messana.addSystemAcceptComand( 'SET_ENERGYSAVE' , 'mEnergySaving' )
-            messana.addSystemAcceptComand( 'SET_SETBACK' , 'mSetback' )
-            messana.createSetupFiles('sys_nodedefs.xml','sys_editor.xml', 'sys_nls.txt')
-            '''
+            DRIVERS = []
+            for key in self.systemGETKeys:
+                temp = messana.getSystemISYdriverInfo(key)
+            if  temp != {}:
+                DRIVERS.append(temp)
             self.poly.installprofile()
 
         except:
@@ -244,20 +240,4 @@ class MessanaController(polyinterface.Controller):
                 ,'SET_SETBACK' : setSetback 
                 }
 
-    drivers= []
-    '''
-    drivers = [  {'driver': 'GV1', 'value': 1, 'uom': 25}
-                ,{'driver': 'GV2', 'value': 1, 'uom': 25}
-                ,{'driver': 'GV3', 'value': 1, 'uom': 25}
-                ,{'driver': 'GV4', 'value': 1, 'uom': 25}
-                ,{'driver': 'GV5', 'value': 1, 'uom': 107}
-                ,{'driver': 'GV6', 'value': 1, 'uom': 107}     
-                ,{'driver': 'GV7', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV8', 'value': 1, 'uom': 107}          
-                ,{'driver': 'GV9', 'value': 1, 'uom': 107}
-                ,{'driver': 'GV10', 'value': 1, 'uom': 107} 
-                ,{'driver': 'GV11', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV12', 'value': 1, 'uom': 107}
-                ,{'driver': 'ALARM', 'value': 0, 'uom': 25}  
-                ]
-    '''
+  
