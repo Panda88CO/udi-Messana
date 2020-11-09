@@ -24,7 +24,6 @@ class MessanaController(polyinterface.Controller):
             messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             LOGGER.debug('MessanaInfo call done')
 
-
             self.system_GETKeys = messana.systemPullKeys()
             self.system_PUTKeys = messana.systemPushKeys()
             self.system_ActiveKeys = messana.systemActiveKeys()
@@ -34,8 +33,10 @@ class MessanaController(polyinterface.Controller):
             DRIVERS = []
             for key in self.systemGETKeys:
                 temp = messana.getSystemISYdriverInfo(key)
-            if  temp != {}:
-                DRIVERS.append(temp)
+                LOGGER.debug(str(temp))
+                if  temp != {}:
+                    DRIVERS.append(temp)
+
             self.poly.installprofile()
 
         except:
@@ -93,17 +94,18 @@ class MessanaController(polyinterface.Controller):
     def discover(self, command=None):
         LOGGER.debug('discover')
         LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
+        '''
         for zoneNbr in range(0,self.msysInfo['mZoneCount']):
             zoneKeys = []
             zoneKeys = self.messana.zonePullKeys(zoneNbr)
             if 'mName' in zoneKeys:
                 name = str(self.messana.pullZoneDataIndividual(zoneNbr, 'mName'))
                 address = 'zone'+str(zoneNbr)
-                LOGGER.debug('zone ' + str(zoneNbr)+' : name, Address' + name +' ' + address) 
+                LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
                 if not address in self.nodes:
                     self.addNode(MessanaZones(self, self.address, address, name, zoneNbr, self.messana))
 
-
+        '''   
         #count = 0
         '''for mySensor in self.mySensors.get_available_sensors():
             count = count+1

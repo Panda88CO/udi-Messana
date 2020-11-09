@@ -917,11 +917,57 @@ class MessanaInfo:
                                                         }  
                                                     }
                                             }                                       
-                                        ,'data' : {}
-                                        ,'NOcapability' : {}
+                                    ,'data' : {}
+                                    ,'NOcapability' : {}
                         },
-                        'atus': {'GETstr' : {
-                                    'mName':'/api/atu/name/'
+                        'atus': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_MODE': 'mMode'
+                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                    ,'KeyInfo' : {  
+                                        'mName':{
+                                             'GETstr': '/api/atu/name/'
+                                            ,'PUTstr': '/api/atu/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'ATU Name' 
+                                                    ,'nlsValues' : None }
+                                                }
+                                        ,'mFlowLevel':{}
+                                        ,'mStatus' : {}
+                                        ,'HRVOn' :{}
+                                        ,'mHUMOn':{}
+                                        ,'mNTDOn':{}
+                                        ,'mINTOn':{}
+                                        ,'mDehumudityStatus':{}
+                                        ,'mHumidityStatus':{}
+                                        ,'mHRVstatus':{}
+                                        ,'mIntegrationStatus':{}
+                                        ,'mAlarmOn':{}
+                                        ,'mAirTemp':{}
+                                        ,'mHumSetpointRH':{}
+                                        ,'mHumSetpointDP':{}
+                                        ,'mDehumSetpointRH':{}
+                                        ,'mDehumSetpointDP':{}
+                                        ,'mCurrentSetpointRH':{}
+                                        ,'mCurrentSetpointDP':{}
+                                    }
+                                    ,'data' : {}
+                                    ,'NOcapability' : {}
+                        },
+                            
+                            'GETstr' : {
+
+
+
+
                                     ,'mFlowLevel':'/api/atu/flowLevel/'
                                     ,'mStatus':'/api/atu/status/'
                                     ,'HRVOn':'/api/atu/hrvOn/'
