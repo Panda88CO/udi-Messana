@@ -963,12 +963,12 @@ class MessanaInfo:
                                     ,'NOcapability' : {}
                         },
                             
-                            'GETstr' : {
+                           { 'GETstr' : {
 
 
 
 
-                                    ,'mFlowLevel':'/api/atu/flowLevel/'
+                                    'mFlowLevel':'/api/atu/flowLevel/'
                                     ,'mStatus':'/api/atu/status/'
                                     ,'HRVOn':'/api/atu/hrvOn/'
                                     ,'mHUMOn':'/api/atu/humOn/'
