@@ -1374,6 +1374,8 @@ class MessanaInfo:
                                 self.keyList['mINTOn'] = 1
                             else:
                                 self.keyList['mINTOn'] = 0
+
+                   #need to update values              
                         elif key == 'freecooling':
                             if tempKeys['freecooling'] == 'true':
                                 self.keyList['mINTOn'] = 1
