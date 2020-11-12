@@ -817,8 +817,9 @@ class MessanaInfo:
 
                         'fan_coils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_MODE': 'mMode'
-                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                                        ,'accepts' : {  'SET_STATUS': 'mStatus'
+                                                                        ,'SET_COOLING_SPEED' : 'mCoolingSpeed' 
+                                                                        ,'SET_HEATING_SPEED' : 'mHeatingSpeed'  }}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/fcu/name/'
@@ -922,8 +923,8 @@ class MessanaInfo:
                         },
                         'atus': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_MODE': 'mMode'
-                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                                        ,'accepts' : {  'SET_STATUS': 'mSTATUS'
+                                                                        ,'SET_HRV_ON' : 'mHRVOn' }}
                                     ,'KeyInfo' : {  
                                         'mName':{
                                              'GETstr': '/api/atu/name/'
@@ -942,7 +943,7 @@ class MessanaInfo:
                                                 }
                                         ,'mFlowLevel':{}
                                         ,'mStatus' : {}
-                                        ,'HRVOn' :{}
+                                        ,'mHRVOn' :{}
                                         ,'mHUMOn':{}
                                         ,'mNTDOn':{}
                                         ,'mINTOn':{}
@@ -958,6 +959,7 @@ class MessanaInfo:
                                         ,'mDehumSetpointDP':{}
                                         ,'mCurrentSetpointRH':{}
                                         ,'mCurrentSetpointDP':{}
+                                        ,'mCapability':{}
                                     }
                                     ,'data' : {}
                                     ,'NOcapability' : {}
@@ -986,6 +988,7 @@ class MessanaInfo:
                                     ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
                                     ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
                                     ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
+                                    ,'mCapability':'/api/atu/capability/'
                                     }
                                  ,
                                  'PUTstr':{                                    
