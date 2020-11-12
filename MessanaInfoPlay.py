@@ -964,7 +964,7 @@ class MessanaInfo:
                                     ,'data' : {}
                                     ,'NOcapability' : {}
                         },
-                            
+                            '''
                            { 'GETstr' : {
 
 
@@ -972,7 +972,7 @@ class MessanaInfo:
 
                                     'mFlowLevel':'/api/atu/flowLevel/'
                                     ,'mStatus':'/api/atu/status/'
-                                    ,'HRVOn':'/api/atu/hrvOn/'
+                                    ,'mHRVOn':'/api/atu/hrvOn/'
                                     ,'mHUMOn':'/api/atu/humOn/'
                                     ,'mNTDOn':'/api/atu/ntdOn/'
                                     ,'mINTOn':'/api/atu/intOn/'
@@ -995,7 +995,7 @@ class MessanaInfo:
                                     'mName':'/api/atu/name/'
                                     ,'mFlowLevel':'/api/atu/flowLevel/'
                                     ,'mStatus':'/api/atu/status/'
-                                    ,'HRVOn':'/api/atu/hrvOn/'
+                                    ,'mHRVOn':'/api/atu/hrvOn/'
                                     ,'mHUMOn':'/api/atu/humOn/'
                                     ,'mNTDOn':'/api/atu/ntdOn/'
                                     ,'mINTOn':'/api/atu/intOn/'
@@ -1008,9 +1008,11 @@ class MessanaInfo:
                                     }
                                  ,
                                  'active':['mFlowLevel', 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
+                           }
                                  ,'data' : {}
                                  ,'NOcapability' : {}
-                        },
+                            '''
+                        
                         'energy_sources':{'GETstr' : {
                                             'mName':'/api/energySource/name/'
                                             ,'mStatus':'/api/energySource/status/'
@@ -1355,6 +1357,39 @@ class MessanaInfo:
                             self.keyList['mAirQuality'] = tempKeys['co2']            
                         elif key == 'voc':
                             self.keyList['mVoc'] = tempKeys['voc']   
+                        elif key == 'dehumidification':
+                            self.keyList['mDehumudityStatus'] = tempKeys['dehumidification'] 
+                        elif key == 'humidification':
+                            if tempKeys['humidification'] == 'true':
+                                self.keyList['mHUMOn'] = 1
+                            else:
+                                self.keyList['mHUMOn'] = 0
+                        elif key == 'HRV':
+                            if tempKeys['HRV'] == 'true':
+                                self.keyList['mHRVOn'] = 1
+                            else:
+                                self.keyList['mHRVOn'] = 0
+                        elif key == 'convective integration':
+                            if tempKeys['convective integration'] == 'true':
+                                self.keyList['mINTOn'] = 1
+                            else:
+                                self.keyList['mINTOn'] = 0
+                        elif key == 'freecooling':
+                            if tempKeys['freecooling'] == 'true':
+                                self.keyList['mINTOn'] = 1
+                            else:
+                                self.keyList['mINTOn'] = 0                                                    
+                        elif key == 'exhaust air extraction':
+                            if tempKeys['exhaust air extraction'] == 'true':
+                                self.keyList['mINTOn'] = 1
+                            else:
+                                self.keyList['mINTOn'] = 0    
+                                                                               
+  "HRV": "true",
+  "convective integration": "true",
+  "freecooling": "false",
+  "exhaust air extraction": "false"
+
                         else:
                             print(key + ' unknown keyword')
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
