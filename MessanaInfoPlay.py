@@ -982,220 +982,243 @@ class MessanaInfo:
                                                     ,'ISYmax':None
                                                     ,'ISYsubset': '0-1'
                                                     ,'ISYstep':None
-                                            ,'ISYnls': {   
                                                     ,'ISYprec':None }
+                                            ,'ISYnls': {   
                                                      'nlsTEXT' : 'Heat Recovery Status'
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mHUMOn':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mHUMOn':{                                             
+                                             'GETstr': '/api/atu/humOn/'
+                                            ,'PUTstr': '/api/atu/humOn/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom': 25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset': '0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Humidufucation' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mNTDOn':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mNTDOn':{                                             
+                                             'GETstr': '/api/atu/ntdOn/'
+                                            ,'PUTstr': '/api/atu/ntdOn/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom': 25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                      'nlsTEXT' : 'NTD Dehumidification??' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mINTOn':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mINTOn':{                                             
+                                             'GETstr': '/api/atu/intOn/'
+                                            ,'PUTstr': '/api/atu/intOn/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom': 25 
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Convective Integration' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mDehumudityStatus':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
+                                        ,'mDehumudityStatus':{                                             
+                                             'GETstr': '/api/atu/dehumidificationStatus/'
+                                            ,'PUTstr': '/api/atu/dehumidificationStatus/'
+                                            ,'Active': '/api/atu/dehumidificationStatus/' 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                      'nlsTEXT' : 'Dehumidification Status' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mHumidityStatus':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
+                                        ,'mHumidityStatus':{                                             
+                                             'GETstr': '/api/atu/humidificationStatus/'
+                                            ,'PUTstr': '/api/atu/humidificationStatus/'
+                                            ,'Active': '/api/atu/humidificationStatus/' 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                      'nlsTEXT' : 'Humidification Status' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mHRVstatus':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
+                                        ,'mHRVstatus':{                                             
+                                             'GETstr': '/api/atu/hrvStatus/'
+                                            ,'PUTstr': '/api/atu/hrvStatus/'
+                                            ,'Active': '/api/atu/hrvStatus/'
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                      'nlsTEXT' : 'HRV Status' 
+                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                    }
-                                        ,'mIntegrationStatus':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
+                                        ,'mIntegrationStatus':{                                             
+                                             'GETstr': '/api/atu/integrationStatus/'
+                                            ,'PUTstr': '/api/atu/integrationStatus/'
+                                            ,'Active': '/api/atu/integrationStatus/'
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Integration Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }  
                                                         }
                                                    }
-                                        ,'mAlarmOn':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
+                                        ,'mAlarmOn':{                                             
+                                             'GETstr': '/api/atu/alarmOn/'
+                                            ,'PUTstr': '/api/atu/alarmOn/'
+                                            ,'Active': '/api/atu/alarmOn/' 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
+                                                     'ISYuom':25
                                                     ,'ISYmin':None
                                                     ,'ISYmax':None
-                                                    ,'ISYsubset':None
+                                                    ,'ISYsubset':'0-1'
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Alarm Status' 
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }  
                                                         }
                                                    }
-                                        ,'mAirTemp':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mAirTemp':{                                            
+                                             'GETstr': '/api/atu/airTemperature/'
+                                            ,'PUTstr': '/api/atu/airTemperature/'
+                                            ,'Active': '/api/atu/airTemperature/'
+                                            ,'ISYeditor':{
+                                                     'ISYuom':17
+                                                    ,'ISYmin':40
+                                                    ,'ISYmax':120
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0}
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Air Temperature (flow)' 
+                                                    }
+                                                   }
+                                        ,'mHumSetpointRH':{                                             
+                                             'GETstr': '/api/atu/humidSetpointRH/'
+                                            ,'PUTstr': '/api/atu/humidSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Humidity Setpoint RH' 
                                                         }
                                                    }
-                                        ,'mHumSetpointRH':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mHumSetpointDP':{                                             
+                                             'GETstr': '/api/atu/humidSetpointDP/'
+                                            ,'PUTstr': '/api/atu/humidSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1  }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Humidity Setpoint RH' 
                                                         }
                                                    }
-                                        ,'mHumSetpointDP':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mDehumSetpointRH':{                                             
+                                             'GETstr': '/api/atu/dehumSetpointRH/'
+                                            ,'PUTstr': '/api/atu/dehumSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1  }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Deumidity Setpoint RH' 
                                                         }
                                                    }
-                                        ,'mDehumSetpointRH':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mDehumSetpointDP':{    
+                                             'GETstr': '/api/atu/dehumidSetpointDP/'
+                                            ,'PUTstr': '/api/atu/dehumidSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1  }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Dehumidity Setpoint DP' 
                                                         }
                                                    }
-                                        ,'mDehumSetpointDP':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mCurrentSetpointRH':{                                             
+                                             'GETstr': '/api/atu/currentSetpointRH/'
+                                            ,'PUTstr': '/api/atu/currentSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1  }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Current Setpoint RH' 
                                                         }
                                                    }
-                                        ,'mCurrentSetpointRH':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
+                                        ,'mCurrentSetpointDP':{                                             
+                                             'GETstr': '/api/atu/currentSetpointDP/'
+                                            ,'PUTstr': '/api/atu/currentSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
+                                                     'ISYuom':51
+                                                    ,'ISYmin':0
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1  }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
-                                                        }
-                                                   }
-                                        ,'mCurrentSetpointDP':{                                             'GETstr': '/api/atu/name/'
-                                            ,'PUTstr': '/api/atu/name/'
-                                            ,'Active': None 
-                                            ,'ISYeditor':{
-                                                     'ISYuom':None
-                                                    ,'ISYmin':None
-                                                    ,'ISYmax':None
-                                                    ,'ISYsubset':None
-                                                    ,'ISYstep':None
-                                                    ,'ISYprec':None }
-                                            , 'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Name' 
+                                                     'nlsTEXT' : 'Current Setpoint RH' 
                                                         }
                                                    }
                                         ,'mCapability': {
@@ -1213,51 +1236,11 @@ class MessanaInfo:
                                                      'nlsTEXT' : None
                                                         }
                                                     }
-
+                                    }
                                     ,'data' : {}
-                                    ,'NOcapability' : {}
-                                
+                                    ,'NOcapability' : {}                  
                         },
-                            '''
-                           { 'GETstr' : {
-                                    ,'mHRVOn':'/api/atu/hrvOn/'
-                                    ,'mHUMOn':'/api/atu/humOn/'
-                                    ,'mNTDOn':'/api/atu/ntdOn/'
-                                    ,'mINTOn':'/api/atu/intOn/'
-                                    ,'mDehumudityStatus':'/api/atu/dehumidificationStatus/'
-                                    ,'mHumidityStatus':'/api/atu/humidificationStatus/'
-                                    ,'mHRVstatus':'/api/atu/status/'
-                                    ,'mIntegrationStatus':'/api/atu/integrationStatus/'
-                                    ,'mAlarmOn':'/api/atu/alarmOn/'
-                                    ,'mAirTemp':'/api/atu/airTemperature/'
-                                    ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
-                                    ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
-                                    ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
-                                    ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
-                                    ,'mCapability':'/api/atu/capability/'
-                                    }
-                                 ,
-                                 'PUTstr':{                                    
-                                    ,'mHRVOn':'/api/atu/hrvOn/'
-                                    ,'mHUMOn':'/api/atu/humOn/'
-                                    ,'mNTDOn':'/api/atu/ntdOn/'
-                                    ,'mINTOn':'/api/atu/intOn/'
-                                    ,'mHumSetpointRH':'/api/atu/humidSetpointRH/'
-                                    ,'mHumSetpointDP':'/api/atu/humidSetpointDP/'
-                                    ,'mDehumSetpointRH':'/api/atu/dehumSetpointRH/'
-                                    ,'mDehumSetpointDP':'/api/atu/dehumSetpointDP/'
-                                    ,'mCurrentSetpointRH':'/api/atu/currentSetpointRH/'
-                                    ,'mCurrentSetpointDP':'/api/atu/currentSetpointDP/'
-                                    }
-                                 ,
-                                 'active':[ 'mAlarmOn', 'mAirTemp', 'mCurrentSetpointRH', 'mCurrentSetpointDP'  ]
-                           }
-                                 ,'data' : {}
-                                 ,'NOcapability' : {}
-                            '''
-                        
+      
                         'energy_sources':{'GETstr' : {
                                             'mName':'/api/energySource/name/'
                                             ,'mStatus':'/api/energySource/status/'
@@ -1610,15 +1593,13 @@ class MessanaInfo:
                         elif key == 'HRV':
                             self.keyList['mHRVOn'] = tempKeys['HRV']
                         elif key == 'convective integration':
-                                self.keyList['mINTOn'] = tempKeys['convective integration']
-
-
-                   #need to update values              
+                            self.keyList['mINTOn'] = tempKeys['convective integration']           
                         elif key == 'freecooling':
-                            self.keyList['mINTOn'] = tempKeys['freecooling']                                               
+                            # Not currently supported                                              
+                            None
                         elif key == 'exhaust air extraction':
-                            self.keyList['mINTOn'] = tempKeys['exhaust air extraction']
-
+                            # Not currently supported  
+                            None
                         else:
                             print(key + ' unknown keyword')
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
