@@ -745,7 +745,7 @@ class MessanaInfo:
                         'hc_changeover' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_MODE': 'mMode'
-                                                                        ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
+                                                                       ,'SET_ADAPTIVE_COMFORT' : 'mAdaptiveComfort' }}
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/hc/name/'
@@ -924,7 +924,18 @@ class MessanaInfo:
                         'atus': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': 'mSTATUS'
-                                                                        ,'SET_HRV_ON' : 'mHRVOn' }}
+                                                                        ,'SET_HRV_ON' : 'mHRVOn'
+                                                                        ,'SET_FLOWLEVEL' :'mFlowLevel'
+                                                                        ,'SET_HUM' :'mHUMOn'
+                                                                        ,'SET_NTD' :'mNTDOn'
+                                                                        ,'SET_INT' :'mINTOn'      
+                                                                        ,'SET_HUM_SP_RH' :'mHumSetpointRH'     
+                                                                        ,'SET_HUM_SP_DP' :'mHumSetpointDP'     
+                                                                        ,'SET_DEHUM_SP_RH' :'mDehumSetpointRH'     
+                                                                        ,'SET_DEHUM_SP_DP' :'mDehumSetpointDP'     
+                                                                        ,'SET_CURR_SP_RH' :'mCurrentSetpointRH'     
+                                                                        ,'SET_CURR_SP_DP' :'mCurrentSetpointDP'
+                                                                        }}
                                     ,'KeyInfo' : {  
                                         'mName':{
                                              'GETstr': '/api/atu/name/'
@@ -958,7 +969,7 @@ class MessanaInfo:
                                                    }
                                         ,'mStatus' : {                                             
                                              'GETstr':'/api/atu/status/'
-                                            ,'PUTstr':'/api/atu/status/'                    
+                                            ,'PUTstr':'/api/atu/status/'                
                                             ,'Active': None 
                                             ,'ISYeditor':{   
                                                      'ISYuom': 25
@@ -1038,7 +1049,7 @@ class MessanaInfo:
                                                    }
                                         ,'mDehumudityStatus':{                                             
                                              'GETstr': '/api/atu/dehumidificationStatus/'
-                                            ,'PUTstr': '/api/atu/dehumidificationStatus/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/dehumidificationStatus/' 
                                             ,'ISYeditor':{
                                                      'ISYuom':25
@@ -1054,7 +1065,7 @@ class MessanaInfo:
                                                    }
                                         ,'mHumidityStatus':{                                             
                                              'GETstr': '/api/atu/humidificationStatus/'
-                                            ,'PUTstr': '/api/atu/humidificationStatus/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/humidificationStatus/' 
                                             ,'ISYeditor':{
                                                      'ISYuom':25
@@ -1070,7 +1081,7 @@ class MessanaInfo:
                                                    }
                                         ,'mHRVstatus':{                                             
                                              'GETstr': '/api/atu/hrvStatus/'
-                                            ,'PUTstr': '/api/atu/hrvStatus/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/hrvStatus/'
                                             ,'ISYeditor':{
                                                      'ISYuom':25
@@ -1086,7 +1097,7 @@ class MessanaInfo:
                                                    }
                                         ,'mIntegrationStatus':{                                             
                                              'GETstr': '/api/atu/integrationStatus/'
-                                            ,'PUTstr': '/api/atu/integrationStatus/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/integrationStatus/'
                                             ,'ISYeditor':{
                                                      'ISYuom':25
@@ -1102,7 +1113,7 @@ class MessanaInfo:
                                                    }
                                         ,'mAlarmOn':{                                             
                                              'GETstr': '/api/atu/alarmOn/'
-                                            ,'PUTstr': '/api/atu/alarmOn/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/alarmOn/' 
                                             ,'ISYeditor':{
                                                      'ISYuom':25
@@ -1118,7 +1129,7 @@ class MessanaInfo:
                                                    }
                                         ,'mAirTemp':{                                            
                                              'GETstr': '/api/atu/airTemperature/'
-                                            ,'PUTstr': '/api/atu/airTemperature/'
+                                            ,'PUTstr': None
                                             ,'Active': '/api/atu/airTemperature/'
                                             ,'ISYeditor':{
                                                      'ISYuom':17
@@ -1129,7 +1140,8 @@ class MessanaInfo:
                                                     ,'ISYprec':0}
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Air Temperature (flow)' 
-                                                    }
+                                                     ,'nlsValues' : None 
+                                                        }
                                                    }
                                         ,'mHumSetpointRH':{                                             
                                              'GETstr': '/api/atu/humidSetpointRH/'
@@ -1144,6 +1156,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Humidity Setpoint RH' 
+                                                     ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mHumSetpointDP':{                                             
@@ -1159,6 +1172,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1  }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Humidity Setpoint RH' 
+                                                     ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mDehumSetpointRH':{                                             
@@ -1174,6 +1188,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1  }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Deumidity Setpoint RH' 
+                                                     ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mDehumSetpointDP':{    
@@ -1189,6 +1204,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1  }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Dehumidity Setpoint DP' 
+                                                     ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mCurrentSetpointRH':{                                             
@@ -1204,6 +1220,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1  }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Setpoint RH' 
+                                                     ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mCurrentSetpointDP':{                                             
@@ -1219,6 +1236,7 @@ class MessanaInfo:
                                                     ,'ISYprec':1  }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Current Setpoint RH' 
+                                                    ,'nlsValues' : None 
                                                         }
                                                    }
                                         ,'mCapability': {
@@ -1234,64 +1252,269 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : None
+                                                    ,'nlsValues' : None 
                                                         }
                                                     }
                                     }
                                     ,'data' : {}
                                     ,'NOcapability' : {}                  
                         },
-      
-                        'energy_sources':{'GETstr' : {
-                                            'mName':'/api/energySource/name/'
-                                            ,'mStatus':'/api/energySource/status/'
-                                            ,'mDHWstatus':'/api/energySource/dhwStatus/'
-                                            ,'mType':'/api/energySource/type/'
-                                            ,'mAlarmOn':'/api/energySource/alarmOn/' 
-                                            }
-                                         ,
-                                         'PUTstr':{'mName':'/api/energySource/name/'}
-                                         ,
-                                         'active':['mAlarmOn']
+                        'energy_sources':{'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_STATUS': 'mStatus'}
+                                                                        }
+                                    ,'KeyInfo' : {  
+                                        'mName':{
+                                             'GETstr': '/api/energySource/name/'
+                                            ,'PUTstr': '/api/energySource/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Energy Source Name' 
+                                                    ,'nlsValues' : None }
+                                                }
+                                        ,'mStatus' : {                                             
+                                             'GETstr':'/api/energySource/status/'
+                                            ,'PUTstr': None                  
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'ATU Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
+                                                    }
+                                        ,'mDHWstatus' : {                                             
+                                             'GETstr':'/api/energySource/dhwStatus/'
+                                            ,'PUTstr': None                  
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'ATU Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
+                                                    }
+                                        ,'mType' : {                                             
+                                             'GETstr':'/api/energySource/type/'
+                                            ,'PUTstr': None                  
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-3'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'ATU Status'
+                                                    ,'nlsValues' : {0:'Broiler', 1:' H.P. Cooling Only'
+                                                                    , 2: 'H.P. Heating Only', 3:'H.P. Heating and Cooling' }
+                                                       }
+                                                    }
+                                        ,'mAlarmOn' : {                                             
+                                             'GETstr':'/api/energySource/alarmOn/'
+                                            ,'PUTstr': None                  
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'ATU Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
+                                                    }  
+                                        }                                                                                                      
                                          ,'data' : {}
                                          ,'NOcapability' : {}
+                                        
                         }, 
-                        'buffer_tanks': {'GETstr' : {
-                                            'mName':'/api/bufferTank/name/'
-                                            ,'mStatus':'/api/bufferTank/status/'
-                                            ,'mMode':'/api/bufferTank/mode/'
-                                            ,'mTemp':'/api/bufferTank/temperature/'
-                                            ,'mAlarmOn':'/api/bufferTank/alarmOn/'
-                                            }
-                                         ,
-                                         'PUTstr':{
-                                            'mName':'/api/bufferTank/name/'
-                                            ,'mStatus':'/api/bufferTank/status/'
-                                            ,'mMode':'/api/bufferTank/mode/' 
-                                            }
-                                         ,
-                                         'active':['mTemp', 'mAlarmOn']
+                        'buffer_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_STATUS'    : 'mStatus'
+                                                                       ,'SET_MODE'      : 'mMode'
+                                                                       ,'SET_TEMPMODE'  :'mTempMode'}
+                                                                        }
+                                    ,'KeyInfo' : {  
+                                        'mName':{
+                                             'GETstr': '/api/bufferTank/name/'
+                                            ,'PUTstr': '/api/bufferTank/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Name' 
+                                                    ,'nlsValues' : None }
+                                                }
+                                        ,'mStatus' : {                                             
+                                             'GETstr':'/api/bufferTank/status/'
+                                            ,'PUTstr':'/api/bufferTank/status/'                
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
+                                                    }
+                                         ,'mMode' : {                                             
+                                             'GETstr':'/api/bufferTank/mode/'
+                                            ,'PUTstr':'/api/bufferTank/mode/'                
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Mode'
+                                                    ,'nlsValues' : {0:'Manual', 1:'Automatic' }
+                                                       }
+                                                    }                           
+                                          ,'mTempMode' : {                                             
+                                             'GETstr':'/api/bufferTank/tempMode/'
+                                            ,'PUTstr':'/api/bufferTank/tempMode/'                
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-2'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Tempperature Mode'
+                                                    ,'nlsValues' : {0:'Fixed Temp', 1:'Follow Loads', 2:'Outdoor Temp Compensation' }
+                                                       }
+                                                    }                                               
+                                         ,'mAlarmOn' : {                                             
+                                             'GETstr':'/api/bufferTank/alarmOn/'
+                                            ,'PUTstr':None              
+                                            ,'Active':None
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Alarm'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
+                                                    }   
+                                        }                        
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         },
-                        'domsetic_hot_waters': {'GETstr' : {
-                                                    'mStatus':'/api/dhw/status/'
-                                                    ,'mName':'/api/dhw/name/'
-                                                    ,'mTemp':'/api/dhw/temperature/'
-                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/' 
+                        'domsetic_hot_waters': { 'ISYnode':{   'nlsICON' :'GenericCtl'
+                                                        ,'sends'   : []
+                                                        ,'accepts' : {  'SET_STATUS': 'mStatus'
+                                                                        ,'SET_TARGETTEMP': 'mTargetTemp'
+                                                        }
+                                                                        }
+                                    ,'KeyInfo' : {  
+                                        'mName':{
+                                             'GETstr': '/api/dhw/name/'
+                                            ,'PUTstr': '/api/dhw/name/'
+                                            ,'Active': None 
+                                            ,'ISYeditor':{
+                                                     'ISYuom':None
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Domestic Hot Water Name' 
+                                                    ,'nlsValues' : None }
+                                                }
+                                        ,'mStatus' : {                                             
+                                             'GETstr':'/api/dhw/status/'
+                                            ,'PUTstr':'/api/dhw/status/'              
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom': 25
+                                                    ,'ISYmin':None
+                                                    ,'ISYmax':None
+                                                    ,'ISYsubset': '0-1'
+                                                    ,'ISYstep':None
+                                                    ,'ISYprec':None }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Domestic Hot Water Status'
+                                                    ,'nlsValues' : {0:'Off', 1:'On' }
+                                                       }
                                                     }
-                                                ,
-                                                'PUTstr':{ 
-                                                    'mStatus':'/api/dhw/status/'
-                                                    ,'mName':'/api/dhw/name/'
-                                                    ,'mTargetTemp':'/api/dhw/targetTemperature/'
-                                                    }
-                                                ,
-                                                'active':['mTemp']
-                                                ,'data' : {}
-                                                ,'NOcapability' : {}
+                                        ,'mTemp' : {                                             
+                                             'GETstr':'/api/dhw/temperature/'
+                                            ,'PUTstr':None             
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':17
+                                                    ,'ISYmin':-40
+                                                    ,'ISYmax':150
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Domestic Hot Water Temp'
+                                                    ,'nlsValues' : None
+                                                       }
+                                                    }                            
+                                        ,'mTargetTemp' : {                                             
+                                             'GETstr':'/api/dhw/targetTemperature/'
+                                            ,'PUTstr':'/api/dhw/targetTemperature/'              
+                                            ,'Active': None 
+                                            ,'ISYeditor':{   
+                                                     'ISYuom':17
+                                                    ,'ISYmin':-40
+                                                    ,'ISYmax':150
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':1 }
+                                            ,'ISYnls': {    
+                                                     'nlsTEXT' : 'Domestic Hot Water Target Temp'
+                                                    ,'nlsValues' : None
+                                                       }
+                                                    } 
+                                        }                              
+                                        ,'data' : {}
+                                        ,'NOcapability' : {}
                         }
                     
-            }
+                }
         
         '''
         self.setupStruct = {'nodeDef': nodeNbr: { 'nodeDef':{}
