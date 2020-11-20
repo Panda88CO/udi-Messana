@@ -1347,7 +1347,6 @@ class MessanaInfo:
                                         }                                                                                                      
                                          ,'data' : {}
                                          ,'NOcapability' : {}
-                                        
                         }, 
                         'buffer_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1566,7 +1565,36 @@ class MessanaInfo:
             macrozoneName = 'macrozone'
             self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
 
-        #more modules mnissing 
+        for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
+            self.getAtuCapability(atuNbr)
+            self.updateATUData(atuNbr)
+            atuName = 'atu'
+            self.addNodeDefStruct(atuNbr, 'atus', atuName )
+ 
+        for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
+            self.updateDHWData(dhwNbr)
+            dhwName = 'dhw'
+            self.addNodeDefStruct(dhwNbr, 'domsetic_hot_waters', dhwName )
+
+        for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
+            self.updateFanCoilData(fcNbr)
+            fcName = 'fancoil'
+            self.addNodeDefStruct(fcNbr, 'fan_coils', fcName )
+        '''
+        for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
+            self.updateEnergySourceData(esNbr)
+            esName = 'energysource'
+            self.addNodeDefStruct(esNbr, 'energy_sources', esName )           
+        '''
+        for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
+            self.updateBufferTankData(btNbr)
+            btName = 'buffertanks'
+            self.addNodeDefStruct(btNbr, 'buffer_tanks', btName )     
+
+        for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
+            self.updateHC_COData(hccoNbr)
+            hccoName = 'hc_changeover'
+            self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )            
 
         self.createSetupFiles('./profile/nodedef/nodeTest.xml','./profile/editor/editorTest.xml', './profile/nls/en_us.txt')
 
@@ -2335,6 +2363,9 @@ class MessanaInfo:
     def updateATUData(self, ATUNbr):
         print('updatATUData: ' + str(ATUNbr))
         return(self.updateNodeData(ATUNbr, 'atus'))
+
+    def getAtuCapability(self, atuNbr): 
+        self.getNodeCapability('atus', atuNbr)
 
     def pullATUDataIndividual(self, ATUNbr, mKey): 
         print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
