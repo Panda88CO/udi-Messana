@@ -448,4 +448,132 @@
          </accepts>
       </cmds>
 </nodeDef> 
+   <nodeDef id="macrozone" nls="nlsmacrozone_3">
+      <sts>
+         <st id="GV1" editor="MACROZONES3_1" />
+         <st id="GV2" editor="MACROZONES3_2" />
+         <st id="GV3" editor="MACROZONES3_3" />
+         <st id="GV4" editor="MACROZONES3_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="MACROZONES3_2" init="GV2"/> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" /> 
+            <cmd id="SET_SETBACK" /> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="atu" nls="nlsatu_0">
+      <sts>
+         <st id="GV1" editor="ATUS0_1" />
+         <st id="GV2" editor="ATUS0_2" />
+         <st id="GV3" editor="ATUS0_3" />
+         <st id="GV4" editor="ATUS0_4" />
+         <st id="GV5" editor="ATUS0_5" />
+         <st id="GV6" editor="ATUS0_6" />
+         <st id="GV7" editor="ATUS0_7" />
+         <st id="GV8" editor="ATUS0_8" />
+         <st id="GV9" editor="ATUS0_9" />
+         <st id="GV10" editor="ATUS0_10" />
+         <st id="GV11" editor="ATUS0_11" />
+         <st id="GV12" editor="ATUS0_12" />
+         <st id="GV13" editor="ATUS0_13" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" /> 
+            <cmd id="SET_HRV_ON" /> 
+            <cmd id="SET_FLOWLEVEL" /> 
+               <p id="" editor="ATUS0_1" init="GV1"/> 
+            </cmd> 
+            <cmd id="SET_HUM" /> 
+            <cmd id="SET_NTD" /> 
+               <p id="" editor="ATUS0_3" init="GV3"/> 
+            </cmd> 
+            <cmd id="SET_INT" /> 
+            <cmd id="SET_HUM_SP_RH" /> 
+               <p id="" editor="ATUS0_9" init="GV9"/> 
+            </cmd> 
+            <cmd id="SET_HUM_SP_DP" /> 
+               <p id="" editor="ATUS0_10" init="GV10"/> 
+            </cmd> 
+            <cmd id="SET_DEHUM_SP_RH" /> 
+               <p id="" editor="ATUS0_11" init="GV11"/> 
+            </cmd> 
+            <cmd id="SET_DEHUM_SP_DP" /> 
+            <cmd id="SET_CURR_SP_RH" /> 
+               <p id="" editor="ATUS0_12" init="GV12"/> 
+            </cmd> 
+            <cmd id="SET_CURR_SP_DP" /> 
+               <p id="" editor="ATUS0_13" init="GV13"/> 
+            </cmd> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="energysource" nls="nlsenergysource_0">
+      <sts>
+         <st id="GV1" editor="ENERGY_SOURCES0_1" />
+         <st id="GV2" editor="ENERGY_SOURCES0_2" />
+         <st id="GV3" editor="ENERGY_SOURCES0_3" />
+         <st id="GV4" editor="ENERGY_SOURCES0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="ENERGY_SOURCES0_1" init="GV1"/> 
+            </cmd> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="buffertanks" nls="nlsbuffertanks_0">
+      <sts>
+         <st id="GV1" editor="BUFFER_TANKS0_1" />
+         <st id="GV2" editor="BUFFER_TANKS0_2" />
+         <st id="GV3" editor="BUFFER_TANKS0_3" />
+         <st id="GV4" editor="BUFFER_TANKS0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" /> 
+               <p id="" editor="BUFFER_TANKS0_1" init="GV1"/> 
+            </cmd> 
+            <cmd id="SET_MODE" /> 
+               <p id="" editor="BUFFER_TANKS0_2" init="GV2"/> 
+            </cmd> 
+            <cmd id="SET_TEMPMODE" /> 
+               <p id="" editor="BUFFER_TANKS0_3" init="GV3"/> 
+            </cmd> 
+         </accepts>
+      </cmds>
+</nodeDef> 
+   <nodeDef id="hc_changeover" nls="nlshc_changeover_0">
+      <sts>
+         <st id="GV1" editor="HC_CHANGEOVER0_1" />
+         <st id="GV2" editor="HC_CHANGEOVER0_2" />
+         <st id="GV3" editor="HC_CHANGEOVER0_3" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_MODE" /> 
+               <p id="" editor="HC_CHANGEOVER0_1" init="GV1"/> 
+            </cmd> 
+            <cmd id="SET_ADAPTIVE_COMFORT" /> 
+               <p id="" editor="HC_CHANGEOVER0_3" init="GV3"/> 
+            </cmd> 
+         </accepts>
+      </cmds>
+</nodeDef> 
 </nodeDefs> 

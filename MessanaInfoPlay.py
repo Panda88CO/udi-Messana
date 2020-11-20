@@ -810,11 +810,10 @@ class MessanaInfo:
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                     }
                                                 }
+                                        }   
                                         ,'data' : {}
                                         ,'NOcapability' : {}
-                                    }
                         },
-
                         'fan_coils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': 'mStatus'
@@ -1572,31 +1571,36 @@ class MessanaInfo:
             self.addNodeDefStruct(atuNbr, 'atus', atuName )
  
         for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
+            self.getDHWCapability(dhwNbr)
             self.updateDHWData(dhwNbr)
             dhwName = 'dhw'
             self.addNodeDefStruct(dhwNbr, 'domsetic_hot_waters', dhwName )
 
         for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
+            self.getFanCoilCapability(fcNbr)
             self.updateFanCoilData(fcNbr)
             fcName = 'fancoil'
             self.addNodeDefStruct(fcNbr, 'fan_coils', fcName )
-        '''
+       
         for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
+            self.getEnergySourceCapability(esNbr)
             self.updateEnergySourceData(esNbr)
             esName = 'energysource'
             self.addNodeDefStruct(esNbr, 'energy_sources', esName )           
-        '''
+        
         for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
+            self.getBufferTankCapability(btNbr)
             self.updateBufferTankData(btNbr)
             btName = 'buffertanks'
             self.addNodeDefStruct(btNbr, 'buffer_tanks', btName )     
 
         for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
+            self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
             hccoName = 'hc_changeover'
             self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )            
 
-        self.createSetupFiles('./profile/nodedef/nodeTest.xml','./profile/editor/editorTest.xml', './profile/nls/en_us.txt')
+        self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
 
         '''
         print ('Reading Messana System')
@@ -2338,6 +2342,9 @@ class MessanaInfo:
         print('updatHC_COData: ' + str(HC_CONbr))
         return(self.updateNodeData(HC_CONbr, 'hc_changeover'))
 
+    def getHC_COCapability(self, HC_CONbr): 
+        self.getNodeCapability('hc_changeover', HC_CONbr)
+
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
         print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(HC_CONbr, 'hc_changeover', mKey))
@@ -2389,9 +2396,11 @@ class MessanaInfo:
   
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
-
         print('updatFanCoilData: ' + str(FanCoilNbr))
         return(self.updateNodeData(FanCoilNbr, 'fan_coils'))
+
+    def getFanCoilCapability(self, FanCoilNbr): 
+        self.getNodeCapability('fan_coils', FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
         print('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
@@ -2418,6 +2427,9 @@ class MessanaInfo:
         print('updatEnergySourceData: ' + str(EnergySourceNbr))
         return(self.updateNodeData(EnergySourceNbr, 'energy_sources'))
 
+    def getEnergySourceCapability(self, EnergySourceNbr): 
+        self.getNodeCapability('energy_sources', EnergySourceNbr)
+
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(EnergySourceNbr, 'energy_sources', mKey))
@@ -2443,6 +2455,10 @@ class MessanaInfo:
     def updateBufferTankData(self, BufferTankNbr):
         print('updatBufferTankData: ' + str(BufferTankNbr))
         return(self.updateNodeData(BufferTankNbr, 'buffer_tanks'))
+
+    def getBufferTankCapability(self, BufferTankNbr): 
+        self.getNodeCapability('buffer_tanks', BufferTankNbr)
+
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
         print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
@@ -2482,6 +2498,9 @@ class MessanaInfo:
     def updateDHWData(self, DHWNbr):
         print('updatDHWData: ' + str(DHWNbr))
         return(self.updateNodeData(DHWNbr, 'domsetic_hot_waters'))
+
+    def getDHWCapability(self, DHWNbr): 
+        self.getNodeCapability('domsetic_hot_waters', DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
         print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    

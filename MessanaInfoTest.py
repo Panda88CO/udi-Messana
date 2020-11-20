@@ -37,6 +37,7 @@ for key in systemGETKeys:
 print(DRIVERS)
 
 print('zones')
+'''
 ZONEDRIVER  = {}
 for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
     zoneData = {}
@@ -55,7 +56,7 @@ shutil.copy('./nodeTest.xml', './profile/nodedef/nodedefs.xml')
 shutil.copy('./editorTest.xml', './profile/editor/editors.xml')
 shutil.copy('./nlsTest.txt', './profile/nls/en_us.txt')
 print('systemKeys')
-'''
+
 sysData={}
 for mKey in systemPUTKeys:
     sysData = messana.pullSystemDataIndividual(mKey)

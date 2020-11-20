@@ -476,4 +476,88 @@
   <editor id = "MACROZONES2_4" > 
      <range  uom="51" min="0" max="100" step="1" prec="1" >
 </editor>
+  <editor id = "MACROZONES3_1" > 
+     <range  uom="17" min="40" max="120" step="1" prec="0" >
+</editor>
+  <editor id = "MACROZONES3_2" > 
+     <range  uom="25" subset="0-1" nls="MACROZONES3_2" >
+</editor>
+  <editor id = "MACROZONES3_3" > 
+     <range  uom="25" subset="0-1" nls="MACROZONES3_3" >
+</editor>
+  <editor id = "MACROZONES3_4" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ATUS0_1" > 
+     <range  uom="25" min="0" max="100" >
+</editor>
+  <editor id = "ATUS0_2" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_2" >
+</editor>
+  <editor id = "ATUS0_3" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_3" >
+</editor>
+  <editor id = "ATUS0_4" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_4" >
+</editor>
+  <editor id = "ATUS0_5" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_5" >
+</editor>
+  <editor id = "ATUS0_6" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_6" >
+</editor>
+  <editor id = "ATUS0_7" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_7" >
+</editor>
+  <editor id = "ATUS0_8" > 
+     <range  uom="17" min="40" max="120" step="1" prec="0" >
+</editor>
+  <editor id = "ATUS0_9" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ATUS0_10" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ATUS0_11" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ATUS0_12" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ATUS0_13" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" >
+</editor>
+  <editor id = "ENERGY_SOURCES0_1" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_1" >
+</editor>
+  <editor id = "ENERGY_SOURCES0_2" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_2" >
+</editor>
+  <editor id = "ENERGY_SOURCES0_3" > 
+     <range  uom="25" subset="0-3" nls="ENERGY_SOURCES0_3" >
+</editor>
+  <editor id = "ENERGY_SOURCES0_4" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_4" >
+</editor>
+  <editor id = "BUFFER_TANKS0_1" > 
+     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_1" >
+</editor>
+  <editor id = "BUFFER_TANKS0_2" > 
+     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_2" >
+</editor>
+  <editor id = "BUFFER_TANKS0_3" > 
+     <range  uom="25" subset="0-2" nls="BUFFER_TANKS0_3" >
+</editor>
+  <editor id = "BUFFER_TANKS0_4" > 
+     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_4" >
+</editor>
+  <editor id = "HC_CHANGEOVER0_1" > 
+     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_1" >
+</editor>
+  <editor id = "HC_CHANGEOVER0_2" > 
+     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_2" >
+</editor>
+  <editor id = "HC_CHANGEOVER0_3" > 
+     <range  uom="25" subset="0-1" nls="HC_CHANGEOVER0_3" >
+</editor>
 </editors> 
