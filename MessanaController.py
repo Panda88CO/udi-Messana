@@ -64,12 +64,15 @@ class MessanaController(polyinterface.Controller):
             self.reportCmd('DOF',2)
             self.hb = 0
 
+
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
+        '''
         for node in self.nodes:
              if node != self.address:
                 self.nodes[node].updateInfo()
-
+        '''
+        
     def pullAllMessanaStatus(self):
         return(True)
 
