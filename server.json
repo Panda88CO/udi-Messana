@@ -10,7 +10,7 @@
     "longPoll": "600",
     "credits": [
         {
-            "title": "A NodeServer to integrate Messana Radiant eat/Cool system",
+            "title": "A NodeServer to integrate Messana Radiant Heat/Cool system",
             "author": "Panda88CO",
             "version": "0.0.1",
             "date": "Oct 25, 2020",

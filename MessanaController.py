@@ -8,6 +8,7 @@ from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
 from MessanaZones import MessanaZones
 import shutil
+
 LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
@@ -248,7 +249,6 @@ class MessanaController(polyinterface.Controller):
 
   
 if __name__ == "__main__":
-
     try:
         LOGGER.info('Starting Messana Controller')
         polyglot = polyinterface.Interface('Messana_Control')
