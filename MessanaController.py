@@ -3,6 +3,7 @@
 import polyinterface
 from subprocess import call
 import json
+import sys
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
 from MessanaZones import MessanaZones
@@ -246,3 +247,13 @@ class MessanaController(polyinterface.Controller):
                 }
 
   
+if __name__ == "__main__":
+
+    try:
+        LOGGER.info('Starting Messana Controller')
+        polyglot = polyinterface.Interface('Messana_Control')
+        polyglot.start()
+        control = MessanaController(polyglot)
+        control.runForever()
+    except (KeyboardInterrupt, SystemExit):
+        sys.exit(0)
