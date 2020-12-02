@@ -19,5 +19,4 @@ I have been trying to use a files for this config but no luck so far
 
 #### For more information:
 - <https://www.raspberrypi.org/documentation/usage/gpio/>
-- <https://pinout.xyz/pinout/wiringpi>
-- <https://github.com/timofurrer/w1thermsensor>
+

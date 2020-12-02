@@ -49,6 +49,7 @@ class MessanaController(polyinterface.Controller):
         self.check_params()
         self.discover()         
         self.updateInfo()
+        LOGGER.debug(drivers)
   
  
 
@@ -154,39 +155,8 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('Check Params')
 
     
-    '''    LOGGER.debug(str(self.polyConfig['customParams'])) 
-        params = {}
-        count = 0
-        self.removeNoticesAll()
-        self.addNotice('To add IOpin use portN as Key and IN:name or OUT:name as value to define ports')
-        self.addNotice('N is BRCM port number (4 use for temp semnsor)')     
-        for mySensor in self.mySensors.get_available_sensors():
-            count = count+1
-            currentSensor = mySensor.id.lower() 
-            if not(currentSensor in self.polyConfig['customParams']):
-                params[currentSensor]=['NoName'+str(count)]
-        if not(params == {}):
-            self.addCustomParam(params)
-        LOGGER.debug(str(params))
     
-        for customP in self.polyConfig['customParams']:
-            LOGGER.debug(str(customP))
-            if customP.lower() in BRCM_PORTS:
-                PortNumber = BRCM_PORTS[customP.lower()]
-                PortDef = self.polyConfig['customParams'][customP]
-                PortInfo = PortDef.split(':',1)
-                LOGGER.debug(str(PortNumber) + ' ' + str(PortInfo))
-                if PortInfo[0].lower() == 'in':
-                    self.INPUT_PINS.update({PortNumber:PortInfo[1]})
-                    LOGGER.debug('Input Pin: '+str(PortNumber) + ' ' + str(PortInfo[1]))
-                elif PortInfo[0].lower() == 'out':
-                    self.OUTPUT_PINS.update({PortNumber:PortInfo[1]})
-                    LOGGER.debug('Output Pin: '+str(PortNumber) + ' ' + str(PortInfo[1]))
-
-                else:
-                    self.addNotice('Must use IN or OUT:name(port 4 is used for temp sensors)')                    
-        self.saveCustomData(self.polyConfig['customParams'])
-    '''
+    
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
         self.checkSetDriver('GV1', 'mStatus')

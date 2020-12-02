@@ -33,6 +33,7 @@ for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)
     if  temp != {}:
         DRIVERS.append(temp)
+        print(temp)
 
 print(DRIVERS)
 
