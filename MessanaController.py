@@ -12,6 +12,7 @@ import shutil
 LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
+
     def __init__(self, polyglot):
         super().__init__(polyglot)
         LOGGER.info('_init_')
@@ -23,22 +24,16 @@ class MessanaController(polyinterface.Controller):
         self.ISYdrivers=[]
         self.ISYcommands = {}
         try:
-            messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+            self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
             LOGGER.debug('MessanaInfo call done')
 
-            self.system_GETKeys = messana.systemPullKeys()
-            self.system_PUTKeys = messana.systemPushKeys()
-            self.system_ActiveKeys = messana.systemActiveKeys()
+            self.system_GETKeys = self.messana.systemPullKeys()
+            self.system_PUTKeys = self.messana.systemPushKeys()
+            self.system_ActiveKeys = self.messana.systemActiveKeys()
             
-            messana.updateSystemData()
-            messana.addSystemDefStruct(self.address)
-            DRIVERS = []
-            for key in self.systemGETKeys:
-                temp = messana.getSystemISYdriverInfo(key)
-                LOGGER.debug(str(temp))
-                if  temp != {}:
-                    DRIVERS.append(temp)
-
+            self.messana.updateSystemData()
+            self.messana.addSystemDefStruct(self.address)
+            
             self.poly.installprofile()
 
         except:
@@ -46,7 +41,11 @@ class MessanaController(polyinterface.Controller):
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
-
+        for key in self.systemGETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            LOGGER.debug(str(temp))
+            if  temp != {}:
+                drivers.append(temp)
         self.check_params()
         self.discover()         
         self.updateInfo()
@@ -218,7 +217,7 @@ class MessanaController(polyinterface.Controller):
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
-        val = int(command.get('value'))
+        '''val = int(command.get('value'))
         LOGGER.debug('set Status Recived:' + str(val))
         self.msysInfo['mStatus'] = val
         LOGGER.debug(self.msysInfo)
@@ -227,7 +226,7 @@ class MessanaController(polyinterface.Controller):
         self.messana.pullSystemDataMessana()
         self.messana.pullSystemData()
         LOGGER.debug(self.msysInfo)
-
+        '''
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
@@ -240,12 +239,13 @@ class MessanaController(polyinterface.Controller):
 
 
     id = 'messanasys'
-    
+    drivers = []
     commands = { 'UPDATE': discover
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
                 ,'SET_SETBACK' : setSetback 
                 }
+
 
   
 if __name__ == "__main__":
