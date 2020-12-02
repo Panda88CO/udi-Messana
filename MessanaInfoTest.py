@@ -28,14 +28,14 @@ systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
 messana.updateSystemData()
-DRIVERS = []
+drivers = []
 for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)
     if  temp != {}:
-        DRIVERS.append(temp)
+        drivers.append(temp)
         print(temp)
 
-print(DRIVERS)
+print(drivers)
 
 print('zones')
 '''

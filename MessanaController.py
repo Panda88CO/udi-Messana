@@ -12,6 +12,13 @@ import shutil
 LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
+    id = 'messanasys'
+    drivers = []
+    commands = { 'UPDATE': discover
+                ,'SET_STATUS': setStatus
+                ,'SET_ENERGYSAVE': setEnergySave
+                ,'SET_SETBACK' : setSetback 
+                }
 
     def __init__(self, polyglot):
         super().__init__(polyglot)
@@ -45,11 +52,11 @@ class MessanaController(polyinterface.Controller):
             temp = self.messana.getSystemISYdriverInfo(key)
             LOGGER.debug(str(temp))
             if  temp != {}:
-                drivers.append(temp)
+                self.drivers.append(temp)
         self.check_params()
         self.discover()         
         self.updateInfo()
-        LOGGER.debug(drivers)
+        LOGGER.debug(self.drivers)
   
  
 
@@ -156,10 +163,15 @@ class MessanaController(polyinterface.Controller):
 
     
     
-    
+
     def updateInfo(self):
         LOGGER.info('Update Messana System ')
-        self.checkSetDriver('GV1', 'mStatus')
+        for mKey in self.system_GETKeys: 
+            temp = self.messana.getSystemISYdriverInfo(mKey)
+
+            self.checkSetDriver(temp['driver'], mKey)
+            LOGGER.debug(temp['driver'])
+        '''    
         self.checkSetDriver('GV2', 'mUnitTemp')
         self.checkSetDriver('GV3', 'mEnergySaving')
         self.checkSetDriver('GV4', 'mSetback')
@@ -172,7 +184,7 @@ class MessanaController(polyinterface.Controller):
         self.checkSetDriver('GV11', 'mHC_changeoverCount')
         self.checkSetDriver('GV12', 'mBufTankCount')
         self.checkSetDriver('ALARM', 'mExternalAlarm')
-
+        '''
 
     def checkSetDriver(self, ISYkey, mKey):
         if mKey in self.msysInfo:
