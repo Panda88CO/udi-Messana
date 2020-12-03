@@ -2058,6 +2058,7 @@ class MessanaInfo:
 
     #Setup file generation 
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
+        LOGGER.debug ('Create Setup Files')
         status = True
         try:
             nodeFile = open(nodeDefFileName, 'w+')
@@ -2157,6 +2158,9 @@ class MessanaInfo:
         except:
             print('something went wrong in creating setup files')
             status = False
+            nodeFile.close()
+            editorFile.close()
+            nlsFile.close()       
         return(status)
 
     def createNodedeFile(self, fileName):
