@@ -31,7 +31,7 @@
             </cmd> 
          </accepts>
       </cmds>
-</nodeDef> 
+   </nodeDef> 
    <nodeDef id="zone" nls="nlszone_0">
       <sts>
          <st id="GV1" editor="ZONES0_1" />
@@ -67,7 +67,7 @@
             </cmd> 
          </accepts>
       </cmds>
-</nodeDef> 
+   </nodeDef> 
    <nodeDef id="zone" nls="nlszone_1">
       <sts>
          <st id="GV1" editor="ZONES1_1" />

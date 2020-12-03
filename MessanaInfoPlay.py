@@ -2150,7 +2150,7 @@ class MessanaInfo:
 
                 nodeFile.write('      </cmds>\n')                
                                  
-                nodeFile.write('</nodeDef> \n')
+                nodeFile.write('   </nodeDef> \n')
 
             nodeFile.write('</nodeDefs> \n' )
             nodeFile.close()
