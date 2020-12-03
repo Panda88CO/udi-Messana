@@ -161,9 +161,10 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('Update Messana System ')
         for mKey in self.system_GETKeys: 
             temp = self.messana.getSystemISYdriverInfo(mKey)
-
-            self.checkSetDriver(temp['driver'], mKey)
-            LOGGER.debug(temp['driver'])
+            LOGGER.debug(temp)
+            if  temp != {}:
+                self.checkSetDriver(temp['driver'], mKey)
+                LOGGER.debug(temp['driver'])
         '''    
         self.checkSetDriver('GV2', 'mUnitTemp')
         self.checkSetDriver('GV3', 'mEnergySaving')
