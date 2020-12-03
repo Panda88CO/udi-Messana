@@ -2061,9 +2061,11 @@ class MessanaInfo:
         LOGGER.debug ('Create Setup Files')
         status = True
         try:
+            LOGGER.debug('opening files')
             nodeFile = open(nodeDefFileName, 'w+')
             editorFile = open(editorFileName, 'w+')
             nlsFile = open(nlsFileName, 'w+')
+            LOGGER.debug('Opening Files OK')
             editorFile.write('<editors> \n')
             nodeFile.write('<nodeDefs> \n')
             for node in self.setupFile['nodeDef']:
