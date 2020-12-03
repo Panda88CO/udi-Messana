@@ -12,13 +12,6 @@ import shutil
 LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
-    id = 'messanasys'
-    drivers = []
-    commands = { 'UPDATE': discover
-                ,'SET_STATUS': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SETBACK' : setSetback 
-                }
 
     def __init__(self, polyglot):
         super().__init__(polyglot)
@@ -219,7 +212,6 @@ class MessanaController(polyinterface.Controller):
         val = int(command.get('value'))
         LOGGER.debug('setSetback Reeived:' + str(val))
 
-
     id = 'messanasys'
     drivers = []
     commands = { 'UPDATE': discover
@@ -227,7 +219,6 @@ class MessanaController(polyinterface.Controller):
                 ,'SET_ENERGYSAVE': setEnergySave
                 ,'SET_SETBACK' : setSetback 
                 }
-
 
   
 if __name__ == "__main__":
