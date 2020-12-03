@@ -41,7 +41,7 @@ class MessanaController(polyinterface.Controller):
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
-        for key in self.systemGETKeys:
+        for key in self.system_GETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             LOGGER.debug(str(temp))
             if  temp != {}:
