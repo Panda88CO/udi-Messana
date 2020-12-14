@@ -181,7 +181,7 @@ class MessanaController(polyinterface.Controller):
         '''
 
     def checkSetDriver(self, ISYkey, mKey):
-        if mKey in self.msysInfo:
+        if mKey in self.system_GETKeys:
             if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
                     if self.systemDict[mKey] in  ['Celcius', 'Fahrenheit']:
@@ -189,7 +189,7 @@ class MessanaController(polyinterface.Controller):
                           self.systemDict[mKey] = 0
                        else:
                           self.systemDict[mKey] = 1 
-            self.setDriver(ISYkey, self.msysInfo[mKey])   
+            self.setDriver(ISYkey, self.mKey)   
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
