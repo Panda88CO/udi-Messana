@@ -31,7 +31,7 @@ class MessanaController(polyinterface.Controller):
             self.system_PUTKeys = self.messana.systemPushKeys()
             self.system_ActiveKeys = self.messana.systemActiveKeys()
             
-            self.messana.updateSystemData('full')
+            self.messana.updateSystemData('all')
             self.messana.addSystemDefStruct(self.address)
             
             self.poly.installprofile()
