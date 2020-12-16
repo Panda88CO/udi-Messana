@@ -46,8 +46,6 @@
          <st id="GV10" editor="ZONES0_10" />
          <st id="GV11" editor="ZONES0_11" />
          <st id="GV12" editor="ZONES0_12" />
-         <st id="GV13" editor="ZONES0_13" />
-         <st id="GV14" editor="ZONES0_14" />
       </sts>
       <cmds>
          <sends>
@@ -60,10 +58,10 @@
                <p id="" editor="ZONES0_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES0_12" init="GV12" /> 
+               <p id="" editor="ZONES0_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES0_10" init="GV10" /> 
+               <p id="" editor="ZONES0_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -82,8 +80,6 @@
          <st id="GV10" editor="ZONES1_10" />
          <st id="GV11" editor="ZONES1_11" />
          <st id="GV12" editor="ZONES1_12" />
-         <st id="GV13" editor="ZONES1_13" />
-         <st id="GV14" editor="ZONES1_14" />
       </sts>
       <cmds>
          <sends>
@@ -96,10 +92,10 @@
                <p id="" editor="ZONES1_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES1_12" init="GV12" /> 
+               <p id="" editor="ZONES1_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES1_10" init="GV10" /> 
+               <p id="" editor="ZONES1_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -118,8 +114,6 @@
          <st id="GV10" editor="ZONES2_10" />
          <st id="GV11" editor="ZONES2_11" />
          <st id="GV12" editor="ZONES2_12" />
-         <st id="GV13" editor="ZONES2_13" />
-         <st id="GV14" editor="ZONES2_14" />
       </sts>
       <cmds>
          <sends>
@@ -132,10 +126,10 @@
                <p id="" editor="ZONES2_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES2_12" init="GV12" /> 
+               <p id="" editor="ZONES2_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES2_10" init="GV10" /> 
+               <p id="" editor="ZONES2_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -154,8 +148,6 @@
          <st id="GV10" editor="ZONES3_10" />
          <st id="GV11" editor="ZONES3_11" />
          <st id="GV12" editor="ZONES3_12" />
-         <st id="GV13" editor="ZONES3_13" />
-         <st id="GV14" editor="ZONES3_14" />
       </sts>
       <cmds>
          <sends>
@@ -168,10 +160,10 @@
                <p id="" editor="ZONES3_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES3_12" init="GV12" /> 
+               <p id="" editor="ZONES3_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES3_10" init="GV10" /> 
+               <p id="" editor="ZONES3_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -190,8 +182,6 @@
          <st id="GV10" editor="ZONES4_10" />
          <st id="GV11" editor="ZONES4_11" />
          <st id="GV12" editor="ZONES4_12" />
-         <st id="GV13" editor="ZONES4_13" />
-         <st id="GV14" editor="ZONES4_14" />
       </sts>
       <cmds>
          <sends>
@@ -204,10 +194,10 @@
                <p id="" editor="ZONES4_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES4_12" init="GV12" /> 
+               <p id="" editor="ZONES4_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES4_10" init="GV10" /> 
+               <p id="" editor="ZONES4_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -294,8 +284,6 @@
          <st id="GV10" editor="ZONES7_10" />
          <st id="GV11" editor="ZONES7_11" />
          <st id="GV12" editor="ZONES7_12" />
-         <st id="GV13" editor="ZONES7_13" />
-         <st id="GV14" editor="ZONES7_14" />
       </sts>
       <cmds>
          <sends>
@@ -308,10 +296,10 @@
                <p id="" editor="ZONES7_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES7_12" init="GV12" /> 
+               <p id="" editor="ZONES7_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES7_10" init="GV10" /> 
+               <p id="" editor="ZONES7_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -330,8 +318,6 @@
          <st id="GV10" editor="ZONES8_10" />
          <st id="GV11" editor="ZONES8_11" />
          <st id="GV12" editor="ZONES8_12" />
-         <st id="GV13" editor="ZONES8_13" />
-         <st id="GV14" editor="ZONES8_14" />
       </sts>
       <cmds>
          <sends>
@@ -344,10 +330,10 @@
                <p id="" editor="ZONES8_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES8_12" init="GV12" /> 
+               <p id="" editor="ZONES8_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES8_10" init="GV10" /> 
+               <p id="" editor="ZONES8_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>
@@ -366,8 +352,6 @@
          <st id="GV10" editor="ZONES9_10" />
          <st id="GV11" editor="ZONES9_11" />
          <st id="GV12" editor="ZONES9_12" />
-         <st id="GV13" editor="ZONES9_13" />
-         <st id="GV14" editor="ZONES9_14" />
       </sts>
       <cmds>
          <sends>
@@ -380,10 +364,10 @@
                <p id="" editor="ZONES9_2" init="GV2" /> 
             </cmd> 
             <cmd id="SET_ENERGYSAVE" > 
-               <p id="" editor="ZONES9_12" init="GV12" /> 
+               <p id="" editor="ZONES9_10" init="GV10" /> 
             </cmd> 
             <cmd id="SET_SCHEDULEON" > 
-               <p id="" editor="ZONES9_10" init="GV10" /> 
+               <p id="" editor="ZONES9_8" init="GV8" /> 
             </cmd> 
          </accepts>
       </cmds>

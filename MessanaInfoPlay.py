@@ -1550,7 +1550,7 @@ class MessanaInfo:
         self.zoneCapability = {}
         self.atuCapability = {}
         
-        self.updateSystemData()
+        self.updateSystemData('all')
         self.addSystemDefStruct('system')
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
@@ -2007,7 +2007,7 @@ class MessanaInfo:
                             keys.append(mKey)
         else:
             print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData()
+            self.updateSystemData('full')
             self.updateNodeData(NodeNbr, NodeKey)
             if self.mSystem[NodeKey]['data']:
                 for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
@@ -2190,22 +2190,30 @@ class MessanaInfo:
         print(self.mSystem['system']['ISYnode']['nlsNAME'])        
         file1.close() 
     '''
-    
+    #if self.mSystem['system']['KeyInfo'][mKey]['Active']:
     #System
-    def updateSystemData(self):
+    def updateSystemData(self, level):
         print('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
         sysData = {}
         DataOK = True
         for mKey in self.mSystem['system']['KeyInfo']:
-            if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
-                #print('GET ' + mKey)
-                sysData= self.pullSystemDataIndividual(mKey)
-                if not(sysData['statusOK']):
-                    print('Error System GET: ' + mKey)
-                    DataOK = False       
+            if level == 'active':
+                mStr = self.mSystem['system']['KeyInfo'][mKey]['Active']
+                if mStr != None:
+                    sysData= self.pullSystemDataIndividual(mKey)
+                    if not(sysData['statusOK']):
+                        print('Error System Active GET: ' + mKey)
+                        DataOK = False  
+            elif level == 'all':
+                if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
+                    #print('GET ' + mKey)
+                    sysData= self.pullSystemDataIndividual(mKey)
+                    if not(sysData['statusOK']):
+                        print('Error System Active GET: ' + mKey)
+                        DataOK = False  
             else:
-                print('GET string does not exist for : ' + mKey)
+                print('Unknown level: ' + level)
                 DataOK = False               
         return(DataOK)
 
@@ -2214,8 +2222,7 @@ class MessanaInfo:
         sysData = {}
         if mKey in self.mSystem['system']['KeyInfo']:
             if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
-                sysData = self.GETSystem(mKey)
-
+                sysData = self.GETSystem(mKey)       
         else:
             sysData['statusOK'] = False
             sysData['error'] = (mKey + ' is not a supported GETstr command')
@@ -2226,7 +2233,7 @@ class MessanaInfo:
         print('MessanaInfo push System Data: ' + mKey)
         sysData = self.PUTSystem(mKey, value)
         if sysData['statusOK']:
-           return(True)
+            return(True)
         else:
             print(sysData['error'])
             return(False)  
@@ -2239,7 +2246,7 @@ class MessanaInfo:
                 keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
-            self.updateSystemData()
+            self.updateSystemData('full')
             for mKey in self.mSystem['system']['data']:
                 keys.append(mKey)
         return(keys)
@@ -2254,7 +2261,7 @@ class MessanaInfo:
                         keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
-            self.updateSystemData()
+            self.updateSystemData('long')
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
                     if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
@@ -2271,7 +2278,7 @@ class MessanaInfo:
                         keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
-            self.updateSystemData()
+            self.updateSystemData('full')
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
                     if self.mSystem['system']['KeyInfo'][mKey]['Active']:

@@ -19,7 +19,7 @@ messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 
 #Retrive basic system info
 print('\nSYSTEM')
-messana.updateSystemData()
+messana.updateSystemData('all')
 #messana.loadData()
 #time.sleep(2)
 print('loaded :')
@@ -27,15 +27,22 @@ print('loaded :')
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-messana.updateSystemData()
+messana.updateSystemData('all')
 drivers = []
 for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)
     if  temp != {}:
         drivers.append(temp)
-        print(temp)
+        val = messana.pullSystemDataIndividual(key)
+        print(temp['driver'], val['data'])
 
 print(drivers)
+
+for key in systemGETKeys:
+    val = messana.pullSystemDataIndividual(key)
+    print (key, val)
+
+
 
 print('zones')
 '''

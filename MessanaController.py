@@ -31,7 +31,7 @@ class MessanaController(polyinterface.Controller):
             self.system_PUTKeys = self.messana.systemPushKeys()
             self.system_ActiveKeys = self.messana.systemActiveKeys()
             
-            self.messana.updateSystemData()
+            self.messana.updateSystemData('full')
             self.messana.addSystemDefStruct(self.address)
             
             self.poly.installprofile()
@@ -48,7 +48,7 @@ class MessanaController(polyinterface.Controller):
                 self.drivers.append(temp)
         self.check_params()
         self.discover()         
-        self.updateInfo()
+        self.updateInfo('all')
         LOGGER.debug(self.drivers)
   
  
@@ -69,6 +69,8 @@ class MessanaController(polyinterface.Controller):
 
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
+        self.updateSystemInfo('active')
+        self.reportDrivers()
         '''
         for node in self.nodes:
              if node != self.address:
@@ -82,7 +84,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('Messana Controller longPoll')
         self.heartbeat()
         self.pullAllMessanaStatus() #update from Messanato internal structure
-        self.updateInfo()
+        self.updateSystemInfo('all')
         self.reportDrivers()
         #for node in self.nodes:
         #    if node != self.address:
@@ -157,28 +159,27 @@ class MessanaController(polyinterface.Controller):
     
     
 
-    def updateInfo(self):
+    def updateInfo(self, level):
         LOGGER.info('Update Messana System ')
-        for mKey in self.system_GETKeys: 
-            temp = self.messana.getSystemISYdriverInfo(mKey)
-            LOGGER.debug(temp)
-            if  temp != {}:
-                self.checkSetDriver(temp['driver'], mKey)
-                LOGGER.debug(temp['driver'])
-        '''    
-        self.checkSetDriver('GV2', 'mUnitTemp')
-        self.checkSetDriver('GV3', 'mEnergySaving')
-        self.checkSetDriver('GV4', 'mSetback')
-        self.checkSetDriver('GV5', 'mATUcount')
-        self.checkSetDriver('GV6', 'mDHWcount')
-        self.checkSetDriver('GV7', 'mFanCoilCount')
-        self.checkSetDriver('GV8', 'mEnergySourceCount')
-        self.checkSetDriver('GV9', 'mZoneCount')
-        self.checkSetDriver('GV10', 'mMacrozoneCount')
-        self.checkSetDriver('GV11', 'mHC_changeoverCount')
-        self.checkSetDriver('GV12', 'mBufTankCount')
-        self.checkSetDriver('ALARM', 'mExternalAlarm')
-        '''
+        if level == 'short':
+            for mKey in self.system_ActiveKeys: 
+                temp = self.messana.getSystemISYdriverInfo(mKey)
+                if temp := {}:
+                    ISYkey = temp['driver']
+                    ISYval = self.messana.pullSystemDataIndividual(mKey)
+                    self.checkSetDriver(ISYkey, ISYval)
+                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ISYval)
+        elif level == 'long':
+             for mKey in self.system_GETKeys: 
+                temp = self.messana.getSystemISYdriverInfo(mKey)
+                if temp := {}:
+                    ISYkey = temp['driver']
+                    ISYval = self.messana.pullSystemDataIndividual(mKey)
+                    self.checkSetDriver(ISYkey, ISYval)
+                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ISYval)
+        else:
+            LOGGER.debug('unknown level' + level)
+
 
     def checkSetDriver(self, ISYkey, mKey):
         if mKey in self.system_GETKeys:
