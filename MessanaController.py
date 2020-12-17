@@ -53,7 +53,6 @@ class MessanaController(polyinterface.Controller):
   
  
 
-
     def stop(self):
         LOGGER.debug('stop - Cleaning up Temp Sensors & GPIO')
 
