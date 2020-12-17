@@ -49,15 +49,14 @@ class MessanaController(polyinterface.Controller):
                             temp['value'] = 1
 
                     LOGGER.debug(self.drivers)      
-                    self.drivers.append(temp)
-            LOGGER.debug(self.drivers)
+                    MessanaController.drivers.append(temp)
+            LOGGER.debug(MessanaController.drivers)
             #self.check_params()
             #self.discover()         
             LOGGER.debug('Install Updated profile')
             self.poly.installprofile()
-
+            
             self.updateInfo('all')
-
             self.messanaImportOK = 1
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
