@@ -35,22 +35,21 @@ class MessanaController(polyinterface.Controller):
             self.messana.addSystemDefStruct(self.address)
             
             self.poly.installprofile()
-
+            for key in self.system_GETKeys:
+                temp = self.messana.getSystemISYdriverInfo(key)
+                LOGGER.debug(str(temp))
+                if  temp != {}:
+                    self.drivers.append(temp)
+            self.check_params()
+            self.discover()         
+            self.updateInfo('all')
+            LOGGER.debug(self.drivers)
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
-        for key in self.system_GETKeys:
-            temp = self.messana.getSystemISYdriverInfo(key)
-            LOGGER.debug(str(temp))
-            if  temp != {}:
-                self.drivers.append(temp)
-        self.check_params()
-        self.discover()         
-        self.updateInfo('all')
-        LOGGER.debug(self.drivers)
-  
+
  
 
     def stop(self):
