@@ -40,11 +40,17 @@ class MessanaController(polyinterface.Controller):
                 temp = self.messana.getSystemISYdriverInfo(key)
                 LOGGER.debug(str(temp))
                 if  temp != {}:
+                    if not(temp['value'].isnumeric()):                         
+                        if temp['value'] == 'Celcius':
+                            temp['value'] = 0
+                        else:
+                            temp['value'] = 1
                     self.drivers.append(temp)
-            self.check_params()
-            self.discover()         
-            self.updateInfo('all')
             LOGGER.debug(self.drivers)
+            #self.check_params()
+            #self.discover()         
+            self.updateInfo('all')
+
             self.messanaImportOK = 1
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
@@ -164,7 +170,7 @@ class MessanaController(polyinterface.Controller):
 
     def updateInfo(self, level):
         LOGGER.info('Update Messana System ')
-        if level == 'short':
+        if level == 'active':
             for mKey in self.system_ActiveKeys: 
                 temp = self.messana.getSystemISYdriverInfo(mKey)
                 if temp != {}:
@@ -172,7 +178,7 @@ class MessanaController(polyinterface.Controller):
                     ISYval = self.messana.pullSystemDataIndividual(mKey)
                     self.checkSetDriver(ISYkey, ISYval)
                     LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ISYval)
-        elif level == 'long':
+        elif level == 'all':
              for mKey in self.system_GETKeys: 
                 temp = self.messana.getSystemISYdriverInfo(mKey)
                 if temp != {}:
