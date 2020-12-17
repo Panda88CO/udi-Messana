@@ -16,6 +16,7 @@ class MessanaController(polyinterface.Controller):
     def __init__(self, polyglot):
         super().__init__(polyglot)
         LOGGER.info('_init_')
+        self.messanaImportOK = 0
         self.name = 'Messana Main Control'
         self.address ='messanasys'
         self.primary = self.address
@@ -44,6 +45,7 @@ class MessanaController(polyinterface.Controller):
             self.discover()         
             self.updateInfo('all')
             LOGGER.debug(self.drivers)
+            self.messanaImportOK = 1
         except:
             LOGGER.debug('Reading data from Messana System NOT successful')
                 
@@ -51,7 +53,6 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('Start  Messana Main')
 
  
-
     def stop(self):
         LOGGER.debug('stop - Cleaning up Temp Sensors & GPIO')
 
@@ -66,27 +67,29 @@ class MessanaController(polyinterface.Controller):
 
 
     def shortPoll(self):
-        LOGGER.debug('Messane Controller shortPoll')
-        self.messana.updateSystemData('active')
-        self.reportDrivers()
-        '''
-        for node in self.nodes:
-             if node != self.address:
-                self.nodes[node].updateInfo()
-        '''
+        if self.messanaImportOK == 1:
+            LOGGER.debug('Messane Controller shortPoll')
+            self.messana.updateSystemData('active')
+            self.reportDrivers()
+            '''
+            for node in self.nodes:
+                if node != self.address:
+                    self.nodes[node].updateInfo()
+             '''
         
     def pullAllMessanaStatus(self):
         return(True)
 
     def longPoll(self):
-        LOGGER.debug('Messana Controller longPoll')
-        self.heartbeat()
-        self.messana.pullAllMessanaStatus() #update from Messana to internal structure
-        self.messana.updateSystemData('all')
-        self.reportDrivers()
-        #for node in self.nodes:
-        #    if node != self.address:
-        #        self.nodes[node].updateInfo()
+        if self.messanaImportOK == 1:
+            LOGGER.debug('Messana Controller longPoll')
+            self.heartbeat()
+            self.messana.pullAllMessanaStatus() #update from Messana to internal structure
+            self.messana.updateSystemData('all')
+            self.reportDrivers()
+            #for node in self.nodes:
+            #    if node != self.address:
+            #        self.nodes[node].updateInfo()
         
 
     def query(self, command=None):
