@@ -86,7 +86,7 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Long Poll System Up')
             self.heartbeat()
-            self.messana.pullAllMessanaStatus() #update from Messana to internal structure
+            #self.messana.pullAllMessanaStatus() #update from Messana to internal structure
             self.messana.updateSystemData('all')
             self.reportDrivers()
             #for node in self.nodes:
