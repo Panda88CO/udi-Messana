@@ -35,11 +35,11 @@ class MessanaController(polyinterface.Controller):
             self.messana.updateSystemData('all')
             self.messana.addSystemDefStruct(self.address)
             
-            self.poly.installprofile()
-            LOGGER.debug('Install Updated profile')
+
+            LOGGER.debug('Append drivers')
             for key in self.system_GETKeys:
                 temp = self.messana.getSystemISYdriverInfo(key)
-                LOGGER.debug(str(temp))
+                LOGGER.debug('Driver info: ' + str(temp))
                 if  temp != {}:
                     if not(temp['value'].isnumeric()):                         
                         LOGGER.debug('non numeric value :' + temp['value'])
@@ -47,10 +47,15 @@ class MessanaController(polyinterface.Controller):
                             temp['value'] = 0
                         else:
                             temp['value'] = 1
-                    self.drivers.append(temp)
-            LOGGER.debug(self.drivers)
+
+                    LOGGER.debug(drivers)      
+                    drivers.append(temp)
+            LOGGER.debug(drivers)
             #self.check_params()
             #self.discover()         
+            LOGGER.debug('Install Updated profile')
+            self.poly.installprofile()
+
             self.updateInfo('all')
 
             self.messanaImportOK = 1
