@@ -2246,7 +2246,7 @@ class MessanaInfo:
                 keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
-            self.updateSystemData('full')
+            self.updateSystemData('all')
             for mKey in self.mSystem['system']['data']:
                 keys.append(mKey)
         return(keys)
@@ -2278,7 +2278,7 @@ class MessanaInfo:
                         keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
-            self.updateSystemData('full')
+            self.updateSystemData('all')
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
                     if self.mSystem['system']['KeyInfo'][mKey]['Active']:
