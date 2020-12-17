@@ -67,22 +67,24 @@ class MessanaController(polyinterface.Controller):
 
 
     def shortPoll(self):
+        LOGGER.debug('Messane Controller shortPoll')
         if self.messanaImportOK == 1:
-            LOGGER.debug('Messane Controller shortPoll')
+            LOGGER.debug('Short Poll System Up')
             self.messana.updateSystemData('active')
             self.reportDrivers()
             '''
             for node in self.nodes:
                 if node != self.address:
                     self.nodes[node].updateInfo()
-             '''
+            '''
         
     def pullAllMessanaStatus(self):
         return(True)
 
     def longPoll(self):
+        LOGGER.debug('Messana Controller longPoll')
         if self.messanaImportOK == 1:
-            LOGGER.debug('Messana Controller longPoll')
+            LOGGER.debug('Long Poll System Up')
             self.heartbeat()
             self.messana.pullAllMessanaStatus() #update from Messana to internal structure
             self.messana.updateSystemData('all')
