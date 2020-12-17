@@ -164,7 +164,7 @@ class MessanaController(polyinterface.Controller):
         if level == 'short':
             for mKey in self.system_ActiveKeys: 
                 temp = self.messana.getSystemISYdriverInfo(mKey)
-                if temp := {}:
+                if temp != {}:
                     ISYkey = temp['driver']
                     ISYval = self.messana.pullSystemDataIndividual(mKey)
                     self.checkSetDriver(ISYkey, ISYval)
