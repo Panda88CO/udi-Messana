@@ -36,11 +36,13 @@ class MessanaController(polyinterface.Controller):
             self.messana.addSystemDefStruct(self.address)
             
             self.poly.installprofile()
+            LOGGER.debug('Install Updated profile')
             for key in self.system_GETKeys:
                 temp = self.messana.getSystemISYdriverInfo(key)
                 LOGGER.debug(str(temp))
                 if  temp != {}:
                     if not(temp['value'].isnumeric()):                         
+                        LOGGER.debug('non numeric value :' + temp['value'])
                         if temp['value'] == 'Celcius':
                             temp['value'] = 0
                         else:
