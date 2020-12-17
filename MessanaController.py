@@ -41,7 +41,7 @@ class MessanaController(polyinterface.Controller):
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
-        for key in self.messana.system_GETKeys:
+        for key in self.system_GETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             LOGGER.debug(str(temp))
             if  temp != {}:
@@ -69,7 +69,7 @@ class MessanaController(polyinterface.Controller):
 
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
-        self.messana.updateSystemInfo('active')
+        self.messana.updateSystemData('active')
         self.reportDrivers()
         '''
         for node in self.nodes:
@@ -83,8 +83,8 @@ class MessanaController(polyinterface.Controller):
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
         self.heartbeat()
-        self.messana.pullAllMessanaStatus() #update from Messanato internal structure
-        self.messana.updateSystemInfo('all')
+        self.messana.pullAllMessanaStatus() #update from Messana to internal structure
+        self.messana.updateSystemData('all')
         self.reportDrivers()
         #for node in self.nodes:
         #    if node != self.address:
