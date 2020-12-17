@@ -2007,7 +2007,7 @@ class MessanaInfo:
                             keys.append(mKey)
         else:
             print('No Keys found - trying to fetch Messana data')
-            self.updateSystemData('full')
+            self.updateSystemData('all')
             self.updateNodeData(NodeNbr, NodeKey)
             if self.mSystem[NodeKey]['data']:
                 for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
