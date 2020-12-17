@@ -48,9 +48,9 @@ class MessanaController(polyinterface.Controller):
                         else:
                             temp['value'] = 1
 
-                    LOGGER.debug(drivers)      
-                    drivers.append(temp)
-            LOGGER.debug(drivers)
+                    LOGGER.debug(self.drivers)      
+                    self.drivers.append(temp)
+            LOGGER.debug(self.drivers)
             #self.check_params()
             #self.discover()         
             LOGGER.debug('Install Updated profile')
