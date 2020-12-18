@@ -185,8 +185,9 @@ class MessanaController(polyinterface.Controller):
                 if temp != {}:
                     ISYkey = temp['driver']
                     ISYval = self.messana.pullSystemDataIndividual(mKey)
+                    LOGGER.debug(ISYkey, ISYval)
                     self.checkSetDriver(ISYkey, ISYval)
-                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ISYval)
+                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ str(ISYval))
         elif level == 'all':
              for mKey in self.system_GETKeys: 
                 temp = self.messana.getSystemISYdriverInfo(mKey)
@@ -194,7 +195,7 @@ class MessanaController(polyinterface.Controller):
                     ISYkey = temp['driver']
                     ISYval = self.messana.pullSystemDataIndividual(mKey)
                     self.checkSetDriver(ISYkey, ISYval)
-                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ISYval)
+                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+str(ISYval))
         else:
             LOGGER.debug('unknown level' + level)
 
