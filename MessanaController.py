@@ -45,7 +45,7 @@ class MessanaController(polyinterface.Controller):
             temp = self.messana.getSystemISYdriverInfo(key)
             LOGGER.debug('Driver info: ' + str(temp))
             if  temp != {}:
-                if not(temp['value'].isnumeric()):                         
+                if not(str(temp['value']).isnumeric()):                         
                     LOGGER.debug('non numeric value :' + temp['value'])
                     if temp['value'] == 'Celcius':
                         temp['value'] = 0
