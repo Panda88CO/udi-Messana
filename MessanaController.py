@@ -24,44 +24,45 @@ class MessanaController(polyinterface.Controller):
         self.reportDrivers()
         self.ISYdrivers=[]
         self.ISYcommands = {}
-        try:
-            self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-            LOGGER.debug('MessanaInfo call done')
+        #try:
+        self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+        LOGGER.debug('MessanaInfo call done')
 
-            self.system_GETKeys = self.messana.systemPullKeys()
-            self.system_PUTKeys = self.messana.systemPushKeys()
-            self.system_ActiveKeys = self.messana.systemActiveKeys()
-            
-            self.messana.updateSystemData('all')
-            self.messana.addSystemDefStruct(self.address)
-            
+        self.system_GETKeys = self.messana.systemPullKeys()
+        self.system_PUTKeys = self.messana.systemPushKeys()
+        self.system_ActiveKeys = self.messana.systemActiveKeys()
+        
+        self.messana.updateSystemData('all')
+        self.messana.addSystemDefStruct(self.address)
+        
 
-      
-            LOGGER.debug('Install Updated profile')
-            self.poly.installprofile()
+    
+        LOGGER.debug('Install Updated profile')
+        self.poly.installprofile()
 
-            LOGGER.debug('Append drivers')
-            for key in self.system_GETKeys:
-                temp = self.messana.getSystemISYdriverInfo(key)
-                LOGGER.debug('Driver info: ' + str(temp))
-                if  temp != {}:
-                    if not(temp['value'].isnumeric()):                         
-                        LOGGER.debug('non numeric value :' + temp['value'])
-                        if temp['value'] == 'Celcius':
-                            temp['value'] = 0
-                        else:
-                            temp['value'] = 1
+        LOGGER.debug('Append drivers')
+        for key in self.system_GETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(temp['value'].isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                    else:
+                        temp['value'] = 1
 
-                    LOGGER.debug(self.drivers)      
-                    MessanaController.drivers.append(temp)
-            LOGGER.debug(MessanaController.drivers)
-            #self.check_params()
-            #self.discover()   
-            
-            self.updateInfo('all')
-            self.messanaImportOK = 1
-        except:
-            LOGGER.debug('Reading data from Messana System NOT successful')
+                LOGGER.debug(self. + 'before append')      
+                MessanaController.drivers.append(temp)
+                LOGGER.debug(self. + 'after append')                       
+        LOGGER.debug(MessanaController.drivers)
+        #self.check_params()
+        #self.discover()   
+        
+        self.updateInfo('all')
+        self.messanaImportOK = 1
+        #except:
+        #    LOGGER.debug('Reading data from Messana System NOT successful')
                 
     def start(self):
         LOGGER.info('Start  Messana Main')
