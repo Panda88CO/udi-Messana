@@ -1,5 +1,6 @@
 <nodeDefs> 
    <nodeDef id="system" nls="nlssystem">
+      <editors />
       <sts>
          <st id="GV1" editor="SYSTEM_1" />
          <st id="GV2" editor="SYSTEM_2" />
@@ -33,6 +34,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_0">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES0_1" />
          <st id="GV2" editor="ZONES0_2" />
@@ -67,6 +69,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_1">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES1_1" />
          <st id="GV2" editor="ZONES1_2" />
@@ -101,6 +104,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_2">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES2_1" />
          <st id="GV2" editor="ZONES2_2" />
@@ -135,6 +139,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_3">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES3_1" />
          <st id="GV2" editor="ZONES3_2" />
@@ -169,6 +174,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_4">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES4_1" />
          <st id="GV2" editor="ZONES4_2" />
@@ -203,6 +209,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_5">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES5_1" />
          <st id="GV2" editor="ZONES5_2" />
@@ -237,6 +244,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_6">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES6_1" />
          <st id="GV2" editor="ZONES6_2" />
@@ -271,6 +279,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_7">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES7_1" />
          <st id="GV2" editor="ZONES7_2" />
@@ -305,6 +314,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_8">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES8_1" />
          <st id="GV2" editor="ZONES8_2" />
@@ -339,6 +349,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="zone" nls="nlszone_9">
+      <editors />
       <sts>
          <st id="GV1" editor="ZONES9_1" />
          <st id="GV2" editor="ZONES9_2" />
@@ -373,6 +384,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="macrozone" nls="nlsmacrozone_0">
+      <editors />
       <sts>
          <st id="GV1" editor="MACROZONES0_1" />
          <st id="GV2" editor="MACROZONES0_2" />
@@ -393,6 +405,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="macrozone" nls="nlsmacrozone_1">
+      <editors />
       <sts>
          <st id="GV1" editor="MACROZONES1_1" />
          <st id="GV2" editor="MACROZONES1_2" />
@@ -413,6 +426,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="macrozone" nls="nlsmacrozone_2">
+      <editors />
       <sts>
          <st id="GV1" editor="MACROZONES2_1" />
          <st id="GV2" editor="MACROZONES2_2" />
@@ -433,6 +447,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="macrozone" nls="nlsmacrozone_3">
+      <editors />
       <sts>
          <st id="GV1" editor="MACROZONES3_1" />
          <st id="GV2" editor="MACROZONES3_2" />
@@ -453,6 +468,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="atu" nls="nlsatu_0">
+      <editors />
       <sts>
          <st id="GV1" editor="ATUS0_1" />
          <st id="GV2" editor="ATUS0_2" />
@@ -502,6 +518,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="energysource" nls="nlsenergysource_0">
+      <editors />
       <sts>
          <st id="GV1" editor="ENERGY_SOURCES0_1" />
          <st id="GV2" editor="ENERGY_SOURCES0_2" />
@@ -519,6 +536,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="buffertanks" nls="nlsbuffertanks_0">
+      <editors />
       <sts>
          <st id="GV1" editor="BUFFER_TANKS0_1" />
          <st id="GV2" editor="BUFFER_TANKS0_2" />
@@ -542,6 +560,7 @@
       </cmds>
    </nodeDef> 
    <nodeDef id="hc_changeover" nls="nlshc_changeover_0">
+      <editors />
       <sts>
          <st id="GV1" editor="HC_CHANGEOVER0_1" />
          <st id="GV2" editor="HC_CHANGEOVER0_2" />

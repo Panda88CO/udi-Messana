@@ -2072,6 +2072,7 @@ class MessanaInfo:
                 nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
                 #print(nodeDefStr)
                 nodeFile.write(nodeDefStr)
+                nodeFile.write('      <editors />\n')
                 nodeFile.write('      <sts>\n')
                 nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
                 nlsFile.write(nlsStr)
@@ -2105,7 +2106,7 @@ class MessanaInfo:
                                 editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
                             else:
                                 print('unknown editor keyword: ' + str(key))
-                        editorStr = editorStr + ' >\n'
+                        editorStr = editorStr + ' />\n'
                         #print(editorStr)
                         editorFile.write(editorStr)
                         editorFile.write('</editor>\n')
