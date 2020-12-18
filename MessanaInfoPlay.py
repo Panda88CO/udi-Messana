@@ -1586,7 +1586,13 @@ class MessanaInfo:
             self.getEnergySourceCapability(esNbr)
             self.updateEnergySourceData(esNbr)
             esName = 'energysource'
-            self.addNodeDefStruct(esNbr, 'energy_sources', esName )           
+            self.addNodeDefStruct(esNbr, 'energy_sources', esName )   
+            
+        for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
+            self.getHC_COCapability(hccoNbr)
+            self.updateHC_COData(hccoNbr)
+            hccoName = 'hcco'
+            self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )          
         
         for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
             self.getBufferTankCapability(btNbr)
@@ -1594,11 +1600,7 @@ class MessanaInfo:
             btName = 'buffertanks'
             self.addNodeDefStruct(btNbr, 'buffer_tanks', btName )     
 
-        for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
-            self.getHC_COCapability(hccoNbr)
-            self.updateHC_COData(hccoNbr)
-            hccoName = 'hcchangeover'
-            self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )            
+          
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
 
