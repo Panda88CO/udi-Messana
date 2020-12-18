@@ -1597,7 +1597,7 @@ class MessanaInfo:
         for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
             self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
-            hccoName = 'hc_changeover'
+            hccoName = 'hcchangeover'
             self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )            
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
