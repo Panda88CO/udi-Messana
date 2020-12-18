@@ -52,9 +52,9 @@ class MessanaController(polyinterface.Controller):
                     else:
                         temp['value'] = 1
 
-                LOGGER.debug(self. + 'before append')      
+                LOGGER.debug(MessanaController.drivers + 'before append')      
                 MessanaController.drivers.append(temp)
-                LOGGER.debug(self. + 'after append')                       
+                LOGGER.debug(MessanaController.drivers + 'after append')                       
         LOGGER.debug(MessanaController.drivers)
         #self.check_params()
         #self.discover()   
