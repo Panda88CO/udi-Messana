@@ -36,6 +36,10 @@ class MessanaController(polyinterface.Controller):
             self.messana.addSystemDefStruct(self.address)
             
 
+      
+            LOGGER.debug('Install Updated profile')
+            self.poly.installprofile()
+
             LOGGER.debug('Append drivers')
             for key in self.system_GETKeys:
                 temp = self.messana.getSystemISYdriverInfo(key)
@@ -52,9 +56,7 @@ class MessanaController(polyinterface.Controller):
                     MessanaController.drivers.append(temp)
             LOGGER.debug(MessanaController.drivers)
             #self.check_params()
-            #self.discover()         
-            LOGGER.debug('Install Updated profile')
-            self.poly.installprofile()
+            #self.discover()   
             
             self.updateInfo('all')
             self.messanaImportOK = 1
