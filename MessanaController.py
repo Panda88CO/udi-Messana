@@ -26,7 +26,7 @@ class MessanaController(polyinterface.Controller):
         self.ISYcommands = {}
         self.ISYTempUnit = 0
         try:
-            self.messana = MessanaInfo('192.168.2.65' , '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
+            self.messana = MessanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
             LOGGER.debug('MessanaInfo call done')
 
             self.system_GETKeys = self.messana.systemPullKeys()
@@ -233,7 +233,7 @@ class MessanaController(polyinterface.Controller):
         val = int(command.get('value'))
         LOGGER.debug('setSetback Reeived:' + str(val))
 
-    id = messana.systemName
+    id = 'system'
     drivers = []
     commands = { 'UPDATE': discover
                 ,'SET_STATUS': setStatus

@@ -8,7 +8,7 @@ from collections import defaultdict
 #LOGGER = polyinterface.LOGGER
 
 class MessanaInfo:
-    def __init__ (self, mIPaddress, mAPIKeyVal):
+    def __init__ (self, mIPaddress, mAPIKeyVal, systemName):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
@@ -1551,9 +1551,9 @@ class MessanaInfo:
         self.atuCapability = {}
         
         self.updateSystemData('all')
-        systemName = 'system'
-        self.addSystemDefStruct(systemName)
         
+        self.addSystemDefStruct(systemName)
+
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
             self.updateZoneData(zoneNbr)
