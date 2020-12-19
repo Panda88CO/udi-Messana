@@ -233,7 +233,7 @@ class MessanaController(polyinterface.Controller):
         val = int(command.get('value'))
         LOGGER.debug('setSetback Reeived:' + str(val))
 
-    id = 'messanasys'
+    id = messana.systemName
     drivers = []
     commands = { 'UPDATE': discover
                 ,'SET_STATUS': setStatus

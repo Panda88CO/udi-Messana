@@ -1551,11 +1551,13 @@ class MessanaInfo:
         self.atuCapability = {}
         
         self.updateSystemData('all')
-        self.addSystemDefStruct('system')
+        systemName = 'system'
+        self.addSystemDefStruct(systemName)
+        
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
             self.updateZoneData(zoneNbr)
-            zoneName = 'zone'
+            zoneName = 'zones'
             self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
        
         for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
@@ -1587,7 +1589,7 @@ class MessanaInfo:
             self.updateEnergySourceData(esNbr)
             esName = 'energysource'
             self.addNodeDefStruct(esNbr, 'energy_sources', esName )   
-            
+
         for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
             self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
