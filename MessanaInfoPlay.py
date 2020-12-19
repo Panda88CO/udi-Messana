@@ -200,7 +200,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                     'nlsTEXT' : 'Temp Unit' 
-                                                    ,'nlsValues' : {0:'F', 1:'C'}
+                                                    ,'nlsValues' : {0:'C', 1:'F'}
                                                         }
                                                 }                                        
                                         ,'mEnergySaving':{
@@ -2119,7 +2119,7 @@ class MessanaInfo:
 
                         for nlsInfo in self.setupFile['nls'][nodeName]:
                             if nlsInfo == 'nlsTEXT':
-                                #nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+nodeName+'-NAME = '
+                                
                                 nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
                                 nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
                                 nlsFile.write(nlsStr)
@@ -2130,6 +2130,11 @@ class MessanaInfo:
                                     nlsFile.write(nlsStr)
                                     nlsValues = nlsValues + 1
                             #print(nlsStr)
+                        #### Missing CMD portion 
+                        # nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+?????????+'-NAME = '
+                        # nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
+                        # nlsFile.write(nlsStr)
+                        #     
                 nodeFile.write('      </sts>\n')
                 nodeFile.write('      <cmds>\n')                
                 nodeFile.write('         <sends>\n')            
