@@ -33,7 +33,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_0">
+   <nodeDef id="zones" nls="nlszones0">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES0_1" />
@@ -68,7 +68,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_1">
+   <nodeDef id="zones" nls="nlszones1">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES1_1" />
@@ -103,7 +103,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_2">
+   <nodeDef id="zones" nls="nlszones2">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES2_1" />
@@ -138,7 +138,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_3">
+   <nodeDef id="zones" nls="nlszones3">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES3_1" />
@@ -173,7 +173,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_4">
+   <nodeDef id="zones" nls="nlszones4">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES4_1" />
@@ -208,7 +208,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_5">
+   <nodeDef id="zones" nls="nlszones5">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES5_1" />
@@ -243,7 +243,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_6">
+   <nodeDef id="zones" nls="nlszones6">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES6_1" />
@@ -278,7 +278,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_7">
+   <nodeDef id="zones" nls="nlszones7">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES7_1" />
@@ -313,7 +313,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_8">
+   <nodeDef id="zones" nls="nlszones8">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES8_1" />
@@ -348,7 +348,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="zone" nls="nlszone_9">
+   <nodeDef id="zones" nls="nlszones9">
       <editors />
       <sts>
          <st id="GV1" editor="ZONES9_1" />
@@ -383,7 +383,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone" nls="nlsmacrozone_0">
+   <nodeDef id="macrozone" nls="nlsmacrozone0">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES0_1" />
@@ -404,7 +404,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone" nls="nlsmacrozone_1">
+   <nodeDef id="macrozone" nls="nlsmacrozone1">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES1_1" />
@@ -425,7 +425,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone" nls="nlsmacrozone_2">
+   <nodeDef id="macrozone" nls="nlsmacrozone2">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES2_1" />
@@ -446,7 +446,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone" nls="nlsmacrozone_3">
+   <nodeDef id="macrozone" nls="nlsmacrozone3">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES3_1" />
@@ -467,7 +467,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="atu" nls="nlsatu_0">
+   <nodeDef id="atu" nls="nlsatu0">
       <editors />
       <sts>
          <st id="GV1" editor="ATUS0_1" />
@@ -517,7 +517,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="energysource" nls="nlsenergysource_0">
+   <nodeDef id="energysource" nls="nlsenergysource0">
       <editors />
       <sts>
          <st id="GV1" editor="ENERGY_SOURCES0_1" />
@@ -535,7 +535,27 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="buffertanks" nls="nlsbuffertanks_0">
+   <nodeDef id="hcco" nls="nlshcco0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="HC_CHANGEOVER0_1" />
+         <st id="GV2" editor="HC_CHANGEOVER0_2" />
+         <st id="GV3" editor="HC_CHANGEOVER0_3" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_MODE" > 
+               <p id="" editor="HC_CHANGEOVER0_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_ADAPTIVE_COMFORT" > 
+               <p id="" editor="HC_CHANGEOVER0_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="buffertanks" nls="nlsbuffertanks0">
       <editors />
       <sts>
          <st id="GV1" editor="BUFFER_TANKS0_1" />
@@ -555,26 +575,6 @@
             </cmd> 
             <cmd id="SET_TEMPMODE" > 
                <p id="" editor="BUFFER_TANKS0_3" init="GV3" /> 
-            </cmd> 
-         </accepts>
-      </cmds>
-   </nodeDef> 
-   <nodeDef id="hc_changeover" nls="nlshc_changeover_0">
-      <editors />
-      <sts>
-         <st id="GV1" editor="HC_CHANGEOVER0_1" />
-         <st id="GV2" editor="HC_CHANGEOVER0_2" />
-         <st id="GV3" editor="HC_CHANGEOVER0_3" />
-      </sts>
-      <cmds>
-         <sends>
-         </sends>
-         <accepts>
-            <cmd id="SET_MODE" > 
-               <p id="" editor="HC_CHANGEOVER0_1" init="GV1" /> 
-            </cmd> 
-            <cmd id="SET_ADAPTIVE_COMFORT" > 
-               <p id="" editor="HC_CHANGEOVER0_3" init="GV3" /> 
             </cmd> 
          </accepts>
       </cmds>

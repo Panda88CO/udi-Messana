@@ -491,6 +491,15 @@
   <editor id = "ENERGY_SOURCES0_4" > 
      <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_4" />
 </editor>
+  <editor id = "HC_CHANGEOVER0_1" > 
+     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_1" />
+</editor>
+  <editor id = "HC_CHANGEOVER0_2" > 
+     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_2" />
+</editor>
+  <editor id = "HC_CHANGEOVER0_3" > 
+     <range  uom="25" subset="0-1" nls="HC_CHANGEOVER0_3" />
+</editor>
   <editor id = "BUFFER_TANKS0_1" > 
      <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_1" />
 </editor>
@@ -502,14 +511,5 @@
 </editor>
   <editor id = "BUFFER_TANKS0_4" > 
      <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_4" />
-</editor>
-  <editor id = "HC_CHANGEOVER0_1" > 
-     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_1" />
-</editor>
-  <editor id = "HC_CHANGEOVER0_2" > 
-     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_2" />
-</editor>
-  <editor id = "HC_CHANGEOVER0_3" > 
-     <range  uom="25" subset="0-1" nls="HC_CHANGEOVER0_3" />
 </editor>
 </editors> 
