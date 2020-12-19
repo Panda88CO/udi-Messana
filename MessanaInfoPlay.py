@@ -1551,7 +1551,7 @@ class MessanaInfo:
         self.atuCapability = {}
         
         self.updateSystemData('all')
-        
+        print(systemName + 'added')
         self.addSystemDefStruct(systemName)
 
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
