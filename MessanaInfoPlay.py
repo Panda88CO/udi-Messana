@@ -1649,7 +1649,7 @@ class MessanaInfo:
         self.keyCount = 0
         nodeId.lower()
 
-        self.name = nodeId+'_'+str(NodeNbr)
+        self.name = nodeId+str(NodeNbr)
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
         #editorName = nodeName+'_'+str(keyCount)
