@@ -69,7 +69,7 @@ class MessanaController(polyinterface.Controller):
 
  
     def stop(self):
-        LOGGER.debug('stop - Cleaning up Temp Sensors & GPIO')
+        LOGGER.debug('stop - Cleaning up')
 
     def heartbeat(self):
         LOGGER.debug('heartbeat: hb={}'.format(self.hb))

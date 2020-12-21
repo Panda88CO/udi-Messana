@@ -1557,49 +1557,49 @@ class MessanaInfo:
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
             self.updateZoneData(zoneNbr)
-            zoneName = 'zones'
+            zoneName = 'zones'+str(zoneNbr)
             self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
        
         for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
             self.getMacrozoneCapability(macrozoneNbr)
             self.updateMacroZoneData(macrozoneNbr)
-            macrozoneName = 'macrozone'
+            macrozoneName = 'macrozone'+str(macrozoneNbr)
             self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
 
         for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
             self.getAtuCapability(atuNbr)
             self.updateATUData(atuNbr)
-            atuName = 'atu'
+            atuName = 'atu'+str(atuNbr)
             self.addNodeDefStruct(atuNbr, 'atus', atuName )
  
         for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
             self.getDHWCapability(dhwNbr)
             self.updateDHWData(dhwNbr)
-            dhwName = 'dhw'
+            dhwName = 'dhw'+str(dhwNbr)
             self.addNodeDefStruct(dhwNbr, 'domsetic_hot_waters', dhwName )
 
         for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
             self.getFanCoilCapability(fcNbr)
             self.updateFanCoilData(fcNbr)
-            fcName = 'fancoil'
+            fcName = 'fancoil'+str(fcNbr)
             self.addNodeDefStruct(fcNbr, 'fan_coils', fcName )
        
         for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
             self.getEnergySourceCapability(esNbr)
             self.updateEnergySourceData(esNbr)
-            esName = 'energysource'
+            esName = 'energysource'+str(esNbr)
             self.addNodeDefStruct(esNbr, 'energy_sources', esName )   
 
         for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
             self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
-            hccoName = 'hcco'
+            hccoName = 'hcco'+str(hccoNbr)
             self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )          
         
         for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
             self.getBufferTankCapability(btNbr)
             self.updateBufferTankData(btNbr)
-            btName = 'buffertanks'
+            btName = 'buffertanks'+str(btNbr)
             self.addNodeDefStruct(btNbr, 'buffer_tanks', btName )     
 
           
