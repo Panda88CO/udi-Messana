@@ -546,7 +546,7 @@ class MessanaInfo:
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
                                             , 'ISYnls': {    
-                                                     'nlsTEXT' : 'MAcro Zone member'  
+                                                     'nlsTEXT' : 'Macro Zone member'  
                                                     ,'nlsValues' : None 
                                                         }
                                                     }  
@@ -2078,11 +2078,11 @@ class MessanaInfo:
                 nodeFile.write(nodeDefStr)
                 nodeFile.write('      <editors />\n')
                 nodeFile.write('      <sts>\n')
-                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
-                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
                 nlsFile.write(nlsStr)
-                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
-                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
                 nlsFile.write(nlsStr)
                 for status in self.setupFile['nodeDef'][node]['sts']:
                     for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
@@ -2119,7 +2119,6 @@ class MessanaInfo:
 
                         for nlsInfo in self.setupFile['nls'][nodeName]:
                             if nlsInfo == 'nlsTEXT':
-                                
                                 nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
                                 nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
                                 nlsFile.write(nlsStr)
