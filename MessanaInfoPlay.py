@@ -260,7 +260,7 @@ class MessanaInfo:
                         'zones': {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
                                                 ,'accepts' : {'SET_SETPOINT'   : 'Set Temp'
-                                                             ,'SET_STATUS'     : 'Zone State'                                                           ,'SET_STATUS'     : 'mStatus'
+                                                             ,'SET_STATUS'     : 'Zone State'                                                           
                                                              ,'SET_ENERGYSAVE' : 'EnergySaving'
                                                              ,'SET_SCHEDULEON' : 'ScheduleOn'}
                                                 }
