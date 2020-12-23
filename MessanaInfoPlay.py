@@ -13,11 +13,8 @@ class MessanaInfo:
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
                                                 ,'accepts' : {'UPDATE'         : 'Update System Data'
-
                                                              ,'SET_STATUS'     : 'System'
-
                                                              ,'SET_ENERGYSAVE' : 'Energy Save'
-
                                                              ,'SET_SETBACK'    : 'Setback' }
                                                 }
                                     ,'KeyInfo' : {
@@ -262,10 +259,9 @@ class MessanaInfo:
                         },
                         'zones': {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'SET_SETPOINT'   : 'mSetPoint'
-                                                             ,'SET_STATUS'     : 'mStatus'
-                                                             ,'SET_ENERGYSAVE' : 'mEnergySaving'
-                                                             ,'SET_SCHEDULEON' : 'mScheduleOn'}
+                                                ,'accepts' : {'SET_SETPOINT'   : 'Set Temp'                                                           ,'SET_STATUS'     : 'mStatus'
+                                                             ,'SET_ENERGYSAVE' : 'EnergySaving'
+                                                             ,'SET_SCHEDULEON' : 'ScheduleOn'}
                                                 }
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -1649,55 +1645,55 @@ class MessanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-    def addNodeDefStruct(self, NodeNbr, NodeName, nodeId):
+    def addNodeDefStruct(self, nodeNbr, nodeName, nodeId):
         self.keyCount = 0
         nodeId.lower()
 
-        self.name = nodeId+str(NodeNbr)
+        self.name = nodeName+str(nodeNbr)
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
         #editorName = nodeName+'_'+str(keyCount)
         self.setupFile['nodeDef'][self.name]={}
         self.setupFile['nodeDef'][self.name]['CodeId'] = nodeId
         self.setupFile['nodeDef'][self.name]['nlsId'] = self.nlsKey
-        self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[NodeName]['data'][NodeNbr]['mName']
-        self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[NodeName]['ISYnode']['nlsICON']
+        self.setupFile['nodeDef'][self.name]['nlsNAME']=self.mSystem[nodeName]['data'][nodeNbr]['mName']
+        self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
 
-        for mKey in self.mSystem[NodeName]['data'][NodeNbr]: 
+        for mKey in self.mSystem[nodeName]['data'][nodeNbr]: 
             #make check if system has unit installed
-            if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+            if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 self.keyCount = self.keyCount + 1
-                editorName = NodeName.upper()+str(NodeNbr)+'_'+str(self.keyCount)
+                editorName = nodeName.upper()+str(nodeNbr)+'_'+str(self.keyCount)
                 nlsName = editorName
                 ISYvar = 'GV'+str(self.keyCount)
                 self.setupFile['nodeDef'][self.name]['sts'][mKey]={ISYvar:editorName}
                 self.setupFile['editors'][editorName]={}
                 #self.setupFile['nls'][editorName][ISYparam]
-                for ISYparam in self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor']:
-                    if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
-                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem[NodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+                for ISYparam in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']:
+                    if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                        self.setupFile['editors'][editorName][ISYparam]=self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
-                if self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls']:
+                if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
-                for ISYnls in self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls']:
+                for ISYnls in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
                     print( mKey + ' ' + ISYnls)
-                    if  self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
-                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[NodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                    if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                        self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
                             self.setupFile['editors'][editorName]['nlsKey'] = nlsName 
 
         self.setupFile['nodeDef'][self.name]['cmds']= {}
-        if 'accepts' in self.mSystem[NodeName]['ISYnode']:
+        if 'accepts' in self.mSystem[nodeName]['ISYnode']:
             self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
-            for key in  self.mSystem[NodeName]['ISYnode']['accepts']:
-                if self.mSystem[NodeName]['ISYnode']['accepts'][key] in self.setupFile['nodeDef'][self.name]['sts']:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[NodeName]['ISYnode']['accepts'][key]]
+            for key in  self.mSystem[nodeName]['ISYnode']['accepts']:
+                if self.mSystem[nodeName]['ISYnode']['accepts'][key] in self.setupFile['nodeDef'][self.name]['sts']:
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]]
                 else:
                     self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= {}
-                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYname']=self.mSystem[NodeName]['ISYnode']['accepts'][key]    
-        if 'sends' in self.mSystem[NodeName]['ISYnode']:         
-            self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[NodeName]['ISYnode']['sends']                                 
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYname']=self.mSystem[nodeName]['ISYnode']['accepts'][key]    
+        if 'sends' in self.mSystem[nodeName]['ISYnode']:         
+            self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
         return()
 
     def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
@@ -2070,123 +2066,123 @@ class MessanaInfo:
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
         print ('Create Setup Files')
         status = True
-        try:
-            print('opening files')
-            nodeFile = open(nodeDefFileName, 'w+')
-            editorFile = open(editorFileName, 'w+')
-            nlsFile = open(nlsFileName, 'w+')
-            print('Opening Files OK')
-            editorFile.write('<editors> \n')
-            nodeFile.write('<nodeDefs> \n')
-            for node in self.setupFile['nodeDef']:
-                nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
-                #print(nodeDefStr)
-                nodeFile.write(nodeDefStr)
-                nodeFile.write('      <editors />\n')
-                nodeFile.write('      <sts>\n')
-                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
-                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+        #try:
+        print('opening files')
+        nodeFile = open(nodeDefFileName, 'w+')
+        editorFile = open(editorFileName, 'w+')
+        nlsFile = open(nlsFileName, 'w+')
+        print('Opening Files OK')
+        editorFile.write('<editors> \n')
+        nodeFile.write('<nodeDefs> \n')
+        for node in self.setupFile['nodeDef']:
+            nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
+            #print(nodeDefStr)
+            nodeFile.write(nodeDefStr)
+            nodeFile.write('      <editors />\n')
+            nodeFile.write('      <sts>\n')
+            #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+            nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+            nlsFile.write(nlsStr)
+            #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+            nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+            nlsFile.write(nlsStr)
+            for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYname']
+                nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
                 nlsFile.write(nlsStr)
-                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
-                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
-                nlsFile.write(nlsStr)
-                for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                    cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYname']
-                    nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
-                    nlsFile.write(nlsStr)
-                    print(nlsStr)
-  
-                for status in self.setupFile['nodeDef'][node]['sts']:
-                    for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
-                        nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
-                        nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
-                        #print(nodeDefStr)
-                        nodeFile.write(nodeDefStr)
-                        editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
-                        editorStr = '     <range '
-                        for key in self.setupFile['editors'][nodeName]:
-                            if key == 'ISYsubset':
-                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYuom':
-                                editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYmax':
-                                editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYmin': 
-                                editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYstep':
-                                editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
-                            elif key == 'ISYprec': 
-                                editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYsubset': 
-                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'nlsKey': 
-                                nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
-                                editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
-                            else:
-                                print('unknown editor keyword: ' + str(key))
-                        editorStr = editorStr + ' />\n'
-                        #print(editorStr)
-                        editorFile.write(editorStr)
-                        editorFile.write('</editor>\n')
+                print(nlsStr)
 
-                        for nlsInfo in self.setupFile['nls'][nodeName]:
-                            if nlsInfo == 'nlsTEXT':
-                                nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
-                                nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
+            for status in self.setupFile['nodeDef'][node]['sts']:
+                for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
+                    nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
+                    nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
+                    #print(nodeDefStr)
+                    nodeFile.write(nodeDefStr)
+                    editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
+                    editorStr = '     <range '
+                    for key in self.setupFile['editors'][nodeName]:
+                        if key == 'ISYsubset':
+                            editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'ISYuom':
+                            editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'ISYmax':
+                            editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'ISYmin': 
+                            editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'ISYstep':
+                            editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
+                        elif key == 'ISYprec': 
+                            editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'ISYsubset': 
+                            editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                        elif key == 'nlsKey': 
+                            nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
+                            editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
+                        else:
+                            print('unknown editor keyword: ' + str(key))
+                    editorStr = editorStr + ' />\n'
+                    #print(editorStr)
+                    editorFile.write(editorStr)
+                    editorFile.write('</editor>\n')
+
+                    for nlsInfo in self.setupFile['nls'][nodeName]:
+                        if nlsInfo == 'nlsTEXT':
+                            nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
+                            nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
+                            nlsFile.write(nlsStr)
+                        elif nlsInfo == 'nlsValues':
+                            nlsValues = 0
+                            for key in self.setupFile['nls'][nodeName][nlsInfo]:
+                                nlsStr = nlsEditorKey+'-'+str(nlsValues)+'='+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
                                 nlsFile.write(nlsStr)
-                            elif nlsInfo == 'nlsValues':
-                                nlsValues = 0
-                                for key in self.setupFile['nls'][nodeName][nlsInfo]:
-                                    nlsStr = nlsEditorKey+'-'+str(nlsValues)+'='+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
-                                    nlsFile.write(nlsStr)
-                                    nlsValues = nlsValues + 1
-                            #print(nlsStr)
+                                nlsValues = nlsValues + 1
+                        #print(nlsStr)
 
-                nodeFile.write('      </sts>\n')
-                nodeFile.write('      <cmds>\n')                
-                nodeFile.write('         <sends>\n')            
-                if self.setupFile['nodeDef'][node]['cmds']:
-                    if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
-                        for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
-                            cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
-                            #print(cmdStr)
+            nodeFile.write('      </sts>\n')
+            nodeFile.write('      <cmds>\n')                
+            nodeFile.write('         <sends>\n')            
+            if self.setupFile['nodeDef'][node]['cmds']:
+                if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
+                    for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
+                        cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
+                        #print(cmdStr)
+                        nodeFile.write(cmdStr)
+            nodeFile.write('         </sends>\n')               
+            nodeFile.write('         <accepts>\n')      
+            if self.setupFile['nodeDef'][node]['cmds']:
+                if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
+                    for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                        
+                        if self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd] != {}:
+                            cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
+                            nodeFile.write(cmdStr)  
+                            cmdStr = '               <p id="" editor="'
+                            for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
+                                cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
+                            #print(cmdStr)                              
                             nodeFile.write(cmdStr)
-                nodeFile.write('         </sends>\n')               
-                nodeFile.write('         <accepts>\n')      
-                if self.setupFile['nodeDef'][node]['cmds']:
-                    if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
-                        for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                            
-                            if self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd] != {}:
-                                cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
-                                nodeFile.write(cmdStr)  
-                                cmdStr = '               <p id="" editor="'
-                                for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
-                                    cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                                #print(cmdStr)                              
-                                nodeFile.write(cmdStr)
-                                nodeFile.write('            </cmd> \n')
-                            else:
-                                cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
-                                #print(cmdStr)
-                                nodeFile.write(cmdStr)  
-                nodeFile.write('         </accepts>\n')                   
+                            nodeFile.write('            </cmd> \n')
+                        else:
+                            cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
+                            #print(cmdStr)
+                            nodeFile.write(cmdStr)  
+            nodeFile.write('         </accepts>\n')                   
 
-                nodeFile.write('      </cmds>\n')                
-                                 
-                nodeFile.write('   </nodeDef> \n')
+            nodeFile.write('      </cmds>\n')                
+                                
+            nodeFile.write('   </nodeDef> \n')
 
-            nodeFile.write('</nodeDefs> \n' )
-            nodeFile.close()
-            editorFile.write('</editors> \n')
-            editorFile.close()
-            nlsFile.close()
-        except:
-            print('something went wrong in creating setup files')
-            status = False
-            nodeFile.close()
-            editorFile.close()
-            nlsFile.close()       
+        nodeFile.write('</nodeDefs> \n' )
+        nodeFile.close()
+        editorFile.write('</editors> \n')
+        editorFile.close()
+        nlsFile.close()
+        #except:
+        print('something went wrong in creating setup files')
+        status = False
+        nodeFile.close()
+        editorFile.close()
+        nlsFile.close()       
         return(status)
 
     def createNodedeFile(self, fileName):
