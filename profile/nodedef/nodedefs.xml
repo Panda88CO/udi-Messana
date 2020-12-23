@@ -1,0 +1,42 @@
+<nodeDefs> 
+   <nodeDef id="system" nls="nlssystem">
+      <editors />
+      <sts>
+         <st id="GV1" editor="SYSTEM_1" />
+         <st id="GV2" editor="SYSTEM_2" />
+         <st id="GV3" editor="SYSTEM_3" />
+         <st id="GV4" editor="SYSTEM_4" />
+         <st id="GV5" editor="SYSTEM_5" />
+         <st id="GV6" editor="SYSTEM_6" />
+         <st id="GV7" editor="SYSTEM_7" />
+         <st id="GV8" editor="SYSTEM_8" />
+         <st id="GV9" editor="SYSTEM_9" />
+         <st id="GV10" editor="SYSTEM_10" />
+         <st id="GV11" editor="SYSTEM_11" />
+      </sts>
+      <cmds>
+         <sends>
+            <cmd id="DON" /> 
+            <cmd id="DOF" /> 
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" > 
+               <p id="" editor="Update System Data" init="ISYname" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="System" init="ISYname" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="Energy Save" init="ISYname" /> 
+            </cmd> 
+            <cmd id="SET_SETBACK" > 
+               <p id="" editor="Setback" init="ISYname" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones0" nls="nlszones00">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES0_1" />
+         <st id="ISYname" editor="mSetPoint" />

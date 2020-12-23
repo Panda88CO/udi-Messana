@@ -12,10 +12,14 @@ class MessanaInfo:
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
-                                                ,'accepts' : {'UPDATE'        : ''
-                                                            ,'SET_STATUS'     : 'mStatus'
-                                                            ,'SET_ENERGYSAVE' : 'mEnergySaving'
-                                                            ,'SET_SETBACK'    : 'mSetback'}}
+                                                ,'accepts' : {'UPDATE'         : 'Update System Data'
+
+                                                             ,'SET_STATUS'     : 'System'
+
+                                                             ,'SET_ENERGYSAVE' : 'Energy Save'
+
+                                                             ,'SET_SETBACK'    : 'Setback' }
+                                                }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/system/name/'
@@ -216,7 +220,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Savings' 
-                                                    ,'nlsValues' : { 0:'Off', 1:'On' }
+                                                    ,'nlsValues' : { 0:'Disable', 1:'Enable' }
                                                         }
                                                 }                                        
                                         ,'mSetback':{
@@ -232,7 +236,7 @@ class MessanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Setback Status' 
-                                                    ,'nlsValues' : { 0:'Off',  1:'On' }
+                                                    ,'nlsValues' : { 0:'Disable',  1:'Enable' }
                                                         }
                                                 }                                          
                                         ,'mExternalAlarm':{
@@ -253,14 +257,16 @@ class MessanaInfo:
                                                 }   
                                          }                                         
                                      ,'data':{}
-                                         
+                                     ,'NOcapability' : {}
+                            
                         },
                         'zones': {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
                                                 ,'accepts' : {'SET_SETPOINT'   : 'mSetPoint'
                                                              ,'SET_STATUS'     : 'mStatus'
                                                              ,'SET_ENERGYSAVE' : 'mEnergySaving'
-                                                             ,'SET_SCHEDULEON' : 'mScheduleOn'}}
+                                                             ,'SET_SCHEDULEON' : 'mScheduleOn'}
+                                                }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/zone/name/'
@@ -1440,9 +1446,8 @@ class MessanaInfo:
                         'domsetic_hot_waters': { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': 'mStatus'
-                                                                        ,'SET_TARGETTEMP': 'mTargetTemp'
-                                                        }
-                                                                        }
+                                                                        ,'SET_TARGETTEMP': 'mTargetTemp' }
+                                                            }
                                     ,'KeyInfo' : {  
                                         'mName':{
                                              'GETstr': '/api/dhw/name/'
@@ -1511,22 +1516,21 @@ class MessanaInfo:
                                         ,'data' : {}
                                         ,'NOcapability' : {}
                         }
-                    
                 }
         
-        '''
-        self.setupStruct = {'nodeDef': nodeNbr: { 'nodeDef':{}
-                                            ,'sts':{}
-                                            ,'cmds':{
-                                                    'sends':{}
-                                                    ,'accepts':{}
-                                                    } 
-                                            }
-                                }
-                    ,'editors':{id:Name, range:{}}
-                    ,'nls':{}
-                        }
-        '''
+        
+        #self.setupStruct = {'nodeDef': nodeNbr: { 'nodeDef':{}
+        ##                                    ,'sts':{}
+        #                                  ,'cmds':{
+        #                                            'sends':{}
+        #                                            ,'accepts':{}
+        #                                            } 
+        #                                    }
+        #                        }
+        #            ,'editors':{id:Name, range:{}}
+        #            ,'nls':{}
+        #                }
+        
         self.nodeCount = 0
         self.setupFile = { 'nodeDef':{}
                             ,'editors':{}
@@ -1691,6 +1695,7 @@ class MessanaInfo:
                     self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[NodeName]['ISYnode']['accepts'][key]]
                 else:
                     self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= {}
+                self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYname']=self.mSystem[NodeName]['ISYnode']['accepts'][key]    
         if 'sends' in self.mSystem[NodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[NodeName]['ISYnode']['sends']                                 
         return()
@@ -1802,12 +1807,13 @@ class MessanaInfo:
         self.setupFile['nodeDef']['system']['cmds']={}
         if 'accepts' in self.mSystem['system']['ISYnode']:
             self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-            for key in  self.mSystem['system']['ISYnode']['accepts']:
+            for key in  self.mSystem['system']['ISYnode']['accepts']:     
                 if self.mSystem['system']['ISYnode']['accepts'][key] in self.setupFile['nodeDef']['system']['sts']:
                     mVal = self.mSystem['system']['ISYnode']['accepts'][key]
                     self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= self.setupFile['nodeDef']['system']['sts'][mVal]
                 else:
                     self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= {}   
+                self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYname']=self.mSystem['system']['ISYnode']['accepts'][key]
         if 'sends' in self.mSystem['system']['ISYnode']:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
@@ -2084,6 +2090,12 @@ class MessanaInfo:
                 #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
                 nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
                 nlsFile.write(nlsStr)
+                for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                    cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYname']
+                    nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
+                    nlsFile.write(nlsStr)
+                    print(nlsStr)
+  
                 for status in self.setupFile['nodeDef'][node]['sts']:
                     for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
                         nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
@@ -2129,11 +2141,7 @@ class MessanaInfo:
                                     nlsFile.write(nlsStr)
                                     nlsValues = nlsValues + 1
                             #print(nlsStr)
-                        #### Missing CMD portion 
-                        # nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+?????????+'-NAME = '
-                        # nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
-                        # nlsFile.write(nlsStr)
-                        #     
+
                 nodeFile.write('      </sts>\n')
                 nodeFile.write('      <cmds>\n')                
                 nodeFile.write('         <sends>\n')            
