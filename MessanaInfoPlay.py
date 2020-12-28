@@ -12,13 +12,13 @@ class MessanaInfo:
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
-                                                ,'accepts' : {'UPDATE'         : {   'ISYname' :'Update System Data'
+                                                ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
                                                                                     ,'ISYeditor' : None} 
-                                                             ,'SET_STATUS'     : {   'ISYname' :'System Status'
+                                                             ,'SET_STATUS'     : {   'ISYtext' :'System Status'
                                                                                     ,'ISYeditor' : 'mStatus'}
-                                                             ,'SET_ENERGYSAVE' : {   'ISYname' :'Energy Save'
+                                                             ,'SET_ENERGYSAVE' : {   'ISYtext' :'Energy Save'
                                                                                     ,'ISYeditor' : 'mEnergySaving'}
-                                                             ,'SET_SETBACK'    : {   'ISYname' :'Setback'
+                                                             ,'SET_SETBACK'    : {   'ISYtext' :'Setback'
                                                                                     ,'ISYeditor' : 'mSetback' }
                                                             }
                                                 }
@@ -264,13 +264,13 @@ class MessanaInfo:
                         },
                         'zones': {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'SET_SETPOINT'   : {   'ISYname' :'Set Temperature'
+                                                ,'accepts' : {'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
                                                                                     ,'ISYeditor' : 'mSetPoint' }
-                                                             ,'SET_STATUS'     : {   'ISYname' :'Zone State'
+                                                             ,'SET_STATUS'     : {   'ISYtext' :'Zone State'
                                                                                     ,'ISYeditor' : 'mStatus' }                                                         
-                                                             ,'SET_ENERGYSAVE' : {   'ISYname' :'Energy Saving'
+                                                             ,'SET_ENERGYSAVE' : {   'ISYtext' :'Energy Saving'
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
-                                                             ,'SET_SCHEDULEON' : {   'ISYname' :'Schedule Status'
+                                                             ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
                                                             }
                                                 }
@@ -635,13 +635,13 @@ class MessanaInfo:
                         },
                         'macrozones' : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {'UPDATE'        : { 'ISYname' :'Update System'
+                                                        ,'accepts' : {'UPDATE'        : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                    ,'SET_STATUS'     : { 'ISYname' :'Macro Zone State'
+                                                                    ,'SET_STATUS'     : { 'ISYtext' :'Macro Zone State'
                                                                                          ,'ISYeditor' : None } 
-                                                                    ,'SET_ENERGYSAVE' : { 'ISYname' :'Energy Saving'
+                                                                    ,'SET_ENERGYSAVE' : { 'ISYtext' :'Energy Saving'
                                                                                          ,'ISYeditor' : None }
-                                                                    ,'SET_SETBACK'    : { 'ISYname' :'Setback'
+                                                                    ,'SET_SETBACK'    : { 'ISYtext' :'Setback'
                                                                                          ,'ISYeditor' : None}
                                                                     }
                                                         }
@@ -764,9 +764,9 @@ class MessanaInfo:
                         }, 
                         'hc_changeover' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_MODE': { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_ADAPTIVE_COMFORT' :{ 'ISYname' :'Adaptive System'
+                                                                       ,'SET_ADAPTIVE_COMFORT' :{ 'ISYtext' :'Adaptive System'
                                                                                          ,'ISYeditor' : None } }}
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -838,11 +838,11 @@ class MessanaInfo:
                         },
                         'fan_coils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_COOLING_SPEED' : { 'ISYname' :'Update System'
+                                                                        ,'SET_COOLING_SPEED' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None } 
-                                                                        ,'SET_HEATING_SPEED' : { 'ISYname' :'Update System'
+                                                                        ,'SET_HEATING_SPEED' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None } }}
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -947,29 +947,29 @@ class MessanaInfo:
                         },
                         'atus': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_HRV_ON' : { 'ISYname' :'Update System'
+                                                                        ,'SET_HRV_ON' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_FLOWLEVEL' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_HUM' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_HUM' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_NTD' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_NTD' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_INT' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_INT' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_RH' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_HUM_SP_RH' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_DP' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_HUM_SP_DP' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_RH' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_DEHUM_SP_RH' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_DP' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_DEHUM_SP_DP' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }    
-                                                                        ,'SET_CURR_SP_RH' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_CURR_SP_RH' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_CURR_SP_DP' :{ 'ISYname' :'Update System'
+                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                         }}
                                     ,'KeyInfo' : {  
@@ -1297,7 +1297,7 @@ class MessanaInfo:
                         },
                         'energy_sources':{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                        ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
@@ -1387,11 +1387,11 @@ class MessanaInfo:
                         }, 
                         'buffer_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_MODE'      : { 'ISYname' :'Update System'
+                                                                       ,'SET_MODE'      : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_TEMPMODE'  :{ 'ISYname' :'Update System'
+                                                                       ,'SET_TEMPMODE'  :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
@@ -1480,9 +1480,9 @@ class MessanaInfo:
                         },
                         'domsetic_hot_waters': { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYname' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_TARGETTEMP': { 'ISYname' :'Update System'
+                                                                        ,'SET_TARGETTEMP': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }}
                                                             }
                                     ,'KeyInfo' : {  
@@ -1730,9 +1730,10 @@ class MessanaInfo:
             for key in  self.mSystem[nodeName]['ISYnode']['accepts']:
                 if self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][self.name]['sts']:
                     self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor']]
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYname']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
                 else:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
+                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -1849,9 +1850,10 @@ class MessanaInfo:
                 if self.mSystem['system']['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef']['system']['sts']:
                     mVal = self.mSystem['system']['ISYnode']['accepts'][key]['ISYeditor']
                     self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= self.setupFile['nodeDef']['system']['sts'][mVal]
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYname']=self.mSystem['system']['ISYnode']['accepts'][key]
+                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYInfo']=self.mSystem['system']['ISYnode']['accepts'][key]
                 else:
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= self.mSystem['system']['ISYnode']['accepts'][key]   
+                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= {}
+                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYInfo']= self.mSystem['system']['ISYnode']['accepts'][key]   
         if 'sends' in self.mSystem['system']['ISYnode']:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
@@ -2129,43 +2131,44 @@ class MessanaInfo:
             nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
             nlsFile.write(nlsStr)
             for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYname']
+                cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
                 nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
                 nlsFile.write(nlsStr)
                 print(nlsStr)
 
             for status in self.setupFile['nodeDef'][node]['sts']:
                 for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
-                    nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
-                    nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
-                    #print(nodeDefStr)
-                    nodeFile.write(nodeDefStr)
-                    editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
-                    editorStr = '     <range '
-                    for key in self.setupFile['editors'][nodeName]:
-                        if key == 'ISYsubset':
-                            editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'ISYuom':
-                            editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'ISYmax':
-                            editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'ISYmin': 
-                            editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'ISYstep':
-                            editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
-                        elif key == 'ISYprec': 
-                            editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'ISYsubset': 
-                            editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                        elif key == 'nlsKey': 
-                            nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
-                            editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
-                        else:
-                            print('unknown editor keyword: ' + str(key))
-                    editorStr = editorStr + ' />\n'
-                    #print(editorStr)
-                    editorFile.write(editorStr)
-                    editorFile.write('</editor>\n')
+                    if statusId != 'ISYInfo':
+                        nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
+                        nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
+                        #print(nodeDefStr)
+                        nodeFile.write(nodeDefStr)
+                        editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
+                        editorStr = '     <range '
+                        for key in self.setupFile['editors'][nodeName]:
+                            if key == 'ISYsubset':
+                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYuom':
+                                editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYmax':
+                                editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYmin': 
+                                editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYstep':
+                                editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
+                            elif key == 'ISYprec': 
+                                editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'ISYsubset': 
+                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                            elif key == 'nlsKey': 
+                                nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
+                                editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
+                            else:
+                                print('unknown editor keyword: ' + str(key))
+                        editorStr = editorStr + ' />\n'
+                        #print(editorStr)
+                        editorFile.write(editorStr)
+                        editorFile.write('</editor>\n')
 
                     for nlsInfo in self.setupFile['nls'][nodeName]:
                         if nlsInfo == 'nlsTEXT':
@@ -2195,15 +2198,16 @@ class MessanaInfo:
                 if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
                     for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
                         
-                        if self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd] != {}:
-                            cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
-                            nodeFile.write(cmdStr)  
-                            cmdStr = '               <p id="" editor="'
+                        if len(self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]) != 1:
                             for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
-                                cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                            #print(cmdStr)                              
-                            nodeFile.write(cmdStr)
-                            nodeFile.write('            </cmd> \n')
+                                if key != 'ISYInfo':
+                                    cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
+                                    nodeFile.write(cmdStr)  
+                                    cmdStr = '               <p id="" editor="'
+                                    cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
+                                    print(cmdStr)                              
+                                    nodeFile.write(cmdStr)
+                                    nodeFile.write('            </cmd> \n')
                         else:
                             cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
                             #print(cmdStr)
