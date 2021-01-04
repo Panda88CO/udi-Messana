@@ -161,7 +161,7 @@ class MessanaInfo:
                                                     ,'nlsValues' :  None 
                                                     }
                                                 }                                          
-                                        ,'mHC_changeoverCount':{
+                                        ,'mhc_coCount':{
                                              'GETstr':'/api/system/HCgroupCount/'
                                             ,'PUTstr': None 
                                             ,'Active': None                                       
@@ -762,7 +762,7 @@ class MessanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         }, 
-                        'hc_changeover' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'hc_co' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1295,7 +1295,7 @@ class MessanaInfo:
                                     ,'data' : {}
                                     ,'NOcapability' : {}                  
                         },
-                        'energy_sources':{'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'energy_s':{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                        ,'ISYeditor' : None }}
@@ -1385,7 +1385,7 @@ class MessanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         }, 
-                        'buffer_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'buf_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1478,7 +1478,7 @@ class MessanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         },
-                        'domsetic_hot_waters': { 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'dom_hw': { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1617,7 +1617,7 @@ class MessanaInfo:
             self.getDHWCapability(dhwNbr)
             self.updateDHWData(dhwNbr)
             dhwName = 'dhw'+str(dhwNbr)
-            self.addNodeDefStruct(dhwNbr, 'domsetic_hot_waters', dhwName )
+            self.addNodeDefStruct(dhwNbr, 'dom_hw', dhwName )
 
         for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
             self.getFanCoilCapability(fcNbr)
@@ -1629,19 +1629,19 @@ class MessanaInfo:
             self.getEnergySourceCapability(esNbr)
             self.updateEnergySourceData(esNbr)
             esName = 'energysource'+str(esNbr)
-            self.addNodeDefStruct(esNbr, 'energy_sources', esName )   
+            self.addNodeDefStruct(esNbr, 'energy_s', esName )   
 
-        for hccoNbr in range(0,self.mSystem['system']['data']['mHC_changeoverCount']):
+        for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
             self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
             hccoName = 'hcco'+str(hccoNbr)
-            self.addNodeDefStruct(hccoNbr, 'hc_changeover', hccoName )          
+            self.addNodeDefStruct(hccoNbr, 'hc_co', hccoName )          
         
         for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
             self.getBufferTankCapability(btNbr)
             self.updateBufferTankData(btNbr)
             btName = 'buffertanks'+str(btNbr)
-            self.addNodeDefStruct(btNbr, 'buffer_tanks', btName )     
+            self.addNodeDefStruct(btNbr, 'buf_tanks', btName )     
 
           
 
@@ -2419,30 +2419,30 @@ class MessanaInfo:
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
         print('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateNodeData(HC_CONbr, 'hc_changeover'))
+        return(self.updateNodeData(HC_CONbr, 'hc_co'))
 
     def getHC_COCapability(self, HC_CONbr): 
-        self.getNodeCapability('hc_changeover', HC_CONbr)
+        self.getNodeCapability('hc_co', HC_CONbr)
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
         print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(HC_CONbr, 'hc_changeover', mKey))
+        return(self.pullNodeDataIndividual(HC_CONbr, 'hc_co', mKey))
 
     def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
         print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(HC_CONbr, 'hc_changeover', mKey, value))
+        return(self.pushNodeDataIndividual(HC_CONbr, 'hc_co', mKey, value))
 
-    def hc_changeoverPullKeys(self, HC_CONbr):
-        print('hc_changeoverPullKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'GETstr'))
+    def hc_coPullKeys(self, HC_CONbr):
+        print('hc_coPullKeys')
+        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'GETstr'))
 
-    def hc_changeoverPushKeys(self, HC_CONbr):
-        print('hc_changeoverPushKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'PUTstr'))
+    def hc_coPushKeys(self, HC_CONbr):
+        print('hc_coPushKeys')
+        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'PUTstr'))
   
-    def hc_changeoverActiveKeys(self, HC_CONbr):
-        print('hc_changeoverActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_changeover', 'active'))    
+    def hc_coActiveKeys(self, HC_CONbr):
+        print('hc_coActiveKeys')
+        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'active'))    
    
 
     #ATU
@@ -2504,70 +2504,70 @@ class MessanaInfo:
     #energy_sources
     def updateEnergySourceData(self, EnergySourceNbr):
         print('updatEnergySourceData: ' + str(EnergySourceNbr))
-        return(self.updateNodeData(EnergySourceNbr, 'energy_sources'))
+        return(self.updateNodeData(EnergySourceNbr, 'energy_s'))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
-        self.getNodeCapability('energy_sources', EnergySourceNbr)
+        self.getNodeCapability('energy_s', EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(EnergySourceNbr, 'energy_sources', mKey))
+        return(self.pullNodeDataIndividual(EnergySourceNbr, 'energy_s', mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
         print('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(EnergySourceNbr, 'energy_sources', mKey, value))
+        return(self.pushNodeDataIndividual(EnergySourceNbr, 'energy_s', mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
         print('energy_sourcePullKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'GETstr'))
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
         print('energy_sourcePushKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'PUTstr'))
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         print('energy_sourceActiveKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_sources', 'active'))    
+        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'active'))    
 
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         print('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateNodeData(BufferTankNbr, 'buffer_tanks'))
+        return(self.updateNodeData(BufferTankNbr, 'buf_tanks'))
 
     def getBufferTankCapability(self, BufferTankNbr): 
-        self.getNodeCapability('buffer_tanks', BufferTankNbr)
+        self.getNodeCapability('buf_tanks', BufferTankNbr)
 
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
         print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey))
+        return(self.pullNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey))
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
         print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'buffer_tanks', 'mMode')
+            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'buf_tanks', 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+                return(self.pushNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey, value))
             else:
                 print('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushNodeDataIndividual(BufferTankNbr, 'buffer_tanks', mKey, value))
+             return(self.pushNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
         print('buffer_tankPullKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'GETstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'GETstr'))
 
     def buffer_tankPushKeys(self, BufferTankNbr):
         print('buffer_tankPushKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'PUTstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'PUTstr'))
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
         print('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buffer_tanks', 'active'))    
+        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'active'))    
 
 
         #Domestic Hot Water
@@ -2576,31 +2576,31 @@ class MessanaInfo:
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
         print('updatDHWData: ' + str(DHWNbr))
-        return(self.updateNodeData(DHWNbr, 'domsetic_hot_waters'))
+        return(self.updateNodeData(DHWNbr, 'dom_hw'))
 
     def getDHWCapability(self, DHWNbr): 
-        self.getNodeCapability('domsetic_hot_waters', DHWNbr)
+        self.getNodeCapability('dom_hw', DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
         print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey))
+        return(self.pullNodeDataIndividual(DHWNbr, 'dom_hw', mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
         print('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(DHWNbr, 'domsetic_hot_waters', mKey, value))
+        return(self.pushNodeDataIndividual(DHWNbr, 'dom_hw', mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
         print('DHWPullKeys')
-        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'GETstr'))
+        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
         print('DHWPushKeys')
-        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'PUTstr'))
+        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
         print('DHWActiveKeys')
-        return( self.getNodeKeys (DHWNbr, 'domsetic_hot_waters', 'active'))    
+        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'active'))    
 
 
     '''
@@ -2612,7 +2612,7 @@ class MessanaInfo:
         if self.systemDict['mMacrozoneCount'] > 0:    
             print('Reading MacroZone System')
             self.pullAllMacroZoneDataMessana()
-        if self.systemDict['mHC_changeoverCount'] > 0:   
+        if self.systemDict['mhc_coCount'] > 0:   
             print('Reading Ht/Cold System')
             self.pullAllHC_CODataMessana()
         if self.systemDict['mATUCount'] > 0:

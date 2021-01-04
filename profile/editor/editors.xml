@@ -479,37 +479,37 @@
   <editor id = "ATUS0_13" > 
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
-  <editor id = "ENERGY_SOURCES0_1" > 
-     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_1" />
+  <editor id = "ENERGY_S0_1" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_S0_1" />
 </editor>
-  <editor id = "ENERGY_SOURCES0_2" > 
-     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_2" />
+  <editor id = "ENERGY_S0_2" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_S0_2" />
 </editor>
-  <editor id = "ENERGY_SOURCES0_3" > 
-     <range  uom="25" subset="0-3" nls="ENERGY_SOURCES0_3" />
+  <editor id = "ENERGY_S0_3" > 
+     <range  uom="25" subset="0-3" nls="ENERGY_S0_3" />
 </editor>
-  <editor id = "ENERGY_SOURCES0_4" > 
-     <range  uom="25" subset="0-1" nls="ENERGY_SOURCES0_4" />
+  <editor id = "ENERGY_S0_4" > 
+     <range  uom="25" subset="0-1" nls="ENERGY_S0_4" />
 </editor>
-  <editor id = "HC_CHANGEOVER0_1" > 
-     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_1" />
+  <editor id = "HC_CO0_1" > 
+     <range  uom="25" subset="0-2" nls="HC_CO0_1" />
 </editor>
-  <editor id = "HC_CHANGEOVER0_2" > 
-     <range  uom="25" subset="0-2" nls="HC_CHANGEOVER0_2" />
+  <editor id = "HC_CO0_2" > 
+     <range  uom="25" subset="0-2" nls="HC_CO0_2" />
 </editor>
-  <editor id = "HC_CHANGEOVER0_3" > 
-     <range  uom="25" subset="0-1" nls="HC_CHANGEOVER0_3" />
+  <editor id = "HC_CO0_3" > 
+     <range  uom="25" subset="0-1" nls="HC_CO0_3" />
 </editor>
-  <editor id = "BUFFER_TANKS0_1" > 
-     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_1" />
+  <editor id = "BUF_TANKS0_1" > 
+     <range  uom="25" subset="0-1" nls="BUF_TANKS0_1" />
 </editor>
-  <editor id = "BUFFER_TANKS0_2" > 
-     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_2" />
+  <editor id = "BUF_TANKS0_2" > 
+     <range  uom="25" subset="0-1" nls="BUF_TANKS0_2" />
 </editor>
-  <editor id = "BUFFER_TANKS0_3" > 
-     <range  uom="25" subset="0-2" nls="BUFFER_TANKS0_3" />
+  <editor id = "BUF_TANKS0_3" > 
+     <range  uom="25" subset="0-2" nls="BUF_TANKS0_3" />
 </editor>
-  <editor id = "BUFFER_TANKS0_4" > 
-     <range  uom="25" subset="0-1" nls="BUFFER_TANKS0_4" />
+  <editor id = "BUF_TANKS0_4" > 
+     <range  uom="25" subset="0-1" nls="BUF_TANKS0_4" />
 </editor>
 </editors> 

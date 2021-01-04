@@ -495,13 +495,13 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="energysource0" nls="nlsenergy_sources0">
+   <nodeDef id="energysource0" nls="nlsenergy_s0">
       <editors />
       <sts>
-         <st id="GV1" editor="ENERGY_SOURCES0_1" />
-         <st id="GV2" editor="ENERGY_SOURCES0_2" />
-         <st id="GV3" editor="ENERGY_SOURCES0_3" />
-         <st id="GV4" editor="ENERGY_SOURCES0_4" />
+         <st id="GV1" editor="ENERGY_S0_1" />
+         <st id="GV2" editor="ENERGY_S0_2" />
+         <st id="GV3" editor="ENERGY_S0_3" />
+         <st id="GV4" editor="ENERGY_S0_4" />
       </sts>
       <cmds>
          <sends>
@@ -511,12 +511,12 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="hcco0" nls="nlshc_changeover0">
+   <nodeDef id="hcco0" nls="nlshc_co0">
       <editors />
       <sts>
-         <st id="GV1" editor="HC_CHANGEOVER0_1" />
-         <st id="GV2" editor="HC_CHANGEOVER0_2" />
-         <st id="GV3" editor="HC_CHANGEOVER0_3" />
+         <st id="GV1" editor="HC_CO0_1" />
+         <st id="GV2" editor="HC_CO0_2" />
+         <st id="GV3" editor="HC_CO0_3" />
       </sts>
       <cmds>
          <sends>
@@ -527,13 +527,13 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="buffertanks0" nls="nlsbuffer_tanks0">
+   <nodeDef id="buffertanks0" nls="nlsbuf_tanks0">
       <editors />
       <sts>
-         <st id="GV1" editor="BUFFER_TANKS0_1" />
-         <st id="GV2" editor="BUFFER_TANKS0_2" />
-         <st id="GV3" editor="BUFFER_TANKS0_3" />
-         <st id="GV4" editor="BUFFER_TANKS0_4" />
+         <st id="GV1" editor="BUF_TANKS0_1" />
+         <st id="GV2" editor="BUF_TANKS0_2" />
+         <st id="GV3" editor="BUF_TANKS0_3" />
+         <st id="GV4" editor="BUF_TANKS0_4" />
       </sts>
       <cmds>
          <sends>
