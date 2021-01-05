@@ -762,7 +762,7 @@ class MessanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         }, 
-                        'hc_co' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'HcCo' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -836,7 +836,7 @@ class MessanaInfo:
                                         ,'data' : {}
                                         ,'NOcapability' : {}
                         },
-                        'fan_coils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'FanCoils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1295,7 +1295,7 @@ class MessanaInfo:
                                     ,'data' : {}
                                     ,'NOcapability' : {}                  
                         },
-                        'energy_s':{'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'EnergyS':{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                        ,'ISYeditor' : None }}
@@ -1385,7 +1385,7 @@ class MessanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         }, 
-                        'buf_tanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'BufTanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1478,7 +1478,7 @@ class MessanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         },
-                        'dom_hw': { 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        'DomHw': { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1617,31 +1617,31 @@ class MessanaInfo:
             self.getDHWCapability(dhwNbr)
             self.updateDHWData(dhwNbr)
             dhwName = 'dhw'+str(dhwNbr)
-            self.addNodeDefStruct(dhwNbr, 'dom_hw', dhwName )
+            self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
 
         for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
             self.getFanCoilCapability(fcNbr)
             self.updateFanCoilData(fcNbr)
             fcName = 'fancoil'+str(fcNbr)
-            self.addNodeDefStruct(fcNbr, 'fan_coils', fcName )
+            self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
        
         for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
             self.getEnergySourceCapability(esNbr)
             self.updateEnergySourceData(esNbr)
             esName = 'energysource'+str(esNbr)
-            self.addNodeDefStruct(esNbr, 'energy_s', esName )   
+            self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
 
         for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
             self.getHC_COCapability(hccoNbr)
             self.updateHC_COData(hccoNbr)
             hccoName = 'hcco'+str(hccoNbr)
-            self.addNodeDefStruct(hccoNbr, 'hc_co', hccoName )          
+            self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
         
         for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
             self.getBufferTankCapability(btNbr)
             self.updateBufferTankData(btNbr)
             btName = 'buffertanks'+str(btNbr)
-            self.addNodeDefStruct(btNbr, 'buf_tanks', btName )     
+            self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
 
           
 
@@ -2419,30 +2419,30 @@ class MessanaInfo:
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
         print('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateNodeData(HC_CONbr, 'hc_co'))
+        return(self.updateNodeData(HC_CONbr, 'HcCo'))
 
     def getHC_COCapability(self, HC_CONbr): 
-        self.getNodeCapability('hc_co', HC_CONbr)
+        self.getNodeCapability('HcCo', HC_CONbr)
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
         print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(HC_CONbr, 'hc_co', mKey))
+        return(self.pullNodeDataIndividual(HC_CONbr, 'HcCo', mKey))
 
     def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
         print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(HC_CONbr, 'hc_co', mKey, value))
+        return(self.pushNodeDataIndividual(HC_CONbr, 'HcCo', mKey, value))
 
-    def hc_coPullKeys(self, HC_CONbr):
+    def HcCoPullKeys(self, HC_CONbr):
         print('hc_coPullKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'GETstr'))
+        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'GETstr'))
 
     def hc_coPushKeys(self, HC_CONbr):
         print('hc_coPushKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'PUTstr'))
+        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'PUTstr'))
   
     def hc_coActiveKeys(self, HC_CONbr):
         print('hc_coActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, 'hc_co', 'active'))    
+        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'active'))    
    
 
     #ATU
@@ -2476,98 +2476,98 @@ class MessanaInfo:
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
         print('updatFanCoilData: ' + str(FanCoilNbr))
-        return(self.updateNodeData(FanCoilNbr, 'fan_coils'))
+        return(self.updateNodeData(FanCoilNbr, 'FanCoils'))
 
     def getFanCoilCapability(self, FanCoilNbr): 
-        self.getNodeCapability('fan_coils', FanCoilNbr)
+        self.getNodeCapability('FanCoils', FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
         print('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(FanCoilNbr, 'fan_coils', mKey))
+        return(self.pullNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey))
 
     def pushFanCoilDataIndividual(self, FanCoilNbr, mKey, value):
         print('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(FanCoilNbr, 'fan_coils', mKey, value))
+        return(self.pushNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey, value))
 
     def fan_coilPullKeys(self, FanCoilNbr):
         print('fan_coilPullKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'GETstr'))
+        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'GETstr'))
 
     def fan_coilPushKeys(self, FanCoilNbr):
         print('fan_coilPushKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'PUTstr'))
+        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'PUTstr'))
   
     def fan_coilActiveKeys(self, FanCoilNbr):
         print('fan_coilActiveKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'fan_coils', 'active'))    
+        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'active'))    
   
-    #energy_sources
+    #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
         print('updatEnergySourceData: ' + str(EnergySourceNbr))
-        return(self.updateNodeData(EnergySourceNbr, 'energy_s'))
+        return(self.updateNodeData(EnergySourceNbr, 'EnergyS'))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
-        self.getNodeCapability('energy_s', EnergySourceNbr)
+        self.getNodeCapability('EnergyS', EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(EnergySourceNbr, 'energy_s', mKey))
+        return(self.pullNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
         print('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(EnergySourceNbr, 'energy_s', mKey, value))
+        return(self.pushNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
         print('energy_sourcePullKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'GETstr'))
+        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
-        print('energy_sourcePushKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'PUTstr'))
+        print('EnergySourcePushKeys')
+        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         print('energy_sourceActiveKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'energy_s', 'active'))    
+        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'active'))    
 
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         print('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateNodeData(BufferTankNbr, 'buf_tanks'))
+        return(self.updateNodeData(BufferTankNbr, 'BufTanks'))
 
     def getBufferTankCapability(self, BufferTankNbr): 
-        self.getNodeCapability('buf_tanks', BufferTankNbr)
+        self.getNodeCapability('BufTanks', BufferTankNbr)
 
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
         print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey))
+        return(self.pullNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey))
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
         print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'buf_tanks', 'mMode')
+            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'BufTanks', 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey, value))
+                return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
             else:
                 print('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushNodeDataIndividual(BufferTankNbr, 'buf_tanks', mKey, value))
+             return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
         print('buffer_tankPullKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'GETstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'GETstr'))
 
     def buffer_tankPushKeys(self, BufferTankNbr):
         print('buffer_tankPushKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'PUTstr'))
+        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'PUTstr'))
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
         print('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'buf_tanks', 'active'))    
+        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'active'))    
 
 
         #Domestic Hot Water
@@ -2576,31 +2576,31 @@ class MessanaInfo:
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
         print('updatDHWData: ' + str(DHWNbr))
-        return(self.updateNodeData(DHWNbr, 'dom_hw'))
+        return(self.updateNodeData(DHWNbr, 'DomHw'))
 
     def getDHWCapability(self, DHWNbr): 
-        self.getNodeCapability('dom_hw', DHWNbr)
+        self.getNodeCapability('DomHw', DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
         print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(DHWNbr, 'dom_hw', mKey))
+        return(self.pullNodeDataIndividual(DHWNbr, 'DomHw', mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
         print('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(DHWNbr, 'dom_hw', mKey, value))
+        return(self.pushNodeDataIndividual(DHWNbr, 'DomHw', mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
         print('DHWPullKeys')
-        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'GETstr'))
+        return( self.getNodeKeys (DHWNbr, 'DomHw', 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
         print('DHWPushKeys')
-        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'PUTstr'))
+        return( self.getNodeKeys (DHWNbr, 'DomHw', 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
         print('DHWActiveKeys')
-        return( self.getNodeKeys (DHWNbr, 'dom_hw', 'active'))    
+        return( self.getNodeKeys (DHWNbr, 'DomHw', 'active'))    
 
 
     '''
