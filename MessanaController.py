@@ -112,13 +112,13 @@ class MessanaController(polyinterface.Controller):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
-        for node in self.nodes:
-            self.nodes[node].updateInfo()
-            #self.nodes[node].update24Hqueue()
+        #for node in self.nodes:
+        #    self.nodes[node].updateInfo()
+        #    #self.nodes[node].update24Hqueue()
 
     def discover(self, command=None):
         LOGGER.debug('discover')
-        LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
+        #LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
         '''
         for zoneNbr in range(0,self.msysInfo['mZoneCount']):
             zoneKeys = []
