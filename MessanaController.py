@@ -179,6 +179,7 @@ class MessanaController(polyinterface.Controller):
 
     def updateInfo(self, level):
         LOGGER.info('Update Messana System ')
+        
         if level == 'active':
             for mKey in self.system_ActiveKeys: 
                 temp = self.messana.getSystemISYdriverInfo(mKey)
@@ -213,16 +214,10 @@ class MessanaController(polyinterface.Controller):
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
-        '''val = int(command.get('value'))
+        val = int(command.get('value'))
         LOGGER.debug('set Status Recived:' + str(val))
-        self.msysInfo['mStatus'] = val
-        LOGGER.debug(self.msysInfo)
-        self.messana.pushSystemData('mStatus', val)
-        self.checkSetDriver('GV1', 'mStatus')
-        self.messana.pullSystemDataMessana()
-        self.messana.pullSystemData()
-        LOGGER.debug(self.msysInfo)
-        '''
+        
+        
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
