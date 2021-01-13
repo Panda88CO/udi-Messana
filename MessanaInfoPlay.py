@@ -2178,7 +2178,7 @@ class MessanaInfo:
                         elif nlsInfo == 'nlsValues':
                             nlsValues = 0
                             for key in self.setupFile['nls'][nodeName][nlsInfo]:
-                                nlsStr = nlsEditorKey+'-'+str(nlsValues)+'='+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                                nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
                                 nlsFile.write(nlsStr)
                                 nlsValues = nlsValues + 1
                         #print(nlsStr)
