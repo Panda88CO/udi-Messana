@@ -213,8 +213,8 @@ class MessanaController(polyinterface.Controller):
                 ISYkey = temp['driver']
                 valInfo = self.messana.pullSystemDataIndividual(mKey)
                 if valInfo['statusOK']:
-                    ISYval = valInfo['data']
-                    LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
+                    ISYval = valInfo['data']                    
+                    LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + str(ISYval))
                     self.checkSetDriver(ISYkey, mKey)
         else:
             LOGGER.info(mKey + ' update failed')
@@ -228,7 +228,7 @@ class MessanaController(polyinterface.Controller):
             valInfo = self.messana.pullSystemDataIndividual(mKey)
             if valInfo['statusOK']:
                 ISYval = valInfo['data']
-                LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
+                LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + str(ISYval))
                 self.checkSetDriver(ISYkey, mKey)
         else:
             LOGGER.info(mKey + ' update failed')
