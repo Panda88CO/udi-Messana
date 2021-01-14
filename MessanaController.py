@@ -222,9 +222,11 @@ class MessanaController(polyinterface.Controller):
             if temp != {}:
                 LOGGER.debug('update ISY value')
                 ISYkey = temp['driver']
-                ISYval = self.messana.pullSystemDataIndividual(mKey)
-                LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
-                self.checkSetDriver(ISYkey, mKey)
+                valInfo = self.messana.pullSystemDataIndividual(mKey)
+                if valInfo['statusOK']:
+                    ISYval = valInfo['data']
+                    LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
+                    self.checkSetDriver(ISYkey, mKey)
         else:
             LOGGER.info(mKey + ' update failed')
 
