@@ -194,17 +194,20 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('unknown level' + level)
 
 #need to debug 
-    def checkSetDriver(self, ISYkey, mKey):
+    def checkSetDriver(self, ISYkey, mKey, val):
         LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
         if mKey in self.system_GETKeys:
             if mKey == 'mUnitTemp': 
+                valInfo = self.messana.pullSystemDataIndividual(mKey)
+                if valInfo['statusOK']:
+                    ISYval = valInfo['data']        
                     #"we cannot handle strings"
-                    if self.systemDict[mKey] in  ['Celcius', 'Fahrenheit']:
-                       if self.systemDict[mKey] == 'Celcius':
-                          mKey = 0
+                    if ISYval in  ['Celcius', 'Fahrenheit']:
+                       if ISYval == 'Celcius':
+                          val = 0
                        else:
-                          mKey = 1 
-            self.setDriver(ISYkey, mKey)   
+                          val = 1 
+            self.setDriver(ISYkey, val)   
 
     def setParamFromISY(self, mKey, val):
         LOGGER.debug('setParamFromISY')
@@ -218,7 +221,7 @@ class MessanaController(polyinterface.Controller):
                 if valInfo['statusOK']:
                     ISYval = valInfo['data']                    
                     LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + str(ISYval))
-                    self.checkSetDriver(ISYkey, mKey)
+                    self.checkSetDriver(ISYkey, mKey, ISYval)
         else:
             LOGGER.info(mKey + ' update failed')
 
@@ -232,7 +235,7 @@ class MessanaController(polyinterface.Controller):
             if valInfo['statusOK']:
                 ISYval = valInfo['data']
                 LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + str(ISYval))
-                self.checkSetDriver(ISYkey, mKey)
+                self.checkSetDriver(ISYkey, mKey, ISYval)
         else:
             LOGGER.info(mKey + ' update failed')
 
