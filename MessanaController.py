@@ -201,7 +201,7 @@ class MessanaController(polyinterface.Controller):
         else:
             LOGGER.debug('unknown level' + level)
 
-
+#need to debug 
     def checkSetDriver(self, ISYkey, mKey):
         LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
         if mKey in self.system_GETKeys:
@@ -223,8 +223,8 @@ class MessanaController(polyinterface.Controller):
                 LOGGER.debug('update ISY value')
                 ISYkey = temp['driver']
                 ISYval = self.messana.pullSystemDataIndividual(mKey)
-                LOGGER.debug('ISYkey, ISYval:' + ISYkey, ISYval)
-                self.checkSetDriver(ISYkey, ISYval)
+                LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
+                self.checkSetDriver(ISYkey, mKey)
         else:
             LOGGER.info(mKey + ' update failed')
 
