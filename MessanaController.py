@@ -183,21 +183,10 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('Update Messana System ')
         if level == 'active':
             for mKey in self.system_ActiveKeys: 
-                temp = self.messana.getSystemISYdriverInfo(mKey)
-                if temp != {}:
-                    ISYkey = temp['driver']
-                    ISYval = self.messana.pullSystemDataIndividual(mKey)
-                    LOGGER.debug(ISYkey, ISYval)
-                    self.checkSetDriver(ISYkey, ISYval)
-                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+ str(ISYval))
+                self.updateParamsToISY(mKey)
         elif level == 'all':
              for mKey in self.system_GETKeys: 
-                temp = self.messana.getSystemISYdriverInfo(mKey)
-                if temp != {}:
-                    ISYkey = temp['driver']
-                    ISYval = self.messana.pullSystemDataIndividual(mKey)
-                    self.checkSetDriver(ISYkey, ISYval)
-                    LOGGER.debug('Driver set' + mKey +': ' + ISYkey +', '+str(ISYval))
+                self.updateParamsToISY(mKey)
         else:
             LOGGER.debug('unknown level' + level)
 
@@ -230,6 +219,19 @@ class MessanaController(polyinterface.Controller):
         else:
             LOGGER.info(mKey + ' update failed')
 
+    def updateParamsToISY(self, mKey):
+        LOGGER.debug('setParamFromISY')
+        temp = self.messana.getSystemISYdriverInfo(mKey)
+        if temp != {}:
+            LOGGER.debug('update ISY value')
+            ISYkey = temp['driver']
+            valInfo = self.messana.pullSystemDataIndividual(mKey)
+            if valInfo['statusOK']:
+                ISYval = valInfo['data']
+                LOGGER.debug('ISYkey, ISYval:' + ISYkey+ ', ' + ISYval)
+                self.checkSetDriver(ISYkey, mKey)
+        else:
+            LOGGER.info(mKey + ' update failed')
 
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
