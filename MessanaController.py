@@ -213,32 +213,42 @@ class MessanaController(polyinterface.Controller):
                           mKey = 1 
             self.setDriver(ISYkey, self.mKey)   
 
+    def setParamFromISY(self, mKey, val):
+
+        if self.messana.pushSystemDataIndividual(mKey, val):
+            LOGGER.info(mKey + ' updated to '+ str(val))
+            temp = self.messana.getSystemISYdriverInfo(mKey)
+            if temp != {}:
+                ISYkey = temp['driver']
+                ISYval = self.messana.pullSystemDataIndividual(mKey)
+                LOGGER.debug(ISYkey, ISYval)
+                self.checkSetDriver(ISYkey, ISYval)
+        else:
+            LOGGER.info(mKey + ' update failed')
+
+
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
         val = int(command.get('value'))
+        mKey = 'mStatus'
         LOGGER.debug('set Status Recived:' + str(val))
-        if self.messana.pushSystemDataIndividual('mStatus', val):
-            LOGGER.info('Status updated to '+ str(val))
-        else:
-            LOGGER.info('Status update failed')
+        self.setParamFromISY(mKey, val)
+
         
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
+        mKey = 'mEnergySaving'
         LOGGER.debug('SetEnergySave Recived:' + str(val))
-        if self.messana.pushSystemDataIndividual('mEnergySaving', val):
-            LOGGER.info('EnergySave updated to '+ str(val))
-        else:
-            LOGGER.info('EnergySave update failed')
+        self.setParamFromISY(mKey, val)
+
 
     def setSetback(self, command):
         LOGGER.debug('setSetback Called')
         val = int(command.get('value'))
+        mKey = 'mSetback'
         LOGGER.debug('setSetback Reeived:' + str(val))
-        if self.messana.pushSystemDataIndividual('mSetback', val):
-            LOGGER.info('Setback updated to '+ str(val))
-        else:
-            LOGGER.info('Setback update failed')
+        self.setParamFromISY(mKey, val)
 
     id = 'system'
     drivers = []
