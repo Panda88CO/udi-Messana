@@ -204,7 +204,7 @@ class MessanaController(polyinterface.Controller):
                           mKey = 0
                        else:
                           mKey = 1 
-            self.setDriver(ISYkey, self.mKey)   
+            self.setDriver(ISYkey, mKey)   
 
     def setParamFromISY(self, mKey, val):
         LOGGER.debug('setParamFromISY')
