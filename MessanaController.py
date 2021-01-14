@@ -203,6 +203,7 @@ class MessanaController(polyinterface.Controller):
 
 
     def checkSetDriver(self, ISYkey, mKey):
+        LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
         if mKey in self.system_GETKeys:
             if mKey == 'mUnitTemp': 
                     #"we cannot handle strings"
@@ -214,14 +215,15 @@ class MessanaController(polyinterface.Controller):
             self.setDriver(ISYkey, self.mKey)   
 
     def setParamFromISY(self, mKey, val):
-
+        LOGGER.debug('setParamFromISY')
         if self.messana.pushSystemDataIndividual(mKey, val):
             LOGGER.info(mKey + ' updated to '+ str(val))
             temp = self.messana.getSystemISYdriverInfo(mKey)
             if temp != {}:
+                LOGGER.debug('update ISY value')
                 ISYkey = temp['driver']
                 ISYval = self.messana.pullSystemDataIndividual(mKey)
-                LOGGER.debug(ISYkey, ISYval)
+                LOGGER.debug('ISYkey, ISYval:' + ISYkey, ISYval)
                 self.checkSetDriver(ISYkey, ISYval)
         else:
             LOGGER.info(mKey + ' update failed')
