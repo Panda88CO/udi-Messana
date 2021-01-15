@@ -8,23 +8,45 @@ from MessanaInfo import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
 
-class MessanaZones(polyinterface.Node):
+class MessanaZone(polyinterface.Node):
     def __init__(self, controller, primary, address, name, zoneNbr, messana):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
         self.zoneNbr = zoneNbr
-        self.messana = messana
-        self.zoneInfo = defaultdict(dict)
-        
+        self.messana = messana     
         self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
         #LOGGER.debug(self.zoneInfo)
 
-      
+        self.zone_GETKeys = self.messana.zonePullKeys()
+        self.zone_PUTKeys = self.messana.zonePushKeys()
+        self.zone_ActiveKeys = self.messana.zoneActiveKeys()
+
+        LOGGER.debug('Append Zone drivers')
+        for key in self.zone_GETKeys:
+            temp = self.messana.getnodeISYdriverInfo('zone', zoneNbr, key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(str(temp['value']).isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                        self.ISYTempUnit = 4
+                    else:
+                        temp['value'] = 1
+                        self.ISYTempUnit = 17
+                LOGGER.debug(str(temp) + 'before append')      
+                MessanaZone.drivers.append(temp)
+                LOGGER.debug(str(MessanaZone.drivers) + 'after append')                       
+        LOGGER.debug(MessanaZone.drivers)
+        #self.check_params()
+        #self.discover()   
+        #self.updateInfo('all')    
+
     def start(self):
         return True
 
     def stop(self):
-        LOGGER.debug('stop - Cleaning up Temp Sensors & GPIO')
+        LOGGER.debug('stop - Cleaning up')
 
     def shortPoll(self):
         LOGGER.debug('Messane Zone shortPoll')
@@ -42,6 +64,7 @@ class MessanaZones(polyinterface.Node):
 
     def updateInfo(self):
         LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
+        '''
         self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
         self.checkSetDriver('GV4', 'mStatus')
         self.checkSetDriver('GV1', 'mSetPoint')        
@@ -61,7 +84,7 @@ class MessanaZones(polyinterface.Node):
         self.checkSetDriver('ALARM', 'mAlarmOn')
         self.checkSetDriver('GV13', 'mCurrentSetPointRH')
         self.checkSetDriver('GV14', 'mCurrentSetPointDP')
-
+        '''
 
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
@@ -89,7 +112,7 @@ class MessanaZones(polyinterface.Node):
         self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV1', 'mSetPoint')  
 
-    def EnSchedule(self, command):
+    def enableSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
         val = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(val))      
@@ -98,29 +121,11 @@ class MessanaZones(polyinterface.Node):
         self.checkSetDriver('GV3', 'mScheduleOn')
 
     id = 'zone'
-    commands = { 'SET_ZSETPOINT': setSetpoint
-                ,'SET_ZSTATUS': setStatus
-                ,'SET_ZENERGYSAVE': setEnergySave
-                ,'SET_ZSCHEDULE' : EnSchedule 
+    commands = { 'SET_SETPOINT': setSetpoint
+                ,'SET_STATUS': setStatus
+                ,'SET_ENERGYSAVE': setEnergySave
+                ,'SET_SCHEDULE' : enableSchedule 
                 }
 
-    drivers = [  {'driver': 'GV4', 'value': 1, 'uom': 25}
-                ,{'driver': 'GV1', 'value': 70, 'uom': 17}               
-                ,{'driver': 'GV2', 'value': 70, 'uom': 17}
-                ,{'driver': 'GV3', 'value': 1, 'uom': 25}
-                ,{'driver': 'CLITEMP', 'value': 10, 'uom': 17}
-                ,{'driver': 'GV5', 'value': 1, 'uom': 51}
-                ,{'driver': 'CLIHUM', 'value': 1, 'uom': 51}
-                ,{'driver': 'C02LVL', 'value': 1, 'uom': 107}
-                ,{'driver': 'GV6', 'value': 1, 'uom': 107}     
-                ,{'driver': 'GV7', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV8', 'value': 1, 'uom': 25}
-                ,{'driver': 'ALARM', 'value': 0, 'uom': 25}          
-                ,{'driver': 'GV9', 'value': 1, 'uom': 107}
-                ,{'driver': 'GV10', 'value': 1, 'uom': 107} 
-                ,{'driver': 'GV11', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV12', 'value': 1, 'uom': 107}
-                ,{'driver': 'GV13', 'value': 0, 'uom': 107}
-                ,{'driver': 'GV14', 'value': 1, 'uom': 107}
-                ]
+    drivers = [  ]
 

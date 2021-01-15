@@ -1673,15 +1673,16 @@ class MessanaInfo:
 
     def getnodeISYdriverInfo(self, node, nodeNbr, mKey):
         info = {}
-        if mKey in self.setupFile['nodeDef']['system']['sts']:
-            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+        nodeName = node + str(nodeNbr)
+        if mKey in self.setupFile['nodeDef'][nodeName]['sts']:
+            keys = list(self.setupFile['nodeDef'][nodeName]['sts'][mKey].keys())
             info['driver'] = keys[0]
             tempData =  self.GETSystem(mKey)
             if tempData['statusOK']:
                 info['value'] = tempData['data']
             else:
                 info['value'] = ''
-            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+            editor = self.setupFile['nodeDef'][nodeName]['sts'][mKey][keys[0]]
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)

@@ -6,7 +6,7 @@ import json
 import sys
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
-from MessanaZones import MessanaZones
+from MessanaZone import MessanaZone
 import shutil
 
 LOGGER = polyinterface.LOGGER
@@ -39,7 +39,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('Install Updated profile')
         self.poly.installprofile()
 
-        LOGGER.debug('Append drivers')
+        LOGGER.debug('Append System drivers')
         for key in self.system_GETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             LOGGER.debug('Driver info: ' + str(temp))
@@ -120,16 +120,70 @@ class MessanaController(polyinterface.Controller):
         nbrZones = 0
         self.getMessanaSystemKeyVal('mZoneCount', nbrZones)
         for zoneNbr in range(0,nbrZones):
-            zoneKeys = []
-            zoneKeys = self.messana.zonePullKeys(zoneNbr)
-            if 'mName' in zoneKeys:
+            LOGGER.debug('Adding zone ' + str(zoneNbr))
+            zoneGETKeys = []
+            zoneGETKeys = self.messana.zonePullKeys(zoneNbr)
+            if 'mName' in zoneGETKeys:
                 name = str(self.messana.pullZoneDataIndividual(zoneNbr, 'mName'))
                 address = 'zone'+str(zoneNbr)
                 LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
                 if not address in self.nodes:
                     self.addNode(MessanaZones(self, self.address, address, name, zoneNbr, self.messana))
+        
+        nbrMacrozones = 0
+
+        '''
+        self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
+        for macrozoneNbr in range(0,nbrMacrozones):
+            macrozoneGETKeys = []
+            macrozoneGETKeys = self.messana.macrozonePullKeys(macrozoneNbr)
+            if 'mName' in macrozoneGETKeys:
+                name = str(self.messana.pullMacroZoneDataIndividual(macrozoneNbr, 'mName'))
+                address = 'macrozone'+str(zoneNbr)
+                LOGGER.debug('macrozone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
+                if not address in self.nodes:
+                    self.addNode(MessanaMacrozones(self, self.address, address, name, zoneNbr, self.messana))
+        '''
+
+        nbrATUs = 0
+
+        nbrDHWs = 0
+        
+        nbrFanCoils = 0
+        
+        nbrEnergySources = 0
+
+        nbrHCCOs = 0
+
+        nbrBufTanks = 0
 
         
+        
+        '''
+        for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+            zoneData = {}
+            messana.updateZoneData(zoneNbr)
+            zoneGETkeys = messana.zonePullKeys(zoneNbr)
+            print (zoneGETkeys)
+            zonePUTkeys = messana.zonePushKeys(zoneNbr)
+            print(zonePUTkeys)
+            zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
+            print (zoneActiveKeys)
+            
+            for mKey in zoneGETkeys:
+                zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
+                if zoneData['statusOK']:
+                    print('GET: ' + mKey + str(zoneData['data']))
+                if mKey in zoneActiveKeys:
+                    zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
+                    if zoneData['statusOK']:
+                        print('GET: ' + mKey + str(zoneData['data']))
+                if mKey in zonePUTkeys:
+                    if mKey in messana.mSystem['zones']['data'][zoneNbr]:
+                        nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
+                        print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
+                        print('nodeData : ' + str(nodeData))
+        '''
         #count = 0
         '''for mySensor in self.mySensors.get_available_sensors():
             count = count+1
