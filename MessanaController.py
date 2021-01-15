@@ -62,7 +62,7 @@ class MessanaController(polyinterface.Controller):
         self.updateInfo('all')
         self.messanaImportOK = 1
         self.discover()
-        
+
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
                 
@@ -130,7 +130,7 @@ class MessanaController(polyinterface.Controller):
                 address = 'zone'+str(zoneNbr)
                 LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
                 if not address in self.nodes:
-                    self.addNode(MessanaZones(self, self.address, address, name, zoneNbr, self.messana))
+                    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         
         nbrMacrozones = 0
 
