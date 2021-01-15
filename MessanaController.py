@@ -61,6 +61,8 @@ class MessanaController(polyinterface.Controller):
         
         self.updateInfo('all')
         self.messanaImportOK = 1
+        self.discover()
+        
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
                 
