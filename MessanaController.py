@@ -129,8 +129,8 @@ class MessanaController(polyinterface.Controller):
                 name = str(self.messana.pullZoneDataIndividual(zoneNbr, 'mName'))
                 address = 'zone'+str(zoneNbr)
                 LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
-                if not address in self.nodes:
-                    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
+                #if not address in self.nodes:
+                #    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         
         nbrMacrozones = 0
 
