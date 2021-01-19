@@ -42,20 +42,22 @@ for key in systemGETKeys:
 
 print('zones')
 MessanaZone = []
-for zoneNbr in (0,9):
-    zoneInfo = messana.pullZoneData(zoneNbr)
+for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+    #zoneInfo = messana.pullZoneData(zoneNbr)
     #LOGGER.debug(self.zoneInfo)
-    zone_GETKeys = messana.zonePullKeys()
-    zone_PUTKeys = messana.zonePushKeys()
-    zone_ActiveKeys = messana.zoneActiveKeys()
+    zone_GETKeys = messana.zonePullKeys(zoneNbr)
+    zone_PUTKeys = messana.zonePushKeys(zoneNbr)
+    zone_ActiveKeys = messana.zoneActiveKeys(zoneNbr)
 
     print('Append Zone drivers')
     for key in zone_GETKeys:
-        temp = messana.getnodeISYdriverInfo('zone', zoneNbr, key)
+        zoneInfo = messana.pullZoneDataIndividual(zoneNbr, key)
+        print(zoneInfo)
+        temp = messana.getnodeISYdriverInfo('zones', zoneNbr, key)
         print('Driver info: ' + str(temp))
         if  temp != {}:
             if not(str(temp['value']).isnumeric()):                         
-                print('non numeric value :' + temp['value'])
+                print('non numeric value :' + str(temp['value']))
                 if temp['value'] == 'Celcius':
                     temp['value'] = 0
                     ISYTempUnit = 4

@@ -1677,7 +1677,7 @@ class MessanaInfo:
         if mKey in self.setupFile['nodeDef'][nodeName]['sts']:
             keys = list(self.setupFile['nodeDef'][nodeName]['sts'][mKey].keys())
             info['driver'] = keys[0]
-            tempData =  self.GETSystem(mKey)
+            tempData =  self.GETNodeData(node, nodeNbr, mKey)
             if tempData['statusOK']:
                 info['value'] = tempData['data']
             else:
@@ -2047,13 +2047,14 @@ class MessanaInfo:
         if self.mSystem[NodeKey]['data']:
             if NodeNbr in self.mSystem[NodeKey]['data']: 
                 for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
-                    if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
+                    if self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
+                        #if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
                 self.updateNodeData(NodeNbr, NodeKey)
                 for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
-                    if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
+                    if self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
                         if not(mKey in keys):
                             keys.append(mKey)
         else:
@@ -2385,7 +2386,7 @@ class MessanaInfo:
   
     def zoneActiveKeys(self, zoneNbr):
         print('zoneActiveKeys')
-        return( self.getNodeKeys (zoneNbr, 'zones', 'active'))
+        return( self.getNodeKeys (zoneNbr, 'zones', 'Active'))
 
 
     #MacroZone
@@ -2414,7 +2415,7 @@ class MessanaInfo:
   
     def macrozoneActiveKeys(self, macrozoneNbr):
         print('macrozoneActiveKeys')
-        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'active'))    
+        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'Active'))    
 
 
     # Hot Cold Change Over
@@ -2443,7 +2444,7 @@ class MessanaInfo:
   
     def hc_coActiveKeys(self, HC_CONbr):
         print('hc_coActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'active'))    
+        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'Active'))    
    
 
     #ATU
@@ -2472,7 +2473,7 @@ class MessanaInfo:
   
     def atuActiveKeys(self, ATUNbr):
         print('atusActiveKeys')
-        return( self.getNodeKeys (ATUNbr, 'atus', 'active'))    
+        return( self.getNodeKeys (ATUNbr, 'atus', 'Active'))    
   
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
@@ -2500,7 +2501,7 @@ class MessanaInfo:
   
     def fan_coilActiveKeys(self, FanCoilNbr):
         print('fan_coilActiveKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'active'))    
+        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'Active'))    
   
     #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
@@ -2528,7 +2529,7 @@ class MessanaInfo:
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         print('energy_sourceActiveKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'active'))    
+        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'Active'))    
 
 
     #Buffer Tank
@@ -2568,7 +2569,7 @@ class MessanaInfo:
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
         print('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'active'))    
+        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'Active'))    
 
 
         #Domestic Hot Water
