@@ -45,7 +45,7 @@ class MessanaZone(polyinterface.Node):
         return True
 
     def stop(self):
-        LOGGER.debug('stop - Cleaning up')
+        LOGGER.debug('stop - Messana Zone Cleaning up')
 
     def shortPoll(self):
         LOGGER.debug('Messane Zone shortPoll')
