@@ -14,20 +14,19 @@ class MessanaZone(polyinterface.Node):
         LOGGER.info('_init_ Messana Zone')
         self.zoneNbr = zoneNbr
         self.messana = messana     
-        self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
-        #LOGGER.debug(self.zoneInfo)
 
-        self.zone_GETKeys = self.messana.zonePullKeys()
-        self.zone_PUTKeys = self.messana.zonePushKeys()
-        self.zone_ActiveKeys = self.messana.zoneActiveKeys()
+        self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
+        self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
+        self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zonebr)
 
         LOGGER.debug('Append Zone drivers')
         for key in self.zone_GETKeys:
-            temp = self.messana.getnodeISYdriverInfo('zone', zoneNbr, key)
+            self.zoneInfo = self.messana.pullZoneDataIndividual(self.zoneNbr,key )
+            temp = self.messana.getnodeISYdriverInfo('zones', zoneNbr, key)
             LOGGER.debug('Driver info: ' + str(temp))
             if  temp != {}:
                 if not(str(temp['value']).isnumeric()):                         
-                    LOGGER.debug('non numeric value :' + temp['value'])
+                    LOGGER.debug('non numeric value :' + str(temp['value']))
                     if temp['value'] == 'Celcius':
                         temp['value'] = 0
                         self.ISYTempUnit = 4
@@ -50,41 +49,43 @@ class MessanaZone(polyinterface.Node):
 
     def shortPoll(self):
         LOGGER.debug('Messane Zone shortPoll')
-        self.updateInfo()
+        self.updateInfo('active')
                    
     def longPoll(self):
         LOGGER.debug('Messana Zone longPoll')
-
+        self.updateInfo('all')
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
     def checkSetDriver(self, ISYkey, mKey):
         if mKey in self.zoneInfo:
-            self.setDriver(ISYkey, self.zoneInfo[mKey])   
+            self.setDriver(ISYkey, self.zoneInfo[mKey])
+            
 
-    def updateInfo(self):
-        LOGGER.info( 'Zone ' + str(self.zoneNbr) + ' Data update')
-        '''
-        self.zoneInfo = self.messana.pullZoneData(self.zoneNbr)
-        self.checkSetDriver('GV4', 'mStatus')
-        self.checkSetDriver('GV1', 'mSetPoint')        
-        self.checkSetDriver('GV2', 'mTemp')
-        self.checkSetDriver('CLITEMP', 'mAirTemp')
-        self.checkSetDriver('GV3', 'mScheduleOn')
-        self.checkSetDriver('GV5', 'mDewPoint')
-        self.checkSetDriver('GV6', 'mAirQuality')
-        self.checkSetDriver('CLIHUM', 'mHumidity')
-        self.checkSetDriver('CO2LVL', 'mCO2')
-        self.checkSetDriver('GV7', 'mMacrozoneId')
-        self.checkSetDriver('GV8', 'mEnergySave')
-        self.checkSetDriver('GV9', 'mHumSetPointRH')
-        self.checkSetDriver('GV10', 'mHumSetPointDP')
-        self.checkSetDriver('GV11', 'mDeumSetPointRH')
-        self.checkSetDriver('GV12', 'mDehumSetPointDP')
-        self.checkSetDriver('ALARM', 'mAlarmOn')
-        self.checkSetDriver('GV13', 'mCurrentSetPointRH')
-        self.checkSetDriver('GV14', 'mCurrentSetPointDP')
-        '''
+    def updateParamsToISY(self, mKey):
+        LOGGER.debug('setParamFromISY')
+        temp = self.messana.getnodeISYdriverInfo('zones', self.zoneNbr, mKey)
+        if temp != {}:
+            LOGGER.debug('update ISY value')
+            ISYkey = temp['driver']
+            self.checkSetDriver(ISYkey, mKey)
+        else:
+            LOGGER.info(mKey + ' update failed')
+
+    def updateInfo(self, level):
+        LOGGER.info( 'Update Info - Zone ' + str(self.zoneNbr) + ' Data update')
+        if level == 'active':
+            for mKey in self.zone_ActiveKeys: 
+                LOGGER.debug('Zone active ' + mKey)
+                self.updateParamsToISY(mKey)
+                
+        elif level == 'all':
+             for mKey in self.zone_GETKeys: 
+                self.updateParamsToISY(mKey)
+                LOGGER.debug('Zone all ' + mKey)
+        else:
+            LOGGER.debug('unknown level' + level)
+       
 
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')

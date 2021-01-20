@@ -67,7 +67,7 @@ for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
             print(str(temp) + 'before append')      
             MessanaZone.append(temp)
             print(str(MessanaZone) + 'after append')                       
-    print(MessanaZone)
+        print(MessanaZone)
 
 '''
 ZONEDRIVER  = {}

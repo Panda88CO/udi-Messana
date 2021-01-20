@@ -127,12 +127,12 @@ class MessanaController(polyinterface.Controller):
             zoneGETKeys = self.messana.zonePullKeys(zoneNbr)
             if 'mName' in zoneGETKeys:
                 name = str(self.messana.pullZoneDataIndividual(zoneNbr, 'mName'))
-                address = 'zone'+str(zoneNbr)
+                address = 'zones'+str(zoneNbr)
                 LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
                 #if not address in self.nodes:
                 #    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         
-        nbrMacrozones = 0
+        #nbrMacrozones = 0
 
         '''
         self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
@@ -147,17 +147,17 @@ class MessanaController(polyinterface.Controller):
                     self.addNode(MessanaMacrozones(self, self.address, address, name, zoneNbr, self.messana))
         '''
 
-        nbrATUs = 0
+        #nbrATUs = 0
 
-        nbrDHWs = 0
+        #nbrDHWs = 0
         
-        nbrFanCoils = 0
+        #nbrFanCoils = 0
         
-        nbrEnergySources = 0
+        #nbrEnergySources = 0
 
-        nbrHCCOs = 0
+        #nbrHCCOs = 0
 
-        nbrBufTanks = 0
+        #nbrBufTanks = 0
 
         
         
