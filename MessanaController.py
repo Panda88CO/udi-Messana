@@ -7,6 +7,7 @@ import sys
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
 from MessanaZone import MessanaZone
+#import MessanaISY
 import shutil
 
 LOGGER = polyinterface.LOGGER
