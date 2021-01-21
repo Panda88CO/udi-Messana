@@ -81,15 +81,27 @@ class MessanaZone(polyinterface.Node):
                 
         elif level == 'all':
              for mKey in self.zone_GETKeys: 
-                self.updateParamsToISY(mKey)
+                self.updateParamsToISY(self, mKey)
                 LOGGER.debug('Zone all ' + mKey)
         else:
             LOGGER.debug('unknown level' + level)
        
+    def setParamFromISY(self, mKey, val):
+        LOGGER.debug('setParamFromISY')
+        if self.messana.pushNodeDataIndividual(mKey, val):
+            LOGGER.info(mKey + ' updated to '+ str(val))
+            temp = self.messana.getNodeISYdriverInfo('zones', self.zoneNbr, mKey)
+            if temp != {}:
+                ISYkey = temp['driver']
+                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
+                self.checkSetDriver(ISYkey, mKey)
+        else:
+            LOGGER.info(mKey + ' update failed')
 
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         val = int(command.get('value'))
+
         self.zoneInfo['mStatus'] = val
         #LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
         #LOGGER.debug(self.zoneInfo)
