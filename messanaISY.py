@@ -1,47 +1,10 @@
-class MessanaISY:
-    def checkSetDriver(self, nodeName, keySet, ISYkey, mKey):
-        LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
-        if nodeName == 'system':
-            if mKey in self.keySet:
-                valInfo = self.messana.pullSystemDataIndividual(mKey)
-                if valInfo['statusOK']:
-                    val = valInfo['data']        
-                    if mKey == 'mUnitTemp': 
-                        #"we cannot handle strings"
-                        if val in  ['Celcius', 'Fahrenheit']:
-                            if val == 'Celcius':
-                                val = 0
-                            else:  
-                                val = 1 
-                    self.setDriver(ISYkey, val)
-                return(True)
-            else:
-                return(False)
-        else:
-            return(False)
+#!/usr/bin/env python3
 
+import polyinterface
+class MessanaNode(polyinterface.Node):
+    def __init__(self, controller, primary, address, name, zoneNbr, messana):
+        super().__init__(controller, primary, address, name)
 
-    def setParamFromISY(self, mKey, val):
-        LOGGER.debug('setParamFromISY')
-        if self.messana.pushSystemDataIndividual(mKey, val):
-            LOGGER.info(mKey + ' updated to '+ str(val))
-            temp = self.messana.getSystemISYdriverInfo(mKey)
-            if temp != {}:
-                ISYkey = temp['driver']
-                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
-                self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-
-    def updateParamsToISY(self, mKey):
-        LOGGER.debug('setParamFromISY')
-        temp = self.messana.getSystemISYdriverInfo(mKey)
-        if temp != {}:
-            LOGGER.debug('update ISY value')
-            ISYkey = temp['driver']
-            self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
 
     def pullAllMessanaStatus(self):
         return(True)
@@ -60,46 +23,7 @@ class MessanaISY:
         else:
             LOGGER.debug('unknown level' + level)
 
-            
-    def setParamFromISY(self, mKey, val):
-        LOGGER.debug('setParamFromISY')
-        if self.messana.pushSystemDataIndividual(mKey, val):
-            LOGGER.info(mKey + ' updated to '+ str(val))
-            temp = self.messana.getSystemISYdriverInfo(mKey)
-            if temp != {}:
-                ISYkey = temp['driver']
-                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
-                self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-
-    def getMessanaSystemKeyVal(self, mKey, val):
-        Info = self.messana.pullSystemDataIndividual(mKey)
-        if mKey in self.system_GETKeys:
-            if Info['statusOK']:
-                val = Info['data']        
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if val in  ['Celcius', 'Fahrenheit']:
-                        if val == 'Celcius':
-                            val = 0
-                        else:  
-                            val = 1 
-            return(True)
-        else:
-            LOGGER.debug('Unknown key: ' + mKey)
-            
-
-    def updateParamsToISY(self, mKey):
-        LOGGER.debug('setParamFromISY')
-        temp = self.messana.getSystemISYdriverInfo(mKey)
-        if temp != {}:
-            LOGGER.debug('update ISY value')
-            ISYkey = temp['driver']
-            self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-
+ 
             
     def pullAllMessanaStatus(self):
         return(True)
@@ -124,7 +48,7 @@ class MessanaISY:
                 self.updateParamsToISY(mKey)
                 
         elif level == 'all':
-                for mKey in self.zone_GETKeys: 
+            for mKey in self.zone_GETKeys: 
                 self.updateParamsToISY(self, mKey)
                 LOGGER.debug('Zone all ' + mKey)
         else:

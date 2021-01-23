@@ -4,12 +4,12 @@ import polyinterface
 from subprocess import call
 import json
 from collections import defaultdict
-from MessanaInfo import MessanaInfo
-from MessanaISY import MessanaISY
+#from MessanaInfo import MessanaInfo
+from MessanaISY import MessanaNode
 
 LOGGER = polyinterface.LOGGER
 
-class MessanaZone(polyinterface.Node):
+class MessanaZone(MessanaNode.Node):
     def __init__(self, controller, primary, address, name, zoneNbr, messana):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
