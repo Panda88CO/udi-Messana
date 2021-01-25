@@ -2,7 +2,7 @@
 
 import polyinterface
 class MessanaNode(polyinterface.Node):
-    def __init__(self, controller, primary, address, name, zoneNbr, messana):
+    def __init__(self, controller, primary, address, name, nodeType, nodeNbr,  messana):
         super().__init__(controller, primary, address, name)
 
 

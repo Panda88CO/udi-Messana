@@ -9,7 +9,7 @@ from MessanaISY import MessanaNode
 
 LOGGER = polyinterface.LOGGER
 
-class MessanaZone(MessanaNode.Node):
+class MessanaZone(MessanaNode.Node, messana):
     def __init__(self, controller, primary, address, name, zoneNbr, messana):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone')
