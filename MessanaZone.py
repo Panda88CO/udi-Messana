@@ -8,12 +8,12 @@ from collections import defaultdict
 from MessanaISY import MessanaNode
 
 LOGGER = polyinterface.LOGGER
-
-class MessanaZone(MessanaNode.Node, messana):
-    def __init__(self, controller, primary, address, name, zoneNbr, messana):
-        super().__init__(controller, primary, address, name)
+#self, controller, primary, address, name, nodeType, nodeNbr, messana
+class MessanaZone(MessanaNode.Node):
+    def __init__(self, controller, primary, address, name,  nodeType, nodeNbr, messana):
+        super().__init__(controller, primary, address, name, nodeType, nodeNbr, messana)
         LOGGER.info('_init_ Messana Zone')
-        self.zoneNbr = zoneNbr
+        self.zoneNbr = nodeNbr
         self.messana = messana     
 
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
@@ -23,7 +23,7 @@ class MessanaZone(MessanaNode.Node, messana):
         LOGGER.debug('Append Zone drivers')
         for key in self.zone_GETKeys:
             self.zoneInfo = self.messana.pullZoneDataIndividual(self.zoneNbr,key )
-            temp = self.messana.getnodeISYdriverInfo('zones', zoneNbr, key)
+            temp = self.messana.getnodeISYdriverInfo('zones', self.zoneNbr, key)
             LOGGER.debug('Driver info: ' + str(temp))
             if  temp != {}:
                 if not(str(temp['value']).isnumeric()):                         
@@ -55,6 +55,7 @@ class MessanaZone(MessanaNode.Node, messana):
     def longPoll(self):
         LOGGER.debug('Messana Zone longPoll')
         self.updateInfo('all')
+
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
