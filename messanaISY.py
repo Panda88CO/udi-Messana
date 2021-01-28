@@ -3,7 +3,69 @@
 import polyinterface
 
 LOGGER = polyinterface.LOGGER
-class MessanaNode(polyinterface.Node):
+class messanaPoly(polyinterfce):
+    def __init__(self, polyglot, messanaIPaddress, messanaKey ):
+        super().__init__(polyglot)
+        self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
+        LOGGER.debug('MessanaInfo call done')
+
+
+
+class messanaController(messanaPoly.controller):
+    def __init__(self, polyglot, messanaIPaddress, messanaKey ):
+        super().__init__(polyglot)
+        LOGGER.info('_init_')
+        self.messanaImportOK = 0
+        self.name = 'Messana Main Control'
+        self.address ='messanasys'
+        self.primary = self.address
+        self.hb = 0
+        self.reportDrivers()
+        self.ISYdrivers=[]
+        self.ISYcommands = {}
+        self.ISYTempUnit = 0
+        #try:
+        self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
+        LOGGER.debug('MessanaInfo call done')
+
+        self.system_GETKeys = self.messana.systemPullKeys()
+        self.system_PUTKeys = self.messana.systemPushKeys()
+        self.system_ActiveKeys = self.messana.systemActiveKeys()
+        
+        self.messana.updateSystemData('all')
+        self.messana.addSystemDefStruct(self.address)
+    
+        LOGGER.debug('Install Updated profile')
+        self.poly.installprofile()
+
+        LOGGER.debug('Append System drivers')
+        for key in self.system_GETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(str(temp['value']).isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                        self.ISYTempUnit = 4
+                    else:
+                        temp['value'] = 1
+                        self.ISYTempUnit = 17
+                LOGGER.debug(str(temp) + 'before append')      
+                MessanaController.drivers.append(temp)
+                LOGGER.debug(str(MessanaController.drivers) + 'after append')                       
+        LOGGER.debug(MessanaController.drivers)
+        #self.check_params()
+        #self.discover()   
+        
+        self.updateInfo('all')
+        self.messanaImportOK = 1
+        self.discover()
+
+        #except:
+            #LOGGER.debug('Reading data from Messana System NOT successful')
+
+class messanaNode(polyinterface.Node):
     def __init__(self, controller, primary, address, name, nodeType, nodeNbr, messana):
         super().__init__(controller, primary, address, name)
         self.nodePullKeys = messana.getNodeKeys (nodeNbr, nodeType, 'GETstr')
