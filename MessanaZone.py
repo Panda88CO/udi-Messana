@@ -16,6 +16,7 @@ class MessanaZone(MessanaNode.Node):
         self.zoneNbr = nodeNbr
         self.messana = messana     
 
+        '''
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zonebr)
@@ -41,7 +42,9 @@ class MessanaZone(MessanaNode.Node):
         #self.check_params()
         #self.discover()   
         #self.updateInfo('all')    
+        '''
 
+        
     def start(self):
         return True
 
