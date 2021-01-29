@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import polyinterface
+from MessanaInfoPlay import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
 class messanaPoly(polyinterfce):
@@ -8,8 +9,32 @@ class messanaPoly(polyinterfce):
         super().__init__(polyglot)
         self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
         LOGGER.debug('MessanaInfo call done')
+        self.system_GETKeys = self.messana.systemPullKeys()
+        self.system_PUTKeys = self.messana.systemPushKeys()
+        self.system_ActiveKeys = self.messana.systemActiveKeys()
+        
+        self.messana.updateSystemData('all')
+        self.messana.addSystemDefStruct(self.address)
+    
+        LOGGER.debug('Install Updated profile')
+        self.poly.installprofile()
 
-
+    def getSystemDrivers():
+        LOGGER.debug('Append System drivers')
+        for key in self.system_GETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(str(temp['value']).isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                        self.ISYTempUnit = 4
+                    else:
+                        temp['value'] = 1
+                        self.ISYTempUnit = 17
+                LOGGER.debug(str(temp) + 'before append')    
+        return(temp)
 
 class messanaController(messanaPoly.controller):
     def __init__(self, polyglot, messanaIPaddress, messanaKey ):
@@ -28,32 +53,11 @@ class messanaController(messanaPoly.controller):
         self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
         LOGGER.debug('MessanaInfo call done')
 
-        self.system_GETKeys = self.messana.systemPullKeys()
-        self.system_PUTKeys = self.messana.systemPushKeys()
-        self.system_ActiveKeys = self.messana.systemActiveKeys()
-        
-        self.messana.updateSystemData('all')
-        self.messana.addSystemDefStruct(self.address)
-    
-        LOGGER.debug('Install Updated profile')
-        self.poly.installprofile()
 
-        LOGGER.debug('Append System drivers')
-        for key in self.system_GETKeys:
-            temp = self.messana.getSystemISYdriverInfo(key)
-            LOGGER.debug('Driver info: ' + str(temp))
-            if  temp != {}:
-                if not(str(temp['value']).isnumeric()):                         
-                    LOGGER.debug('non numeric value :' + temp['value'])
-                    if temp['value'] == 'Celcius':
-                        temp['value'] = 0
-                        self.ISYTempUnit = 4
-                    else:
-                        temp['value'] = 1
-                        self.ISYTempUnit = 17
-                LOGGER.debug(str(temp) + 'before append')      
-                MessanaController.drivers.append(temp)
-                LOGGER.debug(str(MessanaController.drivers) + 'after append')                       
+  
+        temp = messannaPoly.getSystemDrivers()    
+        MessanaController.drivers.append(temp)
+        LOGGER.debug(str(MessanaController.drivers) + 'after append')                       
         LOGGER.debug(MessanaController.drivers)
         #self.check_params()
         #self.discover()   
