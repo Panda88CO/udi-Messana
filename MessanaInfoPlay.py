@@ -8,7 +8,7 @@ from collections import defaultdict
 #LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
-    def __init__ (self, mIPaddress, mAPIKeyVal, systemName):
+    def __init__ (self, systemName):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
@@ -1577,20 +1577,21 @@ class messanaInfo:
 
         #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         #self.IP = '192.168.2.65'    
-
+        self.mIPaddress = '192.168.2.64'
+        self.mAPIkey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        
         self.APIKey = 'apikey'
-        self.APIKeyVal = mAPIKeyVal
         self.APIStr = self.APIKey + '=' + self.APIKeyVal
 
-        self.IP ='http://'+ mIPaddress
+        self.IP ='http://'+ self.mIPaddress
 
         self.RESPONSE_OK = '<Response [200]>'
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
+        '''
         self.zoneCapability = {}
         self.atuCapability = {}
-        
         self.updateSystemData('all')
         print(systemName + 'added')
         self.addSystemDefStruct(systemName)
@@ -1646,12 +1647,17 @@ class messanaInfo:
           
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
-
+        '''
         '''
         print('Reading Messana System')
         #self.pullAllMessanaStatus()
         print('Finish Reading Messana system')
         '''
+    
+    def setMessanaCredentials (self, mIPaddress, APIkey):
+        self.mIPaddress = mIPaddress
+        self.APIKeyVal = APIkey
+
     def init(self):
 
         return(True)

@@ -53,6 +53,9 @@ class messanaController(messanaPoly.controller):
         self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
         LOGGER.debug('MessanaInfo call done')
 
+        self.system_GETKeys = self.messana.systemPullKeys()
+        self.system_PUTKeys = self.messana.systemPushKeys()
+        self.system_ActiveKeys = self.messana.systemActiveKeys()
 
   
         temp = messannaPoly.getSystemDrivers()    
