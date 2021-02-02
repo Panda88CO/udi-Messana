@@ -4,11 +4,10 @@ import polyinterface
 from MessanaInfoPlay import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
-class messanaPoly(polyinterfce):
+class messanaPoly(polyinterface):
     def __init__(self, polyglot, messanaIPaddress, messanaKey ):
         super().__init__(polyglot)
-        self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
-        LOGGER.debug('MessanaInfo call done')
+      
         self.system_GETKeys = self.messana.systemPullKeys()
         self.system_PUTKeys = self.messana.systemPushKeys()
         self.system_ActiveKeys = self.messana.systemActiveKeys()
@@ -19,7 +18,32 @@ class messanaPoly(polyinterfce):
         LOGGER.debug('Install Updated profile')
         self.poly.installprofile()
 
-    def getSystemDrivers():
+    def start(self):
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY):,'Credentials')
+
+        self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        if self.IPAddress is None:
+            self.IPAddress= '192.168.2.65'
+            LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
+
+        if self.password is None:
+            self.password = default_password
+            LOGGER.error('check_params: password not defined in customParams, please add it.  Using {}'.format(self.password))
+            self.addCustomParam({'password': self.password})
+
+
+
+        if 'IP_ADDRESS' in self.polyConfig['customParams']:
+            LOGGER.debug('IP address detected')
+            self.IPaddress = self.polyConfig['customParams']['IP_ADDRESS']
+        else:
+
+        self.messana = messanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
+        LOGGER.debug('MessanaInfo call done')
+
+    def getSystemDrivers(self):
         LOGGER.debug('Append System drivers')
         for key in self.system_GETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
