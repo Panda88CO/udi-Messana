@@ -8,7 +8,7 @@ from collections import defaultdict
 #LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
-    def __init__ (self, systemName):
+    def __init__ (self, mIPaddress, mAPIkey, systemName):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']

@@ -233,8 +233,8 @@ class MessanaInfo:
                     }
     
       
-        #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-        #self.IP = '192.168.2.65'    
+        self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        self.IP = '192.168.2.65'    
 
         self.APIKey = 'apikey'
         self.APIKeyVal = mAPIKeyVal

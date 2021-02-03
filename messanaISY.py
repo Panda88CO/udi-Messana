@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import polyinterface
-from MessanaInfoPlay import MessanaInfo
+from MessanaInfoPlay import messanaInfo
 
 LOGGER = polyinterface.LOGGER
 class messanaPoly(polyinterface):
@@ -30,7 +30,7 @@ class messanaPoly(polyinterface):
             self.IPaddress = self.polyConfig['customParams']['IP_ADDRESS']
         else:
         '''
-        self.messana = messanaInfo(self.IPaddress, self.MessanaKey, MessanaPoly.id )
+        self.messana = messanaInfo(self.IPaddress, self.MessanaKey, messanaPoly.id )
         LOGGER.debug('MessanaInfo call done')
         self.system_GETKeys = self.messana.systemPullKeys()
         self.system_PUTKeys = self.messana.systemPushKeys()
@@ -81,10 +81,10 @@ class messanaController(messanaPoly.controller):
         #self.system_ActiveKeys = self.messana.systemActiveKeys()
 
   
-        temp = messanaPoly.getSystemDrivers()    
-        MessanaController.drivers.append(temp)
-        LOGGER.debug(str(MessanaController.drivers) + 'after append')                       
-        LOGGER.debug(MessanaController.drivers)
+        self.temp = messanaPoly.getSystemDrivers()    
+        messanaController.drivers.append(self.temp)
+        LOGGER.debug(str(messanaController.drivers) + 'after append')                       
+        LOGGER.debug(messanaController.drivers)
         #self.check_params()
         #self.discover()   
         

@@ -5,7 +5,7 @@ from subprocess import call
 import json
 import sys
 from collections import defaultdict
-from MessanaInfoPlay import MessanaInfo
+from MessanaInfoPlay import messanaInfo
 from MessanaZone import MessanaZone
 import shutil
 
