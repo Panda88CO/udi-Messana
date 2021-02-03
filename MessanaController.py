@@ -7,6 +7,7 @@ import sys
 from collections import defaultdict
 from MessanaInfoPlay import MessanaInfo
 from MessanaZone import MessanaZone
+import messanaISY
 import shutil
 
 LOGGER = polyinterface.LOGGER
@@ -15,7 +16,7 @@ class MessanaController(polyinterface.Controller):
 
     def __init__(self, polyglot):
         super().__init__(polyglot)
-        LOGGER.info('_init_')
+        LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.name = 'Messana Main Control'
         self.address ='messanasys'
@@ -26,7 +27,8 @@ class MessanaController(polyinterface.Controller):
         self.ISYcommands = {}
         self.ISYTempUnit = 0
         #try:
-        #self.messana = MessanaInfo('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', MessanaController.id )
+        #self.messana = MessanaInfo( MessanaController.id )
+        #messana.setMessanaCredentials ('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
         #LOGGER.debug('MessanaInfo call done')
 
         #self.system_GETKeys = self.messana.systemPullKeys()
@@ -36,7 +38,7 @@ class MessanaController(polyinterface.Controller):
         #self.messana.updateSystemData('all')
         #self.messana.addSystemDefStruct(self.address)
     
-        LOGGER.debug('Install Updated profile')
+        #LOGGER.debug('Install Updated profile')
         self.poly.installprofile()
 
         #LOGGER.debug('Append System drivers')
@@ -329,9 +331,9 @@ class MessanaController(polyinterface.Controller):
 if __name__ == "__main__":
     try:
         LOGGER.info('Starting Messana Controller')
-        polyglot = polyinterface.Interface('Messana_Control')
-        polyglot.start()
-        control = MessanaController(polyglot)
+        messanaPolyglot = messanaISY.Interface('Messana_Control')
+        messanaPolyglot.start()
+        control = MessanaController( messanaPolyglot)
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
         sys.exit(0)
