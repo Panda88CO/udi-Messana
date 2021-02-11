@@ -59,7 +59,7 @@ class messanaPoly(polyinterface):
                 LOGGER.debug(str(temp) + 'before append')    
         return(temp)
 
-class messanaController(messanaPoly.controller):
+class messanaController(messanaPoly.Controller):
     def __init__(self, polyglot, messanaIPaddress, messanaKey ):
         super().__init__(polyglot)
         LOGGER.info('_init_')
