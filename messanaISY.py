@@ -42,6 +42,7 @@ class messanaPoly(polyinterface):
         LOGGER.debug('Install Updated profile')
         self.poly.installprofile()
 
+
     def getSystemDrivers(self):
         LOGGER.debug('Append System drivers')
         for key in self.system_GETKeys:
@@ -58,6 +59,16 @@ class messanaPoly(polyinterface):
                         self.ISYTempUnit = 17
                 LOGGER.debug(str(temp) + 'before append')    
         return(temp)
+
+    def getZoneCount(self):
+        return(messana.mSystem['system']['data']['mZoneCount'])
+
+    def getMacrozoneCount(self):
+    
+    def getATUcount(self):
+    
+
+
 
 class messanaController(messanaPoly.Controller):
     def __init__(self, polyglot, messanaIPaddress, messanaKey ):
