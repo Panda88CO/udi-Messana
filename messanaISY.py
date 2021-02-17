@@ -6,7 +6,7 @@ from MessanaInfoPlay import messanaInfo
 LOGGER = polyinterface.LOGGER
 class messanaPoly(polyinterface):
     def __init__(self, polyglot ):
-        super().__init__(polyglot)
+        super(messanaPoly, self).__init__(polyglot)
         LOGGER.debug ('__Init__ messanaPoly' )
       
     def start(self):
