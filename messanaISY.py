@@ -63,9 +63,9 @@ class messanaPoly(polyinterface):
     def getZoneCount(self):
         return(messana.mSystem['system']['data']['mZoneCount'])
 
-    def getMacrozoneCount(self):
+    #def getMacrozoneCount(self):
     
-    def getATUcount(self):
+    #def getATUcount(self):
     
 
 
