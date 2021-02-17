@@ -39,7 +39,7 @@ class MessanaController(polyinterface.Controller):
         #self.messana.addSystemDefStruct(self.address)
     
         #LOGGER.debug('Install Updated profile')
-        self.poly.installprofile()
+        #self.poly.installprofile()
 
         #LOGGER.debug('Append System drivers')
         #for key in self.system_GETKeys:
