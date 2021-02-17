@@ -11,7 +11,7 @@ import shutil
 #import ISYsetupFiles
 
 #LOGGER = polyinterface.LOGGER
-        
+           
 #sys.stdout = open('Messanaoutput.txt','wt')
 
 messana = messanaInfo('192.168.2.65',  'system')
