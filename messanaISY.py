@@ -69,7 +69,7 @@ class messanaPoly(polyinterface):
     
 
 
-
+'''
 class messanaController(messanaPoly.Controller):
     def __init__(self, polyglot, messanaIPaddress, messanaKey ):
         super().__init__(polyglot)
@@ -105,7 +105,8 @@ class messanaController(messanaPoly.Controller):
 
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
-
+'''
+'''
 class messanaNode(polyinterface.Node):
     def __init__(self, controller, primary, address, name, nodeType, nodeNbr, messana):
         super().__init__(controller, primary, address, name)
@@ -174,4 +175,5 @@ class messanaNode(polyinterface.Node):
                 self.setDriver(ISYkey, val)
             return(True)
         else:
-            return(False)               
+            return(False)         
+'''      
