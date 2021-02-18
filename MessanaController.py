@@ -15,7 +15,7 @@ LOGGER = polyinterface.LOGGER
 class MessanaController(polyinterface.Controller):
 
     def __init__(self, polyglot):
-        super().__init__(polyglot)
+        super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.name = 'Messana Main Control'

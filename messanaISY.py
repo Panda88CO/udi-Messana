@@ -30,14 +30,14 @@ class messanaPoly(polyinterface):
             self.IPaddress = self.polyConfig['customParams']['IP_ADDRESS']
         else:
         '''
-        self.messana = messanaInfo(self.IPaddress, self.MessanaKey, messanaPoly.id )
+        #self.messana = messanaInfo(self.IPaddress, self.MessanaKey, messanaPoly.id )
         LOGGER.debug('MessanaInfo call done')
-        self.system_GETKeys = self.messana.systemPullKeys()
-        self.system_PUTKeys = self.messana.systemPushKeys()
-        self.system_ActiveKeys = self.messana.systemActiveKeys()
+        #self.system_GETKeys = self.messana.systemPullKeys()
+        #self.system_PUTKeys = self.messana.systemPushKeys()
+        #self.system_ActiveKeys = self.messana.systemActiveKeys()
         
-        self.messana.updateSystemData('all')
-        self.messana.addSystemDefStruct(self.address)
+        #self.messana.updateSystemData('all')
+        #self.messana.addSystemDefStruct(self.address)
     
         LOGGER.debug('Install Updated profile')
         self.poly.installprofile()
@@ -92,8 +92,8 @@ class messanaController(messanaPoly.Controller):
         #self.system_ActiveKeys = self.messana.systemActiveKeys()
 
   
-        self.temp = messanaPoly.getSystemDrivers()    
-        messanaController.drivers.append(self.temp)
+        #self.temp = messanaPoly.getSystemDrivers()    
+        #messanaController.drivers.append(self.temp)
         LOGGER.debug(str(messanaController.drivers) + 'after append')                       
         LOGGER.debug(messanaController.drivers)
         #self.check_params()
