@@ -60,9 +60,13 @@ class MessanaController(polyinterface.Controller):
         #LOGGER.debug(MessanaController.drivers)
         #self.check_params()
         #self.discover()   
-       #self.updateInfo('all')
+        #self.updateInfo('all')
         #self.messanaImportOK = 1
         #self.discover()
+
+
+    def start(self):
+        LOGGER.info('Start  Messana Main')
         LOGGER.info('Init - configurations')
         self.removeNoticesAll()
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
