@@ -60,7 +60,28 @@ class MessanaController(polyinterface.Controller):
         #LOGGER.debug(MessanaController.drivers)
         #self.check_params()
         #self.discover()   
+       #self.updateInfo('all')
+        #self.messanaImportOK = 1
+        #self.discover()
+
+
+    def start(self):
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY):','Credentials')
+
+        self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        if self.IPAddress is None:
+            self.IPAddress= '192.168.2.65'
+            LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
         
+        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        if self.MessanaKey is None:
+            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+            LOGGER.error('check_params: Messana Key not specified')
+            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
+        self.messana = MessanaInfo( self.IPAddress, self.MessanaKey )
+
         self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
@@ -133,6 +154,34 @@ class MessanaController(polyinterface.Controller):
                 #    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         
         #nbrMacrozones = 0
+
+    def getSystemDrivers(self):
+        LOGGER.debug('Append System drivers')
+        for key in self.system_GETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(str(temp['value']).isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                        self.ISYTempUnit = 4
+                    else:
+                        temp['value'] = 1
+                        self.ISYTempUnit = 17
+                LOGGER.debug(str(temp) + 'before append')    
+        return(temp)
+
+    def getZoneCount(self):
+        return(messana.mSystem['system']['data']['mZoneCount'])
+
+    #def getMacrozoneCount(self):
+    
+    #def getATUcount(self):
+
+        #except:
+            #LOGGER.debug('Reading data from Messana System NOT successful')
+
 
         '''
         self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
