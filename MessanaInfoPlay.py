@@ -2496,7 +2496,7 @@ class messanaInfo:
         print('atusActiveKeys')
         return( self.getNodeKeys (ATUNbr, 'atus', 'Active'))    
   
-     def getATUCount(self):
+    def getATUCount(self):
         return(messana.mSystem['system']['data']['mATUcount'])
 
 
@@ -2558,10 +2558,10 @@ class messanaInfo:
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         print('energy_sourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'Active'))    
-
     
     def getenergySourceCount(self):
         return(messana.mSystem['system']['data']['mEnergySourceCount'])
+
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         print('updatBufferTankData: ' + str(BufferTankNbr))
