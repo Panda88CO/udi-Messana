@@ -2464,7 +2464,7 @@ class messanaInfo:
         print('hc_coActiveKeys')
         return( self.getNodeKeys (HC_CONbr, 'HcCo', 'Active'))    
 
-     def getHotColdChangeOverCount(self):
+    def getHotColdChangeOverCount(self):
         return(messana.mSystem['system']['data']['mhc_coCount'])
 
 
