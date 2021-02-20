@@ -372,7 +372,7 @@ class MessanaController(polyinterface.Controller):
 if __name__ == "__main__":
     try:
         LOGGER.info('Starting Messana Controller')
-        messanaPolyglot = messanaISY.Interface('Messana_Control')
+        messanaPolyglot = polyinterface.Interface('Messana_Control')
         messanaPolyglot.start()
         control = MessanaController( messanaPolyglot)
         control.runForever()
