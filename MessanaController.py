@@ -63,7 +63,7 @@ class MessanaController(polyinterface.Controller):
        #self.updateInfo('all')
         #self.messanaImportOK = 1
         #self.discover()
-
+        LOGGER.info('Init - configurations')
         self.removeNoticesAll()
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY):','Credentials')
 
