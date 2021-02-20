@@ -75,4 +75,3 @@ class messanaNode(polyinterface.Node):
             return(True)
         else:
             return(False)         
-'''      
