@@ -172,15 +172,7 @@ class MessanaController(polyinterface.Controller):
                 LOGGER.debug(str(temp) + 'before append')    
         return(temp)
 
-    def getZoneCount(self):
-        return(messana.mSystem['system']['data']['mZoneCount'])
-
-    #def getMacrozoneCount(self):
     
-    #def getATUcount(self):
-
-        #except:
-            #LOGGER.debug('Reading data from Messana System NOT successful')
 
 
         '''
