@@ -89,7 +89,7 @@ class MessanaController(polyinterface.Controller):
         systemPUTKeys = self.messana.systemPushKeys()
         systemActiveKeys = self.messana.systemActiveKeys()
         self.messana.updateSystemData('all')
-        
+        ###
         for key in systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             if  temp != {}:
