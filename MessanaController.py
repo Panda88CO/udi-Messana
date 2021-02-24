@@ -84,7 +84,7 @@ class MessanaController(polyinterface.Controller):
             self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-        self.messana = MessanaInfo( self.IPAddress, self.MessanaKey )
+        self.messana = messanaInfo( self.IPAddress, self.MessanaKey )
 
         self.updateInfo('all')
         self.reportDrivers()
