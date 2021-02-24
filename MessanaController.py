@@ -95,7 +95,7 @@ class MessanaController(polyinterface.Controller):
             if  temp != {}:
                 drivers.append(temp)
                 val = messana.pullSystemDataIndividual(key)
-                LOGGER.debug(  'driver:  '  temp['driver']+ ' , '+ val['data'])
+                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ val['data'])
 
         #self.updateInfo('all')
         self.reportDrivers()
