@@ -1577,13 +1577,13 @@ class messanaInfo:
 
         #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         #self.IP = '192.168.2.65'    
-        self.mIPaddress = '192.168.2.64'
-        self.mAPIkey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+        #self.mIPaddress = '192.168.2.64'
+        #self.mAPIkey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         
         self.APIKey = 'apikey'
-        self.APIStr = self.APIKey + '=' + self.APIKeyVal
+        self.APIStr = self.APIKey + '=' + mAPIKey
 
-        self.IP ='http://'+ self.mIPaddress
+        self.IP ='http://'+ mIPaddress
 
         self.RESPONSE_OK = '<Response [200]>'
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
