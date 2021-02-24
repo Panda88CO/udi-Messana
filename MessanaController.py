@@ -66,7 +66,7 @@ class MessanaController(polyinterface.Controller):
 
 
     def start(self):
-        LOGGER.info('Start  Messana Main')
+        LOGGER.info('Start  Messana Main NEW')
 
         LOGGER.info('Init - configurations')
         
@@ -89,14 +89,11 @@ class MessanaController(polyinterface.Controller):
         self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
-        self.discover()
+        #self.discover()
 
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
                 
-    def start(self):
-        LOGGER.info('Start  Messana Main')
-
  
     def stop(self):
         LOGGER.debug('stop - Cleaning up')
