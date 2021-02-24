@@ -85,8 +85,19 @@ class MessanaController(polyinterface.Controller):
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey )
+        systemGETKeys = messana.systemPullKeys()
+        systemPUTKeys = messana.systemPushKeys()
+        systemActiveKeys = messana.systemActiveKeys()
+        messana.updateSystemData('all')
+        
+        for key in systemGETKeys:
+            temp = messana.getSystemISYdriverInfo(key)
+            if  temp != {}:
+                drivers.append(temp)
+                val = messana.pullSystemDataIndividual(key)
+                LOGGER.debug(  'driver:  '  temp['driver']+ ' , '+ val['data'])
 
-        self.updateInfo('all')
+        #self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
         #self.discover()
@@ -94,7 +105,8 @@ class MessanaController(polyinterface.Controller):
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
                 
- 
+
+
     def stop(self):
         LOGGER.debug('stop - Cleaning up')
 
