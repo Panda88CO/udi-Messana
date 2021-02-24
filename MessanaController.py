@@ -85,10 +85,11 @@ class MessanaController(polyinterface.Controller):
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey )
+        self.messana.updateSystemData('all')
         systemGETKeys = self.messana.systemPullKeys()
         systemPUTKeys = self.messana.systemPushKeys()
         systemActiveKeys = self.messana.systemActiveKeys()
-        self.messana.updateSystemData('all')
+        
         ###
         for key in systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
