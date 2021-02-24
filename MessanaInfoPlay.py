@@ -1581,7 +1581,7 @@ class messanaInfo:
         #self.mAPIkey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         
         self.APIKey = 'apikey'
-        self.APIStr = self.APIKey + '=' + mAPIKey
+        self.APIStr = self.APIKey + '=' + mAPIkey
 
         self.IP ='http://'+ mIPaddress
 
