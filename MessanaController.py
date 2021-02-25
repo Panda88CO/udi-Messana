@@ -96,7 +96,7 @@ class MessanaController(polyinterface.Controller):
             if  temp != {}:
                 drivers.append(temp)
                 val = self.messana.pullSystemDataIndividual(key)
-                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ val['data'])
+                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
 
         #self.updateInfo('all')
         self.reportDrivers()
@@ -259,27 +259,6 @@ class MessanaController(polyinterface.Controller):
                self.addNode(TEMPsensor(self, self.address, address, name, currentSensor))
         '''
 
-    '''
-        for out_pin in RELAY_IO_PINS :
-            LOGGER.info( ' gpio output :' + str(out_pin))
-            address = 'outpin'+  str(out_pin)
-            name = 'pin' + str(out_pin)
-            LOGGER.debug( address + ' ' + name + ' ' + str(out_pin))
-            if not address in self.nodes:
-               LOGGER.debug('GPIO out'+ self.address +' ' + address + ' ' + name  )
-               self.addNode(GPOUTcontrol(self, self.address, address, name, out_pin))
-               GPIO.setup(int(out_pin), GPIO.OUT) 
-
-        for in_pin in INPUT_PINS :
-            LOGGER.info( ' gpio input :' + str(in_pin))
-            address = 'inpin'+  str(in_pin)
-            name = 'pin' + str(in_pin)
-            LOGGER.debug( address + ' ' + name + ' ' + str(in_pin))
-            if not address in self.nodes:
-               LOGGER.debug('GPIO in'+ self.address +' ' + address + ' ' + name  )
-               self.addNode(GPINcontrol(self, self.address, address, name, in_pin))
-               GPIO.setup(int(in_pin), GPIO.IN)   
-    '''
 
     def checkSetDriver(self, ISYkey, mKey):
         LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
