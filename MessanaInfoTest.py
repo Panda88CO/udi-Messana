@@ -14,7 +14,7 @@ import shutil
            
 #sys.stdout = open('Messanaoutput.txt','wt')
 
-messana = messanaInfo('192.168.2.65',  'system')
+messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', 'SystemName')
 #messana.init()
 
 #Retrive basic system info
@@ -23,7 +23,7 @@ messana.updateSystemData('all')
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-messana.updateSystemData('all')
+#messana.updateSystemData('all')
 drivers = []
 for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)

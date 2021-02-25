@@ -8,7 +8,7 @@ import polyinterface
 LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
-    def __init__ (self, mIPaddress, mAPIkey):
+    def __init__ (self, mIPaddress, mAPIkey, systemName):
         self.mSystem = defaultdict(dict)
         self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
@@ -1589,7 +1589,7 @@ class messanaInfo:
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
-        '''
+        
         self.zoneCapability = {}
         self.atuCapability = {}
         self.updateSystemData('all')
@@ -1647,7 +1647,7 @@ class messanaInfo:
           
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
-        '''
+        
         '''
         LOGGER.debug('Reading Messana System')
         #self.pullAllMessanaStatus()
