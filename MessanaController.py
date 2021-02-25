@@ -154,8 +154,7 @@ class MessanaController(polyinterface.Controller):
     def discover(self, command=None):
         LOGGER.debug('discover')
         #LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
-        nbrZones = 0
-        self.getMessanaSystemKeyVal('mZoneCount', nbrZones)
+        nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
             zoneGETKeys = []
