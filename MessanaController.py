@@ -161,9 +161,8 @@ class MessanaController(polyinterface.Controller):
             name = self.messana.getZoneName(zoneNbr)
             address = 'zones'+str(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
-            if not address in self.nodes:
+            #if not address in self.nodes:
                #self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
-        
         #nbrMacrozones = 0
 
     def getSystemDrivers(self):
