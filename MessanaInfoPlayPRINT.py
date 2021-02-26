@@ -2398,7 +2398,11 @@ class messanaInfo:
         return(self.mSystem['system']['data']['mZoneCount'])
 
     def getZoneName(self, zoneNbr):
-        return(self.pullNodeDataIndividual(zoneNbr, 'zones', 'mName'))
+        tempName = self.pullNodeDataIndividual(zoneNbr, 'zones', 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
 
     #def getMacrozoneCount(self):
     

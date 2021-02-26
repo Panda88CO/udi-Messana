@@ -42,13 +42,15 @@ for key in systemGETKeys:
 
 print('zones')
 MessanaZone = []
-for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+zoneCount = messana.getZoneCount()
+for zoneNbr in range(0, zoneCount):
     #zoneInfo = messana.pullZoneData(zoneNbr)
     #LOGGER.debug(self.zoneInfo)
     zone_GETKeys = messana.zonePullKeys(zoneNbr)
     zone_PUTKeys = messana.zonePushKeys(zoneNbr)
     zone_ActiveKeys = messana.zoneActiveKeys(zoneNbr)
-
+    name = messana.getZoneName(zoneNbr)
+    print(name)
     print('Append Zone drivers')
     for key in zone_GETKeys:
         zoneInfo = messana.pullZoneDataIndividual(zoneNbr, key)
