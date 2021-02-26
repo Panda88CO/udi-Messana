@@ -33,7 +33,7 @@ for key in systemGETKeys:
         print(temp['driver'], val['data'])
 
 print(drivers)
-
+print (messana.getZoneCount())
 for key in systemGETKeys:
     val = messana.pullSystemDataIndividual(key)
     print (key, val)

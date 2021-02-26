@@ -2395,9 +2395,9 @@ class messanaInfo:
         return( self.getNodeKeys (zoneNbr, 'zones', 'Active'))
 
     def getZoneCount(self):
-        return(messana.mSystem['system']['data']['mZoneCount'])
+        return(self.mSystem['system']['data']['mZoneCount'])
 
-    def getZoneName(self, zoneNbr)
+    def getZoneName(self, zoneNbr):
         return(self.pullNodeDataIndividual(zoneNbr, 'zones', 'mName'))
 
     #def getMacrozoneCount(self):
