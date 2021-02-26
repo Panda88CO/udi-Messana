@@ -154,7 +154,6 @@ class MessanaController(polyinterface.Controller):
 
     def discover(self, command=None):
         LOGGER.debug('discover')
-        #LOGGER.info('Adding Zones' + str(self.msysInfo['mZoneCount']))
         nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
@@ -185,75 +184,75 @@ class MessanaController(polyinterface.Controller):
     
 
 
-        '''
-        self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
-        for macrozoneNbr in range(0,nbrMacrozones):
-            macrozoneGETKeys = []
-            macrozoneGETKeys = self.messana.macrozonePullKeys(macrozoneNbr)
-            if 'mName' in macrozoneGETKeys:
-                name = str(self.messana.pullMacroZoneDataIndividual(macrozoneNbr, 'mName'))
-                address = 'macrozone'+str(zoneNbr)
-                LOGGER.debug('macrozone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
-                if not address in self.nodes:
-                    self.addNode(MessanaMacrozones(self, self.address, address, name, zoneNbr, self.messana))
-        '''
+    '''
+    self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
+    for macrozoneNbr in range(0,nbrMacrozones):
+        macrozoneGETKeys = []
+        macrozoneGETKeys = self.messana.macrozonePullKeys(macrozoneNbr)
+        if 'mName' in macrozoneGETKeys:
+            name = str(self.messana.pullMacroZoneDataIndividual(macrozoneNbr, 'mName'))
+            address = 'macrozone'+str(zoneNbr)
+            LOGGER.debug('macrozone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
+            if not address in self.nodes:
+                self.addNode(MessanaMacrozones(self, self.address, address, name, zoneNbr, self.messana))
 
-        #nbrATUs = 0
 
-        #nbrDHWs = 0
+    #nbrATUs = 0
+
+    #nbrDHWs = 0
+    
+    #nbrFanCoils = 0
+    
+    #nbrEnergySources = 0
+
+    #nbrHCCOs = 0
+
+    #nbrBufTanks = 0
+
+    '''    
+    
+    '''
+    for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
+        zoneData = {}
+        messana.updateZoneData(zoneNbr)
+        zoneGETkeys = messana.zonePullKeys(zoneNbr)
+        print (zoneGETkeys)
+        zonePUTkeys = messana.zonePushKeys(zoneNbr)
+        print(zonePUTkeys)
+        zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
+        print (zoneActiveKeys)
         
-        #nbrFanCoils = 0
-        
-        #nbrEnergySources = 0
-
-        #nbrHCCOs = 0
-
-        #nbrBufTanks = 0
-
-        
-        
-        '''
-        for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
-            zoneData = {}
-            messana.updateZoneData(zoneNbr)
-            zoneGETkeys = messana.zonePullKeys(zoneNbr)
-            print (zoneGETkeys)
-            zonePUTkeys = messana.zonePushKeys(zoneNbr)
-            print(zonePUTkeys)
-            zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
-            print (zoneActiveKeys)
-            
-            for mKey in zoneGETkeys:
+        for mKey in zoneGETkeys:
+            zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
+            if zoneData['statusOK']:
+                print('GET: ' + mKey + str(zoneData['data']))
+            if mKey in zoneActiveKeys:
                 zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
                 if zoneData['statusOK']:
                     print('GET: ' + mKey + str(zoneData['data']))
-                if mKey in zoneActiveKeys:
-                    zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
-                    if zoneData['statusOK']:
-                        print('GET: ' + mKey + str(zoneData['data']))
-                if mKey in zonePUTkeys:
-                    if mKey in messana.mSystem['zones']['data'][zoneNbr]:
-                        nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
-                        print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
-                        print('nodeData : ' + str(nodeData))
-        '''
-        #count = 0
-        '''for mySensor in self.mySensors.get_available_sensors():
-            count = count+1
-            currentSensor = mySensor.id.lower() 
-            LOGGER.info(currentSensor+ 'Sensor Serial Number Detected - use Custom Params to rename')
-            address = 'rpitemp'+str(count)
-            # check if sensor serial number exist in custom parapms and then replace name
-            if currentSensor in self.polyConfig['customParams']:
-               LOGGER.debug('A customParams name for sensor detected')
-               name = self.polyConfig['customParams'][currentSensor]
-            else:
-               LOGGER.debug('Default Naming')
-               name = 'Sensor'+str(count)
-            #LOGGER.debug( address + ' '+ name + ' ' + currentSensor)
-            if not address in self.nodes:
-               self.addNode(TEMPsensor(self, self.address, address, name, currentSensor))
-        '''
+            if mKey in zonePUTkeys:
+                if mKey in messana.mSystem['zones']['data'][zoneNbr]:
+                    nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
+                    print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
+                    print('nodeData : ' + str(nodeData))
+    '''
+    
+    '''for mySensor in self.mySensors.get_available_sensors():
+        count = count+1
+        currentSensor = mySensor.id.lower() 
+        LOGGER.info(currentSensor+ 'Sensor Serial Number Detected - use Custom Params to rename')
+        address = 'rpitemp'+str(count)
+        # check if sensor serial number exist in custom parapms and then replace name
+        if currentSensor in self.polyConfig['customParams']:
+            LOGGER.debug('A customParams name for sensor detected')
+            name = self.polyConfig['customParams'][currentSensor]
+        else:
+            LOGGER.debug('Default Naming')
+            name = 'Sensor'+str(count)
+        #LOGGER.debug( address + ' '+ name + ' ' + currentSensor)
+        if not address in self.nodes:
+            self.addNode(TEMPsensor(self, self.address, address, name, currentSensor))
+    '''
 
 
     def checkSetDriver(self, ISYkey, mKey):
