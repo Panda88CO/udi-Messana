@@ -101,6 +101,7 @@ class MessanaController(polyinterface.Controller):
         #self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
+        self.discover()
         #self.discover()
 
         #except:
@@ -157,14 +158,11 @@ class MessanaController(polyinterface.Controller):
         nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
-            zoneGETKeys = []
-            zoneGETKeys = self.messana.zonePullKeys(zoneNbr)
-            if 'mName' in zoneGETKeys:
-                name = str(self.messana.pullZoneDataIndividual(zoneNbr, 'mName'))
-                address = 'zones'+str(zoneNbr)
-                LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
-                #if not address in self.nodes:
-                #    self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
+            name = self.messana.getZoneName(zoneNbr)
+            address = 'zones'+str(zoneNbr)
+            LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
+            if not address in self.nodes:
+               #self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         
         #nbrMacrozones = 0
 

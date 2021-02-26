@@ -2397,6 +2397,9 @@ class messanaInfo:
     def getZoneCount(self):
         return(messana.mSystem['system']['data']['mZoneCount'])
 
+    def getZoneName(self, zoneNbr)
+        return(self.pullNodeDataIndividual(zoneNbr, 'zones', 'mName'))
+
     #def getMacrozoneCount(self):
     
     #def getATUcount(self):
