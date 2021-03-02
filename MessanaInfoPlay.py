@@ -5,8 +5,6 @@ import json
 from collections import defaultdict
 import polyinterface
 
-import getMessanaSystemKeyVal
-
 LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
