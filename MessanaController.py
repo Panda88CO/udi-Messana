@@ -164,22 +164,7 @@ class MessanaController(polyinterface.Controller):
                #self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         #nbrMacrozones = 0
 
-    def getSystemDrivers(self):
-        LOGGER.debug('Append System drivers')
-        for key in self.system_GETKeys:
-            temp = self.messana.getSystemISYdriverInfo(key)
-            LOGGER.debug('Driver info: ' + str(temp))
-            if  temp != {}:
-                if not(str(temp['value']).isnumeric()):                         
-                    LOGGER.debug('non numeric value :' + temp['value'])
-                    if temp['value'] == 'Celcius':
-                        temp['value'] = 0
-                        self.ISYTempUnit = 4
-                    else:
-                        temp['value'] = 1
-                        self.ISYTempUnit = 17
-                LOGGER.debug(str(temp) + 'before append')    
-        return(temp)
+
 
     
 
@@ -254,7 +239,7 @@ class MessanaController(polyinterface.Controller):
             self.addNode(TEMPsensor(self, self.address, address, name, currentSensor))
     '''
 
-
+    '''
     def checkSetDriver(self, ISYkey, mKey):
         LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
         if mKey in self.keySet:
@@ -313,7 +298,7 @@ class MessanaController(polyinterface.Controller):
         else:
             LOGGER.debug('Unknown key: ' + mKey)
             
-
+    '''
 
 
     def check_params(self, command=None):
@@ -324,17 +309,16 @@ class MessanaController(polyinterface.Controller):
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
         val = int(command.get('value'))
-        mKey = 'mStatus'
         LOGGER.debug('set Status Recived:' + str(val))
-        self.setParamFromISY(mKey, val)
+        self.messana.systemSetStatus (val)
+
 
         
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
-        mKey = 'mEnergySaving'
         LOGGER.debug('SetEnergySave Recived:' + str(val))
-        self.setParamFromISY(mKey, val)
+        self.messana.systemSetEnergySave (val)
 
 
     def setSetback(self, command):
@@ -343,6 +327,7 @@ class MessanaController(polyinterface.Controller):
         mKey = 'mSetback'
         LOGGER.debug('setSetback Reeived:' + str(val))
         self.setParamFromISY(mKey, val)
+        self.messana.systemSetSetback (val)
 
     def ISYupdate (self):
         LOGGER.info('ISY-update called')

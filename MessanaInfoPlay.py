@@ -3,8 +3,10 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-#import pickle
 import polyinterface
+
+import getMessanaSystemKeyVal
+
 LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
@@ -2248,20 +2250,102 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
-    '''
-    def saveData (self):
-        file1 = open(r'MessanaData.pkl','wb')
-        #pickle.dump(self.mSystem, file1)
-        file1.close()
 
-    def loadData (self):
-        file1 = open(r'MessanaData.pkl','rb')
-        self.mSystem = pickle.load(file1)
-        LOGGER.debug(self.mSystem['system']['ISYnode']['nlsNAME'])        
-        file1.close() 
+
+    # Generic
+
+
+    # System
+
+    def getSystemDrivers(self):
+    LOGGER.debug('Append System drivers')
+    for key in self.system_GETKeys:
+        temp = self.getSystemISYdriverInfo(key)
+        LOGGER.debug('Driver info: ' + str(temp))
+        if  temp != {}:
+            if not(str(temp['value']).isnumeric()):                         
+                LOGGER.debug('non numeric value :' + temp['value'])
+                if temp['value'] == 'Celcius':
+                    temp['value'] = 0
+                    self.ISYTempUnit = 4
+                else:
+                    temp['value'] = 1
+                    self.ISYTempUnit = 17
+            LOGGER.debug(str(temp) + 'before append')    
+    return(temp)
+
+
+    def checkSetDriver(self, ISYkey, mKey):
+        LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
+        if mKey in self.keySet:
+            valInfo = self.pullSystemDataIndividual(mKey)
+            if valInfo['statusOK']:
+                val = valInfo['data']        
+                if mKey == 'mUnitTemp': 
+                    #"we cannot handle strings"
+                    if val in  ['Celcius', 'Fahrenheit']:
+                        if val == 'Celcius':
+                            val = 0
+                        else:  
+                            val = 1 
+                self.setDriver(ISYkey, val)
+            return(True)
+        else:
+            return(False)
+
+    def systemSetStatus (self, val)
+        LOGGER.debug('systemSetStatus Called')
+        self.setParamFromISY('mSystem', val)
+
+    def systemSetEnergySave(self, val):
+        LOGGER.debug('systemSetEnergySave Called')
+        self.setParamFromISY('mEnergySaving', val)
+
+    def systemSetSetback(self, val):
+        LOGGER.debug('systemSetSetback Called')
+        self.setParamFromISY('mSetback', val)
+
+
     '''
-    #if self.mSystem['system']['KeyInfo'][mKey]['Active']:
-    #System
+    def updateParamsToISY(self, mKey):
+        LOGGER.debug('setSystemParamFromISY')
+        temp = self.getSystemISYdriverInfo(mKey)
+        if temp != {}:
+            LOGGER.debug('update ISY value')
+            ISYkey = temp['driver']
+            self.checkSetDriver(ISYkey, mKey)
+        else:
+            LOGGER.info(mKey + ' update failed')
+    '''
+
+    def setParamFromISY(self, mKey, val):
+        LOGGER.debug('setParamFromISY')
+        if self.pushSystemDataIndividual(mKey, val):
+            LOGGER.info(mKey + ' updated to '+ str(val))
+            temp = self.getSystemISYdriverInfo(mKey)
+            if temp != {}:
+                ISYkey = temp['driver']
+                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
+                self.checkSetDriver(ISYkey, mKey)
+        else:
+            LOGGER.info(mKey + ' update failed')
+
+    def getMessanaSystemKeyVal(self, mKey, val):
+        Info = self.pullSystemDataIndividual(mKey)
+        if mKey in self.system_GETKeys:
+            if Info['statusOK']:
+                val = Info['data']        
+                if mKey == 'mUnitTemp': 
+                    #"we cannot handle strings"
+                    if val in  ['Celcius', 'Fahrenheit']:
+                        if val == 'Celcius':
+                            val = 0
+                        else:  
+                            val = 1 
+            return(True)
+        else:
+            LOGGER.debug('Unknown key: ' + mKey)     
+
     def updateSystemData(self, level):
         LOGGER.debug('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
