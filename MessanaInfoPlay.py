@@ -3,8 +3,8 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-import polyinterface
-
+#import polyinterface
+ 
 LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
@@ -1657,10 +1657,6 @@ class messanaInfo:
     def setMessanaCredentials (self, mIPaddress, APIkey):
         self.mIPaddress = mIPaddress
         self.APIKeyVal = APIkey
-
-    def init(self):
-
-        return(True)
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}

@@ -2180,9 +2180,10 @@ class messanaInfo:
 
                     for nlsInfo in self.setupFile['nls'][nodeName]:
                         if nlsInfo == 'nlsTEXT':
-                            nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
-                            nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
-                            nlsFile.write(nlsStr)
+                            if statusId != 'ISYInfo':
+                                nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
+                                nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
+                                nlsFile.write(nlsStr)
                         elif nlsInfo == 'nlsValues':
                             nlsValues = 0
                             for key in self.setupFile['nls'][nodeName][nlsInfo]:
