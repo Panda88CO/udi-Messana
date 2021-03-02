@@ -2258,21 +2258,21 @@ class messanaInfo:
     # System
 
     def getSystemDrivers(self):
-    LOGGER.debug('Append System drivers')
-    for key in self.system_GETKeys:
-        temp = self.getSystemISYdriverInfo(key)
-        LOGGER.debug('Driver info: ' + str(temp))
-        if  temp != {}:
-            if not(str(temp['value']).isnumeric()):                         
-                LOGGER.debug('non numeric value :' + temp['value'])
-                if temp['value'] == 'Celcius':
-                    temp['value'] = 0
-                    self.ISYTempUnit = 4
-                else:
-                    temp['value'] = 1
-                    self.ISYTempUnit = 17
-            LOGGER.debug(str(temp) + 'before append')    
-    return(temp)
+        LOGGER.debug('Append System drivers')
+        for key in self.system_GETKeys:
+            temp = self.getSystemISYdriverInfo(key)
+            LOGGER.debug('Driver info: ' + str(temp))
+            if  temp != {}:
+                if not(str(temp['value']).isnumeric()):                         
+                    LOGGER.debug('non numeric value :' + temp['value'])
+                    if temp['value'] == 'Celcius':
+                        temp['value'] = 0
+                        self.ISYTempUnit = 4
+                    else:
+                        temp['value'] = 1
+                        self.ISYTempUnit = 17
+                LOGGER.debug(str(temp) + 'before append')    
+        return(temp)
 
 
     def checkSetDriver(self, ISYkey, mKey):
