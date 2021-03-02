@@ -2293,7 +2293,7 @@ class messanaInfo:
         else:
             return(False)
 
-    def systemSetStatus (self, val)
+    def systemSetStatus (self, val):
         LOGGER.debug('systemSetStatus Called')
         self.setParamFromISY('mSystem', val)
 
