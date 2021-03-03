@@ -3,7 +3,7 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-#import polyinterface
+import polyinterface
  
 LOGGER = polyinterface.LOGGER
 
