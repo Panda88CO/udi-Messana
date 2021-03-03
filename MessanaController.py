@@ -127,6 +127,10 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
             self.messana.updateSystemData('active')
+            for driverInfo in drivers['driver']:
+                self.messana.systemDriverValue(driverInfo)
+
+
 ### something is missing here - need to extract data and update driver
 
             self.reportDrivers()

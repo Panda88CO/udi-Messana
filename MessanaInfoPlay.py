@@ -1644,15 +1644,15 @@ class messanaInfo:
             btName = 'buffertanks'+str(btNbr)
             self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
 
-          
-
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+        self.ISYmapping = self.createISYmapping(self.setupFile):
         
         '''
         LOGGER.debug('Reading Messana System')
         #self.pullAllMessanaStatus()
         LOGGER.debug('Finish Reading Messana system')
         '''
+    del createISYmapping(self)
     
     def setMessanaCredentials (self, mIPaddress, APIkey):
         self.mIPaddress = mIPaddress

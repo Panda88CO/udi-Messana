@@ -1647,7 +1647,30 @@ class messanaInfo:
           
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+                
+        self.ISYmapping = self.createISYmapping()
         
+        '''
+        LOGGER.debug('Reading Messana System')
+        #self.pullAllMessanaStatus()
+        LOGGER.debug('Finish Reading Messana system')
+        '''
+
+    def createISYmapping(self):
+        self.ISYmap = {}
+        temp = {}
+        for nodes in self.setupFile['nodeDef']:
+            temp[nodes]= {}
+            for mKeys in self.setupFile['nodeDef'][nodes]['sts']:
+                for ISYkey in self.setupFile['nodeDef'][nodes]['sts'][mKeys]:
+                    if ISYkey != 'ISYInfo':
+                        temp[nodes][ISYkey] = {}
+                        temp[nodes][ISYkey].update({'messana': mKeys})
+                        temp[nodes][ISYkey].update({'editor': self.setupFile['nodeDef'][nodes]['sts'][mKeys][ISYkey]})
+        self.ISYmap.update(temp)    
+        print(self.ISYmap) 
+        
+
         '''
         print('Reading Messana System')
         #self.pullAllMessanaStatus()
@@ -2232,12 +2255,14 @@ class messanaInfo:
         editorFile.write('</editors> \n')
         editorFile.close()
         nlsFile.close()
+        '''
         #except:
         print('something went wrong in creating setup files')
         status = False
         nodeFile.close()
         editorFile.close()
-        nlsFile.close()       
+        nlsFile.close()
+        '''       
         return(status)
 
     def createNodedeFile(self, fileName):
