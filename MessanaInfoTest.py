@@ -23,7 +23,8 @@ messana.updateSystemData('all')
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-#messana.updateSystemData('all')
+messana.updateSystemData('all')
+messana.updateSystemData('active')
 drivers = []
 for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)

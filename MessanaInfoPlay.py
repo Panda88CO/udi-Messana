@@ -1861,9 +1861,6 @@ class messanaInfo:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
 
-
-
-
     def getNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
         if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
@@ -1911,8 +1908,7 @@ class messanaInfo:
                         else:
                             LOGGER.debug(key + ' unknown keyword')
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
-       
-    
+           
     def GETSystem(self, mKey):
         sysData= {}
         LOGGER.debug('GETSystem: ' + mKey )

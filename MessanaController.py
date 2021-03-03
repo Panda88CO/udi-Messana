@@ -127,6 +127,8 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
             self.messana.updateSystemData('active')
+### something is missing here - need to extract data and update driver
+
             self.reportDrivers()
             '''
             for node in self.nodes:
