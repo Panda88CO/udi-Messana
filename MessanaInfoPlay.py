@@ -2175,16 +2175,17 @@ class messanaInfo:
                         editorFile.write('</editor>\n')
 
                     for nlsInfo in self.setupFile['nls'][nodeName]:
-                        if nlsInfo == 'nlsTEXT':
-                            nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
-                            nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
-                            nlsFile.write(nlsStr)
-                        elif nlsInfo == 'nlsValues':
-                            nlsValues = 0
-                            for key in self.setupFile['nls'][nodeName][nlsInfo]:
-                                nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                        if statusId != 'ISYInfo':
+                            if nlsInfo == 'nlsTEXT':
+                                nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
+                                nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
                                 nlsFile.write(nlsStr)
-                                nlsValues = nlsValues + 1
+                            elif nlsInfo == 'nlsValues':
+                                nlsValues = 0
+                                for key in self.setupFile['nls'][nodeName][nlsInfo]:
+                                    nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                                    nlsFile.write(nlsStr)
+                                    nlsValues = nlsValues + 1
                         #LOGGER.debug(nlsStr)
 
             nodeFile.write('      </sts>\n')
