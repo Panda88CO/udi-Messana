@@ -1596,8 +1596,7 @@ class messanaInfo:
         print(systemName + 'added')
 
 
-        self. setMessanaCredentials ( mIPaddress, APIkey):
-        
+        self. setMessanaCredentials (mIPaddress, mAPIkey)
         
         self.addSystemDefStruct(systemName)
 
@@ -2401,15 +2400,10 @@ class messanaInfo:
     def putSystemISYValue(self, ISYkey, systemValue):
         messanaKey = self.ISYmap['system'][ISYkey]['messana']
         systemPushKeys = self.systemPushKeys()
+        status = False
         if messanaKey in systemPushKeys:
-            data = self.pushSystemDataIndividual(messanaKey, systemValue)
-            if data['stausOK']:
-                systemVale = data['data']
-            else:
-                systemValue = None
-            return (dat['statusOK'])
-        else:
-            return(False)
+            status = self.pushSystemDataIndividual(messanaKey, systemValue)
+        return(status)
 
     # Zones
     def getZoneCapability(self, zoneNbr): 
