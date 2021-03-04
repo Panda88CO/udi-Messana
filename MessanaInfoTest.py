@@ -35,6 +35,14 @@ for key in systemGETKeys:
 
 print(drivers)
 
+for ISYdriver in drivers:
+    ISYkey = ISYdriver['driver']
+    value = None
+    status = None
+    print (status, value = messana.getSystemISYValue(ISYkey))
+    print(messana.putSystemISYValue(ISYkey, value))
+    print(value)
+    print()
 
 
 print (messana.getZoneCount())

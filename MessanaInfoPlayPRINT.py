@@ -1648,7 +1648,7 @@ class messanaInfo:
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
                 
-        self.ISYmapping = self.createISYmapping()
+        self.ISYmap = self.createISYmapping()
         
         '''
         LOGGER.debug('Reading Messana System')
@@ -1657,7 +1657,6 @@ class messanaInfo:
         '''
 
     def createISYmapping(self):
-        self.ISYmap = {}
         temp = {}
         for nodes in self.setupFile['nodeDef']:
             temp[nodes]= {}
@@ -1667,9 +1666,8 @@ class messanaInfo:
                         temp[nodes][ISYkey] = {}
                         temp[nodes][ISYkey].update({'messana': mKeys})
                         temp[nodes][ISYkey].update({'editor': self.setupFile['nodeDef'][nodes]['sts'][mKeys][ISYkey]})
-        self.ISYmap.update(temp)    
-        print(self.ISYmap) 
-        
+        print(temp) 
+        return (temp)
 
         '''
         print('Reading Messana System')
@@ -1887,8 +1885,6 @@ class messanaInfo:
         if 'sends' in self.mSystem['system']['ISYnode']:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
-
-
 
 
     def getNodeCapability (self, nodeKey, nodeNbr):     
@@ -2381,6 +2377,35 @@ class messanaInfo:
                         keys.append(mKey)
         return(keys)  
             
+    def getSystemISYValue(self, ISYkey):
+        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        systemPullKeys = self.systemPullKeys()
+        if messanaKey in systemPullKeys:
+            data = self.pullSystemDataIndividual(messanaKey)
+            if data['statusOK']:
+                systemValue = data['data']
+                status = True
+            else:
+                status = False
+                systemValue = None
+        else:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def putSystemISYValue(self, ISYkey, systemValue):
+        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        systemPushKeys = self.systemPushKeys()
+        if messanaKey in systemPushKeys:
+            data = self.pushSystemDataIndividual(messanaKey, systemValue)
+            if data['stausOK']:
+                systemVale = data['data']
+            else:
+                systemValue = None
+            return (dat['statusOK'])
+        else:
+            return(False)
+
     # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability('zones', zoneNbr)
