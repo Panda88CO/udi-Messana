@@ -39,7 +39,8 @@ for ISYdriver in drivers:
     ISYkey = ISYdriver['driver']
     value = None
     status = None
-    print (status, value = messana.getSystemISYValue(ISYkey))
+    status, value = messana.getSystemISYValue(ISYkey)
+    print (status, value)
     print(messana.putSystemISYValue(ISYkey, value))
     print(value)
     print()
