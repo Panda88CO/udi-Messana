@@ -3,8 +3,8 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-#import polyinterface
- 
+#import pickle
+import polyinterface
 LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
@@ -1594,6 +1594,10 @@ class messanaInfo:
         self.atuCapability = {}
         self.updateSystemData('all')
         LOGGER.debug(systemName + 'added')
+
+
+        self. setMessanaCredentials (mIPaddress, mAPIkey)
+        
         self.addSystemDefStruct(systemName)
 
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
@@ -1647,7 +1651,28 @@ class messanaInfo:
           
 
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+                
+        self.ISYmap = self.createISYmapping()
         
+        '''
+        LOGGER.debug('Reading Messana System')
+        #self.pullAllMessanaStatus()
+        LOGGER.debug('Finish Reading Messana system')
+        '''
+
+    def createISYmapping(self):
+        temp = {}
+        for nodes in self.setupFile['nodeDef']:
+            temp[nodes]= {}
+            for mKeys in self.setupFile['nodeDef'][nodes]['sts']:
+                for ISYkey in self.setupFile['nodeDef'][nodes]['sts'][mKeys]:
+                    if ISYkey != 'ISYInfo':
+                        temp[nodes][ISYkey] = {}
+                        temp[nodes][ISYkey].update({'messana': mKeys})
+                        temp[nodes][ISYkey].update({'editor': self.setupFile['nodeDef'][nodes]['sts'][mKeys][ISYkey]})
+        LOGGER.debug(temp) 
+        return (temp)
+
         '''
         LOGGER.debug('Reading Messana System')
         #self.pullAllMessanaStatus()
@@ -1657,6 +1682,10 @@ class messanaInfo:
     def setMessanaCredentials (self, mIPaddress, APIkey):
         self.mIPaddress = mIPaddress
         self.APIKeyVal = APIkey
+
+    def init(self):
+
+        return(True)
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
@@ -1860,8 +1889,6 @@ class messanaInfo:
         if 'sends' in self.mSystem['system']['ISYnode']:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
-
-
 
 
     def getNodeCapability (self, nodeKey, nodeNbr):     
@@ -2186,7 +2213,7 @@ class messanaInfo:
                                     nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
                                     nlsFile.write(nlsStr)
                                     nlsValues = nlsValues + 1
-                        #LOGGER.debug(nlsStr)
+                            #LOGGER.debug(nlsStr)
 
             nodeFile.write('      </sts>\n')
             nodeFile.write('      <cmds>\n')                
@@ -2228,12 +2255,14 @@ class messanaInfo:
         editorFile.write('</editors> \n')
         editorFile.close()
         nlsFile.close()
+        '''
         #except:
         LOGGER.debug('something went wrong in creating setup files')
         status = False
         nodeFile.close()
         editorFile.close()
-        nlsFile.close()       
+        nlsFile.close()
+        '''       
         return(status)
 
     def createNodedeFile(self, fileName):
@@ -2245,102 +2274,20 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
-
-
-    # Generic
-
-
-    # System
-
-    def getSystemDrivers(self):
-        LOGGER.debug('Append System drivers')
-        for key in self.system_GETKeys:
-            temp = self.getSystemISYdriverInfo(key)
-            LOGGER.debug('Driver info: ' + str(temp))
-            if  temp != {}:
-                if not(str(temp['value']).isnumeric()):                         
-                    LOGGER.debug('non numeric value :' + temp['value'])
-                    if temp['value'] == 'Celcius':
-                        temp['value'] = 0
-                        self.ISYTempUnit = 4
-                    else:
-                        temp['value'] = 1
-                        self.ISYTempUnit = 17
-                LOGGER.debug(str(temp) + 'before append')    
-        return(temp)
-
-
-    def checkSetDriver(self, ISYkey, mKey):
-        LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
-        if mKey in self.keySet:
-            valInfo = self.pullSystemDataIndividual(mKey)
-            if valInfo['statusOK']:
-                val = valInfo['data']        
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if val in  ['Celcius', 'Fahrenheit']:
-                        if val == 'Celcius':
-                            val = 0
-                        else:  
-                            val = 1 
-                self.setDriver(ISYkey, val)
-            return(True)
-        else:
-            return(False)
-
-    def systemSetStatus (self, val):
-        LOGGER.debug('systemSetStatus Called')
-        self.setParamFromISY('mSystem', val)
-
-    def systemSetEnergySave(self, val):
-        LOGGER.debug('systemSetEnergySave Called')
-        self.setParamFromISY('mEnergySaving', val)
-
-    def systemSetSetback(self, val):
-        LOGGER.debug('systemSetSetback Called')
-        self.setParamFromISY('mSetback', val)
-
-
     '''
-    def updateParamsToISY(self, mKey):
-        LOGGER.debug('setSystemParamFromISY')
-        temp = self.getSystemISYdriverInfo(mKey)
-        if temp != {}:
-            LOGGER.debug('update ISY value')
-            ISYkey = temp['driver']
-            self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
+    def saveData (self):
+        file1 = open(r'MessanaData.pkl','wb')
+        #pickle.dump(self.mSystem, file1)
+        file1.close()
+
+    def loadData (self):
+        file1 = open(r'MessanaData.pkl','rb')
+        self.mSystem = pickle.load(file1)
+        LOGGER.debug(self.mSystem['system']['ISYnode']['nlsNAME'])        
+        file1.close() 
     '''
-
-    def setParamFromISY(self, mKey, val):
-        LOGGER.debug('setParamFromISY')
-        if self.pushSystemDataIndividual(mKey, val):
-            LOGGER.info(mKey + ' updated to '+ str(val))
-            temp = self.getSystemISYdriverInfo(mKey)
-            if temp != {}:
-                ISYkey = temp['driver']
-                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
-                self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-
-    def getMessanaSystemKeyVal(self, mKey, val):
-        Info = self.pullSystemDataIndividual(mKey)
-        if mKey in self.system_GETKeys:
-            if Info['statusOK']:
-                val = Info['data']        
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if val in  ['Celcius', 'Fahrenheit']:
-                        if val == 'Celcius':
-                            val = 0
-                        else:  
-                            val = 1 
-            return(True)
-        else:
-            LOGGER.debug('Unknown key: ' + mKey)     
-
+    #if self.mSystem['system']['KeyInfo'][mKey]['Active']:
+    #System
     def updateSystemData(self, level):
         LOGGER.debug('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
@@ -2434,6 +2381,30 @@ class messanaInfo:
                         keys.append(mKey)
         return(keys)  
             
+    def getSystemISYValue(self, ISYkey):
+        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        systemPullKeys = self.systemPullKeys()
+        if messanaKey in systemPullKeys:
+            data = self.pullSystemDataIndividual(messanaKey)
+            if data['statusOK']:
+                systemValue = data['data']
+                status = True
+            else:
+                status = False
+                systemValue = None
+        else:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def putSystemISYValue(self, ISYkey, systemValue):
+        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        systemPushKeys = self.systemPushKeys()
+        status = False
+        if messanaKey in systemPushKeys:
+            status = self.pushSystemDataIndividual(messanaKey, systemValue)
+        return(status)
+
     # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability('zones', zoneNbr)
