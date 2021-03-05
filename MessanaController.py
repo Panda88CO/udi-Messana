@@ -22,7 +22,6 @@ class MessanaController(polyinterface.Controller):
         self.address ='messanasys'
         self.primary = self.address
         self.hb = 0
-        
         self.ISYdrivers=[]
         self.ISYcommands = {}
         self.ISYTempUnit = 0
@@ -86,9 +85,9 @@ class MessanaController(polyinterface.Controller):
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         self.messana.updateSystemData('all')
-        systemGETKeys = self.messana.systemPullKeys()
-        systemPUTKeys = self.messana.systemPushKeys()
-        systemActiveKeys = self.messana.systemActiveKeys()
+        self.systemGETKeys = self.messana.systemPullKeys()
+        self.systemPUTKeys = self.messana.systemPushKeys()
+        self.systemActiveKeys = self.messana.systemActiveKeys()
         
         self.drivers = []
         for key in systemGETKeys:
@@ -124,6 +123,7 @@ class MessanaController(polyinterface.Controller):
 
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
+
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
             self.messana.updateSystemData('active')
@@ -146,6 +146,7 @@ class MessanaController(polyinterface.Controller):
 
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
+        
         if self.messanaImportOK == 1:
             LOGGER.debug('Long Poll System Up')
             self.heartbeat()
