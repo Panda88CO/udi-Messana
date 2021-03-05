@@ -127,7 +127,7 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
             self.messana.updateSystemData('active')
-            LOGGER.debug('drivers = ' + self.drivers)
+            LOGGER.debug( self.drivers)
             for ISYdriver in self.drivers:
                 ISYkey = ISYdriver['driver']
                 status, value = messana.getSystemISYValue(ISYkey)
