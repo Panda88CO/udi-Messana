@@ -133,7 +133,7 @@ class MessanaController(polyinterface.Controller):
                 status, value = self.messana.getSystemISYValue(ISYkey)
                 if status:
                     self.setDriver(ISYdriver, value)
-                    LOGGER.debug('driver updated :' + ISYdriver + ' =  '+str(value))
+                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver)
 
