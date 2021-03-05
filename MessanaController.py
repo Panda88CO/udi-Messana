@@ -149,9 +149,19 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Long Poll System Up')
             self.heartbeat()
-            #self.messana.pullAllMessanaStatus() #update from Messana to internal structure
-            self.messana.updateSystemData('all')
+                    self.messana.updateSystemData('all')
+            LOGGER.debug( self.drivers)
+            for ISYdriver in self.drivers:
+                ISYkey = ISYdriver['driver']
+                status, value = self.messana.getSystemISYValue(ISYkey)
+                if status:
+                    self.setDriver(ISYdriver, value)
+                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                else:
+                    LOGGER.debug('Error getting ' + ISYdriver)
+
             self.reportDrivers()
+
             #for node in self.nodes:
             #    if node != self.address:
             #        self.nodes[node].updateInfo()
