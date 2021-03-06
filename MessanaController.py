@@ -90,7 +90,7 @@ class MessanaController(polyinterface.Controller):
         self.systemActiveKeys = self.messana.systemActiveKeys()
         
         self.drivers = []
-        for key in systemGETKeys:
+        for key in self.systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             if  temp != {}:
                 self.drivers.append(temp)
@@ -146,7 +146,7 @@ class MessanaController(polyinterface.Controller):
 
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
-        
+
         if self.messanaImportOK == 1:
             LOGGER.debug('Long Poll System Up')
             self.heartbeat()
