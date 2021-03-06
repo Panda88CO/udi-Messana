@@ -1673,11 +1673,7 @@ class messanaInfo:
         LOGGER.debug(temp) 
         return (temp)
 
-        '''
-        LOGGER.debug('Reading Messana System')
-        #self.pullAllMessanaStatus()
-        LOGGER.debug('Finish Reading Messana system')
-        '''
+
     
     def setMessanaCredentials (self, mIPaddress, APIkey):
         self.mIPaddress = mIPaddress
@@ -2405,6 +2401,18 @@ class messanaInfo:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
 
+    def systemSetStatus (self, val):
+        LOGGER.debug('systemSetstatus called')
+        self.putSystemISYValue('mStatus', val)
+
+    def systemSetEnergySave (self, val):
+        LOGGER.debug('systemSetEnergySave called')
+        self.putSystemISYValue('mEnergySaving', val)
+        
+    def systemSetback (self, val):
+        LOGGER.debug('setSetback called')
+        self.putSystemISYValue('mEnergySaving', val)
+
     # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability('zones', zoneNbr)
@@ -2489,7 +2497,7 @@ class messanaInfo:
         return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'Active'))    
 
     def getMacrozoneCount(self):
-        return(messana.mSystem['system']['data']['mMacrozoneCount'])
+        return(self.mSystem['system']['data']['mMacrozoneCount'])
 
     #def getATUcount(self):
 
@@ -2522,7 +2530,7 @@ class messanaInfo:
         return( self.getNodeKeys (HC_CONbr, 'HcCo', 'Active'))    
 
     def getHotColdChangeOverCount(self):
-        return(messana.mSystem['system']['data']['mhc_coCount'])
+        return(self.mSystem['system']['data']['mhc_coCount'])
 
 
     #ATU
@@ -2554,7 +2562,7 @@ class messanaInfo:
         return( self.getNodeKeys (ATUNbr, 'atus', 'Active'))    
   
     def getATUCount(self):
-        return(messana.mSystem['system']['data']['mATUcount'])
+        return(self.mSystem['system']['data']['mATUcount'])
 
 
     #Fan Coils
@@ -2586,7 +2594,7 @@ class messanaInfo:
         return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'Active'))    
     
     def getFanCoilCount(self):
-        return(messana.mSystem['system']['data']['mFanCoilCount'])
+        return(self.mSystem['system']['data']['mFanCoilCount'])
   
     #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
@@ -2617,7 +2625,7 @@ class messanaInfo:
         return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'Active'))    
     
     def getenergySourceCount(self):
-        return(messana.mSystem['system']['data']['mEnergySourceCount'])
+        return(self.mSystem['system']['data']['mEnergySourceCount'])
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
@@ -2659,7 +2667,7 @@ class messanaInfo:
         return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'Active'))    
     
     def getBufferTankCount(self):
-        return(messana.mSystem['system']['data']['mBufTankCount'])
+        return(self.mSystem['system']['data']['mBufTankCount'])
 
         #Domestic Hot Water
  
@@ -2694,7 +2702,7 @@ class messanaInfo:
         return( self.getNodeKeys (DHWNbr, 'DomHw', 'active'))    
 
     def getDomesticHotWaterCount(self):
-        return(messana.mSystem['system']['data']['mDHWcount'])
+        return(self.mSystem['system']['data']['mDHWcount'])
     '''
 
     def pullMessanaStatus(self):

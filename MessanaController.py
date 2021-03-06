@@ -331,7 +331,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('set Status Called')
         val = int(command.get('value'))
         LOGGER.debug('set Status Recived:' + str(val))
-        self.messana.systemSetStatus (val)
+        self.messana.systemSetStatus(val)
 
 
         
@@ -339,7 +339,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('setEnergySave Called')
         val = int(command.get('value'))
         LOGGER.debug('SetEnergySave Recived:' + str(val))
-        self.messana.systemSetEnergySave (val)
+        self.messana.systemSetEnergySave(val)
 
 
     def setSetback(self, command):
@@ -348,7 +348,7 @@ class MessanaController(polyinterface.Controller):
         mKey = 'mSetback'
         LOGGER.debug('setSetback Reeived:' + str(val))
         self.setParamFromISY(mKey, val)
-        self.messana.systemSetSetback (val)
+        self.messana.systemSetback(val)
 
     def ISYupdate (self):
         LOGGER.info('ISY-update called')
