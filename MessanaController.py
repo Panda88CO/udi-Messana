@@ -18,8 +18,10 @@ class MessanaController(polyinterface.Controller):
         super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
-        self.name = 'MessanaControl'
+
+        self.name = 'Messana Control'
         self.address ='messanasys'
+        
         self.primary = self.address
         self.hb = 0
         self.ISYdrivers=[]
