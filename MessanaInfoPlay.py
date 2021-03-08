@@ -2411,7 +2411,7 @@ class messanaInfo:
         
     def systemSetback (self, val):
         LOGGER.debug('setSetback called')
-        self.putSystemISYValue('mEnergySaving', val)
+        self.putSystemISYValue('mSetback', val)
 
     # Zones
     def getZoneCapability(self, zoneNbr): 
