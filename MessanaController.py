@@ -19,7 +19,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
 
-        self.name = 'MessanaMain'
+        self.name = 'Messana Main'
         self.address ='messanasys'
         
         self.primary = self.address
@@ -107,6 +107,8 @@ class MessanaController(polyinterface.Controller):
         #self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
+        self.ISYforced = False
+        self.removeNoticesAll()
         self.discover()
         #self.discover()
 
@@ -133,7 +135,11 @@ class MessanaController(polyinterface.Controller):
 
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
-            self.messana.updateSystemData('active')
+            if self.ISYforced:
+                self.messana.updateSystemData('active')
+            else:
+                self.messana.updateSystemData('all')
+
             LOGGER.debug( self.drivers)
             for ISYdriver in self.drivers:
                 ISYkey = ISYdriver['driver']
@@ -143,8 +149,8 @@ class MessanaController(polyinterface.Controller):
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
-
             self.reportDrivers()
+            self.ISYforced = True
             '''
             for node in self.nodes:
                 if node != self.address:
@@ -163,13 +169,16 @@ class MessanaController(polyinterface.Controller):
                 ISYkey = ISYdriver['driver']
                 status, value = self.messana.getSystemISYValue(ISYkey)
                 if status:
-                    self.setDriver(ISYdriver, value)
+                    if self.ISYforced:
+                        self.setDriver(ISYdriver, value, report = True, force = False)
+                    else:
+                        self.setDriver(ISYdriver, value, report = True, force = True)
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
 
             self.reportDrivers()
-
+            self.ISYforced = True
             #for node in self.nodes:
             #    if node != self.address:
             #        self.nodes[node].updateInfo()
