@@ -2394,7 +2394,6 @@ class messanaInfo:
         if messanaKey in systemPullKeys:
             data = self.pullSystemDataIndividual(messanaKey)
             if data['statusOK']:
-
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
                     if val == 'Celcius':
@@ -2402,8 +2401,10 @@ class messanaInfo:
                     else:  
                         val = 1 
                 systemValue = val
+                status = True
             else:
                 systemValue = None
+                status = False
         else:
             status = False
             systemValue = None
