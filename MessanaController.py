@@ -97,6 +97,11 @@ class MessanaController(polyinterface.Controller):
             if  temp != {}:
                 self.drivers.append(temp)
                 val = self.messana.pullSystemDataIndividual(key)
+                if val['data'] in  ['Celcius', 'Fahrenheit']:
+                    if val['data'] == 'Celcius':
+                        val['data'] = 0
+                    else:  
+                        val['data'] = 1
                 LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
 
         #self.updateInfo('all')

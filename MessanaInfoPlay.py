@@ -1690,7 +1690,13 @@ class messanaInfo:
             info['driver'] = keys[0]
             tempData =  self.GETSystem(mKey)
             if tempData['statusOK']:
-                info['value'] = tempData['data']
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
             else:
                 info['value'] = ''
             editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
@@ -1700,16 +1706,21 @@ class messanaInfo:
 
     def getnodeISYdriverInfo(self, node, nodeNbr, mKey):
         info = {}
-        nodeName = node + str(nodeNbr)
-        if mKey in self.setupFile['nodeDef'][nodeName]['sts']:
-            keys = list(self.setupFile['nodeDef'][nodeName]['sts'][mKey].keys())
+        if mKey in self.setupFile['nodeDef']['system']['sts']:
+            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
             info['driver'] = keys[0]
-            tempData =  self.GETNodeData(node, nodeNbr, mKey)
+            tempData =  self.GETSystem(mKey)
             if tempData['statusOK']:
-                info['value'] = tempData['data']
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
             else:
                 info['value'] = ''
-            editor = self.setupFile['nodeDef'][nodeName]['sts'][mKey][keys[0]]
+            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
@@ -2383,15 +2394,21 @@ class messanaInfo:
         if messanaKey in systemPullKeys:
             data = self.pullSystemDataIndividual(messanaKey)
             if data['statusOK']:
-                systemValue = data['data']
-                status = True
+
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
             else:
-                status = False
                 systemValue = None
         else:
             status = False
             systemValue = None
         return (status, systemValue)
+
 
     def putSystemISYValue(self, ISYkey, systemValue):
         messanaKey = self.ISYmap['system'][ISYkey]['messana']
