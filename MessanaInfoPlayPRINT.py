@@ -1689,7 +1689,13 @@ class messanaInfo:
             info['driver'] = keys[0]
             tempData =  self.GETSystem(mKey)
             if tempData['statusOK']:
-                info['value'] = tempData['data']
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
             else:
                 info['value'] = ''
             editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
