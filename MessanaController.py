@@ -142,7 +142,7 @@ class MessanaController(polyinterface.Controller):
                     self.setDriver(ISYdriver, value)
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver)
+                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
 
             self.reportDrivers()
             '''
@@ -166,7 +166,7 @@ class MessanaController(polyinterface.Controller):
                     self.setDriver(ISYdriver, value)
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver)
+                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
 
             self.reportDrivers()
 
