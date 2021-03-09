@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
-
+        self.ISYforced = False
         self.name = 'Messana Main'
         self.address ='messanasys'
         
@@ -103,14 +103,15 @@ class MessanaController(polyinterface.Controller):
                     else:  
                         val['data'] = 1
                 LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
-
-        #self.updateInfo('all')
+                
+        self.poly.installprofile()
+        self.updateInfo('all')
         self.reportDrivers()
         self.messanaImportOK = 1
-        self.ISYforced = False
+        
         self.removeNoticesAll()
         self.discover()
-        #self.discover()
+
 
         #except:
             #LOGGER.debug('Reading data from Messana System NOT successful')
@@ -149,7 +150,7 @@ class MessanaController(polyinterface.Controller):
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
-            self.reportDrivers()
+            #self.reportDrivers()
             self.ISYforced = True
             '''
             for node in self.nodes:
@@ -196,7 +197,7 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
             name = self.messana.getZoneName(zoneNbr)
             address = 'zones'+str(zoneNbr)
-            LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
+            LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
             #if not address in self.nodes:
                #self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
         #nbrMacrozones = 0

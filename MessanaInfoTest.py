@@ -34,6 +34,7 @@ for key in systemGETKeys:
         print(temp['driver'], val['data'])
 
 print(drivers)
+ISYmap = messana.createISYmapping()
 
 for ISYdriver in drivers:
     ISYkey = ISYdriver['driver']
