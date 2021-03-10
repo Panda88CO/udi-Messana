@@ -428,8 +428,8 @@ class MessanaController(polyinterface.Controller):
 if __name__ == "__main__":
     try:
         LOGGER.info('Starting Messana Controller')
-        messanaPolyglot = polyinterface.Interface('Messana_Control')
-        messanaPolyglot.start()
+        polyglot = polyinterface.Interface('Messana_Control')
+        polyglot.start()
         control = MessanaController(polyglot)
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
