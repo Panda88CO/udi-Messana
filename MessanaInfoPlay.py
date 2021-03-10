@@ -3,7 +3,6 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-#import pickle
 import polyinterface
 LOGGER = polyinterface.LOGGER
 
