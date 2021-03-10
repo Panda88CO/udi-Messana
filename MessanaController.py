@@ -27,6 +27,51 @@ class MessanaController(polyinterface.Controller):
         self.ISYdrivers=[]
         self.ISYcommands = {}
         self.ISYTempUnit = 0
+
+
+        LOGGER.info('Init - configurations')
+        
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
+
+        self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        if self.IPAddress is None:
+            self.IPAddress= '192.168.2.65'
+            LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
+        
+        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        if self.MessanaKey is None:
+            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+            LOGGER.error('check_params: Messana Key not specified')
+            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
+        self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+        self.messana.updateSystemData('all')
+        self.systemGETKeys = self.messana.systemPullKeys()
+        self.systemPUTKeys = self.messana.systemPushKeys()
+        self.systemActiveKeys = self.messana.systemActiveKeys()
+        
+        self.drivers = []
+        for key in self.systemGETKeys:
+            temp = self.messana.getSystemISYdriverInfo(key)
+            if  temp != {}:
+                self.drivers.append(temp)
+                val = self.messana.pullSystemDataIndividual(key)
+                if val['data'] in  ['Celcius', 'Fahrenheit']:
+                    if val['data'] == 'Celcius':
+                        val['data'] = 0
+                    else:  
+                        val['data'] = 1
+                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
+
+        self.poly.installprofile()
+        self.reportDrivers()
+        self.messanaImportOK = 1
+        
+        self.removeNoticesAll()
+        self.discover()
+
+
         #try:
         #self.messana = MessanaInfo( MessanaController.id )
         #messana.setMessanaCredentials ('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
