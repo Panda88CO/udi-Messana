@@ -1647,7 +1647,7 @@ class messanaInfo:
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
         
         LOGGER.debug ('Install Profile')
-        poly.installprofile()
+        polyinterface.installprofile()
         LOGGER.debug('Install Profile done')  
 
 
