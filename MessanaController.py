@@ -148,9 +148,9 @@ class MessanaController(polyinterface.Controller):
                     else:  
                         val['data'] = 1
                 LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
-        LOGGER.debug ('Install Profile')
-        self.poly.installprofile()
-        LOGGER.debug('Install Profile done')
+        #LOGGER.debug ('Install Profile')
+        #poly.installprofile()
+        #LOGGER.debug('Install Profile done')
         self.reportDrivers()
 
         self.messanaImportOK = 1

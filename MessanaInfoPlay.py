@@ -1589,8 +1589,8 @@ class messanaInfo:
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
         
-        self.zoneCapability = {}
-        self.atuCapability = {}
+        #self.zoneCapability = {}
+        #self.atuCapability = {}
         self.updateSystemData('all')
         LOGGER.debug(systemName + 'added')
         self. setMessanaCredentials (mIPaddress, mAPIkey)    
@@ -1643,11 +1643,14 @@ class messanaInfo:
             self.updateBufferTankData(btNbr)
             btName = 'buffertanks'+str(btNbr)
             self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
-
+        LOGGER.debug ('Create Setup file')
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+        
         LOGGER.debug ('Install Profile')
         poly.installprofile()
-        LOGGER.debug('Install Profile done')     
+        LOGGER.debug('Install Profile done')  
+
+
         self.ISYmap = self.createISYmapping()
 
         '''
@@ -1669,15 +1672,9 @@ class messanaInfo:
         LOGGER.debug(temp) 
         return (temp)
 
-
-    
     def setMessanaCredentials (self, mIPaddress, APIkey):
         self.mIPaddress = mIPaddress
         self.APIKeyVal = APIkey
-
-    def init(self):
-
-        return(True)
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
@@ -1828,18 +1825,7 @@ class messanaInfo:
                 LOGGER.debug(messanaKey + 'not defined')
         return() 
 
-    '''
-    def getSystemDriver(self, driverKey):
-        tempDict= {}
-        if driverKey in  self.setupFile['nodeDef']['system']['sts']:
-            tempDict = self.setupFile['nodeDef']['system']['sts'][driverKey]
-            if len(tempDict) == 1:
-            else:
-                LOGGER.debug('Error more than one element associated with :' + driverKey)
-        else:
-            LOGGER.debug(driverKet + ' not found')
-        return(tempDict)
-    '''
+
     def addSystemDefStruct(self, nodeId):
         self.keyCount = 0
         nodeId.lower()
@@ -2277,19 +2263,8 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
-    '''
-    def saveData (self):
-        file1 = open(r'MessanaData.pkl','wb')
-        #pickle.dump(self.mSystem, file1)
-        file1.close()
 
-    def loadData (self):
-        file1 = open(r'MessanaData.pkl','rb')
-        self.mSystem = pickle.load(file1)
-        LOGGER.debug(self.mSystem['system']['ISYnode']['nlsNAME'])        
-        file1.close() 
-    '''
-    #if self.mSystem['system']['KeyInfo'][mKey]['Active']:
+
     #System
     def updateSystemData(self, level):
         LOGGER.debug('Update Messana Sytem Data')
@@ -2405,7 +2380,6 @@ class messanaInfo:
             status = False
             systemValue = None
         return (status, systemValue)
-
 
     def putSystemISYValue(self, ISYkey, systemValue):
         messanaKey = self.ISYmap['system'][ISYkey]['messana']
