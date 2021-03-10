@@ -65,6 +65,7 @@ class MessanaController(polyinterface.Controller):
                 LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
 
         self.poly.installprofile()
+        self.poly.updateprofile()
         self.reportDrivers()
         self.messanaImportOK = 1
         
@@ -429,7 +430,7 @@ if __name__ == "__main__":
         LOGGER.info('Starting Messana Controller')
         messanaPolyglot = polyinterface.Interface('Messana_Control')
         messanaPolyglot.start()
-        control = MessanaController( messanaPolyglot)
+        control = MessanaController(polyglot)
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
         sys.exit(0)
