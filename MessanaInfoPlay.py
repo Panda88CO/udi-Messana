@@ -1646,13 +1646,7 @@ class messanaInfo:
         LOGGER.debug ('Create Setup file')
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
         
-        LOGGER.debug ('Install Profile')
-        self.poly.installprofile()
-        LOGGER.debug('Install Profile done')  
-
-
         self.ISYmap = self.createISYmapping()
-
         '''
         LOGGER.debug('Reading Messana System')
         #self.pullAllMessanaStatus()

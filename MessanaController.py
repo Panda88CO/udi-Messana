@@ -131,11 +131,17 @@ class MessanaController(polyinterface.Controller):
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+        
+        LOGGER.debug ('Install Profile')    
+        self.poly.installprofile()
+        LOGGER.debug('Install Profile done')
+
         self.messana.updateSystemData('all')
         self.systemGETKeys = self.messana.systemPullKeys()
         self.systemPUTKeys = self.messana.systemPushKeys()
         self.systemActiveKeys = self.messana.systemActiveKeys()
-        
+
+        self.reportDrivers()
         self.drivers = []
         for key in self.systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
@@ -148,10 +154,8 @@ class MessanaController(polyinterface.Controller):
                     else:  
                         val['data'] = 1
                 LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
-        #LOGGER.debug ('Install Profile')
-        #poly.installprofile()
-        #LOGGER.debug('Install Profile done')
-        self.reportDrivers()
+        
+
 
         self.messanaImportOK = 1
         
