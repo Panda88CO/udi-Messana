@@ -7,7 +7,6 @@ import sys
 from collections import defaultdict
 from MessanaInfoPlay import messanaInfo
 #from MessanaZone import MessanaZone
-import messanaISY
 import shutil
 
 LOGGER = polyinterface.LOGGER
@@ -28,7 +27,7 @@ class MessanaController(polyinterface.Controller):
         self.ISYcommands = {}
         self.ISYTempUnit = 0
 
-
+        '''
         LOGGER.info('Init - configurations')
         
         self.removeNoticesAll()
@@ -71,7 +70,7 @@ class MessanaController(polyinterface.Controller):
         
         self.removeNoticesAll()
         self.discover()
-
+        '''
 
         #try:
         #self.messana = MessanaInfo( MessanaController.id )

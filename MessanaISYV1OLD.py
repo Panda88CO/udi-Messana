@@ -25,12 +25,6 @@ class messanaPoly(polyinterface):
             self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-        '''
-        if 'IP_ADDRESS' in self.polyConfig['customParams']:
-            LOGGER.debug('IP address detected')
-            self.IPaddress = self.polyConfig['customParams']['IP_ADDRESS']
-        else:
-        '''
         #self.messana = messanaInfo(self.IPaddress, self.MessanaKey, messanaPoly.id )
         LOGGER.debug('MessanaInfo call done')
         #self.system_GETKeys = self.messana.systemPullKeys()
@@ -117,13 +111,6 @@ class messanaController(polyinterface.Controller):
             self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-
-        '''
-        if 'IP_ADDRESS' in self.polyConfig['customParams']:
-            LOGGER.debug('IP address detected')
-            self.IPaddress = self.polyConfig['customParams']['IP_ADDRESS']
-        else:
-        '''
         #self.messana = messanaInfo(self.IPaddress, self.MessanaKey, messanaPoly.id )
         LOGGER.debug('MessanaInfo call done')
         #self.system_GETKeys = self.messana.systemPullKeys()
@@ -237,4 +224,3 @@ class messanaNode(polyinterface.Node):
             return(True)
         else:
             return(False)         
-'''      
