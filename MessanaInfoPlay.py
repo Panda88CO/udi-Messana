@@ -1593,10 +1593,7 @@ class messanaInfo:
         self.atuCapability = {}
         self.updateSystemData('all')
         LOGGER.debug(systemName + 'added')
-
-
-        self. setMessanaCredentials (mIPaddress, mAPIkey)
-        
+        self. setMessanaCredentials (mIPaddress, mAPIkey)    
         self.addSystemDefStruct(systemName)
 
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
@@ -1647,10 +1644,10 @@ class messanaInfo:
             btName = 'buffertanks'+str(btNbr)
             self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
 
-          
-
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
-                
+        LOGGER.debug ('Install Profile')
+        poly.installprofile()
+        LOGGER.debug('Install Profile done')     
         self.ISYmap = self.createISYmapping()
 
         '''
