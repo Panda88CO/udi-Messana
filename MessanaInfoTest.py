@@ -6,7 +6,7 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-from MessanaInfoPlayPRINT import messanaInfo
+from MessanaInfoPlay import messanaInfo
 import shutil
 #import ISYsetupFiles
 
