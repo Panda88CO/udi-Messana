@@ -2127,16 +2127,17 @@ class messanaInfo:
         status = True
         #try:
         LOGGER.debug('opening files')
-        if os.path.exist(nodeDefFileName):
+        if os.path.exists(nodeDefFileName):
             nodeFile = open(nodeDefFileName, 'w+')
         else:
             nodeFile = open(nodeDefFileName, 'x')
-        if os.path.exist(editorFileName):    
+            
+        if os.path.exists(editorFileName):    
             editorFile = open(editorFileName, 'w+')
         else:
             editorFile = open(editorFileName, 'x')
 
-        if os.path.exist(nlsFileName):
+        if os.path.exists(nlsFileName):
             nlsFile = open(nlsFileName, 'w+')
         else:
             nlsFile = open(nlsFileName, 'x')
