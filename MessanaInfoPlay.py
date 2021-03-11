@@ -2,6 +2,7 @@
 import requests
 #from subprocess import call
 import json
+import os 
 from collections import defaultdict
 import polyinterface
 LOGGER = polyinterface.LOGGER
@@ -2126,9 +2127,20 @@ class messanaInfo:
         status = True
         #try:
         LOGGER.debug('opening files')
-        nodeFile = open(nodeDefFileName, 'w+')
-        editorFile = open(editorFileName, 'w+')
-        nlsFile = open(nlsFileName, 'w+')
+        if os.path.exist(nodeDefFileName):
+            nodeFile = open(nodeDefFileName, 'w+')
+        else:
+            nodeFile = open(nodeDefFileName, 'x')
+        if os.path.exist(editorFileName):    
+            editorFile = open(editorFileName, 'w+')
+        else:
+            editorFile = open(editorFileName, 'x')
+
+        if os.path.exist(nlsFileName):
+            nlsFile = open(nlsFileName, 'w+')
+        else:
+            nlsFile = open(nlsFileName, 'x')
+
         LOGGER.debug('Opening Files OK')
         editorFile.write('<editors> \n')
         nodeFile.write('<nodeDefs> \n')
