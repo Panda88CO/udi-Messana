@@ -421,7 +421,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('ISY-update called')
         self.updateInfo('all')
 
-    id = 'system'
+    id = MessanaController.name
     drivers = []
     commands = { 'UPDATE': ISYupdate
                 ,'SET_STATUS': setStatus
