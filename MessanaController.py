@@ -133,9 +133,9 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('Calling Messsana: '+self.IPAddress+' '+ self.MessanaKey+' '+self.name)
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         
-        LOGGER.debug ('Install Profile')    
-        self.poly.installprofile()
-        LOGGER.debug('Install Profile done')
+        #LOGGER.debug ('Install Profile')    
+        #self.poly.installprofile()
+        #LOGGER.debug('Install Profile done')
 
         self.messana.updateSystemData('all')
         self.systemGETKeys = self.messana.systemPullKeys()
@@ -159,7 +159,6 @@ class MessanaController(polyinterface.Controller):
 
 
         self.messanaImportOK = 1
-        
         self.removeNoticesAll()
         self.discover()
 
