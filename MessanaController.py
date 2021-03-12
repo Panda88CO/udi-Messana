@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.ISYforced = False
-        self.name = str(id)
+        self.name = 'MessanaMain'
         self.address ='messanasys'
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
@@ -420,7 +420,7 @@ class MessanaController(polyinterface.Controller):
     def ISYupdate (self):
         LOGGER.info('ISY-update called')
         self.updateInfo('all')
-
+ 
     id = 'MessanaMain'
     drivers = []
     commands = { 'UPDATE': ISYupdate
