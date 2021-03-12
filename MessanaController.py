@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.ISYforced = False
-        self.name = 'MessanaMain'
+        self.name = 'MessanaMain' # must be same as id (need to find a way to pass this)
         self.address ='messanasys'
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
@@ -133,9 +133,9 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('Calling Messsana: '+self.IPAddress+' '+ self.MessanaKey+' '+ self.name)
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         
-        #LOGGER.debug ('Install Profile')    
-        #self.poly.installprofile()
-        #LOGGER.debug('Install Profile done')
+        LOGGER.debug ('Install Profile')    
+        self.poly.installprofile()
+        LOGGER.debug('Install Profile done')
 
         self.messana.updateSystemData('all')
         self.systemGETKeys = self.messana.systemPullKeys()
