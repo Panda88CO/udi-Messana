@@ -2127,22 +2127,19 @@ class messanaInfo:
         status = True
         #try:
         LOGGER.debug('opening files')
-        #if os.path.exists(nodeDefFileName):
+        if not(os.path.exists('.\profile'):
+            os.mkdir('.\profile')       
+        if not(os.path.exists('.\profile\editor'):
+            os.mkdir('.\profile\editor')
+        if not(os.path.exists('.\profile\nls'):
+            os.mkdir('.\profile\nls')           
+        if not(os.path.exists('.\profile\nodedef'):
+            os.mkdir('.\profile\nodedef')
         nodeFile = open(nodeDefFileName, 'w+')
-        #else:
-        #    nodeFile = open(nodeDefFileName, 'x')
-            
-        #if os.path.exists(editorFileName):    
         editorFile = open(editorFileName, 'w+')
-        #else:
-        #    editorFile = open(editorFileName, 'x')
-
-        #if os.path.exists(nlsFileName):
         nlsFile = open(nlsFileName, 'w+')
-        #else:
-        #   nlsFile = open(nlsFileName, 'x')
-
         LOGGER.debug('Opening Files OK')
+
         editorFile.write('<editors> \n')
         nodeFile.write('<nodeDefs> \n')
         for node in self.setupFile['nodeDef']:
