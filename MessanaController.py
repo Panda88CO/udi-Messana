@@ -414,7 +414,6 @@ class MessanaController(polyinterface.Controller):
         val = int(command.get('value'))
         mKey = 'mSetback'
         LOGGER.debug('setSetback Reeived:' + str(val))
-        self.setParamFromISY(mKey, val)
         self.messana.systemSetback(val)
 
     def ISYupdate (self):
