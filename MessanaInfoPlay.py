@@ -2398,12 +2398,12 @@ class messanaInfo:
         status = self.pushSystemDataIndividual('mStatus', value)
         return(status)
 
-    def systemSetEnergySave (self, val):
+    def systemSetEnergySave (self, value):
         LOGGER.debug('systemSetEnergySave called')
         status = self.pushSystemDataIndividual('mEnergySaving', value)
         return(status)
         
-    def systemSetback (self, val):
+    def systemSetback (self, value):
         LOGGER.debug('setSetback called')
         status = self.pushSystemDataIndividual('mSetback', value)
         return(status)
