@@ -222,7 +222,7 @@ class messanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Energy Savings' 
-                                                    ,'nlsValues' : { 0:'Disable', 1:'Enable' }
+                                                    ,'nlsValues' : { 0:'Disabled', 1:'Enabled' }
                                                         }
                                                 }                                        
                                         ,'mSetback':{
@@ -238,7 +238,7 @@ class messanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                      'nlsTEXT' : 'Setback Status' 
-                                                    ,'nlsValues' : { 0:'Disable',  1:'Enable' }
+                                                    ,'nlsValues' : { 0:'Disabled',  1:'Enabled' }
                                                         }
                                                 }                                          
                                         ,'mExternalAlarm':{

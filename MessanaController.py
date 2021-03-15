@@ -412,7 +412,6 @@ class MessanaController(polyinterface.Controller):
     def setSetback(self, command):
         LOGGER.debug('setSetback Called')
         val = int(command.get('value'))
-        mKey = 'mSetback'
         LOGGER.debug('setSetback Reeived:' + str(val))
         self.messana.systemSetback(val)
 
