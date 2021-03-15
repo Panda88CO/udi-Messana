@@ -4,8 +4,8 @@ import requests
 import json
 import os 
 from collections import defaultdict
-import polyinterface
-LOGGER = polyinterface.LOGGER
+#import polyinterface
+#LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, systemName):
@@ -1593,7 +1593,7 @@ class messanaInfo:
         #self.zoneCapability = {}
         #self.atuCapability = {}
         self.updateSystemData('all')
-        LOGGER.debug(systemName + 'added')
+        print(systemName + 'added')
         self. setMessanaCredentials (mIPaddress, mAPIkey)    
         self.addSystemDefStruct(systemName)
 
@@ -1644,14 +1644,14 @@ class messanaInfo:
             self.updateBufferTankData(btNbr)
             btName = 'buffertanks'+str(btNbr)
             self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
-        LOGGER.debug ('Create Setup file')
+        print ('Create Setup file')
         self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
         
         self.ISYmap = self.createISYmapping()
         '''
-        LOGGER.debug('Reading Messana System')
+        print('Reading Messana System')
         #self.pullAllMessanaStatus()
-        LOGGER.debug('Finish Reading Messana system')
+        print('Finish Reading Messana system')
         '''
 
     def createISYmapping(self):
@@ -1664,7 +1664,7 @@ class messanaInfo:
                         temp[nodes][ISYkey] = {}
                         temp[nodes][ISYkey].update({'messana': mKeys})
                         temp[nodes][ISYkey].update({'editor': self.setupFile['nodeDef'][nodes]['sts'][mKeys][ISYkey]})
-        LOGGER.debug(temp) 
+        print(temp) 
         return (temp)
 
     def setMessanaCredentials (self, mIPaddress, APIkey):
@@ -1745,7 +1745,7 @@ class messanaInfo:
                 if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
                 for ISYnls in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
-                    LOGGER.debug( mKey + ' ' + ISYnls)
+                    print( mKey + ' ' + ISYnls)
                     if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
@@ -1775,7 +1775,7 @@ class messanaInfo:
                 self.setupFile['nodeDef'][self.name]['cmds']['sends']=[]
                 self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
         else:
-            LOGGER.debug('Unknown name: ' + nodeId)
+            print('Unknown name: ' + nodeId)
         return()
    
     def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, messanaKey):  
@@ -1792,7 +1792,7 @@ class messanaInfo:
             if messanaKey in self.setupFile['nodeDef'][name]['sts']: 
                self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = self.setupFile['nodeDef'][name]['sts'][messanaKey]
             else:
-                LOGGER.debug(messanaKey + 'not defined')
+                print(messanaKey + 'not defined')
         return() 
 
 
@@ -1817,7 +1817,7 @@ class messanaInfo:
             if messanaKey in self.setupFile['nodeDef']['system']['sts']:
                 self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = self.setupFile['nodeDef']['system']['sts'][messanaKey]
             else:
-                LOGGER.debug(messanaKey + 'not defined')
+                print(messanaKey + 'not defined')
         return() 
 
 
@@ -1853,7 +1853,7 @@ class messanaInfo:
                     if self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
                         self.setupFile['nls'][nlsName]={}
                     for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
-                        LOGGER.debug( mKey + ' ' + ISYnls)
+                        print( mKey + ' ' + ISYnls)
                         if  self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                             self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
@@ -1920,39 +1920,39 @@ class messanaInfo:
                             # Not currently supported  
                             None
                         else:
-                            LOGGER.debug(key + ' unknown keyword')
+                            print(key + ' unknown keyword')
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
     def GETSystem(self, mKey):
         sysData= {}
-        LOGGER.debug('GETSystem: ' + mKey )
+        print('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
-        #LOGGER.debug( GETStr)
+        #print( GETStr)
         try:
             systemTemp = requests.get(GETStr)
-            LOGGER.debug(str(systemTemp))
+            print(str(systemTemp))
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
-                #LOGGER.debug(systemTemp)
+                #print(systemTemp)
                 self.mSystem['system']['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
                 sysData['statusOK'] = True 
                 sysData['data'] = self.mSystem['system']['data'][mKey] 
             else:
-                LOGGER.debug(str(mKey) + ' error')
+                print(str(mKey) + ' error')
                 sysData['statusOK'] = False
                 sysData['error'] = str(systemTemp)
                 #self.systemDict[mKey] = -1
             return(sysData) #No data for given keyword - remove from list 
         except:
-            LOGGER.debug('System GET operation failed for :' + mKey)
+            print('System GET operation failed for :' + mKey)
             sysData['statusOK'] = False
             sysData['error'] = 'EXCEPT: System GET operation failed for :' + mKey  
             return(sysData)
 
     def PUTSystem(self, mKey, value):
             sysData= {}
-            LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
+            print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             if mKey in self.mSystem['system']['KeyInfo']:
                 if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
@@ -1960,22 +1960,22 @@ class messanaInfo:
                     if PUTStr == None:
                         sysData['statusOK'] = False
                         sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                        LOGGER.debug(sysData)    
+                        print(sysData)    
                         return(sysData)   
-                    #LOGGER.debug(PUTStr)
+                    #print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
             #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
-            #LOGGER.debug(mData)
+            #print(mData)
             try:
                 resp = requests.put(PUTStr, json=mData)
-                LOGGER.debug(resp)
+                print(resp)
                 if str(resp) != self.RESPONSE_OK:
                     sysData['statusOK'] = False
                     sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
                 else:
                     sysData['statusOK'] = True
                     sysData['data'] = value
-                #LOGGER.debug(sysData)    
+                #print(sysData)    
                 return(sysData)          
             except:
                 sysData['statusOK'] = False
@@ -1983,7 +1983,7 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
@@ -2029,7 +2029,7 @@ class messanaInfo:
         nodeData = {}
         if 'PUTstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             PUTStr = self.IP + self.mSystem[mNodeKey]['KeyInfo'][mKey]['PUTstr']
-            #LOGGER.debug('PUT str: ' + PUTStr + str(value))
+            #print('PUT str: ' + PUTStr + str(value))
             mData = {'id':nodeNbr, 'value': value, self.APIKey : self.APIKeyVal}
             resp = requests.put(PUTStr, json=mData)
             if str(resp) == self.RESPONSE_OK:
@@ -2039,19 +2039,19 @@ class messanaInfo:
                 temp1 =  resp.content
                 res_dict = json.loads(temp1.decode('utf-8')) 
                 nodeData['error'] = str(resp) + ': Not able to PUT key: '+ str(res_dict.values()) + ' Node ' + str(id) + ' for key: ' + str(mKey) + ' value:', str(value)
-                LOGGER.debug(nodeData['error'])
+                print(nodeData['error'])
                 nodeData['statusOK'] =False
             elif str(resp) == self.RESPONSE_NO_RESPONSE:
                 nodeData['error'] = str(resp) + ': Error: No response from API for key: ' + str(mKey)+ ' value:', str(value)
-                LOGGER.debug(nodeData['error'])
+                print(nodeData['error'])
                 nodeData['statusOK'] =False
             else:
                 nodeData['error'] = str(resp) + ': Error: Unknown:for key: ' + str(mKey)+ ' value:', str(value)
-                LOGGER.debug(nodeData['error'])
+                print(nodeData['error'])
                 nodeData['statusOK'] =False
         else:
             nodeData['error'] = 'Node ' + mNodeKey + ' does not accept keyword: ' + mKey
-            LOGGER.debug(nodeData['error'])
+            print(nodeData['error'])
             nodeData['nodeDataOK'] =False
         return(nodeData)
 
@@ -2071,7 +2071,7 @@ class messanaInfo:
                         if not(mKey in keys):
                             keys.append(mKey)
         else:
-            LOGGER.debug('No Keys found - trying to fetch Messana data')
+            print('No Keys found - trying to fetch Messana data')
             self.updateSystemData('all')
             self.updateNodeData(NodeNbr, NodeKey)
             if self.mSystem[NodeKey]['data']:
@@ -2080,7 +2080,7 @@ class messanaInfo:
                         if not(mKey in keys):
                             keys.append(mKey)
             else:
-                LOGGER.debug('No '+ NodeKey + ' present')
+                print('No '+ NodeKey + ' present')
         if 'NOcapabiility' in self.mSystem[NodeKey]:
             if self.mSystem[NodeKey]['NOcapability']:
                 if NodeNbr in self.mSystem[NodeKey]['NOcapability']:
@@ -2090,20 +2090,20 @@ class messanaInfo:
         return(keys)
 
     def updateNodeData(self, NodeNbr, NodeKey):
-        LOGGER.debug('updatNodeData: ' + str(NodeNbr) + ' ' + NodeKey)
+        print('updatNodeData: ' + str(NodeNbr) + ' ' + NodeKey)
         Data = {}
         dataOK = True
         for mKey in self.mSystem[NodeKey]['KeyInfo']:
-            #LOGGER.debug('GET ' + mKey + ' in zone ' + str(NodeNbr))
+            #print('GET ' + mKey + ' in zone ' + str(NodeNbr))
             Data = self.pullNodeDataIndividual(NodeNbr, NodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
-                #LOGGER.debug('Error GET' + Data['error'])
+                #print('Error GET' + Data['error'])
         return(dataOK)
     
     def pullNodeDataIndividual(self, NodeNbr, NodeKey, mKey): 
         Data = {} 
-        LOGGER.debug('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
+        print('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
         if mKey in mKey in self.mSystem[NodeKey]['KeyInfo']:
             Data = self.GETNodeData(NodeKey, NodeNbr, mKey)
         else:
@@ -2112,21 +2112,21 @@ class messanaInfo:
         return(Data)    
 
     def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
-        LOGGER.debug('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
         zoneData = {}
         zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
         if zoneData['statusOK']:
             return(True)
         else:
-            LOGGER.debug(zoneData['error'])
+            print(zoneData['error'])
             return(False)
 
     #Setup file generation 
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
-        LOGGER.debug ('Create Setup Files')
+        print ('Create Setup Files')
         status = True
         #try:
-        LOGGER.debug('opening files')
+        print('opening files')
         if not(os.path.exists('./profile')):
             os.mkdir('./profile')       
         if not(os.path.exists('./profile/editor')):
@@ -2138,13 +2138,13 @@ class messanaInfo:
         nodeFile = open(nodeDefFileName, 'w+')
         editorFile = open(editorFileName, 'w+')
         nlsFile = open(nlsFileName, 'w+')
-        LOGGER.debug('Opening Files OK')
+        print('Opening Files OK')
 
         editorFile.write('<editors> \n')
         nodeFile.write('<nodeDefs> \n')
         for node in self.setupFile['nodeDef']:
             nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
-            #LOGGER.debug(nodeDefStr)
+            #print(nodeDefStr)
             nodeFile.write(nodeDefStr)
             nodeFile.write('      <editors />\n')
             nodeFile.write('      <sts>\n')
@@ -2158,14 +2158,14 @@ class messanaInfo:
                 cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
                 nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
                 nlsFile.write(nlsStr)
-                LOGGER.debug(nlsStr)
+                print(nlsStr)
 
             for status in self.setupFile['nodeDef'][node]['sts']:
                 for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
                     if statusId != 'ISYInfo':
                         nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
                         nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
-                        #LOGGER.debug(nodeDefStr)
+                        #print(nodeDefStr)
                         nodeFile.write(nodeDefStr)
                         editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
                         editorStr = '     <range '
@@ -2188,9 +2188,9 @@ class messanaInfo:
                                 nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
                                 editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
                             else:
-                                LOGGER.debug('unknown editor keyword: ' + str(key))
+                                print('unknown editor keyword: ' + str(key))
                         editorStr = editorStr + ' />\n'
-                        #LOGGER.debug(editorStr)
+                        #print(editorStr)
                         editorFile.write(editorStr)
                         editorFile.write('</editor>\n')
 
@@ -2206,7 +2206,7 @@ class messanaInfo:
                                     nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
                                     nlsFile.write(nlsStr)
                                     nlsValues = nlsValues + 1
-                            #LOGGER.debug(nlsStr)
+                            #print(nlsStr)
 
             nodeFile.write('      </sts>\n')
             nodeFile.write('      <cmds>\n')                
@@ -2215,7 +2215,7 @@ class messanaInfo:
                 if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
                     for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
                         cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
-                        #LOGGER.debug(cmdStr)
+                        #print(cmdStr)
                         nodeFile.write(cmdStr)
             nodeFile.write('         </sends>\n')               
             nodeFile.write('         <accepts>\n')      
@@ -2230,12 +2230,12 @@ class messanaInfo:
                                     nodeFile.write(cmdStr)  
                                     cmdStr = '               <p id="" editor="'
                                     cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                                    LOGGER.debug(cmdStr)                              
+                                    print(cmdStr)                              
                                     nodeFile.write(cmdStr)
                                     nodeFile.write('            </cmd> \n')
                         else:
                             cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
-                            #LOGGER.debug(cmdStr)
+                            #print(cmdStr)
                             nodeFile.write(cmdStr)  
             nodeFile.write('         </accepts>\n')                   
 
@@ -2250,7 +2250,7 @@ class messanaInfo:
         nlsFile.close()
         '''
         #except:
-        LOGGER.debug('something went wrong in creating setup files')
+        print('something went wrong in creating setup files')
         status = False
         nodeFile.close()
         editorFile.close()
@@ -2271,7 +2271,7 @@ class messanaInfo:
 
     #System
     def updateSystemData(self, level):
-        LOGGER.debug('Update Messana Sytem Data')
+        print('Update Messana Sytem Data')
         #LOGGER.info(self.mSystem['system'])
         sysData = {}
         DataOK = True
@@ -2281,22 +2281,22 @@ class messanaInfo:
                 if mStr != None:
                     sysData= self.pullSystemDataIndividual(mKey)
                     if not(sysData['statusOK']):
-                        LOGGER.debug('Error System Active GET: ' + mKey)
+                        print('Error System Active GET: ' + mKey)
                         DataOK = False  
             elif level == 'all':
                 if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
-                    #LOGGER.debug('GET ' + mKey)
+                    #print('GET ' + mKey)
                     sysData= self.pullSystemDataIndividual(mKey)
                     if not(sysData['statusOK']):
-                        LOGGER.debug('Error System Active GET: ' + mKey)
+                        print('Error System Active GET: ' + mKey)
                         DataOK = False  
             else:
-                LOGGER.debug('Unknown level: ' + level)
+                print('Unknown level: ' + level)
                 DataOK = False               
         return(DataOK)
 
     def pullSystemDataIndividual(self, mKey):
-        LOGGER.debug('MessanaInfo pull System Data: ' + mKey)
+        print('MessanaInfo pull System Data: ' + mKey)
         sysData = {}
         if mKey in self.mSystem['system']['KeyInfo']:
             if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
@@ -2308,29 +2308,29 @@ class messanaInfo:
 
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
-        LOGGER.debug('MessanaInfo push System Data: ' + mKey)
+        print('MessanaInfo push System Data: ' + mKey)
         sysData = self.PUTSystem(mKey, value)
         if sysData['statusOK']:
             return(True)
         else:
-            LOGGER.debug(sysData['error'])
+            print(sysData['error'])
             return(False)  
      
     def systemPullKeys(self):
-        LOGGER.debug('systemPullKeys')
+        print('systemPullKeys')
         keys=[]
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
                 keys.append(mKey)
         else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
+            print('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem['system']['data']:
                 keys.append(mKey)
         return(keys)
 
     def systemPushKeys(self):
-        LOGGER.debug('systemPushKeys')
+        print('systemPushKeys')
         keys=[]
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
@@ -2338,7 +2338,7 @@ class messanaInfo:
                     if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
                         keys.append(mKey)
         else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
+            print('No Keys found - trying to fetch system data ')
             self.updateSystemData('long')
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
@@ -2347,7 +2347,7 @@ class messanaInfo:
         return(keys)  
             
     def systemActiveKeys(self):
-        LOGGER.debug('systemActiveKeys')
+        print('systemActiveKeys')
         keys=[]
         if self.mSystem['system']['data']:
             for mKey in self.mSystem['system']['data']:
@@ -2355,7 +2355,7 @@ class messanaInfo:
                     if self.mSystem['system']['KeyInfo'][mKey]['Active']:
                         keys.append(mKey)
         else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
+            print('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem['system']['data']:
                 if mKey in self.mSystem['system']['KeyInfo']:
@@ -2393,23 +2393,25 @@ class messanaInfo:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
 
-    def systemSetStatus (self, val):
-        LOGGER.debug('systemSetstatus called')
+    def systemSetStatus (self, systemValue):
+        print('systemSetstatus called')
         status = self.pushSystemDataIndividual('mStatus', systemValue)
         return(status)
 
-    def systemSetEnergySave (self, val):
-        LOGGER.debug('systemSetEnergySave called')
+
+    def systemSetEnergySave (self, systemValue):
+        print('systemSetEnergySave called')
         status = self.pushSystemDataIndividual('mEnergySaving', systemValue)
         return(status)
+
         
-    def systemSetback (self, val):
-        LOGGER.debug('setSetback called')
+    def systemSetback (self, systemValue):
+        print('setSetback called')
         status = self.pushSystemDataIndividual('mSetback', systemValue)
         return(status)
 
- 
-     # Zones
+
+    # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability('zones', zoneNbr)
 
@@ -2417,7 +2419,7 @@ class messanaInfo:
         self.addNodeDefStruct(zoneNbr, 'zones', nodeId)
 
     def updateZoneData(self, zoneNbr):
-        LOGGER.debug('updatZoneData: ' + str(zoneNbr))
+        print('updatZoneData: ' + str(zoneNbr))
         self.zoneKeys = self.zonePullKeys(zoneNbr)
         self.dataOK = True
         for mKey in self.zoneKeys:
@@ -2426,26 +2428,26 @@ class messanaInfo:
         return(self.dataOK)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
-        LOGGER.debug('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
+        print('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(zoneNbr, 'zones', mKey))
 
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
-        LOGGER.debug('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(zoneNbr, 'zones', mKey, value))
 
     def zonePullKeys(self, zoneNbr):
-        LOGGER.debug('zonePullKeys')
+        print('zonePullKeys')
         self.tempZoneKeys =  self.getNodeKeys (zoneNbr, 'zones', 'GETstr')
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
-        LOGGER.debug('zonePushKeys')
+        print('zonePushKeys')
 
         return( self.getNodeKeys (zoneNbr, 'zones', 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
-        LOGGER.debug('zoneActiveKeys')
+        print('zoneActiveKeys')
         return( self.getNodeKeys (zoneNbr, 'zones', 'Active'))
 
     def getZoneCount(self):
@@ -2463,33 +2465,33 @@ class messanaInfo:
     #def getATUcount(self):
 
         #except:
-            #LOGGER.debug('Reading data from Messana System NOT successful')
+            #print('Reading data from Messana System NOT successful')
     #MacroZone
     def getMacrozoneCapability(self, macrozoneNbr): 
         self.getNodeCapability('macrozones', macrozoneNbr)
 
     def updateMacroZoneData(self, macrozoneNbr):
-        LOGGER.debug('updatMacroZoneData: ' + str(macrozoneNbr))
+        print('updatMacroZoneData: ' + str(macrozoneNbr))
         return(self.updateNodeData(macrozoneNbr, 'macrozones'))
 
     def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
-        LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
+        print('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(macrozoneNbr, 'macrozones', mKey))
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
-        LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(macrozoneNbr, 'macrozones', mKey, value))
 
     def macrozonePullKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozonePullKeys')
+        print('macrozonePullKeys')
         return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'GETstr'))
 
     def macrozonePushKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozonePushKeys')
+        print('macrozonePushKeys')
         return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'PUTstr'))
   
     def macrozoneActiveKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozoneActiveKeys')
+        print('macrozoneActiveKeys')
         return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'Active'))    
 
     def getMacrozoneCount(self):
@@ -2499,30 +2501,30 @@ class messanaInfo:
 
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
-        LOGGER.debug('updatHC_COData: ' + str(HC_CONbr))
+        print('updatHC_COData: ' + str(HC_CONbr))
         return(self.updateNodeData(HC_CONbr, 'HcCo'))
 
     def getHC_COCapability(self, HC_CONbr): 
         self.getNodeCapability('HcCo', HC_CONbr)
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
-        LOGGER.debug('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
+        print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(HC_CONbr, 'HcCo', mKey))
 
     def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
-        LOGGER.debug('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(HC_CONbr, 'HcCo', mKey, value))
 
     def HcCoPullKeys(self, HC_CONbr):
-        LOGGER.debug('hc_coPullKeys')
+        print('hc_coPullKeys')
         return( self.getNodeKeys (HC_CONbr, 'HcCo', 'GETstr'))
 
     def hc_coPushKeys(self, HC_CONbr):
-        LOGGER.debug('hc_coPushKeys')
+        print('hc_coPushKeys')
         return( self.getNodeKeys (HC_CONbr, 'HcCo', 'PUTstr'))
   
     def hc_coActiveKeys(self, HC_CONbr):
-        LOGGER.debug('hc_coActiveKeys')
+        print('hc_coActiveKeys')
         return( self.getNodeKeys (HC_CONbr, 'HcCo', 'Active'))    
 
     def getHotColdChangeOverCount(self):
@@ -2531,30 +2533,30 @@ class messanaInfo:
 
     #ATU
     def updateATUData(self, ATUNbr):
-        LOGGER.debug('updatATUData: ' + str(ATUNbr))
+        print('updatATUData: ' + str(ATUNbr))
         return(self.updateNodeData(ATUNbr, 'atus'))
 
     def getAtuCapability(self, atuNbr): 
         self.getNodeCapability('atus', atuNbr)
 
     def pullATUDataIndividual(self, ATUNbr, mKey): 
-        LOGGER.debug('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
+        print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(ATUNbr, 'atus', mKey))
 
     def pushATUDataIndividual(self, ATUNbr, mKey, value):
-        LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(ATUNbr, 'atus', mKey, value))
 
     def atuPullKeys(self, ATUNbr): 
-        LOGGER.debug('atusPullKeys')
+        print('atusPullKeys')
         return( self.getNodeKeys (ATUNbr, 'atus', 'GETstr'))
 
     def atuPushKeys(self, ATUNbr):
-        LOGGER.debug('atusPushKeys')
+        print('atusPushKeys')
         return( self.getNodeKeys (ATUNbr, 'atus', 'PUTstr'))
   
     def atuActiveKeys(self, ATUNbr):
-        LOGGER.debug('atusActiveKeys')
+        print('atusActiveKeys')
         return( self.getNodeKeys (ATUNbr, 'atus', 'Active'))    
   
     def getATUCount(self):
@@ -2563,30 +2565,30 @@ class messanaInfo:
 
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
-        LOGGER.debug('updatFanCoilData: ' + str(FanCoilNbr))
+        print('updatFanCoilData: ' + str(FanCoilNbr))
         return(self.updateNodeData(FanCoilNbr, 'FanCoils'))
 
     def getFanCoilCapability(self, FanCoilNbr): 
         self.getNodeCapability('FanCoils', FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
-        LOGGER.debug('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
+        print('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey))
 
     def pushFanCoilDataIndividual(self, FanCoilNbr, mKey, value):
-        LOGGER.debug('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey, value))
 
     def fan_coilPullKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilPullKeys')
+        print('fan_coilPullKeys')
         return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'GETstr'))
 
     def fan_coilPushKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilPushKeys')
+        print('fan_coilPushKeys')
         return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'PUTstr'))
   
     def fan_coilActiveKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilActiveKeys')
+        print('fan_coilActiveKeys')
         return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'Active'))    
     
     def getFanCoilCount(self):
@@ -2594,30 +2596,30 @@ class messanaInfo:
   
     #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
-        LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
+        print('updatEnergySourceData: ' + str(EnergySourceNbr))
         return(self.updateNodeData(EnergySourceNbr, 'EnergyS'))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
         self.getNodeCapability('EnergyS', EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
-        LOGGER.debug('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
+        print('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
-        LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
-        LOGGER.debug('energy_sourcePullKeys')
+        print('energy_sourcePullKeys')
         return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
-        LOGGER.debug('EnergySourcePushKeys')
+        print('EnergySourcePushKeys')
         return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
-        LOGGER.debug('energy_sourceActiveKeys')
+        print('energy_sourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'Active'))    
     
     def getenergySourceCount(self):
@@ -2625,7 +2627,7 @@ class messanaInfo:
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
-        LOGGER.debug('updatBufferTankData: ' + str(BufferTankNbr))
+        print('updatBufferTankData: ' + str(BufferTankNbr))
         return(self.updateNodeData(BufferTankNbr, 'BufTanks'))
 
     def getBufferTankCapability(self, BufferTankNbr): 
@@ -2633,11 +2635,11 @@ class messanaInfo:
 
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
-        LOGGER.debug('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
+        print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey))
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
-        LOGGER.debug('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
@@ -2645,21 +2647,21 @@ class messanaInfo:
             if BTdata['data'] != 0:
                 return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
             else:
-                LOGGER.debug('Mode = 0, Cannot set status if mode = 0')
+                print('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
              return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
-        LOGGER.debug('buffer_tankPullKeys')
+        print('buffer_tankPullKeys')
         return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'GETstr'))
 
     def buffer_tankPushKeys(self, BufferTankNbr):
-        LOGGER.debug('buffer_tankPushKeys')
+        print('buffer_tankPushKeys')
         return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'PUTstr'))
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
-        LOGGER.debug('buffer_tankActiveKeys')
+        print('buffer_tankActiveKeys')
         return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'Active'))    
     
     def getBufferTankCount(self):
@@ -2670,31 +2672,31 @@ class messanaInfo:
 
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
-        LOGGER.debug('updatDHWData: ' + str(DHWNbr))
+        print('updatDHWData: ' + str(DHWNbr))
         return(self.updateNodeData(DHWNbr, 'DomHw'))
 
     def getDHWCapability(self, DHWNbr): 
         self.getNodeCapability('DomHw', DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
-        LOGGER.debug('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
+        print('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(DHWNbr, 'DomHw', mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
-        LOGGER.debug('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
+        print('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(DHWNbr, 'DomHw', mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
-        LOGGER.debug('DHWPullKeys')
+        print('DHWPullKeys')
         return( self.getNodeKeys (DHWNbr, 'DomHw', 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
-        LOGGER.debug('DHWPushKeys')
+        print('DHWPushKeys')
         return( self.getNodeKeys (DHWNbr, 'DomHw', 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
-        LOGGER.debug('DHWActiveKeys')
+        print('DHWActiveKeys')
         return( self.getNodeKeys (DHWNbr, 'DomHw', 'active'))    
 
     def getDomesticHotWaterCount(self):
@@ -2703,16 +2705,16 @@ class messanaInfo:
 
     def pullMessanaStatus(self):
         if self.systemDict['mZoneCount'] > 0:
-            LOGGER.debug('Reading Zone System')
+            print('Reading Zone System')
             self.pullAllZoneDataMessana()
         if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
+            print('Reading MacroZone System')
             self.pullAllMacroZoneDataMessana()
         if self.systemDict['mhc_coCount'] > 0:   
-            LOGGER.debug('Reading Ht/Cold System')
+            print('Reading Ht/Cold System')
             self.pullAllHC_CODataMessana()
         if self.systemDict['mATUCount'] > 0:
-            LOGGER.debug('Reading ATU System')
+            print('Reading ATU System')
 
     
    

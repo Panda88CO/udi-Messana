@@ -6,7 +6,7 @@ import requests
 from subprocess import call
 import json
 from collections import defaultdict
-from MessanaInfoPlay import messanaInfo
+from MessanaInfoPlayPRINT import messanaInfo
 import shutil
 #import ISYsetupFiles
 
@@ -52,6 +52,14 @@ for key in systemGETKeys:
     val = messana.pullSystemDataIndividual(key)
     print (key, val)
 
+print('setEnergySave Called')
+val = 0
+print('SetEnergySave Recived:' + str(val))
+messana.systemSetEnergySave(val)
+val = 1
+print('SetEnergySave Recived:' + str(val))
+messana.systemSetEnergySave(val)
+
 
 
 print('zones')
@@ -59,7 +67,7 @@ MessanaZone = []
 zoneCount = messana.getZoneCount()
 for zoneNbr in range(0, zoneCount):
     #zoneInfo = messana.pullZoneData(zoneNbr)
-    #LOGGER.debug(self.zoneInfo)
+    #print(self.zoneInfo)
     zone_GETKeys = messana.zonePullKeys(zoneNbr)
     zone_PUTKeys = messana.zonePushKeys(zoneNbr)
     zone_ActiveKeys = messana.zoneActiveKeys(zoneNbr)
