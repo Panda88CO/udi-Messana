@@ -2396,21 +2396,21 @@ class messanaInfo:
     def getSystemSetbackISYdriver(self):
         Key = ''
         for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mSetback':
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mSetback':
                 Key = ISYkey
         return(Key)
 
     def getSystemStatusISYdriver(self):
         Key = ''
         for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mStatus':
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
         return(Key)
 
     def getSystemEnergySaveISYdriver(self):
         Key = ''
         for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mEnergySaving':
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mEnergySaving':
                 Key = ISYkey
         return(Key)       
 
