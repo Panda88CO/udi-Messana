@@ -428,7 +428,7 @@ class MessanaController(polyinterface.Controller):
         self.messana.updateSystemData('all')
         self.updateISYdrivers()
  
-    id = 'MessanaMain'
+    id = 'MessanaMain' #self.name must have same value 
     LOGGER.debug(str(id))
     drivers = []
     commands = { 'UPDATE': ISYupdate
