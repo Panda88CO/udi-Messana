@@ -11,7 +11,7 @@ LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
 class messanaZone(polyinterface.Node):
     def __init__(self, controller, primary, address, name,  zoneNbr):
-        super().__init__(controller, primary, address, name, zoneNbr)
+        super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
         self.zoneNbr = zoneNbr
 
