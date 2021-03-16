@@ -13,7 +13,7 @@ LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
 
-    def __init__(self, polyglot):
+    def __init__(self, messanaName):
         super(MessanaController, self).__init__(polyglot)
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
@@ -425,10 +425,11 @@ class MessanaController(polyinterface.Controller):
 
     def ISYupdate (self, command):
         LOGGER.info('ISY-update called')
-        self.updateInfo('all')
+        self.messana.updateSystemData('all')
         self.updateISYdrivers()
  
     id = 'MessanaMain'
+    LOGGER.debug(str(id))
     drivers = []
     commands = { 'UPDATE': ISYupdate
                 ,'SET_STATUS': setStatus
