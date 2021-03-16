@@ -444,6 +444,8 @@ if __name__ == "__main__":
         polyglot = polyinterface.Interface('Messana_Control')
         polyglot.start()
         control = MessanaController(polyglot)
+        control.id = 'MessanaMain1'
+        control.name = 'MessanaMain1'
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
         sys.exit(0)
