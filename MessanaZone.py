@@ -14,7 +14,8 @@ class messanaZone(polyinterface.Node):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
         self.zoneNbr = zoneNbr
-
+        self.name = name
+        self.address = address 
 
         '''
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
@@ -99,7 +100,8 @@ class messanaZone(polyinterface.Node):
         self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV3', 'mScheduleOn')
 
-    id = 'zone'
+    id = 'zones'+str(zoneNbr)
+
     commands = { 'SET_SETPOINT': setSetpoint
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
