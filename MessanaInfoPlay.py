@@ -2393,6 +2393,27 @@ class messanaInfo:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
 
+    def getSystemSetbackISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mSetback':
+                Key = ISYkey
+        return(Key)
+
+    def getSystemStatusISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)
+
+    def getSystemEnergySaveISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['sysem'][ISYkey]['messana'] == 'mEnergySaving':
+                Key = ISYkey
+        return(Key)       
+
     def systemSetStatus (self, value):
         LOGGER.debug('systemSetstatus called')
         status = self.pushSystemDataIndividual('mStatus', value)
