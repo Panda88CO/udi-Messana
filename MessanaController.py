@@ -6,7 +6,7 @@ import json
 import sys
 from collections import defaultdict
 from MessanaInfoPlay import messanaInfo
-#from MessanaZone import MessanaZone
+from MessanaZone import messanaZone
 import shutil
 
 LOGGER = polyinterface.LOGGER
@@ -253,8 +253,10 @@ class MessanaController(polyinterface.Controller):
             name = self.messana.getZoneName(zoneNbr)
             address = 'zones'+str(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
-            #if not address in self.nodes:
-               #self.addNode(MessanaZone(self, self.address, address, name, zoneNbr, self.messana))
+            if not address in self.nodes:
+               self.addNode(messanaZone(self, self.address, address, name, zoneNbr))
+
+
         #nbrMacrozones = 0
 
 
@@ -444,8 +446,6 @@ if __name__ == "__main__":
         polyglot = polyinterface.Interface('Messana_Control')
         polyglot.start()
         control = MessanaController(polyglot)
-        control.id = 'MessanaMain1'
-        control.name = 'MessanaMain1'
         control.runForever()
     except (KeyboardInterrupt, SystemExit):
         sys.exit(0)

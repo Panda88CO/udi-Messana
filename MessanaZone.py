@@ -5,16 +5,16 @@ from subprocess import call
 import json
 from collections import defaultdict
 #from MessanaInfo import MessanaInfo
-from MessanaISY import MessanaNode
+#from MessanaISY import MessanaNode
 
 LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
-class MessanaZone(MessanaNode.Node):
-    def __init__(self, controller, primary, address, name,  nodeType, nodeNbr, messana):
-        super().__init__(controller, primary, address, name, nodeType, nodeNbr, messana)
-        LOGGER.info('_init_ Messana Zone')
-        self.zoneNbr = nodeNbr
-        self.messana = messana     
+class messanaZone(polyinterface.Node):
+    def __init__(self, controller, primary, address, name,  zoneNbr):
+        super().__init__(controller, primary, address, name, zoneNbr)
+        LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
+        self.zoneNbr = zoneNbr
+
 
         '''
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
