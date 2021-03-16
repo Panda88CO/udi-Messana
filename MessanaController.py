@@ -216,17 +216,7 @@ class MessanaController(polyinterface.Controller):
             self.heartbeat()
             self.messana.updateSystemData('all')
             LOGGER.debug( self.drivers)
-            for ISYdriver in self.drivers:
-                ISYkey = ISYdriver['driver']
-                status, value = self.messana.getSystemISYValue(ISYkey)
-                if status:
-                    if self.ISYforced:
-                        self.setDriver(ISYdriver, value, report = True, force = False)
-                    else:
-                        self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
-                else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+            self.updateISYdrivers()
 
             self.reportDrivers()
             self.ISYforced = True
@@ -433,9 +423,10 @@ class MessanaController(polyinterface.Controller):
             ISYdriver = self.messana.getSystemSetbackISYdriver()
             self.setDriver(ISYdriver, value, report = True)
 
-    def ISYupdate (self):
+    def ISYupdate (self, command):
         LOGGER.info('ISY-update called')
         self.updateInfo('all')
+        self.updateISYdrivers()
  
     id = 'MessanaMain'
     drivers = []
