@@ -19,7 +19,8 @@ class messanaZone(polyinterface.Node):
         self.messana = self.parent.messana
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
-        self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zonebr)
+        self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)
+        LOGGER.debug(self.zone_ActiveKeys)
         '''
         LOGGER.debug('Append Zone drivers')
         for key in self.zone_GETKeys:
