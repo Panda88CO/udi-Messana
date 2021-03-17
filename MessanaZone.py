@@ -16,13 +16,11 @@ class messanaZone(polyinterface.Node):
         self.name = name
         self.address = address 
         self.id = 'zones'+str(zoneNbr)
-
-
-        '''
+        self.messana = self.parent.messana
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zonebr)
-
+        '''
         LOGGER.debug('Append Zone drivers')
         for key in self.zone_GETKeys:
             self.zoneInfo = self.messana.pullZoneDataIndividual(self.zoneNbr,key )
