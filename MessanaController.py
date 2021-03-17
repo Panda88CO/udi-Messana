@@ -9,6 +9,7 @@ from MessanaInfoPlay import messanaInfo
 from MessanaZone import messanaZone
 import shutil
 
+
 LOGGER = polyinterface.LOGGER
                
 class MessanaController(polyinterface.Controller):
@@ -133,7 +134,7 @@ class MessanaController(polyinterface.Controller):
             if  temp != {}:
                 self.drivers.append(temp)
                 LOGGER.debug(  'driver:  ' +  temp['driver'])
-                
+
         self.messanaImportOK = 1
         self.removeNoticesAll()
         self.discover()

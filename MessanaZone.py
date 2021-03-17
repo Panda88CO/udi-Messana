@@ -5,7 +5,6 @@ from subprocess import call
 import json
 from collections import defaultdict
 #from MessanaInfo import MessanaInfo
-#from MessanaISY import MessanaNode
 
 LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
@@ -17,7 +16,7 @@ class messanaZone(polyinterface.Node):
         self.name = name
         self.address = address 
         self.id = 'zones'+str(zoneNbr)
-        
+
 
         '''
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)

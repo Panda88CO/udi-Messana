@@ -7,6 +7,7 @@ from collections import defaultdict
 import polyinterface
 LOGGER = polyinterface.LOGGER
 
+
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, systemName):
         self.mSystem = defaultdict(dict)
