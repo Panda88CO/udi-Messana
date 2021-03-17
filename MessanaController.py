@@ -50,24 +50,7 @@ class MessanaController(polyinterface.Controller):
         self.systemPUTKeys = self.messana.systemPushKeys()
         self.systemActiveKeys = self.messana.systemActiveKeys()
         
-        self.drivers = []
-        for key in self.systemGETKeys:
-            temp = self.messana.getSystemISYdriverInfo(key)
-            if  temp != {}:
-                self.drivers.append(temp)
-                val = self.messana.pullSystemDataIndividual(key)
-                if val['data'] in  ['Celcius', 'Fahrenheit']:
-                    if val['data'] == 'Celcius':
-                        val['data'] = 0
-                    else:  
-                        val['data'] = 1
-                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
 
-        self.poly.installprofile()
-        self.poly.updateprofile()
-        self.reportDrivers()
-        self.messanaImportOK = 1
-        
         self.removeNoticesAll()
         self.discover()
         '''
@@ -148,13 +131,8 @@ class MessanaController(polyinterface.Controller):
             temp = self.messana.getSystemISYdriverInfo(key)
             if  temp != {}:
                 self.drivers.append(temp)
-                val = self.messana.pullSystemDataIndividual(key)
-                if val['data'] in  ['Celcius', 'Fahrenheit']:
-                    if val['data'] == 'Celcius':
-                        val['data'] = 0
-                    else:  
-                        val['data'] = 1
-                LOGGER.debug(  'driver:  ' +  temp['driver']+ ' , '+ str(val['data']))
+          
+                LOGGER.debug(  'driver:  ' +  temp['driver'])
         
 
 
