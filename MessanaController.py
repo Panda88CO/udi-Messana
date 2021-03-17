@@ -18,7 +18,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.ISYforced = False
-        self.name = 'MessanaMain' # must be same as id (need to find a way to pass this)
+        self.name = 'MessanaMain' # must be less than 14 characters
         self.address ='messanasys'
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
@@ -26,6 +26,7 @@ class MessanaController(polyinterface.Controller):
         self.ISYdrivers=[]
         self.ISYcommands = {}
         self.ISYTempUnit = 0
+        self.id = self.name
 
         '''
         LOGGER.info('Init - configurations')
@@ -131,11 +132,8 @@ class MessanaController(polyinterface.Controller):
             temp = self.messana.getSystemISYdriverInfo(key)
             if  temp != {}:
                 self.drivers.append(temp)
-          
                 LOGGER.debug(  'driver:  ' +  temp['driver'])
-        
-
-
+                
         self.messanaImportOK = 1
         self.removeNoticesAll()
         self.discover()
@@ -408,9 +406,9 @@ class MessanaController(polyinterface.Controller):
         self.messana.updateSystemData('all')
         self.updateISYdrivers()
  
-    id = 'MessanaMain' #self.name must have same value 
-    LOGGER.debug(str(id))
-    drivers = []
+    #id = 'MessanaMain' #self.name must have same value 
+    #LOGGER.debug(str(id))
+    #drivers = []
     commands = { 'UPDATE': ISYupdate
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave

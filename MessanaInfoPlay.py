@@ -1874,7 +1874,6 @@ class messanaInfo:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
 
-
     def getNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
         if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
@@ -2267,7 +2266,6 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
-
 
     #System
     def updateSystemData(self, level):

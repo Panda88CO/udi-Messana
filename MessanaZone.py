@@ -16,6 +16,8 @@ class messanaZone(polyinterface.Node):
         self.zoneNbr = zoneNbr
         self.name = name
         self.address = address 
+        self.id = 'zones'+str(zoneNbr)
+        
 
         '''
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
@@ -100,7 +102,7 @@ class messanaZone(polyinterface.Node):
         self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
         self.checkSetDriver('GV3', 'mScheduleOn')
 
-    id = 'zones'
+ 
 
     commands = { 'SET_SETPOINT': setSetpoint
                 ,'SET_STATUS': setStatus
