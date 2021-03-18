@@ -73,6 +73,14 @@ for zoneNbr in range(0, zoneCount):
     zone_ActiveKeys = messana.zoneActiveKeys(zoneNbr)
     name = messana.getZoneName(zoneNbr)
     print(name)
+
+    drivers = []
+    for key in zone_GETKeys:
+        temp = messana.getZoneISYdriverInfo(key, zoneNbr)
+        if  temp != {}:
+            drivers.append(temp)
+            print(  'driver:  ' +  temp['driver'])
+
     print('Append Zone drivers')
     for key in zone_GETKeys:
         zoneInfo = messana.pullZoneDataIndividual(zoneNbr, key)

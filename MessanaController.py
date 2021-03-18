@@ -128,8 +128,7 @@ class MessanaController(polyinterface.Controller):
         self.systemGETKeys = self.messana.systemPullKeys()
         self.systemPUTKeys = self.messana.systemPushKeys()
         self.systemActiveKeys = self.messana.systemActiveKeys()
-
-        self.reportDrivers()
+        
         self.drivers = []
         for key in self.systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
@@ -137,6 +136,9 @@ class MessanaController(polyinterface.Controller):
                 self.drivers.append(temp)
                 LOGGER.debug(  'driver:  ' +  temp['driver'])
 
+        self.updateISYdrivers()
+        self.reportDrivers()
+        
         self.messanaImportOK = 1
 
         self.discover()
@@ -159,7 +161,7 @@ class MessanaController(polyinterface.Controller):
             self.reportCmd('DOF',2)
             self.hb = 0
 
-
+    
     def shortPoll(self):
         LOGGER.debug('Messane Controller shortPoll')
 
@@ -170,16 +172,8 @@ class MessanaController(polyinterface.Controller):
             else:
                 self.messana.updateSystemData('all')
 
-            LOGGER.debug( self.drivers)
-            for ISYdriver in self.drivers:
-                ISYkey = ISYdriver['driver']
-                status, value = self.messana.getSystemISYValue(ISYkey)
-                if status:
-                    self.setDriver(ISYdriver, value)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
-                else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
-            #self.reportDrivers()
+            self.updateISYdrivers()
+            self.reportDrivers()
             self.ISYforced = True
             '''
             for node in self.nodes:

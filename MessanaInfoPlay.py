@@ -1672,33 +1672,14 @@ class messanaInfo:
         self.mIPaddress = mIPaddress
         self.APIKeyVal = APIkey
 
-    def getSystemISYdriverInfo(self, mKey):
-        info = {}
-        if mKey in self.setupFile['nodeDef']['system']['sts']:
-            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
-            info['driver'] = keys[0]
-            tempData =  self.GETSystem(mKey)
-            if tempData['statusOK']:
-                val = tempData['data']        
-                if val in  ['Celcius', 'Fahrenheit']:
-                    if val == 'Celcius':
-                        val = 0
-                    else:  
-                        val = 1 
-                info['value'] = val
-            else:
-                info['value'] = ''
-            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
 
-            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
-        return(info)
 
     def getnodeISYdriverInfo(self, node, nodeNbr, mKey):
         info = {}
         if mKey in self.setupFile['nodeDef']['system']['sts']:
             keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
             info['driver'] = keys[0]
-            tempData =  self.GETSystem(mKey)
+            tempData =  self.GETSystemData(mKey)
             if tempData['statusOK']:
                 val = tempData['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -1924,7 +1905,7 @@ class messanaInfo:
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
-    def GETSystem(self, mKey):
+    def GETSystemData(self, mKey):
         sysData= {}
         LOGGER.debug('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
@@ -1950,7 +1931,7 @@ class messanaInfo:
             sysData['error'] = 'EXCEPT: System GET operation failed for :' + mKey  
             return(sysData)
 
-    def PUTSystem(self, mKey, value):
+    def PUTSystemData(self, mKey, value):
             sysData= {}
             LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
@@ -2299,7 +2280,7 @@ class messanaInfo:
         sysData = {}
         if mKey in self.mSystem['system']['KeyInfo']:
             if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
-                sysData = self.GETSystem(mKey)       
+                sysData = self.GETSystemData(mKey)       
         else:
             sysData['statusOK'] = False
             sysData['error'] = (mKey + ' is not a supported GETstr command')
@@ -2392,6 +2373,27 @@ class messanaInfo:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
 
+    def getSystemISYdriverInfo(self, mKey):
+        info = {}
+        if mKey in self.setupFile['nodeDef']['system']['sts']:
+            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETSystemData(mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
     def getSystemSetbackISYdriver(self):
         Key = ''
         for ISYkey in self.ISYmap['system']:
@@ -2477,6 +2479,28 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
+
+    def getZoneISYdriverInfo(self, mKey, zoneNbr):
+        info = {}
+        zoneStr = 'zones'+str(zoneNbr)
+        if mKey in self.setupFile['nodeDef'][zoneStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][zoneStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData('zones', zoneNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][zoneStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
 
     #def getMacrozoneCount(self):
     

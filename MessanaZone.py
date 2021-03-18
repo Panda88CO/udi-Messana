@@ -20,32 +20,15 @@ class messanaZone(polyinterface.Node):
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)
-        LOGGER.debug(self.zone_ActiveKeys)
-        '''
-        LOGGER.debug('Append Zone drivers')
-        for key in self.zone_GETKeys:
-            self.zoneInfo = self.messana.pullZoneDataIndividual(self.zoneNbr,key )
-            temp = self.messana.getnodeISYdriverInfo('zones', self.zoneNbr, key)
-            LOGGER.debug('Driver info: ' + str(temp))
-            if  temp != {}:
-                if not(str(temp['value']).isnumeric()):                         
-                    LOGGER.debug('non numeric value :' + str(temp['value']))
-                    if temp['value'] == 'Celcius':
-                        temp['value'] = 0
-                        self.ISYTempUnit = 4
-                    else:
-                        temp['value'] = 1
-                        self.ISYTempUnit = 17
-                LOGGER.debug(str(temp) + 'before append')      
-                MessanaZone.drivers.append(temp)
-                LOGGER.debug(str(MessanaZone.drivers) + 'after append')                       
-        LOGGER.debug(MessanaZone.drivers)
-        #self.check_params()
-        #self.discover()   
-        #self.updateInfo('all')    
-        '''
-
         
+        self.drivers = []
+        for key in self.zone_GETKeys:
+            self.temp = self.messana.getZoneISYdriverInfo(key, self.zoneNbr)
+            if  self.temp != {}:
+                self.drivers.append(self.temp)
+                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+
+       
     def start(self):
         return True
 

@@ -2460,6 +2460,29 @@ class messanaInfo:
         else:
             return('NA')
 
+    def getZoneISYdriverInfo(self, mKey, zoneNbr):
+        info = {}
+        zoneStr = 'zones'+str(zoneNbr)
+        if mKey in self.setupFile['nodeDef'][zoneStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][zoneStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData('zones', zoneNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][zoneStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+
     #def getMacrozoneCount(self):
     
     #def getATUcount(self):
