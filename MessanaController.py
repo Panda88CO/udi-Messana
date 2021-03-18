@@ -31,6 +31,43 @@ class MessanaController(polyinterface.Controller):
         self.drivers = []
 
         LOGGER.info('Init - configurations')
+        self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        if (self.IPAddress is None) or (self.MessanaKey is None):
+            self.defineInputParams()
+        else:
+            self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+        
+            LOGGER.debug ('Install Profile')    
+            self.poly.installprofile()
+            LOGGER.debug('Install Profile done')
+
+            self.messana.updateSystemData('all')
+            self.systemGETKeys = self.messana.systemPullKeys()
+            self.systemPUTKeys = self.messana.systemPushKeys()
+            self.systemActiveKeys = self.messana.systemActiveKeys()
+            
+            
+            for key in self.systemGETKeys:
+                temp = self.messana.getSystemISYdriverInfo(key)
+                if  temp != {}:
+                    self.drivers.append(temp)
+                    LOGGER.debug(  'driver:  ' +  temp['driver'])
+
+            '''
+            LOGGER.info('Init - configurations')
+            
+
+            
+
+            self.removeNoticesAll()
+            self.discover()
+            '''
+    def defineInputParams(self):
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
+        self.addNotice('Please restart node server after setting parameters')
+        '''
         self.removeNoticesAll()
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
 
@@ -45,55 +82,14 @@ class MessanaController(polyinterface.Controller):
             self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             LOGGER.error('check_params: Messana Key not specified')
             self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-        LOGGER.debug('Calling Messsana: '+self.IPAddress+' '+ self.MessanaKey+' '+ self.name)
-        self.removeNoticesAll()
-
-        self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
-        
-        LOGGER.debug ('Install Profile')    
-        self.poly.installprofile()
-        LOGGER.debug('Install Profile done')
-
-        self.messana.updateSystemData('all')
-        self.systemGETKeys = self.messana.systemPullKeys()
-        self.systemPUTKeys = self.messana.systemPushKeys()
-        self.systemActiveKeys = self.messana.systemActiveKeys()
-        
-        
-        for key in self.systemGETKeys:
-            temp = self.messana.getSystemISYdriverInfo(key)
-            if  temp != {}:
-                self.drivers.append(temp)
-                LOGGER.debug(  'driver:  ' +  temp['driver'])
-
-        '''
-        LOGGER.info('Init - configurations')
-        
-        self.removeNoticesAll()
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
-
-        self.IPAddress = self.getCustomParam('IP_ADDRESS')
-        if self.IPAddress is None:
-            self.IPAddress= '192.168.2.65'
-            LOGGER.error('IP address not set')
-            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
-        
-        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
-        if self.MessanaKey is None:
-            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-            LOGGER.error('check_params: Messana Key not specified')
-            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         self.messana.updateSystemData('all')
         self.systemGETKeys = self.messana.systemPullKeys()
         self.systemPUTKeys = self.messana.systemPushKeys()
         self.systemActiveKeys = self.messana.systemActiveKeys()
-        
-
-        self.removeNoticesAll()
-        self.discover()
         '''
 
+        
     def start(self):
         LOGGER.info('Start  Messana Main NEW')
         self.updateISYdrivers()
