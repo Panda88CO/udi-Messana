@@ -36,16 +36,12 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('ip address ' + str(self.IPAddress))
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
         LOGGER.debug('Messana Key address ' + str(self.MessanaKey))
-        
+
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
         else:
             self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         
-            LOGGER.debug ('Install Profile')    
-            self.poly.installprofile()
-            LOGGER.debug('Install Profile done')
-
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
@@ -58,6 +54,9 @@ class MessanaController(polyinterface.Controller):
                     self.drivers.append(temp)
                     LOGGER.debug(  'driver:  ' +  temp['driver'])
 
+            LOGGER.debug ('Install Profile')    
+            self.poly.installprofile()
+            LOGGER.debug('Install Profile done')
             '''
             LOGGER.info('Init - configurations')
             
