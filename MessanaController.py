@@ -37,17 +37,19 @@ class MessanaController(polyinterface.Controller):
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
         self.addNotice('Please restart node server after setting parameters')
 
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
+        self.addNotice('Please Set IP address (IP_ADDRESS)')
 
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
         if self.IPAddress is None:
-            #self.IPAddress= '192.168.2.65'
+            self.addNotice('Please Set IP address (IP_ADDRESS)')
             LOGGER.error('IP address not set')
+            #self.IPAddress= '192.168.2.65'
             #self.addCustomParam({'IP_ADDRESS': self.IPAddress})
         
         if self.MessanaKey is None:
-            #self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+            self.addNotice('Please Set IP Messana Key (MESSANA_KEY)')
             LOGGER.error('check_params: Messana Key not specified')
+            #self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             #self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.addNotice('Please restart Node server after setting the parameters')
 
@@ -57,15 +59,14 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('Start  Messana Main NEW')
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
-        
+
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
             self.stop()
 
         else:
-
+            LOGGER.info('Retrieving info from Messana System')
             self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
-        
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
