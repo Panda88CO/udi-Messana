@@ -28,79 +28,9 @@ class MessanaController(polyinterface.Controller):
         self.ISYcommands = {}
         self.ISYTempUnit = 0
         self.id = self.name
-
-        '''
-        LOGGER.info('Init - configurations')
-        
-        self.removeNoticesAll()
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
-
-        self.IPAddress = self.getCustomParam('IP_ADDRESS')
-        if self.IPAddress is None:
-            self.IPAddress= '192.168.2.65'
-            LOGGER.error('IP address not set')
-            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
-        
-        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
-        if self.MessanaKey is None:
-            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-            LOGGER.error('check_params: Messana Key not specified')
-            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-        self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
-        self.messana.updateSystemData('all')
-        self.systemGETKeys = self.messana.systemPullKeys()
-        self.systemPUTKeys = self.messana.systemPushKeys()
-        self.systemActiveKeys = self.messana.systemActiveKeys()
-        
-
-        self.removeNoticesAll()
-        self.discover()
-        '''
-
-        #try:
-        #self.messana = MessanaInfo( MessanaController.id )
-        #messana.setMessanaCredentials ('192.168.2.65', '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-        #LOGGER.debug('MessanaInfo call done')
-
-        #self.system_GETKeys = self.messana.systemPullKeys()
-        #self.system_PUTKeys = self.messana.systemPushKeys()
-        #self.system_ActiveKeys = self.messana.systemActiveKeys()
-        
-        #self.messana.updateSystemData('all')
-        #self.messana.addSystemDefStruct(self.address)
-    
-        #LOGGER.debug('Install Updated profile')
-        #self.poly.installprofile()
-
-        #LOGGER.debug('Append System drivers')
-        #for key in self.system_GETKeys:
-        #    temp = self.messana.getSystemISYdriverInfo(key)
-        #    LOGGER.debug('Driver info: ' + str(temp))
-        #    if  temp != {}:
-        #        if not(str(temp['value']).isnumeric()):                         
-        #            LOGGER.debug('non numeric value :' + temp['value'])
-        #            if temp['value'] == 'Celcius':
-        #                temp['value'] = 0
-        #                self.ISYTempUnit = 4
-        #            else:
-        #                temp['value'] = 1
-        #                self.ISYTempUnit = 17
-        #        LOGGER.debug(str(temp) + 'before append')      
-        #        MessanaController.drivers.append(temp)
-        #        LOGGER.debug(str(MessanaController.drivers) + 'after append')                       
-        #LOGGER.debug(MessanaController.drivers)
-        #self.check_params()
-        #self.discover()   
-        #self.updateInfo('all')
-        #self.messanaImportOK = 1
-        #self.discover()
-
-
-    def start(self):
-        LOGGER.info('Start  Messana Main NEW')
+        self.drivers = []
 
         LOGGER.info('Init - configurations')
-        
         self.removeNoticesAll()
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
 
@@ -129,24 +59,49 @@ class MessanaController(polyinterface.Controller):
         self.systemPUTKeys = self.messana.systemPushKeys()
         self.systemActiveKeys = self.messana.systemActiveKeys()
         
-        self.drivers = []
+        
         for key in self.systemGETKeys:
             temp = self.messana.getSystemISYdriverInfo(key)
             if  temp != {}:
                 self.drivers.append(temp)
                 LOGGER.debug(  'driver:  ' +  temp['driver'])
 
-        self.updateISYdrivers()
-        self.reportDrivers()
+        '''
+        LOGGER.info('Init - configurations')
         
-        self.messanaImportOK = 1
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
 
+        self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        if self.IPAddress is None:
+            self.IPAddress= '192.168.2.65'
+            LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
+        
+        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        if self.MessanaKey is None:
+            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+            LOGGER.error('check_params: Messana Key not specified')
+            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
+        self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+        self.messana.updateSystemData('all')
+        self.systemGETKeys = self.messana.systemPullKeys()
+        self.systemPUTKeys = self.messana.systemPushKeys()
+        self.systemActiveKeys = self.messana.systemActiveKeys()
+        
+
+        self.removeNoticesAll()
+        self.discover()
+        '''
+
+    def start(self):
+        LOGGER.info('Start  Messana Main NEW')
+        self.updateISYdrivers()
+        self.messanaImportOK = 1
         self.discover()
 
 
-        #except:
-            #LOGGER.debug('Reading data from Messana System NOT successful')
-                
+              
 
 
     def stop(self):
@@ -210,7 +165,6 @@ class MessanaController(polyinterface.Controller):
                 LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
             else:
                 LOGGER.debug('Error getting ' + ISYdriver['driver'])
-
         self.reportDrivers()
 
     def query(self, command=None):

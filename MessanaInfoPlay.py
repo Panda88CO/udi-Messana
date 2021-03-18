@@ -2289,7 +2289,7 @@ class messanaInfo:
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
         LOGGER.debug('MessanaInfo push System Data: ' + mKey)
-        sysData = self.PUTSystem(mKey, value)
+        sysData = self.PUTSystemData(mKey, value)
         if sysData['statusOK']:
             return(True)
         else:
@@ -2365,7 +2365,7 @@ class messanaInfo:
             systemValue = None
         return (status, systemValue)
 
-    def putSystemISYValue(self, ISYkey, systemValue):
+    def PUTSystemISYValue(self, ISYkey, systemValue):
         messanaKey = self.ISYmap['system'][ISYkey]['messana']
         systemPushKeys = self.systemPushKeys()
         status = False

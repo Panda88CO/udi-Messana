@@ -30,8 +30,27 @@ class messanaZone(polyinterface.Node):
 
        
     def start(self):
+
+
         return True
 
+
+    def updateISYdrivers(self):
+        LOGGER.debug('updateISYdrivers')
+        for ISYdriver in self.drivers:
+            ISYkey = ISYdriver['driver']
+            status, value = self.messana.getZoneISYValue(ISYkey)
+            if status:
+                if self.ISYforced:
+                    self.setDriver(ISYdriver, value, report = True, force = False)
+                else:
+                    self.setDriver(ISYdriver, value, report = True, force = True)
+                LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+            else:
+                LOGGER.debug('Error getting ' + ISYdriver['driver'])
+        self.reportDrivers()
+
+        
     def stop(self):
         LOGGER.debug('stop - Messana Zone Cleaning up')
 
