@@ -31,8 +31,12 @@ class MessanaController(polyinterface.Controller):
         self.drivers = []
 
         LOGGER.info('Init - configurations')
+
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
+        LOGGER.debug('ip address ' + str(self.IPAddress))
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        LOGGER.debug('Messana Key address ' + str(self.MessanaKey))
+        
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
         else:
@@ -89,7 +93,7 @@ class MessanaController(polyinterface.Controller):
         self.systemActiveKeys = self.messana.systemActiveKeys()
         '''
 
-        
+
     def start(self):
         LOGGER.info('Start  Messana Main NEW')
         self.updateISYdrivers()
