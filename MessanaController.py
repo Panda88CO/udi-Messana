@@ -30,15 +30,38 @@ class MessanaController(polyinterface.Controller):
         self.id = self.name
         self.drivers = []
 
-        LOGGER.info('Init - configurations')
+
+
+    def defineInputParams(self):
+        self.removeNoticesAll()
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
+        self.addNotice('Please restart node server after setting parameters')
+
+        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
 
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
-        LOGGER.debug('ip address ' + str(self.IPAddress))
+        if self.IPAddress is None:
+            self.IPAddress= '192.168.2.65'
+            LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
+        
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
+        if self.MessanaKey is None:
+            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
+            LOGGER.error('check_params: Messana Key not specified')
+            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
+        self.addNotice('Please restart Node server after setting the parameters')
+        self.stop()
+
+
+
+    def start(self):
+        LOGGER.info('Start  Messana Main NEW')
         LOGGER.debug('Messana Key address ' + str(self.MessanaKey))
 
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
+
         else:
             self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
         
@@ -57,44 +80,6 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug ('Install Profile')    
             self.poly.installprofile()
             LOGGER.debug('Install Profile done')
-            '''
-            LOGGER.info('Init - configurations')
-            
-
-            
-
-            self.removeNoticesAll()
-            self.discover()
-            '''
-    def defineInputParams(self):
-        self.removeNoticesAll()
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
-        self.addNotice('Please restart node server after setting parameters')
-        '''
-        self.removeNoticesAll()
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
-
-        self.IPAddress = self.getCustomParam('IP_ADDRESS')
-        if self.IPAddress is None:
-            self.IPAddress= '192.168.2.65'
-            LOGGER.error('IP address not set')
-            self.addCustomParam({'IP_ADDRESS': self.IPAddress})
-        
-        self.MessanaKey = self.getCustomParam('MESSANA_KEY')
-        if self.MessanaKey is None:
-            self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-            LOGGER.error('check_params: Messana Key not specified')
-            self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
-        self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
-        self.messana.updateSystemData('all')
-        self.systemGETKeys = self.messana.systemPullKeys()
-        self.systemPUTKeys = self.messana.systemPushKeys()
-        self.systemActiveKeys = self.messana.systemActiveKeys()
-        '''
-
-
-    def start(self):
-        LOGGER.info('Start  Messana Main NEW')
         self.updateISYdrivers()
         self.messanaImportOK = 1
         self.discover()
