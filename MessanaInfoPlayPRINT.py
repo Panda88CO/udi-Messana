@@ -7,6 +7,7 @@ from collections import defaultdict
 #import polyinterface
 #LOGGER = polyinterface.LOGGER
 
+
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, systemName):
         self.mSystem = defaultdict(dict)
@@ -1599,7 +1600,7 @@ class messanaInfo:
 
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
-            self.updateZoneData(zoneNbr)
+            self.updateZoneData('all', zoneNbr)
             zoneName = 'zones'+str(zoneNbr)
             self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
        
@@ -1671,33 +1672,14 @@ class messanaInfo:
         self.mIPaddress = mIPaddress
         self.APIKeyVal = APIkey
 
-    def getSystemISYdriverInfo(self, mKey):
-        info = {}
-        if mKey in self.setupFile['nodeDef']['system']['sts']:
-            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
-            info['driver'] = keys[0]
-            tempData =  self.GETSystem(mKey)
-            if tempData['statusOK']:
-                val = tempData['data']        
-                if val in  ['Celcius', 'Fahrenheit']:
-                    if val == 'Celcius':
-                        val = 0
-                    else:  
-                        val = 1 
-                info['value'] = val
-            else:
-                info['value'] = ''
-            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
 
-            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
-        return(info)
 
     def getnodeISYdriverInfo(self, node, nodeNbr, mKey):
         info = {}
         if mKey in self.setupFile['nodeDef']['system']['sts']:
             keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
             info['driver'] = keys[0]
-            tempData =  self.GETSystem(mKey)
+            tempData =  self.GETSystemData(mKey)
             if tempData['statusOK']:
                 val = tempData['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -1874,7 +1856,6 @@ class messanaInfo:
             self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
         return()
 
-
     def getNodeCapability (self, nodeKey, nodeNbr):     
         self.keyList = {}
         if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
@@ -1924,7 +1905,7 @@ class messanaInfo:
         self.mSystem[nodeKey]['NOcapability'][nodeNbr] = self.keyList
        
     
-    def GETSystem(self, mKey):
+    def GETSystemData(self, mKey):
         sysData= {}
         print('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
@@ -1950,7 +1931,7 @@ class messanaInfo:
             sysData['error'] = 'EXCEPT: System GET operation failed for :' + mKey  
             return(sysData)
 
-    def PUTSystem(self, mKey, value):
+    def PUTSystemData(self, mKey, value):
             sysData= {}
             print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
@@ -2268,11 +2249,10 @@ class messanaInfo:
         file.close()
         return()
 
-
     #System
     def updateSystemData(self, level):
         print('Update Messana Sytem Data')
-        #LOGGER.info(self.mSystem['system'])
+        #print(self.mSystem['system'])
         sysData = {}
         DataOK = True
         for mKey in self.mSystem['system']['KeyInfo']:
@@ -2300,7 +2280,7 @@ class messanaInfo:
         sysData = {}
         if mKey in self.mSystem['system']['KeyInfo']:
             if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
-                sysData = self.GETSystem(mKey)       
+                sysData = self.GETSystemData(mKey)       
         else:
             sysData['statusOK'] = False
             sysData['error'] = (mKey + ' is not a supported GETstr command')
@@ -2309,7 +2289,7 @@ class messanaInfo:
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
         print('MessanaInfo push System Data: ' + mKey)
-        sysData = self.PUTSystem(mKey, value)
+        sysData = self.PUTSystemData(mKey, value)
         if sysData['statusOK']:
             return(True)
         else:
@@ -2385,7 +2365,7 @@ class messanaInfo:
             systemValue = None
         return (status, systemValue)
 
-    def putSystemISYValue(self, ISYkey, systemValue):
+    def PUTSystemISYValue(self, ISYkey, systemValue):
         messanaKey = self.ISYmap['system'][ISYkey]['messana']
         systemPushKeys = self.systemPushKeys()
         status = False
@@ -2393,34 +2373,79 @@ class messanaInfo:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
 
-    def systemSetStatus (self, systemValue):
+    def getSystemISYdriverInfo(self, mKey):
+        info = {}
+        if mKey in self.setupFile['nodeDef']['system']['sts']:
+            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETSystemData(mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+    def getSystemSetbackISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mSetback':
+                Key = ISYkey
+        return(Key)
+
+    def getSystemStatusISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)
+
+    def getSystemEnergySaveISYdriver(self):
+        Key = ''
+        for ISYkey in self.ISYmap['system']:
+            if self.ISYmap['system'][ISYkey]['messana'] == 'mEnergySaving':
+                Key = ISYkey
+        return(Key)       
+
+    def systemSetStatus (self, value):
         print('systemSetstatus called')
-        status = self.pushSystemDataIndividual('mStatus', systemValue)
+        status = self.pushSystemDataIndividual('mStatus', value)
         return(status)
 
-
-    def systemSetEnergySave (self, systemValue):
+    def systemSetEnergySave (self, value):
         print('systemSetEnergySave called')
-        status = self.pushSystemDataIndividual('mEnergySaving', systemValue)
+        status = self.pushSystemDataIndividual('mEnergySaving', value)
         return(status)
-
         
-    def systemSetback (self, systemValue):
+    def systemSetback (self, value):
         print('setSetback called')
-        status = self.pushSystemDataIndividual('mSetback', systemValue)
+        status = self.pushSystemDataIndividual('mSetback', value)
         return(status)
 
-
-    # Zones
+ 
+     # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability('zones', zoneNbr)
 
     def addZoneDefStruct(self, zoneNbr, nodeId):
         self.addNodeDefStruct(zoneNbr, 'zones', nodeId)
 
-    def updateZoneData(self, zoneNbr):
+    def updateZoneData(self, level, zoneNbr):
         print('updatZoneData: ' + str(zoneNbr))
+
         self.zoneKeys = self.zonePullKeys(zoneNbr)
+        if level == 'all':
+            print('ALL update zone ' + str(zoneNbr))
+        elif level == 'active':
+            print('ACTIVE update zone ' + str(zoneNbr))
         self.dataOK = True
         for mKey in self.zoneKeys:
             self.data = self.pullZoneDataIndividual(zoneNbr, mKey)
@@ -2481,7 +2506,6 @@ class messanaInfo:
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
-
 
     #def getMacrozoneCount(self):
     

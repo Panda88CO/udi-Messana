@@ -1600,7 +1600,7 @@ class messanaInfo:
 
         for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
             self.getZoneCapability(zoneNbr)
-            #self.updateZoneData('all', zoneNbr)
+            self.updateZoneData('all', zoneNbr)
             zoneName = 'zones'+str(zoneNbr)
             self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
        
