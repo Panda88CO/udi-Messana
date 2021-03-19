@@ -27,7 +27,8 @@ class messanaZone(polyinterface.Node):
             if  self.temp != {}:
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
-
+        self.updateZoneData('all', self.zoneNbr)
+        self.updateISYdrivers()
        
     def start(self):
 
@@ -56,11 +57,13 @@ class messanaZone(polyinterface.Node):
 
     def shortPoll(self):
         LOGGER.debug('Messane Zone shortPoll')
-        self.updateInfo('active')
+        self.messana.updateZoneData('active', self.zoneNbr)
+        self.updateISYdrivers()
                    
     def longPoll(self):
         LOGGER.debug('Messana Zone longPoll')
-        self.updateInfo('all')
+        self.messana.updateZoneData('all', self.zoneNbr)
+        self.updateISYdrivers()
 
     def query(self, command=None):
         LOGGER.debug('TOP querry')

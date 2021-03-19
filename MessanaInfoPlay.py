@@ -2438,9 +2438,14 @@ class messanaInfo:
     def addZoneDefStruct(self, zoneNbr, nodeId):
         self.addNodeDefStruct(zoneNbr, 'zones', nodeId)
 
-    def updateZoneData(self, zoneNbr):
+    def updateZoneData(self, level, zoneNbr):
         LOGGER.debug('updatZoneData: ' + str(zoneNbr))
+
         self.zoneKeys = self.zonePullKeys(zoneNbr)
+        if level == 'all':
+            LOGGER.debug('ALL update zone ' + str(zoneNbr))
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update zone ' + str(zoneNbr))
         self.dataOK = True
         for mKey in self.zoneKeys:
             self.data = self.pullZoneDataIndividual(zoneNbr, mKey)
