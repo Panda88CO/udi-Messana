@@ -116,11 +116,11 @@ class MessanaController(polyinterface.Controller):
             self.updateISYdrivers()
             self.reportDrivers()
             self.ISYforced = True
-            '''
+   
             for node in self.nodes:
                 if node != self.address:
-                    self.nodes[node].updateInfo()
-            '''
+                    self.nodes[node].shortPoll()
+            
 
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
@@ -134,9 +134,9 @@ class MessanaController(polyinterface.Controller):
 
             self.reportDrivers()
             self.ISYforced = True
-            #for node in self.nodes:
-            #    if node != self.address:
-            #        self.nodes[node].updateInfo()
+            for node in self.nodes:
+                if node != self.address:
+                    self.nodes[node].longPoll()
         
     def updateISYdrivers(self):
         LOGGER.debug('updateISYdrivers')
