@@ -27,7 +27,7 @@ class messanaZone(polyinterface.Node):
             if  self.temp != {}:
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
-        self.updateZoneData('all', self.zoneNbr)
+        self.messana.updateZoneData('all', self.zoneNbr)
         self.updateISYdrivers()
        
     def start(self):
