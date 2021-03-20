@@ -2485,6 +2485,35 @@ class messanaInfo:
         else:
             return('NA')
 
+
+    def ZoneSetStatus(self, zoneNbr):
+        return(True)
+
+    def getZoneStatusISYdriver(self, zoneNbr):
+        return (True)
+
+
+    def ZoneSetEnergySave(self, zoneNbr):
+        return(True)
+
+    def getZoneEnergySaveISYdriver(self, zoneNbr):
+        return (True)
+
+
+    def ZoneSetSetpoint(self, zoneNbr):
+        return(True)
+
+    def getZoneSetPointISYdriver(self, zoneNbr):
+        return (True)
+
+    def ZoneEnableSchedule(self, zoneNbr):
+        return(True)
+
+
+    def getZoneEnableScheduleISYdriver(self, zoneNbr):
+        return (True)
+
+
     def getZoneISYdriverInfo(self, mKey, zoneNbr):
         info = {}
         zoneStr = 'zones'+str(zoneNbr)

@@ -49,7 +49,7 @@ class messanaZone(polyinterface.Node):
                 LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
             else:
                 LOGGER.debug('Error getting ' + ISYdriver['driver'])
-        self.reportDrivers()
+
 
         
     def stop(self):
@@ -64,6 +64,7 @@ class messanaZone(polyinterface.Node):
         LOGGER.debug('Messana Zone longPoll')
         self.messana.updateZoneData('all', self.zoneNbr)
         self.updateISYdrivers()
+        self.reportDrivers()
 
     def query(self, command=None):
         LOGGER.debug('TOP querry')
@@ -72,38 +73,43 @@ class messanaZone(polyinterface.Node):
 
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
-        val = int(command.get('value'))
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(value))
+        if self.messana.ZoneSetStatus(value, self.zoneNbr):
+            ISYdriver = self.messana.getZoneStatusISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
-        self.zoneInfo['mStatus'] = val
-        #LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(val))
-        #LOGGER.debug(self.zoneInfo)
-        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
-        self.checkSetDriver('GV4', 'mStatus')
 
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
-        val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(val))
-        self.zoneInfo['mEnergySave'] = val
-        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
-        self.checkSetDriver('GV8', 'mEnergySave')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(value))
+        if self.messana.ZoneSetEnergySave(value, self.zoneNbr):
+            ISYdriver = self.messana.getZoneEnergySaveISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
+
 
     def setSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
-        val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(val))
-        self.zoneInfo['mSetPoint'] = val
-        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
-        self.checkSetDriver('GV1', 'mSetPoint')  
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(value))
+        if self.messana.ZoneSetSetpoint(value, self.zoneNbr):
+            ISYdriver = self.messana.getZoneSetPointISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
+
 
     def enableSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
-        val = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(val))      
-        self.zoneInfo['mScheduleOn'] = val
-        self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
-        self.checkSetDriver('GV3', 'mScheduleOn')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(value))      
+        if self.messana.ZoneEnableSchedule(value, self.zoneNbr):
+            ISYdriver = self.messana.getZoneEnableScheduleISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)     
+        
+        #self.zoneInfo['mScheduleOn'] = val
+        #self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
+        #self.checkSetDriver('GV3', 'mScheduleOn')
 
  
 
