@@ -2504,7 +2504,6 @@ class messanaInfo:
         return(Key)  
         
 
-
     def zoneSetEnergySave(self, value, zoneNbr):
         LOGGER.debug(' zoneSetEnergySave called for zone: ' + str(zoneNbr))
         
