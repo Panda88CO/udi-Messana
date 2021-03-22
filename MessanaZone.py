@@ -20,6 +20,7 @@ class messanaZone(polyinterface.Node):
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)
+        self.ISYforced = False
         
         self.drivers = []
         for key in self.zone_GETKeys:
@@ -29,6 +30,7 @@ class messanaZone(polyinterface.Node):
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
         self.messana.updateZoneData('all', self.zoneNbr)
         self.updateISYdrivers()
+        self.ISYforced = True
        
     def start(self):
 
