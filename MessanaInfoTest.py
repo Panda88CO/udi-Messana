@@ -36,16 +36,17 @@ for key in systemGETKeys:
 print(drivers)
 ISYmap = messana.createISYmapping()
 
+'''
 for ISYdriver in drivers:
     ISYkey = ISYdriver['driver']
     value = None
     status = None
     status, value = messana.getSystemISYValue(ISYkey)
     print (status, value)
-    print(messana.putSystemISYValue(ISYkey, value))
+    print(.messana.getZoneISYdriverInfo(key, zoneNbr))
     print(value)
     print()
-
+'''
 
 print (messana.getZoneCount())
 for key in systemGETKeys:
@@ -100,6 +101,17 @@ for zoneNbr in range(0, zoneCount):
             MessanaZone.append(temp)
             print(str(MessanaZone) + 'after append')                       
         print(MessanaZone)
+
+
+        print('setEnergySave Called')
+    val = 0
+    print('zoneSetStatus Recived:' + str(val))
+    messana.zoneSetStatus(val, zoneNbr)
+    val = 1
+    print('zoneSetStatus Recived:' + str(val))
+    messana.zoneSetStatus(val, zoneNbr)
+    key = messana.getZoneStatusISYdriver (zoneNbr)
+    print(key)
 
 '''
 ZONEDRIVER  = {}

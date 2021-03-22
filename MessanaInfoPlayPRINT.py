@@ -2252,7 +2252,7 @@ class messanaInfo:
     #System
     def updateSystemData(self, level):
         print('Update Messana Sytem Data')
-        #print(self.mSystem['system'])
+        #LOGGER.info(self.mSystem['system'])
         sysData = {}
         DataOK = True
         for mKey in self.mSystem['system']['KeyInfo']:
@@ -2468,7 +2468,6 @@ class messanaInfo:
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
-
         return( self.getNodeKeys (zoneNbr, 'zones', 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
@@ -2484,6 +2483,44 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
+
+
+    def zoneSetStatus(self, value, zoneNbr):
+        print(' Zone Setstatus called for zone: ' + str(zoneNbr))
+        status = self.pushZoneDataIndividual(zoneNbr, 'mStatus', value)
+        return(status)
+ 
+
+    def getZoneStatusISYdriver(self, zoneNbr):
+        Key = ''
+        zoneName = 'zones'+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+        
+
+
+    def zoneSetEnergySave(self, value, zoneNbr):
+        return(True)
+
+    def getZoneEnergySaveISYdriver(self, zoneNbr):
+        return (True)
+
+
+    def zoneSetSetpoint(self,value,  zoneNbr):
+        return(True)
+
+    def getZoneSetPointISYdriver(self, zoneNbr):
+        return (True)
+
+    def zoneEnableSchedule(self, zoneNbr):
+        return(True)
+
+
+    def getZoneEnableScheduleISYdriver(self, zoneNbr):
+        return (True)
+
 
     def getZoneISYdriverInfo(self, mKey, zoneNbr):
         info = {}
