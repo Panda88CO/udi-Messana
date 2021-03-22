@@ -2522,7 +2522,7 @@ class messanaInfo:
 
 
 
-    def zoneSetSetpoint(self,value,  zoneNbr):
+    def zoneSetSetpoint(self, value,  zoneNbr):
         LOGGER.debug('zoneSetSetpoint called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mSetPoint', value)
@@ -2539,7 +2539,7 @@ class messanaInfo:
         return(Key)  
   
 
-    def zoneEnableSchedule(self, zoneNbr):
+    def zoneEnableSchedule(self, value, zoneNbr):
         LOGGER.debug('zoneEnableSchedule called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mScheduleOn', value)
