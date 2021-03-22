@@ -2488,12 +2488,14 @@ class messanaInfo:
 
     def zoneSetStatus(self, value, zoneNbr):
         LOGGER.debug(' zoneSetstatus called for zone: ' + str(zoneNbr))
+        
         status = self.pushZoneDataIndividual(zoneNbr, 'mStatus', value)
         return(status)
  
 
     def getZoneStatusISYdriver(self, zoneNbr):
         LOGGER.debug('getZoneStatusISYdriver called for zone: '+str(zoneNbr))
+        
         Key = ''
         zoneName = 'zones'+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2505,11 +2507,13 @@ class messanaInfo:
 
     def zoneSetEnergySave(self, value, zoneNbr):
         LOGGER.debug(' zoneSetEnergySave called for zone: ' + str(zoneNbr))
+        
         status = self.pushZoneDataIndividual(zoneNbr, 'mEnergySaving', value)
         return(status)
     
     def getZoneEnergySaveISYdriver(self, zoneNbr):
         LOGGER.debug('getZoneEnergySaveISYdriver called for zone: '+str(zoneNbr))
+        
         Key = ''
         zoneName = 'zones'+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2521,11 +2525,13 @@ class messanaInfo:
 
     def zoneSetSetpoint(self,value,  zoneNbr):
         LOGGER.debug('zoneSetSetpoint called for zone: ' + str(zoneNbr))
+        
         status = self.pushZoneDataIndividual(zoneNbr, 'mSetPoint', value)
         return(status)
 
     def getZoneSetPointISYdriver(self, zoneNbr):
         LOGGER.debug('getZoneSetPointISYdriver called for zone: '+str(zoneNbr))
+        
         Key = ''
         zoneName = 'zones'+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2536,12 +2542,14 @@ class messanaInfo:
 
     def zoneEnableSchedule(self, zoneNbr):
         LOGGER.debug('zoneEnableSchedule called for zone: ' + str(zoneNbr))
+        
         status = self.pushZoneDataIndividual(zoneNbr, 'mScheduleOn', value)
         return(status)
 
 
     def getZoneEnableScheduleISYdriver(self, zoneNbr):
         LOGGER.debug('getZoneEnableScheduleISYdriver called for zone: '+str(zoneNbr))
+        
         Key = ''
         zoneName = 'zones'+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
