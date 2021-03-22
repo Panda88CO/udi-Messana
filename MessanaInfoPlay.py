@@ -2485,6 +2485,31 @@ class messanaInfo:
         else:
             return('NA')
 
+    def getZoneISYValue(self, ISYkey, zoneNbr):
+        zoneName = 'zones'+str(zoneNbr)
+        messanaKey = self.ISYmap[zoneName][ISYkey]['messana']
+        systemPullKeys = self.zonePullKeys(zoneNbr)
+        if messanaKey in systemPullKeys:
+            data = self.pullSystemDataIndividual(messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        else:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+
+
 
     def zoneSetStatus(self, value, zoneNbr):
         LOGGER.debug(' zoneSetstatus called for zone: ' + str(zoneNbr))

@@ -40,7 +40,7 @@ class messanaZone(polyinterface.Node):
         LOGGER.debug('updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
-            status, value = self.messana.getZoneISYValue(ISYkey)
+            status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
             if status:
                 if self.ISYforced:
                     self.setDriver(ISYdriver, value, report = True, force = False)
