@@ -2372,6 +2372,9 @@ class messanaInfo:
         if messanaKey in systemPushKeys:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
+    
+    def getMessanaSystemKey(self, ISYkey):
+        return(self.ISYmap['system'][ISYkey]['messana'])
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
@@ -2484,6 +2487,9 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
+    def getMessanaISYket(self, ISYkey, zoneNbr):
+        zoneName = 'zones'+str(zoneNbr)
+        return(self.ISYmap[zoneName][ISYkey]['messana'])
 
     def getZoneISYValue(self, ISYkey, zoneNbr):
         zoneName = 'zones'+str(zoneNbr)
