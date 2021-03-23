@@ -104,7 +104,7 @@ class MessanaController(polyinterface.Controller):
 
     
     def shortPoll(self):
-        LOGGER.debug('Messane Controller shortPoll')
+        LOGGER.debug('Messana Controller shortPoll')
 
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
@@ -119,6 +119,7 @@ class MessanaController(polyinterface.Controller):
             for node in self.nodes:
                 if node != self.address:
                     self.nodes[node].shortPoll()
+                    LOGGER.debug( ' shortPoll node: ' + node )
             
 
     def longPoll(self):
