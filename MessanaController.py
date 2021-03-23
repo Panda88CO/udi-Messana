@@ -82,7 +82,7 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug ('Install Profile')    
             self.poly.installprofile()
             LOGGER.debug('Install Profile done')
-        self.updateISYdrivers()
+        self.updateISYdrivers('all')
         self.messanaImportOK = 1
         self.discover()
 
@@ -110,10 +110,10 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('Short Poll System Up')
             if self.ISYforced:
                 self.messana.updateSystemData('active')
+                self.updateISYdrivers('active')
             else:
                 self.messana.updateSystemData('all')
-
-            self.updateISYdrivers()
+                self.updateISYdrivers('all')
             self.ISYforced = True
    
             for node in self.nodes:
@@ -127,26 +127,41 @@ class MessanaController(polyinterface.Controller):
             self.heartbeat()
             self.messana.updateSystemData('all')
             LOGGER.debug( self.drivers)
-            self.updateISYdrivers()
+            self.updateISYdrivers('all')
             self.reportDrivers()
             self.ISYforced = True
             for node in self.nodes:
                 if node != self.address:
                     self.nodes[node].longPoll()
         
-    def updateISYdrivers(self):
+    def updateISYdrivers(self, level):
         LOGGER.debug('updateISYdrivers')
         for ISYdriver in self.drivers:
-            ISYkey = ISYdriver['driver']
-            status, value = self.messana.getSystemISYValue(ISYkey)
-            if status:
-                if self.ISYforced:
-                    self.setDriver(ISYdriver, value, report = True, force = False)
-                else:
-                    self.setDriver(ISYdriver, value, report = True, force = True)
-                LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+            if level == 'active':
+                if ISYdriver in self.systemActiveKeys:
+                    ISYkey = ISYdriver['driver']
+                    status, value = self.messana.getSystemISYValue(ISYkey)
+                    if status:
+                        if self.ISYforced:
+                            self.setDriver(ISYdriver, value, report = True, force = False)
+                        else:
+                            self.setDriver(ISYdriver, value, report = True, force = True)
+                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    else:
+                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+            elif level == 'all':
+                ISYkey = ISYdriver['driver']
+                    status, value = self.messana.getSystemISYValue(ISYkey)
+                    if status:
+                        if self.ISYforced:
+                            self.setDriver(ISYdriver, value, report = True, force = False)
+                        else:
+                            self.setDriver(ISYdriver, value, report = True, force = True)
+                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    else:
+                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                 LOGGER.debug('Error!  Unknown level passed: ' + level)
 
 
     def query(self, command=None):
@@ -337,7 +352,7 @@ class MessanaController(polyinterface.Controller):
     def ISYupdate (self, command):
         LOGGER.info('ISY-update called')
         self.messana.updateSystemData('all')
-        self.updateISYdrivers()
+        self.updateISYdrivers('all')
  
     #id = 'MessanaMain' #self.name must have same value 
     #LOGGER.debug(str(id))
