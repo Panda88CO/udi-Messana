@@ -140,7 +140,7 @@ class MessanaController(polyinterface.Controller):
             ISYkey = ISYdriver['driver']
             if level == 'active':
                 if self.messana.getMessanaSystemKey(ISYkey) in self.systemActiveKeys:
-                    ISYkey = ISYdriver['driver']
+                    LOGGER.debug('MessanaController ISYdrivers ACTIVE ' + self.messana.getMessanaSystemKey(ISYkey))
                     status, value = self.messana.getSystemISYValue(ISYkey)
                     if status:
                         if self.ISYforced:
@@ -151,7 +151,7 @@ class MessanaController(polyinterface.Controller):
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
-                ISYkey = ISYdriver['driver']
+                LOGGER.debug('MessanaController ISYdrivers ACTIVE ' + self.messana.getMessanaSystemKey(ISYkey))
                 status, value = self.messana.getSystemISYValue(ISYkey)
                 if status:
                     if self.ISYforced:
