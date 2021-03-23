@@ -151,15 +151,15 @@ class MessanaController(polyinterface.Controller):
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 ISYkey = ISYdriver['driver']
-                    status, value = self.messana.getSystemISYValue(ISYkey)
-                    if status:
-                        if self.ISYforced:
-                            self.setDriver(ISYdriver, value, report = True, force = False)
-                        else:
-                            self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                status, value = self.messana.getSystemISYValue(ISYkey)
+                if status:
+                    if self.ISYforced:
+                        self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        self.setDriver(ISYdriver, value, report = True, force = True)
+                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                else:
+                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
             else:
                  LOGGER.debug('Error!  Unknown level passed: ' + level)
 
