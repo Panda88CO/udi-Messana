@@ -86,7 +86,7 @@ for zoneNbr in range(0, zoneCount):
     for key in zone_GETKeys:
         zoneInfo = messana.pullZoneDataIndividual(zoneNbr, key)
         print(zoneInfo)
-        temp = messana.getnodeISYdriverInfo('zones', zoneNbr, key)
+        temp = messana.getZoneISYdriverInfo('zones', zoneNbr, key)
         print('Driver info: ' + str(temp))
         if  temp != {}:
             if not(str(temp['value']).isnumeric()):                         
