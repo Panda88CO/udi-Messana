@@ -85,8 +85,6 @@ class messanaZone(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
-
-
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
