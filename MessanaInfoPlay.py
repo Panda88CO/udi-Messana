@@ -2490,7 +2490,7 @@ class messanaInfo:
         messanaKey = self.ISYmap[zoneName][ISYkey]['messana']
         systemPullKeys = self.zonePullKeys(zoneNbr)
         if messanaKey in systemPullKeys:
-            data = self.pullSystemDataIndividual(messanaKey)
+            data = self.pullZoneDataIndividual(zoneNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
