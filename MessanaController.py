@@ -190,7 +190,7 @@ class MessanaController(polyinterface.Controller):
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
             name = self.messana.getZoneName(zoneNbr)
-            address = 'zones'+str(zoneNbr)
+            address = self.messana.getZoneAddress()
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
             if not address in self.nodes:
                self.addNode(messanaZone(self, self.address, address, name, zoneNbr))
