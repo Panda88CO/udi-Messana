@@ -1593,7 +1593,8 @@ class messanaInfo:
         
         #self.zoneCapability = {}
         #self.atuCapability = {}
-        #Dunny check to see if there is connection to Messana system)
+        
+        #Dummy check to see if there is connection to Messana system)
         sysData= self.pullSystemDataIndividual('mApiVer')
         if not(sysData['statusOK']):
             LOGGER.debug('Error Connecting to MessanaSystem')
