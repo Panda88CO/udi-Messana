@@ -2501,7 +2501,7 @@ class messanaInfo:
         zoneName = 'zones'+str(zoneNbr)
         messanaKey = self.ISYmap[zoneName][ISYkey]['messana']
         #systemPullKeys = self.zonePullKeys(zoneNbr)
-       try:
+        try:
             data = self.pullZoneDataIndividual(zoneNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
