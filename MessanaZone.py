@@ -42,8 +42,8 @@ class messanaZone(polyinterface.Node):
         LOGGER.debug('updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
+            temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
             if level == 'active':
-                temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
                 if temp in self.zone_ActiveKeys:                    
                     LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)

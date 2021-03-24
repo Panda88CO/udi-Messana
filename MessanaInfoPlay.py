@@ -2451,12 +2451,15 @@ class messanaInfo:
         LOGGER.debug('updatZoneData: ' + str(zoneNbr))
 
         self.zoneKeys = self.zonePullKeys(zoneNbr)
+        keys =[]
         if level == 'all':
             LOGGER.debug('ALL update zone ' + str(zoneNbr))
+            keys =  self.zoneActiveKeys(zoneNbr)
         elif level == 'active':
             LOGGER.debug('ACTIVE update zone ' + str(zoneNbr))
+            keys =  self.zonePullKeys(zoneNbr)
         self.dataOK = True
-        for mKey in self.zoneKeys:
+        for mKey in keys:
             self.data = self.pullZoneDataIndividual(zoneNbr, mKey)
             self.dataOK = self.dataOK and self.data['dataAll']
         return(self.dataOK)
