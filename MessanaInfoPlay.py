@@ -1593,67 +1593,72 @@ class messanaInfo:
         
         #self.zoneCapability = {}
         #self.atuCapability = {}
-        self.updateSystemData('all')
-        LOGGER.debug(systemName + 'added')
-        self. setMessanaCredentials (mIPaddress, mAPIkey)    
-        self.addSystemDefStruct(systemName)
+        #Dunny check to see if there is connection to Messana system)
+        sysData= self.pullSystemDataIndividual('mApiVer')
+        if not(sysData['statusOK']):
+            LOGGER.debug('Error Connecting to MessanaSystem')
+        else:    
+            self.updateSystemData('all')
+            LOGGER.debug(systemName + 'added')
+            self. setMessanaCredentials (mIPaddress, mAPIkey)    
+            self.addSystemDefStruct(systemName)
 
-        for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
-            self.getZoneCapability(zoneNbr)
-            self.updateZoneData('all', zoneNbr)
-            zoneName = 'zones'+str(zoneNbr)
-            self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
-       
-        for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
-            self.getMacrozoneCapability(macrozoneNbr)
-            self.updateMacroZoneData(macrozoneNbr)
-            macrozoneName = 'macrozone'+str(macrozoneNbr)
-            self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
-
-        for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
-            self.getAtuCapability(atuNbr)
-            self.updateATUData(atuNbr)
-            atuName = 'atu'+str(atuNbr)
-            self.addNodeDefStruct(atuNbr, 'atus', atuName )
- 
-        for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
-            self.getDHWCapability(dhwNbr)
-            self.updateDHWData(dhwNbr)
-            dhwName = 'dhw'+str(dhwNbr)
-            self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
-
-        for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
-            self.getFanCoilCapability(fcNbr)
-            self.updateFanCoilData(fcNbr)
-            fcName = 'fancoil'+str(fcNbr)
-            self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
-       
-        for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
-            self.getEnergySourceCapability(esNbr)
-            self.updateEnergySourceData(esNbr)
-            esName = 'energysource'+str(esNbr)
-            self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
-
-        for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
-            self.getHC_COCapability(hccoNbr)
-            self.updateHC_COData(hccoNbr)
-            hccoName = 'hcco'+str(hccoNbr)
-            self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
+            for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
+                self.getZoneCapability(zoneNbr)
+                self.updateZoneData('all', zoneNbr)
+                zoneName = 'zones'+str(zoneNbr)
+                self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
         
-        for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
-            self.getBufferTankCapability(btNbr)
-            self.updateBufferTankData(btNbr)
-            btName = 'buffertanks'+str(btNbr)
-            self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
-        LOGGER.debug ('Create Setup file')
-        self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+            for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
+                self.getMacrozoneCapability(macrozoneNbr)
+                self.updateMacroZoneData(macrozoneNbr)
+                macrozoneName = 'macrozone'+str(macrozoneNbr)
+                self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
+
+            for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
+                self.getAtuCapability(atuNbr)
+                self.updateATUData(atuNbr)
+                atuName = 'atu'+str(atuNbr)
+                self.addNodeDefStruct(atuNbr, 'atus', atuName )
+    
+            for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
+                self.getDHWCapability(dhwNbr)
+                self.updateDHWData(dhwNbr)
+                dhwName = 'dhw'+str(dhwNbr)
+                self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
+
+            for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
+                self.getFanCoilCapability(fcNbr)
+                self.updateFanCoilData(fcNbr)
+                fcName = 'fancoil'+str(fcNbr)
+                self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
         
-        self.ISYmap = self.createISYmapping()
-        '''
-        LOGGER.debug('Reading Messana System')
-        #self.pullAllMessanaStatus()
-        LOGGER.debug('Finish Reading Messana system')
-        '''
+            for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
+                self.getEnergySourceCapability(esNbr)
+                self.updateEnergySourceData(esNbr)
+                esName = 'energysource'+str(esNbr)
+                self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
+
+            for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
+                self.getHC_COCapability(hccoNbr)
+                self.updateHC_COData(hccoNbr)
+                hccoName = 'hcco'+str(hccoNbr)
+                self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
+            
+            for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
+                self.getBufferTankCapability(btNbr)
+                self.updateBufferTankData(btNbr)
+                btName = 'buffertanks'+str(btNbr)
+                self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
+            LOGGER.debug ('Create Setup file')
+            self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+            
+            self.ISYmap = self.createISYmapping()
+            '''
+            LOGGER.debug('Reading Messana System')
+            #self.pullAllMessanaStatus()
+            LOGGER.debug('Finish Reading Messana system')
+            '''
 
     def createISYmapping(self):
         temp = {}

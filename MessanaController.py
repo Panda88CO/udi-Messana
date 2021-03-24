@@ -33,7 +33,6 @@ class MessanaController(polyinterface.Controller):
 
 
     def defineInputParams(self):
-        self.removeNoticesAll()
         self.addNotice('Please Set IP address (IP_ADDRESS) and Messana Key (MESSANA_KEY)')
         self.addNotice('Please restart node server after setting parameters')
 
@@ -56,7 +55,8 @@ class MessanaController(polyinterface.Controller):
 
 
     def start(self):
-        LOGGER.info('Start  Messana Main NEW')
+        self.removeNoticesAll()
+        LOGGER.info('Start Messana Main NEW')
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
 
@@ -67,6 +67,9 @@ class MessanaController(polyinterface.Controller):
         else:
             LOGGER.info('Retrieving info from Messana System')
             self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+            if self.messana == False:
+                self.stop()
+                
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
