@@ -29,6 +29,7 @@ class MessanaController(polyinterface.Controller):
         self.ISYTempUnit = 0
         self.id = self.name
         self.drivers = []
+        self.nodeDefineDone = False
 
 
 
@@ -121,10 +122,11 @@ class MessanaController(polyinterface.Controller):
                 self.updateISYdrivers('all')
             self.ISYforced = True
             LOGGER.debug('Short POll controller: ' )
-            for node in self.nodes:
-                if node != self.address and node != 'controller':
-                    LOGGER.debug('Calling SHORT POLL for node : ' + node )
-                    self.nodes[node].shortPoll()      
+            if self.nodeDefineDone == True:
+                for node in self.nodes:
+                    if node != self.address and node != 'controller':
+                        LOGGER.debug('Calling SHORT POLL for node : ' + node )
+                        self.nodes[node].shortPoll()      
 
     def longPoll(self):
         LOGGER.debug('Messana Controller longPoll')
@@ -134,11 +136,13 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug( self.drivers)
             self.updateISYdrivers('all')
             self.reportDrivers()
-            self.ISYforced = True          
-            for node in self.nodes:
-                if node != self.address and node != 'controller':
-                    LOGGER.debug('Calling LONG POLL for node : ' + node )
-                    self.nodes[node].longPoll()
+            self.ISYforced = True   
+            if self.nodeDefineDone == True:       
+                for node in self.nodes:
+                    if node != self.address and node != 'controller':
+                        LOGGER.debug('Calling LONG POLL for node : ' + node )
+                        self.nodes[node].longPoll()
+                    
                     
 
     def updateISYdrivers(self, level):
@@ -190,6 +194,7 @@ class MessanaController(polyinterface.Controller):
 
 
         #nbrMacrozones = 0
+        self.nodeDefineDone = True
 
 
 
@@ -326,7 +331,7 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('Unknown key: ' + mKey)
             
     '''
-
+    
 
     def check_params(self, command=None):
         LOGGER.debug('Check Params')
