@@ -43,8 +43,9 @@ class messanaZone(polyinterface.Node):
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
-                if self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr) in self.zone_ActiveKeys:                    
-                    LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr))
+                temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
+                if temp in self.zone_ActiveKeys:                    
+                    LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
                     if status:
                         if self.ISYforced:
@@ -54,9 +55,9 @@ class messanaZone(polyinterface.Node):
                         LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
-                elif level == 'active':
+                elif level == 'all':
                     status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
-                    LOGGER.debug('Messana Zone ISYdrivers ALL ' + self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr))
+                    LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
                     if status:
                         if self.ISYforced:
                             self.setDriver(ISYdriver, value, report = True, force = False)
@@ -66,7 +67,7 @@ class messanaZone(polyinterface.Node):
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
                 else:
-                    LOGGER.debug('Error!  Unknow lwevwl: ' + level)
+                    LOGGER.debug('Error!  Unknow level: ' + level)
         
     def stop(self):
         LOGGER.debug('stop - Messana Zone Cleaning up')
