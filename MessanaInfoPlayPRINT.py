@@ -1593,67 +1593,73 @@ class messanaInfo:
         
         #self.zoneCapability = {}
         #self.atuCapability = {}
-        self.updateSystemData('all')
-        print(systemName + 'added')
-        self. setMessanaCredentials (mIPaddress, mAPIkey)    
-        self.addSystemDefStruct(systemName)
-
-        for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
-            self.getZoneCapability(zoneNbr)
-            self.updateZoneData('all', zoneNbr)
-            zoneName = 'zones'+str(zoneNbr)
-            self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
-       
-        for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
-            self.getMacrozoneCapability(macrozoneNbr)
-            self.updateMacroZoneData(macrozoneNbr)
-            macrozoneName = 'macrozone'+str(macrozoneNbr)
-            self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
-
-        for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
-            self.getAtuCapability(atuNbr)
-            self.updateATUData(atuNbr)
-            atuName = 'atu'+str(atuNbr)
-            self.addNodeDefStruct(atuNbr, 'atus', atuName )
- 
-        for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
-            self.getDHWCapability(dhwNbr)
-            self.updateDHWData(dhwNbr)
-            dhwName = 'dhw'+str(dhwNbr)
-            self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
-
-        for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
-            self.getFanCoilCapability(fcNbr)
-            self.updateFanCoilData(fcNbr)
-            fcName = 'fancoil'+str(fcNbr)
-            self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
-       
-        for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
-            self.getEnergySourceCapability(esNbr)
-            self.updateEnergySourceData(esNbr)
-            esName = 'energysource'+str(esNbr)
-            self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
-
-        for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
-            self.getHC_COCapability(hccoNbr)
-            self.updateHC_COData(hccoNbr)
-            hccoName = 'hcco'+str(hccoNbr)
-            self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
         
-        for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
-            self.getBufferTankCapability(btNbr)
-            self.updateBufferTankData(btNbr)
-            btName = 'buffertanks'+str(btNbr)
-            self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
-        print ('Create Setup file')
-        self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+        #Dummy check to see if there is connection to Messana system)
+        sysData= self.pullSystemDataIndividual('mApiVer')
+        if not(sysData['statusOK']):
+            print('Error Connecting to MessanaSystem')
+        else:    
+            self.updateSystemData('all')
+            print(systemName + 'added')
+            self. setMessanaCredentials (mIPaddress, mAPIkey)    
+            self.addSystemDefStruct(systemName)
+
+            for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
+                self.getZoneCapability(zoneNbr)
+                self.updateZoneData('all', zoneNbr)
+                zoneName = 'zones'+str(zoneNbr)
+                self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
         
-        self.ISYmap = self.createISYmapping()
-        '''
-        print('Reading Messana System')
-        #self.pullAllMessanaStatus()
-        print('Finish Reading Messana system')
-        '''
+            for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
+                self.getMacrozoneCapability(macrozoneNbr)
+                self.updateMacroZoneData(macrozoneNbr)
+                macrozoneName = 'macrozone'+str(macrozoneNbr)
+                self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
+
+            for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
+                self.getAtuCapability(atuNbr)
+                self.updateATUData(atuNbr)
+                atuName = 'atu'+str(atuNbr)
+                self.addNodeDefStruct(atuNbr, 'atus', atuName )
+    
+            for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
+                self.getDHWCapability(dhwNbr)
+                self.updateDHWData(dhwNbr)
+                dhwName = 'dhw'+str(dhwNbr)
+                self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
+
+            for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
+                self.getFanCoilCapability(fcNbr)
+                self.updateFanCoilData(fcNbr)
+                fcName = 'fancoil'+str(fcNbr)
+                self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
+        
+            for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
+                self.getEnergySourceCapability(esNbr)
+                self.updateEnergySourceData(esNbr)
+                esName = 'energysource'+str(esNbr)
+                self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
+
+            for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
+                self.getHC_COCapability(hccoNbr)
+                self.updateHC_COData(hccoNbr)
+                hccoName = 'hcco'+str(hccoNbr)
+                self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
+            
+            for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
+                self.getBufferTankCapability(btNbr)
+                self.updateBufferTankData(btNbr)
+                btName = 'buffertanks'+str(btNbr)
+                self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
+            print ('Create Setup file')
+            self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
+            
+            self.ISYmap = self.createISYmapping()
+            '''
+            print('Reading Messana System')
+            #self.pullAllMessanaStatus()
+            print('Finish Reading Messana system')
+            '''
 
     def createISYmapping(self):
         temp = {}
@@ -2372,6 +2378,9 @@ class messanaInfo:
         if messanaKey in systemPushKeys:
             status = self.pushSystemDataIndividual(messanaKey, systemValue)
         return(status)
+    
+    def getMessanaSystemKey(self, ISYkey):
+        return(self.ISYmap['system'][ISYkey]['messana'])
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
@@ -2468,6 +2477,7 @@ class messanaInfo:
 
     def zonePushKeys(self, zoneNbr):
         print('zonePushKeys')
+
         return( self.getNodeKeys (zoneNbr, 'zones', 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
@@ -2483,15 +2493,46 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
+    def getZoneMessanaISYkey(self, ISYkey, zoneNbr):
+        zoneName = 'zones'+str(zoneNbr)
+        return(self.ISYmap[zoneName][ISYkey]['messana'])
+
+    def getZoneISYValue(self, ISYkey, zoneNbr):
+        zoneName = 'zones'+str(zoneNbr)
+        messanaKey = self.ISYmap[zoneName][ISYkey]['messana']
+        systemPullKeys = self.zonePullKeys(zoneNbr)
+        if messanaKey in systemPullKeys:
+            data = self.pullZoneDataIndividual(zoneNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        else:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+
 
 
     def zoneSetStatus(self, value, zoneNbr):
-        print(' Zone Setstatus called for zone: ' + str(zoneNbr))
+        print(' zoneSetstatus called for zone: ' + str(zoneNbr))
+        
         status = self.pushZoneDataIndividual(zoneNbr, 'mStatus', value)
         return(status)
  
 
     def getZoneStatusISYdriver(self, zoneNbr):
+        print('getZoneStatusISYdriver called for zone: '+str(zoneNbr))
+        
         Key = ''
         zoneName = 'zones'+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2500,26 +2541,57 @@ class messanaInfo:
         return(Key)  
         
 
-
     def zoneSetEnergySave(self, value, zoneNbr):
-        return(True)
-
+        print(' zoneSetEnergySave called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mEnergySaving', value)
+        return(status)
+    
     def getZoneEnergySaveISYdriver(self, zoneNbr):
-        return (True)
+        print('getZoneEnergySaveISYdriver called for zone: '+str(zoneNbr))
+        
+        Key = ''
+        zoneName = 'zones'+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mEnergySaving':
+                Key = ISYkey
+        return(Key)  
 
 
-    def zoneSetSetpoint(self,value,  zoneNbr):
-        return(True)
+
+    def zoneSetSetpoint(self, value,  zoneNbr):
+        print('zoneSetSetpoint called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mSetPoint', value)
+        return(status)
 
     def getZoneSetPointISYdriver(self, zoneNbr):
-        return (True)
+        print('getZoneSetPointISYdriver called for zone: '+str(zoneNbr))
+        
+        Key = ''
+        zoneName = 'zones'+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetPoint':
+                Key = ISYkey
+        return(Key)  
+  
 
-    def zoneEnableSchedule(self, zoneNbr):
-        return(True)
+    def zoneEnableSchedule(self, value, zoneNbr):
+        print('zoneEnableSchedule called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mScheduleOn', value)
+        return(status)
 
 
     def getZoneEnableScheduleISYdriver(self, zoneNbr):
-        return (True)
+        print('getZoneEnableScheduleISYdriver called for zone: '+str(zoneNbr))
+        
+        Key = ''
+        zoneName = 'zones'+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mScheduleOn':
+                Key = ISYkey
+        return(Key) 
 
 
     def getZoneISYdriverInfo(self, mKey, zoneNbr):

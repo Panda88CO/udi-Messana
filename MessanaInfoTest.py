@@ -101,7 +101,13 @@ for zoneNbr in range(0, zoneCount):
             MessanaZone.append(temp)
             print(str(MessanaZone) + 'after append')                       
         print(MessanaZone)
-
+      
+        for ISYdriver in drivers:
+            ISYkey = ISYdriver['driver']
+            temp = messana.getZoneMessanaISYkey(ISYkey, zoneNbr)
+            if  temp in zone_ActiveKeys:                    
+                    #LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + self.messana.getMessanaISYkey(ISYkey, self.zoneNbr))
+                    status, value = messana.getZoneISYValue(ISYkey, zoneNbr)
 
         print('setEnergySave Called')
     val = 0

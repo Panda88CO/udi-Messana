@@ -1593,7 +1593,7 @@ class messanaInfo:
         
         #self.zoneCapability = {}
         #self.atuCapability = {}
-        
+
         #Dummy check to see if there is connection to Messana system)
         sysData= self.pullSystemDataIndividual('mApiVer')
         if not(sysData['statusOK']):
@@ -2493,7 +2493,7 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
-    def getMessanaISYket(self, ISYkey, zoneNbr):
+    def getZoneMessanaISYkey(self, ISYkey, zoneNbr):
         zoneName = 'zones'+str(zoneNbr)
         return(self.ISYmap[zoneName][ISYkey]['messana'])
 
