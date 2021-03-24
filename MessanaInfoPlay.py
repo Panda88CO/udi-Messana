@@ -9,9 +9,21 @@ LOGGER = polyinterface.LOGGER
 
 
 class messanaInfo:
-    def __init__ (self, mIPaddress, mAPIkey, systemName):
+    def __init__ (self, mIPaddress, mAPIkey):
+        
+        self.systemID = 'system'
+        self.zoneID = 'zones'
+        self.macroZoneID = 'macrozones'
+        self.atuID = 'atus'
+        self.dhwID = 'DomHw'
+        self.fcID = 'FanCoils'
+        self.energySaveID =  'EnergyS'
+        self.HotColdcoID = 'HcCo'
+        self.bufferTankID = 'BufTanks'
+
+
         self.mSystem = defaultdict(dict)
-        self.mSystem = {'system': {  'ISYnode':{ 'nlsICON' :'Thermostat'
+        self.mSystem = { self.systemID: {  'ISYnode':{ 'nlsICON' :'Thermostat'
                                                 ,'sends'   : ['DON', 'DOF']
                                                 ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
                                                                                     ,'ISYeditor' : None} 
@@ -263,7 +275,7 @@ class messanaInfo:
                                      ,'NOcapability' : {}
                             
                         },
-                        'zones': {   'ISYnode':{'nlsICON':'TempSensor'
+                        self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
                                                 ,'accepts' : {'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
                                                                                     ,'ISYeditor' : 'mSetPoint' }
@@ -634,7 +646,7 @@ class messanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         },
-                        'macrozones' : {   'ISYnode':{   'nlsICON' :'TempSensor'
+                        self.macroZoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
                                                         ,'accepts' : {'UPDATE'        : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -763,7 +775,7 @@ class messanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         }, 
-                        'HcCo' :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -837,7 +849,7 @@ class messanaInfo:
                                         ,'data' : {}
                                         ,'NOcapability' : {}
                         },
-                        'FanCoils' :{'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -946,7 +958,7 @@ class messanaInfo:
                                     ,'data' : {}
                                     ,'NOcapability' : {}
                         },
-                        'atus': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.atuID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1296,7 +1308,7 @@ class messanaInfo:
                                     ,'data' : {}
                                     ,'NOcapability' : {}                  
                         },
-                        'EnergyS':{'ISYnode':{   'nlsICON' :'GenericCtl'
+                         self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                        ,'ISYeditor' : None }}
@@ -1386,7 +1398,7 @@ class messanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         }, 
-                        'BufTanks': {'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1479,7 +1491,7 @@ class messanaInfo:
                                          ,'data' : {}
                                          ,'NOcapability' : {}
                         },
-                        'DomHw': { 'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1596,61 +1608,63 @@ class messanaInfo:
 
         #Dummy check to see if there is connection to Messana system)
         sysData= self.pullSystemDataIndividual('mApiVer')
+
+ 
         if not(sysData['statusOK']):
             LOGGER.debug('Error Connecting to MessanaSystem')
         else:    
             self.updateSystemData('all')
-            LOGGER.debug(systemName + 'added')
+            LOGGER.debug(self.systemID + 'added')
             self. setMessanaCredentials (mIPaddress, mAPIkey)    
-            self.addSystemDefStruct(systemName)
+            self.addSystemDefStruct(self.systemID)
 
-            for zoneNbr in range(0,self.mSystem['system']['data']['mZoneCount']):
+            for zoneNbr in range(0,self.mSystem[ self.systemID]['data']['mZoneCount']):
                 self.getZoneCapability(zoneNbr)
                 self.updateZoneData('all', zoneNbr)
-                zoneName = 'zones'+str(zoneNbr)
-                self.addNodeDefStruct(zoneNbr, 'zones', zoneName )
+                zoneName = self.zoneID+str(zoneNbr)
+                self.addNodeDefStruct(zoneNbr, self.zoneID, zoneName )
         
-            for macrozoneNbr in range(0,self.mSystem['system']['data']['mMacrozoneCount']):
+            for macrozoneNbr in range(0,self.mSystem[ self.systemID]['data']['mMacrozoneCount']):
                 self.getMacrozoneCapability(macrozoneNbr)
                 self.updateMacroZoneData(macrozoneNbr)
-                macrozoneName = 'macrozone'+str(macrozoneNbr)
-                self.addNodeDefStruct(macrozoneNbr, 'macrozones', macrozoneName )
+                macrozoneName = self.macroZoneID+str(macrozoneNbr)
+                self.addNodeDefStruct(macrozoneNbr, self.macroZoneID, macrozoneName )
 
-            for atuNbr in range(0,self.mSystem['system']['data']['mATUcount']):
+            for atuNbr in range(0,self.mSystem[ self.systemID]['data']['mATUcount']):
                 self.getAtuCapability(atuNbr)
                 self.updateATUData(atuNbr)
-                atuName = 'atu'+str(atuNbr)
-                self.addNodeDefStruct(atuNbr, 'atus', atuName )
+                atuName = self.atuID+str(atuNbr)
+                self.addNodeDefStruct(atuNbr, self.atuID, atuName )
     
-            for dhwNbr in range(0,self.mSystem['system']['data']['mDHWcount']):
+            for dhwNbr in range(0,self.mSystem[ self.systemID]['data']['mDHWcount']):
                 self.getDHWCapability(dhwNbr)
                 self.updateDHWData(dhwNbr)
-                dhwName = 'dhw'+str(dhwNbr)
-                self.addNodeDefStruct(dhwNbr, 'DomHw', dhwName )
+                dhwName = self.dhwID+str(dhwNbr)
+                self.addNodeDefStruct(dhwNbr, self.dhwID, dhwName )
 
-            for fcNbr in range(0,self.mSystem['system']['data']['mFanCoilCount']):
+            for fcNbr in range(0,self.mSystem[ self.systemID]['data']['mFanCoilCount']):
                 self.getFanCoilCapability(fcNbr)
                 self.updateFanCoilData(fcNbr)
-                fcName = 'fancoil'+str(fcNbr)
-                self.addNodeDefStruct(fcNbr, 'FanCoils', fcName )
+                fcName = self.fcID+str(fcNbr)
+                self.addNodeDefStruct(fcNbr, self.fcID, fcName )
         
-            for esNbr in range(0,self.mSystem['system']['data']['mEnergySourceCount']):
+            for esNbr in range(0,self.mSystem[ self.systemID]['data']['mEnergySourceCount']):
                 self.getEnergySourceCapability(esNbr)
                 self.updateEnergySourceData(esNbr)
-                esName = 'energysource'+str(esNbr)
-                self.addNodeDefStruct(esNbr, 'EnergyS', esName )   
+                esName =  self.energySaveID+str(esNbr)
+                self.addNodeDefStruct(esNbr,  self.energySaveID, esName )   
 
-            for hccoNbr in range(0,self.mSystem['system']['data']['mhc_coCount']):
+            for hccoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
                 self.getHC_COCapability(hccoNbr)
                 self.updateHC_COData(hccoNbr)
-                hccoName = 'hcco'+str(hccoNbr)
-                self.addNodeDefStruct(hccoNbr, 'HcCo', hccoName )          
+                hccoName = self.HotColdcoID +str(hccoNbr)
+                self.addNodeDefStruct(hccoNbr, self.HotColdcoID , hccoName )          
             
-            for btNbr in range(0,self.mSystem['system']['data']['mBufTankCount']):
+            for btNbr in range(0,self.mSystem[ self.systemID]['data']['mBufTankCount']):
                 self.getBufferTankCapability(btNbr)
                 self.updateBufferTankData(btNbr)
-                btName = 'buffertanks'+str(btNbr)
-                self.addNodeDefStruct(btNbr, 'BufTanks', btName )     
+                btName = self.bufferTankID+str(btNbr)
+                self.addNodeDefStruct(btNbr, self.bufferTankID, btName )     
             LOGGER.debug ('Create Setup file')
             self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
             
@@ -1682,8 +1696,8 @@ class messanaInfo:
 
     def getnodeISYdriverInfo(self, node, nodeNbr, mKey):
         info = {}
-        if mKey in self.setupFile['nodeDef']['system']['sts']:
-            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+        if mKey in self.setupFile['nodeDef'][ self.systemID]['sts']:
+            keys = list(self.setupFile['nodeDef'][ self.systemID]['sts'][mKey].keys())
             info['driver'] = keys[0]
             tempData =  self.GETSystemData(mKey)
             if tempData['statusOK']:
@@ -1696,7 +1710,7 @@ class messanaInfo:
                 info['value'] = val
             else:
                 info['value'] = ''
-            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+            editor = self.setupFile['nodeDef'][ self.systemID]['sts'][mKey][keys[0]]
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
@@ -1785,25 +1799,25 @@ class messanaInfo:
 
 
     def addSystemSendComand(self, idName):
-        if 'sends' in self.setupFile['nodeDef']['system']['cmds']:
-            self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
+        if 'sends' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
+            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
         else:
-            self.setupFile['nodeDef']['system']['cmds']['sends']=[]
-            self.setupFile['nodeDef']['system']['cmds']['sends'].append(idName)
+            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=[]
+            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
         return()
    
     def addSystemAcceptComand(self, functionName, messanaKey):
         if len(messanaKey) == 0:
-            if 'accepts' in self.setupFile['nodeDef']['system']['cmds']:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = {}
+            if 'accepts' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
+                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = {}
             else:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = {}
+                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'] = {}
+                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = {}
         else:
-            if not('accepts' in self.setupFile['nodeDef']['system']['cmds']):
-                self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-            if messanaKey in self.setupFile['nodeDef']['system']['sts']:
-                self.setupFile['nodeDef']['system']['cmds']['accepts'][functionName] = self.setupFile['nodeDef']['system']['sts'][messanaKey]
+            if not('accepts' in self.setupFile['nodeDef'][ self.systemID]['cmds']):
+                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'] = {}
+            if messanaKey in self.setupFile['nodeDef'][ self.systemID]['sts']:
+                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = self.setupFile['nodeDef'][ self.systemID]['sts'][messanaKey]
             else:
                 LOGGER.debug(messanaKey + 'not defined')
         return() 
@@ -1814,52 +1828,52 @@ class messanaInfo:
         nodeId.lower()
         self.nlsKey= 'nls' + nodeId
         self.nlsKey.lower()
-        self.setupFile['nodeDef']['system']={}
-        self.setupFile['nodeDef']['system']['CodeId'] = nodeId
-        self.setupFile['nodeDef']['system']['nlsId'] = self.nlsKey
-        self.setupFile['nodeDef']['system']['nlsNAME']=self.mSystem['system']['data']['mName']
-        self.setupFile['nodeDef']['system']['nlsICON']=self.mSystem['system']['ISYnode']['nlsICON']
-        self.setupFile['nodeDef']['system']['sts']={}
+        self.setupFile['nodeDef'][ self.systemID]={}
+        self.setupFile['nodeDef'][ self.systemID]['CodeId'] = nodeId
+        self.setupFile['nodeDef'][ self.systemID]['nlsId'] = self.nlsKey
+        self.setupFile['nodeDef'][ self.systemID]['nlsNAME']=self.mSystem[ self.systemID]['data']['mName']
+        self.setupFile['nodeDef'][ self.systemID]['nlsICON']=self.mSystem[ self.systemID]['ISYnode']['nlsICON']
+        self.setupFile['nodeDef'][ self.systemID]['sts']={}
 
-        for mKey in self.mSystem['system']['data']: 
+        for mKey in self.mSystem[ self.systemID]['data']: 
             #make check if system has unit installed
-            if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
-                if ((self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
-                   and self.mSystem['system']['data'][mKey] != 0)
-                   or self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
+            if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
+                if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
+                   and self.mSystem[ self.systemID]['data'][mKey] != 0)
+                   or self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
                     self.keyCount = self.keyCount + 1
                     editorName = 'SYSTEM_'+str(self.keyCount)
                     nlsName = editorName
                     ISYvar = 'GV'+str(self.keyCount)
-                    self.setupFile['nodeDef']['system']['sts'][mKey]={ISYvar:editorName}
+                    self.setupFile['nodeDef'][ self.systemID]['sts'][mKey]={ISYvar:editorName}
                     self.setupFile['editors'][editorName]={}
                     #self.setupFile['nls'][editorName][ISYparam]
-                    for ISYparam in self.mSystem['system']['KeyInfo'][mKey]['ISYeditor']:
-                        if self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
-                            self.setupFile['editors'][editorName][ISYparam]=self.mSystem['system']['KeyInfo'][mKey]['ISYeditor'][ISYparam]
+                    for ISYparam in self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']:
+                        if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor'][ISYparam]!= None:
+                            self.setupFile['editors'][editorName][ISYparam]=self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor'][ISYparam]
 
-                    if self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
+                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
                         self.setupFile['nls'][nlsName]={}
-                    for ISYnls in self.mSystem['system']['KeyInfo'][mKey]['ISYnls']:
+                    for ISYnls in self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
                         LOGGER.debug( mKey + ' ' + ISYnls)
-                        if  self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
-                            self.setupFile['nls'][nlsName][ISYnls] = self.mSystem['system']['KeyInfo'][mKey]['ISYnls'][ISYnls]
+                        if  self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
+                            self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
                                 self.setupFile['editors'][editorName]['nlsKey'] = nlsName
         
-        self.setupFile['nodeDef']['system']['cmds']={}
-        if 'accepts' in self.mSystem['system']['ISYnode']:
-            self.setupFile['nodeDef']['system']['cmds']['accepts'] = {}
-            for key in  self.mSystem['system']['ISYnode']['accepts']:     
-                if self.mSystem['system']['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef']['system']['sts']:
-                    mVal = self.mSystem['system']['ISYnode']['accepts'][key]['ISYeditor']
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= self.setupFile['nodeDef']['system']['sts'][mVal]
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYInfo']=self.mSystem['system']['ISYnode']['accepts'][key]
+        self.setupFile['nodeDef'][ self.systemID]['cmds']={}
+        if 'accepts' in self.mSystem[ self.systemID]['ISYnode']:
+            self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'] = {}
+            for key in  self.mSystem[ self.systemID]['ISYnode']['accepts']:     
+                if self.mSystem[ self.systemID]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][ self.systemID]['sts']:
+                    mVal = self.mSystem[ self.systemID]['ISYnode']['accepts'][key]['ISYeditor']
+                    self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][key]= self.setupFile['nodeDef'][ self.systemID]['sts'][mVal]
+                    self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[ self.systemID]['ISYnode']['accepts'][key]
                 else:
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]= {}
-                    self.setupFile['nodeDef']['system']['cmds']['accepts'][key]['ISYInfo']= self.mSystem['system']['ISYnode']['accepts'][key]   
-        if 'sends' in self.mSystem['system']['ISYnode']:
-            self.setupFile['nodeDef']['system']['cmds']['sends']=self.mSystem['system']['ISYnode']['sends']                              
+                    self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][key]= {}
+                    self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[ self.systemID]['ISYnode']['accepts'][key]   
+        if 'sends' in self.mSystem[ self.systemID]['ISYnode']:
+            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=self.mSystem[ self.systemID]['ISYnode']['sends']                              
         return()
 
     def getNodeCapability (self, nodeKey, nodeNbr):     
@@ -1914,7 +1928,7 @@ class messanaInfo:
     def GETSystemData(self, mKey):
         sysData= {}
         LOGGER.debug('GETSystem: ' + mKey )
-        GETStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
+        GETStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
         #LOGGER.debug( GETStr)
         try:
             systemTemp = requests.get(GETStr)
@@ -1922,9 +1936,9 @@ class messanaInfo:
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 #LOGGER.debug(systemTemp)
-                self.mSystem['system']['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
+                self.mSystem[ self.systemID]['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
                 sysData['statusOK'] = True 
-                sysData['data'] = self.mSystem['system']['data'][mKey] 
+                sysData['data'] = self.mSystem[ self.systemID]['data'][mKey] 
             else:
                 LOGGER.debug(str(mKey) + ' error')
                 sysData['statusOK'] = False
@@ -1941,9 +1955,9 @@ class messanaInfo:
             sysData= {}
             LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
-            if mKey in self.mSystem['system']['KeyInfo']:
-                if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
-                    PUTStr = self.IP+self.mSystem['system']['KeyInfo'][mKey]['PUTstr']
+            if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
+                    PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
                     if PUTStr == None:
                         sysData['statusOK'] = False
                         sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
@@ -2258,19 +2272,19 @@ class messanaInfo:
     #System
     def updateSystemData(self, level):
         LOGGER.debug('Update Messana Sytem Data')
-        #LOGGER.info(self.mSystem['system'])
+        #LOGGER.info(self.mSystem[ self.systemID])
         sysData = {}
         DataOK = True
-        for mKey in self.mSystem['system']['KeyInfo']:
+        for mKey in self.mSystem[ self.systemID]['KeyInfo']:
             if level == 'active':
-                mStr = self.mSystem['system']['KeyInfo'][mKey]['Active']
+                mStr = self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']
                 if mStr != None:
                     sysData= self.pullSystemDataIndividual(mKey)
                     if not(sysData['statusOK']):
                         LOGGER.debug('Error System Active GET: ' + mKey)
                         DataOK = False  
             elif level == 'all':
-                if self.mSystem['system']['KeyInfo'][mKey]['GETstr']:
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr']:
                     #LOGGER.debug('GET ' + mKey)
                     sysData= self.pullSystemDataIndividual(mKey)
                     if not(sysData['statusOK']):
@@ -2284,8 +2298,8 @@ class messanaInfo:
     def pullSystemDataIndividual(self, mKey):
         LOGGER.debug('MessanaInfo pull System Data: ' + mKey)
         sysData = {}
-        if mKey in self.mSystem['system']['KeyInfo']:
-            if 'GETstr' in self.mSystem['system']['KeyInfo'][mKey]:
+        if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+            if 'GETstr' in self.mSystem[ self.systemID]['KeyInfo'][mKey]:
                 sysData = self.GETSystemData(mKey)       
         else:
             sysData['statusOK'] = False
@@ -2305,52 +2319,52 @@ class messanaInfo:
     def systemPullKeys(self):
         LOGGER.debug('systemPullKeys')
         keys=[]
-        if self.mSystem['system']['data']:
-            for mKey in self.mSystem['system']['data']:
+        if self.mSystem[ self.systemID]['data']:
+            for mKey in self.mSystem[ self.systemID]['data']:
                 keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
-            for mKey in self.mSystem['system']['data']:
+            for mKey in self.mSystem[ self.systemID]['data']:
                 keys.append(mKey)
         return(keys)
 
     def systemPushKeys(self):
         LOGGER.debug('systemPushKeys')
         keys=[]
-        if self.mSystem['system']['data']:
-            for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
+        if self.mSystem[ self.systemID]['data']:
+            for mKey in self.mSystem[ self.systemID]['data']:
+                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
                         keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('long')
-            for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['PUTstr']:
+            for mKey in self.mSystem[ self.systemID]['data']:
+                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
                         keys.append(mKey)
         return(keys)  
             
     def systemActiveKeys(self):
         LOGGER.debug('systemActiveKeys')
         keys=[]
-        if self.mSystem['system']['data']:
-            for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['Active']:
+        if self.mSystem[ self.systemID]['data']:
+            for mKey in self.mSystem[ self.systemID]['data']:
+                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
                         keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
-            for mKey in self.mSystem['system']['data']:
-                if mKey in self.mSystem['system']['KeyInfo']:
-                    if self.mSystem['system']['KeyInfo'][mKey]['Active']:
+            for mKey in self.mSystem[ self.systemID]['data']:
+                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
+                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
                         keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):
-        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        messanaKey = self.ISYmap[ self.systemID][ISYkey]['messana']
         systemPullKeys = self.systemPullKeys()
         if messanaKey in systemPullKeys:
             data = self.pullSystemDataIndividual(messanaKey)
@@ -2372,7 +2386,7 @@ class messanaInfo:
         return (status, systemValue)
 
     def PUTSystemISYValue(self, ISYkey, systemValue):
-        messanaKey = self.ISYmap['system'][ISYkey]['messana']
+        messanaKey = self.ISYmap[ self.systemID][ISYkey]['messana']
         systemPushKeys = self.systemPushKeys()
         status = False
         if messanaKey in systemPushKeys:
@@ -2380,12 +2394,12 @@ class messanaInfo:
         return(status)
     
     def getMessanaSystemKey(self, ISYkey):
-        return(self.ISYmap['system'][ISYkey]['messana'])
+        return(self.ISYmap[ self.systemID][ISYkey]['messana'])
 
     def getSystemISYdriverInfo(self, mKey):
         info = {}
-        if mKey in self.setupFile['nodeDef']['system']['sts']:
-            keys = list(self.setupFile['nodeDef']['system']['sts'][mKey].keys())
+        if mKey in self.setupFile['nodeDef'][ self.systemID]['sts']:
+            keys = list(self.setupFile['nodeDef'][ self.systemID]['sts'][mKey].keys())
             info['driver'] = keys[0]
             tempData =  self.GETSystemData(mKey)
             if tempData['statusOK']:
@@ -2398,29 +2412,29 @@ class messanaInfo:
                 info['value'] = val
             else:
                 info['value'] = ''
-            editor = self.setupFile['nodeDef']['system']['sts'][mKey][keys[0]]
+            editor = self.setupFile['nodeDef'][ self.systemID]['sts'][mKey][keys[0]]
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
     def getSystemSetbackISYdriver(self):
         Key = ''
-        for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['system'][ISYkey]['messana'] == 'mSetback':
+        for ISYkey in self.ISYmap[ self.systemID]:
+            if self.ISYmap[ self.systemID][ISYkey]['messana'] == 'mSetback':
                 Key = ISYkey
         return(Key)
 
     def getSystemStatusISYdriver(self):
         Key = ''
-        for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['system'][ISYkey]['messana'] == 'mStatus':
+        for ISYkey in self.ISYmap[ self.systemID]:
+            if self.ISYmap[ self.systemID][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
         return(Key)
 
     def getSystemEnergySaveISYdriver(self):
         Key = ''
-        for ISYkey in self.ISYmap['system']:
-            if self.ISYmap['system'][ISYkey]['messana'] == 'mEnergySaving':
+        for ISYkey in self.ISYmap[ self.systemID]:
+            if self.ISYmap[ self.systemID][ISYkey]['messana'] == 'mEnergySaving':
                 Key = ISYkey
         return(Key)       
 
@@ -2439,13 +2453,15 @@ class messanaInfo:
         status = self.pushSystemDataIndividual('mSetback', value)
         return(status)
 
- 
+    def getSystemAddress(self):
+        return(self.systemID)
+
      # Zones
     def getZoneCapability(self, zoneNbr): 
-        self.getNodeCapability('zones', zoneNbr)
+        self.getNodeCapability(self.zoneID, zoneNbr)
 
     def addZoneDefStruct(self, zoneNbr, nodeId):
-        self.addNodeDefStruct(zoneNbr, 'zones', nodeId)
+        self.addNodeDefStruct(zoneNbr, self.zoneID, nodeId)
 
     def updateZoneData(self, level, zoneNbr):
         LOGGER.debug('updatZoneData: ' + str(zoneNbr))
@@ -2466,42 +2482,47 @@ class messanaInfo:
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
         LOGGER.debug('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(zoneNbr, 'zones', mKey))
+        return(self.pullNodeDataIndividual(zoneNbr, self.zoneID, mKey))
 
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
         LOGGER.debug('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(zoneNbr, 'zones', mKey, value))
+        return(self.pushNodeDataIndividual(zoneNbr, self.zoneID, mKey, value))
 
     def zonePullKeys(self, zoneNbr):
         LOGGER.debug('zonePullKeys')
-        self.tempZoneKeys =  self.getNodeKeys (zoneNbr, 'zones', 'GETstr')
+        self.tempZoneKeys =  self.getNodeKeys (zoneNbr, self.zoneID, 'GETstr')
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
         LOGGER.debug('zonePushKeys')
 
-        return( self.getNodeKeys (zoneNbr, 'zones', 'PUTstr'))
+        return( self.getNodeKeys (zoneNbr, self.zoneID, 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
         LOGGER.debug('zoneActiveKeys')
-        return( self.getNodeKeys (zoneNbr, 'zones', 'Active'))
+        return( self.getNodeKeys (zoneNbr, self.zoneID, 'Active'))
 
     def getZoneCount(self):
-        return(self.mSystem['system']['data']['mZoneCount'])
+        return(self.mSystem[ self.systemID]['data']['mZoneCount'])
 
     def getZoneName(self, zoneNbr):
-        tempName = self.pullNodeDataIndividual(zoneNbr, 'zones', 'mName')
+        tempName = self.pullNodeDataIndividual(zoneNbr, self.zoneID, 'mName')
         if tempName['statusOK']:
             return(tempName['data'])
         else:
             return('NA')
+
+    def getZoneAddress(self):
+        return(self.zoneID)
+
+
     def getZoneMessanaISYkey(self, ISYkey, zoneNbr):
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         return(self.ISYmap[zoneName][ISYkey]['messana'])
 
     def getZoneISYValue(self, ISYkey, zoneNbr):
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         messanaKey = self.ISYmap[zoneName][ISYkey]['messana']
         #systemPullKeys = self.zonePullKeys(zoneNbr)
         try:
@@ -2537,7 +2558,7 @@ class messanaInfo:
         LOGGER.debug('getZoneStatusISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
             if self.ISYmap[zoneName][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
@@ -2554,7 +2575,7 @@ class messanaInfo:
         LOGGER.debug('getZoneEnergySaveISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
             if self.ISYmap[zoneName][ISYkey]['messana'] == 'mEnergySaving':
                 Key = ISYkey
@@ -2572,7 +2593,7 @@ class messanaInfo:
         LOGGER.debug('getZoneSetPointISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
             if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetPoint':
                 Key = ISYkey
@@ -2590,7 +2611,7 @@ class messanaInfo:
         LOGGER.debug('getZoneEnableScheduleISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
-        zoneName = 'zones'+str(zoneNbr)
+        zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
             if self.ISYmap[zoneName][ISYkey]['messana'] == 'mScheduleOn':
                 Key = ISYkey
@@ -2599,11 +2620,11 @@ class messanaInfo:
 
     def getZoneISYdriverInfo(self, mKey, zoneNbr):
         info = {}
-        zoneStr = 'zones'+str(zoneNbr)
+        zoneStr = self.zoneID+str(zoneNbr)
         if mKey in self.setupFile['nodeDef'][zoneStr]['sts']:
             keys = list(self.setupFile['nodeDef'][zoneStr]['sts'][mKey].keys())
             info['driver'] = keys[0]
-            tempData =  self.GETNodeData('zones', zoneNbr, mKey)
+            tempData =  self.GETNodeData(self.zoneID, zoneNbr, mKey)
             if tempData['statusOK']:
                 val = tempData['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -2627,204 +2648,204 @@ class messanaInfo:
             #LOGGER.debug('Reading data from Messana System NOT successful')
     #MacroZone
     def getMacrozoneCapability(self, macrozoneNbr): 
-        self.getNodeCapability('macrozones', macrozoneNbr)
+        self.getNodeCapability(self.macroZoneID, macrozoneNbr)
 
     def updateMacroZoneData(self, macrozoneNbr):
         LOGGER.debug('updatMacroZoneData: ' + str(macrozoneNbr))
-        return(self.updateNodeData(macrozoneNbr, 'macrozones'))
+        return(self.updateNodeData(macrozoneNbr, self.macroZoneID))
 
     def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
         LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(macrozoneNbr, 'macrozones', mKey))
+        return(self.pullNodeDataIndividual(macrozoneNbr, self.macroZoneID, mKey))
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
         LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(macrozoneNbr, 'macrozones', mKey, value))
+        return(self.pushNodeDataIndividual(macrozoneNbr, self.macroZoneID, mKey, value))
 
     def macrozonePullKeys(self, macrozoneNbr):
         LOGGER.debug('macrozonePullKeys')
-        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'GETstr'))
+        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'GETstr'))
 
     def macrozonePushKeys(self, macrozoneNbr):
         LOGGER.debug('macrozonePushKeys')
-        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'PUTstr'))
+        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'PUTstr'))
   
     def macrozoneActiveKeys(self, macrozoneNbr):
         LOGGER.debug('macrozoneActiveKeys')
-        return( self.getNodeKeys (macrozoneNbr, 'macrozones', 'Active'))    
+        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'Active'))    
 
     def getMacrozoneCount(self):
-        return(self.mSystem['system']['data']['mMacrozoneCount'])
+        return(self.mSystem[ self.systemID]['data']['mMacrozoneCount'])
 
     #def getATUcount(self):
 
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
         LOGGER.debug('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateNodeData(HC_CONbr, 'HcCo'))
+        return(self.updateNodeData(HC_CONbr, self.HotColdcoID ))
 
     def getHC_COCapability(self, HC_CONbr): 
-        self.getNodeCapability('HcCo', HC_CONbr)
+        self.getNodeCapability(self.HotColdcoID , HC_CONbr)
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
         LOGGER.debug('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(HC_CONbr, 'HcCo', mKey))
+        return(self.pullNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey))
 
     def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
         LOGGER.debug('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(HC_CONbr, 'HcCo', mKey, value))
+        return(self.pushNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey, value))
 
     def HcCoPullKeys(self, HC_CONbr):
         LOGGER.debug('hc_coPullKeys')
-        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'GETstr'))
+        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'GETstr'))
 
     def hc_coPushKeys(self, HC_CONbr):
         LOGGER.debug('hc_coPushKeys')
-        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'PUTstr'))
+        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'PUTstr'))
   
     def hc_coActiveKeys(self, HC_CONbr):
         LOGGER.debug('hc_coActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, 'HcCo', 'Active'))    
+        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'Active'))    
 
     def getHotColdChangeOverCount(self):
-        return(self.mSystem['system']['data']['mhc_coCount'])
+        return(self.mSystem[ self.systemID]['data']['mhc_coCount'])
 
 
     #ATU
     def updateATUData(self, ATUNbr):
         LOGGER.debug('updatATUData: ' + str(ATUNbr))
-        return(self.updateNodeData(ATUNbr, 'atus'))
+        return(self.updateNodeData(ATUNbr, self.atuID))
 
     def getAtuCapability(self, atuNbr): 
-        self.getNodeCapability('atus', atuNbr)
+        self.getNodeCapability(self.atuID, atuNbr)
 
     def pullATUDataIndividual(self, ATUNbr, mKey): 
         LOGGER.debug('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(ATUNbr, 'atus', mKey))
+        return(self.pullNodeDataIndividual(ATUNbr, self.atuID, mKey))
 
     def pushATUDataIndividual(self, ATUNbr, mKey, value):
         LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(ATUNbr, 'atus', mKey, value))
+        return(self.pushNodeDataIndividual(ATUNbr, self.atuID, mKey, value))
 
     def atuPullKeys(self, ATUNbr): 
         LOGGER.debug('atusPullKeys')
-        return( self.getNodeKeys (ATUNbr, 'atus', 'GETstr'))
+        return( self.getNodeKeys (ATUNbr, self.atuID, 'GETstr'))
 
     def atuPushKeys(self, ATUNbr):
         LOGGER.debug('atusPushKeys')
-        return( self.getNodeKeys (ATUNbr, 'atus', 'PUTstr'))
+        return( self.getNodeKeys (ATUNbr, self.atuID, 'PUTstr'))
   
     def atuActiveKeys(self, ATUNbr):
         LOGGER.debug('atusActiveKeys')
-        return( self.getNodeKeys (ATUNbr, 'atus', 'Active'))    
+        return( self.getNodeKeys (ATUNbr, self.atuID, 'Active'))    
   
     def getATUCount(self):
-        return(self.mSystem['system']['data']['mATUcount'])
+        return(self.mSystem[ self.systemID]['data']['mATUcount'])
 
 
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
         LOGGER.debug('updatFanCoilData: ' + str(FanCoilNbr))
-        return(self.updateNodeData(FanCoilNbr, 'FanCoils'))
+        return(self.updateNodeData(FanCoilNbr, self.fcID))
 
     def getFanCoilCapability(self, FanCoilNbr): 
-        self.getNodeCapability('FanCoils', FanCoilNbr)
+        self.getNodeCapability(self.fcID, FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
         LOGGER.debug('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey))
+        return(self.pullNodeDataIndividual(FanCoilNbr, self.fcID, mKey))
 
     def pushFanCoilDataIndividual(self, FanCoilNbr, mKey, value):
         LOGGER.debug('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(FanCoilNbr, 'FanCoils', mKey, value))
+        return(self.pushNodeDataIndividual(FanCoilNbr, self.fcID, mKey, value))
 
     def fan_coilPullKeys(self, FanCoilNbr):
         LOGGER.debug('fan_coilPullKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'GETstr'))
+        return( self.getNodeKeys (FanCoilNbr, self.fcID, 'GETstr'))
 
     def fan_coilPushKeys(self, FanCoilNbr):
         LOGGER.debug('fan_coilPushKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'PUTstr'))
+        return( self.getNodeKeys (FanCoilNbr, self.fcID, 'PUTstr'))
   
     def fan_coilActiveKeys(self, FanCoilNbr):
         LOGGER.debug('fan_coilActiveKeys')
-        return( self.getNodeKeys (FanCoilNbr, 'FanCoils', 'Active'))    
+        return( self.getNodeKeys (FanCoilNbr, self.fcID, 'Active'))    
     
     def getFanCoilCount(self):
-        return(self.mSystem['system']['data']['mFanCoilCount'])
+        return(self.mSystem[ self.systemID]['data']['mFanCoilCount'])
   
     #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
         LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
-        return(self.updateNodeData(EnergySourceNbr, 'EnergyS'))
+        return(self.updateNodeData(EnergySourceNbr,  self.energySaveID))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
-        self.getNodeCapability('EnergyS', EnergySourceNbr)
+        self.getNodeCapability( self.energySaveID, EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         LOGGER.debug('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey))
+        return(self.pullNodeDataIndividual(EnergySourceNbr,  self.energySaveID, mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
         LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(EnergySourceNbr, 'EnergyS', mKey, value))
+        return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySaveID, mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourcePullKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'GETstr'))
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
         LOGGER.debug('EnergySourcePushKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'PUTstr'))
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourceActiveKeys')
-        return( self.getNodeKeys (EnergySourceNbr, 'EnergyS', 'Active'))    
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'Active'))    
     
     def getenergySourceCount(self):
-        return(self.mSystem['system']['data']['mEnergySourceCount'])
+        return(self.mSystem[ self.systemID]['data']['mEnergySourceCount'])
 
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         LOGGER.debug('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateNodeData(BufferTankNbr, 'BufTanks'))
+        return(self.updateNodeData(BufferTankNbr, self.bufferTankID))
 
     def getBufferTankCapability(self, BufferTankNbr): 
-        self.getNodeCapability('BufTanks', BufferTankNbr)
+        self.getNodeCapability(self.bufferTankID, BufferTankNbr)
 
 
     def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
         LOGGER.debug('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey))
+        return(self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey))
 
     def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
         LOGGER.debug('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullNodeDataIndividual(BufferTankNbr, 'BufTanks', 'mMode')
+            BTdata = self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
+                return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
             else:
                 LOGGER.debug('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushNodeDataIndividual(BufferTankNbr, 'BufTanks', mKey, value))
+             return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
 
     def buffer_tankPullKeys(self, BufferTankNbr):
         LOGGER.debug('buffer_tankPullKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'GETstr'))
+        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'GETstr'))
 
     def buffer_tankPushKeys(self, BufferTankNbr):
         LOGGER.debug('buffer_tankPushKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'PUTstr'))
+        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'PUTstr'))
   
     def buffer_tankActiveKeys(self, BufferTankNbr):
         LOGGER.debug('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, 'BufTanks', 'Active'))    
+        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'Active'))    
     
     def getBufferTankCount(self):
-        return(self.mSystem['system']['data']['mBufTankCount'])
+        return(self.mSystem[ self.systemID]['data']['mBufTankCount'])
 
         #Domestic Hot Water
  
@@ -2832,34 +2853,34 @@ class messanaInfo:
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
         LOGGER.debug('updatDHWData: ' + str(DHWNbr))
-        return(self.updateNodeData(DHWNbr, 'DomHw'))
+        return(self.updateNodeData(DHWNbr, self.dhwID))
 
     def getDHWCapability(self, DHWNbr): 
-        self.getNodeCapability('DomHw', DHWNbr)
+        self.getNodeCapability(self.dhwID, DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
         LOGGER.debug('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(DHWNbr, 'DomHw', mKey))
+        return(self.pullNodeDataIndividual(DHWNbr, self.dhwID, mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
         LOGGER.debug('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(DHWNbr, 'DomHw', mKey, value))
+        return(self.pushNodeDataIndividual(DHWNbr, self.dhwID, mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
         LOGGER.debug('DHWPullKeys')
-        return( self.getNodeKeys (DHWNbr, 'DomHw', 'GETstr'))
+        return( self.getNodeKeys (DHWNbr, self.dhwID, 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
         LOGGER.debug('DHWPushKeys')
-        return( self.getNodeKeys (DHWNbr, 'DomHw', 'PUTstr'))
+        return( self.getNodeKeys (DHWNbr, self.dhwID, 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
         LOGGER.debug('DHWActiveKeys')
-        return( self.getNodeKeys (DHWNbr, 'DomHw', 'active'))    
+        return( self.getNodeKeys (DHWNbr, self.dhwID, 'active'))    
 
     def getDomesticHotWaterCount(self):
-        return(self.mSystem['system']['data']['mDHWcount'])
+        return(self.mSystem[ self.systemID]['data']['mDHWcount'])
     '''
 
     def pullMessanaStatus(self):

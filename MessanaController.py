@@ -19,15 +19,15 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('_init_ Messsana Controller')
         self.messanaImportOK = 0
         self.ISYforced = False
-        self.name = 'MessanaMain' # must be less than 14 characters
-        self.address ='messanasys'
+        self.name = 'Messana Main'
+        #self.address ='messanasys'
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
         self.ISYdrivers=[]
         self.ISYcommands = {}
         self.ISYTempUnit = 0
-        self.id = self.name
+        #self.id = self.name
         self.drivers = []
         self.nodeDefineDone = False
 
@@ -69,10 +69,11 @@ class MessanaController(polyinterface.Controller):
 
         else:
             LOGGER.info('Retrieving info from Messana System')
-            self.messana = messanaInfo( self.IPAddress, self.MessanaKey , self.name)
+            self.messana = messanaInfo( self.IPAddress, self.MessanaKey )
             if self.messana == False:
                 self.stop()
-
+            self.id = self.messana.getSystemAddress()
+            self.address = self.messana.getSystemAddress()
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
