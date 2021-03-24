@@ -13,7 +13,7 @@ class messanaInfo:
         
         self.systemID = 'system'
         self.zoneID = 'zones'
-        self.macroZoneID = 'macrozones'
+        self.macrozoneID = 'macrozones'
         self.atuID = 'atus'
         self.dhwID = 'DomHw'
         self.fcID = 'FanCoils'
@@ -646,7 +646,7 @@ class messanaInfo:
                                     ,'data' :{}
                                     ,'NOcapability' : {}
                         },
-                        self.macroZoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
+                        self.macrozoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
                                                         ,'accepts' : {'UPDATE'        : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1627,8 +1627,8 @@ class messanaInfo:
             for macrozoneNbr in range(0,self.mSystem[ self.systemID]['data']['mMacrozoneCount']):
                 self.getMacrozoneCapability(macrozoneNbr)
                 self.updateMacroZoneData(macrozoneNbr)
-                macrozoneName = self.macroZoneID+str(macrozoneNbr)
-                self.addNodeDefStruct(macrozoneNbr, self.macroZoneID, macrozoneName )
+                macrozoneName = self.macrozoneID+str(macrozoneNbr)
+                self.addNodeDefStruct(macrozoneNbr, self.macrozoneID, macrozoneName )
 
             for atuNbr in range(0,self.mSystem[ self.systemID]['data']['mATUcount']):
                 self.getAtuCapability(atuNbr)
@@ -2648,48 +2648,48 @@ class messanaInfo:
             #LOGGER.debug('Reading data from Messana System NOT successful')
     #MacroZone
     def getMacrozoneCapability(self, macrozoneNbr): 
-        self.getNodeCapability(self.macroZoneID, macrozoneNbr)
+        self.getNodeCapability(self.macrozoneID, macrozoneNbr)
 
     def updateMacroZoneData(self, macrozoneNbr):
         LOGGER.debug('updatMacroZoneData: ' + str(macrozoneNbr))
-        return(self.updateNodeData(macrozoneNbr, self.macroZoneID))
+        return(self.updateNodeData(macrozoneNbr, self.macrozoneID))
 
     def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
         LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(macrozoneNbr, self.macroZoneID, mKey))
+        return(self.pullNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey))
 
     def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
         LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(macrozoneNbr, self.macroZoneID, mKey, value))
+        return(self.pushNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey, value))
 
     def macrozonePullKeys(self, macrozoneNbr):
         LOGGER.debug('macrozonePullKeys')
-        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'GETstr'))
+        return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'GETstr'))
 
     def macrozonePushKeys(self, macrozoneNbr):
         LOGGER.debug('macrozonePushKeys')
-        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'PUTstr'))
+        return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'PUTstr'))
   
     def macrozoneActiveKeys(self, macrozoneNbr):
         LOGGER.debug('macrozoneActiveKeys')
-        return( self.getNodeKeys (macrozoneNbr, self.macroZoneID, 'Active'))    
+        return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'Active'))    
 
     def getMacrozoneCount(self):
-        return(self.mSystem[ self.systemID]['data']['mMacrozoneCount'])
+        return(self.mSystem[self.systemID]['data']['mMacrozoneCount'])
 
 
-    def getMacroZoneName(self, macroZoneNbr):
-        tempName = self.pullNodeDataIndividual(macroZoneNbr, self.macroZoneID, 'mName')
+    def getMacrozoneName(self, macroZoneNbr):
+        tempName = self.pullNodeDataIndividual(macroZoneNbr, self.macrozoneID, 'mName')
         if tempName['statusOK']:
             return(tempName['data'])
         else:
             return('NA')
 
-    def getMacroZoneAddress(self, macroZoneNbr):
-        return(self.macroZoneID + str(macroZoneNbr))
+    def getMacrozoneAddress(self, macroZoneNbr):
+        return(self.macrozoneID + str(macroZoneNbr))
 
 
-    #def getATUcount(self):
+
 
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
@@ -2751,7 +2751,7 @@ class messanaInfo:
         LOGGER.debug('atusActiveKeys')
         return( self.getNodeKeys (ATUNbr, self.atuID, 'Active'))    
   
-    def getATUCount(self):
+    def getAtuCount(self):
         return(self.mSystem[ self.systemID]['data']['mATUcount'])
 
     

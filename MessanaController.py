@@ -7,6 +7,8 @@ import sys
 from collections import defaultdict
 from MessanaInfoPlay import messanaInfo
 from MessanaZone import messanaZone
+from MessanaMacrozone import messanaMacrozone
+from MessanaAtu import messanaAtu
 import shutil
 
 
@@ -195,47 +197,36 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
             if not address in self.nodes:
                self.addNode(messanaZone(self, self.address, address, name, zoneNbr))
-
+        '''
         LOGGER.debug('discover macrozone')
-        nbrMacroZones =  self.messana.getMacroZoneCount()
-        for macroZoneNbr in range(0,nbrMacroZones):
-            LOGGER.debug('Adding zone ' + str(macroZoneNbr))
-            name = self.messana.getMacroZoneName(macroZoneNbr)
-            address = self.messana.getMacroZoneAddress(macroZoneNbr)
-            LOGGER.debug('macrozone ' + str(macroZoneNbr) + ' : name, Address: ' + name +' ' + address) 
+        nbrMacrozones =  self.messana.getMacrozoneCount()
+        for macrozoneNbr in range(0,nbrMacrozones):
+            LOGGER.debug('Adding zone ' + str(macrozoneNbr))
+            name = self.messana.getMacrozoneName(macrozoneNbr)
+            address = self.messana.getMacrozoneAddress(macrozoneNbr)
+            LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + name +' ' + address) 
             if not address in self.nodes:
-               self.addNode(messanaMacroZone(self, self.address, address, name, macroZoneNbr))
+               self.addNode(messanaMacrozone(self, self.address, address, name, macrozoneNbr))
 
         LOGGER.debug('discover atus')
-        nbrAths =  self.messana.getAtuCount()
+        nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):
             LOGGER.debug('Adding zone ' + str(atuNbr))
             name = self.messana.getAtuName(atuNbr)
             address = self.messana.getAtuAddress(atuNbr)
             LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + name +' ' + address) 
             if not address in self.nodes:
-               self.addNode(messanaATU(self, self.address, address, name, atuNbr))
+               self.addNode(messanaAtu(self, self.address, address, name, atuNbr))
         #nbrMacrozones = 0
         self.nodeDefineDone = True
-
+        '''
 
 
     
 
 
     '''
-    self.getMessanaSystemKeyVal('mMacrooneCount', nbrMacrozones)
-    for macrozoneNbr in range(0,nbrMacrozones):
-        macrozoneGETKeys = []
-        macrozoneGETKeys = self.messana.macrozonePullKeys(macrozoneNbr)
-        if 'mName' in macrozoneGETKeys:
-            name = str(self.messana.pullMacroZoneDataIndividual(macrozoneNbr, 'mName'))
-            address = 'macrozone'+str(zoneNbr)
-            LOGGER.debug('macrozone ' + str(zoneNbr) + ' : name, Address' + name +' ' + address) 
-            if not address in self.nodes:
-                self.addNode(MessanaMacrozones(self, self.address, address, name, zoneNbr, self.messana))
-
-
+   
     #nbrATUs = 0
 
     #nbrDHWs = 0

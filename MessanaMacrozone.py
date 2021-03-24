@@ -8,14 +8,14 @@ from collections import defaultdict
 
 LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
-class messanaZone(polyinterface.Node):
+class messanaMacrozone(polyinterface.Node):
     def __init__(self, controller, primary, address, name,  zoneNbr):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
         self.zoneNbr = zoneNbr
         self.name = name
         self.address = address 
-        self.id = 'zones'+str(zoneNbr)
+        self.id = 'macrozones'+str(zoneNbr)
         self.messana = self.parent.messana
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
