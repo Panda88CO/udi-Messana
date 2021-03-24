@@ -39,7 +39,7 @@ class messanaZone(polyinterface.Node):
 
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('updateISYdrivers')
+        LOGGER.debug('Zone updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
