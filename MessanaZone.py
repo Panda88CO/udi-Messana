@@ -42,8 +42,8 @@ class messanaZone(polyinterface.Node):
         LOGGER.debug('updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
-            temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
             if level == 'active':
+                temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
                 if temp in self.zone_ActiveKeys:                    
                     LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
@@ -55,19 +55,20 @@ class messanaZone(polyinterface.Node):
                         LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
-                elif level == 'all':
-                    status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
-                    LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
-                    if status:
-                        if self.ISYforced:
-                            self.setDriver(ISYdriver, value, report = True, force = False)
-                        else:
-                            self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+            elif level == 'all':
+                temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
+                status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
+                LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
+                if status:
+                    if self.ISYforced:
+                        self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        self.setDriver(ISYdriver, value, report = True, force = True)
+                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error!  Unknow level: ' + level)
+                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+            else:
+                LOGGER.debug('Error!  Unknow level: ' + level)
         
     def stop(self):
         LOGGER.debug('stop - Messana Zone Cleaning up')
