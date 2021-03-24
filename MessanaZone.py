@@ -12,11 +12,13 @@ class messanaZone(polyinterface.Node):
     def __init__(self, controller, primary, address, name,  zoneNbr):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
+        
         self.zoneNbr = zoneNbr
         self.name = name
         self.address = address 
-        self.id = 'zones'+str(zoneNbr)
         self.messana = self.parent.messana
+        self.id = self.messana.getZoneAddress(self.zoneNbr)
+       
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)

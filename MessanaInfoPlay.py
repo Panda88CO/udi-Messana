@@ -2513,8 +2513,8 @@ class messanaInfo:
         else:
             return('NA')
 
-    def getZoneAddress(self):
-        return(self.zoneID)
+    def getZoneAddress(self, zoneNbr):
+        return(self.zoneID + str(zoneNbr))
 
 
     def getZoneMessanaISYkey(self, ISYkey, zoneNbr):
@@ -2677,6 +2677,18 @@ class messanaInfo:
     def getMacrozoneCount(self):
         return(self.mSystem[ self.systemID]['data']['mMacrozoneCount'])
 
+
+    def getMacroZoneName(self, macroZoneNbr):
+        tempName = self.pullNodeDataIndividual(macroZoneNbr, self.macroZoneID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+
+    def getMacroZoneAddress(self, macroZoneNbr):
+        return(self.macroZoneID + str(macroZoneNbr))
+
+
     #def getATUcount(self):
 
     # Hot Cold Change Over
@@ -2741,6 +2753,17 @@ class messanaInfo:
   
     def getATUCount(self):
         return(self.mSystem[ self.systemID]['data']['mATUcount'])
+
+    
+    def getAtuName(self, atuNbr):
+        tempName = self.pullNodeDataIndividual(atuNbr, self.atuID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getAtuAddress(self, atuNbr):
+        return(self.atuID + str(atuNbr))
 
 
     #Fan Coils

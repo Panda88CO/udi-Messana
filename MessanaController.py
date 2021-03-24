@@ -185,17 +185,36 @@ class MessanaController(polyinterface.Controller):
         self.reportDrivers()
 
     def discover(self, command=None):
-        LOGGER.debug('discover')
+        LOGGER.debug('discover zones')
+
         nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
             name = self.messana.getZoneName(zoneNbr)
-            address = self.messana.getZoneAddress()
+            address = self.messana.getZoneAddress(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
             if not address in self.nodes:
                self.addNode(messanaZone(self, self.address, address, name, zoneNbr))
 
+        LOGGER.debug('discover macrozone')
+        nbrMacroZones =  self.messana.getMacroZoneCount()
+        for macroZoneNbr in range(0,nbrMacroZones):
+            LOGGER.debug('Adding zone ' + str(macroZoneNbr))
+            name = self.messana.getMacroZoneName(macroZoneNbr)
+            address = self.messana.getMacroZoneAddress(macroZoneNbr)
+            LOGGER.debug('macrozone ' + str(macroZoneNbr) + ' : name, Address: ' + name +' ' + address) 
+            if not address in self.nodes:
+               self.addNode(messanaMacroZone(self, self.address, address, name, macroZoneNbr))
 
+        LOGGER.debug('discover atus')
+        nbrAths =  self.messana.getAtuCount()
+        for atuNbr in range(0,nbrAtus):
+            LOGGER.debug('Adding zone ' + str(atuNbr))
+            name = self.messana.getAtuName(atuNbr)
+            address = self.messana.getAtuAddress(atuNbr)
+            LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + name +' ' + address) 
+            if not address in self.nodes:
+               self.addNode(messanaATU(self, self.address, address, name, atuNbr))
         #nbrMacrozones = 0
         self.nodeDefineDone = True
 
