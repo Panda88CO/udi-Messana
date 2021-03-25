@@ -222,7 +222,7 @@ class MessanaController(polyinterface.Controller):
         #nbrMacrozones = 0
        
         '''
-         self.nodeDefineDone = True
+        self.nodeDefineDone = True
 
     
 
