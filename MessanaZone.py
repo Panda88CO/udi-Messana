@@ -151,13 +151,11 @@ class messanaZone(polyinterface.Node):
                 ,'SET_ENERGYSAVE' : setEnergySave
                 ,'SET_SCHEDULEON' : enableSchedule 
                 ,'UPDATE' : ISYupdate
-                ,'SET_CUR_DEWPOINT' : setCurrentDewPt
-                ,'SET_CUR_REL_HUM' : setCurRelHum
-                ,'SET_DEW_T_DEHUM' : setDewTempDehum
-                ,'SET_REL_DEHUM' : setRelDehum
-                ,'SET_DEW_T_HUM' : setDewTempHum
-                ,'SET_REL_HUM' : setRelHum                                                                    
+                ,'CurrentSetPointDP' : setCurrentDewPt
+                ,'CurrentSetPointRH' : setCurRelHum
+                ,'DehumSetPointDP' : setDewTempDehum
+                ,'DehumSetPointRH' : setRelDehum
+                ,'HumSetPointDP' : setDewTempHum
+                ,'HumSetPointRH' : setRelHum                                                                    
                 ,'SET_CO2' : setCO2
                 }
-
-                                                      

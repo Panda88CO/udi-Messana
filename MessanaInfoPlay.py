@@ -287,22 +287,22 @@ class messanaInfo:
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
                                                              ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                             ,'SET_CUR_DEWPOINT': { 'ISYtext' :'Not Implemented yet'
+                                                             ,'CurrentSetPointDP': { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mCurrentSetPointDP'}
-                                                             ,'SET_CUR_REL_HUM' : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'CurrentSetPointRH' : { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mCurrentSetPointRH'}
-                                                             ,'SET_DEW_T_DEHUM' : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'DehumSetPointDP' : { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mDehumSetPointDP'}
-                                                             ,'SET_REL_DEHUM'   : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'DehumSetPointRH'   : { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mDehumSetPointRH'}
-                                                             ,'SET_DEW_T_HUM'   : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'HumSetPointDP'   : { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mHumSetPointDP'}
-                                                             ,'SET_REL_HUM'     : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'HumSetPointRH'     : { 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mHumSetPointRH'}
                                                              ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet'
                                                                                     ,'ISYeditor' : 'mCO2'}
 
-                                                            }  #more PUTs to be supported
+                                                            } 
                                                 }
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -795,7 +795,9 @@ class messanaInfo:
                         }, 
                         self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {  'UPDATE':  { 'ISYtext'   :'Update System'
+                                                                                         ,'ISYeditor' : None } 
+                                                                       ,'SET_MODE': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'SET_ADAPTIVE_COMFORT' :{ 'ISYtext' :'Adaptive System'
                                                                                          ,'ISYeditor' : None } }}
@@ -870,6 +872,8 @@ class messanaInfo:
                         self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
+                                                                                         ,'ISYeditor' : None }
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                         ,'SET_COOLING_SPEED' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None } 
@@ -980,25 +984,27 @@ class messanaInfo:
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
+                                                                        , 'UPDATE': { 'ISYtext'   :'Update System'
+                                                                                         ,'ISYeditor' : None }
                                                                         ,'SET_HRV_ON' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                         ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_HUM' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_HUM' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_NTD' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_NTD' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'SET_INT' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_INT' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_RH' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_DP' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_RH' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_DP' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_DEHUM_SP_DP' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }    
-                                                                        ,'SET_CURR_SP_RH' :{ 'ISYtext' :'Update System'
+                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }     
                                                                         ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1329,7 +1335,9 @@ class messanaInfo:
                          self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                       ,'ISYeditor' : None }}
+                                                                                       ,'ISYeditor' : None }
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
+                                                                                         ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
                                         'mName':{
@@ -1419,6 +1427,8 @@ class messanaInfo:
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
+                                                                                         ,'ISYeditor' : None }
+                                                                       ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'SET_MODE'      : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1512,6 +1522,8 @@ class messanaInfo:
                         self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
+                                                                                         ,'ISYeditor' : None }
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                         ,'SET_TARGETTEMP': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }}
