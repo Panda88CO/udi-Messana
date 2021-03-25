@@ -987,28 +987,28 @@ class messanaInfo:
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'System Status'
                                                                                          ,'ISYeditor' : 'mStatus' }
                                                                         ,'UPDATE': { 'ISYtext'   :'Update System'
-                                                                                         ,'ISYeditor' : None }
+                                                                                         ,'ISYeditor'    : None }
                                                                         ,'SET_HRVON' : { 'ISYtext' :'Heat Revopvery'
-                                                                                         ,'ISYeditor' : 'mHRVOn' }
+                                                                                         ,'ISYeditor'    : 'mHRVOn' }
                                                                         ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Set Flow Level'
-                                                                                         ,'ISYeditor' : 'mFlowLevel' }
+                                                                                         ,'ISYeditor'    : 'mFlowLevel' }
                                                                         ,'SET_HUM' : { 'ISYtext' :'Humidity Integration'
-                                                                                         ,'ISYeditor' : 'mHUMOn' }
+                                                                                         ,'ISYeditor'    : 'mHUMOn' }
                                                                         ,'SET_NTD' : { 'ISYtext' :'NTD Integration'
-                                                                                         ,'ISYeditor' : 'mNTDOn' }
+                                                                                         ,'ISYeditor'    : 'mNTDOn' }
                                                                         ,'SET_INT' : { 'ISYtext' :'Convective Integration'
                                                                                          ,'ISYeditor' : 'mINTOn' }     
-                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext' :'Hum Setpoint RH'
+                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext'   :'Hum Setpoint RH'
                                                                                          ,'ISYeditor' : 'mHumSetpointRH'}     
-                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext' :'Hum Setpoint DP'
-                                                                                         ,'ISYeditor' : 'mHumSetpointDP' }     
-                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'Dehum Setpoint RH'
-                                                                                         ,'ISYeditor' : 'mDehumSetpointRH' }     
+                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext'   :'Hum Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mHumSetpointDP' } 
+                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'DehumSetpointRH'
+                                                                                         ,'ISYeditor' : 'mDehumSetpointRH'}
                                                                         ,'SET_DEHUM_SP_DP' : { 'ISYtext' :'Dehum Setpoint DP'
                                                                                          ,'ISYeditor' : 'mDehumSetpointDP' }    
-                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext' :'Current Setpoint RH'
+                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext'  :'Current Setpoint RH'
                                                                                          ,'ISYeditor' : 'mCurrentSetpointRH' }     
-                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Current Setpoint DP'
+                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext'   :'Current Setpoint DP'
                                                                                          ,'ISYeditor' : 'mCurrentSetpointDP' }
                                                                         }}
                                     ,'KeyInfo' : {  
