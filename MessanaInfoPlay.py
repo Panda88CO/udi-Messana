@@ -2104,7 +2104,7 @@ class messanaInfo:
     
     def pullNodeDataIndividual(self, NodeNbr, NodeKey, mKey): 
         Data = {} 
-        LOGGER.debug('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
         if mKey in mKey in self.mSystem[NodeKey]['KeyInfo']:
             Data = self.GETNodeData(NodeKey, NodeNbr, mKey)
         else:
