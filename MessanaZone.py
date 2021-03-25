@@ -2,9 +2,6 @@
 
 import polyinterface
 from subprocess import call
-import json
-from collections import defaultdict
-#from MessanaInfo import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
@@ -12,7 +9,6 @@ class messanaZone(polyinterface.Node):
     def __init__(self, controller, primary, address, name,  zoneNbr):
         super().__init__(controller, primary, address, name)
         LOGGER.info('_init_ Messana Zone ' + str(zoneNbr) )
-        
         self.zoneNbr = zoneNbr
         self.name = name
         self.address = address 
@@ -35,8 +31,6 @@ class messanaZone(polyinterface.Node):
         self.ISYforced = True
        
     def start(self):
-
-
         return True
 
 
@@ -89,6 +83,8 @@ class messanaZone(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
+    # ISY functions
+
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
@@ -96,8 +92,6 @@ class messanaZone(polyinterface.Node):
         if self.messana.zoneSetStatus(value, self.zoneNbr):
             ISYdriver = self.messana.getZoneStatusISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)
-
-
 
     def setEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
@@ -125,17 +119,45 @@ class messanaZone(polyinterface.Node):
             ISYdriver = self.messana.getZoneEnableScheduleISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)     
         
-        #self.zoneInfo['mScheduleOn'] = val
-        #self.messana.pushZoneData(self.zoneNbr, self.zoneInfo)
-        #self.checkSetDriver('GV3', 'mScheduleOn')
+    def ISYupdate(self, command):
+        LOGGER.info('ISY-update called - zone' + str(self.zoneNbr))
+        self.messana.updateZoneData('all', self.zoneNbr)
+        self.updateISYdrivers('all')
+        self.reportDrivers()
 
- 
+    def setCurrentDewPt(self, command):
+        LOGGER.debug('Not implemented yet')
 
-    commands = { 'SET_SETPOINT': setSetpoint
-                ,'SET_STATUS': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SCHEDULE' : enableSchedule 
+    def setCurRelHum(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    def setDewTempDehum(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    def setRelDehum(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    def setDewTempHum(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    def setRelHum(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    def setCO2(self, command):
+        LOGGER.debug('Not implemented yet')
+
+    commands = { 'SET_SETPOINT' : setSetpoint
+                ,'SET_STATUS' : setStatus
+                ,'SET_ENERGYSAVE' : setEnergySave
+                ,'SET_SCHEDULEON' : enableSchedule 
+                ,'UPDATE' : ISYupdate
+                ,'SET_CUR_DEWPOINT' : setCurrentDewPt
+                ,'SET_CUR_REL_HUM' : setCurRelHum
+                ,'SET_DEW_T_DEHUM' : setDewTempDehum
+                ,'SET_REL_DEHUM' : setRelDehum
+                ,'SET_DEW_T_HUM' : setDewTempHum
+                ,'SET_REL_HUM' : setRelHum                                                                    
+                ,'SET_CO2' : setCO2
                 }
 
-    drivers = [  ]
-
+                                                      

@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 
 import polyinterface
-from subprocess import call
-import json
 import sys
-from collections import defaultdict
 from MessanaInfoPlay import messanaInfo
 from MessanaZone import messanaZone
 from MessanaMacrozone import messanaMacrozone
 from MessanaATU import messanaAtu
-import shutil
+
 
 
 LOGGER = polyinterface.LOGGER
@@ -381,6 +378,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.info('ISY-update called')
         self.messana.updateSystemData('all')
         self.updateISYdrivers('all')
+        self.reportDrivers()
  
     #id = 'MessanaMain' #self.name must have same value 
     #LOGGER.debug(str(id))

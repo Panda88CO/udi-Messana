@@ -277,7 +277,9 @@ class messanaInfo:
                         },
                         self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
+                                                ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
+                                                                                    ,'ISYeditor' : None} 
+                                                             ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
                                                                                     ,'ISYeditor' : 'mSetPoint' }
                                                              ,'SET_STATUS'     : {   'ISYtext' :'Zone State'
                                                                                     ,'ISYeditor' : 'mStatus' }                                                         
@@ -285,7 +287,22 @@ class messanaInfo:
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
                                                              ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                            }
+                                                             ,'SET_CUR_DEWPOINT': { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mCurrentSetPointDP'}
+                                                             ,'SET_CUR_REL_HUM' : { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mCurrentSetPointRH'}
+                                                             ,'SET_DEW_T_DEHUM' : { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mDehumSetPointDP'}
+                                                             ,'SET_REL_DEHUM'   : { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mDehumSetPointRH'}
+                                                             ,'SET_DEW_T_HUM'   : { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mHumSetPointDP'}
+                                                             ,'SET_REL_HUM'     : { 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mHumSetPointRH'}
+                                                             ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet'
+                                                                                    ,'ISYeditor' : 'mCO2'}
+
+                                                            }  #more PUTs to be supported
                                                 }
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -648,14 +665,15 @@ class messanaInfo:
                         },
                         self.macrozoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {'UPDATE'        : { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                    ,'SET_STATUS'     : { 'ISYtext' :'Macro Zone State'
-                                                                                         ,'ISYeditor' : None } 
-                                                                    ,'SET_ENERGYSAVE' : { 'ISYtext' :'Energy Saving'
-                                                                                         ,'ISYeditor' : None }
-                                                                    ,'SET_SETBACK'    : { 'ISYtext' :'Setback'
-                                                                                         ,'ISYeditor' : None}
+                                                                    ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
+                                                                                         ,'ISYeditor' : 'mSetPoint' }
+                                                                    ,'SET_STATUS'     : { 'ISYtext'   :'Macro Zone State'
+                                                                                         ,'ISYeditor' : 'mStatus' } 
+                                                                    ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
+                                                                                         ,'ISYeditor' : 'mScheduleOn' }
+   
                                                                     }
                                                         }
 
