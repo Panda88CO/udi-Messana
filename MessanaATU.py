@@ -34,8 +34,6 @@ class messanaAtu(polyinterface.Node):
         self.ISYforced = True
        
     def start(self):
-
-
         return True
 
 
@@ -88,7 +86,7 @@ class messanaAtu(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
-    def setStatus(self, command):
+    def atuSetStatus(self, command):
         LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setStatus Received:' + str(value))
@@ -97,8 +95,7 @@ class messanaAtu(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
 
-
-    def setEnergySave(self, command):
+    def atuSetEnergySave(self, command):
         LOGGER.debug('setEnergySave Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setEnergySave Received:' + str(value))
@@ -107,7 +104,7 @@ class messanaAtu(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
 
-    def setSetpoint(self, command):
+    def atuSetSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setSetpoint Received:' + str(value))
@@ -116,7 +113,7 @@ class messanaAtu(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
 
-    def enableSchedule(self, command):
+    def atuEnableSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' EnSchedule Reeived:' + str(value))      
@@ -124,17 +121,74 @@ class messanaAtu(polyinterface.Node):
             ISYdriver = self.messana.getAtuEnableScheduleISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)     
         
-        #self.atuInfo['mScheduleOn'] = val
-        #self.messana.pushAtuData(self.atuNbr, self.atuInfo)
-        #self.checkSetDriver('GV3', 'mScheduleOn')
 
- 
 
-    commands = { 'SET_SETPOINT': setSetpoint
-                ,'SET_STATUS': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SCHEDULE' : enableSchedule 
+    def atuUpdate(self, command):
+        LOGGER.debug(' atuUpdate Not implemented yet')
+        return True
+
+    def atuHRV(self, command):
+        LOGGER.debug('atuHRV not implemented yet')
+        return True
+
+    def atuFlowlevel(self, command):
+        LOGGER.debug('atu FlowLevel not implemented yet')
+        return True
+
+    def atuHUM(self, command):
+        LOGGER.debug('atuHUM Not implemented yet')
+        return True
+
+    def atuINT(self, command):
+        LOGGER.debug('atuINT Not implemented yet')
+        return True
+    
+    def atuNTD(self, command):
+        LOGGER.debug('atuNTD Not implemented yet')
+        return True
+
+    def atuHumSetpointRH(self, command):
+        LOGGER.debug('atuHumSetpointRH Not implemented yet')
+        return True
+
+
+    def atuHumSetpointDP(self, command):
+        LOGGER.debug('atuHumSetpointDP Not implemented yet')
+        return True
+
+    def atuDehumSetpointRH(self, command):
+        LOGGER.debug('Not implemented yet')
+        return True
+
+    def atuDehumSetpointDP(self, command):
+        LOGGER.debug('atuDehumSetpointRH Not implemented yet')
+        return True
+
+    def atuCurrentSetpointRH(self, command):
+        LOGGER.debug('atuCurrentSetpointRH Not implemented yet')
+        return True
+
+    def atuCurrentSetpointDP(self, command):
+        LOGGER.debug('atuCurrentSetpointDP Not implemented yet')
+        return True
+
+    commands = { 'SET_SETPOINT': atuSetSetpoint
+                ,'SET_STATUS': atuSetStatus
+                ,'SET_ENERGYSAVE': atuSetEnergySave
+                ,'SET_SCHEDULE' : atuEnableSchedule
+                ,'UPDATE': atuUpdate
+                ,'SETHRV_ON': atuHRV
+                ,'SET_FLOWLEVEL': atuFlowlevel
+                ,'SET_HUM' : atuHUM
+                ,'SET_INT' : atuINT
+                ,'SET_NTD' : atuNTD
+                ,'SET_HUM_SP_RH' : atuHumSetpointRH
+                ,'SET_HUM_SP_DP' : atuHumSetpointDP
+                ,'SET_DEHUM_SP_RH' : atuDehumSetpointRH
+                ,'SET_DEHUM_SP_DP' :atuDehumSetpointDP
+                ,'SET_CURR_SP_RH' : atuCurrentSetpointRH
+                ,'SET_CURR_SP_DP' : atuCurrentSetpointDP
                 }
 
-    drivers = [  ]
+
 

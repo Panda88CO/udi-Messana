@@ -796,11 +796,12 @@ class messanaInfo:
                         self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'UPDATE':  { 'ISYtext'   :'Update System'
-                                                                                         ,'ISYeditor' : None } 
-                                                                       ,'SET_MODE': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
+                                                                                    ,'ISYeditor' : None } 
+                                                                       ,'SET_MODE': { 'ISYtext' :'Set Mode'
+                                                                                     ,'ISYeditor' : 'mMode' }
                                                                        ,'SET_ADAPTIVE_COMFORT' :{ 'ISYtext' :'Adaptive System'
-                                                                                         ,'ISYeditor' : None } }}
+                                                                                        ,'ISYeditor' : 'mAdaptiveComfort' } }
+                                                        }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/hc/name/'
@@ -871,14 +872,15 @@ class messanaInfo:
                         },
                         self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_COOLING_SPEED' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None } 
-                                                                        ,'SET_HEATING_SPEED' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None } }}
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Set System Status'
+                                                                                       ,'ISYeditor' :'mStatus' }
+                                                                        ,'UPDATE' : { 'ISYtext'   :'Update System'
+                                                                                     ,'ISYeditor' : None }
+                                                                        ,'SET_COOLING_SPEED' : { 'ISYtext' :'Colling Speed'
+                                                                                                ,'ISYeditor' : 'mCoolingSpeed' } 
+                                                                        ,'SET_HEATING_SPEED' : { 'ISYtext' :'Heating Speed'
+                                                                                                ,'ISYeditor' : 'mHeatingSpeed'} }
+                                                }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/fcu/name/'
@@ -982,32 +984,32 @@ class messanaInfo:
                         },
                         self.atuID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'System Status'
+                                                                                         ,'ISYeditor' : 'mStatus' }
+                                                                        ,'UPDATE': { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                        , 'UPDATE': { 'ISYtext'   :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_HRV_ON' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_HUM' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_NTD' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_INT' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_DP' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }    
-                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
+                                                                        ,'SET_HRVON' : { 'ISYtext' :'Heat Revopvery'
+                                                                                         ,'ISYeditor' : 'mHRVOn' }
+                                                                        ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Set Flow Level'
+                                                                                         ,'ISYeditor' : 'mFlowLevel' }
+                                                                        ,'SET_HUM' : { 'ISYtext' :'Humidity Integration'
+                                                                                         ,'ISYeditor' : 'mHUMOn' }
+                                                                        ,'SET_NTD' : { 'ISYtext' :'NTD Integration'
+                                                                                         ,'ISYeditor' : 'mNTDOn' }
+                                                                        ,'SET_INT' : { 'ISYtext' :'Convective Integration'
+                                                                                         ,'ISYeditor' : 'mINTOn' }     
+                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext' :'Hum Setpoint RH'
+                                                                                         ,'ISYeditor' : 'mHumSetpointRH'}     
+                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext' :'Hum Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mHumSetpointDP' }     
+                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'Dehum Setpoint RH'
+                                                                                         ,'ISYeditor' : 'mDehumSetpointRH' }     
+                                                                        ,'SET_DEHUM_SP_DP' : { 'ISYtext' :'Dehum Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mDehumSetpointDP' }    
+                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext' :'Current Setpoint RH'
+                                                                                         ,'ISYeditor' : 'mCurrentSetpointRH' }     
+                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Current Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mCurrentSetpointDP' }
                                                                         }}
                                     ,'KeyInfo' : {  
                                         'mName':{
