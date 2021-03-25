@@ -1927,7 +1927,7 @@ class messanaInfo:
     
     def GETSystemData(self, mKey):
         sysData= {}
-        LOGGER.debug('GETSystem: ' + mKey )
+        #LOGGER.debug('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
         #LOGGER.debug( GETStr)
         try:
@@ -1953,7 +1953,7 @@ class messanaInfo:
 
     def PUTSystemData(self, mKey, value):
             sysData= {}
-            LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
+            #LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
@@ -1984,7 +1984,7 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        #LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
@@ -2259,6 +2259,7 @@ class messanaInfo:
         '''       
         return(status)
 
+    '''
     def createNodedeFile(self, fileName):
         file = open(fileName, 'w+')
         file.close()
@@ -2268,6 +2269,7 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
+    '''
 
     #System
     def updateSystemData(self, level):
@@ -2456,7 +2458,8 @@ class messanaInfo:
     def getSystemAddress(self):
         return(self.systemID)
 
-     # Zones
+
+    # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability(self.zoneID, zoneNbr)
 
