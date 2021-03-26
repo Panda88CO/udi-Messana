@@ -126,25 +126,25 @@ class messanaZone(polyinterface.Node):
         self.reportDrivers()
 
     def setCurrentDewPt(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setCurrentDewPt Not implemented yet')
 
     def setCurRelHum(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setCurRelHum Not implemented yet')
 
     def setDewTempDehum(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setDewTempDehum Not implemented yet')
 
     def setRelDehum(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setRelDehum Not implemented yet')
 
     def setDewTempHum(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setDewTempHum Not implemented yet')
 
     def setRelHum(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setRelHum Not implemented yet')
 
     def setCO2(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('setCO2 Not implemented yet')
 
     commands = { 'SET_SETPOINT' : setSetpoint
                 ,'SET_STATUS' : setStatus
