@@ -1,5 +1,5 @@
 <nodeDefs> 
-   <nodeDef id="SystemName" nls="nlsSystemName">
+   <nodeDef id="system" nls="nlssystem">
       <editors />
       <sts>
          <st id="GV1" editor="SYSTEM_1" />
@@ -383,7 +383,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone0" nls="nlsmacrozones0">
+   <nodeDef id="macrozones0" nls="nlsmacrozones0">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES0_1" />
@@ -402,7 +402,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone1" nls="nlsmacrozones1">
+   <nodeDef id="macrozones1" nls="nlsmacrozones1">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES1_1" />
@@ -421,7 +421,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone2" nls="nlsmacrozones2">
+   <nodeDef id="macrozones2" nls="nlsmacrozones2">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES2_1" />
@@ -440,7 +440,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="macrozone3" nls="nlsmacrozones3">
+   <nodeDef id="macrozones3" nls="nlsmacrozones3">
       <editors />
       <sts>
          <st id="GV1" editor="MACROZONES3_1" />
@@ -459,7 +459,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="atu0" nls="nlsatus0">
+   <nodeDef id="atus0" nls="nlsatus0">
       <editors />
       <sts>
          <st id="GV1" editor="ATUS0_1" />
@@ -495,7 +495,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="energysource0" nls="nlsEnergyS0">
+   <nodeDef id="EnergyS0" nls="nlsEnergyS0">
       <editors />
       <sts>
          <st id="GV1" editor="ENERGYS0_1" />
@@ -511,7 +511,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="hcco0" nls="nlsHcCo0">
+   <nodeDef id="HcCo0" nls="nlsHcCo0">
       <editors />
       <sts>
          <st id="GV1" editor="HCCO0_1" />
@@ -527,7 +527,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   <nodeDef id="buffertanks0" nls="nlsBufTanks0">
+   <nodeDef id="BufTanks0" nls="nlsBufTanks0">
       <editors />
       <sts>
          <st id="GV1" editor="BUFTANKS0_1" />

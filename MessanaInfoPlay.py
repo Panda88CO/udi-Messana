@@ -287,19 +287,19 @@ class messanaInfo:
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
                                                              ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                             ,'CurrentSetPointDP': { 'ISYtext' :'Not Implemented yet'
+                                                             ,'CurrentSetPointDP': { 'ISYtext' :'Not Implemented yet1'
                                                                                     ,'ISYeditor' : 'mCurrentSetPointDP'}
-                                                             ,'CurrentSetPointRH' : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'CurrentSetPointRH' : { 'ISYtext' :'Not Implemented yet2'
                                                                                     ,'ISYeditor' : 'mCurrentSetPointRH'}
-                                                             ,'DehumSetPointDP' : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'DehumSetPointDP' : { 'ISYtext' :'Not Implemented yet3'
                                                                                     ,'ISYeditor' : 'mDehumSetPointDP'}
-                                                             ,'DehumSetPointRH'   : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'DehumSetPointRH'   : { 'ISYtext' :'Not Implemented yet4'
                                                                                     ,'ISYeditor' : 'mDehumSetPointRH'}
-                                                             ,'HumSetPointDP'   : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'HumSetPointDP'   : { 'ISYtext' :'Not Implemented yet5'
                                                                                     ,'ISYeditor' : 'mHumSetPointDP'}
-                                                             ,'HumSetPointRH'     : { 'ISYtext' :'Not Implemented yet'
+                                                             ,'HumSetPointRH'     : { 'ISYtext' :'Not Implemented yet6'
                                                                                     ,'ISYeditor' : 'mHumSetPointRH'}
-                                                             ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet'
+                                                             ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet7'
                                                                                     ,'ISYeditor' : 'mCO2'}
 
                                                             } 

@@ -2544,8 +2544,9 @@ class messanaInfo:
             systemValue = None
         return (status, systemValue)
 
-
-
+    # Needs to be implemented 
+    def validateISYZoneFunctions(self, functionList, zoneNbr):
+        return(' LIST of supported functions')
 
     def zoneSetStatus(self, value, zoneNbr):
         print(' zoneSetstatus called for zone: ' + str(zoneNbr))
