@@ -67,7 +67,7 @@ print('zones')
 MessanaZone = []
 zoneCount = messana.getZoneCount()
 for zoneNbr in range(0, zoneCount):
-    messana.getZoneCapability(zoneNbr)
+    #messana.getZoneCapability(zoneNbr)
     #zoneInfo = messana.pullZoneData(zoneNbr)
     #print(self.zoneInfo)
     zone_GETKeys = messana.zonePullKeys(zoneNbr)
