@@ -58,9 +58,15 @@ class MessanaController(polyinterface.Controller):
         self.removeNoticesAll()
         LOGGER.info('Start Messana Main NEW')
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
-        LOGGER.debug('IPaddress retrieved:' + self.IPAddress)
+        if self.IPAddress == None:
+            LOGGER.debug('No IPaddress retrieved:' )
+        else:
+            LOGGER.debug('IPaddress retrieved: ' + self.IPAddress)
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
-        LOGGER.debug('IPaddress retrieved:'+ self.MessanaKey)
+        if self.MessanaKey == None:
+            LOGGER.debug('No MESSANA_KEY retrieved:')
+        else:
+            LOGGER.debug('MESSANA_KEY retrieved: '+ self.MessanaKey)
 
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
