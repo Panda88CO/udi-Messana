@@ -2266,7 +2266,7 @@ class messanaInfo:
                                     nodeFile.write(cmdStr)  
                                     cmdStr = '               <p id="" editor="'
                                     cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                                    LOGGER.debug(cmdStr)                              
+                                    #LOGGER.debug(cmdStr)                              
                                     nodeFile.write(cmdStr)
                                     nodeFile.write('            </cmd> \n')
                         else:
