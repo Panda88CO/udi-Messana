@@ -33,11 +33,6 @@ class MessanaController(polyinterface.Controller):
 
 
     def defineInputParams(self):
-        self.addNotice('Please Set IP address (IP_ADDRESS) and Key (MESSANA_KEY) for Messana system.')
-        self.addNotice('Please restart node server after setting parameters')
-
-        self.addNotice('Please Set IP address (IP_ADDRESS)')
-
         self.IPAddress = self.getCustomParam('IP_ADDRESS')
         if self.IPAddress is None:
             self.addNotice('Please Set IP address of Messana system (IP_ADDRESS)')

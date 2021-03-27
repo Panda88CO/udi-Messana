@@ -1748,9 +1748,10 @@ class messanaInfo:
         return(info)
 
     def addNodeDefStruct(self, nodeNbr, nodeName, nodeId):
+
         self.keyCount = 0
         nodeId.lower()
-
+        LOGGER.debug('addNodeDefStruct: ' + nodeName+ ' ' + str(nodeNbr) + ' '+nodeId)
         self.name = nodeName+str(nodeNbr)
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
@@ -1779,7 +1780,7 @@ class messanaInfo:
                 if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
                 for ISYnls in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
-                    LOGGER.debug( mKey + ' ' + ISYnls)
+                    #LOGGER.debug( mKey + ' ' + ISYnls)
                     if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
@@ -1860,6 +1861,7 @@ class messanaInfo:
         nodeId.lower()
         self.nlsKey= 'nls' + nodeId
         self.nlsKey.lower()
+        LOGGER.debug('addSystemDefStruct: ' + nodeId)
         self.setupFile['nodeDef'][ self.systemID]={}
         self.setupFile['nodeDef'][ self.systemID]['CodeId'] = nodeId
         self.setupFile['nodeDef'][ self.systemID]['nlsId'] = self.nlsKey
@@ -1868,6 +1870,7 @@ class messanaInfo:
         self.setupFile['nodeDef'][ self.systemID]['sts']={}
 
         for mKey in self.mSystem[ self.systemID]['data']: 
+           
             #make check if system has unit installed
             if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
@@ -1887,7 +1890,7 @@ class messanaInfo:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
                         self.setupFile['nls'][nlsName]={}
                     for ISYnls in self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
-                        LOGGER.debug( mKey + ' ' + ISYnls)
+                        #LOGGER.debug( mKey + ' ' + ISYnls)
                         if  self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                             self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
@@ -1964,7 +1967,7 @@ class messanaInfo:
         #LOGGER.debug( GETStr)
         try:
             systemTemp = requests.get(GETStr)
-            LOGGER.debug(str(systemTemp))
+            #LOGGER.debug(str(systemTemp))
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 #LOGGER.debug(systemTemp)
@@ -1993,7 +1996,7 @@ class messanaInfo:
                     if PUTStr == None:
                         sysData['statusOK'] = False
                         sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                        LOGGER.debug(sysData)    
+                        LOGGER.debug('Error '+ sysData)    
                         return(sysData)   
                     #LOGGER.debug(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
@@ -2145,7 +2148,7 @@ class messanaInfo:
         return(Data)    
 
     def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
-        LOGGER.debug('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
+       # LOGGER.debug('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
         zoneData = {}
         zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
         if zoneData['statusOK']:
@@ -2191,7 +2194,7 @@ class messanaInfo:
                 cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
                 nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
                 nlsFile.write(nlsStr)
-                LOGGER.debug(nlsStr)
+                #LOGGER.debug(nlsStr)
 
             for status in self.setupFile['nodeDef'][node]['sts']:
                 for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
