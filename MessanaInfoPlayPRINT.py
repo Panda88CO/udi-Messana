@@ -277,15 +277,32 @@ class messanaInfo:
                         },
                         self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
-                                                                                    ,'ISYeditor' : 'mSetPoint' }
+                                                ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
+                                                                                    ,'ISYeditor' : None} 
+                                                             ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
+                                                                                    ,'ISYeditor' : 'mSetpoint' }
                                                              ,'SET_STATUS'     : {   'ISYtext' :'Zone State'
                                                                                     ,'ISYeditor' : 'mStatus' }                                                         
                                                              ,'SET_ENERGYSAVE' : {   'ISYtext' :'Energy Saving'
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
                                                              ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                            }
+                                                             ,'CurrentSetpointDP': { 'ISYtext' :'Not Implemented yet1'
+                                                                                    ,'ISYeditor' : 'mCurrentSetpointDP'}
+                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Not Implemented yet2'
+                                                                                    ,'ISYeditor' : 'mCurrentSetpointRH'}
+                                                             ,'DehumSetpointDP' : { 'ISYtext' :'Not Implemented yet3'
+                                                                                    ,'ISYeditor' : 'mDehumSetpointDP'}
+                                                             ,'DehumSetpointRH'   : { 'ISYtext' :'Not Implemented yet4'
+                                                                                    ,'ISYeditor' : 'mDehumSetpointRH'}
+                                                             ,'HumSetpointDP'   : { 'ISYtext' :'Not Implemented yet5'
+                                                                                    ,'ISYeditor' : 'mHumSetpointDP'}
+                                                             ,'HumSetpointRH'     : { 'ISYtext' :'Not Implemented yet6'
+                                                                                    ,'ISYeditor' : 'mHumSetpointRH'}
+                                                             ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet7'
+                                                                                    ,'ISYeditor' : 'mCO2'}
+
+                                                            } 
                                                 }
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -304,7 +321,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }  
                                                 }  
-                                        ,'mSetPoint' :{
+                                        ,'mSetpoint' :{
                                              'GETstr': '/api/zone/setpoint/'
                                             ,'PUTstr': '/api/zone/setpoint/'
                                             ,'Active': None 
@@ -336,7 +353,7 @@ class messanaInfo:
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                     }
-                                        ,'mHumSetPointRH': { 
+                                        ,'mHumSetpointRH': { 
                                              'GETstr': '/api/zone/humidSetpointRH/'
                                             ,'PUTstr': '/api/zone/humidSetpointRH/'
                                             ,'Active': None 
@@ -352,7 +369,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mHumSetPointDP': { 
+                                        ,'mHumSetpointDP': { 
                                              'GETstr': '/api/zone/humidSetpointDP/'
                                             ,'PUTstr': '/api/zone/humidSetpointDP/'
                                             ,'Active': None 
@@ -368,7 +385,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mDehumSetPointRH':{ 
+                                        ,'mDehumSetpointRH':{ 
                                              'GETstr': '/api/zone/dehumSetpointRH/'
                                             ,'PUTstr': '/api/zone/dehumSetpointRH/'
                                             ,'Active': None 
@@ -384,7 +401,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mDehumSetPointDP': { 
+                                        ,'mDehumSetpointDP': { 
                                              'GETstr': '/api/zone/dehumSetpointDP/'
                                             ,'PUTstr': '/api/zone/dehumSetpointDP/'
                                             ,'Active': None 
@@ -400,7 +417,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mCurrentSetPointRH': { 
+                                        ,'mCurrentSetpointRH': { 
                                              'GETstr': '/api/zone/currentSetpointRH/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointRH/'
@@ -416,7 +433,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mCurrentSetPointDP': { 
+                                        ,'mCurrentSetpointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointDP/' 
@@ -648,14 +665,15 @@ class messanaInfo:
                         },
                         self.macrozoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {'UPDATE'        : { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                    ,'SET_STATUS'     : { 'ISYtext' :'Macro Zone State'
-                                                                                         ,'ISYeditor' : None } 
-                                                                    ,'SET_ENERGYSAVE' : { 'ISYtext' :'Energy Saving'
-                                                                                         ,'ISYeditor' : None }
-                                                                    ,'SET_SETBACK'    : { 'ISYtext' :'Setback'
-                                                                                         ,'ISYeditor' : None}
+                                                                    ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
+                                                                                         ,'ISYeditor' : 'mSetpoint' }
+                                                                    ,'SET_STATUS'     : { 'ISYtext'   :'Macro Zone State'
+                                                                                         ,'ISYeditor' : 'mStatus' } 
+                                                                    ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
+                                                                                         ,'ISYeditor' : 'mScheduleOn' }
+   
                                                                     }
                                                         }
 
@@ -676,7 +694,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                 } 
-                                        ,'mSetPoint': {
+                                        ,'mSetpoint': {
                                               'GETstr':'/api/macrozone/setpoint/'
                                              ,'PUTstr':'/api/macrozone/setpoint/'
                                              ,'Active': None 
@@ -777,10 +795,13 @@ class messanaInfo:
                         }, 
                         self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_MODE': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
+                                                        ,'accepts' : {  'UPDATE':  { 'ISYtext'   :'Update System'
+                                                                                    ,'ISYeditor' : None } 
+                                                                       ,'SET_MODE': { 'ISYtext' :'Set Mode'
+                                                                                     ,'ISYeditor' : 'mMode' }
                                                                        ,'SET_ADAPTIVE_COMFORT' :{ 'ISYtext' :'Adaptive System'
-                                                                                         ,'ISYeditor' : None } }}
+                                                                                        ,'ISYeditor' : 'mAdaptiveComfort' } }
+                                                        }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/hc/name/'
@@ -851,12 +872,15 @@ class messanaInfo:
                         },
                         self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_COOLING_SPEED' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None } 
-                                                                        ,'SET_HEATING_SPEED' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None } }}
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Set System Status'
+                                                                                       ,'ISYeditor' :'mStatus' }
+                                                                        ,'UPDATE' : { 'ISYtext'   :'Update System'
+                                                                                     ,'ISYeditor' : None }
+                                                                        ,'SET_COOLING_SPEED' : { 'ISYtext' :'Colling Speed'
+                                                                                                ,'ISYeditor' : 'mCoolingSpeed' } 
+                                                                        ,'SET_HEATING_SPEED' : { 'ISYtext' :'Heating Speed'
+                                                                                                ,'ISYeditor' : 'mHeatingSpeed'} }
+                                                }
                                     ,'KeyInfo' : {
                                          'mName':{
                                              'GETstr': '/api/fcu/name/'
@@ -960,30 +984,32 @@ class messanaInfo:
                         },
                         self.atuID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_HRV_ON' : { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_HUM' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_NTD' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_INT' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_RH' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_HUM_SP_DP' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_RH' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_DEHUM_SP_DP' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }    
-                                                                        ,'SET_CURR_SP_RH' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }     
-                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }
+                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'System Status'
+                                                                                         ,'ISYeditor' : 'mStatus' }
+                                                                        ,'UPDATE': { 'ISYtext'   :'Update System'
+                                                                                         ,'ISYeditor'    : None }
+                                                                        ,'SET_HRVON' : { 'ISYtext' :'Heat Revopvery'
+                                                                                         ,'ISYeditor'    : 'mHRVOn' }
+                                                                        ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Set Flow Level'
+                                                                                         ,'ISYeditor'    : 'mFlowLevel' }
+                                                                        ,'SET_HUM' : { 'ISYtext' :'Humidity Integration'
+                                                                                         ,'ISYeditor'    : 'mHUMOn' }
+                                                                        ,'SET_NTD' : { 'ISYtext' :'NTD Integration'
+                                                                                         ,'ISYeditor'    : 'mNTDOn' }
+                                                                        ,'SET_INT' : { 'ISYtext' :'Convective Integration'
+                                                                                         ,'ISYeditor' : 'mINTOn' }     
+                                                                        ,'SET_HUM_SP_RH' : { 'ISYtext'   :'Hum Setpoint RH'
+                                                                                         ,'ISYeditor' : 'mHumSetpointRH'}     
+                                                                        ,'SET_HUM_SP_DP' : { 'ISYtext'   :'Hum Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mHumSetpointDP' } 
+                                                                        ,'SET_DEHUM_SP_RH' : { 'ISYtext' :'DehumSetpointRH'
+                                                                                         ,'ISYeditor' : 'mDehumSetpointRH'}
+                                                                        ,'SET_DEHUM_SP_DP' : { 'ISYtext' :'Dehum Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mDehumSetpointDP' }    
+                                                                        ,'SET_CURR_SP_RH' : { 'ISYtext'  :'Current Setpoint RH'
+                                                                                         ,'ISYeditor' : 'mCurrentSetpointRH' }     
+                                                                        ,'SET_CURR_SP_DP' :{ 'ISYtext'   :'Current Setpoint DP'
+                                                                                         ,'ISYeditor' : 'mCurrentSetpointDP' }
                                                                         }}
                                     ,'KeyInfo' : {  
                                         'mName':{
@@ -1311,7 +1337,9 @@ class messanaInfo:
                          self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                       ,'ISYeditor' : None }}
+                                                                                       ,'ISYeditor' : None }
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
+                                                                                         ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
                                         'mName':{
@@ -1401,6 +1429,8 @@ class messanaInfo:
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
+                                                                                         ,'ISYeditor' : None }
+                                                                       ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'SET_MODE'      : { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }
@@ -1494,6 +1524,8 @@ class messanaInfo:
                         self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
+                                                                                         ,'ISYeditor' : None }
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                         ,'SET_TARGETTEMP': { 'ISYtext' :'Update System'
                                                                                          ,'ISYeditor' : None }}
@@ -1888,12 +1920,12 @@ class messanaInfo:
                         if key == 'operative_temperature':
                             if tempKeys[key] == 0:
                                 self.keyList['mTemp'] = tempKeys["operative_temperature"]
-                                self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+                                self.keyList['mSetpoint'] = tempKeys["operative_temperature"]
                         elif key == 'air_temperature':
                             self.keyList['mAirTemp'] = tempKeys["air_temperature"]
                         elif key == 'relative_humidity':
-                            self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
-                            self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumSetpointRH'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumSetpointDP'] = tempKeys["relative_humidity"]
                             self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
                             self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
                             self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
@@ -1927,7 +1959,7 @@ class messanaInfo:
     
     def GETSystemData(self, mKey):
         sysData= {}
-        print('GETSystem: ' + mKey )
+        #print('GETSystem: ' + mKey )
         GETStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr'] + '?' + self.APIStr 
         #print( GETStr)
         try:
@@ -1953,7 +1985,7 @@ class messanaInfo:
 
     def PUTSystemData(self, mKey, value):
             sysData= {}
-            print('PUT System: {' + mKey +':'+str(value)+'}' )
+            #print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
@@ -1984,7 +2016,7 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        #print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
@@ -2104,7 +2136,7 @@ class messanaInfo:
     
     def pullNodeDataIndividual(self, NodeNbr, NodeKey, mKey): 
         Data = {} 
-        print('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
+        #print('pullNodeDataIndividual: ' +str(NodeNbr)  + ' ' + mKey)    
         if mKey in mKey in self.mSystem[NodeKey]['KeyInfo']:
             Data = self.GETNodeData(NodeKey, NodeNbr, mKey)
         else:
@@ -2259,6 +2291,7 @@ class messanaInfo:
         '''       
         return(status)
 
+    '''
     def createNodedeFile(self, fileName):
         file = open(fileName, 'w+')
         file.close()
@@ -2268,6 +2301,7 @@ class messanaInfo:
         file = open(fileName, 'w+')
         file.close()
         return()
+    '''
 
     #System
     def updateSystemData(self, level):
@@ -2456,7 +2490,8 @@ class messanaInfo:
     def getSystemAddress(self):
         return(self.systemID)
 
-     # Zones
+
+    # Zones
     def getZoneCapability(self, zoneNbr): 
         self.getNodeCapability(self.zoneID, zoneNbr)
 
@@ -2544,9 +2579,17 @@ class messanaInfo:
             systemValue = None
         return (status, systemValue)
 
-    # Needs to be implemented 
-    def validateISYZoneFunctions(self, functionList, zoneNbr):
-        return(' LIST of supported functions')
+
+    def checkZoneCommand(self, cmd, zoneNbr):
+        exists = True
+        mCmd = self.mSystem[self.zoneID]['ISYnode']['accepts'][cmd]['ISYeditor']
+        
+        if mCmd != None:
+            if mCmd in self.mSystem[self.zoneID]['NOcapability'][zoneNbr]:
+                if self.mSystem[self.zoneID]['NOcapability'][zoneNbr][mCmd] == 0:
+                    exists = False
+        return(exists)
+
 
     def zoneSetStatus(self, value, zoneNbr):
         print(' zoneSetstatus called for zone: ' + str(zoneNbr))
@@ -2587,16 +2630,16 @@ class messanaInfo:
     def zoneSetSetpoint(self, value,  zoneNbr):
         print('zoneSetSetpoint called for zone: ' + str(zoneNbr))
         
-        status = self.pushZoneDataIndividual(zoneNbr, 'mSetPoint', value)
+        status = self.pushZoneDataIndividual(zoneNbr, 'mSetpoint', value)
         return(status)
 
     def getZoneSetPointISYdriver(self, zoneNbr):
-        print('getZoneSetPointISYdriver called for zone: '+str(zoneNbr))
+        print('getZoneSetpointISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
-            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetPoint':
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetpoint':
                 Key = ISYkey
         return(Key)  
   
@@ -2676,7 +2719,7 @@ class messanaInfo:
         return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'Active'))    
 
     def getMacrozoneCount(self):
-        return(self.mSystem[ self.macrozoneID]['data']['mMacrozoneCount'])
+        return(self.mSystem[self.systemID]['data']['mMacrozoneCount'])
 
 
     def getMacrozoneName(self, macroZoneNbr):
@@ -2752,7 +2795,7 @@ class messanaInfo:
         print('atusActiveKeys')
         return( self.getNodeKeys (ATUNbr, self.atuID, 'Active'))    
   
-    def getATUCount(self):
+    def getAtuCount(self):
         return(self.mSystem[ self.systemID]['data']['mATUcount'])
 
     

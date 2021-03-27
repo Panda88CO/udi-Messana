@@ -13,12 +13,28 @@ import shutil
 #LOGGER = polyinterface.LOGGER
            
 #sys.stdout = open('Messanaoutput.txt','wt')
-
+commands = { 'SET_SETPOINT' : 'setSetpoint'
+            ,'SET_STATUS' : 'setStatus'
+            ,'SET_ENERGYSAVE' : 'setEnergySave'
+            ,'SET_SCHEDULEON' : 'enableSchedule' 
+            ,'UPDATE' : 'ISYupdate'
+            ,'CurrentSetpointDP' : 'setCurrentDewPt'
+            ,'CurrentSetpointRH' : 'setCurRelHum'
+            ,'DehumSetpointDP' : 'setDewTempDehum'
+            ,'DehumSetpointRH' : 'setRelDehum'
+            ,'HumSetpointDP' : 'setDewTempHum'
+            ,'HumSetpointRH' : 'setRelHum'
+            ,'SET_CO2' : 'setCO2'
+            }
 messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
 #messana.init()
+print (commands)
+
 
 #Retrive basic system info
 print('\nSYSTEM')
+print (commands)
+
 messana.updateSystemData('all')
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
@@ -67,6 +83,9 @@ print('zones')
 MessanaZone = []
 zoneCount = messana.getZoneCount()
 for zoneNbr in range(0, zoneCount):
+    for cmd in commands:
+        if not(messana.checkZoneCommand(cmd, zoneNbr)):
+            commands.pop(cmd)
     #messana.getZoneCapability(zoneNbr)
     #zoneInfo = messana.pullZoneData(zoneNbr)
     #print(self.zoneInfo)

@@ -280,25 +280,25 @@ class messanaInfo:
                                                 ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
                                                                                     ,'ISYeditor' : None} 
                                                              ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
-                                                                                    ,'ISYeditor' : 'mSetPoint' }
+                                                                                    ,'ISYeditor' : 'mSetpoint' }
                                                              ,'SET_STATUS'     : {   'ISYtext' :'Zone State'
                                                                                     ,'ISYeditor' : 'mStatus' }                                                         
                                                              ,'SET_ENERGYSAVE' : {   'ISYtext' :'Energy Saving'
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
                                                              ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                             ,'CurrentSetPointDP': { 'ISYtext' :'Not Implemented yet1'
-                                                                                    ,'ISYeditor' : 'mCurrentSetPointDP'}
-                                                             ,'CurrentSetPointRH' : { 'ISYtext' :'Not Implemented yet2'
-                                                                                    ,'ISYeditor' : 'mCurrentSetPointRH'}
-                                                             ,'DehumSetPointDP' : { 'ISYtext' :'Not Implemented yet3'
-                                                                                    ,'ISYeditor' : 'mDehumSetPointDP'}
-                                                             ,'DehumSetPointRH'   : { 'ISYtext' :'Not Implemented yet4'
-                                                                                    ,'ISYeditor' : 'mDehumSetPointRH'}
-                                                             ,'HumSetPointDP'   : { 'ISYtext' :'Not Implemented yet5'
-                                                                                    ,'ISYeditor' : 'mHumSetPointDP'}
-                                                             ,'HumSetPointRH'     : { 'ISYtext' :'Not Implemented yet6'
-                                                                                    ,'ISYeditor' : 'mHumSetPointRH'}
+                                                             ,'CurrentSetpointDP': { 'ISYtext' :'Not Implemented yet1'
+                                                                                    ,'ISYeditor' : 'mCurrentSetpointDP'}
+                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Not Implemented yet2'
+                                                                                    ,'ISYeditor' : 'mCurrentSetpointRH'}
+                                                             ,'DehumSetpointDP' : { 'ISYtext' :'Not Implemented yet3'
+                                                                                    ,'ISYeditor' : 'mDehumSetpointDP'}
+                                                             ,'DehumSetpointRH'   : { 'ISYtext' :'Not Implemented yet4'
+                                                                                    ,'ISYeditor' : 'mDehumSetpointRH'}
+                                                             ,'HumSetpointDP'   : { 'ISYtext' :'Not Implemented yet5'
+                                                                                    ,'ISYeditor' : 'mHumSetpointDP'}
+                                                             ,'HumSetpointRH'     : { 'ISYtext' :'Not Implemented yet6'
+                                                                                    ,'ISYeditor' : 'mHumSetpointRH'}
                                                              ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet7'
                                                                                     ,'ISYeditor' : 'mCO2'}
 
@@ -321,7 +321,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }  
                                                 }  
-                                        ,'mSetPoint' :{
+                                        ,'mSetpoint' :{
                                              'GETstr': '/api/zone/setpoint/'
                                             ,'PUTstr': '/api/zone/setpoint/'
                                             ,'Active': None 
@@ -353,7 +353,7 @@ class messanaInfo:
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                         }
                                                     }
-                                        ,'mHumSetPointRH': { 
+                                        ,'mHumSetpointRH': { 
                                              'GETstr': '/api/zone/humidSetpointRH/'
                                             ,'PUTstr': '/api/zone/humidSetpointRH/'
                                             ,'Active': None 
@@ -369,7 +369,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mHumSetPointDP': { 
+                                        ,'mHumSetpointDP': { 
                                              'GETstr': '/api/zone/humidSetpointDP/'
                                             ,'PUTstr': '/api/zone/humidSetpointDP/'
                                             ,'Active': None 
@@ -385,7 +385,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mDehumSetPointRH':{ 
+                                        ,'mDehumSetpointRH':{ 
                                              'GETstr': '/api/zone/dehumSetpointRH/'
                                             ,'PUTstr': '/api/zone/dehumSetpointRH/'
                                             ,'Active': None 
@@ -401,7 +401,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mDehumSetPointDP': { 
+                                        ,'mDehumSetpointDP': { 
                                              'GETstr': '/api/zone/dehumSetpointDP/'
                                             ,'PUTstr': '/api/zone/dehumSetpointDP/'
                                             ,'Active': None 
@@ -417,7 +417,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mCurrentSetPointRH': { 
+                                        ,'mCurrentSetpointRH': { 
                                              'GETstr': '/api/zone/currentSetpointRH/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointRH/'
@@ -433,7 +433,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                     }
-                                        ,'mCurrentSetPointDP': { 
+                                        ,'mCurrentSetpointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/currentSetpointDP/' 
@@ -668,7 +668,7 @@ class messanaInfo:
                                                         ,'accepts' : {'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                     ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
-                                                                                         ,'ISYeditor' : 'mSetPoint' }
+                                                                                         ,'ISYeditor' : 'mSetpoint' }
                                                                     ,'SET_STATUS'     : { 'ISYtext'   :'Macro Zone State'
                                                                                          ,'ISYeditor' : 'mStatus' } 
                                                                     ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
@@ -694,7 +694,7 @@ class messanaInfo:
                                                     ,'nlsValues' : None 
                                                         }
                                                 } 
-                                        ,'mSetPoint': {
+                                        ,'mSetpoint': {
                                               'GETstr':'/api/macrozone/setpoint/'
                                              ,'PUTstr':'/api/macrozone/setpoint/'
                                              ,'Active': None 
@@ -1920,12 +1920,12 @@ class messanaInfo:
                         if key == 'operative_temperature':
                             if tempKeys[key] == 0:
                                 self.keyList['mTemp'] = tempKeys["operative_temperature"]
-                                self.keyList['mSetPoint'] = tempKeys["operative_temperature"]
+                                self.keyList['mSetpoint'] = tempKeys["operative_temperature"]
                         elif key == 'air_temperature':
                             self.keyList['mAirTemp'] = tempKeys["air_temperature"]
                         elif key == 'relative_humidity':
-                            self.keyList['mHumidSetpointRH'] = tempKeys["relative_humidity"]
-                            self.keyList['mHumidSetpointDP'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumSetpointRH'] = tempKeys["relative_humidity"]
+                            self.keyList['mHumSetpointDP'] = tempKeys["relative_humidity"]
                             self.keyList['mDehumSetpointRH'] = tempKeys["relative_humidity"]
                             self.keyList['mDehumSetpointDP'] = tempKeys["relative_humidity"]
                             self.keyList['mCurrentSetpointRH'] = tempKeys["relative_humidity"]
@@ -2580,6 +2580,15 @@ class messanaInfo:
         return (status, systemValue)
 
 
+    def checkZoneCommand(self, cmd, zoneNbr):
+        exists = True
+        mCmd = self.mSystem[self.zoneID]['ISYnode']['accepts'][cmd]['ISYeditor']
+        
+        if mCmd != None:
+            if mCmd in self.mSystem[self.zoneID]['NOcapability'][zoneNbr]:
+                if self.mSystem[self.zoneID]['NOcapability'][zoneNbr][mCmd] == 0:
+                    exists = False
+        return(exists)
 
 
     def zoneSetStatus(self, value, zoneNbr):
@@ -2621,16 +2630,16 @@ class messanaInfo:
     def zoneSetSetpoint(self, value,  zoneNbr):
         LOGGER.debug('zoneSetSetpoint called for zone: ' + str(zoneNbr))
         
-        status = self.pushZoneDataIndividual(zoneNbr, 'mSetPoint', value)
+        status = self.pushZoneDataIndividual(zoneNbr, 'mSetpoint', value)
         return(status)
 
     def getZoneSetPointISYdriver(self, zoneNbr):
-        LOGGER.debug('getZoneSetPointISYdriver called for zone: '+str(zoneNbr))
+        LOGGER.debug('getZoneSetpointISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
-            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetPoint':
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mSetpoint':
                 Key = ISYkey
         return(Key)  
   

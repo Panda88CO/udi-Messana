@@ -14,7 +14,7 @@ class messanaZone(polyinterface.Node):
         self.address = address 
         self.messana = self.parent.messana
         self.id = self.messana.getZoneAddress(self.zoneNbr)
-       
+        self.checkZoneCommands(self.zoneNbr)
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)
@@ -32,6 +32,15 @@ class messanaZone(polyinterface.Node):
        
     def start(self):
         return True
+
+    def checkZoneCommands(self, zoneNbr):
+        tempList = []
+        for cmd in messanaZone.commands:
+            if not(self.messana.checkZoneCommand(cmd, 0)):
+                tempList.append(cmd)
+        for key in tempList:
+            messanaZone.commands.pop(key)
+   
 
 
     def updateISYdrivers(self, level):
@@ -151,11 +160,11 @@ class messanaZone(polyinterface.Node):
                 ,'SET_ENERGYSAVE' : setEnergySave
                 ,'SET_SCHEDULEON' : enableSchedule 
                 ,'UPDATE' : ISYupdate
-                ,'CurrentSetPointDP' : setCurrentDewPt
-                ,'CurrentSetPointRH' : setCurRelHum
-                ,'DehumSetPointDP' : setDewTempDehum
-                ,'DehumSetPointRH' : setRelDehum
-                ,'HumSetPointDP' : setDewTempHum
-                ,'HumSetPointRH' : setRelHum                                                                    
+                ,'CurrentSetpointDP' : setCurrentDewPt
+                ,'CurrentSetpointRH' : setCurRelHum
+                ,'DehumSetpointDP' : setDewTempDehum
+                ,'DehumSetpointRH' : setRelDehum
+                ,'HumSetpointDP' : setDewTempHum
+                ,'HumSetpointRH' : setRelHum                                                                    
                 ,'SET_CO2' : setCO2
                 }
