@@ -38,6 +38,7 @@ class MessanaController(polyinterface.Controller):
             self.addNotice('Please Set IP address of Messana system (IP_ADDRESS)')
             self.addNotice('E.g. 192.168.1.2')
             LOGGER.error('IP address not set')
+            self.addCustomParam({'IP_ADDRESS': '192.168.1.2'})
             #self.IPAddress= '192.168.2.65'
             #self.addCustomParam({'IP_ADDRESS': self.IPAddress})
         
@@ -45,6 +46,8 @@ class MessanaController(polyinterface.Controller):
             self.addNotice('Please Set Messana API access Key (MESSANA_KEY)')
             self.addNotice('E.g. 12345678-90ab-cdef-1234-567890abcdef')
             LOGGER.error('check_params: Messana Key not specified')
+            self.addCustomParam({'MESSANA_KEY': '12345678-90ab-cdef-1234-567890abcdef'})
+
             #self.MessanaKey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
             #self.addCustomParam({'MESSANA_KEY': self.MessanaKey})
         self.addNotice('Please restart Node server after setting the parameters')
@@ -58,7 +61,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('IPaddress retrieved:' + self.IPAddress)
         self.MessanaKey = self.getCustomParam('MESSANA_KEY')
         LOGGER.debug('IPaddress retrieved:'+ self.MessanaKey)
-        
+
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
             self.stop()
@@ -94,6 +97,7 @@ class MessanaController(polyinterface.Controller):
 
 
     def stop(self):
+        #self.removeNoticesAll()
         LOGGER.debug('stop - Cleaning up')
 
     def heartbeat(self):
