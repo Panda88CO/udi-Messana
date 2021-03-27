@@ -14,6 +14,20 @@ class messanaZone(polyinterface.Node):
         self.address = address 
         self.messana = self.parent.messana
         self.id = self.messana.getZoneAddress(self.zoneNbr)
+        self.commands = { 
+                 'SET_SETPOINT' : self.setSetpoint
+                ,'SET_STATUS' : self.setStatus
+                ,'SET_ENERGYSAVE' : self.setEnergySave
+                ,'SET_SCHEDULEON' : self.enableSchedule 
+                ,'UPDATE' : self.ISYupdate
+                ,'CurrentSetpointDP' : self.setCurrentDewPt
+                ,'CurrentSetpointRH' : self.setCurRelHum
+                ,'DehumSetpointDP' : self.setDewTempDehum
+                ,'DehumSetpointRH' : self.setRelDehum
+                ,'HumSetpointDP' : self.setDewTempHum
+                ,'HumSetpointRH' : self.setRelHum                                                                    
+                ,'SET_CO2' : self.setCO2
+                }
         self.checkZoneCommands(self.zoneNbr)
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
@@ -35,11 +49,11 @@ class messanaZone(polyinterface.Node):
 
     def checkZoneCommands(self, zoneNbr):
         tempList = []
-        for cmd in messanaZone.commands:
+        for cmd in self.commands:
             if not(self.messana.checkZoneCommand(cmd, 0)):
                 tempList.append(cmd)
         for key in tempList:
-            messanaZone.commands.pop(key)
+            self.commands.pop(key)
    
 
 
@@ -154,7 +168,7 @@ class messanaZone(polyinterface.Node):
 
     def setCO2(self, command):
         LOGGER.debug('setCO2 Not implemented yet')
-
+    '''
     commands = { 'SET_SETPOINT' : setSetpoint
                 ,'SET_STATUS' : setStatus
                 ,'SET_ENERGYSAVE' : setEnergySave
@@ -168,3 +182,4 @@ class messanaZone(polyinterface.Node):
                 ,'HumSetpointRH' : setRelHum                                                                    
                 ,'SET_CO2' : setCO2
                 }
+    '''
