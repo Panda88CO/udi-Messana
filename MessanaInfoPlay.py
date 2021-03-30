@@ -21,8 +21,7 @@ class messanaInfo:
         self.HotColdcoID = 'HcCo'
         self.bufferTankID = 'BufTanks'
         self.supportedNodeList = [
-                             self.systemID
-                            ,self.zoneID
+                             self.zoneID
                             ,self.macrozoneID
                             ,self.atuID
                             ,self.dhwID
