@@ -20,7 +20,17 @@ class messanaInfo:
         self.energySaveID =  'EnergyS'
         self.HotColdcoID = 'HcCo'
         self.bufferTankID = 'BufTanks'
-
+        self.supportedNodeList = [
+                             self.systemID
+                            ,self.zoneID
+                            ,self.macrozoneID
+                            ,self.atuID
+                            ,self.dhwID
+                            ,self.fcID
+                            ,self.energySaveID
+                            ,self.HotColdcoID 
+                            ,self.bufferTankID
+                            ] 
 
         self.mSystem = defaultdict(dict)
         self.mSystem = { self.systemID: {  'ISYnode':{ 'nlsICON' :'Thermostat'
@@ -1747,6 +1757,18 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
+    def checkValidNodeCommand(self, cmd, node, nodeNbr):
+        exists = True
+        mCmd = self.mSystem[node]['ISYnode']['accepts'][cmd]['ISYeditor']
+        
+        if mCmd != None:
+            if mCmd in self.mSystem[node]['NOcapability'][nodeNbr]:
+                if self.mSystem[node]['NOcapability'][nodeNbr][mCmd] == 0:
+                    exists = False
+        return(exists)
+
+
+
     def addNodeDefStruct(self, nodeNbr, nodeName, nodeId):
 
         self.keyCount = 0
@@ -1790,12 +1812,13 @@ class messanaInfo:
         if 'accepts' in self.mSystem[nodeName]['ISYnode']:
             self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
             for key in  self.mSystem[nodeName]['ISYnode']['accepts']:
-                if self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][self.name]['sts']:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor']]
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
-                else:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                if self.checkValidNodeCommand(key, nodeName, nodeNbr ):
+                    if self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][self.name]['sts']:
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor']]
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                    else:
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -2592,6 +2615,7 @@ class messanaInfo:
                 if self.mSystem[self.zoneID]['NOcapability'][zoneNbr][mCmd] == 0:
                     exists = False
         return(exists)
+
 
 
     def zoneSetStatus(self, value, zoneNbr):
