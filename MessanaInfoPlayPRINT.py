@@ -20,7 +20,16 @@ class messanaInfo:
         self.energySaveID =  'EnergyS'
         self.HotColdcoID = 'HcCo'
         self.bufferTankID = 'BufTanks'
-
+        self.supportedNodeList = [
+                             self.zoneID
+                            ,self.macrozoneID
+                            ,self.atuID
+                            ,self.dhwID
+                            ,self.fcID
+                            ,self.energySaveID
+                            ,self.HotColdcoID 
+                            ,self.bufferTankID
+                            ] 
 
         self.mSystem = defaultdict(dict)
         self.mSystem = { self.systemID: {  'ISYnode':{ 'nlsICON' :'Thermostat'
@@ -360,7 +369,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -376,7 +385,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -392,7 +401,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -408,7 +417,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -419,12 +428,12 @@ class messanaInfo:
                                                     }
                                         ,'mCurrentSetpointRH': { 
                                              'GETstr': '/api/zone/currentSetpointRH/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/currentSetpointRH/'
+                                            ,'PUTstr': '/api/zone/currentSetpointRH/'
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -435,12 +444,12 @@ class messanaInfo:
                                                     }
                                         ,'mCurrentSetpointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/currentSetpointDP/' 
+                                            ,'PUTstr': '/api/zone/currentSetpointDP/' 
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -451,8 +460,8 @@ class messanaInfo:
                                                     }
                                         ,'mHumidity': { 
                                              'GETstr': '/api/zone/humidity/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/humidity/' 
+                                            ,'PUTstr': '/api/zone/humidity/' 
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
                                                     ,'ISYmin':0
@@ -467,8 +476,8 @@ class messanaInfo:
                                                     }
                                         ,'mDewPoint' : { 
                                              'GETstr': '/api/zone/dewpoint/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/dewpoint/'
+                                            ,'PUTstr': '/api/zone/dewpoint/'
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
                                                     ,'ISYmin':0
@@ -502,7 +511,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airQuality/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -534,7 +543,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/co2/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -550,7 +559,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/voc/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -1747,10 +1756,23 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
+    def checkValidNodeCommand(self, cmd, node, nodeNbr):
+        exists = True
+        mCmd = self.mSystem[node]['ISYnode']['accepts'][cmd]['ISYeditor']
+        
+        if mCmd != None:
+            if mCmd in self.mSystem[node]['NOcapability'][nodeNbr]:
+                if self.mSystem[node]['NOcapability'][nodeNbr][mCmd] == 0:
+                    exists = False
+        return(exists)
+
+
+
     def addNodeDefStruct(self, nodeNbr, nodeName, nodeId):
+
         self.keyCount = 0
         nodeId.lower()
-
+        print('addNodeDefStruct: ' + nodeName+ ' ' + str(nodeNbr) + ' '+nodeId)
         self.name = nodeName+str(nodeNbr)
         self.nlsKey = 'nls' + self.name
         self.nlsKey.lower()
@@ -1779,7 +1801,7 @@ class messanaInfo:
                 if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
                     self.setupFile['nls'][nlsName]={}
                 for ISYnls in self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls']:
-                    print( mKey + ' ' + ISYnls)
+                    #print( mKey + ' ' + ISYnls)
                     if  self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                         self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[nodeName]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                         if ISYnls == 'nlsValues':
@@ -1789,12 +1811,15 @@ class messanaInfo:
         if 'accepts' in self.mSystem[nodeName]['ISYnode']:
             self.setupFile['nodeDef'][self.name]['cmds']['accepts']={}
             for key in  self.mSystem[nodeName]['ISYnode']['accepts']:
-                if self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][self.name]['sts']:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor']]
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                if self.checkValidNodeCommand(key, nodeName, nodeNbr ):
+                    if self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor'] in self.setupFile['nodeDef'][self.name]['sts']:
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]= self.setupFile['nodeDef'][self.name]['sts'][self.mSystem[nodeName]['ISYnode']['accepts'][key]['ISYeditor']]
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']=self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                    else:
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
+                        self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                 else:
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
-                    self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
+                    print('Removed "accepts" using : ' + key)
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -1860,6 +1885,7 @@ class messanaInfo:
         nodeId.lower()
         self.nlsKey= 'nls' + nodeId
         self.nlsKey.lower()
+        print('addSystemDefStruct: ' + nodeId)
         self.setupFile['nodeDef'][ self.systemID]={}
         self.setupFile['nodeDef'][ self.systemID]['CodeId'] = nodeId
         self.setupFile['nodeDef'][ self.systemID]['nlsId'] = self.nlsKey
@@ -1868,6 +1894,7 @@ class messanaInfo:
         self.setupFile['nodeDef'][ self.systemID]['sts']={}
 
         for mKey in self.mSystem[ self.systemID]['data']: 
+           
             #make check if system has unit installed
             if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
@@ -1887,7 +1914,7 @@ class messanaInfo:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
                         self.setupFile['nls'][nlsName]={}
                     for ISYnls in self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls']:
-                        print( mKey + ' ' + ISYnls)
+                        #print( mKey + ' ' + ISYnls)
                         if  self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]:      
                             self.setupFile['nls'][nlsName][ISYnls] = self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYnls'][ISYnls]
                             if ISYnls == 'nlsValues':
@@ -1964,7 +1991,7 @@ class messanaInfo:
         #print( GETStr)
         try:
             systemTemp = requests.get(GETStr)
-            print(str(systemTemp))
+            #print(str(systemTemp))
             if str(systemTemp) == self.RESPONSE_OK:
                 systemTemp = systemTemp.json()
                 #print(systemTemp)
@@ -1993,7 +2020,7 @@ class messanaInfo:
                     if PUTStr == None:
                         sysData['statusOK'] = False
                         sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                        print(sysData)    
+                        print('Error '+ sysData)    
                         return(sysData)   
                     #print(PUTStr)
             mData = {'value':value, self.APIKey : self.APIKeyVal}
@@ -2016,14 +2043,16 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        #print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
                 if  mKey in self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
-                    nodeData['error'] = 'Does not support keyword: ' + mKey
-                    nodeData['statusOK'] =False
-                    return (nodeData)
+                    if self.mSystem[mNodeKey]['NOcapability'][nodeNbr][mKey] == 0:
+                        print(mKey + ' capability not supported')
+                        nodeData['error'] = 'Does not support keyword: ' + mKey
+                        nodeData['statusOK'] =False
+                        return (nodeData)
         if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
             Nodep = requests.get(GETStr)
@@ -2127,7 +2156,7 @@ class messanaInfo:
         Data = {}
         dataOK = True
         for mKey in self.mSystem[NodeKey]['KeyInfo']:
-            #print('GET ' + mKey + ' in zone ' + str(NodeNbr))
+            print('GET ' + mKey + ' in zone ' + str(NodeNbr))
             Data = self.pullNodeDataIndividual(NodeNbr, NodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
@@ -2145,7 +2174,7 @@ class messanaInfo:
         return(Data)    
 
     def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
-        print('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
+       # print('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
         zoneData = {}
         zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
         if zoneData['statusOK']:
@@ -2191,7 +2220,7 @@ class messanaInfo:
                 cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
                 nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
                 nlsFile.write(nlsStr)
-                print(nlsStr)
+                #print(nlsStr)
 
             for status in self.setupFile['nodeDef'][node]['sts']:
                 for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
@@ -2263,7 +2292,7 @@ class messanaInfo:
                                     nodeFile.write(cmdStr)  
                                     cmdStr = '               <p id="" editor="'
                                     cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                                    print(cmdStr)                              
+                                    #print(cmdStr)                              
                                     nodeFile.write(cmdStr)
                                     nodeFile.write('            </cmd> \n')
                         else:
@@ -2589,6 +2618,7 @@ class messanaInfo:
                 if self.mSystem[self.zoneID]['NOcapability'][zoneNbr][mCmd] == 0:
                     exists = False
         return(exists)
+
 
 
     def zoneSetStatus(self, value, zoneNbr):

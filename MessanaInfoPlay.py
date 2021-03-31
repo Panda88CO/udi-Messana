@@ -369,7 +369,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -385,7 +385,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -401,7 +401,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -417,7 +417,7 @@ class messanaInfo:
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -428,12 +428,12 @@ class messanaInfo:
                                                     }
                                         ,'mCurrentSetpointRH': { 
                                              'GETstr': '/api/zone/currentSetpointRH/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/currentSetpointRH/'
+                                            ,'PUTstr': '/api/zone/currentSetpointRH/'
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -444,12 +444,12 @@ class messanaInfo:
                                                     }
                                         ,'mCurrentSetpointDP': { 
                                              'GETstr': '/api/zone/currentSetpointDP/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/currentSetpointDP/' 
+                                            ,'PUTstr': '/api/zone/currentSetpointDP/' 
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':107
                                                     ,'ISYmin':0
-                                                    ,'ISYmax':1000
+                                                    ,'ISYmax':100
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':1
                                                     ,'ISYprec':0 }
@@ -460,8 +460,8 @@ class messanaInfo:
                                                     }
                                         ,'mHumidity': { 
                                              'GETstr': '/api/zone/humidity/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/humidity/' 
+                                            ,'PUTstr': '/api/zone/humidity/' 
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
                                                     ,'ISYmin':0
@@ -476,8 +476,8 @@ class messanaInfo:
                                                     }
                                         ,'mDewPoint' : { 
                                              'GETstr': '/api/zone/dewpoint/'
-                                            ,'PUTstr': None
-                                            ,'Active': '/api/zone/dewpoint/'
+                                            ,'PUTstr': '/api/zone/dewpoint/'
+                                            ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
                                                     ,'ISYmin':0
@@ -511,7 +511,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/airQuality/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -543,7 +543,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/co2/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -559,7 +559,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': '/api/zone/voc/'
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':108
                                                     ,'ISYmin':0
                                                     ,'ISYmax':1000
                                                     ,'ISYsubset':None
@@ -1819,7 +1819,7 @@ class messanaInfo:
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                 else:
-                    LOGGER.debug('Removed accept using : ' + key)
+                    LOGGER.debug('Removed "accepts" using : ' + key)
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -2043,14 +2043,16 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        #LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
         if 'NOcapability' in self.mSystem[mNodeKey]:
             if self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
                 if  mKey in self.mSystem[mNodeKey]['NOcapability'][nodeNbr]:
-                    nodeData['error'] = 'Does not support keyword: ' + mKey
-                    nodeData['statusOK'] =False
-                    return (nodeData)
+                    if self.mSystem[mNodeKey]['NOcapability'][nodeNbr][mKey] == 0:
+                        LOGGER.debug(mKey + ' capability not supported')
+                        nodeData['error'] = 'Does not support keyword: ' + mKey
+                        nodeData['statusOK'] =False
+                        return (nodeData)
         if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
             Nodep = requests.get(GETStr)
@@ -2154,7 +2156,7 @@ class messanaInfo:
         Data = {}
         dataOK = True
         for mKey in self.mSystem[NodeKey]['KeyInfo']:
-            #LOGGER.debug('GET ' + mKey + ' in zone ' + str(NodeNbr))
+            LOGGER.debug('GET ' + mKey + ' in zone ' + str(NodeNbr))
             Data = self.pullNodeDataIndividual(NodeNbr, NodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
