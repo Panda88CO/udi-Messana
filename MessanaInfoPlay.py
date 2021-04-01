@@ -9,9 +9,9 @@ LOGGER = polyinterface.LOGGER
 
 
 class messanaInfo:
-    def __init__ (self, mIPaddress, mAPIkey):
+    def __init__ (self, mIPaddress, mAPIkey, mISYcontrollerName):
         
-        self.systemID = 'system'
+        self.systemID = mISYcontrollerName
         self.zoneID = 'zones'
         self.macrozoneID = 'macrozones'
         self.atuID = 'atus'

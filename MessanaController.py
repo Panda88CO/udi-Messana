@@ -19,7 +19,7 @@ class MessanaController(polyinterface.Controller):
         self.messanaImportOK = 0
         self.ISYforced = False
         self.name = 'Messana Main'
-        self.address ='system'
+        self.address ='Msystem'
         self.id = self.address
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
@@ -75,7 +75,7 @@ class MessanaController(polyinterface.Controller):
 
         else:
             LOGGER.info('Retrieving info from Messana System')
-            self.messana = messanaInfo( self.IPAddress, self.MessanaKey )
+            self.messana = messanaInfo( self.IPAddress, self.MessanaKey, self.address )
             if self.messana == False:
                 self.stop()
             self.id = self.messana.getSystemAddress()
