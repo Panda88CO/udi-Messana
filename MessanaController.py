@@ -19,7 +19,8 @@ class MessanaController(polyinterface.Controller):
         self.messanaImportOK = 0
         self.ISYforced = False
         self.name = 'Messana Main'
-        #self.address ='messanasys'
+        self.address ='system'
+        self.id = self.address
         LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
