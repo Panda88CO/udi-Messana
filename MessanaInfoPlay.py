@@ -2981,7 +2981,7 @@ class messanaInfo:
         return (status, systemValue)
 
 
-    def getMacrooneISYdriverInfo(self, mKey, macrozoneNbr):
+    def getMacrozoneISYdriverInfo(self, mKey, macrozoneNbr):
         info = {}
         macrozoneStr = self.macrozoneID+str(macrozoneNbr)
         if mKey in self.setupFile['nodeDef'][macrozoneStr]['sts']:
