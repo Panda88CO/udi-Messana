@@ -192,29 +192,27 @@ class MessanaController(polyinterface.Controller):
         self.reportDrivers()
 
     def discover(self, command=None):
-        LOGGER.debug('discover zones')
 
+        LOGGER.debug('discover zones')
         nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
             LOGGER.debug('Adding zone ' + str(zoneNbr))
-            name = self.messana.getZoneName(zoneNbr)
-            address = self.messana.getZoneAddress(zoneNbr)
+            zonename = self.messana.getZoneName(zoneNbr)
+            zoneaddress = self.messana.getZoneAddress(zoneNbr)
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + name +' ' + address) 
-            if not address in self.nodes:
-               self.addNode(messanaZone(self, self.address, address, name, zoneNbr))
+            if not zoneaddress in self.nodes:
+               self.addNode(messanaZone(self, self.address, zoneaddress, zonename, zoneNbr))
         
-        
-        '''
-        LOGGER.debug('discover macrozone')
+        LOGGER.debug('discover macrozones')
         nbrMacrozones =  self.messana.getMacrozoneCount()
         for macrozoneNbr in range(0,nbrMacrozones):
             LOGGER.debug('Adding zone ' + str(macrozoneNbr))
-            name = self.messana.getMacrozoneName(macrozoneNbr)
-            address = self.messana.getMacrozoneAddress(macrozoneNbr)
-            LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + name +' ' + address) 
-            if not address in self.nodes:
-               self.addNode(messanaMacrozone(self, self.address, address, name, macrozoneNbr))
-
+            macrozonename = self.messana.getMacrozoneName(macrozoneNbr)
+            macrozoneaddress = self.messana.getMacrozoneAddress(macrozoneNbr)
+            LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + macrozonename +' ' + macrozoneaddress) 
+            if not macrozoneaddress in self.nodes:
+               self.addNode(messanaMacrozone(self, self.address, macrozoneaddress, macrozonename, macrozoneNbr))
+        '''
         LOGGER.debug('discover atus')
         nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):

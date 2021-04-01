@@ -286,29 +286,29 @@ class messanaInfo:
                         },
                         self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
-                                                ,'accepts' : {'UPDATE'         : {   'ISYtext' :'Update System Data'
+                                                ,'accepts' : {'UPDATE'          : {   'ISYtext' :'Update System Data'
                                                                                     ,'ISYeditor' : None} 
-                                                             ,'SET_SETPOINT'   : {   'ISYtext' :'Set Temperature'
+                                                             ,'SET_SETPOINT'    : {   'ISYtext' :'Set Temperature'
                                                                                     ,'ISYeditor' : 'mSetpoint' }
-                                                             ,'SET_STATUS'     : {   'ISYtext' :'Zone State'
+                                                             ,'SET_STATUS'      : {   'ISYtext' :'Zone State'
                                                                                     ,'ISYeditor' : 'mStatus' }                                                         
-                                                             ,'SET_ENERGYSAVE' : {   'ISYtext' :'Energy Saving'
+                                                             ,'SET_ENERGYSAVE'  : {   'ISYtext' :'Energy Saving'
                                                                                     ,'ISYeditor' : 'mEnergySaving' }
-                                                             ,'SET_SCHEDULEON' : {   'ISYtext' :'Schedule Status'
+                                                             ,'SET_SCHEDULEON'  : {   'ISYtext' :'Schedule Status'
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
-                                                             ,'CurrentSetpointDP': { 'ISYtext' :'Not Implemented yet1'
+                                                             ,'CurrentSetpointDP': { 'ISYtext' :'Current Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mCurrentSetpointDP'}
-                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Not Implemented yet2'
+                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Current Setpoint Relative Humidity'
                                                                                     ,'ISYeditor' : 'mCurrentSetpointRH'}
-                                                             ,'DehumSetpointDP' : { 'ISYtext' :'Not Implemented yet3'
+                                                             ,'DehumSetpointDP' : { 'ISYtext' :'Dehumdification Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mDehumSetpointDP'}
-                                                             ,'DehumSetpointRH'   : { 'ISYtext' :'Not Implemented yet4'
+                                                             ,'DehumSetpointRH' : { 'ISYtext' :'Dehumdification Setpoint Relative Humidity'
                                                                                     ,'ISYeditor' : 'mDehumSetpointRH'}
-                                                             ,'HumSetpointDP'   : { 'ISYtext' :'Not Implemented yet5'
+                                                             ,'HumSetpointDP'   : { 'ISYtext' :'Humdification Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mHumSetpointDP'}
-                                                             ,'HumSetpointRH'     : { 'ISYtext' :'Not Implemented yet6'
+                                                             ,'HumSetpointRH'   : { 'ISYtext' :'Humdification Setpoint Relative Humidity'
                                                                                     ,'ISYeditor' : 'mHumSetpointRH'}
-                                                             ,'SET_CO2'         :{ 'ISYtext' :'Not Implemented yet7'
+                                                             ,'SET_CO2'         :{ 'ISYtext' :'CO2 Setpoint'
                                                                                     ,'ISYeditor' : 'mCO2'}
 
                                                             } 
@@ -1667,10 +1667,10 @@ class messanaInfo:
         
             for macrozoneNbr in range(0,self.mSystem[ self.systemID]['data']['mMacrozoneCount']):
                 self.getMacrozoneCapability(macrozoneNbr)
-                self.updateMacroZoneData(macrozoneNbr)
+                self.updateMacrozoneData('all', macrozoneNbr)
                 macrozoneName = self.macrozoneID+str(macrozoneNbr)
                 self.addNodeDefStruct(macrozoneNbr, self.macrozoneID, macrozoneName )
-
+            
             for atuNbr in range(0,self.mSystem[ self.systemID]['data']['mATUcount']):
                 self.getAtuCapability(atuNbr)
                 self.updateATUData(atuNbr)
@@ -2607,7 +2607,6 @@ class messanaInfo:
     def updateZoneData(self, level, zoneNbr):
         LOGGER.debug('updatZoneData: ' + str(zoneNbr))
 
-        #self.zoneKeys = self.zonePullKeys(zoneNbr)
         keys =[]
         if level == 'all':
             LOGGER.debug('ALL update zone ' + str(zoneNbr))
@@ -2768,6 +2767,112 @@ class messanaInfo:
                 Key = ISYkey
         return(Key) 
 
+    def zonesetCurrentDPt(self, value,  zoneNbr):
+        LOGGER.debug('zonesetCurrentDPt called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mCurrentSetpointDP', value)
+        return(status)
+
+    def getZonesetCurrentDPtISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetCurrentDPtISYdriver called for zone: '+str(zoneNbr))
+        
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mCurrentSetpointDP':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetCurrentRH(self, value,  zoneNbr):
+        LOGGER.debug('zonesetCurrentRH called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mCurrentSetpointRH', value)
+        return(status)
+
+    def getZonesetCurrentRHISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetCurrentRHISYdriver called for zone: '+str(zoneNbr))
+        
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mCurrentSetpointRH':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetDehumDpt(self, value,  zoneNbr):
+        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mDehumSetpointDP', value)
+        return(status)
+
+    def getZonesetDehumDPtISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mDehumSetpointDP':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetDehumRH(self, value,  zoneNbr):
+        LOGGER.debug('zonesetDehumRH called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mDehumSetpointRH', value)
+        return(status)
+
+    def getZonesetDehumRHISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetDehumRHISYdriver called for zone: '+str(zoneNbr))
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mDehumSetpointRH':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetHumRH(self, value,  zoneNbr):
+        LOGGER.debug('zonesetHumRH called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mHumSetpointRH', value)
+        return(status)
+
+    def getZonesetHumRHISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetHumRHISYdriver called for zone: '+str(zoneNbr))
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mHumSetpointRH':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetHumDpt(self, value,  zoneNbr):
+        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mHumSetpointDP', value)
+        return(status)
+
+    def getZonesetHumDPtISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mHumSetpointDP':
+                Key = ISYkey
+        return(Key)  
+
+    def zonesetCO2 (self, value,  zoneNbr):
+        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        
+        status = self.pushZoneDataIndividual(zoneNbr, 'mCO2', value)
+        return(status)
+
+    def getZonesetCO2ISYdriver(self, zoneNbr):
+        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        Key = ''
+        zoneName = self.zoneID+str(zoneNbr)
+        for ISYkey in self.ISYmap[zoneName]:
+            if self.ISYmap[zoneName][ISYkey]['messana'] == 'mCO2':
+                Key = ISYkey
+        return(Key)  
 
     def getZoneISYdriverInfo(self, mKey, zoneNbr):
         info = {}
@@ -2791,25 +2896,38 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-    #def getMacrozoneCount(self):
-    
-    #def getATUcount(self):
 
-        #except:
-            #LOGGER.debug('Reading data from Messana System NOT successful')
+    ###################################################################        
     #MacroZone
     def getMacrozoneCapability(self, macrozoneNbr): 
         self.getNodeCapability(self.macrozoneID, macrozoneNbr)
 
-    def updateMacroZoneData(self, macrozoneNbr):
-        LOGGER.debug('updatMacroZoneData: ' + str(macrozoneNbr))
-        return(self.updateNodeData(macrozoneNbr, self.macrozoneID))
+    def getMacrozoneAddress(self, macrozoneNbr):
+        return(self.macrozoneID + str(macrozoneNbr))
 
-    def pullMacroZoneDataIndividual(self, macrozoneNbr, mKey): 
+    def updateMacrozoneData(self,  level, macrozoneNbr):
+        LOGGER.debug('updatMacrozoneData: ' + str(macrozoneNbr))
+
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update macrozone ' + str(macrozoneNbr))
+            keys =  self.macrozonePullKeys(macrozoneNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update macrozone ' + str(macrozoneNbr))
+            keys =  self.macrozoneActiveKeys(macrozoneNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullMacrozoneDataIndividual(macrozoneNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
+
+
+    def pullMacrozoneDataIndividual(self, macrozoneNbr, mKey): 
         LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey))
 
-    def pushMacroZoneDataIndividual(self, macrozoneNbr, mKey, value):
+    def pushMacrozoneDataIndividual(self, macrozoneNbr, mKey, value):
         LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey, value))
 
@@ -2836,12 +2954,114 @@ class messanaInfo:
         else:
             return('NA')
 
-    def getMacrozoneAddress(self, macroZoneNbr):
-        return(self.macrozoneID + str(macroZoneNbr))
+    def getMacrozoneMessanaISYkey(self, ISYkey, macrozoneNbr):
+        macrozoneName = self.macrozoneID+str(macrozoneNbr)
+        return(self.ISYmap[macrozoneName][ISYkey]['messana'])
+
+    def getMacrooneISYValue(self, ISYkey, macrozoneNbr):
+        macrozoneName = self.macrozoneID+str(macrozoneNbr)
+        messanaKey = self.ISYmap[macrozoneName][ISYkey]['messana']
+        try:
+            data = self.pullMacrozoneDataIndividual(macrozoneNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+
+    def getMacrooneISYdriverInfo(self, mKey, macrozoneNbr):
+        info = {}
+        macrozoneStr = self.macrozoneID+str(macrozoneNbr)
+        if mKey in self.setupFile['nodeDef'][macrozoneStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][macrozoneStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.macrozoneID, macrozoneNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][macrozoneStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+    def macrozoneSetStatus(self, value, macrozoneNbr):
+        LOGGER.debug(' macrozoneSetstatus called for zone: ' + str(macrozoneNbr))
+        
+        status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mStatus', value)
+        return(status)
+ 
+
+    def getmacrozoneStatusISYdriver(self, macrozoneNbr):
+        LOGGER.debug('getMacrozoneStatusISYdriver called for zone: '+str(macrozoneNbr))
+        
+        Key = ''
+        macrozoneName = self.zoneID+str(macrozoneNbr)
+        for ISYkey in self.ISYmap[macrozoneName]:
+            if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+        
+
+
+    def macrozoneSetSetpoint(self, value,  macrozoneNbr):
+        LOGGER.debug('macrozoneSetSetpoint called for zone: ' + str(macrozoneNbr))
+        
+        status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mSetpoint', value)
+        return(status)
+
+    def getMacrozoneSetPointISYdriver(self, macrozoneNbr):
+        LOGGER.debug('getMacrozoneSetpointISYdriver called for zone: '+str(macrozoneNbr))
+        
+        Key = ''
+        macrozoneName = self.zoneID+str(macrozoneNbr)
+        for ISYkey in self.ISYmap[macrozoneName]:
+            if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mSetpoint':
+                Key = ISYkey
+        return(Key)  
+  
+
+    def macrozoneEnableSchedule(self, value, macrozoneNbr):
+        LOGGER.debug('macrozoneEnableSchedule called for zone: ' + str(macrozoneNbr))
+        
+        status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mScheduleOn', value)
+        return(status)
+
+
+    def getMacrozoneEnableScheduleISYdriver(self, macrozoneNbr):
+        LOGGER.debug('getMacrozoneEnableScheduleISYdriver called for zone: '+str(macrozoneNbr))
+        
+        Key = ''
+        macrozoneName = self.zoneID+str(macrozoneNbr)
+        for ISYkey in self.ISYmap[macrozoneName]:
+            if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mScheduleOn':
+                Key = ISYkey
+        return(Key) 
 
 
 
 
+
+
+    ##############################################################
     # Hot Cold Change Over
     def updateHC_COData(self, HC_CONbr):
         LOGGER.debug('updatHC_COData: ' + str(HC_CONbr))

@@ -14,23 +14,7 @@ class messanaZone(polyinterface.Node):
         self.address = address 
         self.messana = self.parent.messana
         self.id = self.messana.getZoneAddress(self.zoneNbr)
-        '''
-        self.commands = { 
-                 'SET_SETPOINT' : self.setSetpoint
-                ,'SET_STATUS' : self.setStatus
-                ,'SET_ENERGYSAVE' : self.setEnergySave
-                ,'SET_SCHEDULEON' : self.enableSchedule 
-                ,'UPDATE' : self.ISYupdate
-                ,'CurrentSetpointDP' : self.setCurrentDewPt
-                ,'CurrentSetpointRH' : self.setCurRelHum
-                ,'DehumSetpointDP' : self.setDewTempDehum
-                ,'DehumSetpointRH' : self.setRelDehum
-                ,'HumSetpointDP' : self.setDewTempHum
-                ,'HumSetpointRH' : self.setRelHum                                                                    
-                ,'SET_CO2' : self.setCO2
-                }
-        '''
-        #self.checkZoneCommands(self.zoneNbr)
+
         self.zone_GETKeys = self.messana.zonePullKeys(self.zoneNbr)
         self.zone_PUTKeys = self.messana.zonePushKeys(self.zoneNbr)
         self.zone_ActiveKeys = self.messana.zoneActiveKeys(self.zoneNbr)
@@ -48,7 +32,7 @@ class messanaZone(polyinterface.Node):
        
     def start(self):
         return True
-
+    '''
     def checkZoneCommands(self, zoneNbr):
         tempList = []
         for cmd in self.commands:
@@ -56,7 +40,7 @@ class messanaZone(polyinterface.Node):
                 tempList.append(cmd)
         for key in tempList:
             self.commands.pop(key)
-   
+   '''
 
 
     def updateISYdrivers(self, level):
@@ -151,25 +135,61 @@ class messanaZone(polyinterface.Node):
         self.reportDrivers()
 
     def setCurrentDewPt(self, command):
-        LOGGER.debug('setCurrentDewPt Not implemented yet')
+        LOGGER.debug('setCurrentDP Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetCurrentDPt(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetCurrentDPtISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     def setCurRelHum(self, command):
-        LOGGER.debug('setCurRelHum Not implemented yet')
+        LOGGER.debug('setCurRelHum Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetCurrentRH(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetCurrentRHISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     def setDewTempDehum(self, command):
-        LOGGER.debug('setDewTempDehum Not implemented yet')
+        LOGGER.debug('setDewTempDehum Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetDehumDpt(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetDehumDPtISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     def setRelDehum(self, command):
-        LOGGER.debug('setRelDehum Not implemented yet')
+        LOGGER.debug('setRelDehum Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetDehumRH(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetDehumRHISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     def setDewTempHum(self, command):
-        LOGGER.debug('setDewTempHum Not implemented yet')
+        LOGGER.debug('setDewTempHum Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetHumDpt(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetHumDPtISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
+
 
     def setRelHum(self, command):
-        LOGGER.debug('setRelHum Not implemented yet')
+        LOGGER.debug('setRelHum Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetHumRH(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetHumRHISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     def setCO2(self, command):
-        LOGGER.debug('setCO2 Not implemented yet')
+        LOGGER.debug('setCO2 Not tested yet')
+        value = int(command.get('value'))
+        LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
+        if self.messana.zonesetCO2(value, self.zoneNbr):
+            ISYdriver = self.messana.getZonesetCO@ISYdriver(self.zoneNbr)
+            self.setDriver(ISYdriver, value, report = True)
 
     commands = { 'SET_SETPOINT' : setSetpoint
                 ,'SET_STATUS' : setStatus

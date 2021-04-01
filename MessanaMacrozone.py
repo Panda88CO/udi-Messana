@@ -13,7 +13,6 @@ class messanaMacrozone(polyinterface.Node):
         self.name = name
         self.address = address 
         self.messana = self.parent.messana
-        
         self.id =  self.messana.getMacrozoneAddress(self.macrozoneNbr)
         
         self.macrozone_GETKeys = self.messana.macrozonePullKeys(self.macrozoneNbr)
@@ -32,10 +31,16 @@ class messanaMacrozone(polyinterface.Node):
         self.ISYforced = True
        
     def start(self):
-
-
         return True
-
+    '''
+    def checkMacrozoneCommands(self, zoneNbr):
+        tempList = []
+        for cmd in self.commands:
+            if not(self.messana.checkMacrozoneCommand(cmd, self.macrozoneNbr)):
+                tempList.append(cmd)
+        for key in tempList:
+            self.commands.pop(key)
+    '''
 
     def updateISYdrivers(self, level):
         LOGGER.debug('Macrozone updateISYdrivers')
@@ -56,7 +61,7 @@ class messanaMacrozone(polyinterface.Node):
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 temp = self.messana.getMacrozoneMessanaISYkey(ISYkey, self.macrozoneNbr)
-                status, value = self.messana.getMacrooneISYValue(ISYkey, self.macrozoneNbr)
+                status, value = self.messana.getMacrozoneISYValue(ISYkey, self.macrozoneNbr)
                 LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
@@ -89,28 +94,17 @@ class messanaMacrozone(polyinterface.Node):
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(value))
-        if self.messana.zoneSetStatus(value, self.zoneNbr):
-            ISYdriver = self.messana.getZoneStatusISYdriver(self.zoneNbr)
+        LOGGER.debug('Macrozone'+str(self.macrozoneNbr)+' setStatus Received:' + str(value))
+        if self.messana.macrozoneSetStatus(value, self.zoneNbr):
+            ISYdriver = self.messana.getMacrozoneStatusISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)
-
-
-
-    def setEnergySave(self, command):
-        LOGGER.debug('setEnergySave Called')
-        value = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(value))
-        if self.messana.zoneSetEnergySave(value, self.zoneNbr):
-            ISYdriver = self.messana.getZoneEnergySaveISYdriver(self.zoneNbr)
-            self.setDriver(ISYdriver, value, report = True)
-
 
     def setSetpoint(self, command):
         LOGGER.debug('setSetpoint Called')
         value = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(value))
-        if self.messana.zoneSetSetpoint(value, self.zoneNbr):
-            ISYdriver = self.messana.getZoneSetPointISYdriver(self.zoneNbr)
+        LOGGER.debug('Zone'+str(self.macrozoneNbr)+' setSetpoint Received:' + str(value))
+        if self.messana.macrozoneSetSetpoint(value, self.zoneNbr):
+            ISYdriver = self.messana.getMacrozoneSetPointISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)
 
 
@@ -118,8 +112,8 @@ class messanaMacrozone(polyinterface.Node):
         LOGGER.debug('EnSchedule Called')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(value))      
-        if self.messana.zoneEnableSchedule(value, self.zoneNbr):
-            ISYdriver = self.messana.getZoneEnableScheduleISYdriver(self.zoneNbr)
+        if self.messana.macrozoneEnableSchedule(value, self.zoneNbr):
+            ISYdriver = self.messana.getMacrozoneEnableScheduleISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)     
         
     def ISYupdate(self, command):
