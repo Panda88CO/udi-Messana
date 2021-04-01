@@ -27,8 +27,7 @@ commands = { 'SET_SETPOINT' : 'setSetpoint'
             ,'SET_CO2' : 'setCO2'
             }
 messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a')
-#messana.init()
-print (commands)
+#messana.init()print (commands)
 #Retrive basic system info
 print('\nSYSTEM')
 print (commands)
