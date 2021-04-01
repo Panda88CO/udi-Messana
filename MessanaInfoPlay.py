@@ -2114,19 +2114,9 @@ class messanaInfo:
                 return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
-        LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
+        #LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
         nodeData = {}
-        '''
-        # we shoudl not need this as we filter the keyword's capability
-        if 'SensorCapability' in self.mSystem[mNodeKey]:
-            if self.mSystem[mNodeKey]['SensorCapability'][nodeNbr]:
-                if  mKey in self.mSystem[mNodeKey]['SensorCapability'][nodeNbr]:
-                    if self.mSystem[mNodeKey]['SensorCapability'][nodeNbr][mKey] == 0:
-                        LOGGER.debug(mKey + ' capability not supported')
-                        nodeData['error'] = 'Does not support keyword: ' + mKey
-                        nodeData['statusOK'] =False
-                        return (nodeData)
-        '''
+
         if 'GETstr' in self.mSystem[mNodeKey]['KeyInfo'][mKey]:
             GETStr =self.IP+self.mSystem[mNodeKey]['KeyInfo'][mKey]['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
             Nodep = requests.get(GETStr)
@@ -2191,41 +2181,7 @@ class messanaInfo:
             nodeData['nodeDataOK'] =False
         return(nodeData)
 
-    '''
-    def getNodeKeys (self, NodeNbr, NodeKey, cmdKey):
-        keys = []
-        if self.mSystem[NodeKey]['data']:
-            if NodeNbr in self.mSystem[NodeKey]['data']: 
-                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
-                    if self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
-                        #if mKey in self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                self.updateNodeData(NodeNbr, NodeKey)
-                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
-                    if self.mSystem[NodeKey]['KeyInfo'][mKey][cmdKey]:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-        else:
-            LOGGER.debug('No Keys found - trying to fetch Messana data')
-            #self.updateSystemData('all')
-            self.updateNodeData(NodeNbr, NodeKey)
-            if self.mSystem[NodeKey]['data']:
-                for mKey in self.mSystem[NodeKey]['data'][NodeNbr]:
-                    if mKey in self.mSystem[NodeKey]['KeyInfo']:
-                        if not(mKey in keys):
-                            keys.append(mKey)
-            else:
-                LOGGER.debug('No '+ NodeKey + ' present')
-        if 'NOcapabiility' in self.mSystem[NodeKey]:
-            if self.mSystem[NodeKey]['SensorCapability']:
-                if NodeNbr in self.mSystem[NodeKey]['SensorCapability']:
-                    for mKey in keys:
-                        if mKey in self.mSystem[NodeKey]['SensorCapability'][NodeNbr]:
-                            keys.remove(mKey)                            
-        return(keys)
-        '''
+ 
     # New Functions Need to be tested
     def getNodeKeys (self, nodeNbr, nodeKey, cmdKey):
         keys = []
@@ -2250,7 +2206,7 @@ class messanaInfo:
         dataOK = True
         supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
         for mKey in supportedPullKeys:
-            LOGGER.debug('GET ' + mKey + ' in zone ' + str(nodeNbr))
+            #LOGGER.debug('GET ' + mKey + ' in zone ' + str(nodeNbr))
             Data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
             if not(Data['statusOK']):
                 dataOK = False
