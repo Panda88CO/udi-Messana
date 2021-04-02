@@ -26,7 +26,7 @@ class messanaMacrozone(polyinterface.Node):
             if  self.temp != {}:
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
-        #self.messana.updateMacrozoneData('all', self.macrozoneNbr)
+                
         self.updateISYdrivers('all')
         self.ISYforced = True
        
