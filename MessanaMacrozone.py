@@ -53,9 +53,9 @@ class messanaMacrozone(polyinterface.Node):
                     status, value = self.messana.getMacrozoneISYValue(ISYkey, self.macrozoneNbr)
                     if status:
                         if self.ISYforced:
-                            self.setDriver(ISYdriver, value, report = True, force = False)
+                            self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                         else:
-                            self.setDriver(ISYdriver, value, report = True, force = True)
+                            self.setDriver(ISYdriver['driver'], value, report = True, force = True)
                         LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
@@ -65,9 +65,9 @@ class messanaMacrozone(polyinterface.Node):
                 #LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
-                        self.setDriver(ISYdriver, value, report = True, force = False)
+                        self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                     else:
-                        self.setDriver(ISYdriver, value, report = True, force = True)
+                        self.setDriver(ISYdriver['driver'], value, report = True, force = True)
                     LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
