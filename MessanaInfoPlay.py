@@ -2682,6 +2682,7 @@ class messanaInfo:
         except:
             status = False
             systemValue = None
+        LOGGER.debug ('getZoneISYValue + status, systemValue' + status + '  ' + str(systemValue))
         return (status, systemValue)
 
 
