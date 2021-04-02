@@ -56,7 +56,7 @@ class messanaMacrozone(polyinterface.Node):
                             self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver['driver'], value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        LOGGER.debug('driver updated for macrozone'+str(self.macrozoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
@@ -68,7 +68,7 @@ class messanaMacrozone(polyinterface.Node):
                         self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver['driver'], value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    LOGGER.debug('driver updated for macrozone'+str(self.macrozoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
             else:
@@ -79,13 +79,13 @@ class messanaMacrozone(polyinterface.Node):
 
     def shortPoll(self):
         LOGGER.debug('Messana Zone shortPoll - zone '+ str(self.macrozoneNbr))
-        self.messana.updateMacrozoneData('active', self.macrozoneNbr)
+        #self.messana.updateMacrozoneData('active', self.macrozoneNbr)
         self.updateISYdrivers('active')
         self.reportDrivers()
                    
     def longPoll(self):
         LOGGER.debug('Messana Zone longPoll - zone ' + str(self.macrozoneNbr))
-        self.messana.updateMacrozoneData('all', self.macrozoneNbr)
+        #self.messana.updateMacrozoneData('all', self.macrozoneNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
 
