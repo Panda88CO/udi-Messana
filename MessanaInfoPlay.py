@@ -2958,7 +2958,7 @@ class messanaInfo:
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
         return(self.ISYmap[macrozoneName][ISYkey]['messana'])
 
-    def getMacrooneISYValue(self, ISYkey, macrozoneNbr):
+    def getMacrozoneISYValue(self, ISYkey, macrozoneNbr):
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
         messanaKey = self.ISYmap[macrozoneName][ISYkey]['messana']
         try:
