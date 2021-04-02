@@ -111,7 +111,7 @@ class messanaMacrozone(polyinterface.Node):
     def enableSchedule(self, command):
         LOGGER.debug('EnSchedule Called')
         value = int(command.get('value'))
-        LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(value))      
+        LOGGER.debug('Zone'+str(self.macrozoneNbr)+' EnSchedule Reeived:' + str(value))      
         if self.messana.macrozoneEnableSchedule(value, self.macrozoneNbr):
             ISYdriver = self.messana.getMacrozoneEnableScheduleISYdriver(self.macrozoneNbr)
             self.setDriver(ISYdriver, value, report = True)     

@@ -3010,7 +3010,7 @@ class messanaInfo:
         return(status)
  
 
-    def getmacrozoneStatusISYdriver(self, macrozoneNbr):
+    def getMacrozoneStatusISYdriver(self, macrozoneNbr):
         LOGGER.debug('getMacrozoneStatusISYdriver called for zone: '+str(macrozoneNbr))
         
         Key = ''
