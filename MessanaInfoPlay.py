@@ -339,8 +339,8 @@ class messanaInfo:
                                                     ,'ISYmin':40
                                                     ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':1
-                                                    ,'ISYprec':0 }
+                                                    ,'ISYstep':0.5
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Set Temp' 
                                                     ,'nlsValues' : None
@@ -499,7 +499,7 @@ class messanaInfo:
                                                     ,'ISYmin':-40
                                                     ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':1
+                                                    ,'ISYstep':0.5
                                                     ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Perceived Temp' 
@@ -712,8 +712,8 @@ class messanaInfo:
                                                     ,'ISYmin':40
                                                     ,'ISYmax':120
                                                     ,'ISYsubset':None
-                                                    ,'ISYstep':1
-                                                    ,'ISYprec':0 }
+                                                    ,'ISYstep':0.5
+                                                    ,'ISYprec':1 }
                                             , 'ISYnls': {    
                                                      'nlsTEXT' : 'Set Macro Zone Temp' 
                                                     ,'nlsValues' : None 
