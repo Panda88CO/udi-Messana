@@ -637,7 +637,7 @@ class messanaInfo:
                                         ,'mThermalStatus': { 
                                              'GETstr': '/api/zone/thermalStatus/'
                                             ,'PUTstr': None
-                                            ,'Active': None 
+                                            ,'Active': '/api/zone/thermalStatus/'
                                             ,'ISYeditor':{   
                                                      'ISYuom':25
                                                     ,'ISYmin':None

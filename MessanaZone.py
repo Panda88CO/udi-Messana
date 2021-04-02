@@ -82,6 +82,7 @@ class messanaZone(polyinterface.Node):
         LOGGER.debug('Messana Zone shortPoll - zone '+ str(self.zoneNbr))
         self.messana.updateZoneData('active', self.zoneNbr)
         self.updateISYdrivers('active')
+        self.reportDrivers()
                    
     def longPoll(self):
         LOGGER.debug('Messana Zone longPoll - zone ' + str(self.zoneNbr))
