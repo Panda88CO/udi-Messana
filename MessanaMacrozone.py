@@ -49,7 +49,7 @@ class messanaMacrozone(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getMacrozoneMessanaISYkey(ISYkey, self.macrozoneNbr)
                 if temp in self.macrozone_ActiveKeys:                    
-                    LOGGER.debug('Messana Macrozone ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana Macrozone ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getMacrozoneISYValue(ISYkey, self.macrozoneNbr)
                     if status:
                         if self.ISYforced:
@@ -62,7 +62,7 @@ class messanaMacrozone(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getMacrozoneMessanaISYkey(ISYkey, self.macrozoneNbr)
                 status, value = self.messana.getMacrozoneISYValue(ISYkey, self.macrozoneNbr)
-                LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana Zone ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)
