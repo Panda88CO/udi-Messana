@@ -228,7 +228,7 @@ class messanaInfo:
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
                                                     'nlsTEXT' : 'Temp Unit' 
-                                                    ,'nlsValues' : {0:'C', 1:'F'}
+                                                    ,'nlsValues' : {0:'Celcius', 1:'Farenheit'}
                                                         }
                                                 }                                        
                                         ,'mEnergySaving':{
