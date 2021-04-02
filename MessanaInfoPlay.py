@@ -298,15 +298,15 @@ class messanaInfo:
                                                                                     ,'ISYeditor' : 'mScheduleOn' }
                                                              ,'CurrentSetpointDP': { 'ISYtext' :'Current Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mCurrentSetpointDP'}
-                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Current Setpoint Relative Humidity'
+                                                             ,'CurrentSetpointRH' : { 'ISYtext' :'Current Setpoint Rel. Humidity'
                                                                                     ,'ISYeditor' : 'mCurrentSetpointRH'}
                                                              ,'DehumSetpointDP' : { 'ISYtext' :'Dehumdification Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mDehumSetpointDP'}
-                                                             ,'DehumSetpointRH' : { 'ISYtext' :'Dehumdification Setpoint Relative Humidity'
+                                                             ,'DehumSetpointRH' : { 'ISYtext' :'Dehumdification Setpoint Rel. Humidity'
                                                                                     ,'ISYeditor' : 'mDehumSetpointRH'}
                                                              ,'HumSetpointDP'   : { 'ISYtext' :'Humdification Setpoint Dewpoint'
                                                                                     ,'ISYeditor' : 'mHumSetpointDP'}
-                                                             ,'HumSetpointRH'   : { 'ISYtext' :'Humdification Setpoint Relative Humidity'
+                                                             ,'HumSetpointRH'   : { 'ISYtext' :'Humdification Setpoint Rel. Humidity'
                                                                                     ,'ISYeditor' : 'mHumSetpointRH'}
                                                              ,'SET_CO2'         :{ 'ISYtext' :'CO2 Setpoint'
                                                                                     ,'ISYeditor' : 'mCO2'}
