@@ -48,7 +48,7 @@ class messanaMacrozone(polyinterface.Node):
             ISYkey = ISYdriver['driver']
             if level == 'active':
                 temp = self.messana.getMacrozoneMessanaISYkey(ISYkey, self.macrozoneNbr)
-                if temp in self.zone_ActiveKeys:                    
+                if temp in self.macrozone_ActiveKeys:                    
                     LOGGER.debug('Messana Macrozone ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getMacrozoneISYValue(ISYkey, self.macrozoneNbr)
                     if status:
