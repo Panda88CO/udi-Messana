@@ -1942,6 +1942,7 @@ class messanaInfo:
                 if str(Nodep) == self.RESPONSE_OK:
                     tempKeys= Nodep.json()
                     for key in tempKeys:
+                        #zones      
                         if key == 'operative_temperature':
                             status = self.checkGETNode( nodeKey, nodeNbr, 'mTemp')   
                             if status['statusOK'] == True:
@@ -2017,37 +2018,54 @@ class messanaInfo:
                             if status['statusOK'] == True:
                                 self.keyList['mVoc'] = tempKeys['voc']   
                             else:
-                                self.keyList['mVoc'] = 0                                      
-                        elif key == 'dehumidification':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mDehumudityStatus')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDehumudityStatus'] = tempKeys['dehumidification'] 
-                            else:
-                                self.keyList['mDehumudityStatus'] = 0                                      
-                        elif key == 'humidification':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHUMOn')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHUMOn'] = tempKeys['humidification']
-                            else:
-                                self.keyList['mHUMOn'] = 0                                      
-                        elif key == 'HRV':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHRVOn'] = tempKeys['HRV']
-                            else:
-                                self.keyList['mHRVOn'] = 0                                      
-                        elif key == 'convective integration':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
-                            if status['statusOK'] == True:
-                                self.keyList['mINTOn'] = tempKeys['convective integration']           
-                            else:
-                                self.keyList['mINTOn'] = 0                                      
-                        elif key == 'freecooling':
-                            # Not currently supported                                              
-                            None
+                                self.keyList['mVoc'] = 0              
+                        #ATUs
                         elif key == 'exhaust air extraction':
                             # Not currently supported  
                             None
+ 
+                        elif key == 'freecooling':
+                            # Not currently supported  
+                            None
+                        
+                        elif key == 'convective integration':
+                            status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
+                            if status['statusOK'] == True:
+                                if tempKeys['convective integration'] == 'true':
+                                    self.keyList['mINTOn'] = 1
+                                else: 
+                                    self.keyList['mINTOn'] = 0
+                            else:
+                                self.keyList['mINTOn'] = 0
+                        elif key == 'HRV':
+                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
+                            if status['statusOK'] == True:
+                                if tempKeys['HRV'] == 'true':
+                                    self.keyList['mHRVOn'] = 1
+                                else: 
+                                    self.keyList['mHRVOn'] = 0
+                            else:
+                                self.keyList['mHRVOn'] = 0                            
+
+                        elif key == 'humidification':  
+                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
+                            if status['statusOK'] == True:
+                                if tempKeys['humidification'] == 'true':
+                                    self.keyList['mHUMOn'] = 1
+                                else: 
+                                    self.keyList['mHUMOn'] = 0
+                            else:
+                                self.keyList['mHUMOn'] = 0                            
+                            
+                        elif key == 'dehumidification':
+                            status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
+                            if status['statusOK'] == True:
+                                if tempKeys['dehumidification'] == 'true':
+                                    self.keyList['mNTDOn'] = 1
+                                else: 
+                                    self.keyList['mNTDOn'] = 0
+                            else:
+                                self.keyList['mNTDOn'] = 0                                
                         else:
                             LOGGER.debug(key + ' unknown keyword')
         self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyList
@@ -2191,10 +2209,8 @@ class messanaInfo:
                 if self.mSystem[nodeKey]['SensorCapability'][nodeNbr][mKey] != 0:
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
                         data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
-                        if data['statusOK']
+                        if data['statusOK']:
                             keys.append(mKey)
-                                keys.append(mKey)
-                        keys.append(mKey)
             else:
                 if mKey != 'mCapability': #mCapability is special case handled by 'SensorCapability'
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
@@ -2467,13 +2483,15 @@ class messanaInfo:
         if self.mSystem[ self.systemID]['data']:
             for mKey in self.mSystem[ self.systemID]['data']:
                 data = self.pullSystemDataIndividual(mKey)
-                if data['statusOK']
+                if data['statusOK']:
                     keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem[ self.systemID]['data']:
-                keys.append(mKey)
+                data = self.pullSystemDataIndividual(mKey)
+                if data['statusOK']:
+                    keys.append(mKey)
         return(keys)
 
     def systemPushKeys(self):
@@ -2501,9 +2519,8 @@ class messanaInfo:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
                         data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']
+                        if data['statusOK']:
                             keys.append(mKey)
-                                keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
@@ -2511,16 +2528,15 @@ class messanaInfo:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
                         data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']
+                        if data['statusOK']:
                             keys.append(mKey)
-                                keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):
         messanaKey = self.ISYmap[ self.systemID][ISYkey]['messana']
         systemPullKeys = self.systemPullKeys()
         if messanaKey in systemPullKeys:
-            data = 
+            data = self.pullSystemDataIndividual(messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
