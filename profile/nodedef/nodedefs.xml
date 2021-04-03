@@ -1,5 +1,5 @@
 <nodeDefs> 
-   <nodeDef id="Msystem" nls="nlsMsystem">
+   <nodeDef id="msystem" nls="nlsmsystem">
       <editors />
       <sts>
          <st id="GV1" editor="SYSTEM_1" />
@@ -661,8 +661,6 @@
          <st id="GV13" editor="ATUS0_13" />
          <st id="GV14" editor="ATUS0_14" />
          <st id="GV15" editor="ATUS0_15" />
-         <st id="GV16" editor="ATUS0_16" />
-         <st id="GV17" editor="ATUS0_17" />
       </sts>
       <cmds>
          <sends>
@@ -678,30 +676,24 @@
             <cmd id="SET_FLOWLEVEL" > 
                <p id="" editor="ATUS0_1" init="GV1" /> 
             </cmd> 
-            <cmd id="SET_HUM" > 
+            <cmd id="SET_INT" > 
                <p id="" editor="ATUS0_4" init="GV4" /> 
             </cmd> 
-            <cmd id="SET_NTD" > 
-               <p id="" editor="ATUS0_5" init="GV5" /> 
-            </cmd> 
-            <cmd id="SET_INT" > 
-               <p id="" editor="ATUS0_6" init="GV6" /> 
-            </cmd> 
             <cmd id="SET_HUM_SP_RH" > 
-               <p id="" editor="ATUS0_13" init="GV13" /> 
+               <p id="" editor="ATUS0_11" init="GV11" /> 
             </cmd> 
             <cmd id="SET_HUM_SP_DP" > 
-               <p id="" editor="ATUS0_14" init="GV14" /> 
+               <p id="" editor="ATUS0_12" init="GV12" /> 
             </cmd> 
             <cmd id="SET_DEHUM_SP_RH" > 
-               <p id="" editor="ATUS0_15" init="GV15" /> 
+               <p id="" editor="ATUS0_13" init="GV13" /> 
             </cmd> 
             <cmd id="SET_DEHUM_SP_DP" /> 
             <cmd id="SET_CURR_SP_RH" > 
-               <p id="" editor="ATUS0_16" init="GV16" /> 
+               <p id="" editor="ATUS0_14" init="GV14" /> 
             </cmd> 
             <cmd id="SET_CURR_SP_DP" > 
-               <p id="" editor="ATUS0_17" init="GV17" /> 
+               <p id="" editor="ATUS0_15" init="GV15" /> 
             </cmd> 
          </accepts>
       </cmds>

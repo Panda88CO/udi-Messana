@@ -33,7 +33,7 @@
      <range  uom="25" subset="0-1" nls="SYSTEM_11" />
 </editor>
   <editor id = "ZONES0_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES0_2" > 
      <range  uom="25" subset="0-1" nls="ZONES0_2" />
@@ -57,7 +57,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES0_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES0_10" > 
      <range  uom="25" subset="0-1" nls="ZONES0_10" />
@@ -78,7 +78,7 @@
      <range  uom="25" subset="0-4" nls="ZONES0_15" />
 </editor>
   <editor id = "ZONES1_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES1_2" > 
      <range  uom="25" subset="0-1" nls="ZONES1_2" />
@@ -102,7 +102,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES1_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES1_10" > 
      <range  uom="25" subset="0-1" nls="ZONES1_10" />
@@ -123,7 +123,7 @@
      <range  uom="25" subset="0-4" nls="ZONES1_15" />
 </editor>
   <editor id = "ZONES2_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES2_2" > 
      <range  uom="25" subset="0-1" nls="ZONES2_2" />
@@ -147,7 +147,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES2_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES2_10" > 
      <range  uom="25" subset="0-1" nls="ZONES2_10" />
@@ -168,7 +168,7 @@
      <range  uom="25" subset="0-4" nls="ZONES2_15" />
 </editor>
   <editor id = "ZONES3_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES3_2" > 
      <range  uom="25" subset="0-1" nls="ZONES3_2" />
@@ -192,7 +192,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES3_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES3_10" > 
      <range  uom="25" subset="0-1" nls="ZONES3_10" />
@@ -213,7 +213,7 @@
      <range  uom="25" subset="0-4" nls="ZONES3_15" />
 </editor>
   <editor id = "ZONES4_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES4_2" > 
      <range  uom="25" subset="0-1" nls="ZONES4_2" />
@@ -237,7 +237,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES4_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES4_10" > 
      <range  uom="25" subset="0-1" nls="ZONES4_10" />
@@ -258,7 +258,7 @@
      <range  uom="25" subset="0-4" nls="ZONES4_15" />
 </editor>
   <editor id = "ZONES5_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES5_2" > 
      <range  uom="25" subset="0-1" nls="ZONES5_2" />
@@ -282,7 +282,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES5_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES5_10" > 
      <range  uom="25" subset="0-1" nls="ZONES5_10" />
@@ -303,7 +303,7 @@
      <range  uom="25" subset="0-4" nls="ZONES5_15" />
 </editor>
   <editor id = "ZONES6_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES6_2" > 
      <range  uom="25" subset="0-1" nls="ZONES6_2" />
@@ -327,7 +327,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES6_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES6_10" > 
      <range  uom="25" subset="0-1" nls="ZONES6_10" />
@@ -348,7 +348,7 @@
      <range  uom="25" subset="0-4" nls="ZONES6_15" />
 </editor>
   <editor id = "ZONES7_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES7_2" > 
      <range  uom="25" subset="0-1" nls="ZONES7_2" />
@@ -372,7 +372,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES7_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES7_10" > 
      <range  uom="25" subset="0-1" nls="ZONES7_10" />
@@ -393,7 +393,7 @@
      <range  uom="25" subset="0-4" nls="ZONES7_15" />
 </editor>
   <editor id = "ZONES8_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES8_2" > 
      <range  uom="25" subset="0-1" nls="ZONES8_2" />
@@ -417,7 +417,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES8_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES8_10" > 
      <range  uom="25" subset="0-1" nls="ZONES8_10" />
@@ -438,7 +438,7 @@
      <range  uom="25" subset="0-4" nls="ZONES8_15" />
 </editor>
   <editor id = "ZONES9_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES9_2" > 
      <range  uom="25" subset="0-1" nls="ZONES9_2" />
@@ -462,7 +462,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ZONES9_9" > 
-     <range  uom="17" min="-40" max="120" step="1" prec="1" />
+     <range  uom="17" min="-40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "ZONES9_10" > 
      <range  uom="25" subset="0-1" nls="ZONES9_10" />
@@ -483,7 +483,7 @@
      <range  uom="25" subset="0-4" nls="ZONES9_15" />
 </editor>
   <editor id = "MACROZONES0_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "MACROZONES0_2" > 
      <range  uom="25" subset="0-1" nls="MACROZONES0_2" />
@@ -495,7 +495,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "MACROZONES1_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "MACROZONES1_2" > 
      <range  uom="25" subset="0-1" nls="MACROZONES1_2" />
@@ -507,7 +507,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "MACROZONES2_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "MACROZONES2_2" > 
      <range  uom="25" subset="0-1" nls="MACROZONES2_2" />
@@ -519,7 +519,7 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "MACROZONES3_1" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="17" min="40" max="120" step="0.5" prec="1" />
 </editor>
   <editor id = "MACROZONES3_2" > 
      <range  uom="25" subset="0-1" nls="MACROZONES3_2" />
@@ -558,13 +558,13 @@
      <range  uom="25" subset="0-1" nls="ATUS0_9" />
 </editor>
   <editor id = "ATUS0_10" > 
-     <range  uom="25" subset="0-1" nls="ATUS0_10" />
+     <range  uom="17" min="40" max="120" step="1" prec="0" />
 </editor>
   <editor id = "ATUS0_11" > 
-     <range  uom="25" subset="0-1" nls="ATUS0_11" />
+     <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ATUS0_12" > 
-     <range  uom="17" min="40" max="120" step="1" prec="0" />
+     <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ATUS0_13" > 
      <range  uom="51" min="0" max="100" step="1" prec="1" />
@@ -573,12 +573,6 @@
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ATUS0_15" > 
-     <range  uom="51" min="0" max="100" step="1" prec="1" />
-</editor>
-  <editor id = "ATUS0_16" > 
-     <range  uom="51" min="0" max="100" step="1" prec="1" />
-</editor>
-  <editor id = "ATUS0_17" > 
      <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ENERGYS0_1" > 

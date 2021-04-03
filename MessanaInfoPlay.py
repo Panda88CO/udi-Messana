@@ -1649,8 +1649,6 @@ class messanaInfo:
 
         #Dummy check to see if there is connection to Messana system)
         sysData= self.pullSystemDataIndividual('mApiVer')
-
- 
         if not(sysData['statusOK']):
             LOGGER.debug('Error Connecting to MessanaSystem')
         else:    
@@ -2192,6 +2190,10 @@ class messanaInfo:
             if mKey in self.mSystem[nodeKey]['SensorCapability'][nodeNbr]:
                 if self.mSystem[nodeKey]['SensorCapability'][nodeNbr][mKey] != 0:
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
+                        data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                        if data['statusOK']
+                            keys.append(mKey)
+                                keys.append(mKey)
                         keys.append(mKey)
             else:
                 if mKey != 'mCapability': #mCapability is special case handled by 'SensorCapability'
@@ -2214,15 +2216,18 @@ class messanaInfo:
         return(dataOK)
     
     def pullNodeDataIndividual(self, nodeNbr, nodeKey, mKey): 
-        Data = {} 
+        #Data = {} 
         #LOGGER.debug('pullNodeDataIndividual: ' +str(nodeNbr)  + ' ' + mKey)
         #     
+        Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
+        '''
         supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
         if mKey in supportedPullKeys:
             Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
         else:
             Data['statusOK'] = False
             Data['error'] = mKey +' is not a supported GETstr command'
+        '''
         return(Data)
     
     def checkGETNode(self,  nodeKey, nodeNbr, mKey): 
@@ -2461,7 +2466,9 @@ class messanaInfo:
         keys=[]
         if self.mSystem[ self.systemID]['data']:
             for mKey in self.mSystem[ self.systemID]['data']:
-                keys.append(mKey)
+                data = self.pullSystemDataIndividual(mKey)
+                if data['statusOK']
+                    keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
@@ -2493,21 +2500,27 @@ class messanaInfo:
             for mKey in self.mSystem[ self.systemID]['data']:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        keys.append(mKey)
+                        data = self.pullSystemDataIndividual(mKey)
+                        if data['statusOK']
+                            keys.append(mKey)
+                                keys.append(mKey)
         else:
             LOGGER.debug('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem[ self.systemID]['data']:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        keys.append(mKey)
+                        data = self.pullSystemDataIndividual(mKey)
+                        if data['statusOK']
+                            keys.append(mKey)
+                                keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):
         messanaKey = self.ISYmap[ self.systemID][ISYkey]['messana']
         systemPullKeys = self.systemPullKeys()
         if messanaKey in systemPullKeys:
-            data = self.pullSystemDataIndividual(messanaKey)
+            data = 
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -2899,11 +2912,6 @@ class messanaInfo:
 
     ###################################################################        
     #MacroZone
-    def getMacrozoneCapability(self, macrozoneNbr): 
-        self.getNodeCapability(self.macrozoneID, macrozoneNbr)
-
-    def getMacrozoneAddress(self, macrozoneNbr):
-        return(self.macrozoneID + str(macrozoneNbr))
 
     def updateMacrozoneData(self,  level, macrozoneNbr):
         LOGGER.debug('updatMacrozoneData: ' + str(macrozoneNbr))
@@ -2953,6 +2961,12 @@ class messanaInfo:
             return(tempName['data'])
         else:
             return('NA')
+
+    def getMacrozoneCapability(self, macrozoneNbr): 
+        self.getNodeCapability(self.macrozoneID, macrozoneNbr)
+
+    def getMacrozoneAddress(self, macrozoneNbr):
+        return(self.macrozoneID + str(macrozoneNbr))
 
     def getMacrozoneMessanaISYkey(self, ISYkey, macrozoneNbr):
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
@@ -3093,11 +3107,14 @@ class messanaInfo:
     def getHotColdChangeOverCount(self):
         return(self.mSystem[ self.systemID]['data']['mhc_coCount'])
 
-
+    ####################################################
     #ATU
-    def updateATUData(self, ATUNbr):
-        LOGGER.debug('updatATUData: ' + str(ATUNbr))
-        return(self.updateNodeData(ATUNbr, self.atuID))
+    def updateATUData(self, atuNbr):
+        LOGGER.debug('updatATUData: ' + str(atuNbr))
+        return(self.updateNodeData(atuNbr, self.atuID))
+
+    def getATUCapability(self, atuNbr): 
+        self.getNodeCapability(self.atuID, atuNbr)
 
     def getAtuCapability(self, atuNbr): 
         self.getNodeCapability(self.atuID, atuNbr)
@@ -3136,7 +3153,7 @@ class messanaInfo:
     def getAtuAddress(self, atuNbr):
         return(self.atuID + str(atuNbr))
 
-
+    #################################################################
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):
         LOGGER.debug('updatFanCoilData: ' + str(FanCoilNbr))
@@ -3167,7 +3184,8 @@ class messanaInfo:
     
     def getFanCoilCount(self):
         return(self.mSystem[ self.systemID]['data']['mFanCoilCount'])
-  
+
+    #############################################################
     #EnergySources
     def updateEnergySourceData(self, EnergySourceNbr):
         LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
@@ -3199,6 +3217,7 @@ class messanaInfo:
     def getenergySourceCount(self):
         return(self.mSystem[ self.systemID]['data']['mEnergySourceCount'])
 
+    #####################################################
     #Buffer Tank
     def updateBufferTankData(self, BufferTankNbr):
         LOGGER.debug('updatBufferTankData: ' + str(BufferTankNbr))
@@ -3243,7 +3262,7 @@ class messanaInfo:
 
         #Domestic Hot Water
  
-
+    ##################################################################
     # Domestic Hot Water
     def updateDHWData(self, DHWNbr):
         LOGGER.debug('updatDHWData: ' + str(DHWNbr))

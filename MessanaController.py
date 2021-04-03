@@ -123,10 +123,10 @@ class MessanaController(polyinterface.Controller):
         if self.messanaImportOK == 1:
             LOGGER.debug('Short Poll System Up')
             if self.ISYforced:
-                self.messana.updateSystemData('active')
+                #self.messana.updateSystemData('active')
                 self.updateISYdrivers('active')
             else:
-                self.messana.updateSystemData('all')
+                #self.messana.updateSystemData('all')
                 self.updateISYdrivers('all')
             self.ISYforced = True
             LOGGER.debug('Short POll controller: ' )
@@ -212,19 +212,18 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + macrozonename +' ' + macrozoneaddress) 
             if not macrozoneaddress in self.nodes:
                self.addNode(messanaMacrozone(self, self.address, macrozoneaddress, macrozonename, macrozoneNbr))
-        '''
+        
         LOGGER.debug('discover atus')
         nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):
             LOGGER.debug('Adding zone ' + str(atuNbr))
-            name = self.messana.getAtuName(atuNbr)
-            address = self.messana.getAtuAddress(atuNbr)
-            LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + name +' ' + address) 
-            if not address in self.nodes:
-               self.addNode(messanaAtu(self, self.address, address, name, atuNbr))
-        #nbrMacrozones = 0
-       
-        '''
+            atuname = self.messana.getAtuName(atuNbr)
+            atuaddress = self.messana.getAtuAddress(atuNbr)
+            LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaAtu(self, self.address, atuaddress, atuname, atuNbr))
+               
+        
         self.nodeDefineDone = True
 
     
