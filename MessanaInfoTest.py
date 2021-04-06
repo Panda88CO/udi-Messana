@@ -9,9 +9,7 @@ from collections import defaultdict
 from MessanaInfoPlayPRINT import messanaInfo
 import shutil
 #import ISYsetupFiles
-
 #LOGGER = polyinterface.LOGGER
-           
 #sys.stdout = open('Messanaoutput.txt','wt')
 commands = { 'SET_SETPOINT' : 'setSetpoint'
             ,'SET_STATUS' : 'setStatus'
@@ -78,6 +76,11 @@ messana.systemSetEnergySave(val)
 
 print('zones')
 MessanaZone = []
+atuCount = messana.getAtuCount()
+for atuNbr in range(0,atuCount):
+    messana.getAtuCapability(atuNbr)
+    messana.updateATUData(atuNbr)
+    #atuName = self.atuID+str(atuNbr)
 zoneCount = messana.getZoneCount()
 for zoneNbr in range(0, zoneCount):
     for cmd in commands:

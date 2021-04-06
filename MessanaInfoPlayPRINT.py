@@ -282,7 +282,8 @@ class messanaInfo:
                                          }                                         
                                      ,'data':{}
                                      ,'SensorCapability' : {}
-                            
+                                     ,'GETkeysList' :{}
+                                     ,'PUTkeysList' :{}
                         },
                         self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
@@ -460,7 +461,7 @@ class messanaInfo:
                                                     }
                                         ,'mHumidity': { 
                                              'GETstr': '/api/zone/humidity/'
-                                            ,'PUTstr': '/api/zone/humidity/' 
+                                            ,'PUTstr': None
                                             ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
@@ -476,7 +477,7 @@ class messanaInfo:
                                                     }
                                         ,'mDewPoint' : { 
                                              'GETstr': '/api/zone/dewpoint/'
-                                            ,'PUTstr': '/api/zone/dewpoint/'
+                                            ,'PUTstr': None
                                             ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
@@ -671,6 +672,8 @@ class messanaInfo:
                                     }
                                     ,'data' :{}
                                     ,'SensorCapability' : {}
+                                    ,'GETkeysList' :{}
+                                    ,'PUTkeysList' :{}
                         },
                         self.macrozoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
@@ -801,6 +804,8 @@ class messanaInfo:
                                                     }                                     
                                     ,'data' :{}
                                     ,'SensorCapability' : {}
+                                    ,'GETkeysList' :{}
+                                    ,'PUTkeysList' :{}                                    
                         }, 
                         self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -878,7 +883,9 @@ class messanaInfo:
                                         }   
                                         ,'data' : {}
                                         ,'SensorCapability' : {}
-                        },
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
+                                    },
                         self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Set System Status'
@@ -988,8 +995,10 @@ class messanaInfo:
                                                         }  
                                                     }
                                             }                                       
-                                    ,'data' : {}
-                                    ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}  
                         },
                         self.atuID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1340,8 +1349,10 @@ class messanaInfo:
                                                         }
                                                     }
                                     }
-                                    ,'data' : {}
-                                    ,'SensorCapability' : {}                  
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}     
                         },
                          self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1432,8 +1443,10 @@ class messanaInfo:
                                                        }
                                                     }  
                                         }                                                                                                      
-                                         ,'data' : {}
-                                         ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         }, 
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1527,8 +1540,10 @@ class messanaInfo:
                                                        }
                                                     }   
                                         }                        
-                                         ,'data' : {}
-                                         ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         },
                         self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1606,6 +1621,8 @@ class messanaInfo:
                                         }                              
                                         ,'data' : {}
                                         ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         }
                 }
         
@@ -1649,11 +1666,10 @@ class messanaInfo:
 
         #Dummy check to see if there is connection to Messana system)
         sysData= self.pullSystemDataIndividual('mApiVer')
-
- 
         if not(sysData['statusOK']):
             print('Error Connecting to MessanaSystem')
-        else:    
+        else:  
+            # Need SystemCapability function 
             self.updateSystemData('all')
             print(self.systemID + 'added')
             self. setMessanaCredentials (mIPaddress, mAPIkey)    
@@ -1756,14 +1772,12 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-    def checkValidNodeCommand(self, cmd, node, nodeNbr):
+    def checkValidNodeCommand(self, key, node, nodeNbr):
         exists = True
-        mCmd = self.mSystem[node]['ISYnode']['accepts'][cmd]['ISYeditor']
-        
+        mCmd = self.mSystem[node]['ISYnode']['accepts'][key]['ISYeditor']
         if mCmd != None:
-            if mCmd in self.mSystem[node]['SensorCapability'][nodeNbr]:
-                if self.mSystem[node]['SensorCapability'][nodeNbr][mCmd] == 0:
-                    exists = False
+            if not(mCmd in self.mSystem[node]['PUTkeysList'][nodeNbr]):
+                exists = False
         return(exists)
 
 
@@ -1819,7 +1833,7 @@ class messanaInfo:
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                 else:
-                    print('Removed "accepts" for : ' + key)
+                    print('Removed "accepts" for : ' + key + ' not supported')
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -1935,145 +1949,170 @@ class messanaInfo:
             self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=self.mSystem[ self.systemID]['ISYnode']['sends']                              
         return()
 
+
+
     def getNodeCapability (self, nodeKey, nodeNbr):     
-        self.keyList = {}
-        if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
-            if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
-                GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
-                Nodep = requests.get(GETStr)
-                if str(Nodep) == self.RESPONSE_OK:
-                    tempKeys= Nodep.json()
-                    for key in tempKeys:
-                        #zones
-                        if key == 'operative_temperature':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mTemp')   
-                            if status['statusOK'] == True:
-                                self.keyList['mTemp'] = tempKeys['operative_temperature']
-                            else:
-                                self.keyList['mTemp'] = 0
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mSetpoint')   
-                            if status['statusOK'] == True:
-                                self.keyList['mSetpoint'] = tempKeys['operative_temperature']
-                            else:
-                                self.keyList['mSetpoint'] = 0                                    
-                        elif key == 'air_temperature':                            
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mAirTemp')   
-                            if status['statusOK'] == True:
-                                self.keyList['mAirTemp'] = tempKeys["air_temperature"]
-                            else:
-                                self.keyList[''] = 0   
-                        elif key == 'relative_humidity':                            
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mHumSetpointRH'] = 0                                       
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumSetpointDP'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mHumSetpointDP'] = 0                                       
-                            status = self.checkGETNode(nodeKey, nodeNbr, 'mDehumSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDehumSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mDehumSetpointRH'] = 0                                       
-                            status = self.checkGETNode(nodeKey,  nodeNbr, 'mDehumSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDehumSetpointDP'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mDehumSetpointDP'] = 0                                       
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCurrentSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mCurrentSetpointRH'] = 0  
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCurrentSetpointDP'] = tempKeys['relative_humidity']    
-                            else:
-                                self.keyList['mCurrentSetpointDP'] = 0                                                                          
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumidity')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumidity'] = tempKeys['relative_humidity']      
-                            else:
-                                self.keyList['mHumidity'] = 0                                      
-                        elif key == 'dewpoint':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mDewPoint')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDewPoint'] = tempKeys['dewpoint'] 
-                            else:
-                                self.keyList['mDewPoint'] = 0                                        
-                        elif key == 'co2':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCO2')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCO2'] = tempKeys['co2']   
-                            else:
-                                self.keyList['mCO2'] = 0                                      
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mAirQuality')   
-                            if status['statusOK'] == True:
-                                self.keyList['mAirQuality'] = tempKeys['co2']          
-                            else:
-                                self.keyList['mAirQuality'] = 0                                                                          
-                        elif key == 'voc':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mVoc')   
-                            if status['statusOK'] == True:
-                                self.keyList['mVoc'] = tempKeys['voc']   
-                            else:
-                                self.keyList['mVoc'] = 0   
-
-                        #ATUs
-                        elif key == 'exhaust air extraction':
-                            # Not currently supported  
-                            None
- 
-                        elif key == 'freecooling':
-                            # Not currently supported  
-                            None
-                        
-                        elif key == 'convective integration':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['convective integration'] == 'true':
-                                    self.keyList['mINTOn'] = 1
-                                else: 
-                                    self.keyList['mINTOn'] = 0
-                            else:
-                                self.keyList['mINTOn'] = 0
-                        elif key == 'HRV':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['HRV'] == 'true':
-                                    self.keyList['mHRVOn'] = 1
-                                else: 
-                                    self.keyList['mHRVOn'] = 0
-                            else:
-                                self.keyList['mHRVOn'] = 0                            
-
-                        elif key == 'humidification':  
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['humidification'] == 'true':
-                                    self.keyList['mHUMOn'] = 1
-                                else: 
-                                    self.keyList['mHUMOn'] = 0
-                            else:
-                                self.keyList['mHUMOn'] = 0                            
+        self.keyDict = {}
+        self.GETkeysList = []
+        self.PUTkeysList = []
+        for mKey in self.mSystem[nodeKey]['KeyInfo']:
+            if mKey == 'mCapability':
+                if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
+                    GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
+                    Nodep = requests.get(GETStr)
+                    if str(Nodep) == self.RESPONSE_OK:
+                        #self.GETkeysList.append(mKey)
+                        tempKeys= Nodep.json()
+                        for key in tempKeys:
+                            #zones      
+                            if key == 'operative_temperature':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mTemp')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mTemp'] = tempKeys['operative_temperature']
+                                else:
+                                    self.keyDict['mTemp'] = 0
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mSetpoint')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mSetpoint'] = tempKeys['operative_temperature']
+                                else:
+                                    self.keyDict['mSetpoint'] = 0                                    
+                            elif key == 'air_temperature':                            
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mAirTemp')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mAirTemp'] = tempKeys["air_temperature"]
+                                else:
+                                    self.keyDict[''] = 0   
+                            elif key == 'relative_humidity':                            
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mHumSetpointRH'] = 0                                       
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumSetpointDP'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mHumSetpointDP'] = 0                                       
+                                status = self.checkGETNode(nodeKey, nodeNbr, 'mDehumSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDehumSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mDehumSetpointRH'] = 0                                       
+                                status = self.checkGETNode(nodeKey,  nodeNbr, 'mDehumSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDehumSetpointDP'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mDehumSetpointDP'] = 0                                       
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCurrentSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mCurrentSetpointRH'] = 0  
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCurrentSetpointDP'] = tempKeys['relative_humidity']    
+                                else:
+                                    self.keyDict['mCurrentSetpointDP'] = 0                                                                          
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumidity')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumidity'] = tempKeys['relative_humidity']      
+                                else:
+                                    self.keyDict['mHumidity'] = 0                                      
+                            elif key == 'dewpoint':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mDewPoint')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDewPoint'] = tempKeys['dewpoint'] 
+                                else:
+                                    self.keyDict['mDewPoint'] = 0                                        
+                            elif key == 'co2':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCO2')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCO2'] = tempKeys['co2']   
+                                else:
+                                    self.keyDict['mCO2'] = 0                                      
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mAirQuality')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mAirQuality'] = tempKeys['co2']          
+                                else:
+                                    self.keyDict['mAirQuality'] = 0                                                                          
+                            elif key == 'voc':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mVoc')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mVoc'] = tempKeys['voc']   
+                                else:
+                                    self.keyDict['mVoc'] = 0              
+                            #ATUs
+                            elif key == 'exhaust air extraction':
+                                # Not currently supported  
+                                None
+    
+                            elif key == 'freecooling':
+                                # Not currently supported  
+                                None
                             
-                        elif key == 'dehumidification':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
-                            if status['statusOK'] == True:
-                                if tempKeys['dehumidification'] == 'true':
-                                    self.keyList['mNTDOn'] = 1
-                                else: 
-                                    self.keyList['mNTDOn'] = 0
-                            else:
-                                self.keyList['mNTDOn'] = 0                                
+                            elif key == 'convective integration':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['convective integration'] == 'true':
+                                        self.keyDict['mINTOn'] = 1
+                                    else: 
+                                        self.keyDict['mINTOn'] = 0
+                                else:
+                                    self.keyDict['mINTOn'] = 0
+                            elif key == 'HRV':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['HRV'] == 'true':
+                                        self.keyDict['mHRVOn'] = 1
+                                    else: 
+                                        self.keyDict['mHRVOn'] = 0
+                                else:
+                                    self.keyDict['mHRVOn'] = 0                            
 
+                            elif key == 'humidification':  
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['humidification'] == 'true':
+                                        self.keyDict['mHUMOn'] = 1
+                                    else: 
+                                        self.keyDict['mHUMOn'] = 0
+                                else:
+                                    self.keyDict['mHUMOn'] = 0                            
+                                
+                            elif key == 'dehumidification':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
+                                if status['statusOK'] == True:
+                                    if tempKeys['dehumidification'] == 'true':
+                                        self.keyDict['mNTDOn'] = 1
+                                    else: 
+                                        self.keyDict['mNTDOn'] = 0
+                                else:
+                                    self.keyDict['mNTDOn'] = 0                                
+                            else:
+                                print(key + ' unknown keyword')
+
+            elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) 
+                and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None)) :
+                data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                if data['statusOK']:
+                    self.GETkeysList.append(mKey)
+                    temp=data['data']
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey]['PUTstr']!=None:
+                        data =  self.PUTNodeData( nodeKey, nodeNbr, mKey, temp)
+                        if data['statusOK']:
+                            self.PUTkeysList.append(mKey)
                         else:
-                            print(key + ' unknown keyword')
-        self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyList
-       
+                            print( 'Removed ' + mKey + 'from PUT commands')
+        #remove capability for GET list
+        for mKey in self.keyDict:
+            if self.keyDict[mKey] == 0 and mKey in self.GETkeysList:
+                self.GETkeysList.remove(mKey)
+
+        self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyDict
+        self.mSystem[nodeKey]['GETkeysList'][nodeNbr] = []
+        self.mSystem[nodeKey]['GETkeysList'][nodeNbr].extend(self.GETkeysList)
+        self.mSystem[nodeKey]['PUTkeysList'][nodeNbr] = []
+        self.mSystem[nodeKey]['PUTkeysList'][nodeNbr].extend(self.PUTkeysList)
     
     def GETSystemData(self, mKey):
         sysData= {}
@@ -2212,19 +2251,23 @@ class messanaInfo:
             if mKey in self.mSystem[nodeKey]['SensorCapability'][nodeNbr]:
                 if self.mSystem[nodeKey]['SensorCapability'][nodeNbr][mKey] != 0:
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
-                        keys.append(mKey)
+                        data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                        if data['statusOK']:
+                            keys.append(mKey)
             else:
                 if mKey != 'mCapability': #mCapability is special case handled by 'SensorCapability'
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
-                        keys.append(mKey)
-
+                        data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                        if data['statusOK']:
+                            keys.append(mKey)
         return(keys)
 
     def updateNodeData(self, nodeNbr, nodeKey):
         print('updatNodeData: ' + str(nodeNbr) + ' ' + nodeKey)
         Data = {}
         dataOK = True
-        supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
+        #supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
+        supportedPullKeys = self.mSystem[nodeKey]['GETkeysList'][nodeNbr]
         for mKey in supportedPullKeys:
             #print('GET ' + mKey + ' in zone ' + str(nodeNbr))
             Data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
@@ -2234,15 +2277,18 @@ class messanaInfo:
         return(dataOK)
     
     def pullNodeDataIndividual(self, nodeNbr, nodeKey, mKey): 
-        Data = {} 
+        #Data = {} 
         #print('pullNodeDataIndividual: ' +str(nodeNbr)  + ' ' + mKey)
         #     
+        Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
+        '''
         supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
         if mKey in supportedPullKeys:
             Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
         else:
             Data['statusOK'] = False
             Data['error'] = mKey +' is not a supported GETstr command'
+        '''
         return(Data)
     
     def checkGETNode(self,  nodeKey, nodeNbr, mKey): 
@@ -2272,12 +2318,12 @@ class messanaInfo:
 
     def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
        # print('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
-        zoneData = {}
-        zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
-        if zoneData['statusOK']:
+        nodeData = {}
+        nodeData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
+        if nodeData['statusOK']:
             return(True)
         else:
-            print(zoneData['error'])
+            print(nodeData['error'])
             return(False)
 
     #Setup file generation 
@@ -2435,6 +2481,8 @@ class messanaInfo:
         #LOGGER.info(self.mSystem[ self.systemID])
         sysData = {}
         DataOK = True
+        GETkeysList = []
+        PUTkeysList = []
         for mKey in self.mSystem[ self.systemID]['KeyInfo']:
             if level == 'active':
                 mStr = self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']
@@ -2449,7 +2497,7 @@ class messanaInfo:
                     sysData= self.pullSystemDataIndividual(mKey)
                     if not(sysData['statusOK']):
                         print('Error System Active GET: ' + mKey)
-                        DataOK = False  
+                        DataOK = False 
             else:
                 print('Unknown level: ' + level)
                 DataOK = False               
@@ -2481,12 +2529,16 @@ class messanaInfo:
         keys=[]
         if self.mSystem[ self.systemID]['data']:
             for mKey in self.mSystem[ self.systemID]['data']:
-                keys.append(mKey)
+                data = self.pullSystemDataIndividual(mKey)
+                if data['statusOK']:
+                    keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem[ self.systemID]['data']:
-                keys.append(mKey)
+                data = self.pullSystemDataIndividual(mKey)
+                if data['statusOK']:
+                    keys.append(mKey)
         return(keys)
 
     def systemPushKeys(self):
@@ -2513,14 +2565,18 @@ class messanaInfo:
             for mKey in self.mSystem[ self.systemID]['data']:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        keys.append(mKey)
+                        data = self.pullSystemDataIndividual(mKey)
+                        if data['statusOK']:
+                            keys.append(mKey)
         else:
             print('No Keys found - trying to fetch system data ')
             self.updateSystemData('all')
             for mKey in self.mSystem[ self.systemID]['data']:
                 if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                     if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        keys.append(mKey)
+                        data = self.pullSystemDataIndividual(mKey)
+                        if data['statusOK']:
+                            keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):
