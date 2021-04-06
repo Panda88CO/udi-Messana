@@ -1669,10 +1669,13 @@ class messanaInfo:
         if not(sysData['statusOK']):
             print('Error Connecting to MessanaSystem')
         else:  
-            # Need SystemCapability function 
+            
+            self. setMessanaCredentials (mIPaddress, mAPIkey) 
+            # Need SystemCapability function               
+            self.getSystemCapability()
             self.updateSystemData('all')
             print(self.systemID + 'added')
-            self. setMessanaCredentials (mIPaddress, mAPIkey)    
+ 
             self.addSystemDefStruct(self.systemID)
 
             for zoneNbr in range(0,self.mSystem[ self.systemID]['data']['mZoneCount']):
@@ -1726,11 +1729,7 @@ class messanaInfo:
             self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
             
             self.ISYmap = self.createISYmapping()
-            '''
-            print('Reading Messana System')
-            #self.pullAllMessanaStatus()
-            print('Finish Reading Messana system')
-            '''
+
 
     def createISYmapping(self):
         temp = {}
@@ -2091,18 +2090,20 @@ class messanaInfo:
                             else:
                                 print(key + ' unknown keyword')
 
-            elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) 
-                and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None)) :
+            elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) ):
+                #and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None))
                 data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
                 if data['statusOK']:
-                    self.GETkeysList.append(mKey)
-                    temp=data['data']
-                    if self.mSystem[nodeKey]['KeyInfo'][mKey]['PUTstr']!=None:
-                        data =  self.PUTNodeData( nodeKey, nodeNbr, mKey, temp)
-                        if data['statusOK']:
-                            self.PUTkeysList.append(mKey)
-                        else:
-                            print( 'Removed ' + mKey + 'from PUT commands')
+                    # mKey used by ISY
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
+                        self.GETkeysList.append(mKey)
+                        temp=data['data']
+                        if self.mSystem[nodeKey]['KeyInfo'][mKey]['PUTstr']!=None:
+                            data =  self.PUTNodeData( nodeKey, nodeNbr, mKey, temp)
+                            if data['statusOK']:
+                                self.PUTkeysList.append(mKey)
+                            else:
+                                print( 'Removed ' + mKey + 'from PUT commands')
         #remove capability for GET list
         for mKey in self.keyDict:
             if self.keyDict[mKey] == 0 and mKey in self.GETkeysList:
@@ -2145,32 +2146,29 @@ class messanaInfo:
             #print('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                    PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
-                    if PUTStr == None:
-                        sysData['statusOK'] = False
-                        sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                        print('Error '+ sysData)    
-                        return(sysData)   
-                    #print(PUTStr)
-            mData = {'value':value, self.APIKey : self.APIKeyVal}
-            #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
-            #print(mData)
-            try:
-                resp = requests.put(PUTStr, json=mData)
-                print(resp)
-                if str(resp) != self.RESPONSE_OK:
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr'] == None:
                     sysData['statusOK'] = False
-                    sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                    sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                    #print('Error '+ sysData)    
+                    return(sysData)                     
                 else:
-                    sysData['statusOK'] = True
-                    sysData['data'] = value
-                #print(sysData)    
-                return(sysData)          
-            except:
-                sysData['statusOK'] = False
-                sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
-                return(sysData)
+                    PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
+                    mData = {'value':value, self.APIKey : self.APIKeyVal}
+                    try:
+                        resp = requests.put(PUTStr, json=mData)
+                        print(resp)
+                        if str(resp) != self.RESPONSE_OK:
+                            sysData['statusOK'] = False
+                            sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                        else:
+                            sysData['statusOK'] = True
+                            sysData['data'] = value
+                        #print(sysData)    
+                        return(sysData)          
+                    except:
+                        sysData['statusOK'] = False
+                        sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
+                        return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
         #print('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
@@ -2244,9 +2242,19 @@ class messanaInfo:
     # New Functions Need to be tested
     def getNodeKeys (self, nodeNbr, nodeKey, cmdKey):
         keys = []
-        if len(self.mSystem[nodeKey]['SensorCapability']) == 0:
+        if len(self.mSystem[nodeKey]['GETkeysList'][nodeNbr]) == 0:
             print('NodeCapability must be run first')
-            
+        else:
+            if cmdKey == 'PUTstr':
+                for mKey in self.mSystem[nodeKey]['PUTkeysList'][nodeNbr]:
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey] != None:
+                        keys.append(mKey)
+            else:
+                for mKey in self.mSystem[nodeKey]['GETkeysList'][nodeNbr]:
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey] != None:
+                        keys.append(mKey)
+
+        '''    
         for mKey in self.mSystem[nodeKey]['KeyInfo']:
             if mKey in self.mSystem[nodeKey]['SensorCapability'][nodeNbr]:
                 if self.mSystem[nodeKey]['SensorCapability'][nodeNbr][mKey] != 0:
@@ -2260,6 +2268,7 @@ class messanaInfo:
                         data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
                         if data['statusOK']:
                             keys.append(mKey)
+        '''                    
         return(keys)
 
     def updateNodeData(self, nodeNbr, nodeKey):
@@ -2481,8 +2490,9 @@ class messanaInfo:
         #LOGGER.info(self.mSystem[ self.systemID])
         sysData = {}
         DataOK = True
-        GETkeysList = []
-        PUTkeysList = []
+        # Should be updated 
+        # GETkeysList = []
+        # PUTkeysList = []
         for mKey in self.mSystem[ self.systemID]['KeyInfo']:
             if level == 'active':
                 mStr = self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']
@@ -2524,59 +2534,41 @@ class messanaInfo:
             print(sysData['error'])
             return(False)  
      
+    def getSystemCapability(self):
+        GETkeysList=[]
+        PUTkeysList=[]
+        for mKey in self.mSystem[ self.systemID]['KeyInfo']:
+            data = self.pullSystemDataIndividual(mKey)
+            if data['statusOK']:
+                # Parameter is used by ISY
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
+                    temp = data['data']
+                    GETkeysList.append(mKey)
+                    if self.pushSystemDataIndividual(mKey, temp):
+                        PUTkeysList.append(mKey)
+        self.mSystem[self.systemID]['GETkeysList'] = []
+        self.mSystem[self.systemID]['GETkeysList'].extend(GETkeysList)
+        self.mSystem[self.systemID]['PUTkeysList'] = []
+        self.mSystem[self.systemID]['PUTkeysList'].extend(PUTkeysList)
+        
+
+
+
+
     def systemPullKeys(self):
         print('systemPullKeys')
-        keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                data = self.pullSystemDataIndividual(mKey)
-                if data['statusOK']:
-                    keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch system data ')
-            self.updateSystemData('all')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                data = self.pullSystemDataIndividual(mKey)
-                if data['statusOK']:
-                    keys.append(mKey)
-        return(keys)
+        return(self.mSystem[self.systemID]['GETkeysList'])
 
     def systemPushKeys(self):
         print('systemPushKeys')
-        keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                        keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch system data ')
-            self.updateSystemData('long')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                        keys.append(mKey)
-        return(keys)  
+        return(self.mSystem[self.systemID]['PUTkeysList'])  
             
     def systemActiveKeys(self):
         print('systemActiveKeys')
         keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']:
-                            keys.append(mKey)
-        else:
-            print('No Keys found - trying to fetch system data ')
-            self.updateSystemData('all')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']:
-                            keys.append(mKey)
+        for mKey in self.mSystem[self.systemID]['GETkeysList']:
+            if self.mSystem[self.systemID]['KeyInfo'][mKey]['Active'] != None:
+                keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):

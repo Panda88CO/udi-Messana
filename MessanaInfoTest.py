@@ -24,18 +24,18 @@ commands = { 'SET_SETPOINT' : 'setSetpoint'
             ,'HumSetpointRH' : 'setRelHum'
             ,'SET_CO2' : 'setCO2'
             }
-messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', 'msystem')
+messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', 'system')
 #messana.init()print (commands)
 #Retrive basic system info
 print('\nSYSTEM')
 print (commands)
 
-messana.updateSystemData('all')
+#messana.updateSystemData('all')
 systemGETKeys = messana.systemPullKeys()
 systemPUTKeys = messana.systemPushKeys()
 systemActiveKeys = messana.systemActiveKeys()
-messana.updateSystemData('all')
-messana.updateSystemData('active')
+#messana.updateSystemData('all')
+#messana.updateSystemData('active')
 drivers = []
 for key in systemGETKeys:
     temp = messana.getSystemISYdriverInfo(key)
