@@ -8,6 +8,10 @@ import json
 from collections import defaultdict
 from MessanaInfoPlayPRINT import messanaInfo
 import shutil
+
+    
+
+
 #import ISYsetupFiles
 #LOGGER = polyinterface.LOGGER
 #sys.stdout = open('Messanaoutput.txt','wt')
@@ -43,8 +47,61 @@ for key in systemGETKeys:
         print(temp['driver'], val['data'])
 
 print(drivers)
+
+atuNbr =  messana.getAtuCount()
+
 ISYmap = messana.createISYmapping()
 
+nbrAtus =  messana.getAtuCount()
+for atuNbr in range(0,nbrAtus):
+    #LOGGER.debug('Adding zone ' + str(atuNbr))
+    atu_GETKeys = messana.atuPullKeys(atuNbr)
+    atu_PUTKeys = messana.atuPushKeys(atuNbr)
+    atu_ActiveKeys = messana.atuActiveKeys(atuNbr)
+    atuname = messana.getAtuName(atuNbr)
+    atuaddress = messana.getAtuAddress(atuNbr)
+
+drivers = []
+for key in atu_GETKeys:
+    temp = messana.getAtuISYdriverInfo(key, atuNbr)
+    if  temp != {}:
+        drivers.append(temp)
+        print(  'driver:  ' +  temp['driver'])
+messana.updateAtuData('all', atuNbr)
+#updateISYdrivers('all')
+for ISYdriver in drivers:
+        ISYkey = ISYdriver['driver']
+        level = 'active'
+        temp = messana.getAtuMessanaISYkey(ISYkey, atuNbr)
+        if temp in atu_ActiveKeys:                    
+            #LOGGER.debug('Messana ATU ISYdrivers ACTIVE ' + temp)
+            status, value = messana.getAtuISYValue(ISYkey, atuNbr)
+            '''
+                if status:
+                    if self.ISYforced:
+                        self.setDriver(ISYdriver, value, report = True, force = False)
+                    else:
+                        self.setDriver(ISYdriver, value, report = True, force = True)
+                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                else:
+                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+            '''
+        level ='all'
+        temp = messana.getAtuMessanaISYkey(ISYkey, atuNbr)
+        status, value = messana.getAtuISYValue(ISYkey, atuNbr)
+        '''    
+            LOGGER.debug('Messana ATU ISYdrivers ALL ' + temp)
+            if status:
+                if self.ISYforced:
+                    self.setDriver(ISYdriver, value, report = True, force = False)
+                else:
+                    self.setDriver(ISYdriver, value, report = True, force = True)
+                LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+            else:
+                LOGGER.debug('Error getting ' + ISYdriver['driver'])
+        else:
+            LOGGER.debug('Error!  Unknow level: ' + level)
+        '''
 '''
 for ISYdriver in drivers:
     ISYkey = ISYdriver['driver']

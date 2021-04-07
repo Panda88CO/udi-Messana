@@ -3191,7 +3191,7 @@ class messanaInfo:
         LOGGER.debug('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(atuNbr, self.atuID, mKey))
 
-    def pushATUDataIndividual(self, ATUNbr, mKey, value):
+    def pushAtuDataIndividual(self, ATUNbr, mKey, value):
         LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(ATUNbr, self.atuID, mKey, value))
 
@@ -3223,7 +3223,7 @@ class messanaInfo:
 
     def getAtuISYdriverInfo(self, mKey, atuNbr):
         info = {}
-        atuStr = self.macrozoneID+str(atuNbr)
+        atuStr = self.atuID+str(atuNbr)
         if mKey in self.setupFile['nodeDef'][atuStr]['sts']:
             keys = list(self.setupFile['nodeDef'][atuStr]['sts'][mKey].keys())
             info['driver'] = keys[0]

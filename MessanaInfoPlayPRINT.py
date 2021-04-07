@@ -3143,11 +3143,55 @@ class messanaInfo:
     def getAtuCapability(self, atuNbr): 
         self.getNodeCapability(self.atuID, atuNbr)
 
-    def pullATUDataIndividual(self, ATUNbr, mKey): 
-        print('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(ATUNbr, self.atuID, mKey))
+    def updateAtuData(self,  level, atuNbr):
+        print('updateAtuData: ' + str(atuNbr))
 
-    def pushATUDataIndividual(self, ATUNbr, mKey, value):
+        keys =[]
+        if level == 'all':
+            print('ALL update atu ' + str(atuNbr))
+            keys =  self.atuPullKeys(atuNbr)
+        elif level == 'active':
+            print('ACTIVE update atu ' + str(atuNbr))
+            keys =  self.atuActiveKeys(atuNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullAtuDataIndividual(atuNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
+
+    def getAtuMessanaISYkey(self, ISYkey, atuNbr):
+        atuName = self.atuID+str(atuNbr)
+        return(self.ISYmap[atuName][ISYkey]['messana'])
+
+    def getAtuISYValue(self, ISYkey, atuNbr):
+        atuName = self.atuID+str(atuNbr)
+        messanaKey = self.ISYmap[atuName][ISYkey]['messana']
+        try:
+            data = self.pullAtuDataIndividual(atuNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+
+    def pullAtuDataIndividual(self, atuNbr, mKey): 
+        print('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(atuNbr, self.atuID, mKey))
+
+    def pushAtuDataIndividual(self, ATUNbr, mKey, value):
         print('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(ATUNbr, self.atuID, mKey, value))
 
@@ -3176,6 +3220,60 @@ class messanaInfo:
             
     def getAtuAddress(self, atuNbr):
         return(self.atuID + str(atuNbr))
+
+    def getAtuISYdriverInfo(self, mKey, atuNbr):
+        info = {}
+        atuStr = self.atuID+str(atuNbr)
+        if mKey in self.setupFile['nodeDef'][atuStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][atuStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.atuID, atuNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][atuStr]['sts'][mKey][keys[0]]
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+    def atuSetStatus(self, value, atuNbr):
+        print ('atuSetStatus not implemented yet')
+        return(True)
+
+    def getAtuStatusISYdriver(self, atuNbr):
+        print ('getAtuStatusISYdriver not implemented yet')
+        return(None)
+
+    def atuSetEnergySave(self, value, atuNbr):
+        print ('atuSetEnergySave not implemented yet')
+        return(True)
+
+    def getAtuEnergySaveISYdriver(self, atuNbr):
+        print ('getAtuEnergySaveISYdriver not implemented yet')
+        return(None) 
+
+    def atuSetSetpoint(self, value, atuNbr):
+        print ('atuSetSetpoint not implemented yet')
+        return(True)
+
+    def getAtuSetPointISYdriver(self, atuNbr):
+        print ('getAtuSetPointISYdriver not implemented yet')
+        return(None) 
+        
+    def atuEnableSchedule(self, value, atuNbr):
+        print ('atuEnableSchedule not implemented yet')
+        return(True)
+
+    def getAtuEnableScheduleISYdriver(self, atuNbr):
+        print ('getAtuEnableScheduleISYdriver not implemented yet')
+        return(None) 
+
 
     #################################################################
     #Fan Coils
