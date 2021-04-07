@@ -3143,9 +3143,27 @@ class messanaInfo:
     def getAtuCapability(self, atuNbr): 
         self.getNodeCapability(self.atuID, atuNbr)
 
-    def pullATUDataIndividual(self, ATUNbr, mKey): 
-        LOGGER.debug('pullATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(ATUNbr, self.atuID, mKey))
+    def updateAtuData(self,  level, atuNbr):
+        LOGGER.debug('updateAtuData: ' + str(atuNbr))
+
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update atu ' + str(atuNbr))
+            keys =  self.atuPullKeys(atuNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update atu ' + str(atuNbr))
+            keys =  self.atuActiveKeys(atuNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullAtuDataIndividual(atuNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
+
+
+    def pullAtuDataIndividual(self, atuNbr, mKey): 
+        LOGGER.debug('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(atuNbr, self.atuID, mKey))
 
     def pushATUDataIndividual(self, ATUNbr, mKey, value):
         LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
