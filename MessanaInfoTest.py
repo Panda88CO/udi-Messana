@@ -16,13 +16,11 @@ commands = { 'SET_SETPOINT' : 'setSetpoint'
             ,'SET_ENERGYSAVE' : 'setEnergySave'
             ,'SET_SCHEDULEON' : 'enableSchedule' 
             ,'UPDATE' : 'ISYupdate'
-            ,'CurrentSetpointDP' : 'setCurrentDewPt'
-            ,'CurrentSetpointRH' : 'setCurRelHum'
             ,'DehumSetpointDP' : 'setDewTempDehum'
             ,'DehumSetpointRH' : 'setRelDehum'
             ,'HumSetpointDP' : 'setDewTempHum'
             ,'HumSetpointRH' : 'setRelHum'
-            ,'SET_CO2' : 'setCO2'
+
             }
 messana = messanaInfo('192.168.2.65',  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a', 'system')
 #messana.init()print (commands)

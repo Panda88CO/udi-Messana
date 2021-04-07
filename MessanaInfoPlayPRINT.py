@@ -1665,8 +1665,8 @@ class messanaInfo:
         #self.atuCapability = {}
 
         #Dummy check to see if there is connection to Messana system)
-        sysData= self.pullSystemDataIndividual('mApiVer')
-        if not(sysData['statusOK']):
+        
+        if not(self.checkMessanaConnection()):
             print('Error Connecting to MessanaSystem')
         else:  
             
@@ -2501,7 +2501,7 @@ class messanaInfo:
                     print('Error System Active GET: ' + mKey)
                     DataOK = False  
         elif level == 'all':
-            for mKeyu in self.systemPullKeys():
+            for mKey in self.systemPullKeys():
                 sysData= self.pullSystemDataIndividual(mKey)
                 if not(sysData['statusOK']):
                     print('Error System Active GET: ' + mKey)
@@ -2511,29 +2511,31 @@ class messanaInfo:
             DataOK = False               
         return(DataOK)
 
+    #pretty bad solution - just checking if a value can be extracted
+    def checkMessanaConnection(self):
+        sysData = self.GETSystemData('mApiVer') 
+        return (sysData['statusOK'])
+    
+
+
     def pullSystemDataIndividual(self, mKey):
         print('MessanaInfo pull System Data: ' + mKey)
-        sysData = {}
-        if mKey in self.systemPullKeys():
-            sysData = self.GETSystemData(mKey)       
-        else:
-            sysData['statusOK'] = False
-            sysData['error'] = (mKey + ' is not a supported GETstr command')
-        return(sysData)   
+        return(self.GETSystemData(mKey) )
+              
+        
+           
+          
 
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
-        print('MessanaInfo push System Data: ' + mKey)
-        if mKey in self.systemPullKeys():
-            sysData = self.PUTSystemData(mKey, value)
-            if sysData['statusOK']:
-                return(True)
-            else:
-                print(sysData['error'])
-                return(False) 
+        print('MessanaInfo push System Data: ' + mKey)       
+        sysData = self.PUTSystemData(mKey, value)
+        if sysData['statusOK']:
+            return(True)
         else:
-            print(mKey + ' not supported for PUSH command')
-            return(False)
+            print(sysData['error'])
+            return(False) 
+
      
     def getSystemCapability(self):
         GETkeysList=[]
