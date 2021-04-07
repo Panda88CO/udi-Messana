@@ -3160,6 +3160,32 @@ class messanaInfo:
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
 
+    def getAtuMessanaISYkey(self, ISYkey, atuNbr):
+        atuName = self.atuID+str(atuNbr)
+        return(self.ISYmap[atuName][ISYkey]['messana'])
+
+    def getAtuISYValue(self, ISYkey, atuNbr):
+        atuName = self.atuID+str(atuNbr)
+        messanaKey = self.ISYmap[atuName][ISYkey]['messana']
+        try:
+            data = self.pullAtuDataIndividual(atuNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
 
     def pullAtuDataIndividual(self, atuNbr, mKey): 
         LOGGER.debug('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
