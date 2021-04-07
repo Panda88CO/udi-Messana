@@ -2493,32 +2493,29 @@ class messanaInfo:
         # Should be updated 
         # GETkeysList = []
         # PUTkeysList = []
-        for mKey in self.mSystem[ self.systemID]['KeyInfo']:
-            if level == 'active':
-                mStr = self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']
-                if mStr != None:
-                    sysData= self.pullSystemDataIndividual(mKey)
-                    if not(sysData['statusOK']):
-                        print('Error System Active GET: ' + mKey)
-                        DataOK = False  
-            elif level == 'all':
-                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr']:
-                    #print('GET ' + mKey)
-                    sysData= self.pullSystemDataIndividual(mKey)
-                    if not(sysData['statusOK']):
-                        print('Error System Active GET: ' + mKey)
-                        DataOK = False 
-            else:
-                print('Unknown level: ' + level)
-                DataOK = False               
+        
+        if level == 'active':
+            for mKey in self.systemActiveKeys():
+                sysData= self.pullSystemDataIndividual(mKey)
+                if not(sysData['statusOK']):
+                    print('Error System Active GET: ' + mKey)
+                    DataOK = False  
+        elif level == 'all':
+            for mKeyu in self.systemPullKeys():
+                sysData= self.pullSystemDataIndividual(mKey)
+                if not(sysData['statusOK']):
+                    print('Error System Active GET: ' + mKey)
+                    DataOK = False 
+        else:
+            print('Unknown level: ' + level)
+            DataOK = False               
         return(DataOK)
 
     def pullSystemDataIndividual(self, mKey):
         print('MessanaInfo pull System Data: ' + mKey)
         sysData = {}
-        if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-            if 'GETstr' in self.mSystem[ self.systemID]['KeyInfo'][mKey]:
-                sysData = self.GETSystemData(mKey)       
+        if mKey in self.systemPullKeys():
+            sysData = self.GETSystemData(mKey)       
         else:
             sysData['statusOK'] = False
             sysData['error'] = (mKey + ' is not a supported GETstr command')
@@ -2527,12 +2524,16 @@ class messanaInfo:
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
         print('MessanaInfo push System Data: ' + mKey)
-        sysData = self.PUTSystemData(mKey, value)
-        if sysData['statusOK']:
-            return(True)
+        if mKey in self.systemPullKeys():
+            sysData = self.PUTSystemData(mKey, value)
+            if sysData['statusOK']:
+                return(True)
+            else:
+                print(sysData['error'])
+                return(False) 
         else:
-            print(sysData['error'])
-            return(False)  
+            print(mKey + ' not supported for PUSH command')
+            return(False)
      
     def getSystemCapability(self):
         GETkeysList=[]
@@ -2551,9 +2552,6 @@ class messanaInfo:
         self.mSystem[self.systemID]['PUTkeysList'] = []
         self.mSystem[self.systemID]['PUTkeysList'].extend(PUTkeysList)
         
-
-
-
 
     def systemPullKeys(self):
         print('systemPullKeys')
