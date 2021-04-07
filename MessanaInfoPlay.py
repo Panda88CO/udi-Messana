@@ -3177,6 +3177,60 @@ class messanaInfo:
     def getAtuAddress(self, atuNbr):
         return(self.atuID + str(atuNbr))
 
+    def getAtuISYdriverInfo(self, mKey, atuNbr):
+        info = {}
+        atuStr = self.macrozoneID+str(atuNbr)
+        if mKey in self.setupFile['nodeDef'][atuStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][atuStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.atuID, atuNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][atuStr]['sts'][mKey][keys[0]]
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+    def atuSetStatus(self, value, atuNbr):
+        LOGGER.debug ('atuSetStatus not implemented yet')
+        return(True)
+
+    def getAtuStatusISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuStatusISYdriver not implemented yet')
+        return({}})
+
+    def atuSetEnergySave(self, value, atuNbr):
+        LOGGER.debug ('atuSetEnergySave not implemented yet')
+        return(True)
+
+    def getAtuEnergySaveISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuEnergySaveISYdriver not implemented yet')
+        return({}) 
+
+    def atuSetSetpoint(self, value, atuNbr):
+        LOGGER.debug ('atuSetSetpoint not implemented yet')
+        return(True)
+
+    def getAtuSetPointISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetPointISYdriver not implemented yet')
+        return({}) 
+        
+    def atuEnableSchedule(self, value, atuNbr):
+        LOGGER.debug ('atuEnableSchedule not implemented yet')
+        return(True)
+
+    def getAtuEnableScheduleISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuEnableScheduleISYdriver not implemented yet')
+        return({}) 
+
+
     #################################################################
     #Fan Coils
     def updateFanCoilData(self, FanCoilNbr):

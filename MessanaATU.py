@@ -87,34 +87,34 @@ class messanaAtu(polyinterface.Node):
         LOGGER.debug('TOP querry')
 
     def atuSetStatus(self, command):
-        LOGGER.debug('setStatus Called')
+        LOGGER.debug('atuSetStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setStatus Received:' + str(value))
-        if self.messana.atuetStatus(value, self.atuNbr):
-            ISYdriver = self.messana.getatutatusISYdriver(self.atuNbr)
+        if self.messana.atuSetStatus(value, self.atuNbr):
+            ISYdriver = self.messana.getAtuStatusISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
 
 
     def atuSetEnergySave(self, command):
-        LOGGER.debug('setEnergySave Called')
+        LOGGER.debug('atuSetEnergySave Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setEnergySave Received:' + str(value))
-        if self.messana.atuetEnergySave(value, self.atuNbr):
+        if self.messana.atuSetEnergySave(value, self.atuNbr):
             ISYdriver = self.messana.getAtuEnergySaveISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
 
 
     def atuSetSetpoint(self, command):
-        LOGGER.debug('setSetpoint Called')
+        LOGGER.debug('atuSetSetpoint Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' setSetpoint Received:' + str(value))
-        if self.messana.atuetSetpoint(value, self.atuNbr):
-            ISYdriver = self.messana.getatuetPointISYdriver(self.atuNbr)
+        if self.messana.atuSetSetpoint(value, self.atuNbr):
+            ISYdriver = self.messana.getAtuSetPointISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
 
 
     def atuEnableSchedule(self, command):
-        LOGGER.debug('EnSchedule Called')
+        LOGGER.debug('atuEnableSchedule Called')
         value = int(command.get('value'))
         LOGGER.debug('ATU'+str(self.atuNbr)+' EnSchedule Reeived:' + str(value))      
         if self.messana.atuEnableSchedule(value, self.atuNbr):
