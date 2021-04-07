@@ -282,7 +282,8 @@ class messanaInfo:
                                          }                                         
                                      ,'data':{}
                                      ,'SensorCapability' : {}
-                            
+                                     ,'GETkeysList' :{}
+                                     ,'PUTkeysList' :{}
                         },
                         self.zoneID: {   'ISYnode':{'nlsICON':'TempSensor'
                                                 ,'sends'   : []
@@ -460,7 +461,7 @@ class messanaInfo:
                                                     }
                                         ,'mHumidity': { 
                                              'GETstr': '/api/zone/humidity/'
-                                            ,'PUTstr': '/api/zone/humidity/' 
+                                            ,'PUTstr': None
                                             ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
@@ -476,7 +477,7 @@ class messanaInfo:
                                                     }
                                         ,'mDewPoint' : { 
                                              'GETstr': '/api/zone/dewpoint/'
-                                            ,'PUTstr': '/api/zone/dewpoint/'
+                                            ,'PUTstr': None
                                             ,'Active': None
                                             ,'ISYeditor':{   
                                                      'ISYuom':51
@@ -671,6 +672,8 @@ class messanaInfo:
                                     }
                                     ,'data' :{}
                                     ,'SensorCapability' : {}
+                                    ,'GETkeysList' :{}
+                                    ,'PUTkeysList' :{}
                         },
                         self.macrozoneID : {   'ISYnode':{   'nlsICON' :'TempSensor'
                                                         ,'sends'   : []
@@ -801,6 +804,8 @@ class messanaInfo:
                                                     }                                     
                                     ,'data' :{}
                                     ,'SensorCapability' : {}
+                                    ,'GETkeysList' :{}
+                                    ,'PUTkeysList' :{}                                    
                         }, 
                         self.HotColdcoID  :{ 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -878,7 +883,9 @@ class messanaInfo:
                                         }   
                                         ,'data' : {}
                                         ,'SensorCapability' : {}
-                        },
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
+                                    },
                         self.fcID :{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Set System Status'
@@ -988,8 +995,10 @@ class messanaInfo:
                                                         }  
                                                     }
                                             }                                       
-                                    ,'data' : {}
-                                    ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}  
                         },
                         self.atuID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1340,8 +1349,10 @@ class messanaInfo:
                                                         }
                                                     }
                                     }
-                                    ,'data' : {}
-                                    ,'SensorCapability' : {}                  
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}     
                         },
                          self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1432,8 +1443,10 @@ class messanaInfo:
                                                        }
                                                     }  
                                         }                                                                                                      
-                                         ,'data' : {}
-                                         ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         }, 
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1527,8 +1540,10 @@ class messanaInfo:
                                                        }
                                                     }   
                                         }                        
-                                         ,'data' : {}
-                                         ,'SensorCapability' : {}
+                                        ,'data' : {}
+                                        ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         },
                         self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
@@ -1606,6 +1621,8 @@ class messanaInfo:
                                         }                              
                                         ,'data' : {}
                                         ,'SensorCapability' : {}
+                                        ,'GETkeysList' : {}
+                                        ,'PUTkeysList' : {}
                         }
                 }
         
@@ -1644,17 +1661,19 @@ class messanaInfo:
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
 
         
-        #self.zoneCapability = {}
-        #self.atuCapability = {}
+
 
         #Dummy check to see if there is connection to Messana system)
-        sysData= self.pullSystemDataIndividual('mApiVer')
-        if not(sysData['statusOK']):
+        if not(self.checkMessanaConnection()):
             LOGGER.debug('Error Connecting to MessanaSystem')
-        else:    
+        else:  
+            
+            self. setMessanaCredentials (mIPaddress, mAPIkey) 
+            # Need SystemCapability function               
+            self.getSystemCapability()
             self.updateSystemData('all')
             LOGGER.debug(self.systemID + 'added')
-            self. setMessanaCredentials (mIPaddress, mAPIkey)    
+ 
             self.addSystemDefStruct(self.systemID)
 
             for zoneNbr in range(0,self.mSystem[ self.systemID]['data']['mZoneCount']):
@@ -1708,11 +1727,7 @@ class messanaInfo:
             self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
             
             self.ISYmap = self.createISYmapping()
-            '''
-            LOGGER.debug('Reading Messana System')
-            #self.pullAllMessanaStatus()
-            LOGGER.debug('Finish Reading Messana system')
-            '''
+
 
     def createISYmapping(self):
         temp = {}
@@ -1754,14 +1769,12 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-    def checkValidNodeCommand(self, cmd, node, nodeNbr):
+    def checkValidNodeCommand(self, key, node, nodeNbr):
         exists = True
-        mCmd = self.mSystem[node]['ISYnode']['accepts'][cmd]['ISYeditor']
-        
+        mCmd = self.mSystem[node]['ISYnode']['accepts'][key]['ISYeditor']
         if mCmd != None:
-            if mCmd in self.mSystem[node]['SensorCapability'][nodeNbr]:
-                if self.mSystem[node]['SensorCapability'][nodeNbr][mCmd] == 0:
-                    exists = False
+            if not(mCmd in self.mSystem[node]['PUTkeysList'][nodeNbr]):
+                exists = False
         return(exists)
 
 
@@ -1817,7 +1830,7 @@ class messanaInfo:
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]={}
                         self.setupFile['nodeDef'][self.name]['cmds']['accepts'][key]['ISYInfo']= self.mSystem[nodeName]['ISYnode']['accepts'][key]
                 else:
-                    LOGGER.debug('Removed "accepts" for : ' + key)
+                    LOGGER.debug('Removed "accepts" for : ' + key + ' not supported')
                     
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
@@ -1933,143 +1946,172 @@ class messanaInfo:
             self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=self.mSystem[ self.systemID]['ISYnode']['sends']                              
         return()
 
-    def getNodeCapability (self, nodeKey, nodeNbr):     
-        self.keyList = {}
-        if 'mCapability' in self.mSystem[nodeKey]['KeyInfo']:
-            if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
-                GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
-                Nodep = requests.get(GETStr)
-                if str(Nodep) == self.RESPONSE_OK:
-                    tempKeys= Nodep.json()
-                    for key in tempKeys:
-                        #zones      
-                        if key == 'operative_temperature':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mTemp')   
-                            if status['statusOK'] == True:
-                                self.keyList['mTemp'] = tempKeys['operative_temperature']
-                            else:
-                                self.keyList['mTemp'] = 0
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mSetpoint')   
-                            if status['statusOK'] == True:
-                                self.keyList['mSetpoint'] = tempKeys['operative_temperature']
-                            else:
-                                self.keyList['mSetpoint'] = 0                                    
-                        elif key == 'air_temperature':                            
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mAirTemp')   
-                            if status['statusOK'] == True:
-                                self.keyList['mAirTemp'] = tempKeys["air_temperature"]
-                            else:
-                                self.keyList[''] = 0   
-                        elif key == 'relative_humidity':                            
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mHumSetpointRH'] = 0                                       
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumSetpointDP'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mHumSetpointDP'] = 0                                       
-                            status = self.checkGETNode(nodeKey, nodeNbr, 'mDehumSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDehumSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mDehumSetpointRH'] = 0                                       
-                            status = self.checkGETNode(nodeKey,  nodeNbr, 'mDehumSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDehumSetpointDP'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mDehumSetpointDP'] = 0                                       
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointRH')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCurrentSetpointRH'] = tempKeys['relative_humidity']
-                            else:
-                                self.keyList['mCurrentSetpointRH'] = 0  
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointDP')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCurrentSetpointDP'] = tempKeys['relative_humidity']    
-                            else:
-                                self.keyList['mCurrentSetpointDP'] = 0                                                                          
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mHumidity')   
-                            if status['statusOK'] == True:
-                                self.keyList['mHumidity'] = tempKeys['relative_humidity']      
-                            else:
-                                self.keyList['mHumidity'] = 0                                      
-                        elif key == 'dewpoint':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mDewPoint')   
-                            if status['statusOK'] == True:
-                                self.keyList['mDewPoint'] = tempKeys['dewpoint'] 
-                            else:
-                                self.keyList['mDewPoint'] = 0                                        
-                        elif key == 'co2':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mCO2')   
-                            if status['statusOK'] == True:
-                                self.keyList['mCO2'] = tempKeys['co2']   
-                            else:
-                                self.keyList['mCO2'] = 0                                      
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mAirQuality')   
-                            if status['statusOK'] == True:
-                                self.keyList['mAirQuality'] = tempKeys['co2']          
-                            else:
-                                self.keyList['mAirQuality'] = 0                                                                          
-                        elif key == 'voc':
-                            status = self.checkGETNode( nodeKey, nodeNbr, 'mVoc')   
-                            if status['statusOK'] == True:
-                                self.keyList['mVoc'] = tempKeys['voc']   
-                            else:
-                                self.keyList['mVoc'] = 0              
-                        #ATUs
-                        elif key == 'exhaust air extraction':
-                            # Not currently supported  
-                            None
- 
-                        elif key == 'freecooling':
-                            # Not currently supported  
-                            None
-                        
-                        elif key == 'convective integration':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['convective integration'] == 'true':
-                                    self.keyList['mINTOn'] = 1
-                                else: 
-                                    self.keyList['mINTOn'] = 0
-                            else:
-                                self.keyList['mINTOn'] = 0
-                        elif key == 'HRV':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['HRV'] == 'true':
-                                    self.keyList['mHRVOn'] = 1
-                                else: 
-                                    self.keyList['mHRVOn'] = 0
-                            else:
-                                self.keyList['mHRVOn'] = 0                            
 
-                        elif key == 'humidification':  
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
-                            if status['statusOK'] == True:
-                                if tempKeys['humidification'] == 'true':
-                                    self.keyList['mHUMOn'] = 1
-                                else: 
-                                    self.keyList['mHUMOn'] = 0
-                            else:
-                                self.keyList['mHUMOn'] = 0                            
+
+    def getNodeCapability (self, nodeKey, nodeNbr):     
+        self.keyDict = {}
+        self.GETkeysList = []
+        self.PUTkeysList = []
+        for mKey in self.mSystem[nodeKey]['KeyInfo']:
+            if mKey == 'mCapability':
+                if 'GETstr' in self.mSystem[nodeKey]['KeyInfo']['mCapability']:
+                    GETStr =self.IP+self.mSystem[nodeKey]['KeyInfo']['mCapability']['GETstr']+str(nodeNbr)+'?'+ self.APIStr 
+                    Nodep = requests.get(GETStr)
+                    if str(Nodep) == self.RESPONSE_OK:
+                        #self.GETkeysList.append(mKey)
+                        tempKeys= Nodep.json()
+                        for key in tempKeys:
+                            #zones      
+                            if key == 'operative_temperature':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mTemp')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mTemp'] = tempKeys['operative_temperature']
+                                else:
+                                    self.keyDict['mTemp'] = 0
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mSetpoint')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mSetpoint'] = tempKeys['operative_temperature']
+                                else:
+                                    self.keyDict['mSetpoint'] = 0                                    
+                            elif key == 'air_temperature':                            
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mAirTemp')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mAirTemp'] = tempKeys["air_temperature"]
+                                else:
+                                    self.keyDict[''] = 0   
+                            elif key == 'relative_humidity':                            
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mHumSetpointRH'] = 0                                       
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumSetpointDP'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mHumSetpointDP'] = 0                                       
+                                status = self.checkGETNode(nodeKey, nodeNbr, 'mDehumSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDehumSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mDehumSetpointRH'] = 0                                       
+                                status = self.checkGETNode(nodeKey,  nodeNbr, 'mDehumSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDehumSetpointDP'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mDehumSetpointDP'] = 0                                       
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointRH')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCurrentSetpointRH'] = tempKeys['relative_humidity']
+                                else:
+                                    self.keyDict['mCurrentSetpointRH'] = 0  
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCurrentSetpointDP')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCurrentSetpointDP'] = tempKeys['relative_humidity']    
+                                else:
+                                    self.keyDict['mCurrentSetpointDP'] = 0                                                                          
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mHumidity')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mHumidity'] = tempKeys['relative_humidity']      
+                                else:
+                                    self.keyDict['mHumidity'] = 0                                      
+                            elif key == 'dewpoint':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mDewPoint')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mDewPoint'] = tempKeys['dewpoint'] 
+                                else:
+                                    self.keyDict['mDewPoint'] = 0                                        
+                            elif key == 'co2':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mCO2')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mCO2'] = tempKeys['co2']   
+                                else:
+                                    self.keyDict['mCO2'] = 0                                      
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mAirQuality')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mAirQuality'] = tempKeys['co2']          
+                                else:
+                                    self.keyDict['mAirQuality'] = 0                                                                          
+                            elif key == 'voc':
+                                status = self.checkGETNode( nodeKey, nodeNbr, 'mVoc')   
+                                if status['statusOK'] == True:
+                                    self.keyDict['mVoc'] = tempKeys['voc']   
+                                else:
+                                    self.keyDict['mVoc'] = 0              
+                            #ATUs
+                            elif key == 'exhaust air extraction':
+                                # Not currently supported  
+                                None
+    
+                            elif key == 'freecooling':
+                                # Not currently supported  
+                                None
                             
-                        elif key == 'dehumidification':
-                            status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
-                            if status['statusOK'] == True:
-                                if tempKeys['dehumidification'] == 'true':
-                                    self.keyList['mNTDOn'] = 1
-                                else: 
-                                    self.keyList['mNTDOn'] = 0
+                            elif key == 'convective integration':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['convective integration'] == 'true':
+                                        self.keyDict['mINTOn'] = 1
+                                    else: 
+                                        self.keyDict['mINTOn'] = 0
+                                else:
+                                    self.keyDict['mINTOn'] = 0
+                            elif key == 'HRV':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['HRV'] == 'true':
+                                        self.keyDict['mHRVOn'] = 1
+                                    else: 
+                                        self.keyDict['mHRVOn'] = 0
+                                else:
+                                    self.keyDict['mHRVOn'] = 0                            
+
+                            elif key == 'humidification':  
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
+                                if status['statusOK'] == True:
+                                    if tempKeys['humidification'] == 'true':
+                                        self.keyDict['mHUMOn'] = 1
+                                    else: 
+                                        self.keyDict['mHUMOn'] = 0
+                                else:
+                                    self.keyDict['mHUMOn'] = 0                            
+                                
+                            elif key == 'dehumidification':
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
+                                if status['statusOK'] == True:
+                                    if tempKeys['dehumidification'] == 'true':
+                                        self.keyDict['mNTDOn'] = 1
+                                    else: 
+                                        self.keyDict['mNTDOn'] = 0
+                                else:
+                                    self.keyDict['mNTDOn'] = 0                                
                             else:
-                                self.keyList['mNTDOn'] = 0                                
-                        else:
-                            LOGGER.debug(key + ' unknown keyword')
-        self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyList
-       
+                                LOGGER.debug(key + ' unknown keyword')
+
+            elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) ):
+                #and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None))
+                data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                if data['statusOK']:
+                    # mKey used by ISY
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
+                        self.GETkeysList.append(mKey)
+                        temp=data['data']
+                        if self.mSystem[nodeKey]['KeyInfo'][mKey]['PUTstr']!=None:
+                            data =  self.PUTNodeData( nodeKey, nodeNbr, mKey, temp)
+                            if data['statusOK']:
+                                self.PUTkeysList.append(mKey)
+                            else:
+                                LOGGER.debug( 'Removed ' + mKey + 'from PUT commands')
+        #remove capability for GET list
+        for mKey in self.keyDict:
+            if self.keyDict[mKey] == 0 and mKey in self.GETkeysList:
+                self.GETkeysList.remove(mKey)
+
+        self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyDict
+        self.mSystem[nodeKey]['GETkeysList'][nodeNbr] = []
+        self.mSystem[nodeKey]['GETkeysList'][nodeNbr].extend(self.GETkeysList)
+        self.mSystem[nodeKey]['PUTkeysList'][nodeNbr] = []
+        self.mSystem[nodeKey]['PUTkeysList'][nodeNbr].extend(self.PUTkeysList)
     
     def GETSystemData(self, mKey):
         sysData= {}
@@ -2102,32 +2144,29 @@ class messanaInfo:
             #LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             mData = defaultdict(list)
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                    PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
-                    if PUTStr == None:
-                        sysData['statusOK'] = False
-                        sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                        LOGGER.debug('Error '+ sysData)    
-                        return(sysData)   
-                    #LOGGER.debug(PUTStr)
-            mData = {'value':value, self.APIKey : self.APIKeyVal}
-            #mHeaders = { 'accept': 'application/json' , 'Content-Type': 'application/json' }
-            #LOGGER.debug(mData)
-            try:
-                resp = requests.put(PUTStr, json=mData)
-                LOGGER.debug(resp)
-                if str(resp) != self.RESPONSE_OK:
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr'] == None:
                     sysData['statusOK'] = False
-                    sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                    sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                    #LOGGER.debug('Error '+ sysData)    
+                    return(sysData)                     
                 else:
-                    sysData['statusOK'] = True
-                    sysData['data'] = value
-                #LOGGER.debug(sysData)    
-                return(sysData)          
-            except:
-                sysData['statusOK'] = False
-                sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
-                return(sysData)
+                    PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
+                    mData = {'value':value, self.APIKey : self.APIKeyVal}
+                    try:
+                        resp = requests.put(PUTStr, json=mData)
+                        LOGGER.debug(resp)
+                        if str(resp) != self.RESPONSE_OK:
+                            sysData['statusOK'] = False
+                            sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                        else:
+                            sysData['statusOK'] = True
+                            sysData['data'] = value
+                        #LOGGER.debug(sysData)    
+                        return(sysData)          
+                    except:
+                        sysData['statusOK'] = False
+                        sysData['error'] = 'System PUT operation failed for :' + mKey + ' '+ str(value)
+                        return(sysData)
   
     def GETNodeData(self, mNodeKey, nodeNbr, mKey):
         #LOGGER.debug('GETNodeData: ' + mNodeKey + ' ' + str(nodeNbr)+ ' ' + mKey)
@@ -2201,9 +2240,19 @@ class messanaInfo:
     # New Functions Need to be tested
     def getNodeKeys (self, nodeNbr, nodeKey, cmdKey):
         keys = []
-        if len(self.mSystem[nodeKey]['SensorCapability']) == 0:
+        if len(self.mSystem[nodeKey]['GETkeysList'][nodeNbr]) == 0:
             LOGGER.debug('NodeCapability must be run first')
-            
+        else:
+            if cmdKey == 'PUTstr':
+                for mKey in self.mSystem[nodeKey]['PUTkeysList'][nodeNbr]:
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey] != None:
+                        keys.append(mKey)
+            else:
+                for mKey in self.mSystem[nodeKey]['GETkeysList'][nodeNbr]:
+                    if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey] != None:
+                        keys.append(mKey)
+
+        '''    
         for mKey in self.mSystem[nodeKey]['KeyInfo']:
             if mKey in self.mSystem[nodeKey]['SensorCapability'][nodeNbr]:
                 if self.mSystem[nodeKey]['SensorCapability'][nodeNbr][mKey] != 0:
@@ -2214,15 +2263,18 @@ class messanaInfo:
             else:
                 if mKey != 'mCapability': #mCapability is special case handled by 'SensorCapability'
                     if self.mSystem[nodeKey]['KeyInfo'][mKey][cmdKey]!=None:
-                        keys.append(mKey)
-
+                        data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
+                        if data['statusOK']:
+                            keys.append(mKey)
+        '''                    
         return(keys)
 
     def updateNodeData(self, nodeNbr, nodeKey):
         LOGGER.debug('updatNodeData: ' + str(nodeNbr) + ' ' + nodeKey)
         Data = {}
         dataOK = True
-        supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
+        #supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
+        supportedPullKeys = self.mSystem[nodeKey]['GETkeysList'][nodeNbr]
         for mKey in supportedPullKeys:
             #LOGGER.debug('GET ' + mKey + ' in zone ' + str(nodeNbr))
             Data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
@@ -2232,18 +2284,7 @@ class messanaInfo:
         return(dataOK)
     
     def pullNodeDataIndividual(self, nodeNbr, nodeKey, mKey): 
-        #Data = {} 
-        #LOGGER.debug('pullNodeDataIndividual: ' +str(nodeNbr)  + ' ' + mKey)
-        #     
         Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
-        '''
-        supportedPullKeys = self.getNodeKeys (nodeNbr, nodeKey, 'GETstr')
-        if mKey in supportedPullKeys:
-            Data = self.GETNodeData(nodeKey, nodeNbr, mKey)
-        else:
-            Data['statusOK'] = False
-            Data['error'] = mKey +' is not a supported GETstr command'
-        '''
         return(Data)
     
     def checkGETNode(self,  nodeKey, nodeNbr, mKey): 
@@ -2273,263 +2314,230 @@ class messanaInfo:
 
     def pushNodeDataIndividual(self, NodeNbr, NodeKey, mKey, value):
        # LOGGER.debug('pushZoneDataIndividual: ' +str(NodeNbr)  + ' ' + mKey + ' ' + str(value))  
-        zoneData = {}
-        zoneData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
-        if zoneData['statusOK']:
+        nodeData = {}
+        nodeData= self.PUTNodeData(NodeKey, NodeNbr, mKey, value)
+        if nodeData['statusOK']:
             return(True)
         else:
-            LOGGER.debug(zoneData['error'])
+            LOGGER.debug(nodeData['error'])
             return(False)
 
     #Setup file generation 
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
         LOGGER.debug ('Create Setup Files')
         status = True
-        #try:
-        LOGGER.debug('opening files')
-        if not(os.path.exists('./profile')):
-            os.mkdir('./profile')       
-        if not(os.path.exists('./profile/editor')):
-            os.mkdir('./profile/editor')
-        if not(os.path.exists('./profile/nls')):
-            os.mkdir('./profile/nls')           
-        if not(os.path.exists('./profile/nodedef')):
-            os.mkdir('./profile/nodedef')
-        nodeFile = open(nodeDefFileName, 'w+')
-        editorFile = open(editorFileName, 'w+')
-        nlsFile = open(nlsFileName, 'w+')
-        LOGGER.debug('Opening Files OK')
+        try:
+            LOGGER.debug('opening files')
+            if not(os.path.exists('./profile')):
+                os.mkdir('./profile')       
+            if not(os.path.exists('./profile/editor')):
+                os.mkdir('./profile/editor')
+            if not(os.path.exists('./profile/nls')):
+                os.mkdir('./profile/nls')           
+            if not(os.path.exists('./profile/nodedef')):
+                os.mkdir('./profile/nodedef')
+            nodeFile = open(nodeDefFileName, 'w+')
+            editorFile = open(editorFileName, 'w+')
+            nlsFile = open(nlsFileName, 'w+')
+            LOGGER.debug('Opening Files OK')
 
-        editorFile.write('<editors> \n')
-        nodeFile.write('<nodeDefs> \n')
-        for node in self.setupFile['nodeDef']:
-            nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
-            #LOGGER.debug(nodeDefStr)
-            nodeFile.write(nodeDefStr)
-            nodeFile.write('      <editors />\n')
-            nodeFile.write('      <sts>\n')
-            #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
-            nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
-            nlsFile.write(nlsStr)
-            #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
-            nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
-            nlsFile.write(nlsStr)
-            for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
-                nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
+            editorFile.write('<editors> \n')
+            nodeFile.write('<nodeDefs> \n')
+            for node in self.setupFile['nodeDef']:
+                nodeDefStr ='   <nodeDef id="' + self.setupFile['nodeDef'][node]['CodeId']+'" '+ 'nls="'+self.setupFile['nodeDef'][node]['nlsId']+'">\n'
+                #LOGGER.debug(nodeDefStr)
+                nodeFile.write(nodeDefStr)
+                nodeFile.write('      <editors />\n')
+                nodeFile.write('      <sts>\n')
+                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-NAME = '+self.setupFile['nodeDef'][node]['nlsNAME']+ '\n'
                 nlsFile.write(nlsStr)
-                #LOGGER.debug(nlsStr)
+                #nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['nlsId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+                nlsStr = 'ND-'+self.setupFile['nodeDef'][node]['CodeId']+'-ICON = '+self.setupFile['nodeDef'][node]['nlsICON']+ '\n'
+                nlsFile.write(nlsStr)
+                for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                    cmdName =  self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]['ISYInfo']['ISYtext']
+                    nlsStr = 'CMD-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+acceptCmd+'-NAME = ' + cmdName +'\n'
+                    nlsFile.write(nlsStr)
+                    #LOGGER.debug(nlsStr)
 
-            for status in self.setupFile['nodeDef'][node]['sts']:
-                for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
-                    if statusId != 'ISYInfo':
-                        nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
-                        nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
-                        #LOGGER.debug(nodeDefStr)
-                        nodeFile.write(nodeDefStr)
-                        editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
-                        editorStr = '     <range '
-                        for key in self.setupFile['editors'][nodeName]:
-                            if key == 'ISYsubset':
-                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYuom':
-                                editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYmax':
-                                editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYmin': 
-                                editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYstep':
-                                editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
-                            elif key == 'ISYprec': 
-                                editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'ISYsubset': 
-                                editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
-                            elif key == 'nlsKey': 
-                                nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
-                                editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
-                            else:
-                                LOGGER.debug('unknown editor keyword: ' + str(key))
-                        editorStr = editorStr + ' />\n'
-                        #LOGGER.debug(editorStr)
-                        editorFile.write(editorStr)
-                        editorFile.write('</editor>\n')
-
-                    for nlsInfo in self.setupFile['nls'][nodeName]:
+                for status in self.setupFile['nodeDef'][node]['sts']:
+                    for statusId in self.setupFile['nodeDef'][node]['sts'][status]:
                         if statusId != 'ISYInfo':
-                            if nlsInfo == 'nlsTEXT':
-                                nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
-                                nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
-                                nlsFile.write(nlsStr)
-                            elif nlsInfo == 'nlsValues':
-                                nlsValues = 0
-                                for key in self.setupFile['nls'][nodeName][nlsInfo]:
-                                    nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                            nodeName = self.setupFile['nodeDef'][node]['sts'][status][statusId]
+                            nodeDefStr =  '         <st id="' + statusId+'" editor="'+nodeName+'" />\n'
+                            #LOGGER.debug(nodeDefStr)
+                            nodeFile.write(nodeDefStr)
+                            editorFile.write( '  <editor id = '+'"'+nodeName+'" > \n')
+                            editorStr = '     <range '
+                            for key in self.setupFile['editors'][nodeName]:
+                                if key == 'ISYsubset':
+                                    editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'ISYuom':
+                                    editorStr = editorStr + ' uom="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'ISYmax':
+                                    editorStr = editorStr + ' max="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'ISYmin': 
+                                    editorStr = editorStr + ' min="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'ISYstep':
+                                    editorStr = editorStr + ' step="'+ str(self.setupFile['editors'][nodeName][key])+'"'                  
+                                elif key == 'ISYprec': 
+                                    editorStr = editorStr + ' prec="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'ISYsubset': 
+                                    editorStr = editorStr + ' subset="'+ str(self.setupFile['editors'][nodeName][key])+'"'
+                                elif key == 'nlsKey': 
+                                    nlsEditorKey = str(self.setupFile['editors'][nodeName][key])
+                                    editorStr = editorStr + ' nls="'+ nlsEditorKey+'"'
+                                else:
+                                    LOGGER.debug('unknown editor keyword: ' + str(key))
+                            editorStr = editorStr + ' />\n'
+                            #LOGGER.debug(editorStr)
+                            editorFile.write(editorStr)
+                            editorFile.write('</editor>\n')
+
+                        for nlsInfo in self.setupFile['nls'][nodeName]:
+                            if statusId != 'ISYInfo':
+                                if nlsInfo == 'nlsTEXT':
+                                    nlsStr = 'ST-' + self.setupFile['nodeDef'][node]['nlsId']+'-'+statusId+'-NAME = '
+                                    nlsStr = nlsStr + self.setupFile['nls'][nodeName][nlsInfo] + '\n'
                                     nlsFile.write(nlsStr)
-                                    nlsValues = nlsValues + 1
-                            #LOGGER.debug(nlsStr)
+                                elif nlsInfo == 'nlsValues':
+                                    nlsValues = 0
+                                    for key in self.setupFile['nls'][nodeName][nlsInfo]:
+                                        nlsStr = nlsEditorKey+'-'+str(nlsValues)+' = '+self.setupFile['nls'][nodeName][nlsInfo][key]+'\n'
+                                        nlsFile.write(nlsStr)
+                                        nlsValues = nlsValues + 1
+                                #LOGGER.debug(nlsStr)
 
-            nodeFile.write('      </sts>\n')
-            nodeFile.write('      <cmds>\n')                
-            nodeFile.write('         <sends>\n')            
-            if self.setupFile['nodeDef'][node]['cmds']:
-                if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
-                    for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
-                        cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
-                        #LOGGER.debug(cmdStr)
-                        nodeFile.write(cmdStr)
-            nodeFile.write('         </sends>\n')               
-            nodeFile.write('         <accepts>\n')      
-            if self.setupFile['nodeDef'][node]['cmds']:
-                if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
-                    for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
-                        
-                        if len(self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]) != 1:
-                            for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
-                                if key != 'ISYInfo':
-                                    cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
-                                    nodeFile.write(cmdStr)  
-                                    cmdStr = '               <p id="" editor="'
-                                    cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
-                                    #LOGGER.debug(cmdStr)                              
-                                    nodeFile.write(cmdStr)
-                                    nodeFile.write('            </cmd> \n')
-                        else:
-                            cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
+                nodeFile.write('      </sts>\n')
+                nodeFile.write('      <cmds>\n')                
+                nodeFile.write('         <sends>\n')            
+                if self.setupFile['nodeDef'][node]['cmds']:
+                    if len(self.setupFile['nodeDef'][node]['cmds']['sends']) != 0:
+                        for sendCmd in self.setupFile['nodeDef'][node]['cmds']['sends']:
+                            cmdStr = '            <cmd id="' +sendCmd +'" /> \n'
                             #LOGGER.debug(cmdStr)
-                            nodeFile.write(cmdStr)  
-            nodeFile.write('         </accepts>\n')                   
+                            nodeFile.write(cmdStr)
+                nodeFile.write('         </sends>\n')               
+                nodeFile.write('         <accepts>\n')      
+                if self.setupFile['nodeDef'][node]['cmds']:
+                    if 'accepts' in self.setupFile['nodeDef'][node]['cmds']:
+                        for acceptCmd in self.setupFile['nodeDef'][node]['cmds']['accepts']:
+                            
+                            if len(self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]) != 1:
+                                for key in self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd]:
+                                    if key != 'ISYInfo':
+                                        cmdStr = '            <cmd id="' +acceptCmd+'" > \n'     
+                                        nodeFile.write(cmdStr)  
+                                        cmdStr = '               <p id="" editor="'
+                                        cmdStr = cmdStr + self.setupFile['nodeDef'][node]['cmds']['accepts'][acceptCmd][key]+ '" init="' + key +'" /> \n' 
+                                        #LOGGER.debug(cmdStr)                              
+                                        nodeFile.write(cmdStr)
+                                        nodeFile.write('            </cmd> \n')
+                            else:
+                                cmdStr = '            <cmd id="' +acceptCmd+'" /> \n' 
+                                #LOGGER.debug(cmdStr)
+                                nodeFile.write(cmdStr)  
+                nodeFile.write('         </accepts>\n')                   
 
-            nodeFile.write('      </cmds>\n')                
-                                
-            nodeFile.write('   </nodeDef> \n')
+                nodeFile.write('      </cmds>\n')                
+                                    
+                nodeFile.write('   </nodeDef> \n')
 
-        nodeFile.write('</nodeDefs> \n' )
-        nodeFile.close()
-        editorFile.write('</editors> \n')
-        editorFile.close()
-        nlsFile.close()
-        '''
-        #except:
-        LOGGER.debug('something went wrong in creating setup files')
-        status = False
-        nodeFile.close()
-        editorFile.close()
-        nlsFile.close()
-        '''       
+            nodeFile.write('</nodeDefs> \n' )
+            nodeFile.close()
+            editorFile.write('</editors> \n')
+            editorFile.close()
+            nlsFile.close()
+        
+        except:
+            LOGGER.debug('something went wrong in creating setup files')
+            status = False
+            nodeFile.close()
+            editorFile.close()
+            nlsFile.close()
         return(status)
 
-    '''
-    def createNodedeFile(self, fileName):
-        file = open(fileName, 'w+')
-        file.close()
-        return()
 
-    def createNLSFile(self, fileName):
-        file = open(fileName, 'w+')
-        file.close()
-        return()
-    '''
 
     #System
     def updateSystemData(self, level):
         LOGGER.debug('Update Messana Sytem Data')
-        #LOGGER.info(self.mSystem[ self.systemID])
         sysData = {}
         DataOK = True
-        for mKey in self.mSystem[ self.systemID]['KeyInfo']:
-            if level == 'active':
-                mStr = self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']
-                if mStr != None:
-                    sysData= self.pullSystemDataIndividual(mKey)
-                    if not(sysData['statusOK']):
-                        LOGGER.debug('Error System Active GET: ' + mKey)
-                        DataOK = False  
-            elif level == 'all':
-                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['GETstr']:
-                    #LOGGER.debug('GET ' + mKey)
-                    sysData= self.pullSystemDataIndividual(mKey)
-                    if not(sysData['statusOK']):
-                        LOGGER.debug('Error System Active GET: ' + mKey)
-                        DataOK = False  
-            else:
-                LOGGER.debug('Unknown level: ' + level)
-                DataOK = False               
+       
+        if level == 'active':
+            for mKey in self.systemActiveKeys():
+                sysData= self.pullSystemDataIndividual(mKey)
+                if not(sysData['statusOK']):
+                    LOGGER.debug('Error System Active GET: ' + mKey)
+                    DataOK = False  
+        elif level == 'all':
+            for mKey in self.systemPullKeys():
+                sysData= self.pullSystemDataIndividual(mKey)
+                if not(sysData['statusOK']):
+                    LOGGER.debug('Error System Active GET: ' + mKey)
+                    DataOK = False 
+        else:
+            LOGGER.debug('Unknown level: ' + level)
+            DataOK = False               
         return(DataOK)
+
+    #pretty bad solution - just checking if a value can be extracted
+    def checkMessanaConnection(self):
+        sysData = self.GETSystemData('mApiVer') 
+        return (sysData['statusOK'])
+    
+
 
     def pullSystemDataIndividual(self, mKey):
         LOGGER.debug('MessanaInfo pull System Data: ' + mKey)
-        sysData = {}
-        if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-            if 'GETstr' in self.mSystem[ self.systemID]['KeyInfo'][mKey]:
-                sysData = self.GETSystemData(mKey)       
-        else:
-            sysData['statusOK'] = False
-            sysData['error'] = (mKey + ' is not a supported GETstr command')
-        return(sysData)   
+        return(self.GETSystemData(mKey) )
+                 
 
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
-        LOGGER.debug('MessanaInfo push System Data: ' + mKey)
+        LOGGER.debug('MessanaInfo push System Data: ' + mKey)       
         sysData = self.PUTSystemData(mKey, value)
         if sysData['statusOK']:
             return(True)
         else:
             LOGGER.debug(sysData['error'])
-            return(False)  
+            return(False) 
+
      
+    def getSystemCapability(self):
+        GETkeysList=[]
+        PUTkeysList=[]
+        for mKey in self.mSystem[ self.systemID]['KeyInfo']:
+            data = self.pullSystemDataIndividual(mKey)
+            if data['statusOK']:
+                # Parameter is used by ISY
+                if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
+                    temp = data['data']
+                    GETkeysList.append(mKey)
+                    if self.pushSystemDataIndividual(mKey, temp):
+                        PUTkeysList.append(mKey)
+        self.mSystem[self.systemID]['GETkeysList'] = []
+        self.mSystem[self.systemID]['GETkeysList'].extend(GETkeysList)
+        self.mSystem[self.systemID]['PUTkeysList'] = []
+        self.mSystem[self.systemID]['PUTkeysList'].extend(PUTkeysList)
+        
+
     def systemPullKeys(self):
         LOGGER.debug('systemPullKeys')
-        keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                data = self.pullSystemDataIndividual(mKey)
-                if data['statusOK']:
-                    keys.append(mKey)
-        else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
-            self.updateSystemData('all')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                data = self.pullSystemDataIndividual(mKey)
-                if data['statusOK']:
-                    keys.append(mKey)
-        return(keys)
+        return(self.mSystem[self.systemID]['GETkeysList'])
 
     def systemPushKeys(self):
         LOGGER.debug('systemPushKeys')
-        keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                        keys.append(mKey)
-        else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
-            self.updateSystemData('long')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']:
-                        keys.append(mKey)
-        return(keys)  
+        return(self.mSystem[self.systemID]['PUTkeysList'])  
             
     def systemActiveKeys(self):
         LOGGER.debug('systemActiveKeys')
         keys=[]
-        if self.mSystem[ self.systemID]['data']:
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']:
-                            keys.append(mKey)
-        else:
-            LOGGER.debug('No Keys found - trying to fetch system data ')
-            self.updateSystemData('all')
-            for mKey in self.mSystem[ self.systemID]['data']:
-                if mKey in self.mSystem[ self.systemID]['KeyInfo']:
-                    if self.mSystem[ self.systemID]['KeyInfo'][mKey]['Active']:
-                        data = self.pullSystemDataIndividual(mKey)
-                        if data['statusOK']:
-                            keys.append(mKey)
+        for mKey in self.mSystem[self.systemID]['GETkeysList']:
+            if self.mSystem[self.systemID]['KeyInfo'][mKey]['Active'] != None:
+                keys.append(mKey)
         return(keys)  
             
     def getSystemISYValue(self, ISYkey):
@@ -3310,23 +3318,6 @@ class messanaInfo:
 
     def getDomesticHotWaterCount(self):
         return(self.mSystem[ self.systemID]['data']['mDHWcount'])
-    '''
 
-    def pullMessanaStatus(self):
-        if self.systemDict['mZoneCount'] > 0:
-            LOGGER.debug('Reading Zone System')
-            self.pullAllZoneDataMessana()
-        if self.systemDict['mMacrozoneCount'] > 0:    
-            LOGGER.debug('Reading MacroZone System')
-            self.pullAllMacroZoneDataMessana()
-        if self.systemDict['mhc_coCount'] > 0:   
-            LOGGER.debug('Reading Ht/Cold System')
-            self.pullAllHC_CODataMessana()
-        if self.systemDict['mATUCount'] > 0:
-            LOGGER.debug('Reading ATU System')
 
     
-   
-
-
-    '''
