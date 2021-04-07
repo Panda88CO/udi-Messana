@@ -3204,7 +3204,7 @@ class messanaInfo:
 
     def getAtuStatusISYdriver(self, atuNbr):
         LOGGER.debug ('getAtuStatusISYdriver not implemented yet')
-        return({}})
+        return(None)
 
     def atuSetEnergySave(self, value, atuNbr):
         LOGGER.debug ('atuSetEnergySave not implemented yet')
@@ -3212,7 +3212,7 @@ class messanaInfo:
 
     def getAtuEnergySaveISYdriver(self, atuNbr):
         LOGGER.debug ('getAtuEnergySaveISYdriver not implemented yet')
-        return({}) 
+        return(None) 
 
     def atuSetSetpoint(self, value, atuNbr):
         LOGGER.debug ('atuSetSetpoint not implemented yet')
@@ -3220,7 +3220,7 @@ class messanaInfo:
 
     def getAtuSetPointISYdriver(self, atuNbr):
         LOGGER.debug ('getAtuSetPointISYdriver not implemented yet')
-        return({}) 
+        return(None) 
         
     def atuEnableSchedule(self, value, atuNbr):
         LOGGER.debug ('atuEnableSchedule not implemented yet')
@@ -3228,7 +3228,7 @@ class messanaInfo:
 
     def getAtuEnableScheduleISYdriver(self, atuNbr):
         LOGGER.debug ('getAtuEnableScheduleISYdriver not implemented yet')
-        return({}) 
+        return(None) 
 
 
     #################################################################
