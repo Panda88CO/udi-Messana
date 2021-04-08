@@ -92,7 +92,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                      
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 32
                                                     ,'ISYsubset':None
@@ -108,7 +108,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                               
                                             ,'ISYeditor':{
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 8
                                                     ,'ISYsubset':None
@@ -124,7 +124,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                     
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 8
                                                     ,'ISYsubset':None
@@ -140,7 +140,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                        
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 16
                                                     ,'ISYsubset':None
@@ -156,7 +156,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                      
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 16
                                                     ,'ISYsubset':None
@@ -172,7 +172,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                       
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 16
                                                     ,'ISYsubset':None
@@ -188,7 +188,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                       
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 16
                                                     ,'ISYsubset':None
@@ -204,7 +204,7 @@ class messanaInfo:
                                             ,'PUTstr': None 
                                             ,'Active': None                                  
                                             ,'ISYeditor':{   
-                                                     'ISYuom': 107
+                                                     'ISYuom': 112
                                                     ,'ISYmin': 0 
                                                     ,'ISYmax': 16
                                                     ,'ISYsubset':None
@@ -368,7 +368,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/humidSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -384,7 +384,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/humidSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -400,7 +400,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/dehumSetpointRH/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -416,7 +416,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/dehumSetpointDP/'
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -432,7 +432,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/currentSetpointRH/'
                                             ,'Active': None
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -448,7 +448,7 @@ class messanaInfo:
                                             ,'PUTstr': '/api/zone/currentSetpointDP/' 
                                             ,'Active': None
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':100
                                                     ,'ISYsubset':None
@@ -592,7 +592,7 @@ class messanaInfo:
                                             ,'PUTstr': None
                                             ,'Active': None 
                                             ,'ISYeditor':{   
-                                                     'ISYuom':107
+                                                     'ISYuom':112
                                                     ,'ISYmin':0
                                                     ,'ISYmax':40
                                                     ,'ISYsubset':None
@@ -1659,7 +1659,7 @@ class messanaInfo:
         self.RESPONSE_OK = '<Response [200]>'
         self.RESPONSE_NO_SUPPORT = '<Response [400]>'
         self.RESPONSE_NO_RESPONSE = '<Response [404]>'
-
+        self.NaNlist= [-32768 , -3276.8 ]
         
 
 
@@ -1908,9 +1908,9 @@ class messanaInfo:
            
             #make check if system has unit installed
             if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
-                if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 107
+                if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 112
                    and self.mSystem[ self.systemID]['data'][mKey] != 0)
-                   or self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 107):
+                   or self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != 112):
                     self.keyCount = self.keyCount + 1
                     editorName = 'SYSTEM_'+str(self.keyCount)
                     nlsName = editorName
@@ -2090,7 +2090,7 @@ class messanaInfo:
 
             elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) ):
                 data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
-                if data['statusOK'] and (isinstance(data['data'], float) or   isinstance(data['data'], int)):
+                if data['statusOK'] and not(data['data'] in self.NaNlist) and (isinstance(data['data'], float) or isinstance(data['data'], int)):
                     # mKey used by ISY
                     if self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
                         self.GETkeysList.append(mKey)
@@ -2124,8 +2124,14 @@ class messanaInfo:
                 systemTemp = systemTemp.json()
                 #print(systemTemp)
                 self.mSystem[ self.systemID]['data'][mKey] = systemTemp[str(list(systemTemp.keys())[0])]
-                sysData['statusOK'] = True 
-                sysData['data'] = self.mSystem[ self.systemID]['data'][mKey] 
+
+                sysData['data'] = self.mSystem[ self.systemID]['data'][mKey]
+                if sysData['data'] in self.NaNlist:
+                    sysData['statusOK'] = False
+                    sysData['error'] = 'NaN received'
+                else:
+                    sysData['statusOK'] = True 
+
             else:
                 print(str(mKey) + ' error')
                 sysData['statusOK'] = False
@@ -2176,9 +2182,13 @@ class messanaInfo:
             Nodep = requests.get(GETStr)
             if str(Nodep) == self.RESPONSE_OK:
                 Nodep = Nodep.json()
-                nodeData['data']  = Nodep[str(list(Nodep.keys())[0])] 
-                nodeData['dataAll'] = Nodep
-                nodeData['statusOK'] =True
+                nodeData['data']  = Nodep[str(list(Nodep.keys())[0])]
+                if nodeData in self.NaNlist:
+                    nodeData['statusOK'] = False
+                    nodeData['error'] = 'NaN received'
+                else:
+                    nodeData['dataAll'] = Nodep
+                    nodeData['statusOK'] =True
                 if nodeNbr in self.mSystem[mNodeKey]['data']:
                     if mKey in self.mSystem[mNodeKey]['data'][nodeNbr]:
                         self.mSystem[mNodeKey]['data'][nodeNbr][mKey] = nodeData['data']
@@ -2294,7 +2304,11 @@ class messanaInfo:
             if str(Nodep) == self.RESPONSE_OK:
                 Nodep = Nodep.json()
                 nodeData['data']  = Nodep[str(list(Nodep.keys())[0])] 
-                nodeData['statusOK'] =True
+                if nodeData['data'] in self.NaNlist:
+                    nodeData['statusOK'] =False
+                    nodeData['error'] = 'NaN received'
+                else:
+                    nodeData['statusOK'] =True
             elif str(Nodep) == self.RESPONSE_NO_SUPPORT:
                 temp1 =  Nodep.content
                 res_dict = json.loads(temp1.decode('utf-8')) 
