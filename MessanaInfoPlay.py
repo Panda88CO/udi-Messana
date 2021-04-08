@@ -2091,8 +2091,8 @@ class messanaInfo:
             elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) ):
                 #and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None))
                 data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
-                if data['statusOK']:
-                    # mKey used by ISY
+                if data['statusOK'] and data['data'].isnumeric():
+                    # mKey used by ISY and numeric value 
                     if self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
                         self.GETkeysList.append(mKey)
                         temp=data['data']
