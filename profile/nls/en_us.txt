@@ -483,7 +483,6 @@ ND-atus0-ICON = GenericCtl
 CMD-nlsatus0-SET_STATUS-NAME = System Status
 CMD-nlsatus0-UPDATE-NAME = Update System
 CMD-nlsatus0-SET_HRVON-NAME = Heat Revopvery
-CMD-nlsatus0-SET_FLOWLEVEL-NAME = Set Flow Level
 CMD-nlsatus0-SET_HUM-NAME = Humidity Integration
 CMD-nlsatus0-SET_NTD-NAME = NTD Integration
 CMD-nlsatus0-SET_INT-NAME = Convective Integration

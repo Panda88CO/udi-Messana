@@ -686,9 +686,6 @@
             <cmd id="SET_HRVON" > 
                <p id="" editor="ATUS0_3" init="GV3" /> 
             </cmd> 
-            <cmd id="SET_FLOWLEVEL" > 
-               <p id="" editor="ATUS0_1" init="GV1" /> 
-            </cmd> 
             <cmd id="SET_HUM" > 
                <p id="" editor="ATUS0_4" init="GV4" /> 
             </cmd> 

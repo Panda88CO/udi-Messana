@@ -2089,9 +2089,8 @@ class messanaInfo:
                                 print(key + ' unknown keyword')
 
             elif ((self.mSystem[nodeKey]['KeyInfo'][mKey]['GETstr'] != None) ):
-                #and (self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None))
                 data = self.pullNodeDataIndividual(nodeNbr, nodeKey,  mKey)
-                if data['statusOK'] and data['data'].isnumeric():
+                if data['statusOK'] and (isinstance(data['data'], float) or   isinstance(data['data'], int)):
                     # mKey used by ISY
                     if self.mSystem[nodeKey]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
                         self.GETkeysList.append(mKey)
