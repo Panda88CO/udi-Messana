@@ -1950,7 +1950,7 @@ class messanaInfo:
 
 
     def getNodeCapability (self, nodeKey, nodeNbr):    
-        LOGGER.debug ('getNodeCapability') 
+        #LOGGER.debug ('getNodeCapability') 
         self.keyDict = {}
         self.GETkeysList = []
         self.PUTkeysList = []
@@ -2704,7 +2704,8 @@ class messanaInfo:
 
 
     # Zones
-    def getZoneCapability(self, zoneNbr): 
+    def getZoneCapability(self, zoneNbr):
+        LOGGER.debug('getZoneCapability') 
         self.getNodeCapability(self.zoneID, zoneNbr)
 
     def addZoneDefStruct(self, zoneNbr, nodeId):
@@ -3056,6 +3057,7 @@ class messanaInfo:
             return('NA')
 
     def getMacrozoneCapability(self, macrozoneNbr): 
+        LOGGER.debug('getMacrozoneCapability')        
         self.getNodeCapability(self.macrozoneID, macrozoneNbr)
 
     def getMacrozoneAddress(self, macrozoneNbr):
@@ -3175,6 +3177,7 @@ class messanaInfo:
         return(self.updateNodeData(HC_CONbr, self.HotColdcoID ))
 
     def getHC_COCapability(self, HC_CONbr): 
+        LOGGER.debug('getHC_COCapability')        
         self.getNodeCapability(self.HotColdcoID , HC_CONbr)
 
     def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
@@ -3205,11 +3208,13 @@ class messanaInfo:
     def updateATUData(self, atuNbr):
         LOGGER.debug('updatATUData: ' + str(atuNbr))
         return(self.updateNodeData(atuNbr, self.atuID))
-
+    '''
     def getATUCapability(self, atuNbr): 
+        LOGGER.debug('getATUCapability')               
         self.getNodeCapability(self.atuID, atuNbr)
-
+    '''
     def getAtuCapability(self, atuNbr): 
+        LOGGER.debug('getAtuCapability')             
         self.getNodeCapability(self.atuID, atuNbr)
 
     def updateAtuData(self,  level, atuNbr):
@@ -3351,6 +3356,7 @@ class messanaInfo:
         return(self.updateNodeData(FanCoilNbr, self.fcID))
 
     def getFanCoilCapability(self, FanCoilNbr): 
+        LOGGER.debug('getFanCoilCapability')              
         self.getNodeCapability(self.fcID, FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
@@ -3383,6 +3389,7 @@ class messanaInfo:
         return(self.updateNodeData(EnergySourceNbr,  self.energySaveID))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
+        LOGGER.debug('getEnergySourceCapability')          
         self.getNodeCapability( self.energySaveID, EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
@@ -3415,6 +3422,7 @@ class messanaInfo:
         return(self.updateNodeData(BufferTankNbr, self.bufferTankID))
 
     def getBufferTankCapability(self, BufferTankNbr): 
+        LOGGER.debug('getBufferTankCapability')              
         self.getNodeCapability(self.bufferTankID, BufferTankNbr)
 
 
@@ -3460,6 +3468,7 @@ class messanaInfo:
         return(self.updateNodeData(DHWNbr, self.dhwID))
 
     def getDHWCapability(self, DHWNbr): 
+        LOGGER.debug('getDHWCapability')                      
         self.getNodeCapability(self.dhwID, DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
