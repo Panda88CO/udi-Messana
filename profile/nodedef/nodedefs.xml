@@ -642,6 +642,11 @@
          <st id="GV3" editor="ATUS0_3" />
          <st id="GV4" editor="ATUS0_4" />
          <st id="GV5" editor="ATUS0_5" />
+         <st id="GV6" editor="ATUS0_6" />
+         <st id="GV7" editor="ATUS0_7" />
+         <st id="GV8" editor="ATUS0_8" />
+         <st id="GV9" editor="ATUS0_9" />
+         <st id="GV10" editor="ATUS0_10" />
       </sts>
       <cmds>
          <sends>
@@ -651,13 +656,21 @@
                <p id="" editor="ATUS0_1" init="GV1" /> 
             </cmd> 
             <cmd id="UPDATE" /> 
-            <cmd id="SET_HRVON" /> 
+            <cmd id="SET_HRVON" > 
+               <p id="" editor="ATUS0_2" init="GV2" /> 
+            </cmd> 
             <cmd id="SET_HUM" /> 
-            <cmd id="SET_NTD" /> 
-            <cmd id="SET_INT" /> 
+            <cmd id="SET_NTD" > 
+               <p id="" editor="ATUS0_3" init="GV3" /> 
+            </cmd> 
+            <cmd id="SET_INT" > 
+               <p id="" editor="ATUS0_4" init="GV4" /> 
+            </cmd> 
             <cmd id="SET_HUM_SP_RH" /> 
             <cmd id="SET_HUM_SP_DP" /> 
-            <cmd id="SET_DEHUM_SP_RH" /> 
+            <cmd id="SET_DEHUM_SP_RH" > 
+               <p id="" editor="ATUS0_10" init="GV10" /> 
+            </cmd> 
          </accepts>
       </cmds>
    </nodeDef> 

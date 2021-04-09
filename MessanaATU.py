@@ -93,7 +93,7 @@ class messanaAtu(polyinterface.Node):
             ISYdriver = self.messana.getAtuStatusISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
 
-
+    '''
     def atuSetEnergySave(self, command):
         LOGGER.debug('atuSetEnergySave Called')
         value = int(command.get('value'))
@@ -101,8 +101,8 @@ class messanaAtu(polyinterface.Node):
         if self.messana.atuSetEnergySave(value, self.atuNbr):
             ISYdriver = self.messana.getAtuEnergySaveISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
-
-
+    '''
+    '''
     def atuSetSetpoint(self, command):
         LOGGER.debug('atuSetSetpoint Called')
         value = int(command.get('value'))
@@ -110,8 +110,8 @@ class messanaAtu(polyinterface.Node):
         if self.messana.atuSetSetpoint(value, self.atuNbr):
             ISYdriver = self.messana.getAtuSetPointISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
-
-
+    '''
+    '''
     def atuEnableSchedule(self, command):
         LOGGER.debug('atuEnableSchedule Called')
         value = int(command.get('value'))
@@ -119,11 +119,14 @@ class messanaAtu(polyinterface.Node):
         if self.messana.atuEnableSchedule(value, self.atuNbr):
             ISYdriver = self.messana.getAtuEnableScheduleISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)     
-        
-
+    '''    
 
     def atuUpdate(self, command):
-        LOGGER.debug(' atuUpdate Not implemented yet')
+        LOGGER.debug(' atuUpdate ')
+        self.messana.updateAtuData('all', self.atuNbr)
+        self.updateISYdrivers('all')
+        self.reportDrivers()
+
         return True
 
     def atuHRV(self, command):
@@ -171,20 +174,17 @@ class messanaAtu(polyinterface.Node):
         LOGGER.debug('atuCurrentSetpointDP Not implemented yet')
         return True
 
-    commands = { 'SET_SETPOINT': atuSetSetpoint
-                ,'SET_STATUS': atuSetStatus
-                ,'SET_ENERGYSAVE': atuSetEnergySave
-                ,'SET_SCHEDULE' : atuEnableSchedule
+    commands = { 'SET_STATUS': atuSetStatus
                 ,'UPDATE': atuUpdate
-                ,'SETHRV_ON': atuHRV
+                ,'SET_HRVON': atuHRV
                 ,'SET_FLOWLEVEL': atuFlowlevel
-                ,'SET_HUM' : atuHUM
-                ,'SET_INT' : atuINT
-                ,'SET_NTD' : atuNTD
+                ,'SET_HUMON' : atuHUM
+                ,'SET_INTON' : atuINT
+                ,'SET_NTDON' : atuNTD
                 ,'SET_HUM_SP_RH' : atuHumSetpointRH
                 ,'SET_HUM_SP_DP' : atuHumSetpointDP
                 ,'SET_DEHUM_SP_RH' : atuDehumSetpointRH
-                ,'SET_DEHUM_SP_DP' :atuDehumSetpointDP
+                ,'SET_DEHUM_SP_DP' : atuDehumSetpointDP
                 ,'SET_CURR_SP_RH' : atuCurrentSetpointRH
                 ,'SET_CURR_SP_DP' : atuCurrentSetpointDP
                 }

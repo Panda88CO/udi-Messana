@@ -1010,11 +1010,11 @@ class messanaInfo:
                                                                                          ,'ISYeditor'    : 'mHRVOn' }
                                                                         ,'SET_FLOWLEVEL' :{ 'ISYtext' :'Set Flow Level'
                                                                                          ,'ISYeditor'    : 'mFlowLevel' }
-                                                                        ,'SET_HUM' : { 'ISYtext' :'Humidity Integration'
+                                                                        ,'SET_HUMON' : { 'ISYtext' :'Humidity Integration'
                                                                                          ,'ISYeditor'    : 'mHUMOn' }
-                                                                        ,'SET_NTD' : { 'ISYtext' :'NTD Integration'
+                                                                        ,'SET_NTDON' : { 'ISYtext' :'NTD Integration'
                                                                                          ,'ISYeditor'    : 'mNTDOn' }
-                                                                        ,'SET_INT' : { 'ISYtext' :'Convective Integration'
+                                                                        ,'SET_INTON' : { 'ISYtext' :'Convective Integration'
                                                                                          ,'ISYeditor' : 'mINTOn' }     
                                                                         ,'SET_HUM_SP_RH' : { 'ISYtext'   :'Hum Setpoint RH'
                                                                                          ,'ISYeditor' : 'mHumSetpointRH'}     
@@ -2042,99 +2042,79 @@ class messanaInfo:
                                     self.keyDict['mVoc'] = 0              
                             #ATUs
                             elif key == 'exhaust air extraction':
-                                # Not currently supported  
+                                # Not currently supported   - no correspinding
                                 None
     
                             elif key == 'freecooling':
-                                # Not currently supported  
+                                # Not currently supported  - no correspinding value
                                 None
                             
                             elif key == 'convective integration':
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mINTOn')   
                                 if status['statusOK'] == True:
-                                    if tempKeys['convective integration'] == 'true':
-                                        self.keyDict['mINTOn'] = 1
-                                    else: 
-                                        self.keyDict['mINTOn'] = 0
+                                    if isinstance(tempKeys['convective integration'], int):
+                                        self.keyDict['mINTOn'] = tempKeys['convective integration']
                                 else:
                                     self.keyDict['mINTOn'] = 0
                             elif key == 'HRV':
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mHRVOn')   
                                 if status['statusOK'] == True:
-                                    if tempKeys['HRV'] == 'true':
-                                        self.keyDict['mHRVOn'] = 1
-                                    else: 
-                                        self.keyDict['mHRVOn'] = 0
+                                    if isinstance(tempKeys['HRV'], int):
+                                        self.keyDict['mHRVOn'] = tempKeys['HRV']
                                 else:
                                     self.keyDict['mHRVOn'] = 0                            
 
                             elif key == 'humidification':  
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mHUMOn')   
                                 if status['statusOK'] == True:
-                                    if tempKeys['humidification'] == 'true':
-                                        self.keyDict['mHUMOn'] = 1
-                                    else: 
-                                        self.keyDict['mHUMOn'] = 0
+                                    if isinstance(tempKeys['humidification'], int):
+                                        self.keyDict['mHUMOn'] = tempKeys['humidification']
                                 else:
                                     self.keyDict['mHUMOn'] = 0   
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mHumidityStatus')   
                                 #need to be verified
                                 if status['statusOK'] == True:
-                                    if tempKeys['humidification'] == 'true':
-                                        self.keyDict['mHumidityStatus'] = 1
-                                    else: 
-                                        self.keyDict['mHumidityStatus'] = 0
+                                    if isinstance(tempKeys['humidification'], int):
+                                        self.keyDict['mHumidityStatus'] = tempKeys['humidification']
                                 else:
                                     self.keyDict['mHumidityStatus'] = 0   
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mHumSetpointRH')   
                                 #need to be verified
                                 if status['statusOK'] == True:
-                                    if tempKeys['humidification'] == 'true':
-                                        self.keyDict['mHumSetpointRH'] = 1
-                                    else: 
-                                        self.keyDict['mHumSetpointRH'] = 0
+                                    if isinstance(tempKeys['humidification'], int):
+                                        self.keyDict['mHumSetpointRH'] = tempKeys['humidification']
                                 else:
                                     self.keyDict['mHumSetpointRH'] = 0   
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mHumSetpointDP')   
                                 #need to be verified
                                 if status['statusOK'] == True:
-                                    if tempKeys['humidification'] == 'true':
-                                        self.keyDict['mHumSetpointDP'] = 1
-                                    else: 
-                                        self.keyDict['mHumSetpointDP'] = 0
+                                    if isinstance(tempKeys['humidification'], int):
+                                        self.keyDict['mHumSetpointDP'] = tempKeys['humidification']
                                 else:
                                     self.keyDict['mHumSetpointDP'] = 0   
                             elif key == 'dehumidification':
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
                                 if status['statusOK'] == True:
-                                    if tempKeys['dehumidification'] == 'true':
-                                        self.keyDict['mNTDOn'] = 1
-                                    else: 
-                                        self.keyDict['mNTDOn'] = 0
+                                    if isinstance(tempKeys['dehumidification'], int):
+                                        self.keyDict['mNTDOn'] = tempKeys['dehumidification']
                                 else:
                                     self.keyDict['mNTDOn'] = 0 
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumudityStatus')  
                                 if status['statusOK'] == True:
-                                    if tempKeys['dehumidification'] == 'true':
-                                        self.keyDict['mDehumudityStatus'] = 1
-                                    else: 
-                                        self.keyDict['mDehumudityStatus'] = 0
+                                    if isinstance(tempKeys['dehumidification'], int):
+                                        self.keyDict['mDehumudityStatus'] = tempKeys['dehumidification']
                                 else:
                                     self.keyDict['mDehumudityStatus'] = 0 
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumSetpointRH')  
                                 if status['statusOK'] == True:
-                                    if tempKeys['dehumidification'] == 'true':
-                                        self.keyDict['mDehumSetpointRH'] = 1
-                                    else: 
-                                        self.keyDict['mDehumSetpointRH'] = 0
+                                    if isinstance(tempKeys['dehumidification'], int):
+                                        self.keyDict['mDehumSetpointRH'] = tempKeys['dehumidification']
                                 else:
                                     self.keyDict['mDehumSetpointRH'] = 0 
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumSetpointDP')  
                                 if status['statusOK'] == True:
-                                    if tempKeys['dehumidification'] == 'true':
-                                        self.keyDict['mDehumSetpointDP'] = 1
-                                    else: 
-                                        self.keyDict['mDehumSetpointDP'] = 0
+                                    if isinstance(tempKeys['dehumidification'], int):
+                                        self.keyDict['mDehumSetpointDP'] = tempKeys['dehumidification']
                                 else:
                                     self.keyDict['mDehumSetpointDP'] = 0 
 

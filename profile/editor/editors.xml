@@ -543,7 +543,22 @@
      <range  uom="25" subset="0-1" nls="ATUS0_4" />
 </editor>
   <editor id = "ATUS0_5" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_5" />
+</editor>
+  <editor id = "ATUS0_6" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_6" />
+</editor>
+  <editor id = "ATUS0_7" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_7" />
+</editor>
+  <editor id = "ATUS0_8" > 
+     <range  uom="25" subset="0-1" nls="ATUS0_8" />
+</editor>
+  <editor id = "ATUS0_9" > 
      <range  uom="17" min="40" max="120" step="1" prec="0" />
+</editor>
+  <editor id = "ATUS0_10" > 
+     <range  uom="51" min="0" max="100" step="1" prec="1" />
 </editor>
   <editor id = "ENERGYS0_1" > 
      <range  uom="25" subset="0-1" nls="ENERGYS0_1" />
