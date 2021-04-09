@@ -1795,7 +1795,8 @@ class messanaInfo:
         self.setupFile['nodeDef'][self.name]['nlsICON']=self.mSystem[nodeName]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][self.name]['sts']={}
 
-        for mKey in self.mSystem[nodeName]['data'][nodeNbr]: 
+        #for mKey in self.mSystem[nodeName]['data'][nodeNbr]: 
+        for mKey in self.mSystem[nodeName]['GETkeysList'][nodeNbr]:             
             #make check if system has unit installed
             if self.mSystem[nodeName]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 self.keyCount = self.keyCount + 1
@@ -1904,8 +1905,8 @@ class messanaInfo:
         self.setupFile['nodeDef'][ self.systemID]['nlsICON']=self.mSystem[ self.systemID]['ISYnode']['nlsICON']
         self.setupFile['nodeDef'][ self.systemID]['sts']={}
 
-        for mKey in self.mSystem[ self.systemID]['data']: 
-           
+        #for mKey in self.mSystem[ self.systemID]['data']: 
+        for mKey in self.mSystem[ self.systemID]['GETkeysList']:    
             #make check if system has unit installed
             if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom']:
                 if ((self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] == 112
@@ -1948,7 +1949,8 @@ class messanaInfo:
 
 
 
-    def getNodeCapability (self, nodeKey, nodeNbr):     
+    def getNodeCapability (self, nodeKey, nodeNbr):    
+        print ('getNodeCapability') 
         self.keyDict = {}
         self.GETkeysList = []
         self.PUTkeysList = []
@@ -2074,8 +2076,34 @@ class messanaInfo:
                                     else: 
                                         self.keyDict['mHUMOn'] = 0
                                 else:
-                                    self.keyDict['mHUMOn'] = 0                            
-                                
+                                    self.keyDict['mHUMOn'] = 0   
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHumidityStatus')   
+                                #need to be verified
+                                if status['statusOK'] == True:
+                                    if tempKeys['humidification'] == 'true':
+                                        self.keyDict['mHumidityStatus'] = 1
+                                    else: 
+                                        self.keyDict['mHumidityStatus'] = 0
+                                else:
+                                    self.keyDict['mHumidityStatus'] = 0   
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHumSetpointRH')   
+                                #need to be verified
+                                if status['statusOK'] == True:
+                                    if tempKeys['humidification'] == 'true':
+                                        self.keyDict['mHumSetpointRH'] = 1
+                                    else: 
+                                        self.keyDict['mHumSetpointRH'] = 0
+                                else:
+                                    self.keyDict['mHumSetpointRH'] = 0   
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mHumSetpointDP')   
+                                #need to be verified
+                                if status['statusOK'] == True:
+                                    if tempKeys['humidification'] == 'true':
+                                        self.keyDict['mHumSetpointDP'] = 1
+                                    else: 
+                                        self.keyDict['mHumSetpointDP'] = 0
+                                else:
+                                    self.keyDict['mHumSetpointDP'] = 0   
                             elif key == 'dehumidification':
                                 status = self.checkGETNode( nodeKey, nodeNbr,  'mNTDOn')  
                                 if status['statusOK'] == True:
@@ -2084,7 +2112,35 @@ class messanaInfo:
                                     else: 
                                         self.keyDict['mNTDOn'] = 0
                                 else:
-                                    self.keyDict['mNTDOn'] = 0                                
+                                    self.keyDict['mNTDOn'] = 0 
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumudityStatus')  
+                                if status['statusOK'] == True:
+                                    if tempKeys['dehumidification'] == 'true':
+                                        self.keyDict['mDehumudityStatus'] = 1
+                                    else: 
+                                        self.keyDict['mDehumudityStatus'] = 0
+                                else:
+                                    self.keyDict['mDehumudityStatus'] = 0 
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumSetpointRH')  
+                                if status['statusOK'] == True:
+                                    if tempKeys['dehumidification'] == 'true':
+                                        self.keyDict['mDehumSetpointRH'] = 1
+                                    else: 
+                                        self.keyDict['mDehumSetpointRH'] = 0
+                                else:
+                                    self.keyDict['mDehumSetpointRH'] = 0 
+                                status = self.checkGETNode( nodeKey, nodeNbr,  'mDehumSetpointDP')  
+                                if status['statusOK'] == True:
+                                    if tempKeys['dehumidification'] == 'true':
+                                        self.keyDict['mDehumSetpointDP'] = 1
+                                    else: 
+                                        self.keyDict['mDehumSetpointDP'] = 0
+                                else:
+                                    self.keyDict['mDehumSetpointDP'] = 0 
+
+
+
+
                             else:
                                 print(key + ' unknown keyword')
 
