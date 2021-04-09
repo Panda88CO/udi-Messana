@@ -16,8 +16,9 @@ class messanaAtu(polyinterface.Node):
         self.atuNbr = atuNbr
         self.name = name
         self.address = address 
-        self.id = 'atu'+str(atuNbr)
         self.messana = self.parent.messana
+        self.id = self.messana.getAtuAddress(atuNbr)
+
         self.atu_GETKeys = self.messana.atuPullKeys(self.atuNbr)
         self.atu_PUTKeys = self.messana.atuPushKeys(self.atuNbr)
         self.atu_ActiveKeys = self.messana.atuActiveKeys(self.atuNbr)
@@ -29,7 +30,8 @@ class messanaAtu(polyinterface.Node):
             if  self.temp != {}:
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
-        self.messana.updateAtuData('all', self.atuNbr)
+
+        #self.messana.updateAtuData('all', self.atuNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
        
