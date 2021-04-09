@@ -2141,6 +2141,8 @@ class messanaInfo:
         for mKey in self.keyDict:
             if self.keyDict[mKey] == 0 and mKey in self.GETkeysList:
                 self.GETkeysList.remove(mKey)
+            if self.keyDict[mKey] == 0 and mKey in self.PUTkeysList:
+                self.PUTkeysList.remove(mKey)
 
         self.mSystem[nodeKey]['SensorCapability'][nodeNbr] = self.keyDict
         self.mSystem[nodeKey]['GETkeysList'][nodeNbr] = []
