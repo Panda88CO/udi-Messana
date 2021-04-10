@@ -130,48 +130,48 @@ class messanaAtu(polyinterface.Node):
         return True
 
     def atuHRV(self, command):
-        LOGGER.debug('atuHRV not implemented yet')
+        LOGGER.debug('atuHRV called')
         return True
 
     def atuFlowlevel(self, command):
-        LOGGER.debug('atu FlowLevel not implemented yet')
+        LOGGER.debug('atu FlowLevel called')
         return True
 
     def atuHUM(self, command):
-        LOGGER.debug('atuHUM Not implemented yet')
+        LOGGER.debug('atuHUM called')
         return True
 
     def atuINT(self, command):
-        LOGGER.debug('atuINT Not implemented yet')
+        LOGGER.debug('atuINT called')
         return True
     
     def atuNTD(self, command):
-        LOGGER.debug('atuNTD Not implemented yet')
+        LOGGER.debug('atuNTD called')
         return True
 
     def atuHumSetpointRH(self, command):
-        LOGGER.debug('atuHumSetpointRH Not implemented yet')
+        LOGGER.debug('atuHumSetpointRH called')
         return True
 
 
     def atuHumSetpointDP(self, command):
-        LOGGER.debug('atuHumSetpointDP Not implemented yet')
+        LOGGER.debug('atuHumSetpointDP called')
         return True
 
     def atuDehumSetpointRH(self, command):
-        LOGGER.debug('Not implemented yet')
+        LOGGER.debug('called')
         return True
 
     def atuDehumSetpointDP(self, command):
-        LOGGER.debug('atuDehumSetpointRH Not implemented yet')
+        LOGGER.debug('atuDehumSetpointRH called')
         return True
 
     def atuCurrentSetpointRH(self, command):
-        LOGGER.debug('atuCurrentSetpointRH Not implemented yet')
+        LOGGER.debug('atuCurrentSetpointRH called')
         return True
 
     def atuCurrentSetpointDP(self, command):
-        LOGGER.debug('atuCurrentSetpointDP Not implemented yet')
+        LOGGER.debug('atuCurrentSetpointDP called')
         return True
 
     commands = { 'SET_STATUS': atuSetStatus
