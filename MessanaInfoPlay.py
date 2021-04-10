@@ -3299,36 +3299,149 @@ class messanaInfo:
         return(info)
 
     def atuSetStatus(self, value, atuNbr):
-        LOGGER.debug ('atuSetStatus not implemented yet')
-        return(True)
-
+        LOGGER.debug ('atuSetStatus')
+        status = self.pushAtuDataIndividual(atuNbr, 'mStatus', value)
+        return(status)
+ 
     def getAtuStatusISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuStatusISYdriver not implemented yet')
-        return(None)
+        LOGGER.debug ('getAtuStatusISYdriver called')
+        Key = ''
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+  
+    def atuSetHrv(self, value, atuNbr):
+        LOGGER.debug ('atuSetHRV called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mHRV', value)
+        return(status)
 
-    def atuSetEnergySave(self, value, atuNbr):
-        LOGGER.debug ('atuSetEnergySave not implemented yet')
-        return(True)
+    def getAtuHrvISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuHrvISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRV':
+                Key = ISYkey
+        return(Key)  
 
-    def getAtuEnergySaveISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuEnergySaveISYdriver not implemented yet')
-        return(None) 
+    def atuSetFlowlevel(self, value, atuNbr):
+        LOGGER.debug ('atuSetFlowlevel called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mFlowLevel', value)
+        return(status)
 
-    def atuSetSetpoint(self, value, atuNbr):
-        LOGGER.debug ('atuSetSetpoint not implemented yet')
-        return(True)
-
-    def getAtuSetPointISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetPointISYdriver not implemented yet')
-        return(None) 
+    def getAtuSetFlowlevelISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetPointISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mFlowLevel':
+                Key = ISYkey
+        return(Key)  
         
-    def atuEnableSchedule(self, value, atuNbr):
-        LOGGER.debug ('atuEnableSchedule not implemented yet')
-        return(True)
+    def atuSetHum(self, value, atuNbr):
+        LOGGER.debug ('atuSetHum called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mHUMOn', value)
+        return(status)
 
-    def getAtuEnableScheduleISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuEnableScheduleISYdriver not implemented yet')
-        return(None) 
+    def getAtuSetHumISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetHumISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHUMOn':
+                Key = ISYkey
+        return(Key)  
+
+    def atuSetInt(self, value, atuNbr):
+        LOGGER.debug ('atuSetInt called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mINTOn', value)
+        return(status)
+
+    def getAtuSetIntISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetIntISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mINTOn':
+                Key = ISYkey
+        return(Key)  
+
+    def atuSetNtd(self, value, atuNbr):
+        LOGGER.debug ('atuSetNtd called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mNTDOn', value)
+        return(status)
+
+    def getAtuSetNtdISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetNtdISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mNTDOn':
+                Key = ISYkey
+        return(Key)  
+
+    def atuSetHumSetpointRH(self, value, atuNbr):
+        LOGGER.debug ('atuSetHumSetpointRH called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mHumSetpointRH', value)
+        return(status)
+
+    def getAtuSetHumSetpointRHISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHumSetpointRH':
+                Key = ISYkey
+        return(Key)
+
+   def  atuSetHumSetpointDP(self, value, atuNbr):
+        LOGGER.debug ('atuSetHumSetpointDP called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mHumSetpointDP', value)
+        return(status)
+
+    def getAtuSetHumSetpointDPISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHumSetpointDP':
+                Key = ISYkey
+        return(Key)  
+
+   def atuSetDehumSetpointRH(self, value, atuNbr):
+        LOGGER.debug ('atuSetDehumSetpointRH called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointRH', value)
+        return(status)
+
+    def getAtuSetDehumSetpointRHISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetDehumSetpointRHISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointRH':
+                Key = ISYkey
+        return(Key)  
+
+   def atuSetCurrentSetpointRH(self, value, atuNbr):
+        LOGGER.debug ('atuSetCurrentSetpointRH called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointRH', value)
+        return(status)
+
+    def getAtuSetCurrentSetpointRHISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetCurrentSetpointRHISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mCurrentSetpointRH':
+                Key = ISYkey
+        return(Key)  
+
+   def atuSetCurrentSetpointDP(self, value, atuNbr):
+        LOGGER.debug ('atuSetCurrentSetpointDP called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointDP', value)
+        return(status)
+
+    def getAtuSetCurrentSetpointDPISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetCurrentSetpointDPISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mCurrentSetpointDP':
+                Key = ISYkey
+        return(Key)  
+
 
 
     #################################################################
