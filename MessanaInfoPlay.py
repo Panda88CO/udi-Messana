@@ -3390,7 +3390,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)
 
-   def  atuSetHumSetpointDP(self, value, atuNbr):
+    def atuSetHumSetpointDP(self, value, atuNbr):
         LOGGER.debug ('atuSetHumSetpointDP called')
         status = self.pushAtuDataIndividual(atuNbr, 'mHumSetpointDP', value)
         return(status)
@@ -3403,7 +3403,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
 
-   def atuSetDehumSetpointRH(self, value, atuNbr):
+    def atuSetDehumSetpointRH(self, value, atuNbr):
         LOGGER.debug ('atuSetDehumSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointRH', value)
         return(status)
@@ -3416,7 +3416,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
 
-   def atuSetCurrentSetpointRH(self, value, atuNbr):
+    def atuSetCurrentSetpointRH(self, value, atuNbr):
         LOGGER.debug ('atuSetCurrentSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointRH', value)
         return(status)
@@ -3429,7 +3429,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
 
-   def atuSetCurrentSetpointDP(self, value, atuNbr):
+    def atuSetCurrentSetpointDP(self, value, atuNbr):
         LOGGER.debug ('atuSetCurrentSetpointDP called')
         status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointDP', value)
         return(status)
