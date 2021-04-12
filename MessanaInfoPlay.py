@@ -3416,6 +3416,20 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
 
+
+    def atuSetDehumSetpointDP(self, value, atuNbr):
+        LOGGER.debug ('atuSetDehumSetpointDP called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointDP', value)
+        return(status)
+
+    def getAtuSetDehumSetpointDPISYdriver(self, atuNbr):
+        LOGGER.debug ('getAtuSetDehumSetpointDPISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointDP':
+                Key = ISYkey
+        return(Key)  s
+
     def atuSetCurrentSetpointRH(self, value, atuNbr):
         LOGGER.debug ('atuSetCurrentSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointRH', value)
