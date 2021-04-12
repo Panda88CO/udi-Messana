@@ -92,33 +92,7 @@ class messanaAtu(polyinterface.Node):
             ISYdriver = self.messana.getAtuStatusISYdriver(self.atuNbr)
             self.setDriver(ISYdriver, value, report = True)
 
-    '''
-    def atuSetEnergySave(self, command):
-        LOGGER.debug('atuSetEnergySave Called')
-        value = int(command.get('value'))
-        LOGGER.debug('ATU'+str(self.atuNbr)+' setEnergySave Received:' + str(value))
-        if self.messana.atuSetEnergySave(value, self.atuNbr):
-            ISYdriver = self.messana.getAtuEnergySaveISYdriver(self.atuNbr)
-            self.setDriver(ISYdriver, value, report = True)
-    '''
-    '''
-    def atuSetSetpoint(self, command):
-        LOGGER.debug('atuSetSetpoint Called')
-        value = int(command.get('value'))
-        LOGGER.debug('ATU'+str(self.atuNbr)+' setSetpoint Received:' + str(value))
-        if self.messana.atuSetSetpoint(value, self.atuNbr):
-            ISYdriver = self.messana.getAtuSetPointISYdriver(self.atuNbr)
-            self.setDriver(ISYdriver, value, report = True)
-    '''
-    '''
-    def atuEnableSchedule(self, command):
-        LOGGER.debug('atuEnableSchedule Called')
-        value = int(command.get('value'))
-        LOGGER.debug('ATU'+str(self.atuNbr)+' EnSchedule Reeived:' + str(value))      
-        if self.messana.atuEnableSchedule(value, self.atuNbr):
-            ISYdriver = self.messana.getAtuEnableScheduleISYdriver(self.atuNbr)
-            self.setDriver(ISYdriver, value, report = True)     
-    '''    
+ 
 
     def atuUpdate(self, command):
         LOGGER.debug(' atuUpdate ')

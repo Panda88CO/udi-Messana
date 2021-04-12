@@ -3428,7 +3428,7 @@ class messanaInfo:
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointDP':
                 Key = ISYkey
-        return(Key)  s
+        return(Key)
 
     def atuSetCurrentSetpointRH(self, value, atuNbr):
         LOGGER.debug ('atuSetCurrentSetpointRH called')
