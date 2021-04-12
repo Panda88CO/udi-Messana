@@ -15,8 +15,9 @@ class messanaBufTank(polyinterface.Node):
         self.bufTankNbr = bufTankNbr
         self.name = name
         self.address = address 
-        self.id = 'buffertanks'+str(bufTankNbr)
         self.messana = self.parent.messana
+        self.id = self.messana.getBufTankAddress(bufTankNbr)
+
         self.bufferTank_GETKeys = self.messana.bufferTankPullKeys(self.bufTankNbr)
         self.bufferTank_PUTKeys = self.messana.bufferTankPushKeys(self.bufTankNbr)
         self.bufferTank_ActiveKeys = self.messana.bufferTankActiveKeys(self.bufTankNbr)
@@ -87,6 +88,12 @@ class messanaBufTank(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
+    def bufTankUpdate(self, command):
+        LOGGER.debug(' bufTankUpdate ')
+        self.messana.updateBufTankData('all', self.atuNbr)
+        self.updateISYdrivers('all')
+        self.reportDrivers()
+
     def setStatus(self, command):
         LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
@@ -97,42 +104,30 @@ class messanaBufTank(polyinterface.Node):
 
 
 
-    def setEnergySave(self, command):
-        LOGGER.debug('setEnergySave Called')
+    def setMode(self, command):
+        LOGGER.debug('setMode Called')
         value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufTankNbr)+' setEnergySave Received:' + str(value))
-        if self.messana.bufferTankSetEnergySave(value, self.bufTankNbr):
-            ISYdriver = self.messana.getBufferTankEnergySaveISYdriver(self.bufTankNbr)
+        LOGGER.debug('BufferTanks'+str(self.bufTankNbr)+' setMode Received:' + str(value))
+        if self.messana.bufferTankSetSetMode(value, self.bufTankNbr):
+            ISYdriver = self.messana.getBufferTankSetModeISYdriver(self.bufTankNbr)
             self.setDriver(ISYdriver, value, report = True)
 
 
-    def setSetpoint(self, command):
-        LOGGER.debug('setSetpoint Called')
-        value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufTankNbr)+' setSetpoint Received:' + str(value))
-        if self.messana.bufferTankSetSetpoint(value, self.bufTankNbr):
-            ISYdriver = self.messana.getBufferTankSetPointISYdriver(self.bufTankNbr)
-            self.setDriver(ISYdriver, value, report = True)
 
-
-    def enableSchedule(self, command):
-        LOGGER.debug('EnSchedule Called')
+    def bufTankTempStatus(self, command):
+        LOGGER.debug('bufTankTempStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufTankNbr)+' EnSchedule Reeived:' + str(value))      
-        if self.messana.bufferTankEnableSchedule(value, self.bufTankNbr):
-            ISYdriver = self.messana.getBufferTankEnableScheduleISYdriver(self.bufTankNbr)
+        LOGGER.debug('BufferTanks'+str(self.bufTankNbr)+' Temp Status Reeived:' + str(value))      
+        if self.messana.bufferTankTempStatus(value, self.bufTankNbr):
+            ISYdriver = self.messana.getBufferTankTempStatusISYdriver(self.bufTankNbr)
             self.setDriver(ISYdriver, value, report = True)     
-        
-        #self.bufferTankInfo['mScheduleOn'] = val
-        #self.messana.pushBufferTankData(self.bufTankNbr, self.bufferTankInfo)
-        #self.checkSetDriver('GV3', 'mScheduleOn')
 
  
 
-    commands = { 'SET_SETPOINT': setSetpoint
+    commands = { 'UPDATE' : bufTankUpdate
+                ,'SET_MODE': setMode
                 ,'SET_STATUS': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SCHEDULE' : enableSchedule 
+                ,'SET_TEMPMODE' : bufTankTempStatus
                 }
 
     drivers = [  ]

@@ -28,7 +28,6 @@ class messanaAtu(polyinterface.Node):
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
 
-        #self.messana.updateAtuData('all', self.atuNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
        
@@ -127,52 +126,54 @@ class messanaAtu(polyinterface.Node):
         self.updateISYdrivers('all')
         self.reportDrivers()
 
-        return True
 
     def atuHRV(self, command):
         LOGGER.debug('atuHRV called')
-        return True
+        value = int(command.get('value'))
+        LOGGER.debug('Atu'+str(self.macrozoneNbr)+' atuHRV Reeived:' + str(value))      
+        if self.messana.atuSetHrv(value, self.atuNbr):
+            ISYdriver = self.messana.getAtuHrvISYdriver(self.atuNbr)
+            self.setDriver(ISYdriver, value, report = True)   
+
 
     def atuFlowlevel(self, command):
         LOGGER.debug('atu FlowLevel called')
-        return True
 
     def atuHUM(self, command):
         LOGGER.debug('atuHUM called')
-        return True
+
 
     def atuINT(self, command):
         LOGGER.debug('atuINT called')
-        return True
+
     
     def atuNTD(self, command):
         LOGGER.debug('atuNTD called')
-        return True
+ 
 
     def atuHumSetpointRH(self, command):
         LOGGER.debug('atuHumSetpointRH called')
-        return True
+ 
 
 
     def atuHumSetpointDP(self, command):
         LOGGER.debug('atuHumSetpointDP called')
-        return True
+
 
     def atuDehumSetpointRH(self, command):
         LOGGER.debug('called')
-        return True
+
 
     def atuDehumSetpointDP(self, command):
         LOGGER.debug('atuDehumSetpointRH called')
-        return True
+
 
     def atuCurrentSetpointRH(self, command):
         LOGGER.debug('atuCurrentSetpointRH called')
-        return True
+
 
     def atuCurrentSetpointDP(self, command):
         LOGGER.debug('atuCurrentSetpointDP called')
-        return True
 
     commands = { 'SET_STATUS': atuSetStatus
                 ,'UPDATE': atuUpdate
