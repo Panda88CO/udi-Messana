@@ -206,7 +206,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover macrozones')
         nbrMacrozones =  self.messana.getMacrozoneCount()
         for macrozoneNbr in range(0,nbrMacrozones):
-            LOGGER.debug('Adding zone ' + str(macrozoneNbr))
+            LOGGER.debug('Adding macrozone ' + str(macrozoneNbr))
             macrozonename = self.messana.getMacrozoneName(macrozoneNbr)
             macrozoneaddress = self.messana.getMacrozoneAddress(macrozoneNbr)
             LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + macrozonename +' ' + macrozoneaddress) 
@@ -216,17 +216,17 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover atus')
         nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):
-            LOGGER.debug('Adding zone ' + str(atuNbr))
+            LOGGER.debug('Adding atu ' + str(atuNbr))
             atuname = self.messana.getAtuName(atuNbr)
             atuaddress = self.messana.getAtuAddress(atuNbr)
             LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
             if not atuaddress in self.nodes:
                self.addNode(messanaAtu(self, self.address, atuaddress, atuname, atuNbr))
                
-        LOGGER.debug('discover abuffer tanks')
+        LOGGER.debug('discover buffer tanks')
         nbrBufferTanks =  self.messana.getBufferTankCount()
         for bufTankNbr in range(0,nbrBufferTanks):
-            LOGGER.debug('Adding buffer ' + str(bufTankNbr))
+            LOGGER.debug('Adding buffer tank ' + str(bufTankNbr))
             bufTankname = self.messana.getBufferTankName(bufTankNbr)
             bufTankaddress = self.messana.getBufferTankAddress(bufTankNbr)
             LOGGER.debug('Buffer Tank' + str(bufTankNbr) + ' : name, Address: ' + bufTankname +' ' + bufTankaddress) 
