@@ -1712,11 +1712,11 @@ class messanaInfo:
                 esName =  self.energySaveID+str(esNbr)
                 self.addNodeDefStruct(esNbr,  self.energySaveID, esName )   
 
-            for hccoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
-                self.getHC_COCapability(hccoNbr)
-                self.updateHC_COData('all', hccoNbr)
-                hccoName = self.HotColdcoID +str(hccoNbr)
-                self.addNodeDefStruct(hccoNbr, self.HotColdcoID , hccoName )          
+            for HcCoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
+                self.getHcCoCapability(HcCoNbr)
+                self.updateHcCoData('all', HcCoNbr)
+                hccoName = self.HotColdcoID +str(HcCoNbr)
+                self.addNodeDefStruct(HcCoNbr, self.HotColdcoID , hccoName )          
             
             for btNbr in range(0,self.mSystem[ self.systemID]['data']['mBufTankCount']):
                 self.getBufferTankCapability(btNbr)
@@ -3154,48 +3154,56 @@ class messanaInfo:
 
     ##############################################################
     # Hot Cold Change Over
-    def updateHC_COData(self, HC_CONbr):
-        LOGGER.debug('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateNodeData(HC_CONbr, self.HotColdcoID ))
+    def updateHcCoData(self, level,  HcCoNbr):
+        LOGGER.debug('updatHcCoData: ' + str(HcCoNbr))
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update Hot Cold CO ' + str(HcCoNbr))
+            keys =  self.HcCoPullKeys(HcCoNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update Hot Cold CO  ' + str(HcCoNbr))
+            keys =  self.HcCoActiveKeys(HcCoNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullHcCoDataIndividual(HcCoNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
-    def getHC_COCapability(self, HC_CONbr): 
+    def getHcCoCapability(self, HcCoNbr): 
         LOGGER.debug('getHC_COCapability')        
-        self.getNodeCapability(self.HotColdcoID , HC_CONbr)
+        self.getNodeCapability(self.HotColdcoID , HcCoNbr)
 
-    def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
-        LOGGER.debug('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey))
+    def pullHcCoDataIndividual(self, HcCoNbr, mKey): 
+        LOGGER.debug('pullHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey))
 
-    def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
-        LOGGER.debug('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey, value))
+    def pushHcCoDataIndividual(self, HcCoNbr, mKey, value):
+        LOGGER.debug('pushHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey + ' ' + str(value))  
+        return(self.pushNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey, value))
 
-    def HcCoPullKeys(self, HC_CONbr):
+    def HcCoPullKeys(self, HcCoNbr):
         LOGGER.debug('hc_coPullKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'GETstr'))
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'GETstr'))
 
-    def hc_coPushKeys(self, HC_CONbr):
+    def HcCoPushKeys(self, HcCoNbr):
         LOGGER.debug('hc_coPushKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'PUTstr'))
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'PUTstr'))
   
-    def hc_coActiveKeys(self, HC_CONbr):
+    def HcCoActiveKeys(self, HcCoNbr):
         LOGGER.debug('hc_coActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'Active'))    
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'Active'))    
 
-    def getHotColdChangeOverCount(self):
+    def getHcCoCount(self):
         return(self.mSystem[ self.systemID]['data']['mhc_coCount'])
 
     ####################################################
     #ATU
-    '''
-    def updateATUData(self, atuNbr):
-        LOGGER.debug('updatATUData: ' + str(atuNbr))
-        return(self.updateNodeData(atuNbr, self.atuID))
     
     def getATUCapability(self, atuNbr): 
         LOGGER.debug('getATUCapability')               
         self.getNodeCapability(self.atuID, atuNbr)
-    '''
+    
     def getAtuCapability(self, atuNbr): 
         LOGGER.debug('getAtuCapability')             
         self.getNodeCapability(self.atuID, atuNbr)
@@ -3462,9 +3470,21 @@ class messanaInfo:
 
     #################################################################
     #Fan Coils
-    def updateFanCoilData(self, FanCoilNbr):
+    def updateFanCoilData(self, level, FanCoilNbr):
         LOGGER.debug('updatFanCoilData: ' + str(FanCoilNbr))
-        return(self.updateNodeData(FanCoilNbr, self.fcID))
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update Fan Coil ' + str(FanCoilNbr))
+            keys =  self.fan_coilPullKeys(FanCoilNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update FanCoil  ' + str(FanCoilNbr))
+            keys =  self.fan_coilActiveKeys(FanCoilNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullFanCoilDataIndividual(FanCoilNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
     def getFanCoilCapability(self, FanCoilNbr): 
         LOGGER.debug('getFanCoilCapability')              
@@ -3495,8 +3515,9 @@ class messanaInfo:
 
     #############################################################
     #EnergySources
-    def updateEnergySourceData(self, EnergySourceNbr):
+    def updateEnergySourceData(self, level, EnergySourceNbr):
         LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
+        #needs Update
         return(self.updateNodeData(EnergySourceNbr,  self.energySaveID))
 
     def getEnergySourceCapability(self, EnergySourceNbr): 
@@ -3552,7 +3573,6 @@ class messanaInfo:
 
     def updateBufferTankData(self,  level, bufTankNbr):
         LOGGER.debug('updateBufferTankData: ' + str(bufTankNbr))
-
         keys =[]
         if level == 'all':
             LOGGER.debug('ALL update buffer tank ' + str(bufTankNbr))
@@ -3704,8 +3724,9 @@ class messanaInfo:
  
     ##################################################################
     # Domestic Hot Water
-    def updateDHWData(self, DHWNbr):
+    def updateDHWData(self, level, DHWNbr):
         LOGGER.debug('updatDHWData: ' + str(DHWNbr))
+        #Needs update
         return(self.updateNodeData(DHWNbr, self.dhwID))
 
     def getDHWCapability(self, DHWNbr): 
