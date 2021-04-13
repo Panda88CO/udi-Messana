@@ -3314,14 +3314,14 @@ class messanaInfo:
   
     def atuSetHrv(self, value, atuNbr):
         LOGGER.debug ('atuSetHRV called')
-        status = self.pushAtuDataIndividual(atuNbr, 'mHRV', value)
+        status = self.pushAtuDataIndividual(atuNbr, 'mHRVOn', value)
         return(status)
 
     def getAtuHrvISYdriver(self, atuNbr):
         LOGGER.debug ('getAtuHrvISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
-            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRV':
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRVOn':
                 Key = ISYkey
         return(Key)  
 
