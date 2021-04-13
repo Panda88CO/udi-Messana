@@ -3477,7 +3477,7 @@ class messanaInfo:
             LOGGER.debug('ALL update Fan Coil ' + str(FanCoilNbr))
             keys =  self.fan_coilPullKeys(FanCoilNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update FanCoil  ' + str(FanCoilNbr))
+            LOGGER.debug('ACTIVE update Fan Coil  ' + str(FanCoilNbr))
             keys =  self.fan_coilActiveKeys(FanCoilNbr)
         
         self.dataOK = True
@@ -3517,9 +3517,21 @@ class messanaInfo:
     #EnergySources
     def updateEnergySourceData(self, level, EnergySourceNbr):
         LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
-        #needs Update
-        return(self.updateNodeData(EnergySourceNbr,  self.energySaveID))
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update Energy Source ' + str(EnergySourceNbr))
+            keys =  self.energy_sourcePullKeys(EnergySourceNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update Energy Source  ' + str(EnergySourceNbr))
+            keys =  self.energy_sourceActiveKeys(EnergySourceNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullEnergySourceDataIndividual(EnergySourceNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
+        
     def getEnergySourceCapability(self, EnergySourceNbr): 
         LOGGER.debug('getEnergySourceCapability')          
         self.getNodeCapability( self.energySaveID, EnergySourceNbr)
@@ -3726,8 +3738,19 @@ class messanaInfo:
     # Domestic Hot Water
     def updateDHWData(self, level, DHWNbr):
         LOGGER.debug('updatDHWData: ' + str(DHWNbr))
-        #Needs update
-        return(self.updateNodeData(DHWNbr, self.dhwID))
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update  Domestic Hot Water ' + str(DHWNbr))
+            keys =  self.DHWPullKeys(DHWNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update Domestic Hot Water ' + str(DHWNbr))
+            keys =  self.DHWActiveKeys(DHWNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullDHWDataIndividual(DHWNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
     def getDHWCapability(self, DHWNbr): 
         LOGGER.debug('getDHWCapability')                      
