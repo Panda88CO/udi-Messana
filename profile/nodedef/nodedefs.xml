@@ -1,0 +1,728 @@
+<nodeDefs> 
+   <nodeDef id="system" nls="nlssystem">
+      <editors />
+      <sts>
+         <st id="GV1" editor="SYSTEM_1" />
+         <st id="GV2" editor="SYSTEM_2" />
+         <st id="GV3" editor="SYSTEM_3" />
+         <st id="GV4" editor="SYSTEM_4" />
+         <st id="GV5" editor="SYSTEM_5" />
+         <st id="GV6" editor="SYSTEM_6" />
+         <st id="GV7" editor="SYSTEM_7" />
+         <st id="GV8" editor="SYSTEM_8" />
+         <st id="GV9" editor="SYSTEM_9" />
+         <st id="GV10" editor="SYSTEM_10" />
+         <st id="GV11" editor="SYSTEM_11" />
+      </sts>
+      <cmds>
+         <sends>
+            <cmd id="DON" /> 
+            <cmd id="DOF" /> 
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="SYSTEM_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="SYSTEM_9" init="GV9" /> 
+            </cmd> 
+            <cmd id="SET_SETBACK" > 
+               <p id="" editor="SYSTEM_10" init="GV10" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones0" nls="nlszones0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES0_1" />
+         <st id="GV2" editor="ZONES0_2" />
+         <st id="GV3" editor="ZONES0_3" />
+         <st id="GV4" editor="ZONES0_4" />
+         <st id="GV5" editor="ZONES0_5" />
+         <st id="GV6" editor="ZONES0_6" />
+         <st id="GV7" editor="ZONES0_7" />
+         <st id="GV8" editor="ZONES0_8" />
+         <st id="GV9" editor="ZONES0_9" />
+         <st id="GV10" editor="ZONES0_10" />
+         <st id="GV11" editor="ZONES0_11" />
+         <st id="GV12" editor="ZONES0_12" />
+         <st id="GV13" editor="ZONES0_13" />
+         <st id="GV14" editor="ZONES0_14" />
+         <st id="GV15" editor="ZONES0_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES0_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES0_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES0_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES0_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES0_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES0_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES0_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES0_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones1" nls="nlszones1">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES1_1" />
+         <st id="GV2" editor="ZONES1_2" />
+         <st id="GV3" editor="ZONES1_3" />
+         <st id="GV4" editor="ZONES1_4" />
+         <st id="GV5" editor="ZONES1_5" />
+         <st id="GV6" editor="ZONES1_6" />
+         <st id="GV7" editor="ZONES1_7" />
+         <st id="GV8" editor="ZONES1_8" />
+         <st id="GV9" editor="ZONES1_9" />
+         <st id="GV10" editor="ZONES1_10" />
+         <st id="GV11" editor="ZONES1_11" />
+         <st id="GV12" editor="ZONES1_12" />
+         <st id="GV13" editor="ZONES1_13" />
+         <st id="GV14" editor="ZONES1_14" />
+         <st id="GV15" editor="ZONES1_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES1_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES1_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES1_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES1_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES1_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES1_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES1_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES1_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones2" nls="nlszones2">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES2_1" />
+         <st id="GV2" editor="ZONES2_2" />
+         <st id="GV3" editor="ZONES2_3" />
+         <st id="GV4" editor="ZONES2_4" />
+         <st id="GV5" editor="ZONES2_5" />
+         <st id="GV6" editor="ZONES2_6" />
+         <st id="GV7" editor="ZONES2_7" />
+         <st id="GV8" editor="ZONES2_8" />
+         <st id="GV9" editor="ZONES2_9" />
+         <st id="GV10" editor="ZONES2_10" />
+         <st id="GV11" editor="ZONES2_11" />
+         <st id="GV12" editor="ZONES2_12" />
+         <st id="GV13" editor="ZONES2_13" />
+         <st id="GV14" editor="ZONES2_14" />
+         <st id="GV15" editor="ZONES2_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES2_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES2_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES2_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES2_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES2_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES2_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES2_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES2_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones3" nls="nlszones3">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES3_1" />
+         <st id="GV2" editor="ZONES3_2" />
+         <st id="GV3" editor="ZONES3_3" />
+         <st id="GV4" editor="ZONES3_4" />
+         <st id="GV5" editor="ZONES3_5" />
+         <st id="GV6" editor="ZONES3_6" />
+         <st id="GV7" editor="ZONES3_7" />
+         <st id="GV8" editor="ZONES3_8" />
+         <st id="GV9" editor="ZONES3_9" />
+         <st id="GV10" editor="ZONES3_10" />
+         <st id="GV11" editor="ZONES3_11" />
+         <st id="GV12" editor="ZONES3_12" />
+         <st id="GV13" editor="ZONES3_13" />
+         <st id="GV14" editor="ZONES3_14" />
+         <st id="GV15" editor="ZONES3_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES3_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES3_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES3_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES3_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES3_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES3_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES3_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES3_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones4" nls="nlszones4">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES4_1" />
+         <st id="GV2" editor="ZONES4_2" />
+         <st id="GV3" editor="ZONES4_3" />
+         <st id="GV4" editor="ZONES4_4" />
+         <st id="GV5" editor="ZONES4_5" />
+         <st id="GV6" editor="ZONES4_6" />
+         <st id="GV7" editor="ZONES4_7" />
+         <st id="GV8" editor="ZONES4_8" />
+         <st id="GV9" editor="ZONES4_9" />
+         <st id="GV10" editor="ZONES4_10" />
+         <st id="GV11" editor="ZONES4_11" />
+         <st id="GV12" editor="ZONES4_12" />
+         <st id="GV13" editor="ZONES4_13" />
+         <st id="GV14" editor="ZONES4_14" />
+         <st id="GV15" editor="ZONES4_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES4_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES4_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES4_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES4_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES4_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES4_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES4_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES4_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones5" nls="nlszones5">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES5_1" />
+         <st id="GV2" editor="ZONES5_2" />
+         <st id="GV3" editor="ZONES5_3" />
+         <st id="GV4" editor="ZONES5_4" />
+         <st id="GV5" editor="ZONES5_5" />
+         <st id="GV6" editor="ZONES5_6" />
+         <st id="GV7" editor="ZONES5_7" />
+         <st id="GV8" editor="ZONES5_8" />
+         <st id="GV9" editor="ZONES5_9" />
+         <st id="GV10" editor="ZONES5_10" />
+         <st id="GV11" editor="ZONES5_11" />
+         <st id="GV12" editor="ZONES5_12" />
+         <st id="GV13" editor="ZONES5_13" />
+         <st id="GV14" editor="ZONES5_14" />
+         <st id="GV15" editor="ZONES5_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES5_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES5_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES5_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES5_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES5_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES5_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES5_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES5_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones6" nls="nlszones6">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES6_1" />
+         <st id="GV2" editor="ZONES6_2" />
+         <st id="GV3" editor="ZONES6_3" />
+         <st id="GV4" editor="ZONES6_4" />
+         <st id="GV5" editor="ZONES6_5" />
+         <st id="GV6" editor="ZONES6_6" />
+         <st id="GV7" editor="ZONES6_7" />
+         <st id="GV8" editor="ZONES6_8" />
+         <st id="GV9" editor="ZONES6_9" />
+         <st id="GV10" editor="ZONES6_10" />
+         <st id="GV11" editor="ZONES6_11" />
+         <st id="GV12" editor="ZONES6_12" />
+         <st id="GV13" editor="ZONES6_13" />
+         <st id="GV14" editor="ZONES6_14" />
+         <st id="GV15" editor="ZONES6_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES6_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES6_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES6_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES6_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES6_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES6_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES6_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES6_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones7" nls="nlszones7">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES7_1" />
+         <st id="GV2" editor="ZONES7_2" />
+         <st id="GV3" editor="ZONES7_3" />
+         <st id="GV4" editor="ZONES7_4" />
+         <st id="GV5" editor="ZONES7_5" />
+         <st id="GV6" editor="ZONES7_6" />
+         <st id="GV7" editor="ZONES7_7" />
+         <st id="GV8" editor="ZONES7_8" />
+         <st id="GV9" editor="ZONES7_9" />
+         <st id="GV10" editor="ZONES7_10" />
+         <st id="GV11" editor="ZONES7_11" />
+         <st id="GV12" editor="ZONES7_12" />
+         <st id="GV13" editor="ZONES7_13" />
+         <st id="GV14" editor="ZONES7_14" />
+         <st id="GV15" editor="ZONES7_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES7_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES7_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES7_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES7_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES7_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES7_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES7_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES7_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones8" nls="nlszones8">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES8_1" />
+         <st id="GV2" editor="ZONES8_2" />
+         <st id="GV3" editor="ZONES8_3" />
+         <st id="GV4" editor="ZONES8_4" />
+         <st id="GV5" editor="ZONES8_5" />
+         <st id="GV6" editor="ZONES8_6" />
+         <st id="GV7" editor="ZONES8_7" />
+         <st id="GV8" editor="ZONES8_8" />
+         <st id="GV9" editor="ZONES8_9" />
+         <st id="GV10" editor="ZONES8_10" />
+         <st id="GV11" editor="ZONES8_11" />
+         <st id="GV12" editor="ZONES8_12" />
+         <st id="GV13" editor="ZONES8_13" />
+         <st id="GV14" editor="ZONES8_14" />
+         <st id="GV15" editor="ZONES8_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES8_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES8_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES8_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES8_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES8_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES8_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES8_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES8_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="zones9" nls="nlszones9">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ZONES9_1" />
+         <st id="GV2" editor="ZONES9_2" />
+         <st id="GV3" editor="ZONES9_3" />
+         <st id="GV4" editor="ZONES9_4" />
+         <st id="GV5" editor="ZONES9_5" />
+         <st id="GV6" editor="ZONES9_6" />
+         <st id="GV7" editor="ZONES9_7" />
+         <st id="GV8" editor="ZONES9_8" />
+         <st id="GV9" editor="ZONES9_9" />
+         <st id="GV10" editor="ZONES9_10" />
+         <st id="GV11" editor="ZONES9_11" />
+         <st id="GV12" editor="ZONES9_12" />
+         <st id="GV13" editor="ZONES9_13" />
+         <st id="GV14" editor="ZONES9_14" />
+         <st id="GV15" editor="ZONES9_15" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="ZONES9_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ZONES9_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="ZONES9_13" init="GV13" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="ZONES9_10" init="GV10" /> 
+            </cmd> 
+            <cmd id="DehumSetpointDP" > 
+               <p id="" editor="ZONES9_6" init="GV6" /> 
+            </cmd> 
+            <cmd id="DehumSetpointRH" > 
+               <p id="" editor="ZONES9_5" init="GV5" /> 
+            </cmd> 
+            <cmd id="HumSetpointDP" > 
+               <p id="" editor="ZONES9_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="HumSetpointRH" > 
+               <p id="" editor="ZONES9_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="macrozones0" nls="nlsmacrozones0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="MACROZONES0_1" />
+         <st id="GV2" editor="MACROZONES0_2" />
+         <st id="GV3" editor="MACROZONES0_3" />
+         <st id="GV4" editor="MACROZONES0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="macrozones1" nls="nlsmacrozones1">
+      <editors />
+      <sts>
+         <st id="GV1" editor="MACROZONES1_1" />
+         <st id="GV2" editor="MACROZONES1_2" />
+         <st id="GV3" editor="MACROZONES1_3" />
+         <st id="GV4" editor="MACROZONES1_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="MACROZONES1_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="MACROZONES1_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="MACROZONES1_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="macrozones2" nls="nlsmacrozones2">
+      <editors />
+      <sts>
+         <st id="GV1" editor="MACROZONES2_1" />
+         <st id="GV2" editor="MACROZONES2_2" />
+         <st id="GV3" editor="MACROZONES2_3" />
+         <st id="GV4" editor="MACROZONES2_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="MACROZONES2_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="MACROZONES2_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="MACROZONES2_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="macrozones3" nls="nlsmacrozones3">
+      <editors />
+      <sts>
+         <st id="GV1" editor="MACROZONES3_1" />
+         <st id="GV2" editor="MACROZONES3_2" />
+         <st id="GV3" editor="MACROZONES3_3" />
+         <st id="GV4" editor="MACROZONES3_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_SETPOINT" > 
+               <p id="" editor="MACROZONES3_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="MACROZONES3_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_SCHEDULEON" > 
+               <p id="" editor="MACROZONES3_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="atus0" nls="nlsatus0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ATUS0_1" />
+         <st id="GV2" editor="ATUS0_2" />
+         <st id="GV3" editor="ATUS0_3" />
+         <st id="GV4" editor="ATUS0_4" />
+         <st id="GV5" editor="ATUS0_5" />
+         <st id="GV6" editor="ATUS0_6" />
+         <st id="GV7" editor="ATUS0_7" />
+         <st id="GV8" editor="ATUS0_8" />
+         <st id="GV9" editor="ATUS0_9" />
+         <st id="GV10" editor="ATUS0_10" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="ATUS0_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_HRVON" > 
+               <p id="" editor="ATUS0_2" init="GV2" /> 
+            </cmd> 
+            <cmd id="SET_NTDON" > 
+               <p id="" editor="ATUS0_3" init="GV3" /> 
+            </cmd> 
+            <cmd id="SET_INTON" > 
+               <p id="" editor="ATUS0_4" init="GV4" /> 
+            </cmd> 
+            <cmd id="SET_DEHUM_SP_RH" > 
+               <p id="" editor="ATUS0_10" init="GV10" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="EnergyS0" nls="nlsEnergyS0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="ENERGYS0_1" />
+         <st id="GV2" editor="ENERGYS0_2" />
+         <st id="GV3" editor="ENERGYS0_3" />
+         <st id="GV4" editor="ENERGYS0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" /> 
+            <cmd id="UPDATE" /> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="HcCo0" nls="nlsHcCo0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="HCCO0_1" />
+         <st id="GV2" editor="HCCO0_2" />
+         <st id="GV3" editor="HCCO0_3" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_ADAPTIVE_COMFORT" > 
+               <p id="" editor="HCCO0_3" init="GV3" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+   <nodeDef id="BufTanks0" nls="nlsBufTanks0">
+      <editors />
+      <sts>
+         <st id="GV1" editor="BUFTANKS0_1" />
+         <st id="GV2" editor="BUFTANKS0_2" />
+         <st id="GV3" editor="BUFTANKS0_3" />
+         <st id="GV4" editor="BUFTANKS0_4" />
+      </sts>
+      <cmds>
+         <sends>
+         </sends>
+         <accepts>
+            <cmd id="SET_STATUS" /> 
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_MODE" /> 
+            <cmd id="SET_TEMPMODE" /> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
+</nodeDefs> 

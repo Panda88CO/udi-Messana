@@ -3571,15 +3571,15 @@ class messanaInfo:
         bufTankName = self.bufferTankID+str(bufTankNbr)
         return(self.ISYmap[bufTankName][ISYkey]['messana'])
 
-    def bufTankPullKeys(self, bufTankNbr): 
+    def bufferTankPullKeys(self, bufTankNbr): 
         LOGGER.debug('bufTankPullKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
-    def bufTankPushKeys(self, bufTankNbr):
+    def bufferTankPushKeys(self, bufTankNbr):
         LOGGER.debug('bufTankPushKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
   
-    def bufTankActiveKeys(self, bufTankNbr):
+    def bufferTankActiveKeys(self, bufTankNbr):
         LOGGER.debug('bufTankActiveKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))           
 
@@ -3588,10 +3588,10 @@ class messanaInfo:
         keys =[]
         if level == 'all':
             LOGGER.debug('ALL update buffer tank ' + str(bufTankNbr))
-            keys =  self.bufTankPullKeys(bufTankNbr)
+            keys =  self.bufferTankPullKeys(bufTankNbr)
         elif level == 'active':
             LOGGER.debug('ACTIVE update buffer tank ' + str(bufTankNbr))
-            keys =  self.bufTankActiveKeys(bufTankNbr)
+            keys =  self.bufferTankActiveKeys(bufTankNbr)
         
         self.dataOK = True
         for mKey in keys:
@@ -3639,19 +3639,19 @@ class messanaInfo:
                 return(False)
         else:
              return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
-
-    def buffer_tankPullKeys(self, bufTankNbr):
+    '''
+    def bufferTankPullKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankPullKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
-    def buffer_tankPushKeys(self, bufTankNbr):
+    def bufferTankPushKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankPushKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
   
-    def buffer_tankActiveKeys(self, bufTankNbr):
+    def bufferTankActiveKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankActiveKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))    
-    
+    '''
     def getBufferTankCount(self):
         return(self.mSystem[ self.systemID]['data']['mBufTankCount'])
 

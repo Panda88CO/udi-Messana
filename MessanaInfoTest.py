@@ -54,7 +54,7 @@ ISYmap = messana.createISYmapping()
 
 nbrAtus =  messana.getAtuCount()
 for atuNbr in range(0,nbrAtus):
-    #LOGGER.debug('Adding zone ' + str(atuNbr))
+    #print('Adding zone ' + str(atuNbr))
     atu_GETKeys = messana.atuPullKeys(atuNbr)
     atu_PUTKeys = messana.atuPushKeys(atuNbr)
     atu_ActiveKeys = messana.atuActiveKeys(atuNbr)
@@ -74,7 +74,7 @@ for ISYdriver in drivers:
         level = 'active'
         temp = messana.getAtuMessanaISYkey(ISYkey, atuNbr)
         if temp in atu_ActiveKeys:                    
-            #LOGGER.debug('Messana ATU ISYdrivers ACTIVE ' + temp)
+            #print('Messana ATU ISYdrivers ACTIVE ' + temp)
             status, value = messana.getAtuISYValue(ISYkey, atuNbr)
             '''
                 if status:
@@ -82,25 +82,25 @@ for ISYdriver in drivers:
                         self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    print('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                    print('Error getting ' + ISYdriver['driver'])
             '''
         level ='all'
         temp = messana.getAtuMessanaISYkey(ISYkey, atuNbr)
         status, value = messana.getAtuISYValue(ISYkey, atuNbr)
         '''    
-            LOGGER.debug('Messana ATU ISYdrivers ALL ' + temp)
+            print('Messana ATU ISYdrivers ALL ' + temp)
             if status:
                 if self.ISYforced:
                     self.setDriver(ISYdriver, value, report = True, force = False)
                 else:
                     self.setDriver(ISYdriver, value, report = True, force = True)
-                LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                print('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
             else:
-                LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                print('Error getting ' + ISYdriver['driver'])
         else:
-            LOGGER.debug('Error!  Unknow level: ' + level)
+            print('Error!  Unknow level: ' + level)
         '''
 '''
 for ISYdriver in drivers:
@@ -128,13 +128,59 @@ print('SetEnergySave Recived:' + str(val))
 messana.systemSetEnergySave(val)
 
 
+print('buffertank')
 
-print('zones')
+        
 MessanaZone = []
+bufTcount = messana.getBufferTankCount()
+for btNbr in range(0,bufTcount): 
+    drivers = []
+    bufferTank_GETKeys = messana.bufferTankPullKeys(btNbr)
+    bufferTank_PUTKeys = messana.bufferTankPushKeys(btNbr)
+    bufferTank_ActiveKeys = messana.bufferTankActiveKeys(btNbr)
+    for key in bufferTank_GETKeys:
+        temp = messana.getBufferTankISYdriverInfo(key, btNbr)
+        if  temp != {}:
+            #self.drivers.append(self.temp)
+            print('driver:  ' +  temp['driver'])
+    for ISYdriver in drivers:
+                ISYkey = ISYdriver['driver']
+                if level == 'active':
+                    temp = messana.getBufferTankMessanaISYkey(ISYkey, btNbr)
+                    if temp in bufferTank_ActiveKeys:                    
+                        print('Messana BufferTanks ISYdrivers ACTIVE ' + temp)
+                        status, value = messana.getBufferTankISYValue(ISYkey, btNbr)
+                        if status:
+                            '''
+                            if self.ISYforced:
+                                self.setDriver(ISYdriver, value, report = True, force = False)
+                            else:
+                                self.setDriver(ISYdriver, value, report = True, force = True)
+                            '''
+                            print('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        else:
+                            print('Error getting ' + ISYdriver['driver'])
+                elif level == 'all':
+                    temp = messana.getBufferTankMessanaISYkey(ISYkey, btNbr)
+                    status, value = messana.getBufferTankISYValue(ISYkey, btNbr)
+                    print('Messana BufferTanks ISYdrivers ALL ' + temp)
+                    if status:
+                        '''
+                        if self.ISYforced:
+                            self.setDriver(ISYdriver, value, report = True, force = False)
+                        else:
+                            self.setDriver(ISYdriver, value, report = True, force = True)
+                        '''
+                        print('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    else:
+                        print('Error getting ' + ISYdriver['driver'])
+                else:
+                    print('Error!  Unknow level: ' + level)
+
 atuCount = messana.getAtuCount()
 for atuNbr in range(0,atuCount):
     messana.getAtuCapability(atuNbr)
-    messana.updateATUData(atuNbr)
+    messana.updateAtuData('all', atuNbr)
     #atuName = self.atuID+str(atuNbr)
 zoneCount = messana.getZoneCount()
 for zoneNbr in range(0, zoneCount):
@@ -181,7 +227,7 @@ for zoneNbr in range(0, zoneCount):
             ISYkey = ISYdriver['driver']
             temp = messana.getZoneMessanaISYkey(ISYkey, zoneNbr)
             if  temp in zone_ActiveKeys:                    
-                    #LOGGER.debug('Messana Zone ISYdrivers ACTIVE ' + self.messana.getMessanaISYkey(ISYkey, self.zoneNbr))
+                    #print('Messana Zone ISYdrivers ACTIVE ' + self.messana.getMessanaISYkey(ISYkey, self.zoneNbr))
                     status, value = messana.getZoneISYValue(ISYkey, zoneNbr)
 
         print('setEnergySave Called')

@@ -1690,37 +1690,37 @@ class messanaInfo:
             
             for atuNbr in range(0,self.mSystem[ self.systemID]['data']['mATUcount']):
                 self.getAtuCapability(atuNbr)
-                self.updateATUData(atuNbr)
+                self.updateAtuData('all', atuNbr)
                 atuName = self.atuID+str(atuNbr)
                 self.addNodeDefStruct(atuNbr, self.atuID, atuName )
     
             for dhwNbr in range(0,self.mSystem[ self.systemID]['data']['mDHWcount']):
                 self.getDHWCapability(dhwNbr)
-                self.updateDHWData(dhwNbr)
+                self.updateDHWData('all', dhwNbr)
                 dhwName = self.dhwID+str(dhwNbr)
                 self.addNodeDefStruct(dhwNbr, self.dhwID, dhwName )
 
             for fcNbr in range(0,self.mSystem[ self.systemID]['data']['mFanCoilCount']):
                 self.getFanCoilCapability(fcNbr)
-                self.updateFanCoilData(fcNbr)
+                self.updateFanCoilData('all', fcNbr)
                 fcName = self.fcID+str(fcNbr)
                 self.addNodeDefStruct(fcNbr, self.fcID, fcName )
         
             for esNbr in range(0,self.mSystem[ self.systemID]['data']['mEnergySourceCount']):
                 self.getEnergySourceCapability(esNbr)
-                self.updateEnergySourceData(esNbr)
+                self.updateEnergySourceData('all', esNbr)
                 esName =  self.energySaveID+str(esNbr)
                 self.addNodeDefStruct(esNbr,  self.energySaveID, esName )   
 
-            for hccoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
-                self.getHC_COCapability(hccoNbr)
-                self.updateHC_COData(hccoNbr)
-                hccoName = self.HotColdcoID +str(hccoNbr)
-                self.addNodeDefStruct(hccoNbr, self.HotColdcoID , hccoName )          
+            for HcCoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
+                self.getHcCoCapability(HcCoNbr)
+                self.updateHcCoData('all', HcCoNbr)
+                hccoName = self.HotColdcoID +str(HcCoNbr)
+                self.addNodeDefStruct(HcCoNbr, self.HotColdcoID , hccoName )          
             
             for btNbr in range(0,self.mSystem[ self.systemID]['data']['mBufTankCount']):
                 self.getBufferTankCapability(btNbr)
-                self.updateBufferTankData(btNbr)
+                self.updateBufferTankData('all', btNbr)
                 btName = self.bufferTankID+str(btNbr)
                 self.addNodeDefStruct(btNbr, self.bufferTankID, btName )     
             print ('Create Setup file')
@@ -3154,51 +3154,60 @@ class messanaInfo:
 
     ##############################################################
     # Hot Cold Change Over
-    def updateHC_COData(self, HC_CONbr):
-        print('updatHC_COData: ' + str(HC_CONbr))
-        return(self.updateNodeData(HC_CONbr, self.HotColdcoID ))
+    def updateHcCoData(self, level,  HcCoNbr):
+        print('updatHcCoData: ' + str(HcCoNbr))
+        keys =[]
+        if level == 'all':
+            print('ALL update Hot Cold CO ' + str(HcCoNbr))
+            keys =  self.HcCoPullKeys(HcCoNbr)
+        elif level == 'active':
+            print('ACTIVE update Hot Cold CO  ' + str(HcCoNbr))
+            keys =  self.HcCoActiveKeys(HcCoNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullHcCoDataIndividual(HcCoNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
-    def getHC_COCapability(self, HC_CONbr): 
+    def getHcCoCapability(self, HcCoNbr): 
         print('getHC_COCapability')        
-        self.getNodeCapability(self.HotColdcoID , HC_CONbr)
+        self.getNodeCapability(self.HotColdcoID , HcCoNbr)
 
-    def pullHC_CODataIndividual(self, HC_CONbr, mKey): 
-        print('pullHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey))
+    def pullHcCoDataIndividual(self, HcCoNbr, mKey): 
+        print('pullHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey))
 
-    def pushHC_CODataIndividual(self, HC_CONbr, mKey, value):
-        print('pushHC_CODataIndividual: ' +str(HC_CONbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(HC_CONbr, self.HotColdcoID , mKey, value))
+    def pushHcCoDataIndividual(self, HcCoNbr, mKey, value):
+        print('pushHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey + ' ' + str(value))  
+        return(self.pushNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey, value))
 
-    def HcCoPullKeys(self, HC_CONbr):
+    def HcCoPullKeys(self, HcCoNbr):
         print('hc_coPullKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'GETstr'))
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'GETstr'))
 
-    def hc_coPushKeys(self, HC_CONbr):
+    def HcCoPushKeys(self, HcCoNbr):
         print('hc_coPushKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'PUTstr'))
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'PUTstr'))
   
-    def hc_coActiveKeys(self, HC_CONbr):
+    def HcCoActiveKeys(self, HcCoNbr):
         print('hc_coActiveKeys')
-        return( self.getNodeKeys (HC_CONbr, self.HotColdcoID , 'Active'))    
+        return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'Active'))    
 
-    def getHotColdChangeOverCount(self):
+    def getHcCoCount(self):
         return(self.mSystem[ self.systemID]['data']['mhc_coCount'])
 
     ####################################################
     #ATU
-    def updateATUData(self, atuNbr):
-        print('updatATUData: ' + str(atuNbr))
-        return(self.updateNodeData(atuNbr, self.atuID))
-    '''
+    
     def getATUCapability(self, atuNbr): 
         print('getATUCapability')               
         self.getNodeCapability(self.atuID, atuNbr)
-    '''
+    
     def getAtuCapability(self, atuNbr): 
         print('getAtuCapability')             
         self.getNodeCapability(self.atuID, atuNbr)
-
+    
     def updateAtuData(self,  level, atuNbr):
         print('updateAtuData: ' + str(atuNbr))
 
@@ -3215,6 +3224,7 @@ class messanaInfo:
             self.data = self.pullAtuDataIndividual(atuNbr, mKey)
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
+    
 
     def getAtuMessanaISYkey(self, ISYkey, atuNbr):
         atuName = self.atuID+str(atuNbr)
@@ -3460,9 +3470,21 @@ class messanaInfo:
 
     #################################################################
     #Fan Coils
-    def updateFanCoilData(self, FanCoilNbr):
+    def updateFanCoilData(self, level, FanCoilNbr):
         print('updatFanCoilData: ' + str(FanCoilNbr))
-        return(self.updateNodeData(FanCoilNbr, self.fcID))
+        keys =[]
+        if level == 'all':
+            print('ALL update Fan Coil ' + str(FanCoilNbr))
+            keys =  self.fan_coilPullKeys(FanCoilNbr)
+        elif level == 'active':
+            print('ACTIVE update Fan Coil  ' + str(FanCoilNbr))
+            keys =  self.fan_coilActiveKeys(FanCoilNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullFanCoilDataIndividual(FanCoilNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
     def getFanCoilCapability(self, FanCoilNbr): 
         print('getFanCoilCapability')              
@@ -3493,10 +3515,23 @@ class messanaInfo:
 
     #############################################################
     #EnergySources
-    def updateEnergySourceData(self, EnergySourceNbr):
+    def updateEnergySourceData(self, level, EnergySourceNbr):
         print('updatEnergySourceData: ' + str(EnergySourceNbr))
-        return(self.updateNodeData(EnergySourceNbr,  self.energySaveID))
+        keys =[]
+        if level == 'all':
+            print('ALL update Energy Source ' + str(EnergySourceNbr))
+            keys =  self.energy_sourcePullKeys(EnergySourceNbr)
+        elif level == 'active':
+            print('ACTIVE update Energy Source  ' + str(EnergySourceNbr))
+            keys =  self.energy_sourceActiveKeys(EnergySourceNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullEnergySourceDataIndividual(EnergySourceNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
+        
     def getEnergySourceCapability(self, EnergySourceNbr): 
         print('getEnergySourceCapability')          
         self.getNodeCapability( self.energySaveID, EnergySourceNbr)
@@ -3526,55 +3561,196 @@ class messanaInfo:
 
     #####################################################
     #Buffer Tank
-    def updateBufferTankData(self, BufferTankNbr):
-        print('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateNodeData(BufferTankNbr, self.bufferTankID))
-
-    def getBufferTankCapability(self, BufferTankNbr): 
+    
+  
+    def getBufferTankCapability(self, bufTankNbr): 
         print('getBufferTankCapability')              
-        self.getNodeCapability(self.bufferTankID, BufferTankNbr)
+        self.getNodeCapability(self.bufferTankID, bufTankNbr)
 
+    def getBufferTankMessanaISYkey(self, ISYkey, bufTankNbr):
+        bufTankName = self.bufferTankID+str(bufTankNbr)
+        return(self.ISYmap[bufTankName][ISYkey]['messana'])
 
-    def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
-        print('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey))
+    def bufferTankPullKeys(self, bufTankNbr): 
+        print('bufTankPullKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
-    def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
-        print('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
+    def bufferTankPushKeys(self, bufTankNbr):
+        print('bufTankPushKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
+  
+    def bufferTankActiveKeys(self, bufTankNbr):
+        print('bufTankActiveKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))           
+
+    def updateBufferTankData(self,  level, bufTankNbr):
+        print('updateBufferTankData: ' + str(bufTankNbr))
+        keys =[]
+        if level == 'all':
+            print('ALL update buffer tank ' + str(bufTankNbr))
+            keys =  self.bufferTankPullKeys(bufTankNbr)
+        elif level == 'active':
+            print('ACTIVE update buffer tank ' + str(bufTankNbr))
+            keys =  self.bufferTankActiveKeys(bufTankNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullBufferTankDataIndividual(bufTankNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
+            
+
+    def getBufferTankISYValue(self, ISYkey, bufTankNbr):
+        bufTankName = self.bufferTankID+str(bufTankNbr)
+        messanaKey = self.ISYmap[bufTankName][ISYkey]['messana']
+        try:
+            data = self.pullBufferTankDataIndividual(bufTankNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def pullBufferTankDataIndividual(self, bufTankNbr, mKey): 
+        print('pullBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey))
+
+    def pushBufferTankDataIndividual(self, bufTankNbr, mKey, value):
+        print('pushBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, 'mMode')
+            BTdata = self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
+                return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
             else:
                 print('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
+             return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
 
-    def buffer_tankPullKeys(self, BufferTankNbr):
+    def buffer_tankPullKeys(self, bufTankNbr):
         print('buffer_tankPullKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'GETstr'))
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
-    def buffer_tankPushKeys(self, BufferTankNbr):
+    def buffer_tankPushKeys(self, bufTankNbr):
         print('buffer_tankPushKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'PUTstr'))
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
   
-    def buffer_tankActiveKeys(self, BufferTankNbr):
+    def buffer_tankActiveKeys(self, bufTankNbr):
         print('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'Active'))    
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))    
     
     def getBufferTankCount(self):
         return(self.mSystem[ self.systemID]['data']['mBufTankCount'])
+
+
+    def getBufferTankName(self, bufTankNbr):
+        tempName = self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getBufferTankAddress(self, bufTankNbr):
+        return(self.bufferTankID + str(bufTankNbr))
+
+    def getBufferTankISYdriverInfo(self, mKey, bufTankNbr):
+        info = {}
+        bufTankStr = self.bufferTankID+str(bufTankNbr)
+        if mKey in self.setupFile['nodeDef'][bufTankStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][bufTankStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.bufferTankID, bufTankNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][bufTankStr]['sts'][mKey][keys[0]]
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+
+    def bufferTankSetStatus(self, value, bufTankNbr):
+        print ('bufferTankSetStatus')
+        status = self.pushBufferTankDataIndividual(bufTankNbr, 'mStatus', value)
+        return(status)
+ 
+    def getBufferTankStatusISYdriver(self, bufTankNbr):
+        print ('getBufferTankStatusISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+    def bufferTankSetSetMode(self, value, bufTankNbr):
+        print ('bufferTankSetSetMode')
+        status = self.pushAtuDataIndividual(bufTankNbr, 'mMode', value)
+        return(status)
+ 
+    def getBufferTankSetModeISYdriver(self, bufTankNbr):
+        print ('getBufferTankSetModeISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mMode':
+                Key = ISYkey
+        return(Key)  
+    def bufferTankTempStatus(self, value, bufTankNbr):
+        print ('bufferTankTempStatus')
+        status = self.pushAtuDataIndividual(bufTankNbr, 'mTempMode', value)
+        return(status)
+ 
+    def getBufferTankTempStatusISYdriver(self, bufTankNbr):
+        print ('getBufferTankTempStatusISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mTempMode':
+                Key = ISYkey
+        return(Key)  
+  
+
+
+
 
         #Domestic Hot Water
  
     ##################################################################
     # Domestic Hot Water
-    def updateDHWData(self, DHWNbr):
+    def updateDHWData(self, level, DHWNbr):
         print('updatDHWData: ' + str(DHWNbr))
-        return(self.updateNodeData(DHWNbr, self.dhwID))
+        keys =[]
+        if level == 'all':
+            print('ALL update  Domestic Hot Water ' + str(DHWNbr))
+            keys =  self.DHWPullKeys(DHWNbr)
+        elif level == 'active':
+            print('ACTIVE update Domestic Hot Water ' + str(DHWNbr))
+            keys =  self.DHWActiveKeys(DHWNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullDHWDataIndividual(DHWNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
 
     def getDHWCapability(self, DHWNbr): 
         print('getDHWCapability')                      
