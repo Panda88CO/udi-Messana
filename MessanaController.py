@@ -6,7 +6,7 @@ from MessanaInfoPlay import messanaInfo
 from MessanaZone import messanaZone
 from MessanaMacrozone import messanaMacrozone
 from MessanaATU import messanaAtu
-
+from MessanaBufTank import messanaBufTank
 
 
 LOGGER = polyinterface.LOGGER
@@ -223,7 +223,17 @@ class MessanaController(polyinterface.Controller):
             if not atuaddress in self.nodes:
                self.addNode(messanaAtu(self, self.address, atuaddress, atuname, atuNbr))
                
-        
+        LOGGER.debug('discover abuffer tanks')
+        nbrBufferTanks =  self.messana.getBufferTankCount()
+        for bufTankNbr in range(0,nbrBufferTanks):
+            LOGGER.debug('Adding zone ' + str(bufTankNbr))
+            bufTankname = self.messana.getBufferTankName(bufTankNbr)
+            bufTankaddress = self.messana.getBufferTankAddress(bufTankNbr)
+            LOGGER.debug('Buffer Tank' + str(bufTankNbr) + ' : name, Address: ' + bufTankname +' ' + bufTankaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaBufTank(self, self.address, bufTankaddress, bufTankname, bufTankNbr))
+               
+                
         self.nodeDefineDone = True
 
     

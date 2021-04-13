@@ -1450,13 +1450,13 @@ class messanaInfo:
                         }, 
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Set Status'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_MODE'      : { 'ISYtext' :'Update System'
+                                                                       ,'SET_MODE'      : { 'ISYtext' :'Set Mode'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_TEMPMODE'  :{ 'ISYtext' :'Update System'
+                                                                       ,'SET_TEMPMODE'  :{ 'ISYtext' :'Set Temperature Mode'
                                                                                          ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
@@ -3198,7 +3198,7 @@ class messanaInfo:
     def getAtuCapability(self, atuNbr): 
         LOGGER.debug('getAtuCapability')             
         self.getNodeCapability(self.atuID, atuNbr)
-
+    '''
     def updateAtuData(self,  level, atuNbr):
         LOGGER.debug('updateAtuData: ' + str(atuNbr))
 
@@ -3215,6 +3215,7 @@ class messanaInfo:
             self.data = self.pullAtuDataIndividual(atuNbr, mKey)
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
+    '''
 
     def getAtuMessanaISYkey(self, ISYkey, atuNbr):
         atuName = self.atuID+str(atuNbr)
@@ -3526,47 +3527,149 @@ class messanaInfo:
 
     #####################################################
     #Buffer Tank
-    def updateBufferTankData(self, BufferTankNbr):
-        LOGGER.debug('updatBufferTankData: ' + str(BufferTankNbr))
-        return(self.updateNodeData(BufferTankNbr, self.bufferTankID))
+    def updateBufferTankData(self, bufTankNbr):
+        LOGGER.debug('updatBufferTankData: ' + str(bufTankNbr))
+        return(self.updateNodeData(bufTankNbr, self.bufferTankID))
 
-    def getBufferTankCapability(self, BufferTankNbr): 
+    def getBufferTankCapability(self, bufTankNbr): 
         LOGGER.debug('getBufferTankCapability')              
-        self.getNodeCapability(self.bufferTankID, BufferTankNbr)
+        self.getNodeCapability(self.bufferTankID, bufTankNbr)
 
+    def getBufferTankMessanaISYkey(self, ISYkey, bufTankNbr):
+        bufTankName = self.bufferTankID+str(bufTankNbr)
+        return(self.ISYmap[bufTankName][ISYkey]['messana'])
 
-    def pullBufferTankDataIndividual(self, BufferTankNbr, mKey): 
-        LOGGER.debug('pullBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey))
+    def getBufferTankISYValue(self, ISYkey, bufTankNbr):
+        bufTankName = self.bufferTankID+str(bufTankNbr)
+        messanaKey = self.ISYmap[bufTankName][ISYkey]['messana']
+        try:
+            data = self.pullBufferTankDataIndividual(bufTankNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
 
-    def pushBufferTankDataIndividual(self, BufferTankNbr, mKey, value):
-        LOGGER.debug('pushBufferTankDataIndividual: ' +str(BufferTankNbr)  + ' ' + mKey + ' ' + str(value))  
+    def pullBufferTankDataIndividual(self, bufTankNbr, mKey): 
+        LOGGER.debug('pullBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey)    
+        return(self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey))
+
+    def pushBufferTankDataIndividual(self, bufTankNbr, mKey, value):
+        LOGGER.debug('pushBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
-            BTdata = self.pullNodeDataIndividual(BufferTankNbr, self.bufferTankID, 'mMode')
+            BTdata = self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, 'mMode')
             if BTdata['data'] != 0:
-                return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
+                return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
             else:
                 LOGGER.debug('Mode = 0, Cannot set status if mode = 0')
                 return(False)
         else:
-             return(self.pushNodeDataIndividual(BufferTankNbr, self.bufferTankID, mKey, value))
+             return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
 
-    def buffer_tankPullKeys(self, BufferTankNbr):
+    def buffer_tankPullKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankPullKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'GETstr'))
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
-    def buffer_tankPushKeys(self, BufferTankNbr):
+    def buffer_tankPushKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankPushKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'PUTstr'))
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
   
-    def buffer_tankActiveKeys(self, BufferTankNbr):
+    def buffer_tankActiveKeys(self, bufTankNbr):
         LOGGER.debug('buffer_tankActiveKeys')
-        return( self.getNodeKeys (BufferTankNbr, self.bufferTankID, 'Active'))    
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))    
     
     def getBufferTankCount(self):
         return(self.mSystem[ self.systemID]['data']['mBufTankCount'])
+
+
+    def getBufferTankName(self, bufTankNbr):
+        tempName = self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getBufferTankAddress(self, bufTankNbr):
+        return(self.bufferTankID + str(bufTankNbr))
+
+    def getBufferTankISYdriverInfo(self, mKey, bufTankNbr):
+        info = {}
+        bufTankStr = self.bufferTankID+str(bufTankNbr)
+        if mKey in self.setupFile['nodeDef'][bufTankStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][bufTankStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.bufferTankID, bufTankNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][bufTankStr]['sts'][mKey][keys[0]]
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
+
+    def bufferTankSetStatus(self, value, bufTankNbr):
+        LOGGER.debug ('bufferTankSetStatus')
+        status = self.pushBufferTankDataIndividual(bufTankNbr, 'mStatus', value)
+        return(status)
+ 
+    def getBufferTankStatusISYdriver(self, bufTankNbr):
+        LOGGER.debug ('getBufferTankStatusISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+    def bufferTankSetSetMode(self, value, bufTankNbr):
+        LOGGER.debug ('bufferTankSetSetMode')
+        status = self.pushAtuDataIndividual(bufTankNbr, 'mMode', value)
+        return(status)
+ 
+    def getBufferTankSetModeISYdriver(self, bufTankNbr):
+        LOGGER.debug ('getBufferTankSetModeISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mMode':
+                Key = ISYkey
+        return(Key)  
+    def bufferTankTempStatus(self, value, bufTankNbr):
+        LOGGER.debug ('bufferTankTempStatus')
+        status = self.pushAtuDataIndividual(bufTankNbr, 'mTempMode', value)
+        return(status)
+ 
+    def getBufferTankTempStatusISYdriver(self, bufTankNbr):
+        LOGGER.debug ('getBufferTankTempStatusISYdriver called')
+        Key = ''
+        bufTankName = self.atuID+str(bufTankNbr)
+        for ISYkey in self.ISYmap[bufTankName]:
+            if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mTempMode':
+                Key = ISYkey
+        return(Key)  
+  
+
+
+
 
         #Domestic Hot Water
  

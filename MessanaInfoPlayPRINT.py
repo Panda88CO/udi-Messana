@@ -1450,13 +1450,13 @@ class messanaInfo:
                         }, 
                         self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Set Status'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_MODE'      : { 'ISYtext' :'Update System'
+                                                                       ,'SET_MODE'      : { 'ISYtext' :'Set Mode'
                                                                                          ,'ISYeditor' : None }
-                                                                       ,'SET_TEMPMODE'  :{ 'ISYtext' :'Update System'
+                                                                       ,'SET_TEMPMODE'  :{ 'ISYtext' :'Set Temperature Mode'
                                                                                          ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
@@ -3314,14 +3314,14 @@ class messanaInfo:
   
     def atuSetHrv(self, value, atuNbr):
         print ('atuSetHRV called')
-        status = self.pushAtuDataIndividual(atuNbr, 'mHRV', value)
+        status = self.pushAtuDataIndividual(atuNbr, 'mHRVOn', value)
         return(status)
 
     def getAtuHrvISYdriver(self, atuNbr):
         print ('getAtuHrvISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
-            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRV':
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRVOn':
                 Key = ISYkey
         return(Key)  
 
@@ -3415,6 +3415,20 @@ class messanaInfo:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointRH':
                 Key = ISYkey
         return(Key)  
+
+
+    def atuSetDehumSetpointDP(self, value, atuNbr):
+        print ('atuSetDehumSetpointDP called')
+        status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointDP', value)
+        return(status)
+
+    def getAtuSetDehumSetpointDPISYdriver(self, atuNbr):
+        print ('getAtuSetDehumSetpointDPISYdriver called')
+        atuName = self.atuID+str(atuNbr)
+        for ISYkey in self.ISYmap[atuName]:
+            if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointDP':
+                Key = ISYkey
+        return(Key)
 
     def atuSetCurrentSetpointRH(self, value, atuNbr):
         print ('atuSetCurrentSetpointRH called')
