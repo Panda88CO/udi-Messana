@@ -1690,37 +1690,37 @@ class messanaInfo:
             
             for atuNbr in range(0,self.mSystem[ self.systemID]['data']['mATUcount']):
                 self.getAtuCapability(atuNbr)
-                self.updateATUData(atuNbr)
+                self.updateAtuData('all', atuNbr)
                 atuName = self.atuID+str(atuNbr)
                 self.addNodeDefStruct(atuNbr, self.atuID, atuName )
     
             for dhwNbr in range(0,self.mSystem[ self.systemID]['data']['mDHWcount']):
                 self.getDHWCapability(dhwNbr)
-                self.updateDHWData(dhwNbr)
+                self.updateDHWData('all', dhwNbr)
                 dhwName = self.dhwID+str(dhwNbr)
                 self.addNodeDefStruct(dhwNbr, self.dhwID, dhwName )
 
             for fcNbr in range(0,self.mSystem[ self.systemID]['data']['mFanCoilCount']):
                 self.getFanCoilCapability(fcNbr)
-                self.updateFanCoilData(fcNbr)
+                self.updateFanCoilData('all', fcNbr)
                 fcName = self.fcID+str(fcNbr)
                 self.addNodeDefStruct(fcNbr, self.fcID, fcName )
         
             for esNbr in range(0,self.mSystem[ self.systemID]['data']['mEnergySourceCount']):
                 self.getEnergySourceCapability(esNbr)
-                self.updateEnergySourceData(esNbr)
+                self.updateEnergySourceData('all', esNbr)
                 esName =  self.energySaveID+str(esNbr)
                 self.addNodeDefStruct(esNbr,  self.energySaveID, esName )   
 
             for hccoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
                 self.getHC_COCapability(hccoNbr)
-                self.updateHC_COData(hccoNbr)
+                self.updateHC_COData('all', hccoNbr)
                 hccoName = self.HotColdcoID +str(hccoNbr)
                 self.addNodeDefStruct(hccoNbr, self.HotColdcoID , hccoName )          
             
             for btNbr in range(0,self.mSystem[ self.systemID]['data']['mBufTankCount']):
                 self.getBufferTankCapability(btNbr)
-                self.updateBufferTankData(btNbr)
+                self.updateBufferTankData('all', btNbr)
                 btName = self.bufferTankID+str(btNbr)
                 self.addNodeDefStruct(btNbr, self.bufferTankID, btName )     
             LOGGER.debug ('Create Setup file')
@@ -3187,10 +3187,11 @@ class messanaInfo:
 
     ####################################################
     #ATU
+    '''
     def updateATUData(self, atuNbr):
         LOGGER.debug('updatATUData: ' + str(atuNbr))
         return(self.updateNodeData(atuNbr, self.atuID))
-    '''
+    
     def getATUCapability(self, atuNbr): 
         LOGGER.debug('getATUCapability')               
         self.getNodeCapability(self.atuID, atuNbr)
@@ -3527,10 +3528,8 @@ class messanaInfo:
 
     #####################################################
     #Buffer Tank
-    def updateBufferTankData(self, bufTankNbr):
-        LOGGER.debug('updatBufferTankData: ' + str(bufTankNbr))
-        return(self.updateNodeData(bufTankNbr, self.bufferTankID))
-
+    
+  
     def getBufferTankCapability(self, bufTankNbr): 
         LOGGER.debug('getBufferTankCapability')              
         self.getNodeCapability(self.bufferTankID, bufTankNbr)
@@ -3551,20 +3550,20 @@ class messanaInfo:
         LOGGER.debug('bufTankActiveKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))           
 
-    def updateBufferTankData(self,  level, atuNbr):
-        LOGGER.debug('updateBufferTankData: ' + str(atuNbr))
+    def updateBufferTankData(self,  level, bufTankNbr):
+        LOGGER.debug('updateBufferTankData: ' + str(bufTankNbr))
 
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update atu ' + str(atuNbr))
-            keys =  self.bufferTankPullKeys(atuNbr)
+            LOGGER.debug('ALL update buffer tank ' + str(bufTankNbr))
+            keys =  self.bufTankPullKeys(bufTankNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update atu ' + str(atuNbr))
-            keys =  self.atuActiveKeys(atuNbr)
+            LOGGER.debug('ACTIVE update buffer tank ' + str(bufTankNbr))
+            keys =  self.bufTankActiveKeys(bufTankNbr)
         
         self.dataOK = True
         for mKey in keys:
-            self.data = self.pullAtuDataIndividual(atuNbr, mKey)
+            self.data = self.pullBufferTankDataIndividual(bufTankNbr, mKey)
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
             
