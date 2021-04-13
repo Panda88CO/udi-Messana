@@ -1491,7 +1491,7 @@ class messanaInfo:
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                        }
                                                     }
-                                         ,'mMode' : {                                             
+                                        ,'mMode' : {                                             
                                              'GETstr':'/api/bufferTank/mode/'
                                             ,'PUTstr':'/api/bufferTank/mode/'                
                                             ,'Active': None 
@@ -1507,7 +1507,7 @@ class messanaInfo:
                                                     ,'nlsValues' : {0:'Manual', 1:'Automatic' }
                                                        }
                                                     }                           
-                                          ,'mTempMode' : {                                             
+                                        ,'mTempMode' : {                                             
                                              'GETstr':'/api/bufferTank/tempMode/'
                                             ,'PUTstr':'/api/bufferTank/tempMode/'                
                                             ,'Active': None 
@@ -1522,7 +1522,23 @@ class messanaInfo:
                                                      'nlsTEXT' : 'Buffer Tank Tempperature Mode'
                                                     ,'nlsValues' : {0:'Fixed Temp', 1:'Follow Loads', 2:'Outdoor Temp Compensation' }
                                                        }
-                                                    }                                               
+                                                    }   
+                                        ,'mTemp':{                                            
+                                             'GETstr': '/api/atu/airTemperature/'
+                                            ,'PUTstr': None
+                                            ,'Active': '/api/atu/airTemperature/'
+                                            ,'ISYeditor':{
+                                                     'ISYuom':17
+                                                    ,'ISYmin':40
+                                                    ,'ISYmax':120
+                                                    ,'ISYsubset':None
+                                                    ,'ISYstep':1
+                                                    ,'ISYprec':0}
+                                            , 'ISYnls': {    
+                                                     'nlsTEXT' : 'Buffer Tank Temperature' 
+                                                     ,'nlsValues' : None 
+                                                        }
+                                                   }                                            
                                          ,'mAlarmOn' : {                                             
                                              'GETstr':'/api/bufferTank/alarmOn/'
                                             ,'PUTstr':None              
@@ -3639,19 +3655,7 @@ class messanaInfo:
                 return(False)
         else:
              return(self.pushNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey, value))
-
-    def buffer_tankPullKeys(self, bufTankNbr):
-        print('buffer_tankPullKeys')
-        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
-
-    def buffer_tankPushKeys(self, bufTankNbr):
-        print('buffer_tankPushKeys')
-        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
-  
-    def buffer_tankActiveKeys(self, bufTankNbr):
-        print('buffer_tankActiveKeys')
-        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))    
-    
+ 
     def getBufferTankCount(self):
         return(self.mSystem[ self.systemID]['data']['mBufTankCount'])
 

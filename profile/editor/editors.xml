@@ -591,6 +591,9 @@
      <range  uom="25" subset="0-2" nls="BUFTANKS0_3" />
 </editor>
   <editor id = "BUFTANKS0_4" > 
-     <range  uom="25" subset="0-1" nls="BUFTANKS0_4" />
+     <range  uom="17" min="40" max="120" step="1" prec="0" />
+</editor>
+  <editor id = "BUFTANKS0_5" > 
+     <range  uom="25" subset="0-1" nls="BUFTANKS0_5" />
 </editor>
 </editors> 

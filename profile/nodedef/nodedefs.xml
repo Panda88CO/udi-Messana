@@ -713,6 +713,7 @@
          <st id="GV2" editor="BUFTANKS0_2" />
          <st id="GV3" editor="BUFTANKS0_3" />
          <st id="GV4" editor="BUFTANKS0_4" />
+         <st id="GV5" editor="BUFTANKS0_5" />
       </sts>
       <cmds>
          <sends>

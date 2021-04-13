@@ -103,7 +103,6 @@ class messanaBufTank(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
 
-
     def setMode(self, command):
         LOGGER.debug('setMode Called')
         value = int(command.get('value'))

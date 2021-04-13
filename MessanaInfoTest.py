@@ -133,6 +133,7 @@ print('buffertank')
         
 MessanaZone = []
 bufTcount = messana.getBufferTankCount()
+level = 'all'
 for btNbr in range(0,bufTcount): 
     drivers = []
     bufferTank_GETKeys = messana.bufferTankPullKeys(btNbr)
@@ -141,7 +142,7 @@ for btNbr in range(0,bufTcount):
     for key in bufferTank_GETKeys:
         temp = messana.getBufferTankISYdriverInfo(key, btNbr)
         if  temp != {}:
-            #self.drivers.append(self.temp)
+            drivers.append(temp)
             print('driver:  ' +  temp['driver'])
     for ISYdriver in drivers:
                 ISYkey = ISYdriver['driver']
