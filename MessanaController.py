@@ -226,7 +226,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover abuffer tanks')
         nbrBufferTanks =  self.messana.getBufferTankCount()
         for bufTankNbr in range(0,nbrBufferTanks):
-            LOGGER.debug('Adding zone ' + str(bufTankNbr))
+            LOGGER.debug('Adding buffer ' + str(bufTankNbr))
             bufTankname = self.messana.getBufferTankName(bufTankNbr)
             bufTankaddress = self.messana.getBufferTankAddress(bufTankNbr)
             LOGGER.debug('Buffer Tank' + str(bufTankNbr) + ' : name, Address: ' + bufTankname +' ' + bufTankaddress) 

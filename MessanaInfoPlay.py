@@ -3198,7 +3198,7 @@ class messanaInfo:
     def getAtuCapability(self, atuNbr): 
         LOGGER.debug('getAtuCapability')             
         self.getNodeCapability(self.atuID, atuNbr)
-    '''
+    
     def updateAtuData(self,  level, atuNbr):
         LOGGER.debug('updateAtuData: ' + str(atuNbr))
 
@@ -3215,7 +3215,7 @@ class messanaInfo:
             self.data = self.pullAtuDataIndividual(atuNbr, mKey)
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
-    '''
+    
 
     def getAtuMessanaISYkey(self, ISYkey, atuNbr):
         atuName = self.atuID+str(atuNbr)
@@ -3538,6 +3538,36 @@ class messanaInfo:
     def getBufferTankMessanaISYkey(self, ISYkey, bufTankNbr):
         bufTankName = self.bufferTankID+str(bufTankNbr)
         return(self.ISYmap[bufTankName][ISYkey]['messana'])
+
+    def bufTankPullKeys(self, bufTankNbr): 
+        LOGGER.debug('bufTankPullKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
+
+    def bufTankPushKeys(self, bufTankNbr):
+        LOGGER.debug('bufTankPushKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
+  
+    def bufTankActiveKeys(self, bufTankNbr):
+        LOGGER.debug('bufTankActiveKeys')
+        return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))           
+
+    def updateBufferTankData(self,  level, atuNbr):
+        LOGGER.debug('updateBufferTankData: ' + str(atuNbr))
+
+        keys =[]
+        if level == 'all':
+            LOGGER.debug('ALL update atu ' + str(atuNbr))
+            keys =  self.bufferTankPullKeys(atuNbr)
+        elif level == 'active':
+            LOGGER.debug('ACTIVE update atu ' + str(atuNbr))
+            keys =  self.atuActiveKeys(atuNbr)
+        
+        self.dataOK = True
+        for mKey in keys:
+            self.data = self.pullAtuDataIndividual(atuNbr, mKey)
+            self.dataOK = self.dataOK and self.data['statusOK']
+        return(self.dataOK)
+            
 
     def getBufferTankISYValue(self, ISYkey, bufTankNbr):
         bufTankName = self.bufferTankID+str(bufTankNbr)
