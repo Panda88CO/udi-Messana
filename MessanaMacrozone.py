@@ -78,13 +78,13 @@ class messanaMacrozone(polyinterface.Node):
         LOGGER.debug('stop - Messana Zone Cleaning up')
 
     def shortPoll(self):
-        LOGGER.debug('Messana Zone shortPoll - zone '+ str(self.macrozoneNbr))
+        LOGGER.debug('Messana Macrozone shortPoll - zone '+ str(self.macrozoneNbr))
         #self.messana.updateMacrozoneData('active', self.macrozoneNbr)
         self.updateISYdrivers('active')
         self.reportDrivers()
                    
     def longPoll(self):
-        LOGGER.debug('Messana Zone longPoll - zone ' + str(self.macrozoneNbr))
+        LOGGER.debug('Messana Macrozone longPoll - zone ' + str(self.macrozoneNbr))
         #self.messana.updateMacrozoneData('all', self.macrozoneNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
