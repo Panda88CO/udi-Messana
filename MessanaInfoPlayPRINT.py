@@ -3256,10 +3256,11 @@ class messanaInfo:
 
     ####################################################
     #ATU
-    
+    '''
     def getATUCapability(self, atuNbr): 
         print('getATUCapability')               
         self.getNodeCapability(self.atuID, atuNbr)
+    '''
     
     def getAtuCapability(self, atuNbr): 
         print('getAtuCapability')             
