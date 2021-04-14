@@ -1448,7 +1448,7 @@ class messanaInfo:
                                         ,'GETkeysList' : {}
                                         ,'PUTkeysList' : {}
                         }, 
-                        self.bufferTankID: {'ISYnode':{   'nlsICON' :'GenericCtl'
+                        self.bufferTankID: {'ISYnode':{  'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Set Status'
                                                                                          ,'ISYeditor' : None }
