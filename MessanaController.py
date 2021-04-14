@@ -27,7 +27,6 @@ class MessanaController(polyinterface.Controller):
         self.ISYdrivers=[]
         self.ISYcommands = {}
         self.ISYTempUnit = 0
-        #self.id = self.name
         self.drivers = []
         self.nodeDefineDone = False
 
@@ -225,13 +224,13 @@ class MessanaController(polyinterface.Controller):
                
         LOGGER.debug('discover buffer tanks')
         nbrBufferTanks =  self.messana.getBufferTankCount()
-        for bufTankNbr in range(0,nbrBufferTanks):
-            LOGGER.debug('Adding buffer tank ' + str(bufTankNbr))
-            bufTankname = self.messana.getBufferTankName(bufTankNbr)
-            bufTankaddress = self.messana.getBufferTankAddress(bufTankNbr)
-            LOGGER.debug('Buffer Tank' + str(bufTankNbr) + ' : name, Address: ' + bufTankname +' ' + bufTankaddress) 
-            if not atuaddress in self.nodes:
-               self.addNode(messanaBufTank(self, self.address, bufTankaddress, bufTankname, bufTankNbr))
+        for bufferTankNbr in range(0,nbrBufferTanks):
+            LOGGER.debug('Adding buffer tank ' + str(bufferTankNbr))
+            bufferTankName = self.messana.getBufferTankName(bufferTankNbr)
+            bufferTankAddress = self.messana.getBufferTankAddress(bufferTankNbr)
+            LOGGER.debug('Buffer Tank' + str(bufferTankNbr) + ' : name, Address: ' + bufferTankName +' ' + bufferTankAddress) 
+            if not bufferTankAddress in self.nodes:
+               self.addNode(messanaBufTank(self, self.address, bufferTankAddress, bufferTankName, bufferTankNbr))
                
                 
         self.nodeDefineDone = True
