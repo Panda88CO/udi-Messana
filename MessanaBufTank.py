@@ -25,7 +25,9 @@ class messanaBufTank(polyinterface.Node):
         
         self.drivers = []
         for key in self.bufferTank_GETKeys:
+            LOGGER.debug('Buffer driver loop ' + key)
             self.temp = self.messana.getBufferTankISYdriverInfo(key, self.bufferTankNbr)
+            LOGGER.debug('Buffer Tank driver ' + str(self.temp))
             if  self.temp != {}:
                 self.drivers.append(self.temp)
                 LOGGER.debug(  'driver:  ' +  self.temp['driver'])
@@ -34,8 +36,6 @@ class messanaBufTank(polyinterface.Node):
         self.ISYforced = True
        
     def start(self):
-
-
         return True
 
 
@@ -128,6 +128,4 @@ class messanaBufTank(polyinterface.Node):
                 ,'SET_STATUS': setStatus
                 ,'SET_TEMPMODE' : bufTankTempStatus
                 }
-
-    drivers = [  ]
 
