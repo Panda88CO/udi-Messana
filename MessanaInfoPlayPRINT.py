@@ -10,7 +10,7 @@ from collections import defaultdict
 
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, mISYcontrollerName):
-        # Note all xxIDs must be lower case qwithout special characters
+        # Note all xxIDs must be lower case without special characters (ISY requirement)
         self.systemID = mISYcontrollerName
         self.zoneID = 'zones'
         self.macrozoneID = 'macrozones'
