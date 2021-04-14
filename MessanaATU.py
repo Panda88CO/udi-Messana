@@ -93,7 +93,6 @@ class messanaAtu(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
  
-
     def atuUpdate(self, command):
         LOGGER.debug(' atuUpdate ')
         self.messana.updateAtuData('all', self.atuNbr)

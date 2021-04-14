@@ -23,12 +23,12 @@ class messanaBufTank(polyinterface.Node):
         
         self.drivers = []
         for key in self.bufferTank_GETKeys:
-            LOGGER.debug('Buffer driver loop ' + key)
+            #LOGGER.debug('Buffer driver loop ' + key)
             self.temp = self.messana.getBufferTankISYdriverInfo(key, self.bufferTankNbr)
             #LOGGER.debug('Buffer Tank driver ' + str(self.temp))
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
         self.messana.updateBufferTankData('all', self.bufferTankNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
