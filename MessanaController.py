@@ -201,7 +201,7 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + zonename +' ' + zoneaddress) 
             if not zoneaddress in self.nodes:
                self.addNode(messanaZone(self, self.address, zoneaddress, zonename, zoneNbr))
-        '''
+        
         LOGGER.debug('discover macrozones')
         nbrMacrozones =  self.messana.getMacrozoneCount()
         for macrozoneNbr in range(0,nbrMacrozones):
@@ -211,7 +211,7 @@ class MessanaController(polyinterface.Controller):
             LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + macrozonename +' ' + macrozoneaddress) 
             if not macrozoneaddress in self.nodes:
                self.addNode(messanaMacrozone(self, self.address, macrozoneaddress, macrozonename, macrozoneNbr))
-        '''
+        
         LOGGER.debug('discover atus')
         nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):
