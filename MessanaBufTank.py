@@ -11,12 +11,12 @@ LOGGER = polyinterface.LOGGER
 class messanaBufTank(polyinterface.Node):
     def __init__(self, controller, primary, address, name,  bufferTankNbr):
         super().__init__(controller, primary, address, name)
-        LOGGER.info('_init_ Messana BufferTanks ' + str(bufTankNbr) )
+        LOGGER.info('_init_ Messana BufferTanks ' + str(bufferTankNbr) )
         self.bufferTankNbr = bufferTankNbr
         self.name = name
         self.address = address 
         self.messana = self.parent.messana
-        self.id = self.messana.getBufferTankAddress(bufTankNbr)
+        self.id = self.messana.getBufferTankAddress(bufferTankNbr)
 
         self.bufferTank_GETKeys = self.messana.bufferTankPullKeys(self.bufferTankNbr)
         self.bufferTank_PUTKeys = self.messana.bufferTankPushKeys(self.bufferTankNbr)
