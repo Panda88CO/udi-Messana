@@ -10,14 +10,14 @@ LOGGER = polyinterface.LOGGER
 
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, mISYcontrollerName):
-        
+        # Note all xxIDs must be lower case qwithout special characters
         self.systemID = mISYcontrollerName
         self.zoneID = 'zones'
         self.macrozoneID = 'macrozones'
         self.atuID = 'atus'
         self.dhwID = 'domhw'
         self.fcID = 'fancoils'
-        self.energySaveID =  'energysys'
+        self.energySourceID =  'energysys'
         self.HotColdcoID = 'hcco'
         self.bufferTankID = 'buftanks'
         self.supportedNodeList = [
@@ -26,7 +26,7 @@ class messanaInfo:
                             ,self.atuID
                             ,self.dhwID
                             ,self.fcID
-                            ,self.energySaveID
+                            ,self.energySourceID
                             ,self.HotColdcoID 
                             ,self.bufferTankID
                             ] 
@@ -812,9 +812,9 @@ class messanaInfo:
                                                         ,'accepts' : {  'UPDATE':  { 'ISYtext'   :'Update System'
                                                                                     ,'ISYeditor' : None } 
                                                                        ,'SET_MODE': { 'ISYtext' :'Set Mode'
-                                                                                     ,'ISYeditor' : 'mMode' }
+                                                                                    ,'ISYeditor' : 'mMode' }
                                                                        ,'SET_ADAPTIVE_COMFORT' :{ 'ISYtext' :'Adaptive System'
-                                                                                        ,'ISYeditor' : 'mAdaptiveComfort' } }
+                                                                                    ,'ISYeditor' : 'mAdaptiveComfort' } }
                                                         }
                                     ,'KeyInfo' : {
                                          'mName':{
@@ -1354,11 +1354,9 @@ class messanaInfo:
                                         ,'GETkeysList' : {}
                                         ,'PUTkeysList' : {}     
                         },
-                         self.energySaveID:{'ISYnode':{   'nlsICON' :'GenericCtl'
+                         self.energySourceID:{'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
-                                                                                       ,'ISYeditor' : None }
-                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
+                                                        ,'accepts' : {  'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }}
                                                                         }
                                     ,'KeyInfo' : {  
@@ -1389,7 +1387,7 @@ class messanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Status'
+                                                     'nlsTEXT' : 'Energy Source Status'
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                        }
                                                     }
@@ -1405,7 +1403,7 @@ class messanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Status'
+                                                     'nlsTEXT' : 'Domestic Hot Water Status'
                                                     ,'nlsValues' : {0:'Off', 1:'On' }
                                                        }
                                                     }
@@ -1421,7 +1419,7 @@ class messanaInfo:
                                                     ,'ISYstep':None
                                                     ,'ISYprec':None }
                                             ,'ISYnls': {    
-                                                     'nlsTEXT' : 'ATU Status'
+                                                     'nlsTEXT' : 'Energy Source Type'
                                                     ,'nlsValues' : {0:'Broiler', 1:' H.P. Cooling Only'
                                                                     , 2: 'H.P. Heating Only', 3:'H.P. Heating and Cooling' }
                                                        }
@@ -1451,13 +1449,13 @@ class messanaInfo:
                         self.bufferTankID: {'ISYnode':{  'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
                                                         ,'accepts' : {  'SET_STATUS'    : { 'ISYtext' :'Set Status'
-                                                                                         ,'ISYeditor' : None }
+                                                                                         ,'ISYeditor' : 'mStatus' }
                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
                                                                                          ,'ISYeditor' : None }
                                                                        ,'SET_MODE'      : { 'ISYtext' :'Set Mode'
-                                                                                         ,'ISYeditor' : None }
+                                                                                         ,'ISYeditor' : 'mMode' }
                                                                        ,'SET_TEMPMODE'  :{ 'ISYtext' :'Set Temperature Mode'
-                                                                                         ,'ISYeditor' : None }}
+                                                                                         ,'ISYeditor' : 'mTempMode' }}
                                                                         }
                                     ,'KeyInfo' : {  
                                         'mName':{
@@ -1563,12 +1561,12 @@ class messanaInfo:
                         },
                         self.dhwID: { 'ISYnode':{   'nlsICON' :'GenericCtl'
                                                         ,'sends'   : []
-                                                        ,'accepts' : {  'SET_STATUS': { 'ISYtext' :'Update System'
+                                                        ,'accepts' : {  'SET_STATUS'     : { 'ISYtext' :'Hot Water Status'
+                                                                                         ,'ISYeditor' : 'mStatus' }                                                      
+                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update Hot Water System'
                                                                                          ,'ISYeditor' : None }
-                                                                        ,'UPDATE'        : { 'ISYtext'   :'Update System'
-                                                                                         ,'ISYeditor' : None }
-                                                                        ,'SET_TARGETTEMP': { 'ISYtext' :'Update System'
-                                                                                         ,'ISYeditor' : None }}
+                                                                        ,'SET_TARGETTEMP': { 'ISYtext' :'Target Temperature'
+                                                                                         ,'ISYeditor' : 'mTargetTemp' }}
                                                             }
                                     ,'KeyInfo' : {  
                                         'mName':{
@@ -1725,8 +1723,8 @@ class messanaInfo:
             for esNbr in range(0,self.mSystem[ self.systemID]['data']['mEnergySourceCount']):
                 self.getEnergySourceCapability(esNbr)
                 self.updateEnergySourceData('all', esNbr)
-                esName =  self.energySaveID+str(esNbr)
-                self.addNodeDefStruct(esNbr,  self.energySaveID, esName )   
+                esName =  self.energySourceID+str(esNbr)
+                self.addNodeDefStruct(esNbr,  self.energySourceID, esName )   
 
             for HcCoNbr in range(0,self.mSystem[ self.systemID]['data']['mhc_coCount']):
                 self.getHcCoCapability(HcCoNbr)
@@ -3118,10 +3116,10 @@ class messanaInfo:
  
 
     def getMacrozoneStatusISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneStatusISYdriver called for zone: '+str(macrozoneNbr))
+        LOGGER.debug('getMacrozoneStatusISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
-        macrozoneName = self.zoneID+str(macrozoneNbr)
+        macrozoneName = self.macrozoneID+str(macrozoneNbr)
         for ISYkey in self.ISYmap[macrozoneName]:
             if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
@@ -3136,10 +3134,10 @@ class messanaInfo:
         return(status)
 
     def getMacrozoneSetPointISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneSetpointISYdriver called for zone: '+str(macrozoneNbr))
+        LOGGER.debug('getMacrozoneSetpointISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
-        macrozoneName = self.zoneID+str(macrozoneNbr)
+        macrozoneName = self.macrozoneID+str(macrozoneNbr)
         for ISYkey in self.ISYmap[macrozoneName]:
             if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mSetpoint':
                 Key = ISYkey
@@ -3154,10 +3152,10 @@ class messanaInfo:
 
 
     def getMacrozoneEnableScheduleISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneEnableScheduleISYdriver called for zone: '+str(macrozoneNbr))
+        LOGGER.debug('getMacrozoneEnableScheduleISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
-        macrozoneName = self.zoneID+str(macrozoneNbr)
+        macrozoneName = self.macrozoneID+str(macrozoneNbr)
         for ISYkey in self.ISYmap[macrozoneName]:
             if self.ISYmap[macrozoneName][ISYkey]['messana'] == 'mScheduleOn':
                 Key = ISYkey
@@ -3212,6 +3210,49 @@ class messanaInfo:
 
     def getHcCoCount(self):
         return(self.mSystem[ self.systemID]['data']['mhc_coCount'])
+        
+    def getHcCoName(self, HcCoNbr):
+        tempName = self.pullNodeDataIndividual(HcCoNbr, self.HotColdcoID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getHcCoAddress(self, HcCoNbr):
+        return(self.HotColdcoID + str(HcCoNbr))
+
+
+    def HcCoSetMode(self, value, HcCoNbr):
+        LOGGER.debug('HcCoSetMode called for Hot Cold: ' + str(HcCoNbr))
+        
+        status = self.pushMacrozoneDataIndividual(HcCoNbr, 'mMode', value)
+        return(status)
+
+
+    def getHcCoSetModeISYdriver(self, HcCoNbr):
+        LOGGER.debug('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
+        Key = ''
+        HcCoName = self.zoneID+str(HcCoNbr)
+        for ISYkey in self.ISYmap[HcCoName]:
+            if self.ISYmap[HcCoName][ISYkey]['messana'] == 'mMode':
+                Key = ISYkey
+        return(Key) 
+
+    def HcCoAdaptiveComfort(self, value, HcCoNbr):
+        LOGGER.debug('HcCoAdaptiveComfort called for Hot Cold: ' + str(HcCoNbr))
+        
+        status = self.pushMacrozoneDataIndividual(HcCoNbr, 'mAdaptiveComfort', value)
+        return(status)
+
+
+    def getHcCoAdaptiveComfortISYdriver(self, HcCoNbr):
+        LOGGER.debug('getHcCoAdaptiveComfortISYdriver called for Hot Cold: '+str(HcCoNbr))
+        Key = ''
+        HcCoName = self.zoneID+str(HcCoNbr)
+        for ISYkey in self.ISYmap[HcCoName]:
+            if self.ISYmap[HcCoName][ISYkey]['messana'] == 'mAdaptiveComfort':
+                Key = ISYkey
+        return(Key) 
 
     ####################################################
     #ATU
@@ -3502,6 +3543,17 @@ class messanaInfo:
             self.dataOK = self.dataOK and self.data['statusOK']
         return(self.dataOK)
 
+    
+    def getFanCoilName(self, fanCoilNbr):
+        tempName = self.pullNodeDataIndividual(fanCoilNbr, self.fcID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getFanCoilAddress(self, fanCoilNbr):
+        return(self.fcID + str(fanCoilNbr))  
+
     def getFanCoilCapability(self, FanCoilNbr): 
         LOGGER.debug('getFanCoilCapability')              
         self.getNodeCapability(self.fcID, FanCoilNbr)
@@ -3529,6 +3581,51 @@ class messanaInfo:
     def getFanCoilCount(self):
         return(self.mSystem[ self.systemID]['data']['mFanCoilCount'])
 
+
+    def fanCoilSetCoolingSpeed(self, value, FanCoilNbr):
+        LOGGER.debug ('fanCoilSetCoolingSpeed called')
+        status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mCoolingSpeed', value)
+        return(status)
+ 
+    def getFanCoilCoolingSpeedISYdriver(self, FanCoilNbr):
+        LOGGER.debug ('getFanCoilCoolingSpeedISYdriver called')
+        Key = ''
+        fanCoilName = self.fcID+str(FanCoilNbr)
+        for ISYkey in self.ISYmap[fanCoilName]:
+            if self.ISYmap[fanCoilName][ISYkey]['messana'] == 'mCoolingSpeed':
+                Key = ISYkey
+        return(Key) 
+
+
+    def fanCoilSetHeatingSpeed(self, value, FanCoilNbr):
+        LOGGER.debug ('fanCoilSetHeatingSpeed called')
+        status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mHeatingSpeed', value)
+        return(status)
+ 
+    def getFanCoilHeatingSpeedISYdriver(self, FanCoilNbr):
+        LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
+        Key = ''
+        fanCoilName = self.fcID+str(FanCoilNbr)
+        for ISYkey in self.ISYmap[fanCoilName]:
+            if self.ISYmap[fanCoilName][ISYkey]['messana'] == 'mHeatingSpeed':
+                Key = ISYkey
+        return(Key) 
+
+
+    def fanCoilSetStatus(self, value, FanCoilNbr):
+        LOGGER.debug ('fanCoilSetStatus called')
+        status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mStatus', value)
+        return(status)
+ 
+    def getFanCoilStatusISYdriver(self, FanCoilNbr):
+        LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
+        Key = ''
+        fanCoilName = self.fcID+str(FanCoilNbr)
+        for ISYkey in self.ISYmap[fanCoilName]:
+            if self.ISYmap[fanCoilName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key) 
+
     #############################################################
     #EnergySources
     def updateEnergySourceData(self, level, EnergySourceNbr):
@@ -3548,33 +3645,45 @@ class messanaInfo:
         return(self.dataOK)
 
         
+    def getEnergySourceCount(self):
+        return(self.mSystem[ self.systemID]['data']['mEnergySourceCount'])
+
+    
+    def getEnergySourceName(self, energySourceNbr):
+        tempName = self.pullNodeDataIndividual(energySourceNbr, self.energySourceID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getEnergySourceAddress(self, energySourceNbr):
+        return(self.energySourceID + str(energySourceNbr))     
+
     def getEnergySourceCapability(self, EnergySourceNbr): 
         LOGGER.debug('getEnergySourceCapability')          
-        self.getNodeCapability( self.energySaveID, EnergySourceNbr)
+        self.getNodeCapability( self.energySourceID, EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
         LOGGER.debug('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
-        return(self.pullNodeDataIndividual(EnergySourceNbr,  self.energySaveID, mKey))
+        return(self.pullNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
         LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
-        return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySaveID, mKey, value))
+        return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey, value))
 
     def energy_sourcePullKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourcePullKeys')
-        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'GETstr'))
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'GETstr'))
 
     def energy_sourcePushKeys(self, EnergySourceNbr):
         LOGGER.debug('EnergySourcePushKeys')
-        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'PUTstr'))
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'PUTstr'))
   
     def energy_sourceActiveKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourceActiveKeys')
-        return( self.getNodeKeys (EnergySourceNbr,  self.energySaveID, 'Active'))    
+        return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'Active'))    
     
-    def getenergySourceCount(self):
-        return(self.mSystem[ self.systemID]['data']['mEnergySourceCount'])
-
+   
     #####################################################
     #Buffer Tank
     
@@ -3700,11 +3809,12 @@ class messanaInfo:
     def getBufferTankStatusISYdriver(self, bufTankNbr):
         LOGGER.debug ('getBufferTankStatusISYdriver called')
         Key = ''
-        bufTankName = self.atuID+str(bufTankNbr)
+        bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
             if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
-        return(Key)  
+        return(Key) 
+
     def bufferTankSetSetMode(self, value, bufTankNbr):
         LOGGER.debug ('bufferTankSetSetMode')
         status = self.pushAtuDataIndividual(bufTankNbr, 'mMode', value)
@@ -3713,7 +3823,7 @@ class messanaInfo:
     def getBufferTankSetModeISYdriver(self, bufTankNbr):
         LOGGER.debug ('getBufferTankSetModeISYdriver called')
         Key = ''
-        bufTankName = self.atuID+str(bufTankNbr)
+        bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
             if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mMode':
                 Key = ISYkey
@@ -3726,7 +3836,7 @@ class messanaInfo:
     def getBufferTankTempStatusISYdriver(self, bufTankNbr):
         LOGGER.debug ('getBufferTankTempStatusISYdriver called')
         Key = ''
-        bufTankName = self.atuID+str(bufTankNbr)
+        bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
             if self.ISYmap[bufTankName][ISYkey]['messana'] == 'mTempMode':
                 Key = ISYkey
@@ -3781,5 +3891,40 @@ class messanaInfo:
     def getDomesticHotWaterCount(self):
         return(self.mSystem[ self.systemID]['data']['mDHWcount'])
 
+    def getDomesticHotWaterName(self, DHWNbr):
+        tempName = self.pullNodeDataIndividual(DHWNbr, self.dhwID, 'mName')
+        if tempName['statusOK']:
+            return(tempName['data'])
+        else:
+            return('NA')
+            
+    def getDomesticHotWaterAddress(self, DHWNbr):
+        return(self.dhwID + str(DHWNbr))
 
-    
+    def hotWaterSetStatus(self, value, DHWNbr):
+        LOGGER.debug ('hotWaterSetStatus')
+        status = self.pushAtuDataIndividual(DHWNbr, 'mStatus', value)
+        return(status)
+ 
+    def getHotWaterStatusISYdriver(self, DHWNbr):
+        LOGGER.debug ('getHotWaterStatusISYdriver called')
+        Key = ''
+        DHWName = self.bufferTankID+str(DHWNbr)
+        for ISYkey in self.ISYmap[DHWName]:
+            if self.ISYmap[DHWName][ISYkey]['messana'] == 'mStatus':
+                Key = ISYkey
+        return(Key)  
+  
+    def hotWaterSetTargetTempt(self, value, DHWNbr):
+        LOGGER.debug ('hotWaterSetTargetTempt')
+        status = self.pushAtuDataIndividual(DHWNbr, 'mTargetTemp', value)
+        return(status)
+ 
+    def getHotWaterSetTargetTempISYdriver(self, DHWNbr):
+        LOGGER.debug ('getHotWaterSetTargetTempISYdriver called')
+        Key = ''
+        DHWName = self.bufferTankID+str(DHWNbr)
+        for ISYkey in self.ISYmap[DHWName]:
+            if self.ISYmap[DHWName][ISYkey]['messana'] == 'mTargetTemp':
+                Key = ISYkey
+        return(Key)  

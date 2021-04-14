@@ -15,8 +15,9 @@ class messanaEnergySource(polyinterface.Node):
         self.energySourceNbr = energySourceNbr
         self.name = name
         self.address = address 
-        self.id = 'energysource'+str(energySourceNbr)
         self.messana = self.parent.messana
+        self.id = self.messana.getEnergySourceAddress(energySourceNbr)
+
         self.energySource_GETKeys = self.messana.energySourcePullKeys(self.energySourceNbr)
         self.energySource_PUTKeys = self.messana.energySourcePushKeys(self.energySourceNbr)
         self.energySource_ActiveKeys = self.messana.energySourceActiveKeys(self.energySourceNbr)
@@ -87,52 +88,14 @@ class messanaEnergySource(polyinterface.Node):
     def query(self, command=None):
         LOGGER.debug('TOP querry')
 
-    def setStatus(self, command):
-        LOGGER.debug('setStatus Called')
-        value = int(command.get('value'))
-        LOGGER.debug('EnergySource'+str(self.energySourceNbr)+' setStatus Received:' + str(value))
-        if self.messana.energySourceSetStatus(value, self.energySourceNbr):
-            ISYdriver = self.messana.getEnergySourceStatusISYdriver(self.energySourceNbr)
-            self.setDriver(ISYdriver, value, report = True)
+    def energySourceUpdate(self, command):
+        LOGGER.debug('energySourceUpdate Called')
+        self.messana.updateEnergySourceData('all', self.energySourceNbr)
+        self.updateISYdrivers('all')
+        self.reportDrivers()
 
 
-
-    def setEnergySave(self, command):
-        LOGGER.debug('setEnergySave Called')
-        value = int(command.get('value'))
-        LOGGER.debug('EnergySource'+str(self.energySourceNbr)+' setEnergySave Received:' + str(value))
-        if self.messana.energySourceSetEnergySave(value, self.energySourceNbr):
-            ISYdriver = self.messana.getEnergySourceEnergySaveISYdriver(self.energySourceNbr)
-            self.setDriver(ISYdriver, value, report = True)
-
-
-    def setSetpoint(self, command):
-        LOGGER.debug('setSetpoint Called')
-        value = int(command.get('value'))
-        LOGGER.debug('EnergySource'+str(self.energySourceNbr)+' setSetpoint Received:' + str(value))
-        if self.messana.energySourceSetSetpoint(value, self.energySourceNbr):
-            ISYdriver = self.messana.getEnergySourceSetPointISYdriver(self.energySourceNbr)
-            self.setDriver(ISYdriver, value, report = True)
-
-
-    def enableSchedule(self, command):
-        LOGGER.debug('EnSchedule Called')
-        value = int(command.get('value'))
-        LOGGER.debug('EnergySource'+str(self.energySourceNbr)+' EnSchedule Reeived:' + str(value))      
-        if self.messana.energySourceEnableSchedule(value, self.energySourceNbr):
-            ISYdriver = self.messana.getEnergySourceEnableScheduleISYdriver(self.energySourceNbr)
-            self.setDriver(ISYdriver, value, report = True)     
-        
-        #self.energySourceInfo['mScheduleOn'] = val
-        #self.messana.pushEnergySourceData(self.energySourceNbr, self.energySourceInfo)
-        #self.checkSetDriver('GV3', 'mScheduleOn')
-
- 
-
-    commands = { 'SET_SETPOINT': setSetpoint
-                ,'SET_STATUS': setStatus
-                ,'SET_ENERGYSAVE': setEnergySave
-                ,'SET_SCHEDULE' : enableSchedule 
+    commands = { 'UPDATE' : energySourceUpdate
                 }
 
     drivers = [  ]

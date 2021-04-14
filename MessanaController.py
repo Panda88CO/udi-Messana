@@ -7,6 +7,10 @@ from MessanaZone import messanaZone
 from MessanaMacrozone import messanaMacrozone
 from MessanaATU import messanaAtu
 from MessanaBufTank import messanaBufTank
+from MessanaEnergySource import messanaEnergySource
+from MessanaFanCoil import  messanaFanCoil
+from MessanaHotColdCO import messanaHcCo
+from MessanaHotWater import messanaHotWater
 
 
 LOGGER = polyinterface.LOGGER
@@ -232,137 +236,53 @@ class MessanaController(polyinterface.Controller):
             if not bufferTankAddress in self.nodes:
                self.addNode(messanaBufTank(self, self.address, bufferTankAddress, bufferTankName, bufferTankNbr))
                
-                
+        LOGGER.debug('discover hot cold change overs')
+        nbrHcCos =  self.messana.getHcCoCount()
+        for HcCoNbr in range(0,nbrHcCos):
+            LOGGER.debug('Adding atu ' + str(HcCoNbr))
+            atuname = self.messana.getHcCoName(HcCoNbr)
+            atuaddress = self.messana.getHcCoAddress(HcCoNbr)
+            LOGGER.debug('ATU ' + str(HcCoNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaHcCo(self, self.address, atuaddress, atuname, HcCoNbr))
+
+        LOGGER.debug('discover fan coils')
+        nbrFanCoils =  self.messana.getFanCoilCount()
+        for fanCoilNbr in range(0,nbrFanCoils):
+            LOGGER.debug('Adding atu ' + str(fanCoilNbr))
+            atuname = self.messana.getFanCoilName(fanCoilNbr)
+            atuaddress = self.messana.getFanCoilAddress(fanCoilNbr)
+            LOGGER.debug('ATU ' + str(fanCoilNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaFanCoil(self, self.address, atuaddress, atuname, fanCoilNbr))
+
+        LOGGER.debug('discover energy sources' )
+        nbrEnergySources =  self.messana.getEnergySourceCount()
+        for energySourceNbr in range(0, nbrEnergySources):
+            LOGGER.debug('Adding atu ' + str(energySourceNbr))
+            atuname = self.messana.getEnergySourceName(energySourceNbr)
+            atuaddress = self.messana.getEnergySourceAddress(energySourceNbr)
+            LOGGER.debug('ATU ' + str(energySourceNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaEnergySource(self, self.address, atuaddress, atuname, energySourceNbr))
+
+
+        LOGGER.debug('discover domestic hot waters' )
+        nbrDHWs =  self.messana.getDomesticHotWaterCount()
+        for DHWNbr in range(0,nbrDHWs):
+            LOGGER.debug('Adding atu ' + str(DHWNbr))
+            atuname = self.messana.getDomesticHotWaterName(DHWNbr)
+            atuaddress = self.messana.getDomesticHotWaterAddress(DHWNbr)
+            LOGGER.debug('ATU ' + str(DHWNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
+            if not atuaddress in self.nodes:
+               self.addNode(messanaHotWater(self, self.address, atuaddress, atuname, DHWNbr))
+
         self.nodeDefineDone = True
-
-    
-
-
-    '''
-   
-    #nbrATUs = 0
-
-    #nbrDHWs = 0
-    
-    #nbrFanCoils = 0
-    
-    #nbrEnergySources = 0
-
-    #nbrHCCOs = 0
-
-    #nbrBufTanks = 0
-
-    '''    
-    
-    '''
-    for zoneNbr in range(0,messana.mSystem['system']['data']['mZoneCount']):
-        zoneData = {}
-        messana.updateZoneData(zoneNbr)
-        zoneGETkeys = messana.zonePullKeys(zoneNbr)
-        print (zoneGETkeys)
-        zonePUTkeys = messana.zonePushKeys(zoneNbr)
-        print(zonePUTkeys)
-        zoneActiveKeys = messana.zoneActiveKeys(zoneNbr)
-        print (zoneActiveKeys)
-        
-        for mKey in zoneGETkeys:
-            zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
-            if zoneData['statusOK']:
-                print('GET: ' + mKey + str(zoneData['data']))
-            if mKey in zoneActiveKeys:
-                zoneData = messana.pullZoneDataIndividual(zoneNbr, mKey)
-                if zoneData['statusOK']:
-                    print('GET: ' + mKey + str(zoneData['data']))
-            if mKey in zonePUTkeys:
-                if mKey in messana.mSystem['zones']['data'][zoneNbr]:
-                    nodeData = messana.pushZoneDataIndividual(zoneNbr, mKey, messana.mSystem['zones']['data'][zoneNbr][mKey])
-                    print('PUT zones : ' + mKey + ' ' + str( messana.mSystem['zones']['data'][zoneNbr][mKey]))
-                    print('nodeData : ' + str(nodeData))
-    '''
-    
-    '''for mySensor in self.mySensors.get_available_sensors():
-        count = count+1
-        currentSensor = mySensor.id.lower() 
-        LOGGER.info(currentSensor+ 'Sensor Serial Number Detected - use Custom Params to rename')
-        address = 'rpitemp'+str(count)
-        # check if sensor serial number exist in custom parapms and then replace name
-        if currentSensor in self.polyConfig['customParams']:
-            LOGGER.debug('A customParams name for sensor detected')
-            name = self.polyConfig['customParams'][currentSensor]
-        else:
-            LOGGER.debug('Default Naming')
-            name = 'Sensor'+str(count)
-        #LOGGER.debug( address + ' '+ name + ' ' + currentSensor)
-        if not address in self.nodes:
-            self.addNode(TEMPsensor(self, self.address, address, name, currentSensor))
-    '''
-
-    '''
-    def checkSetDriver(self, ISYkey, mKey):
-        LOGGER.debug('checkset driver ' + ISYkey + ' ,' + mKey)
-        if mKey in self.keySet:
-            valInfo = self.messana.pullSystemDataIndividual(mKey)
-            if valInfo['statusOK']:
-                val = valInfo['data']        
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if val in  ['Celcius', 'Fahrenheit']:
-                        if val == 'Celcius':
-                            val = 0
-                        else:  
-                            val = 1 
-                self.setDriver(ISYkey, val)
-            return(True)
-        else:
-            return(False)
-
-
-
-    def updateParamsToISY(self, mKey):
-        LOGGER.debug('setSystemParamFromISY')
-        temp = self.messana.getSystemISYdriverInfo(mKey)
-        if temp != {}:
-            LOGGER.debug('update ISY value')
-            ISYkey = temp['driver']
-            self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-           
-    def setParamFromISY(self, mKey, val):
-        LOGGER.debug('setParamFromISY')
-        if self.messana.pushSystemDataIndividual(mKey, val):
-            LOGGER.info(mKey + ' updated to '+ str(val))
-            temp = self.messana.getSystemISYdriverInfo(mKey)
-            if temp != {}:
-                ISYkey = temp['driver']
-                LOGGER.debug('update ISY value: ' + ISYkey + ', ' + mKey)
-                self.checkSetDriver(ISYkey, mKey)
-        else:
-            LOGGER.info(mKey + ' update failed')
-
-    def getMessanaSystemKeyVal(self, mKey, val):
-        Info = self.messana.pullSystemDataIndividual(mKey)
-        if mKey in self.system_GETKeys:
-            if Info['statusOK']:
-                val = Info['data']        
-                if mKey == 'mUnitTemp': 
-                    #"we cannot handle strings"
-                    if val in  ['Celcius', 'Fahrenheit']:
-                        if val == 'Celcius':
-                            val = 0
-                        else:  
-                            val = 1 
-            return(True)
-        else:
-            LOGGER.debug('Unknown key: ' + mKey)
-            
-    '''
+  
     
 
     def check_params(self, command=None):
         LOGGER.debug('Check Params')
-
-
  
     def setStatus(self, command):
         LOGGER.debug('set Status Called')
@@ -394,9 +314,7 @@ class MessanaController(polyinterface.Controller):
         self.updateISYdrivers('all')
         self.reportDrivers()
  
-    #id = 'MessanaMain' #self.name must have same value 
-    #LOGGER.debug(str(id))
-    #drivers = []
+
     commands = { 'UPDATE': ISYupdate
                 ,'SET_STATUS': setStatus
                 ,'SET_ENERGYSAVE': setEnergySave
