@@ -15,7 +15,7 @@ class messanaInfo:
         self.zoneID = 'zones'
         self.macrozoneID = 'macrozones'
         self.atuID = 'atus'
-        self.dhwID = 'domhw'
+        self.dhwID = 'domhws'
         self.fcID = 'fancoils'
         self.energySourceID =  'energysys'
         self.HotColdcoID = 'hcco'
@@ -3109,7 +3109,7 @@ class messanaInfo:
         return(info)
 
     def macrozoneSetStatus(self, value, macrozoneNbr):
-        print(' macrozoneSetstatus called for zone: ' + str(macrozoneNbr))
+        print(' macrozoneSetstatus called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mStatus', value)
         return(status)
@@ -3128,7 +3128,7 @@ class messanaInfo:
 
 
     def macrozoneSetSetpoint(self, value,  macrozoneNbr):
-        print('macrozoneSetSetpoint called for zone: ' + str(macrozoneNbr))
+        print('macrozoneSetSetpoint called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mSetpoint', value)
         return(status)
@@ -3145,7 +3145,7 @@ class messanaInfo:
   
 
     def macrozoneEnableSchedule(self, value, macrozoneNbr):
-        print('macrozoneEnableSchedule called for zone: ' + str(macrozoneNbr))
+        print('macrozoneEnableSchedule called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mScheduleOn', value)
         return(status)
@@ -3225,14 +3225,14 @@ class messanaInfo:
     def HcCoSetMode(self, value, HcCoNbr):
         print('HcCoSetMode called for Hot Cold: ' + str(HcCoNbr))
         
-        status = self.pushMacrozoneDataIndividual(HcCoNbr, 'mMode', value)
+        status = self.pushHcCoDataIndividual(HcCoNbr, 'mMode', value)
         return(status)
 
 
     def getHcCoSetModeISYdriver(self, HcCoNbr):
         print('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
-        HcCoName = self.zoneID+str(HcCoNbr)
+        HcCoName = self.HotColdcoID+str(HcCoNbr)
         for ISYkey in self.ISYmap[HcCoName]:
             if self.ISYmap[HcCoName][ISYkey]['messana'] == 'mMode':
                 Key = ISYkey
@@ -3241,14 +3241,14 @@ class messanaInfo:
     def HcCoAdaptiveComfort(self, value, HcCoNbr):
         print('HcCoAdaptiveComfort called for Hot Cold: ' + str(HcCoNbr))
         
-        status = self.pushMacrozoneDataIndividual(HcCoNbr, 'mAdaptiveComfort', value)
+        status = self.pushHcCoDataIndividual(HcCoNbr, 'mAdaptiveComfort', value)
         return(status)
 
 
     def getHcCoAdaptiveComfortISYdriver(self, HcCoNbr):
         print('getHcCoAdaptiveComfortISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
-        HcCoName = self.zoneID+str(HcCoNbr)
+        HcCoName = self.HotColdcoID+str(HcCoNbr)
         for ISYkey in self.ISYmap[HcCoName]:
             if self.ISYmap[HcCoName][ISYkey]['messana'] == 'mAdaptiveComfort':
                 Key = ISYkey
