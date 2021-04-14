@@ -15,11 +15,11 @@ class messanaInfo:
         self.zoneID = 'zones'
         self.macrozoneID = 'macrozones'
         self.atuID = 'atus'
-        self.dhwID = 'DomHw'
-        self.fcID = 'FanCoils'
-        self.energySaveID =  'EnergyS'
-        self.HotColdcoID = 'HcCo'
-        self.bufferTankID = 'BufTanks'
+        self.dhwID = 'domhw'
+        self.fcID = 'fancoils'
+        self.energySaveID =  'energysys'
+        self.HotColdcoID = 'hcco'
+        self.bufferTankID = 'buftanks'
         self.supportedNodeList = [
                              self.zoneID
                             ,self.macrozoneID
