@@ -2,8 +2,6 @@
 
 import polyinterface
 from subprocess import call
-import json
-from collections import defaultdict
 #from MessanaInfo import MessanaInfo
 
 LOGGER = polyinterface.LOGGER
