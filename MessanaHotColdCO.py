@@ -44,7 +44,7 @@ class messanaHcCo(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getHcCoMessanaISYkey(ISYkey, self.HcCoNbr)
                 if temp in self.HcCo_ActiveKeys:                    
-                    LOGGER.debug('Messana HcCo ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana HcCo ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getHcCoISYValue(ISYkey, self.HcCoNbr)
                     if status:
                         if self.ISYforced:
@@ -57,7 +57,7 @@ class messanaHcCo(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getHcCoMessanaISYkey(ISYkey, self.HcCoNbr)
                 status, value = self.messana.getHcCoISYValue(ISYkey, self.HcCoNbr)
-                LOGGER.debug('Messana HcCo ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana HcCo ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)

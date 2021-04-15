@@ -42,7 +42,7 @@ class messanaFanCoil(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getFanCoilMessanaISYkey(ISYkey, self.fanCoilNbr)
                 if temp in self.fanCoil_ActiveKeys:                    
-                    LOGGER.debug('Messana FanCoil ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana FanCoil ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getFanCoilISYValue(ISYkey, self.fanCoilNbr)
                     if status:
                         if self.ISYforced:
@@ -55,7 +55,7 @@ class messanaFanCoil(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getFanCoilMessanaISYkey(ISYkey, self.fanCoilNbr)
                 status, value = self.messana.getFanCoilISYValue(ISYkey, self.fanCoilNbr)
-                LOGGER.debug('Messana FanCoil ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana FanCoil ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)

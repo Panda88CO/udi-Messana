@@ -43,7 +43,7 @@ class messanaHotWater(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getHotWaterMessanaISYkey(ISYkey, self.hotWaterNbr)
                 if temp in self.hotWater_ActiveKeys:                    
-                    LOGGER.debug('Messana HotWater ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana HotWater ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getHotWaterISYValue(ISYkey, self.hotWaterNbr)
                     if status:
                         if self.ISYforced:
@@ -56,7 +56,7 @@ class messanaHotWater(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getHotWaterMessanaISYkey(ISYkey, self.hotWaterNbr)
                 status, value = self.messana.getHotWaterISYValue(ISYkey, self.hotWaterNbr)
-                LOGGER.debug('Messana HotWater ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana HotWater ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)

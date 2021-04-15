@@ -44,7 +44,7 @@ class messanaBufTank(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getBufferTankMessanaISYkey(ISYkey, self.bufferTankNbr)
                 if temp in self.bufferTank_ActiveKeys:                    
-                    LOGGER.debug('Messana BufferTanks ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana BufferTanks ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getBufferTankISYValue(ISYkey, self.bufferTankNbr)
                     if status:
                         if self.ISYforced:
@@ -57,7 +57,7 @@ class messanaBufTank(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getBufferTankMessanaISYkey(ISYkey, self.bufferTankNbr)
                 status, value = self.messana.getBufferTankISYValue(ISYkey, self.bufferTankNbr)
-                LOGGER.debug('Messana BufferTanks ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana BufferTanks ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)
