@@ -2556,7 +2556,7 @@ class messanaInfo:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
                     temp = data['data']
                     GETkeysList.append(mKey)
-                    if self.mSystem[self.systemID]['KeyInfo'][mKey]['PIUTstr'] != None:
+                    if self.mSystem[self.systemID]['KeyInfo'][mKey]['PUTstr'] != None:
                         if self.pushSystemDataIndividual(mKey, temp):
                             PUTkeysList.append(mKey)
         self.mSystem[self.systemID]['GETkeysList'] = []
