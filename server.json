@@ -12,8 +12,8 @@
         {
             "title": "A NodeServer to integrate Messana Radiant Heat/Cool system",
             "author": "Panda88CO",
-            "version": "0.1.0",
-            "date": "April 1, 2021",
+            "version": "0.1.1",
+            "date": "April 14, 2021",
             "source": "https://https://github.com/Panda88CO/udi-Messana",
             "license": "https://raw.githubusercontent.com/Panda88CO/udi-Messana/master/LICENSE"
         }
