@@ -3771,15 +3771,15 @@ class messanaInfo:
         LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey, value))
 
-    def energy_sourcePullKeys(self, EnergySourceNbr):
+    def energySourcePullKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourcePullKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'GETstr'))
 
-    def energy_sourcePushKeys(self, EnergySourceNbr):
+    def energySourcePushKeys(self, EnergySourceNbr):
         LOGGER.debug('EnergySourcePushKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'PUTstr'))
   
-    def energy_sourceActiveKeys(self, EnergySourceNbr):
+    def energySourceActiveKeys(self, EnergySourceNbr):
         LOGGER.debug('energy_sourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'Active'))    
     
