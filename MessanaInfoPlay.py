@@ -3692,11 +3692,6 @@ class messanaInfo:
             systemValue = None
         return (status, systemValue)
 
-    def getFanCoilMessanaISYkey(self, ISYkey, fanCoilNbr):
-        fanCoilName = self.fcID+str(fanCoilNbr)
-        return(self.ISYmap[fanCoilName][ISYkey]['messana'])
-
-
     def fanCoilSetHeatingSpeed(self, value, FanCoilNbr):
         LOGGER.debug ('fanCoilSetHeatingSpeed called')
         status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mHeatingSpeed', value)
