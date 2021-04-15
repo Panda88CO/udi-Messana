@@ -2192,26 +2192,26 @@ class messanaInfo:
             sysData= {}
             #LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             #mData = defaultdict(list)
-            mData = {}
+            #mData = {}
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr'] == None:
                     sysData['statusOK'] = False
-                    sysData['error'] = 'Not able to PUT Key: : '+ mKey + ' value:' + str( value )
-                    #LOGGER.debug('Error '+ sysData)    
+                    sysData['error'] = 'Not able to PUT Key: '+ mKey + ' value:' + str( value )
+                    LOGGER.debug('Error '+ sysData)    
                     return(sysData)                     
                 else:
                     PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
                     mData = {'value':value, self.APIKey : self.APIKeyVal}
                     try:
                         resp = requests.put(PUTStr, json=mData)
-                        #LOGGER.debug(resp)
+                        LOGGER.debug(resp)
                         if str(resp) != self.RESPONSE_OK:
                             sysData['statusOK'] = False
-                            sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
+                            sysData['error'] = str(resp)+ ': Not able to PUT Key: '+ mKey + ' value:' + str( value )
                         else:
                             sysData['statusOK'] = True
                             sysData['data'] = value
-                        #LOGGER.debug(sysData)    
+                        LOGGER.debug(sysData)    
                         return(sysData)          
                     except:
                         sysData['statusOK'] = False
