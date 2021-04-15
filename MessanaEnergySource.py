@@ -44,7 +44,7 @@ class messanaEnergySource(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getEnergySourceMessanaISYkey(ISYkey, self.energySourceNbr)
                 if temp in self.energySource_ActiveKeys:                    
-                    LOGGER.debug('Messana EnergySource ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana EnergySource ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getEnergySourceISYValue(ISYkey, self.energySourceNbr)
                     if status:
                         if self.ISYforced:
@@ -57,7 +57,7 @@ class messanaEnergySource(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getEnergySourceMessanaISYkey(ISYkey, self.energySourceNbr)
                 status, value = self.messana.getEnergySourceISYValue(ISYkey, self.energySourceNbr)
-                LOGGER.debug('Messana EnergySource ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana EnergySource ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)
