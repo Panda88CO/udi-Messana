@@ -3251,6 +3251,32 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
+   def getHcCoISYValue(self, ISYkey, HcCoNbr):
+        HcCoName = self.HotColdcoID+str(HcCoNbr)
+        messanaKey = self.ISYmap[HcCoName][ISYkey]['messana']
+        try:
+            data = self.pullMacrozoneDataIndividual(HcCoNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def getHcCoMessanaISYkey(self, ISYkey, HcCoNbr):
+        HcCoName = self.HotColdcoID+str(HcCoNbr)
+        return(self.ISYmap[HcCoName][ISYkey]['messana'])
+
     def getHcCoSetModeISYdriver(self, HcCoNbr):
         LOGGER.debug('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
@@ -3626,6 +3652,9 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
+    def getFanCoilMessanaISYkey(self, ISYkey, fanCoilNbr):
+        fanCoilName = self.fcID+str(fanCoilNbr)
+        return(self.ISYmap[fanCoilName][ISYkey]['messana'])
 
     def fanCoilSetCoolingSpeed(self, value, FanCoilNbr):
         LOGGER.debug ('fanCoilSetCoolingSpeed called')
@@ -3640,6 +3669,32 @@ class messanaInfo:
             if self.ISYmap[fanCoilName][ISYkey]['messana'] == 'mCoolingSpeed':
                 Key = ISYkey
         return(Key) 
+
+  def getFanCoilISYValue(self, ISYkey, fanCoilNbr):
+        fanCoilName = self.fcID+str(fanCoilNbr)
+        messanaKey = self.ISYmap[fanCoilName][ISYkey]['messana']
+        try:
+            data = self.pullMacrozoneDataIndividual(fanCoilNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def getFanCoilMessanaISYkey(self, ISYkey, fanCoilNbr):
+        fanCoilName = self.fcID+str(fanCoilNbr)
+        return(self.ISYmap[fanCoilName][ISYkey]['messana'])
 
 
     def fanCoilSetHeatingSpeed(self, value, FanCoilNbr):
@@ -3749,6 +3804,32 @@ class messanaInfo:
 
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
+
+  def getEnergySourceISYValue(self, ISYkey, energySourceNbr):
+        energySourceName = self.energySourceID+str(energySourceNbr)
+        messanaKey = self.ISYmap[energySourceName][ISYkey]['messana']
+        try:
+            data = self.pullMacrozoneDataIndividual(energySourceNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def getEnergySourceMessanaISYkey(self, ISYkey, energySourceNbr):
+        energySourceName = self.energySourceID+str(energySourceNbr)
+        return(self.ISYmap[energySourceName][ISYkey]['messana'])
 
    
     #####################################################
@@ -4016,3 +4097,29 @@ class messanaInfo:
             if self.ISYmap[DHWName][ISYkey]['messana'] == 'mTargetTemp':
                 Key = ISYkey
         return(Key)  
+
+  def getHotWaterISYValue(self, ISYkey, dhwNbr):
+        dhwName = self.dhwID+str(dhwNbr)
+        messanaKey = self.ISYmap[dhwName][ISYkey]['messana']
+        try:
+            data = self.pullMacrozoneDataIndividual(dhwNbr, messanaKey)
+            if data['statusOK']:
+                val = data['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                systemValue = val
+                status = True
+            else:
+                systemValue = None
+                status = False
+        except:
+            status = False
+            systemValue = None
+        return (status, systemValue)
+
+    def getHotWaterMessanaISYkey(self, ISYkey, dhwNbr):
+        dhwName = self.dhwID+str(dhwNbr)
+        return(self.ISYmap[dhwName][ISYkey]['messana'])        
