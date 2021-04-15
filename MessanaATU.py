@@ -42,7 +42,7 @@ class messanaAtu(polyinterface.Node):
             if level == 'active':
                 temp = self.messana.getAtuMessanaISYkey(ISYkey, self.atuNbr)
                 if temp in self.atu_ActiveKeys:                    
-                    LOGGER.debug('Messana ATU ISYdrivers ACTIVE ' + temp)
+                    #LOGGER.debug('Messana ATU ISYdrivers ACTIVE ' + temp)
                     status, value = self.messana.getAtuISYValue(ISYkey, self.atuNbr)
                     if status:
                         if self.ISYforced:
@@ -55,7 +55,7 @@ class messanaAtu(polyinterface.Node):
             elif level == 'all':
                 temp = self.messana.getAtuMessanaISYkey(ISYkey, self.atuNbr)
                 status, value = self.messana.getAtuISYValue(ISYkey, self.atuNbr)
-                LOGGER.debug('Messana ATU ISYdrivers ALL ' + temp)
+                #LOGGER.debug('Messana ATU ISYdrivers ALL ' + temp)
                 if status:
                     if self.ISYforced:
                         self.setDriver(ISYdriver, value, report = True, force = False)
