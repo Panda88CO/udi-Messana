@@ -25,7 +25,7 @@ class MessanaController(polyinterface.Controller):
         self.name = 'Messana Main'
         self.address ='msystem'
         self.id = self.address
-        LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
+        #LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
         self.ISYdrivers=[]
@@ -239,7 +239,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover hot cold change overs')
         nbrHcCos =  self.messana.getHcCoCount()
         for HcCoNbr in range(0,nbrHcCos):
-            LOGGER.debug('Adding atu ' + str(HcCoNbr))
+            LOGGER.debug('Adding hot cold cnage over ' + str(HcCoNbr))
             atuname = self.messana.getHcCoName(HcCoNbr)
             atuaddress = self.messana.getHcCoAddress(HcCoNbr)
             #LOGGER.debug('ATU ' + str(HcCoNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
@@ -249,7 +249,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover fan coils')
         nbrFanCoils =  self.messana.getFanCoilCount()
         for fanCoilNbr in range(0,nbrFanCoils):
-            LOGGER.debug('Adding atu ' + str(fanCoilNbr))
+            LOGGER.debug('Adding fan coils ' + str(fanCoilNbr))
             atuname = self.messana.getFanCoilName(fanCoilNbr)
             atuaddress = self.messana.getFanCoilAddress(fanCoilNbr)
             #LOGGER.debug('ATU ' + str(fanCoilNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
@@ -259,7 +259,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover energy sources' )
         nbrEnergySources =  self.messana.getEnergySourceCount()
         for energySourceNbr in range(0, nbrEnergySources):
-            LOGGER.debug('Adding atu ' + str(energySourceNbr))
+            LOGGER.debug('Adding energy sources ' + str(energySourceNbr))
             atuname = self.messana.getEnergySourceName(energySourceNbr)
             atuaddress = self.messana.getEnergySourceAddress(energySourceNbr)
             #LOGGER.debug('ATU ' + str(energySourceNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
@@ -270,7 +270,7 @@ class MessanaController(polyinterface.Controller):
         LOGGER.debug('discover domestic hot waters' )
         nbrDHWs =  self.messana.getDomesticHotWaterCount()
         for DHWNbr in range(0,nbrDHWs):
-            LOGGER.debug('Adding atu ' + str(DHWNbr))
+            LOGGER.debug('Adding domestic hot water ' + str(DHWNbr))
             atuname = self.messana.getDomesticHotWaterName(DHWNbr)
             atuaddress = self.messana.getDomesticHotWaterAddress(DHWNbr)
             #LOGGER.debug('ATU ' + str(DHWNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 

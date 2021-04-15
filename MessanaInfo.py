@@ -1677,7 +1677,7 @@ class messanaInfo:
             # Need SystemCapability function               
             self.getSystemCapability()
             self.updateSystemData('all')
-            LOGGER.debug(self.systemID + 'added')
+            LOGGER.debug(self.systemID + ' added')
  
             self.addSystemDefStruct(self.systemID)
 
@@ -1840,63 +1840,6 @@ class messanaInfo:
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
         return()
-    '''
-    def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
-        self.name = nodeId+str(nodeNbr)
-        if self.name in self.setupFile['nodeDef']:
-            if 'sends' in self.setupFile['nodeDef'][self.name]['cmds']:
-                self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
-            else:
-                self.setupFile['nodeDef'][self.name]['cmds']['sends']=[]
-                self.setupFile['nodeDef'][self.name]['cmds']['sends'].append(functionId)
-        else:
-            LOGGER.debug('Unknown name: ' + nodeId)
-        return()
-    '''
-    '''
-    def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, messanaKey):  
-        name = nodeId + '_' + str(nodeNbr)
-        if len(messanaKey) == 0:
-            if 'accepts' in self.setupFile['nodeDef'][name]['cmds']:
-                self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = {}
-            else:
-                self.setupFile['nodeDef'][name]['cmds']['accepts'] = {}
-                self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = {}
-        else:
-            if not('accepts' in self.setupFile['nodeDef'][name]['cmds']):
-                self.setupFile['nodeDef'][self.name]['cmds']['accepts'] = {}
-            if messanaKey in self.setupFile['nodeDef'][name]['sts']: 
-               self.setupFile['nodeDef'][name]['cmds']['accepts'][functionName] = self.setupFile['nodeDef'][name]['sts'][messanaKey]
-            else:
-                LOGGER.debug(messanaKey + 'not defined')
-        return() 
-        '''
-    '''
-    def addSystemSendComand(self, idName):
-        if 'sends' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
-            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
-        else:
-            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=[]
-            self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
-        return()
-    '''
-    '''
-    def addSystemAcceptComand(self, functionName, messanaKey):
-        if len(messanaKey) == 0:
-            if 'accepts' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
-                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = {}
-            else:
-                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'] = {}
-                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = {}
-        else:
-            if not('accepts' in self.setupFile['nodeDef'][ self.systemID]['cmds']):
-                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'] = {}
-            if messanaKey in self.setupFile['nodeDef'][ self.systemID]['sts']:
-                self.setupFile['nodeDef'][ self.systemID]['cmds']['accepts'][functionName] = self.setupFile['nodeDef'][ self.systemID]['sts'][messanaKey]
-            else:
-                LOGGER.debug(messanaKey + 'not defined')
-        return() 
-    '''
 
     def addSystemDefStruct(self, nodeId):
         self.keyCount = 0
