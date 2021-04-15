@@ -3251,7 +3251,7 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-   def getHcCoISYValue(self, ISYkey, HcCoNbr):
+    def getHcCoISYValue(self, ISYkey, HcCoNbr):
         HcCoName = self.HotColdcoID+str(HcCoNbr)
         messanaKey = self.ISYmap[HcCoName][ISYkey]['messana']
         try:
