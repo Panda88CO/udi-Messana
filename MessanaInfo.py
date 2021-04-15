@@ -2192,26 +2192,25 @@ class messanaInfo:
             sysData= {}
             #LOGGER.debug('PUT System: {' + mKey +':'+str(value)+'}' )
             #mData = defaultdict(list)
-            #mData = {}
             if mKey in self.mSystem[ self.systemID]['KeyInfo']:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr'] == None:
                     sysData['statusOK'] = False
                     sysData['error'] = 'Not able to PUT Key: '+ mKey + ' value:' + str( value )
-                    LOGGER.debug('Error '+ sysData)    
+                    LOGGER.error('Error '+ sysData)    
                     return(sysData)                     
                 else:
                     PUTStr = self.IP+self.mSystem[ self.systemID]['KeyInfo'][mKey]['PUTstr']
                     mData = {'value':value, self.APIKey : self.APIKeyVal}
                     try:
                         resp = requests.put(PUTStr, json=mData)
-                        LOGGER.debug(resp)
+                        #LOGGER.debug(resp)
                         if str(resp) != self.RESPONSE_OK:
                             sysData['statusOK'] = False
                             sysData['error'] = str(resp)+ ': Not able to PUT Key: '+ mKey + ' value:' + str( value )
                         else:
                             sysData['statusOK'] = True
                             sysData['data'] = value
-                        LOGGER.debug(sysData)    
+                        #LOGGER.debug(sysData)    
                         return(sysData)          
                     except:
                         sysData['statusOK'] = False
@@ -2557,8 +2556,9 @@ class messanaInfo:
                 if self.mSystem[ self.systemID]['KeyInfo'][mKey]['ISYeditor']['ISYuom'] != None:
                     temp = data['data']
                     GETkeysList.append(mKey)
-                    if self.pushSystemDataIndividual(mKey, temp):
-                        PUTkeysList.append(mKey)
+                    if self.mSystem[self.systemID]['KeyInfo'][mKey]['PIUTstr'] != None:
+                        if self.pushSystemDataIndividual(mKey, temp):
+                            PUTkeysList.append(mKey)
         self.mSystem[self.systemID]['GETkeysList'] = []
         self.mSystem[self.systemID]['GETkeysList'].extend(GETkeysList)
         self.mSystem[self.systemID]['PUTkeysList'] = []
