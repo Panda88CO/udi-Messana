@@ -28,7 +28,7 @@ class messanaBufTank(polyinterface.Node):
             #LOGGER.debug('Buffer Tank driver ' + str(self.temp))
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
         self.messana.updateBufferTankData('all', self.bufferTankNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
@@ -51,7 +51,7 @@ class messanaBufTank(polyinterface.Node):
                             self.setDriver(ISYdriver, value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
@@ -63,7 +63,7 @@ class messanaBufTank(polyinterface.Node):
                         self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
             else:
@@ -93,7 +93,7 @@ class messanaBufTank(polyinterface.Node):
         self.reportDrivers()
 
     def setStatus(self, command):
-        LOGGER.debug('setStatus Called')
+        #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setStatus Received:' + str(value))
         if self.messana.bufferTankSetStatus(value, self.bufferTankNbr):
@@ -102,7 +102,7 @@ class messanaBufTank(polyinterface.Node):
 
 
     def setMode(self, command):
-        LOGGER.debug('setMode Called')
+        #LOGGER.debug('setMode Called')
         value = int(command.get('value'))
         LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setMode Received:' + str(value))
         if self.messana.bufferTankSetSetMode(value, self.bufferTankNbr):
@@ -112,7 +112,7 @@ class messanaBufTank(polyinterface.Node):
 
 
     def bufTankTempStatus(self, command):
-        LOGGER.debug('bufTankTempStatus Called')
+        #LOGGER.debug('bufTankTempStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' Temp Status Reeived:' + str(value))      
         if self.messana.bufferTankTempStatus(value, self.bufferTankNbr):

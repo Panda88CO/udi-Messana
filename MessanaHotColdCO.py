@@ -28,7 +28,7 @@ class messanaHcCo(polyinterface.Node):
             self.temp = self.messana.getHcCoISYdriverInfo(key, self.HcCoNbr)
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
         self.messana.updateHcCoData('all', self.HcCoNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
@@ -53,9 +53,9 @@ class messanaHcCo(polyinterface.Node):
                             self.setDriver(ISYdriver, value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        LOGGER.error('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 temp = self.messana.getHcCoMessanaISYkey(ISYkey, self.HcCoNbr)
                 status, value = self.messana.getHcCoISYValue(ISYkey, self.HcCoNbr)
@@ -65,11 +65,11 @@ class messanaHcCo(polyinterface.Node):
                         self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                    LOGGER.error('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debug('Error!  Unknow level: ' + level)
+                LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
         LOGGER.debug('stop - Messana HcCo Cleaning up')
@@ -89,7 +89,7 @@ class messanaHcCo(polyinterface.Node):
         LOGGER.debug('TOP querry')
 
     def setStatus(self, command):
-        LOGGER.debug('setStatus Called')
+        #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('HcCo'+str(self.HcCoNbr)+' setStatus Received:' + str(value))
         if self.messana.HcCoSetStatus(value, self.HcCoNbr):
@@ -106,7 +106,7 @@ class messanaHcCo(polyinterface.Node):
 
 
     def setHcCoMode(self, command):
-        LOGGER.debug('setHcCoMode Called')
+        #LOGGER.debug('setHcCoMode Called')
         value = int(command.get('value'))
         LOGGER.debug('HcCo'+str(self.HcCoNbr)+' setSetpoint Received:' + str(value))
         if self.messana.HcCoSetMode(value, self.HcCoNbr):
@@ -115,7 +115,7 @@ class messanaHcCo(polyinterface.Node):
 
 
     def setAdaptiveComfort(self, command):
-        LOGGER.debug('setAdaptiveComfort Called')
+        #LOGGER.debug('setAdaptiveComfort Called')
         value = int(command.get('value'))
         LOGGER.debug('HcCo'+str(self.HcCoNbr)+' EnSchedule Reeived:' + str(value))      
         if self.messana.HcCoAdaptiveComfort(value, self.HcCoNbr):

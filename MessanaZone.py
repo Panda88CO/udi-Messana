@@ -25,23 +25,13 @@ class messanaZone(polyinterface.Node):
             self.temp = self.messana.getZoneISYdriverInfo(key, self.zoneNbr)
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
                 
         self.updateISYdrivers('all')
         self.ISYforced = True
        
     def start(self):
         return True
-    '''
-    def checkZoneCommands(self, zoneNbr):
-        tempList = []
-        for cmd in self.commands:
-            if not(self.messana.checkZoneCommand(cmd, zoneNbr)):
-                tempList.append(cmd)
-        for key in tempList:
-            self.commands.pop(key)
-   '''
-
 
     def updateISYdrivers(self, level):
         LOGGER.debug('Zone updateISYdrivers')
@@ -57,9 +47,9 @@ class messanaZone(polyinterface.Node):
                             self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver['driver'], value, report = True, force = True)
-                        LOGGER.debug('driver updated for zone '+str(self.zoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
+                        #LOGGER.debug('driver updated for zone '+str(self.zoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        LOGGER.error('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 temp = self.messana.getZoneMessanaISYkey(ISYkey, self.zoneNbr)
                 status, value = self.messana.getZoneISYValue(ISYkey, self.zoneNbr)
@@ -69,11 +59,11 @@ class messanaZone(polyinterface.Node):
                         self.setDriver(ISYdriver['driver'], value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver['driver'], value, report = True, force = True)
-                    LOGGER.debug('driver updated for zone '+str(self.zoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
+                    #LOGGER.debug('driver updated for zone '+str(self.zoneNbr)+': ' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                    LOGGER.error('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debug('Error!  Unknow level: ' + level)
+                LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
         LOGGER.debug('stop - Messana Zone Cleaning up')
@@ -96,7 +86,7 @@ class messanaZone(polyinterface.Node):
     # ISY functions
 
     def setStatus(self, command):
-        LOGGER.debug('setStatus Called')
+        #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setStatus Received:' + str(value))
         if self.messana.zoneSetStatus(value, self.zoneNbr):
@@ -104,7 +94,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setEnergySave(self, command):
-        LOGGER.debug('setEnergySave Called')
+        #LOGGER.debug('setEnergySave Called')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(value))
         if self.messana.zoneSetEnergySave(value, self.zoneNbr):
@@ -113,7 +103,7 @@ class messanaZone(polyinterface.Node):
 
 
     def setSetpoint(self, command):
-        LOGGER.debug('setSetpoint Called')
+        #LOGGER.debug('setSetpoint Called')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(value))
         if self.messana.zoneSetSetpoint(value, self.zoneNbr):
@@ -122,7 +112,7 @@ class messanaZone(polyinterface.Node):
 
 
     def enableSchedule(self, command):
-        LOGGER.debug('EnSchedule Called')
+        #LOGGER.debug('EnSchedule Called')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' EnSchedule Reeived:' + str(value))      
         if self.messana.zoneEnableSchedule(value, self.zoneNbr):
@@ -136,7 +126,7 @@ class messanaZone(polyinterface.Node):
         self.reportDrivers()
 
     def setCurrentDewPt(self, command):
-        LOGGER.debug('setCurrentDP Not tested yet')
+        #LOGGER.debug('setCurrentDP Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetCurrentDPt(value, self.zoneNbr):
@@ -144,7 +134,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setCurRelHum(self, command):
-        LOGGER.debug('setCurRelHum Not tested yet')
+        #LOGGER.debug('setCurRelHum Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetCurrentRH(value, self.zoneNbr):
@@ -152,7 +142,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setDewTempDehum(self, command):
-        LOGGER.debug('setDewTempDehum Not tested yet')
+        #LOGGER.debug('setDewTempDehum Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetDehumDpt(value, self.zoneNbr):
@@ -160,7 +150,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setRelDehum(self, command):
-        LOGGER.debug('setRelDehum Not tested yet')
+        #LOGGER.debug('setRelDehum Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetDehumRH(value, self.zoneNbr):
@@ -168,7 +158,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setDewTempHum(self, command):
-        LOGGER.debug('setDewTempHum Not tested yet')
+        #LOGGER.debug('setDewTempHum Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetHumDpt(value, self.zoneNbr):
@@ -177,7 +167,7 @@ class messanaZone(polyinterface.Node):
 
 
     def setRelHum(self, command):
-        LOGGER.debug('setRelHum Not tested yet')
+        #LOGGER.debug('setRelHum Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetHumRH(value, self.zoneNbr):
@@ -185,7 +175,7 @@ class messanaZone(polyinterface.Node):
             self.setDriver(ISYdriver, value, report = True)
 
     def setCO2(self, command):
-        LOGGER.debug('setCO2 Not tested yet')
+        #LOGGER.debug('setCO2 Not tested yet')
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetCO2(value, self.zoneNbr):

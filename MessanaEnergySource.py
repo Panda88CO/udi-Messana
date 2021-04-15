@@ -28,7 +28,7 @@ class messanaEnergySource(polyinterface.Node):
             self.temp = self.messana.getEnergySourceISYdriverInfo(key, self.energySourceNbr)
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
         self.messana.updateEnergySourceData('all', self.energySourceNbr)
         self.updateISYdrivers('all')
         self.ISYforced = True
@@ -53,9 +53,9 @@ class messanaEnergySource(polyinterface.Node):
                             self.setDriver(ISYdriver, value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        LOGGER.error('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 temp = self.messana.getEnergySourceMessanaISYkey(ISYkey, self.energySourceNbr)
                 status, value = self.messana.getEnergySourceISYValue(ISYkey, self.energySourceNbr)
@@ -65,11 +65,11 @@ class messanaEnergySource(polyinterface.Node):
                         self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                    LOGGER.error('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debug('Error!  Unknow level: ' + level)
+                LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
         LOGGER.debug('stop - Messana EnergySource Cleaning up')

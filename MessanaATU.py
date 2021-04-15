@@ -26,7 +26,7 @@ class messanaAtu(polyinterface.Node):
             self.temp = self.messana.getAtuISYdriverInfo(key, self.atuNbr)
             if  self.temp != {}:
                 self.drivers.append(self.temp)
-                LOGGER.debug(  'driver:  ' +  self.temp['driver'])
+                #LOGGER.debug(  'driver:  ' +  self.temp['driver'])
 
         self.updateISYdrivers('all')
         self.ISYforced = True
@@ -49,7 +49,7 @@ class messanaAtu(polyinterface.Node):
                             self.setDriver(ISYdriver, value, report = True, force = False)
                         else:
                             self.setDriver(ISYdriver, value, report = True, force = True)
-                        LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                        #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
                         LOGGER.debug('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
@@ -61,7 +61,7 @@ class messanaAtu(polyinterface.Node):
                         self.setDriver(ISYdriver, value, report = True, force = False)
                     else:
                         self.setDriver(ISYdriver, value, report = True, force = True)
-                    LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
+                    #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
                     LOGGER.debug('Error getting ' + ISYdriver['driver'])
             else:
@@ -101,7 +101,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuHRV(self, command):
-        LOGGER.debug('atuHRV called')
+        #LOGGER.debug('atuHRV called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuHRV Received:' + str(value))      
         if self.messana.atuSetHrv(value, self.atuNbr):
@@ -110,7 +110,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuFlowlevel(self, command):
-        LOGGER.debug('atu FlowLevel called')
+        #LOGGER.debug('atu FlowLevel called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuFlowlevel Received:' + str(value))      
         if self.messana.atuSetFlowlevel(value, self.atuNbr):
@@ -128,7 +128,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuINT(self, command):
-        LOGGER.debug('atuINT called')
+        #LOGGER.debug('atuINT called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuINT Received:' + str(value))      
         if self.messana.atuSetInt(value, self.atuNbr):
@@ -137,7 +137,7 @@ class messanaAtu(polyinterface.Node):
 
     
     def atuNTD(self, command):
-        LOGGER.debug('atuNTD called')
+        #LOGGER.debug('atuNTD called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuNTD Received:' + str(value))      
         if self.messana.atuSetNtd(value, self.atuNbr):
@@ -146,7 +146,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuHumSetpointRH(self, command):
-        LOGGER.debug('atuHumSetpointRH called')
+        #LOGGER.debug('atuHumSetpointRH called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuHumSetpointRH Received:' + str(value))      
         if self.messana.atuSetHumSetpointRH(value, self.atuNbr):
@@ -156,7 +156,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuHumSetpointDP(self, command):
-        LOGGER.debug('atuHumSetpointDP called')
+        #LOGGER.debug('atuHumSetpointDP called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuHumSetpointDP Received:' + str(value))      
         if self.messana.atuSetHumSetpointDP(value, self.atuNbr):
@@ -165,7 +165,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuDehumSetpointRH(self, command):
-        LOGGER.debug('called')
+        #LOGGER.debug('called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuDehumSetpointRH Received:' + str(value))      
         if self.messana.atuSetDehumSetpointRH(value, self.atuNbr):
@@ -174,7 +174,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuDehumSetpointDP(self, command):
-        LOGGER.debug('atuDehumSetpointRH called')
+        #LOGGER.debug('atuDehumSetpointRH called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuDehumSetpointDP Received:' + str(value))      
         if self.messana.atuSetDehumSetpointDP(value, self.atuNbr):
@@ -183,7 +183,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuCurrentSetpointRH(self, command):
-        LOGGER.debug('atuCurrentSetpointRH called')
+        #LOGGER.debug('atuCurrentSetpointRH called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuCurrentSetpointRH Received:' + str(value))      
         if self.messana.atuSetCurrentSetpointRH(value, self.atuNbr):
@@ -192,7 +192,7 @@ class messanaAtu(polyinterface.Node):
 
 
     def atuCurrentSetpointDP(self, command):
-        LOGGER.debug('atuCurrentSetpointDP called')
+        #LOGGER.debug('atuCurrentSetpointDP called')
         value = int(command.get('value'))
         LOGGER.debug('Atu'+str(self.atuNbr)+' atuCurrentSetpointDP Received:' + str(value))      
         if self.messana.atuSetCurrentSetpointDP(value, self.atuNbr):

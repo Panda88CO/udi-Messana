@@ -1655,12 +1655,6 @@ class messanaInfo:
                             ,'editors':{}
                             ,'nls':{}}
 
-
-
-        #self.APIKeyVal = '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
-        #self.IP = '192.168.2.65'    
-        #self.mIPaddress = '192.168.2.64'
-        #self.mAPIkey =  '9bf711fc-54e2-4387-9c7f-991bbb02ab3a'
         
         self.APIKey = 'apikey'
         self.APIStr = self.APIKey + '=' + mAPIkey
@@ -1678,7 +1672,7 @@ class messanaInfo:
         if not(self.checkMessanaConnection()):
             LOGGER.debug('Error Connecting to MessanaSystem')
         else:  
-            
+            LOGGER.info('Extracting Information about Messana System')
             self. setMessanaCredentials (mIPaddress, mAPIkey) 
             # Need SystemCapability function               
             self.getSystemCapability()
@@ -1734,9 +1728,9 @@ class messanaInfo:
                 self.updateBufferTankData('all', btNbr)
                 btName = self.bufferTankID+str(btNbr)
                 self.addNodeDefStruct(btNbr, self.bufferTankID, btName )     
-            LOGGER.debug ('Create Setup file')
+
+            LOGGER.info ('Creating Setup file')
             self.createSetupFiles('./profile/nodedef/nodedefs.xml','./profile/editor/editors.xml', './profile/nls/en_us.txt')
-            
             self.ISYmap = self.createISYmapping()
 
 
@@ -1750,7 +1744,7 @@ class messanaInfo:
                         temp[nodes][ISYkey] = {}
                         temp[nodes][ISYkey].update({'messana': mKeys})
                         temp[nodes][ISYkey].update({'editor': self.setupFile['nodeDef'][nodes]['sts'][mKeys][ISYkey]})
-        LOGGER.debug(temp) 
+        #LOGGER.debug(temp) 
         return (temp)
 
     def setMessanaCredentials (self, mIPaddress, APIkey):
@@ -1791,7 +1785,6 @@ class messanaInfo:
 
 
     def addNodeDefStruct(self, nodeNbr, nodeName, nodeId):
-
         self.keyCount = 0
         nodeId.lower()
         LOGGER.debug('addNodeDefStruct: ' + nodeName+ ' ' + str(nodeNbr) + ' '+nodeId)
@@ -1847,7 +1840,7 @@ class messanaInfo:
         if 'sends' in self.mSystem[nodeName]['ISYnode']:         
             self.setupFile['nodeDef'][self.name]['cmds']['sends'] = self.mSystem[nodeName]['ISYnode']['sends']                                 
         return()
-
+    '''
     def addNodeSendComand(self, nodeNbr, nodeId, functionId ):
         self.name = nodeId+str(nodeNbr)
         if self.name in self.setupFile['nodeDef']:
@@ -1859,7 +1852,8 @@ class messanaInfo:
         else:
             LOGGER.debug('Unknown name: ' + nodeId)
         return()
-   
+    '''
+    '''
     def addNodeAcceptComand(self,  nodeNbr, nodeId, functionName, messanaKey):  
         name = nodeId + '_' + str(nodeNbr)
         if len(messanaKey) == 0:
@@ -1876,8 +1870,8 @@ class messanaInfo:
             else:
                 LOGGER.debug(messanaKey + 'not defined')
         return() 
-
-
+        '''
+    '''
     def addSystemSendComand(self, idName):
         if 'sends' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
             self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
@@ -1885,7 +1879,8 @@ class messanaInfo:
             self.setupFile['nodeDef'][ self.systemID]['cmds']['sends']=[]
             self.setupFile['nodeDef'][ self.systemID]['cmds']['sends'].append(idName)
         return()
-   
+    '''
+    '''
     def addSystemAcceptComand(self, functionName, messanaKey):
         if len(messanaKey) == 0:
             if 'accepts' in self.setupFile['nodeDef'][ self.systemID]['cmds']:
@@ -1901,14 +1896,14 @@ class messanaInfo:
             else:
                 LOGGER.debug(messanaKey + 'not defined')
         return() 
-
+    '''
 
     def addSystemDefStruct(self, nodeId):
         self.keyCount = 0
         nodeId.lower()
         self.nlsKey= 'nls' + nodeId
         self.nlsKey.lower()
-        LOGGER.debug('addSystemDefStruct: ' + nodeId)
+        #LOGGER.debug('addSystemDefStruct: ' + nodeId)
         self.setupFile['nodeDef'][ self.systemID]={}
         self.setupFile['nodeDef'][ self.systemID]['CodeId'] = nodeId
         self.setupFile['nodeDef'][ self.systemID]['nlsId'] = self.nlsKey
@@ -2209,7 +2204,7 @@ class messanaInfo:
                     mData = {'value':value, self.APIKey : self.APIKeyVal}
                     try:
                         resp = requests.put(PUTStr, json=mData)
-                        LOGGER.debug(resp)
+                        #LOGGER.debug(resp)
                         if str(resp) != self.RESPONSE_OK:
                             sysData['statusOK'] = False
                             sysData['error'] = str(resp)+ ': Not able to PUT Key: : '+ mKey + ' value:' + str( value )
@@ -2313,7 +2308,7 @@ class messanaInfo:
         return(keys)
 
     def updateNodeData(self, nodeNbr, nodeKey):
-        LOGGER.debug('updatNodeData: ' + str(nodeNbr) + ' ' + nodeKey)
+        LOGGER.info('updatNodeData: ' + str(nodeNbr) + ' ' + nodeKey)
         Data = {}
         dataOK = True
         supportedPullKeys = self.mSystem[nodeKey]['GETkeysList'][nodeNbr]
@@ -2370,7 +2365,7 @@ class messanaInfo:
 
     #Setup file generation 
     def createSetupFiles(self, nodeDefFileName, editorFileName, nlsFileName):
-        LOGGER.debug ('Create Setup Files')
+        #LOGGER.debug ('Create Setup Files')
         status = True
         try:
             LOGGER.debug('opening files')
@@ -2385,7 +2380,7 @@ class messanaInfo:
             nodeFile = open(nodeDefFileName, 'w+')
             editorFile = open(editorFileName, 'w+')
             nlsFile = open(nlsFileName, 'w+')
-            LOGGER.debug('Opening Files OK')
+            #LOGGER.debug('Opening Files OK')
 
             editorFile.write('<editors> \n')
             nodeFile.write('<nodeDefs> \n')
@@ -2537,13 +2532,13 @@ class messanaInfo:
 
 
     def pullSystemDataIndividual(self, mKey):
-        LOGGER.debug('MessanaInfo pull System Data: ' + mKey)
+        #LOGGER.debug('MessanaInfo pull System Data: ' + mKey)
         return(self.GETSystemData(mKey) )
                  
 
     def pushSystemDataIndividual(self, mKey, value):
         sysData={}
-        LOGGER.debug('MessanaInfo push System Data: ' + mKey)       
+        #LOGGER.debug('MessanaInfo push System Data: ' + mKey)       
         sysData = self.PUTSystemData(mKey, value)
         if sysData['statusOK']:
             return(True)
@@ -2571,15 +2566,15 @@ class messanaInfo:
         
 
     def systemPullKeys(self):
-        LOGGER.debug('systemPullKeys')
+        #LOGGER.debug('systemPullKeys')
         return(self.mSystem[self.systemID]['GETkeysList'])
 
     def systemPushKeys(self):
-        LOGGER.debug('systemPushKeys')
+        #LOGGER.debug('systemPushKeys')
         return(self.mSystem[self.systemID]['PUTkeysList'])  
             
     def systemActiveKeys(self):
-        LOGGER.debug('systemActiveKeys')
+        #LOGGER.debug('systemActiveKeys')
         keys=[]
         for mKey in self.mSystem[self.systemID]['GETkeysList']:
             if self.mSystem[self.systemID]['KeyInfo'][mKey]['Active'] != None:
@@ -2693,10 +2688,10 @@ class messanaInfo:
 
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update zone ' + str(zoneNbr))
+            #LOGGER.debug('ALL update zone ' + str(zoneNbr))
             keys =  self.zonePullKeys(zoneNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update zone ' + str(zoneNbr))
+            #LOGGER.debug('ACTIVE update zone ' + str(zoneNbr))
             keys =  self.zoneActiveKeys(zoneNbr)
         
         self.dataOK = True
@@ -2706,25 +2701,25 @@ class messanaInfo:
         return(self.dataOK)
 
     def pullZoneDataIndividual(self, zoneNbr, mKey): 
-        LOGGER.debug('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(zoneNbr, self.zoneID, mKey))
 
 
     def pushZoneDataIndividual(self, zoneNbr, mKey, value):
-        LOGGER.debug('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushZoneDataIndividual: ' +str(zoneNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(zoneNbr, self.zoneID, mKey, value))
 
     def zonePullKeys(self, zoneNbr):
-        LOGGER.debug('zonePullKeys')
+        #LOGGER.debug('zonePullKeys')
         self.tempZoneKeys =  self.getNodeKeys (zoneNbr, self.zoneID, 'GETstr')
         return( self.tempZoneKeys)
 
     def zonePushKeys(self, zoneNbr):
-        LOGGER.debug('zonePushKeys')
+        #LOGGER.debug('zonePushKeys')
         return( self.getNodeKeys (zoneNbr, self.zoneID, 'PUTstr'))
   
     def zoneActiveKeys(self, zoneNbr):
-        LOGGER.debug('zoneActiveKeys')
+        #LOGGER.debug('zoneActiveKeys')
         return( self.getNodeKeys (zoneNbr, self.zoneID, 'Active'))
 
     def getZoneCount(self):
@@ -2800,13 +2795,13 @@ class messanaInfo:
         
 
     def zoneSetEnergySave(self, value, zoneNbr):
-        LOGGER.debug(' zoneSetEnergySave called for zone: ' + str(zoneNbr))
+        #LOGGER.debug(' zoneSetEnergySave called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mEnergySaving', value)
         return(status)
     
     def getZoneEnergySaveISYdriver(self, zoneNbr):
-        LOGGER.debug('getZoneEnergySaveISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZoneEnergySaveISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
@@ -2818,13 +2813,13 @@ class messanaInfo:
 
 
     def zoneSetSetpoint(self, value,  zoneNbr):
-        LOGGER.debug('zoneSetSetpoint called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zoneSetSetpoint called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mSetpoint', value)
         return(status)
 
     def getZoneSetPointISYdriver(self, zoneNbr):
-        LOGGER.debug('getZoneSetpointISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZoneSetpointISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
@@ -2835,14 +2830,14 @@ class messanaInfo:
   
 
     def zoneEnableSchedule(self, value, zoneNbr):
-        LOGGER.debug('zoneEnableSchedule called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zoneEnableSchedule called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mScheduleOn', value)
         return(status)
 
 
     def getZoneEnableScheduleISYdriver(self, zoneNbr):
-        LOGGER.debug('getZoneEnableScheduleISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZoneEnableScheduleISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
@@ -2852,13 +2847,13 @@ class messanaInfo:
         return(Key) 
 
     def zonesetCurrentDPt(self, value,  zoneNbr):
-        LOGGER.debug('zonesetCurrentDPt called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetCurrentDPt called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mCurrentSetpointDP', value)
         return(status)
 
     def getZonesetCurrentDPtISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetCurrentDPtISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetCurrentDPtISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
@@ -2868,13 +2863,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetCurrentRH(self, value,  zoneNbr):
-        LOGGER.debug('zonesetCurrentRH called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetCurrentRH called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mCurrentSetpointRH', value)
         return(status)
 
     def getZonesetCurrentRHISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetCurrentRHISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetCurrentRHISYdriver called for zone: '+str(zoneNbr))
         
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
@@ -2884,13 +2879,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetDehumDpt(self, value,  zoneNbr):
-        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mDehumSetpointDP', value)
         return(status)
 
     def getZonesetDehumDPtISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2899,13 +2894,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetDehumRH(self, value,  zoneNbr):
-        LOGGER.debug('zonesetDehumRH called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetDehumRH called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mDehumSetpointRH', value)
         return(status)
 
     def getZonesetDehumRHISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetDehumRHISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetDehumRHISYdriver called for zone: '+str(zoneNbr))
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2914,13 +2909,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetHumRH(self, value,  zoneNbr):
-        LOGGER.debug('zonesetHumRH called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetHumRH called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mHumSetpointRH', value)
         return(status)
 
     def getZonesetHumRHISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetHumRHISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetHumRHISYdriver called for zone: '+str(zoneNbr))
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2929,13 +2924,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetHumDpt(self, value,  zoneNbr):
-        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mHumSetpointDP', value)
         return(status)
 
     def getZonesetHumDPtISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2944,13 +2939,13 @@ class messanaInfo:
         return(Key)  
 
     def zonesetCO2 (self, value,  zoneNbr):
-        LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
+        #LOGGER.debug('zonesetDehumDpt called for zone: ' + str(zoneNbr))
         
         status = self.pushZoneDataIndividual(zoneNbr, 'mCO2', value)
         return(status)
 
     def getZonesetCO2ISYdriver(self, zoneNbr):
-        LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
+        #LOGGER.debug('getZonesetDehumDPtISYdriver called for zone: '+str(zoneNbr))
         Key = ''
         zoneName = self.zoneID+str(zoneNbr)
         for ISYkey in self.ISYmap[zoneName]:
@@ -2989,10 +2984,10 @@ class messanaInfo:
 
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update macrozone ' + str(macrozoneNbr))
+            #LOGGER.debug('ALL update macrozone ' + str(macrozoneNbr))
             keys =  self.macrozonePullKeys(macrozoneNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update macrozone ' + str(macrozoneNbr))
+            #LOGGER.debug('ACTIVE update macrozone ' + str(macrozoneNbr))
             keys =  self.macrozoneActiveKeys(macrozoneNbr)
         
         self.dataOK = True
@@ -3003,23 +2998,23 @@ class messanaInfo:
 
 
     def pullMacrozoneDataIndividual(self, macrozoneNbr, mKey): 
-        LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey))
 
     def pushMacrozoneDataIndividual(self, macrozoneNbr, mKey, value):
-        LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushMacroZoneDataIndividual: ' +str(macrozoneNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(macrozoneNbr, self.macrozoneID, mKey, value))
 
     def macrozonePullKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozonePullKeys')
+        #LOGGER.debug('macrozonePullKeys')
         return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'GETstr'))
 
     def macrozonePushKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozonePushKeys')
+        #LOGGER.debug('macrozonePushKeys')
         return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'PUTstr'))
   
     def macrozoneActiveKeys(self, macrozoneNbr):
-        LOGGER.debug('macrozoneActiveKeys')
+        #LOGGER.debug('macrozoneActiveKeys')
         return( self.getNodeKeys (macrozoneNbr, self.macrozoneID, 'Active'))    
 
     def getMacrozoneCount(self):
@@ -3090,14 +3085,14 @@ class messanaInfo:
         return(info)
 
     def macrozoneSetStatus(self, value, macrozoneNbr):
-        LOGGER.debug(' macrozoneSetstatus called for macrozone: ' + str(macrozoneNbr))
+        #LOGGER.debug(' macrozoneSetstatus called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mStatus', value)
         return(status)
  
 
     def getMacrozoneStatusISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneStatusISYdriver called for macrozone: '+str(macrozoneNbr))
+        #LOGGER.debug('getMacrozoneStatusISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
@@ -3109,13 +3104,13 @@ class messanaInfo:
 
 
     def macrozoneSetSetpoint(self, value,  macrozoneNbr):
-        LOGGER.debug('macrozoneSetSetpoint called for macrozone: ' + str(macrozoneNbr))
+        #LOGGER.debug('macrozoneSetSetpoint called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mSetpoint', value)
         return(status)
 
     def getMacrozoneSetPointISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneSetpointISYdriver called for macrozone: '+str(macrozoneNbr))
+        #LOGGER.debug('getMacrozoneSetpointISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
@@ -3126,14 +3121,14 @@ class messanaInfo:
   
 
     def macrozoneEnableSchedule(self, value, macrozoneNbr):
-        LOGGER.debug('macrozoneEnableSchedule called for macrozone: ' + str(macrozoneNbr))
+        #LOGGER.debug('macrozoneEnableSchedule called for macrozone: ' + str(macrozoneNbr))
         
         status = self.pushMacrozoneDataIndividual(macrozoneNbr, 'mScheduleOn', value)
         return(status)
 
 
     def getMacrozoneEnableScheduleISYdriver(self, macrozoneNbr):
-        LOGGER.debug('getMacrozoneEnableScheduleISYdriver called for macrozone: '+str(macrozoneNbr))
+        #LOGGER.debug('getMacrozoneEnableScheduleISYdriver called for macrozone: '+str(macrozoneNbr))
         
         Key = ''
         macrozoneName = self.macrozoneID+str(macrozoneNbr)
@@ -3153,10 +3148,10 @@ class messanaInfo:
         LOGGER.debug('updatHcCoData: ' + str(HcCoNbr))
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update Hot Cold CO ' + str(HcCoNbr))
+            #LOGGER.debug('ALL update Hot Cold CO ' + str(HcCoNbr))
             keys =  self.HcCoPullKeys(HcCoNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update Hot Cold CO  ' + str(HcCoNbr))
+            #LOGGER.debug('ACTIVE update Hot Cold CO  ' + str(HcCoNbr))
             keys =  self.HcCoActiveKeys(HcCoNbr)
         
         self.dataOK = True
@@ -3170,23 +3165,23 @@ class messanaInfo:
         self.getNodeCapability(self.HotColdcoID , HcCoNbr)
 
     def pullHcCoDataIndividual(self, HcCoNbr, mKey): 
-        LOGGER.debug('pullHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey))
 
     def pushHcCoDataIndividual(self, HcCoNbr, mKey, value):
-        LOGGER.debug('pushHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushHC_CODataIndividual: ' +str(HcCoNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(HcCoNbr, self.HotColdcoID , mKey, value))
 
     def HcCoPullKeys(self, HcCoNbr):
-        LOGGER.debug('hc_coPullKeys')
+        #LOGGER.debug('hc_coPullKeys')
         return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'GETstr'))
 
     def HcCoPushKeys(self, HcCoNbr):
-        LOGGER.debug('hc_coPushKeys')
+        #LOGGER.debug('hc_coPushKeys')
         return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'PUTstr'))
   
     def HcCoActiveKeys(self, HcCoNbr):
-        LOGGER.debug('hc_coActiveKeys')
+        #LOGGER.debug('hc_coActiveKeys')
         return( self.getNodeKeys (HcCoNbr, self.HotColdcoID , 'Active'))    
 
     def getHcCoCount(self):
@@ -3204,7 +3199,7 @@ class messanaInfo:
 
 
     def HcCoSetMode(self, value, HcCoNbr):
-        LOGGER.debug('HcCoSetMode called for Hot Cold: ' + str(HcCoNbr))
+        #LOGGER.debug('HcCoSetMode called for Hot Cold: ' + str(HcCoNbr))
         
         status = self.pushHcCoDataIndividual(HcCoNbr, 'mMode', value)
         return(status)
@@ -3228,7 +3223,6 @@ class messanaInfo:
             else:
                 info['value'] = ''
             editor = self.setupFile['nodeDef'][HcCoStr]['sts'][mKey][keys[0]]
-
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
@@ -3259,7 +3253,7 @@ class messanaInfo:
         return(self.ISYmap[HcCoName][ISYkey]['messana'])
 
     def getHcCoSetModeISYdriver(self, HcCoNbr):
-        LOGGER.debug('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
+        #LOGGER.debug('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
         HcCoName = self.HotColdcoID+str(HcCoNbr)
         for ISYkey in self.ISYmap[HcCoName]:
@@ -3268,14 +3262,14 @@ class messanaInfo:
         return(Key) 
 
     def HcCoAdaptiveComfort(self, value, HcCoNbr):
-        LOGGER.debug('HcCoAdaptiveComfort called for Hot Cold: ' + str(HcCoNbr))
+        #LOGGER.debug('HcCoAdaptiveComfort called for Hot Cold: ' + str(HcCoNbr))
         
         status = self.pushHcCoDataIndividual(HcCoNbr, 'mAdaptiveComfort', value)
         return(status)
 
 
     def getHcCoAdaptiveComfortISYdriver(self, HcCoNbr):
-        LOGGER.debug('getHcCoAdaptiveComfortISYdriver called for Hot Cold: '+str(HcCoNbr))
+        #LOGGER.debug('getHcCoAdaptiveComfortISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
         HcCoName = self.HotColdcoID+str(HcCoNbr)
         for ISYkey in self.ISYmap[HcCoName]:
@@ -3285,12 +3279,7 @@ class messanaInfo:
 
     ####################################################
     #ATU
-    '''
-    def getATUCapability(self, atuNbr): 
-        LOGGER.debug('getATUCapability')               
-        self.getNodeCapability(self.atuID, atuNbr)
-    '''
-    
+   
     def getAtuCapability(self, atuNbr): 
         LOGGER.debug('getAtuCapability for ' + str(atuNbr))             
         self.getNodeCapability(self.atuID, atuNbr)
@@ -3300,10 +3289,10 @@ class messanaInfo:
 
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update atu ' + str(atuNbr))
+            #LOGGER.debug('ALL update atu ' + str(atuNbr))
             keys =  self.atuPullKeys(atuNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update atu ' + str(atuNbr))
+            #LOGGER.debug('ACTIVE update atu ' + str(atuNbr))
             keys =  self.atuActiveKeys(atuNbr)
         
         self.dataOK = True
@@ -3341,23 +3330,23 @@ class messanaInfo:
 
 
     def pullAtuDataIndividual(self, atuNbr, mKey): 
-        LOGGER.debug('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullAtuDataIndividual: ' +str(atuNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(atuNbr, self.atuID, mKey))
 
     def pushAtuDataIndividual(self, ATUNbr, mKey, value):
-        LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushATUDataIndividual: ' +str(ATUNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(ATUNbr, self.atuID, mKey, value))
 
     def atuPullKeys(self, ATUNbr): 
-        LOGGER.debug('atusPullKeys')
+        #LOGGER.debug('atusPullKeys')
         return( self.getNodeKeys (ATUNbr, self.atuID, 'GETstr'))
 
     def atuPushKeys(self, ATUNbr):
-        LOGGER.debug('atusPushKeys')
+        #LOGGER.debug('atusPushKeys')
         return( self.getNodeKeys (ATUNbr, self.atuID, 'PUTstr'))
   
     def atuActiveKeys(self, ATUNbr):
-        LOGGER.debug('atusActiveKeys')
+        #LOGGER.debug('atusActiveKeys')
         return( self.getNodeKeys (ATUNbr, self.atuID, 'Active'))    
   
     def getAtuCount(self):
@@ -3396,12 +3385,12 @@ class messanaInfo:
         return(info)
 
     def atuSetStatus(self, value, atuNbr):
-        LOGGER.debug ('atuSetStatus')
+        #LOGGER.debug ('atuSetStatus')
         status = self.pushAtuDataIndividual(atuNbr, 'mStatus', value)
         return(status)
  
     def getAtuStatusISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuStatusISYdriver called')
+        #LOGGER.debug ('getAtuStatusISYdriver called')
         Key = ''
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
@@ -3410,12 +3399,12 @@ class messanaInfo:
         return(Key)  
   
     def atuSetHrv(self, value, atuNbr):
-        LOGGER.debug ('atuSetHRV called')
+        #LOGGER.debug ('atuSetHRV called')
         status = self.pushAtuDataIndividual(atuNbr, 'mHRVOn', value)
         return(status)
 
     def getAtuHrvISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuHrvISYdriver called')
+        #LOGGER.debug ('getAtuHrvISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mHRVOn':
@@ -3423,12 +3412,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetFlowlevel(self, value, atuNbr):
-        LOGGER.debug ('atuSetFlowlevel called')
+        #LOGGER.debug ('atuSetFlowlevel called')
         status = self.pushAtuDataIndividual(atuNbr, 'mFlowLevel', value)
         return(status)
 
     def getAtuSetFlowlevelISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetPointISYdriver called')
+        #LOGGER.debug ('getAtuSetPointISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mFlowLevel':
@@ -3436,12 +3425,12 @@ class messanaInfo:
         return(Key)  
         
     def atuSetHum(self, value, atuNbr):
-        LOGGER.debug ('atuSetHum called')
+        #LOGGER.debug ('atuSetHum called')
         status = self.pushAtuDataIndividual(atuNbr, 'mHUMOn', value)
         return(status)
 
     def getAtuSetHumISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetHumISYdriver called')
+        #LOGGER.debug ('getAtuSetHumISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mHUMOn':
@@ -3449,12 +3438,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetInt(self, value, atuNbr):
-        LOGGER.debug ('atuSetInt called')
+        #LOGGER.debug ('atuSetInt called')
         status = self.pushAtuDataIndividual(atuNbr, 'mINTOn', value)
         return(status)
 
     def getAtuSetIntISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetIntISYdriver called')
+        #LOGGER.debug ('getAtuSetIntISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mINTOn':
@@ -3462,12 +3451,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetNtd(self, value, atuNbr):
-        LOGGER.debug ('atuSetNtd called')
+        #LOGGER.debug ('atuSetNtd called')
         status = self.pushAtuDataIndividual(atuNbr, 'mNTDOn', value)
         return(status)
 
     def getAtuSetNtdISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetNtdISYdriver called')
+        #LOGGER.debug ('getAtuSetNtdISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mNTDOn':
@@ -3475,12 +3464,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetHumSetpointRH(self, value, atuNbr):
-        LOGGER.debug ('atuSetHumSetpointRH called')
+        #LOGGER.debug ('atuSetHumSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mHumSetpointRH', value)
         return(status)
 
     def getAtuSetHumSetpointRHISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
+        #LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mHumSetpointRH':
@@ -3488,12 +3477,12 @@ class messanaInfo:
         return(Key)
 
     def atuSetHumSetpointDP(self, value, atuNbr):
-        LOGGER.debug ('atuSetHumSetpointDP called')
+        #LOGGER.debug ('atuSetHumSetpointDP called')
         status = self.pushAtuDataIndividual(atuNbr, 'mHumSetpointDP', value)
         return(status)
 
     def getAtuSetHumSetpointDPISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
+        #LOGGER.debug ('getAtuSetHumSetpointRHISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mHumSetpointDP':
@@ -3501,12 +3490,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetDehumSetpointRH(self, value, atuNbr):
-        LOGGER.debug ('atuSetDehumSetpointRH called')
+        #LOGGER.debug ('atuSetDehumSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointRH', value)
         return(status)
 
     def getAtuSetDehumSetpointRHISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetDehumSetpointRHISYdriver called')
+        #LOGGER.debug ('getAtuSetDehumSetpointRHISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointRH':
@@ -3515,12 +3504,12 @@ class messanaInfo:
 
 
     def atuSetDehumSetpointDP(self, value, atuNbr):
-        LOGGER.debug ('atuSetDehumSetpointDP called')
+        #LOGGER.debug ('atuSetDehumSetpointDP called')
         status = self.pushAtuDataIndividual(atuNbr, 'mDehumSetpointDP', value)
         return(status)
 
     def getAtuSetDehumSetpointDPISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetDehumSetpointDPISYdriver called')
+        #LOGGER.debug ('getAtuSetDehumSetpointDPISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mDehumSetpointDP':
@@ -3528,12 +3517,12 @@ class messanaInfo:
         return(Key)
 
     def atuSetCurrentSetpointRH(self, value, atuNbr):
-        LOGGER.debug ('atuSetCurrentSetpointRH called')
+        #LOGGER.debug ('atuSetCurrentSetpointRH called')
         status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointRH', value)
         return(status)
 
     def getAtuSetCurrentSetpointRHISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetCurrentSetpointRHISYdriver called')
+        #LOGGER.debug ('getAtuSetCurrentSetpointRHISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mCurrentSetpointRH':
@@ -3541,12 +3530,12 @@ class messanaInfo:
         return(Key)  
 
     def atuSetCurrentSetpointDP(self, value, atuNbr):
-        LOGGER.debug ('atuSetCurrentSetpointDP called')
+        #LOGGER.debug ('atuSetCurrentSetpointDP called')
         status = self.pushAtuDataIndividual(atuNbr, 'mCurrentSetpointDP', value)
         return(status)
 
     def getAtuSetCurrentSetpointDPISYdriver(self, atuNbr):
-        LOGGER.debug ('getAtuSetCurrentSetpointDPISYdriver called')
+        #LOGGER.debug ('getAtuSetCurrentSetpointDPISYdriver called')
         atuName = self.atuID+str(atuNbr)
         for ISYkey in self.ISYmap[atuName]:
             if self.ISYmap[atuName][ISYkey]['messana'] == 'mCurrentSetpointDP':
@@ -3561,10 +3550,10 @@ class messanaInfo:
         LOGGER.debug('updatFanCoilData: ' + str(FanCoilNbr))
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update Fan Coil ' + str(FanCoilNbr))
+            #LOGGER.debug('ALL update Fan Coil ' + str(FanCoilNbr))
             keys =  self.fan_coilPullKeys(FanCoilNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update Fan Coil  ' + str(FanCoilNbr))
+            #LOGGER.debug('ACTIVE update Fan Coil  ' + str(FanCoilNbr))
             keys =  self.fan_coilActiveKeys(FanCoilNbr)
         
         self.dataOK = True
@@ -3589,23 +3578,23 @@ class messanaInfo:
         self.getNodeCapability(self.fcID, FanCoilNbr)
 
     def pullFanCoilDataIndividual(self, FanCoilNbr, mKey): 
-        LOGGER.debug('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(FanCoilNbr, self.fcID, mKey))
 
     def pushFanCoilDataIndividual(self, FanCoilNbr, mKey, value):
-        LOGGER.debug('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushFanCoilDataIndividual: ' +str(FanCoilNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(FanCoilNbr, self.fcID, mKey, value))
 
     def fan_coilPullKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilPullKeys')
+        #LOGGER.debug('fan_coilPullKeys')
         return( self.getNodeKeys (FanCoilNbr, self.fcID, 'GETstr'))
 
     def fan_coilPushKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilPushKeys')
+        #LOGGER.debug('fan_coilPushKeys')
         return( self.getNodeKeys (FanCoilNbr, self.fcID, 'PUTstr'))
   
     def fan_coilActiveKeys(self, FanCoilNbr):
-        LOGGER.debug('fan_coilActiveKeys')
+        #LOGGER.debug('fan_coilActiveKeys')
         return( self.getNodeKeys (FanCoilNbr, self.fcID, 'Active'))    
     
     def getFanCoilCount(self):
@@ -3638,12 +3627,12 @@ class messanaInfo:
         return(self.ISYmap[fanCoilName][ISYkey]['messana'])
 
     def fanCoilSetCoolingSpeed(self, value, FanCoilNbr):
-        LOGGER.debug ('fanCoilSetCoolingSpeed called')
+        #LOGGER.debug ('fanCoilSetCoolingSpeed called')
         status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mCoolingSpeed', value)
         return(status)
  
     def getFanCoilCoolingSpeedISYdriver(self, FanCoilNbr):
-        LOGGER.debug ('getFanCoilCoolingSpeedISYdriver called')
+        #LOGGER.debug ('getFanCoilCoolingSpeedISYdriver called')
         Key = ''
         fanCoilName = self.fcID+str(FanCoilNbr)
         for ISYkey in self.ISYmap[fanCoilName]:
@@ -3674,12 +3663,12 @@ class messanaInfo:
         return (status, systemValue)
 
     def fanCoilSetHeatingSpeed(self, value, FanCoilNbr):
-        LOGGER.debug ('fanCoilSetHeatingSpeed called')
+        #LOGGER.debug ('fanCoilSetHeatingSpeed called')
         status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mHeatingSpeed', value)
         return(status)
  
     def getFanCoilHeatingSpeedISYdriver(self, FanCoilNbr):
-        LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
+        #LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
         Key = ''
         fanCoilName = self.fcID+str(FanCoilNbr)
         for ISYkey in self.ISYmap[fanCoilName]:
@@ -3689,12 +3678,12 @@ class messanaInfo:
 
 
     def fanCoilSetStatus(self, value, FanCoilNbr):
-        LOGGER.debug ('fanCoilSetStatus called')
+        #LOGGER.debug ('fanCoilSetStatus called')
         status = self.pushFanCoilDataIndividual(FanCoilNbr, 'mStatus', value)
         return(status)
  
     def getFanCoilStatusISYdriver(self, FanCoilNbr):
-        LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
+        #LOGGER.debug ('getFanCoilHeatingSpeedISYdriver called')
         Key = ''
         fanCoilName = self.fcID+str(FanCoilNbr)
         for ISYkey in self.ISYmap[fanCoilName]:
@@ -3708,10 +3697,10 @@ class messanaInfo:
         LOGGER.debug('updatEnergySourceData: ' + str(EnergySourceNbr))
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update Energy Source ' + str(EnergySourceNbr))
+            #LOGGER.debug('ALL update Energy Source ' + str(EnergySourceNbr))
             keys =  self.energySourcePullKeys(EnergySourceNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update Energy Source  ' + str(EnergySourceNbr))
+            #LOGGER.debug('ACTIVE update Energy Source  ' + str(EnergySourceNbr))
             keys =  self.energySourceActiveKeys(EnergySourceNbr)
         
         self.dataOK = True
@@ -3740,23 +3729,23 @@ class messanaInfo:
         self.getNodeCapability( self.energySourceID, EnergySourceNbr)
 
     def pullEnergySourceDataIndividual(self, EnergySourceNbr, mKey): 
-        LOGGER.debug('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey))
 
     def pushEnergySourceDataIndividual(self, EnergySourceNbr, mKey, value):
-        LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushEnergySourceDataIndividual: ' +str(EnergySourceNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey, value))
 
     def energySourcePullKeys(self, EnergySourceNbr):
-        LOGGER.debug('energySourcePullKeys')
+        #LOGGER.debug('energySourcePullKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'GETstr'))
 
     def energySourcePushKeys(self, EnergySourceNbr):
-        LOGGER.debug('EnergySourcePushKeys')
+        #LOGGER.debug('EnergySourcePushKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'PUTstr'))
   
     def energySourceActiveKeys(self, EnergySourceNbr):
-        LOGGER.debug('energySourceActiveKeys')
+        #LOGGER.debug('energySourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'Active'))    
     
     def getEnergySourceISYdriverInfo(self, mKey, EnergySourceNbr):
@@ -3821,25 +3810,25 @@ class messanaInfo:
         return(self.ISYmap[bufTankName][ISYkey]['messana'])
 
     def bufferTankPullKeys(self, bufTankNbr): 
-        LOGGER.debug('bufTankPullKeys')
+        #LOGGER.debug('bufTankPullKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'GETstr'))
 
     def bufferTankPushKeys(self, bufTankNbr):
-        LOGGER.debug('bufTankPushKeys')
+        #LOGGER.debug('bufTankPushKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'PUTstr'))
   
     def bufferTankActiveKeys(self, bufTankNbr):
-        LOGGER.debug('bufTankActiveKeys')
+        #LOGGER.debug('bufTankActiveKeys')
         return( self.getNodeKeys (bufTankNbr, self.bufferTankID, 'Active'))           
 
     def updateBufferTankData(self,  level, bufTankNbr):
         LOGGER.debug('updateBufferTankData: ' + str(bufTankNbr))
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update buffer tank ' + str(bufTankNbr))
+            #LOGGER.debug('ALL update buffer tank ' + str(bufTankNbr))
             keys =  self.bufferTankPullKeys(bufTankNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update buffer tank ' + str(bufTankNbr))
+            #LOGGER.debug('ACTIVE update buffer tank ' + str(bufTankNbr))
             keys =  self.bufferTankActiveKeys(bufTankNbr)
         
         self.dataOK = True
@@ -3872,11 +3861,11 @@ class messanaInfo:
         return (status, systemValue)
 
     def pullBufferTankDataIndividual(self, bufTankNbr, mKey): 
-        LOGGER.debug('pullBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(bufTankNbr, self.bufferTankID, mKey))
 
     def pushBufferTankDataIndividual(self, bufTankNbr, mKey, value):
-        LOGGER.debug('pushBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushBufferTankDataIndividual: ' +str(bufTankNbr)  + ' ' + mKey + ' ' + str(value))  
 
         if mKey == 'mStatus':
             BTdata = {}
@@ -3926,12 +3915,12 @@ class messanaInfo:
 
 
     def bufferTankSetStatus(self, value, bufTankNbr):
-        LOGGER.debug ('bufferTankSetStatus')
+        #LOGGER.debug ('bufferTankSetStatus')
         status = self.pushBufferTankDataIndividual(bufTankNbr, 'mStatus', value)
         return(status)
  
     def getBufferTankStatusISYdriver(self, bufTankNbr):
-        LOGGER.debug ('getBufferTankStatusISYdriver called')
+        #LOGGER.debug ('getBufferTankStatusISYdriver called')
         Key = ''
         bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
@@ -3940,12 +3929,12 @@ class messanaInfo:
         return(Key) 
 
     def bufferTankSetSetMode(self, value, bufTankNbr):
-        LOGGER.debug ('bufferTankSetSetMode')
+        #LOGGER.debug ('bufferTankSetSetMode')
         status = self.pushAtuDataIndividual(bufTankNbr, 'mMode', value)
         return(status)
  
     def getBufferTankSetModeISYdriver(self, bufTankNbr):
-        LOGGER.debug ('getBufferTankSetModeISYdriver called')
+        #LOGGER.debug ('getBufferTankSetModeISYdriver called')
         Key = ''
         bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
@@ -3953,12 +3942,12 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
     def bufferTankTempStatus(self, value, bufTankNbr):
-        LOGGER.debug ('bufferTankTempStatus')
+        #LOGGER.debug ('bufferTankTempStatus')
         status = self.pushAtuDataIndividual(bufTankNbr, 'mTempMode', value)
         return(status)
  
     def getBufferTankTempStatusISYdriver(self, bufTankNbr):
-        LOGGER.debug ('getBufferTankTempStatusISYdriver called')
+        #LOGGER.debug ('getBufferTankTempStatusISYdriver called')
         Key = ''
         bufTankName = self.bufferTankID+str(bufTankNbr)
         for ISYkey in self.ISYmap[bufTankName]:
@@ -3975,10 +3964,10 @@ class messanaInfo:
         LOGGER.debug('updatDHWData: ' + str(DHWNbr))
         keys =[]
         if level == 'all':
-            LOGGER.debug('ALL update  Domestic Hot Water ' + str(DHWNbr))
+            #LOGGER.debug('ALL update  Domestic Hot Water ' + str(DHWNbr))
             keys =  self.DHWPullKeys(DHWNbr)
         elif level == 'active':
-            LOGGER.debug('ACTIVE update Domestic Hot Water ' + str(DHWNbr))
+            #LOGGER.debug('ACTIVE update Domestic Hot Water ' + str(DHWNbr))
             keys =  self.DHWActiveKeys(DHWNbr)
         
         self.dataOK = True
@@ -3992,24 +3981,24 @@ class messanaInfo:
         self.getNodeCapability(self.dhwID, DHWNbr)
 
     def pullDHWDataIndividual(self, DHWNbr, mKey): 
-        LOGGER.debug('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
+        #LOGGER.debug('pullDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey)    
         return(self.pullNodeDataIndividual(DHWNbr, self.dhwID, mKey))
 
     def pushDHWDataIndividual(self, DHWNbr, mKey, value):
-        LOGGER.debug('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
+        #LOGGER.debug('pushDHWDataIndividual: ' +str(DHWNbr)  + ' ' + mKey + ' ' + str(value))  
         return(self.pushNodeDataIndividual(DHWNbr, self.dhwID, mKey, value))
 
 
     def DHWPullKeys(self, DHWNbr):
-        LOGGER.debug('DHWPullKeys')
+        #LOGGER.debug('DHWPullKeys')
         return( self.getNodeKeys (DHWNbr, self.dhwID, 'GETstr'))
 
     def DHWPushKeys(self, DHWNbr):
-        LOGGER.debug('DHWPushKeys')
+        #LOGGER.debug('DHWPushKeys')
         return( self.getNodeKeys (DHWNbr, self.dhwID, 'PUTstr'))
   
     def DHWActiveKeys(self, DHWNbr):
-        LOGGER.debug('DHWActiveKeys')
+        #LOGGER.debug('DHWActiveKeys')
         return( self.getNodeKeys (DHWNbr, self.dhwID, 'active'))    
 
     def getDomesticHotWaterCount(self):
@@ -4026,12 +4015,12 @@ class messanaInfo:
         return(self.dhwID + str(DHWNbr))
 
     def hotWaterSetStatus(self, value, DHWNbr):
-        LOGGER.debug ('hotWaterSetStatus')
+        #LOGGER.debug ('hotWaterSetStatus')
         status = self.pushAtuDataIndividual(DHWNbr, 'mStatus', value)
         return(status)
  
     def getHotWaterStatusISYdriver(self, DHWNbr):
-        LOGGER.debug ('getHotWaterStatusISYdriver called')
+        #LOGGER.debug ('getHotWaterStatusISYdriver called')
         Key = ''
         DHWName = self.dhwID+str(DHWNbr)
         for ISYkey in self.ISYmap[DHWName]:
@@ -4061,12 +4050,12 @@ class messanaInfo:
         return(info)
 
     def hotWaterSetTargetTempt(self, value, DHWNbr):
-        LOGGER.debug ('hotWaterSetTargetTempt')
+        #LOGGER.debug ('hotWaterSetTargetTempt')
         status = self.pushAtuDataIndividual(DHWNbr, 'mTargetTemp', value)
         return(status)
  
     def getHotWaterSetTargetTempISYdriver(self, DHWNbr):
-        LOGGER.debug ('getHotWaterSetTargetTempISYdriver called')
+        #LOGGER.debug ('getHotWaterSetTargetTempISYdriver called')
         Key = ''
         DHWName = self.dhwID+str(DHWNbr)
         for ISYkey in self.ISYmap[DHWName]:
