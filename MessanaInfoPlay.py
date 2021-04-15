@@ -3229,6 +3229,28 @@ class messanaInfo:
         return(status)
 
 
+    def getHcCoISYdriverInfo(self, mKey, HcCoNbr):
+        info = {}
+        HcCoStr = self.HotColdcoID+str(HcCoNbr)
+        if mKey in self.setupFile['nodeDef'][HcCoStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][HcCoStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.HotColdcoID, HcCoNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][HcCoStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
     def getHcCoSetModeISYdriver(self, HcCoNbr):
         LOGGER.debug('getHcCoSetModeISYdriver called for Hot Cold: '+str(HcCoNbr))
         Key = ''
@@ -3582,6 +3604,28 @@ class messanaInfo:
     def getFanCoilCount(self):
         return(self.mSystem[ self.systemID]['data']['mFanCoilCount'])
 
+    def getFanCoilISYdriverInfo(self, mKey, FanCoilNbr):
+        info = {}
+        FanCoilStr = self.fcID+str(FanCoilNbr)
+        if mKey in self.setupFile['nodeDef'][FanCoilStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][FanCoilStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.fcID, FanCoilNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][FanCoilStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
 
     def fanCoilSetCoolingSpeed(self, value, FanCoilNbr):
         LOGGER.debug ('fanCoilSetCoolingSpeed called')
@@ -3684,6 +3728,28 @@ class messanaInfo:
         LOGGER.debug('energy_sourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'Active'))    
     
+    def getEnergySourceISYdriverInfo(self, mKey, EnergySourceNbr):
+        info = {}
+        EnergySourceStr = self.energySourceID+str(EnergySourceNbr)
+        if mKey in self.setupFile['nodeDef'][EnergySourceStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][EnergySourceStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.energySourceID, EnergySourceNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][EnergySourceStr]['sts'][mKey][keys[0]]
+
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
    
     #####################################################
     #Buffer Tank
@@ -3910,12 +3976,33 @@ class messanaInfo:
     def getHotWaterStatusISYdriver(self, DHWNbr):
         LOGGER.debug ('getHotWaterStatusISYdriver called')
         Key = ''
-        DHWName = self.bufferTankID+str(DHWNbr)
+        DHWName = self.dhwID+str(DHWNbr)
         for ISYkey in self.ISYmap[DHWName]:
             if self.ISYmap[DHWName][ISYkey]['messana'] == 'mStatus':
                 Key = ISYkey
         return(Key)  
   
+    def getHotWaterISYdriverInfo(self, mKey, DHWNbr):
+        info = {}
+        DHWStr = self.dhwID+str(DHWNbr)
+        if mKey in self.setupFile['nodeDef'][DHWStr]['sts']:
+            keys = list(self.setupFile['nodeDef'][DHWStr]['sts'][mKey].keys())
+            info['driver'] = keys[0]
+            tempData =  self.GETNodeData(self.dhwID, DHWNbr, mKey)
+            if tempData['statusOK']:
+                val = tempData['data']        
+                if val in  ['Celcius', 'Fahrenheit']:
+                    if val == 'Celcius':
+                        val = 0
+                    else:  
+                        val = 1 
+                info['value'] = val
+            else:
+                info['value'] = ''
+            editor = self.setupFile['nodeDef'][DHWStr]['sts'][mKey][keys[0]]
+            info['uom'] = self.setupFile['editors'][editor]['ISYuom']
+        return(info)
+
     def hotWaterSetTargetTempt(self, value, DHWNbr):
         LOGGER.debug ('hotWaterSetTargetTempt')
         status = self.pushAtuDataIndividual(DHWNbr, 'mTargetTemp', value)
@@ -3924,7 +4011,7 @@ class messanaInfo:
     def getHotWaterSetTargetTempISYdriver(self, DHWNbr):
         LOGGER.debug ('getHotWaterSetTargetTempISYdriver called')
         Key = ''
-        DHWName = self.bufferTankID+str(DHWNbr)
+        DHWName = self.dhwID+str(DHWNbr)
         for ISYkey in self.ISYmap[DHWName]:
             if self.ISYmap[DHWName][ISYkey]['messana'] == 'mTargetTemp':
                 Key = ISYkey
