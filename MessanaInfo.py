@@ -3173,7 +3173,7 @@ class messanaInfo:
         HcCoName = self.HotColdcoID+str(HcCoNbr)
         messanaKey = self.ISYmap[HcCoName][ISYkey]['messana']
         try:
-            data = self.pullMacrozoneDataIndividual(HcCoNbr, messanaKey)
+            data = self.pullHcCoDataIndividual(HcCoNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -3587,7 +3587,7 @@ class messanaInfo:
         fanCoilName = self.fcID+str(fanCoilNbr)
         messanaKey = self.ISYmap[fanCoilName][ISYkey]['messana']
         try:
-            data = self.pullMacrozoneDataIndividual(fanCoilNbr, messanaKey)
+            data = self.pullFanCoilDataIndividual(fanCoilNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -3717,7 +3717,7 @@ class messanaInfo:
         energySourceName = self.energySourceID+str(energySourceNbr)
         messanaKey = self.ISYmap[energySourceName][ISYkey]['messana']
         try:
-            data = self.pullMacrozoneDataIndividual(energySourceNbr, messanaKey)
+            data = self.pullEnergySourceDataIndividual(energySourceNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
@@ -4010,7 +4010,7 @@ class messanaInfo:
         dhwName = self.dhwID+str(dhwNbr)
         messanaKey = self.ISYmap[dhwName][ISYkey]['messana']
         try:
-            data = self.pullMacrozoneDataIndividual(dhwNbr, messanaKey)
+            data = self.pullDHWDataIndividual(dhwNbr, messanaKey)
             if data['statusOK']:
                 val = data['data']        
                 if val in  ['Celcius', 'Fahrenheit']:
