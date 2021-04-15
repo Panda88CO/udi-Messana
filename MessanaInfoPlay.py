@@ -3733,10 +3733,10 @@ class messanaInfo:
         keys =[]
         if level == 'all':
             LOGGER.debug('ALL update Energy Source ' + str(EnergySourceNbr))
-            keys =  self.energy_sourcePullKeys(EnergySourceNbr)
+            keys =  self.energySourcePullKeys(EnergySourceNbr)
         elif level == 'active':
             LOGGER.debug('ACTIVE update Energy Source  ' + str(EnergySourceNbr))
-            keys =  self.energy_sourceActiveKeys(EnergySourceNbr)
+            keys =  self.energySourceActiveKeys(EnergySourceNbr)
         
         self.dataOK = True
         for mKey in keys:
@@ -3772,7 +3772,7 @@ class messanaInfo:
         return(self.pushNodeDataIndividual(EnergySourceNbr,  self.energySourceID, mKey, value))
 
     def energySourcePullKeys(self, EnergySourceNbr):
-        LOGGER.debug('energy_sourcePullKeys')
+        LOGGER.debug('energySourcePullKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'GETstr'))
 
     def energySourcePushKeys(self, EnergySourceNbr):
@@ -3780,7 +3780,7 @@ class messanaInfo:
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'PUTstr'))
   
     def energySourceActiveKeys(self, EnergySourceNbr):
-        LOGGER.debug('energy_sourceActiveKeys')
+        LOGGER.debug('energySourceActiveKeys')
         return( self.getNodeKeys (EnergySourceNbr,  self.energySourceID, 'Active'))    
     
     def getEnergySourceISYdriverInfo(self, mKey, EnergySourceNbr):
