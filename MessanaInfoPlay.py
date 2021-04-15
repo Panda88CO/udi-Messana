@@ -3670,7 +3670,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key) 
 
-  def getFanCoilISYValue(self, ISYkey, fanCoilNbr):
+    def getFanCoilISYValue(self, ISYkey, fanCoilNbr):
         fanCoilName = self.fcID+str(fanCoilNbr)
         messanaKey = self.ISYmap[fanCoilName][ISYkey]['messana']
         try:
@@ -3805,7 +3805,7 @@ class messanaInfo:
             info['uom'] = self.setupFile['editors'][editor]['ISYuom']
         return(info)
 
-  def getEnergySourceISYValue(self, ISYkey, energySourceNbr):
+    def getEnergySourceISYValue(self, ISYkey, energySourceNbr):
         energySourceName = self.energySourceID+str(energySourceNbr)
         messanaKey = self.ISYmap[energySourceName][ISYkey]['messana']
         try:
@@ -4098,7 +4098,7 @@ class messanaInfo:
                 Key = ISYkey
         return(Key)  
 
-  def getHotWaterISYValue(self, ISYkey, dhwNbr):
+    def getHotWaterISYValue(self, ISYkey, dhwNbr):
         dhwName = self.dhwID+str(dhwNbr)
         messanaKey = self.ISYmap[dhwName][ISYkey]['messana']
         try:
