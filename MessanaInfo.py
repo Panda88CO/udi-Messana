@@ -334,8 +334,8 @@ class messanaInfo:
                                             ,'Active': None 
                                             ,'ISYeditor':{   
                                                      'ISYuom':17
-                                                    ,'ISYmin':40
-                                                    ,'ISYmax':120
+                                                    ,'ISYmin':60
+                                                    ,'ISYmax':90
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':0.5
                                                     ,'ISYprec':1 }
@@ -709,8 +709,8 @@ class messanaInfo:
                                              ,'Active': None 
                                              ,'ISYeditor':{   
                                                      'ISYuom':17
-                                                    ,'ISYmin':40
-                                                    ,'ISYmax':120
+                                                    ,'ISYmin':60
+                                                    ,'ISYmax':90
                                                     ,'ISYsubset':None
                                                     ,'ISYstep':0.5
                                                     ,'ISYprec':1 }
