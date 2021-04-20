@@ -5,7 +5,7 @@
     "executable": "MessanaController.py",
     "install": "install.sh",
     "description": "Nodeserver to allow integration of Messana Radiant heating/cooling",
-    "notice": "My current system only supports heat, so cooling is not tested yet.  No Fan Coils in my system, and DHW is not integrated ",
+    "notice": "My current system only supports heat, so cooling is not tested yet.  No Fan Coils in my system, and DHW is not integrated.",
     "shortPoll": "120",
     "longPoll": "600",
     "credits": [
