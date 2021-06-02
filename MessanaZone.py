@@ -179,7 +179,7 @@ class messanaZone(polyinterface.Node):
         value = int(command.get('value'))
         LOGGER.debug('Zone'+str(self.zoneNbr)+' setCurrentDewPt Received:' + str(value))
         if self.messana.zonesetCO2(value, self.zoneNbr):
-            ISYdriver = self.messana.getZonesetCO@ISYdriver(self.zoneNbr)
+            ISYdriver = self.messana.getZonesetCO2ISYdriver(self.zoneNbr)
             self.setDriver(ISYdriver, value, report = True)
 
     commands = { 'SET_SETPOINT' : setSetpoint
