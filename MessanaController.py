@@ -23,8 +23,8 @@ class MessanaController(polyinterface.Controller):
         self.messanaImportOK = 0
         self.ISYforced = False
         self.name = 'Messana Main'
-        self.address ='msystem'
-        self.id = self.address
+        #self.address ='msystem'
+        self.id = 'msystem'
         #LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
@@ -81,7 +81,7 @@ class MessanaController(polyinterface.Controller):
             if self.messana == False:
                 self.stop()
             self.id = self.messana.getSystemAddress()
-            self.address = self.messana.getSystemAddress()
+            #self.address = self.messana.getSystemAddress()
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
