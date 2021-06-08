@@ -37,7 +37,7 @@ class messanaHotWater(polyinterface.Node):
 
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('HotWater updateISYdrivers')
+        #LOGGER.debug('HotWater updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
@@ -69,32 +69,32 @@ class messanaHotWater(polyinterface.Node):
                 LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
-        LOGGER.debug('stop - Messana HotWater Cleaning up')
+        LOGGER.info('stop - Messana HotWater Cleaning up')
 
     def shortPoll(self):
-        LOGGER.debug('Messana HotWater shortPoll - hotWater '+ str(self.hotWaterNbr))
+        #LOGGER.debug('Messana HotWater shortPoll - hotWater '+ str(self.hotWaterNbr))
         self.messana.updateHotWaterData('active', self.hotWaterNbr)
         self.updateISYdrivers('active')
                    
     def longPoll(self):
-        LOGGER.debug('Messana HotWater longPoll - hotWater ' + str(self.hotWaterNbr))
+        #LOGGER.debug('Messana HotWater longPoll - hotWater ' + str(self.hotWaterNbr))
         self.messana.updateHotWaterData('all', self.hotWaterNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
 
     def query(self, command=None):
-        LOGGER.debug('TOP querry')
+        LOGGER.info('TOP querry')
 
     def setStatus(self, command):
         #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('HotWater'+str(self.hotWaterNbr)+' setStatus Received:' + str(value))
+        #LOGGER.debug('HotWater'+str(self.hotWaterNbr)+' setStatus Received:' + str(value))
         if self.messana.hotWaterSetStatus(value, self.hotWaterNbr):
             ISYdriver = self.messana.getHotWaterStatusISYdriver(self.hotWaterNbr)
             self.setDriver(ISYdriver, value, report = True)
 
     def HotWaterUpdate(self, command):
-        LOGGER.debug('HWupdate called' + str(self.hotWaterNbr))
+        #LOGGER.debug('HWupdate called' + str(self.hotWaterNbr))
         self.messana.updateHotWaterData('all', self.hotWaterNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
@@ -103,7 +103,7 @@ class messanaHotWater(polyinterface.Node):
     def setHWTargetTemp(self, command):
         #LOGGER.debug('setSetpoint Called')
         value = int(command.get('value'))
-        LOGGER.debug('HotWater'+str(self.hotWaterNbr)+' Target Temp Received:' + str(value))
+        #LOGGER.debug('HotWater'+str(self.hotWaterNbr)+' Target Temp Received:' + str(value))
         if self.messana.hotWaterSetTargetTempt(value, self.hotWaterNbr):
             ISYdriver = self.messana.getHotWaterSetTargetTempISYdriver(self.hotWaterNbr)
             self.setDriver(ISYdriver, value, report = True)
