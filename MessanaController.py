@@ -29,7 +29,7 @@ class MessanaController(polyinterface.Controller):
         self.primary = self.address
         self.hb = 0
         self.ISYdrivers=[]
-        self.ISYcommands = {}
+        #self.ISYcommands = {}
         self.ISYTempUnit = 0
         self.drivers = []
         self.nodeDefineDone = False
