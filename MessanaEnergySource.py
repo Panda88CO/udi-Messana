@@ -38,7 +38,7 @@ class messanaEnergySource(polyinterface.Node):
 
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('EnergySource updateISYdrivers')
+        #LOGGER.debug('EnergySource updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
@@ -70,24 +70,24 @@ class messanaEnergySource(polyinterface.Node):
                 LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
-        LOGGER.debug('stop - Messana EnergySource Cleaning up')
+        LOGGER.info('stop - Messana EnergySource Cleaning up')
 
     def shortPoll(self):
-        LOGGER.debug('Messana EnergySource shortPoll - energySource '+ str(self.energySourceNbr))
+        #LOGGER.debug('Messana EnergySource shortPoll - energySource '+ str(self.energySourceNbr))
         self.messana.updateEnergySourceData('active', self.energySourceNbr)
         self.updateISYdrivers('active')
                    
     def longPoll(self):
-        LOGGER.debug('Messana EnergySource longPoll - energySource ' + str(self.energySourceNbr))
+        #LOGGER.debug('Messana EnergySource longPoll - energySource ' + str(self.energySourceNbr))
         self.messana.updateEnergySourceData('all', self.energySourceNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
 
     def query(self, command=None):
-        LOGGER.debug('TOP querry')
+        LOGGER.info('TOP querry')
 
     def energySourceUpdate(self, command):
-        LOGGER.debug('energySourceUpdate Called')
+        #LOGGER.debug('energySourceUpdate Called')
         self.messana.updateEnergySourceData('all', self.energySourceNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()

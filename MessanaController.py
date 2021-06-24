@@ -23,13 +23,13 @@ class MessanaController(polyinterface.Controller):
         self.messanaImportOK = 0
         self.ISYforced = False
         self.name = 'Messana Main'
-        self.address ='msystem'
-        self.id = self.address
+        #self.address ='msystem'
+        self.id = 'msystem'
         #LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
         self.ISYdrivers=[]
-        self.ISYcommands = {}
+        #self.ISYcommands = {}
         self.ISYTempUnit = 0
         self.drivers = []
         self.nodeDefineDone = False
@@ -69,7 +69,7 @@ class MessanaController(polyinterface.Controller):
         if self.MessanaKey == None:
             LOGGER.error('No MESSANA_KEY retrieved:')
         else:
-            LOGGER.debug('MESSANA_KEY retrieved: '+ self.MessanaKey)
+            LOGGER.debug('MESSANA_KEY retrieved: ')
 
         if (self.IPAddress is None) or (self.MessanaKey is None):
             self.defineInputParams()
@@ -81,7 +81,7 @@ class MessanaController(polyinterface.Controller):
             if self.messana == False:
                 self.stop()
             self.id = self.messana.getSystemAddress()
-            self.address = self.messana.getSystemAddress()
+            #self.address = self.messana.getSystemAddress()
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
             self.systemPUTKeys = self.messana.systemPushKeys()
@@ -94,7 +94,7 @@ class MessanaController(polyinterface.Controller):
                     self.drivers.append(temp)
                     #LOGGER.debug(  'driver:  ' +  temp['driver'])
 
-            LOGGER.debug ('Install Profile')    
+            LOGGER.info ('Install Profile')    
             self.poly.installprofile()
             #LOGGER.debug('Install Profile done')
         self.updateISYdrivers('all')
@@ -107,10 +107,10 @@ class MessanaController(polyinterface.Controller):
 
     def stop(self):
         #self.removeNoticesAll()
-        LOGGER.debug('stop - Cleaning up')
+        LOGGER.info('stop - Cleaning up')
 
     def heartbeat(self):
-        LOGGER.debug('heartbeat: hb={}'.format(self.hb))
+        #LOGGER.debug('heartbeat: hb={}'.format(self.hb))
         if self.hb == 0:
             self.reportCmd('DON',2)
             self.hb = 1
@@ -120,10 +120,10 @@ class MessanaController(polyinterface.Controller):
 
     
     def shortPoll(self):
-        LOGGER.debug('Messana Controller shortPoll')
+        #LOGGER.debug('Messana Controller shortPoll')
 
         if self.messanaImportOK == 1:
-            LOGGER.debug('Short Poll System Up')
+            #LOGGER.debug('Short Poll System Up')
             if self.ISYforced:
                 #self.messana.updateSystemData('active')
                 self.updateISYdrivers('active')
@@ -131,7 +131,7 @@ class MessanaController(polyinterface.Controller):
                 #self.messana.updateSystemData('all')
                 self.updateISYdrivers('all')
             self.ISYforced = True
-            LOGGER.debug('Short POll controller: ' )
+            #LOGGER.debug('Short POll controller: ' )
             if self.nodeDefineDone == True:
                 for node in self.nodes:
                     if node != self.address and node != 'controller':
@@ -139,11 +139,11 @@ class MessanaController(polyinterface.Controller):
                         self.nodes[node].shortPoll()      
 
     def longPoll(self):
-        LOGGER.debug('Messana Controller longPoll')
+        #LOGGER.debug('Messana Controller longPoll')
         if self.messanaImportOK == 1:
             self.heartbeat()
             self.messana.updateSystemData('all')
-            LOGGER.debug( self.drivers)
+            #LOGGER.debug( self.drivers)
             self.updateISYdrivers('all')
             self.reportDrivers()
             self.ISYforced = True   
@@ -156,7 +156,7 @@ class MessanaController(polyinterface.Controller):
                     
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('System updateISYdrivers')
+        #LOGGER.debug('System updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
@@ -195,70 +195,70 @@ class MessanaController(polyinterface.Controller):
 
     def discover(self, command=None):
 
-        LOGGER.debug('discover zones')
+        LOGGER.info('discover zones')
         nbrZones =  self.messana.getZoneCount()
         for zoneNbr in range(0,nbrZones):
-            LOGGER.debug('Adding zone ' + str(zoneNbr))
+            #LOGGER.debug('Adding zone ' + str(zoneNbr))
             zonename = self.messana.getZoneName(zoneNbr)
             zoneaddress = self.messana.getZoneAddress(zoneNbr)
             #LOGGER.debug('zone ' + str(zoneNbr) + ' : name, Address: ' + zonename +' ' + zoneaddress) 
             if not zoneaddress in self.nodes:
                self.addNode(messanaZone(self, self.address, zoneaddress, zonename, zoneNbr))
         
-        LOGGER.debug('discover macrozones')
+        LOGGER.info('discover macrozones')
         nbrMacrozones =  self.messana.getMacrozoneCount()
         for macrozoneNbr in range(0,nbrMacrozones):
-            LOGGER.debug('Adding macrozone ' + str(macrozoneNbr))
+            #LOGGER.debug('Adding macrozone ' + str(macrozoneNbr))
             macrozonename = self.messana.getMacrozoneName(macrozoneNbr)
             macrozoneaddress = self.messana.getMacrozoneAddress(macrozoneNbr)
             #LOGGER.debug('macrozone ' + str(macrozoneNbr) + ' : name, Address: ' + macrozonename +' ' + macrozoneaddress) 
             if not macrozoneaddress in self.nodes:
                self.addNode(messanaMacrozone(self, self.address, macrozoneaddress, macrozonename, macrozoneNbr))
         
-        LOGGER.debug('discover atus')
+        LOGGER.info('discover atus')
         nbrAtus =  self.messana.getAtuCount()
         for atuNbr in range(0,nbrAtus):
-            LOGGER.debug('Adding atu ' + str(atuNbr))
+            #LOGGER.debug('Adding atu ' + str(atuNbr))
             atuname = self.messana.getAtuName(atuNbr)
             atuaddress = self.messana.getAtuAddress(atuNbr)
             #LOGGER.debug('ATU ' + str(atuNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
             if not atuaddress in self.nodes:
                self.addNode(messanaAtu(self, self.address, atuaddress, atuname, atuNbr))
                
-        LOGGER.debug('discover buffer tanks')
+        LOGGER.info('discover buffer tanks')
         nbrBufferTanks =  self.messana.getBufferTankCount()
         for bufferTankNbr in range(0,nbrBufferTanks):
-            LOGGER.debug('Adding buffer tank ' + str(bufferTankNbr))
+            #LOGGER.debug('Adding buffer tank ' + str(bufferTankNbr))
             bufferTankName = self.messana.getBufferTankName(bufferTankNbr)
             bufferTankAddress = self.messana.getBufferTankAddress(bufferTankNbr)
             #LOGGER.debug('Buffer Tank' + str(bufferTankNbr) + ' : name, Address: ' + bufferTankName +' ' + bufferTankAddress) 
             if not bufferTankAddress in self.nodes:
                self.addNode(messanaBufTank(self, self.address, bufferTankAddress, bufferTankName, bufferTankNbr))
                
-        LOGGER.debug('discover hot cold change overs')
+        LOGGER.info('discover hot cold change overs')
         nbrHcCos =  self.messana.getHcCoCount()
         for HcCoNbr in range(0,nbrHcCos):
-            LOGGER.debug('Adding hot cold cnage over ' + str(HcCoNbr))
+            #LOGGER.debug('Adding hot cold cnage over ' + str(HcCoNbr))
             atuname = self.messana.getHcCoName(HcCoNbr)
             atuaddress = self.messana.getHcCoAddress(HcCoNbr)
             #LOGGER.debug('ATU ' + str(HcCoNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
             if not atuaddress in self.nodes:
                self.addNode(messanaHcCo(self, self.address, atuaddress, atuname, HcCoNbr))
 
-        LOGGER.debug('discover fan coils')
+        LOGGER.info('discover fan coils')
         nbrFanCoils =  self.messana.getFanCoilCount()
         for fanCoilNbr in range(0,nbrFanCoils):
-            LOGGER.debug('Adding fan coils ' + str(fanCoilNbr))
+            #LOGGER.debug('Adding fan coils ' + str(fanCoilNbr))
             atuname = self.messana.getFanCoilName(fanCoilNbr)
             atuaddress = self.messana.getFanCoilAddress(fanCoilNbr)
             #LOGGER.debug('ATU ' + str(fanCoilNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
             if not atuaddress in self.nodes:
                self.addNode(messanaFanCoil(self, self.address, atuaddress, atuname, fanCoilNbr))
 
-        LOGGER.debug('discover energy sources' )
+        LOGGER.info('discover energy sources' )
         nbrEnergySources =  self.messana.getEnergySourceCount()
         for energySourceNbr in range(0, nbrEnergySources):
-            LOGGER.debug('Adding energy sources ' + str(energySourceNbr))
+            #LOGGER.debug('Adding energy sources ' + str(energySourceNbr))
             atuname = self.messana.getEnergySourceName(energySourceNbr)
             atuaddress = self.messana.getEnergySourceAddress(energySourceNbr)
             #LOGGER.debug('ATU ' + str(energySourceNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
@@ -266,10 +266,10 @@ class MessanaController(polyinterface.Controller):
                self.addNode(messanaEnergySource(self, self.address, atuaddress, atuname, energySourceNbr))
 
 
-        LOGGER.debug('discover domestic hot waters' )
+        LOGGER.info('discover domestic hot waters' )
         nbrDHWs =  self.messana.getDomesticHotWaterCount()
         for DHWNbr in range(0,nbrDHWs):
-            LOGGER.debug('Adding domestic hot water ' + str(DHWNbr))
+            #LOGGER.debug('Adding domestic hot water ' + str(DHWNbr))
             atuname = self.messana.getDomesticHotWaterName(DHWNbr)
             atuaddress = self.messana.getDomesticHotWaterAddress(DHWNbr)
             #LOGGER.debug('ATU ' + str(DHWNbr) + ' : name, Address: ' + atuname +' ' + atuaddress) 
@@ -286,7 +286,7 @@ class MessanaController(polyinterface.Controller):
     def setStatus(self, command):
         #LOGGER.debug('set Status Called')
         value = int(command.get('value'))
-        LOGGER.debug('set Status Recived:' + str(value))
+        #LOGGER.debug('set Status Recived:' + str(value))
         if self.messana.systemSetStatus(value):
             ISYdriver = self.messana.getSystemStatusISYdriver()
             self.setDriver(ISYdriver, value, report = True)
@@ -294,7 +294,7 @@ class MessanaController(polyinterface.Controller):
     def setEnergySave(self, command):
         #LOGGER.debug('setEnergySave Called')
         value = int(command.get('value'))
-        LOGGER.debug('SetEnergySave Recived:' + str(value))
+        #LOGGER.debug('SetEnergySave Recived:' + str(value))
         if self.messana.systemSetEnergySave(value):
             ISYdriver = self.messana.getSystemEnergySaveISYdriver()
             self.setDriver(ISYdriver, value, report = True)
@@ -302,13 +302,13 @@ class MessanaController(polyinterface.Controller):
     def setSetback(self, command):
         #LOGGER.debug('setSetback Called')
         value = int(command.get('value'))
-        LOGGER.debug('setSetback Reeived:' + str(value))
+        #LOGGER.debug('setSetback Reeived:' + str(value))
         if self.messana.systemSetback(value):
             ISYdriver = self.messana.getSystemSetbackISYdriver()
             self.setDriver(ISYdriver, value, report = True)
 
     def ISYupdate (self, command):
-        LOGGER.info('ISY-update called')
+        #LOGGER.info('ISY-update called')
         self.messana.updateSystemData('all')
         self.updateISYdrivers('all')
         self.reportDrivers()

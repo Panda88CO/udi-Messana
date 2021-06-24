@@ -38,7 +38,7 @@ class messanaBufTank(polyinterface.Node):
 
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('BufferTanks updateISYdrivers')
+        #LOGGER.debug('BufferTanks updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
@@ -53,7 +53,7 @@ class messanaBufTank(polyinterface.Node):
                             self.setDriver(ISYdriver, value, report = True, force = True)
                         #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                     else:
-                        LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                        LOGGER.error('Error getting ' + ISYdriver['driver'])
             elif level == 'all':
                 temp = self.messana.getBufferTankMessanaISYkey(ISYkey, self.bufferTankNbr)
                 status, value = self.messana.getBufferTankISYValue(ISYkey, self.bufferTankNbr)
@@ -65,20 +65,20 @@ class messanaBufTank(polyinterface.Node):
                         self.setDriver(ISYdriver, value, report = True, force = True)
                     #LOGGER.debug('driver updated :' + ISYdriver['driver'] + ' =  '+str(value))
                 else:
-                    LOGGER.debug('Error getting ' + ISYdriver['driver'])
+                    LOGGER.error('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debug('Error!  Unknow level: ' + level)
+                LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
-        LOGGER.debug('stop - Messana BufferTanks Cleaning up')
+        LOGGER.info('stop - Messana BufferTanks Cleaning up')
 
     def shortPoll(self):
-        LOGGER.debug('Messana BufferTanks shortPoll - buffer tanks '+ str(self.bufferTankNbr))
+        #LOGGER.debug('Messana BufferTanks shortPoll - buffer tanks '+ str(self.bufferTankNbr))
         self.messana.updateBufferTankData('active', self.bufferTankNbr)
         self.updateISYdrivers('active')
                    
     def longPoll(self):
-        LOGGER.debug('Messana BufferTanks longPoll - buffer tanks ' + str(self.bufferTankNbr))
+        #LOGGER.debug('Messana BufferTanks longPoll - buffer tanks ' + str(self.bufferTankNbr))
         self.messana.updateBufferTankData('all', self.bufferTankNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
@@ -87,7 +87,7 @@ class messanaBufTank(polyinterface.Node):
         LOGGER.debug('TOP querry')
 
     def bufTankUpdate(self, command):
-        LOGGER.debug(' bufTankUpdate ')
+        #LOGGER.debug(' bufTankUpdate ')
         self.messana.updateBufTankData('all', self.bufferTankNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
@@ -95,7 +95,7 @@ class messanaBufTank(polyinterface.Node):
     def setStatus(self, command):
         #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setStatus Received:' + str(value))
+        #LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setStatus Received:' + str(value))
         if self.messana.bufferTankSetStatus(value, self.bufferTankNbr):
             ISYdriver = self.messana.getBufferTankStatusISYdriver(self.bufferTankNbr)
             self.setDriver(ISYdriver, value, report = True)
@@ -104,7 +104,7 @@ class messanaBufTank(polyinterface.Node):
     def setMode(self, command):
         #LOGGER.debug('setMode Called')
         value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setMode Received:' + str(value))
+        #LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' setMode Received:' + str(value))
         if self.messana.bufferTankSetSetMode(value, self.bufferTankNbr):
             ISYdriver = self.messana.getBufferTankSetModeISYdriver(self.bufferTankNbr)
             self.setDriver(ISYdriver, value, report = True)
@@ -114,7 +114,7 @@ class messanaBufTank(polyinterface.Node):
     def bufTankTempStatus(self, command):
         #LOGGER.debug('bufTankTempStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' Temp Status Reeived:' + str(value))      
+        #LOGGER.debug('BufferTanks'+str(self.bufferTankNbr)+' Temp Status Reeived:' + str(value))      
         if self.messana.bufferTankTempStatus(value, self.bufferTankNbr):
             ISYdriver = self.messana.getBufferTankTempStatusISYdriver(self.bufferTankNbr)
             self.setDriver(ISYdriver, value, report = True)     

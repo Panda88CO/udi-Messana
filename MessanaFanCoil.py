@@ -36,7 +36,7 @@ class messanaFanCoil(polyinterface.Node):
 
 
     def updateISYdrivers(self, level):
-        LOGGER.debug('FanCoil updateISYdrivers')
+        #LOGGER.debug('FanCoil updateISYdrivers')
         for ISYdriver in self.drivers:
             ISYkey = ISYdriver['driver']
             if level == 'active':
@@ -65,35 +65,35 @@ class messanaFanCoil(polyinterface.Node):
                 else:
                     LOGGER.error('Error getting ' + ISYdriver['driver'])
             else:
-                LOGGER.debuerrorg('Error!  Unknow level: ' + level)
+                LOGGER.error('Error!  Unknow level: ' + level)
         
     def stop(self):
-        LOGGER.debug('stop - Messana FanCoil Cleaning up')
+        LOGGER.info('stop - Messana FanCoil Cleaning up')
 
     def shortPoll(self):
-        LOGGER.debug('Messana FanCoil shortPoll - fanCoil '+ str(self.fanCoilNbr))
+        #LOGGER.debug('Messana FanCoil shortPoll - fanCoil '+ str(self.fanCoilNbr))
         self.messana.updateFanCoilData('active', self.fanCoilNbr)
         self.updateISYdrivers('active')
                    
     def longPoll(self):
-        LOGGER.debug('Messana FanCoil longPoll - fanCoil ' + str(self.fanCoilNbr))
+        #LOGGER.debug('Messana FanCoil longPoll - fanCoil ' + str(self.fanCoilNbr))
         self.messana.updateFanCoilData('all', self.fanCoilNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
 
     def query(self, command=None):
-        LOGGER.debug('TOP querry')
+        LOGGER.info('TOP querry')
 
     def setStatus(self, command):
         #LOGGER.debug('setStatus Called')
         value = int(command.get('value'))
-        LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setStatus Received:' + str(value))
+        #LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setStatus Received:' + str(value))
         if self.messana.fanCoilSetStatus(value, self.fanCoilNbr):
             ISYdriver = self.messana.getFanCoilStatusISYdriver(self.fanCoilNbr)
             self.setDriver(ISYdriver, value, report = True)
 
     def fanCoilUpdate(self, command):
-        LOGGER.debug('fanCoilUpdate called')
+        #LOGGER.debug('fanCoilUpdate called')
         self.messana.updateFanCoilData('all', self.fanCoilNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
@@ -102,7 +102,7 @@ class messanaFanCoil(polyinterface.Node):
     def setCoolingSpeed(self, command):
         #LOGGER.debug('setHeatingSpeed Called')
         value = int(command.get('value'))
-        LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setHeatingSpeed Received:' + str(value))
+        #LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setHeatingSpeed Received:' + str(value))
         if self.messana.fanCoilSetCoolingSpeed(value, self.fanCoilNbr):
             ISYdriver = self.messana.getFanCoilCoolingSpeedISYdriver(self.fanCoilNbr)
             self.setDriver(ISYdriver, value, report = True)
@@ -111,7 +111,7 @@ class messanaFanCoil(polyinterface.Node):
     def setHeatingSpeed(self, command):
         #LOGGER.debug('setHeatingSpeed Called')
         value = int(command.get('value'))
-        LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setHeatingSpeed Received:' + str(value))
+        #LOGGER.debug('FanCoil'+str(self.fanCoilNbr)+' setHeatingSpeed Received:' + str(value))
         if self.messana.fanCoilSetHeatingSpeed(value, self.fanCoilNbr):
             ISYdriver = self.messana.getFanCoilHeatingSpeedISYdriver(self.fanCoilNbr)
             self.setDriver(ISYdriver, value, report = True)
