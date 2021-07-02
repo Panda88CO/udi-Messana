@@ -8,6 +8,8 @@
     "notice": "My current system only supports heat, so cooling is not tested yet.  No Fan Coils in my system, and DHW is not integrated.",
     "shortPoll": "120",
     "longPoll": "600",
+    "testMode": false,
+    "profile_version": "0.2.4",
     "credits": [
         {
             "title": "A NodeServer to integrate Messana Radiant Heat/Cool system",
