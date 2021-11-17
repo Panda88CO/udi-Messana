@@ -88,7 +88,7 @@ class messanaBufTank(polyinterface.Node):
 
     def bufTankUpdate(self, command):
         #LOGGER.debug(' bufTankUpdate ')
-        self.messana.updateBufTankData('all', self.bufferTankNbr)
+        self.messana.updateBufferTankData('all', self.bufferTankNbr)
         self.updateISYdrivers('all')
         self.reportDrivers()
 
