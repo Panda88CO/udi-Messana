@@ -1,6 +1,6 @@
 {
     "name": "MessanaControl",
-    "docs": "https://github.com/Panda88CO/udi-Messana",
+    "docs": "https://github.com/Panda88CO/udi-Messana.git",
     "type": "python3",
     "executable": "MessanaController.py",
     "install": "install.sh",
@@ -16,7 +16,7 @@
             "author": "Panda88CO",
             "version": "0.2.6",
             "date": "Nov 14, 2021",
-            "source": "https://github.com/Panda88CO/udi-Messana",
+            "source": "https://github.com/Panda88CO/udi-Messana.git",
             "license": "https://github.com/Panda88CO/udi-Messana/blob/master/LICENSE"
         }
     ]
