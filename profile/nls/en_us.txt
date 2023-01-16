@@ -7,6 +7,7 @@ CMD-nlssystem-SET_SETBACK-NAME = Setback
 ST-nlssystem-GV1-NAME = System state
 SYSTEM_1-0 = Off
 SYSTEM_1-1 = On
+
 ST-nlssystem-GV2-NAME = # of Zones
 ST-nlssystem-GV3-NAME = # of ATU
 ST-nlssystem-GV4-NAME = # of MacroZones (all=1)
