@@ -36,6 +36,7 @@ CMD-nlszones0-DehumSetpointDP-NAME = Dehumdification Setpoint Dewpoint
 CMD-nlszones0-DehumSetpointRH-NAME = Dehumdification Setpoint Rel. Humidity
 CMD-nlszones0-HumSetpointDP-NAME = Humdification Setpoint Dewpoint
 CMD-nlszones0-HumSetpointRH-NAME = Humdification Setpoint Rel. Humidity
+
 ST-nlszones0-GV1-NAME = Set Temp
 ST-nlszones0-GV2-NAME = Zone state
 ZONES0_2-0 = Off

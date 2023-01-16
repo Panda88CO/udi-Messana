@@ -3,6 +3,7 @@
 import polyinterface
 from subprocess import call
 
+
 LOGGER = polyinterface.LOGGER
 #self, controller, primary, address, name, nodeType, nodeNbr, messana
 class messanaMacrozone(polyinterface.Node):

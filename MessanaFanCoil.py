@@ -34,7 +34,6 @@ class messanaFanCoil(polyinterface.Node):
     def start(self):
         return True
 
-
     def updateISYdrivers(self, level):
         #LOGGER.debug('FanCoil updateISYdrivers')
         for ISYdriver in self.drivers:

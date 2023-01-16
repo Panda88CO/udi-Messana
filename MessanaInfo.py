@@ -6,7 +6,6 @@ import os
 import polyinterface
 LOGGER = polyinterface.LOGGER
 
-
 class messanaInfo:
     def __init__ (self, mIPaddress, mAPIkey, mISYcontrollerName):
         # Note all xxIDs must be lower case without special characters (ISY requirement)

@@ -33,6 +33,7 @@
          </accepts>
       </cmds>
    </nodeDef> 
+   
    <nodeDef id="zones0" nls="nlszones0">
       <editors />
       <sts>

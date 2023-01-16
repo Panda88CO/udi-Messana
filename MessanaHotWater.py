@@ -32,7 +32,6 @@ class messanaHotWater(polyinterface.Node):
        
     def start(self):
 
-
         return True
 
 

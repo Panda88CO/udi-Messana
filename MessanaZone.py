@@ -30,6 +30,7 @@ class messanaZone(polyinterface.Node):
         self.updateISYdrivers('all')
         self.ISYforced = True
        
+       
     def start(self):
         return True
 
