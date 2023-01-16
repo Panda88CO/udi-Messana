@@ -1,5 +1,5 @@
 <nodeDefs> 
-   <nodeDef id="system" nls="nlssystem">
+   <nodeDef id="msystem" nls="nlssystem">
       <editors />
       <sts>
          <st id="GV1" editor="SYSTEM_1" />
