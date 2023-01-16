@@ -33,7 +33,40 @@
          </accepts>
       </cmds>
    </nodeDef> 
-   
+      <nodeDef id="controller" nls="nlssystem">
+      <editors />
+      <sts>
+         <st id="GV1" editor="SYSTEM_1" />
+         <st id="GV2" editor="SYSTEM_2" />
+         <st id="GV3" editor="SYSTEM_3" />
+         <st id="GV4" editor="SYSTEM_4" />
+         <st id="GV5" editor="SYSTEM_5" />
+         <st id="GV6" editor="SYSTEM_6" />
+         <st id="GV7" editor="SYSTEM_7" />
+         <st id="GV8" editor="SYSTEM_8" />
+         <st id="GV9" editor="SYSTEM_9" />
+         <st id="GV10" editor="SYSTEM_10" />
+         <st id="GV11" editor="SYSTEM_11" />
+      </sts>
+      <cmds>
+         <sends>
+            <cmd id="DON" /> 
+            <cmd id="DOF" /> 
+         </sends>
+         <accepts>
+            <cmd id="UPDATE" /> 
+            <cmd id="SET_STATUS" > 
+               <p id="" editor="SYSTEM_1" init="GV1" /> 
+            </cmd> 
+            <cmd id="SET_ENERGYSAVE" > 
+               <p id="" editor="SYSTEM_9" init="GV9" /> 
+            </cmd> 
+            <cmd id="SET_SETBACK" > 
+               <p id="" editor="SYSTEM_10" init="GV10" /> 
+            </cmd> 
+         </accepts>
+      </cmds>
+   </nodeDef> 
    <nodeDef id="zones0" nls="nlszones0">
       <editors />
       <sts>
