@@ -79,7 +79,7 @@ class MessanaController(polyinterface.Controller):
             self.messana = messanaInfo( self.IPAddress, self.MessanaKey, self.address )
             if self.messana == False:
                 self.stop()
-            self.id = self.messana.getSystemAddress()
+            #self.id = self.messana.getSystemAddress()
             #self.address = self.messana.getSystemAddress()
             self.messana.updateSystemData('all')
             self.systemGETKeys = self.messana.systemPullKeys()
