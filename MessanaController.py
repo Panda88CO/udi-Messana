@@ -23,7 +23,7 @@ class MessanaController(polyinterface.Controller):
         self.ISYforced = False
         self.name = 'Messana Main'
         #self.address ='msystem'
-        self.id = 'msystem'
+        self.id = 'controller'
         #LOGGER.debug('Name/address: '+ self.name + ' ' + self.address)
         self.primary = self.address
         self.hb = 0
