@@ -103,7 +103,7 @@ class messanaMacrozone(polyinterface.Node):
 
     def setSetpoint(self, command):
         #LOGGER.debug('setSetpoint Called')
-        value = int(command.get('value'))
+        value = round(round(command.get('value')*2,0)/2,1)
         #LOGGER.debug('Zone'+str(self.macrozoneNbr)+' setSetpoint Received:' + str(value))
         if self.messana.macrozoneSetSetpoint(value, self.macrozoneNbr):
             ISYdriver = self.messana.getMacrozoneSetPointISYdriver(self.macrozoneNbr)

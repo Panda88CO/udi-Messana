@@ -96,7 +96,7 @@ class messanaZone(polyinterface.Node):
 
     def setEnergySave(self, command):
         #LOGGER.debug('setEnergySave Called')
-        value = int(command.get('value'))
+        value = round(round(command.get('value')*2,0)/2,1)
         #LOGGER.debug('Zone'+str(self.zoneNbr)+' setEnergySave Received:' + str(value))
         if self.messana.zoneSetEnergySave(value, self.zoneNbr):
             ISYdriver = self.messana.getZoneEnergySaveISYdriver(self.zoneNbr)
@@ -105,7 +105,7 @@ class messanaZone(polyinterface.Node):
 
     def setSetpoint(self, command):
         #LOGGER.debug('setSetpoint Called')
-        value = int(command.get('value'))
+        value = round(round(command.get('value')*2,0)/2,1)
         #LOGGER.debug('Zone'+str(self.zoneNbr)+' setSetpoint Received:' + str(value))
         if self.messana.zoneSetSetpoint(value, self.zoneNbr):
             ISYdriver = self.messana.getZoneSetPointISYdriver(self.zoneNbr)
